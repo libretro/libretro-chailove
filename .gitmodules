@@ -4,3 +4,6 @@
 [submodule "vendor/libretro-common"]
 	path = vendor/libretro-common
 	url = https://github.com/libretro/libretro-common.git
+[submodule "vendor/chaiscript"]
+	path = vendor/chaiscript
+	url = https://github.com/ChaiScript/ChaiScript.git

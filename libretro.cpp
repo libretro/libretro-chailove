@@ -1,9 +1,8 @@
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "libretro.h"
+#include <libretro.h>
+#include "chaigame.hpp"
 
 #define LOGI printf
 
@@ -16,10 +15,8 @@ char retro_system_conf[512];
 
 bool opt_analog;
 
-int retrow=640;
-int retroh=480;
-
-int pauseg=0;
+unsigned int retrow=640;
+unsigned int retroh=480;
 
 signed short soundbuf[1024*2];
 
@@ -55,11 +52,6 @@ short int libretro_input_state_cb(unsigned port,unsigned device,unsigned index,u
 }
 #endif
 
-// prototype for sdlapp.c
-extern bool init_app();
-extern void quit_app();
-extern void exec_app();
-
 void texture_init(){
 		memset(videoBuffer, 0, sizeof(videoBuffer));
 }
@@ -67,54 +59,39 @@ void texture_init(){
 void retro_set_environment(retro_environment_t cb)
 {
    bool no_rom = true;
-
    environ_cb = cb;
-
    cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
-
    struct retro_variable variables[] = {
 	  {
 		 "sdlmandel_analog","Use Analog; OFF|ON",
 	  },
 	  { NULL, NULL },
    };
-
    cb(RETRO_ENVIRONMENT_SET_VARIABLES, variables);
-
 }
 
 static void update_variables(void)
 {
-   struct retro_variable var = {0};
+	struct retro_variable var = {0};
 
+	var.key = "sdlmandel_analog";
+	var.value = NULL;
 
-   var.key = "sdlmandel_analog";
-   var.value = NULL;
-
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-	  fprintf(stderr, "value: %s\n", var.value);
-	  if (strcmp(var.value, "OFF") == 0)
-		 opt_analog = false;
-	  if (strcmp(var.value, "ON") == 0)
-		 opt_analog = true;
+	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+		fprintf(stderr, "value: %s\n", var.value);
+		if (strcmp(var.value, "OFF") == 0)
+			opt_analog = false;
+		if (strcmp(var.value, "ON") == 0)
+			opt_analog = true;
 
 		fprintf(stderr, "[libretro-test]: Analog: %s.\n",opt_analog?"ON":"OFF");
-   }
+	}
 
 }
 
-void update_input()
-{
+void update_input() {
 	input_poll_cb();
 }
-
-
-#if 0
-static void keyboard_cb(bool down, unsigned keycode, uint32_t character, uint16_t mod)
-{
-}
-#endif
 
 /************************************
  * libretro implementation
@@ -122,11 +99,10 @@ static void keyboard_cb(bool down, unsigned keycode, uint32_t character, uint16_
 
 //static struct retro_system_av_info g_av_info;
 
-void retro_get_system_info(struct retro_system_info *info)
-{
+void retro_get_system_info(struct retro_system_info *info) {
 	memset(info, 0, sizeof(*info));
 	info->library_name = "ChaiGame";
-	info->library_version = "0.0.1";
+	info->library_version = "0.0.2";
 	info->need_fullpath = false;
 	info->valid_extensions = "chai";
 }
@@ -134,7 +110,6 @@ void retro_get_system_info(struct retro_system_info *info)
 
 void retro_get_system_av_info(struct retro_system_av_info *info)
 {
-	//FIXME handle vice PAL/NTSC
 	struct retro_game_geometry geom = {
 		retrow,
 		retroh,
@@ -142,12 +117,12 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
 		retroh,
 		4.0 / 3.0
 	};
+	info->geometry = geom;
+
 	struct retro_system_timing timing = {
 		60.0,
 		44100.0
 	};
-
-	info->geometry = geom;
 	info->timing   = timing;
 }
 
@@ -172,8 +147,9 @@ bool retro_unserialize(const void *data, size_t size)
 	return false;
 }
 
-void retro_cheat_reset(void)
-{}
+void retro_cheat_reset(void) {
+	// Nothing.
+}
 
 void retro_cheat_set(unsigned index, bool enabled, const char *code)
 {
@@ -195,24 +171,20 @@ bool retro_load_game(const struct retro_game_info *info)
 
 	printf("LOAD EMU\n");
 
-	return init_app();
+	return ChaiGame::getInstance()->init_app();
 }
 
-bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info)
-{
+bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
 	(void)game_type;
 	(void)info;
 	(void)num_info;
 	return false;
 }
 
-void retro_unload_game(void)
-{
-	 pauseg=0;
+void retro_unload_game(void) {
 }
 
-unsigned retro_get_region(void)
-{
+unsigned retro_get_region(void) {
 	return RETRO_REGION_NTSC;
 }
 
@@ -303,17 +275,13 @@ void retro_init(void)
 	};
 	environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, &inputDescriptors);
 
-	/*
-	struct retro_keyboard_callback cbk = { keyboard_cb };
-	environ_cb(RETRO_ENVIRONMENT_SET_KEYBOARD_CALLBACK, &cbk);
-	*/
 	update_variables();
 
 }
 
 void retro_deinit(void)
 {
-	quit_app();
+	ChaiGame::getInstance()->quit_app();
 }
 
 void retro_reset(void)
@@ -323,13 +291,6 @@ void retro_reset(void)
 void retro_run(void)
 {
 	update_input();
-
-	if(pauseg!=-1){
-
-	}
-
-	exec_app();
-
-		video_cb(videoBuffer, retrow, retroh, retrow << 2);
-
+	ChaiGame::getInstance()->exec_app();
+	video_cb(videoBuffer, retrow, retroh, retrow << 2);
 }

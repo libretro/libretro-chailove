@@ -1,67 +1,81 @@
 #include <stdint.h>
+#include <string>
+#include <SDL.h>
+#include <SDL_gfxPrimitives.h>
 
-/********************************************************************************/
-/*                   SDL PART	:BEGIN						*/
-/********************************************************************************/
-#include "SDL.h"
-
-SDL_Surface* screen;
-SDL_Event event;
+#include "chaigame.hpp"
 
 extern uint32_t *videoBuffer;
-#include "SDL_gfxPrimitives.h"
-//#include "TestGfxPrimitives.c"
 
-int done = 0;
-int x = 0;
+ChaiGame* ChaiGame::m_instance = NULL;
+bool is_file_exist(const char *fileName) {
+    std::ifstream infile(fileName);
+    return infile.good();
+}
 
-
-void quit_app(void)
+int multiply(int i, int j)
 {
+	return i * j;
+}
 
+
+ChaiGame* ChaiGame::getInstance() {
+	if (!m_instance) {
+		m_instance = new ChaiGame;
+	}
+	return m_instance;
+}
+
+void ChaiGame::quit_app(void) {
 	SDL_Quit();
 }
 
-bool init_app(){
+bool ChaiGame::init_app() {
 
-	/* Generate title string */
-	//sprintf (title,"TestGfxPrimitives - v%i.%i.%i",SDL_GFXPRIMITIVES_MAJOR, SDL_GFXPRIMITIVES_MINOR, SDL_GFXPRIMITIVES_MICRO);
+	//if (!is_file_exist("main.chai")) {
+	//	return false;
+	//}
 
-	SDL_Init(SDL_INIT_EVERYTHING);
+	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
+		return false;
+	}
+
 	screen = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE);
 
-	videoBuffer=(unsigned int *)screen->pixels;
+	if (screen == NULL) {
+		return false;
+	}
 
-	/* Use alpha blending */
+	SDL_WM_SetCaption("Hello!", NULL);
+
+	videoBuffer = (unsigned int *)screen->pixels;
 	SDL_SetAlpha(screen, SDL_SRCALPHA, 0);
 
-	done = 0;
 	SDL_ShowCursor(SDL_DISABLE);
+
+
+	chai.add(chaiscript::fun(&multiply), "multiply");
+
+	chai.eval_file("main.chai");
 
 	return true;
 }
 
-void checkInput()
-{
+void ChaiGame::checkInput() {
 	/* Check for events */
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_MOUSEBUTTONDOWN:
 				if ( event.button.button == SDL_BUTTON_LEFT ) {
-					/* Switch to next graphics */
-					//curprim++;
-					x+=1;
 				} else if ( event.button.button == SDL_BUTTON_RIGHT ) {
 					/* Switch to prev graphics */
 					//curprim--;
 				}
 				break;
 			case SDL_KEYDOWN:
-				/* Any keypress quits the app... */
-			x+=1;
-			case SDL_QUIT:
-				done = 1;
-				break;
+				x += chai.eval<int>("multiply(5, 20);");
+				//x += 100;
+				y+=1;
 			default:
 				break;
 		}
@@ -70,7 +84,7 @@ void checkInput()
 }
 
 
-void exec_app(){
+void ChaiGame::exec_app(){
 
 	// Clear the screen
 	Uint32 color = SDL_MapRGBA(screen->format, 0, 0, 0, 255);
@@ -78,8 +92,8 @@ void exec_app(){
 
 	// Draw Background.
 	rectangleRGBA(screen,
-		x, 100,
-		200, 200,
+		x, y,
+		x+100, y+100,
 		0, 0, 255, 255);
 
 	//SDL_UpdateRect(screen, 0, 0, 0, 0);
@@ -87,8 +101,3 @@ void exec_app(){
 
 	checkInput();
 }
-
-/********************************************************************************/
-/*                   SDL PART	:END						*/
-/********************************************************************************/
-
