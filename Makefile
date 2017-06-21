@@ -59,7 +59,7 @@ endif
 
 OBJECTS := libretro.o chaigame.o
 
-all: $(TARGET) vendor/libretro-common/include/libretro.h
+all: vendor/libretro-common/include/libretro.h $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
