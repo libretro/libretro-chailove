@@ -1,2 +1,1 @@
 print("Hello World, from Chai")
-print(multiply(5,20))

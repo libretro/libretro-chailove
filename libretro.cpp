@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libretro.h>
-#include "chaigame.hpp"
-
-#define LOGI printf
+#include "chaigame.h"
 
 char RPATH[512];
 char RETRO_DIR[512];
@@ -12,15 +10,10 @@ const char *retro_save_directory;
 const char *retro_system_directory;
 const char *retro_content_directory;
 char retro_system_conf[512];
-
 bool opt_analog;
-
 unsigned int retrow=640;
 unsigned int retroh=480;
-
 signed short soundbuf[1024*2];
-
-uint32_t *videoBuffer;
 
 static retro_video_refresh_t video_cb;
 static retro_environment_t environ_cb;
@@ -40,11 +33,11 @@ void retro_set_input_state(retro_input_state_t cb) { input_state_cb = cb; }
 #ifdef __cplusplus
 extern "C" {
 #endif
-void libretro_audio_cb(int16_t left, int16_t right){
+void libretro_audio_cb(int16_t left, int16_t right) {
 	audio_cb(left,right);
 }
 
-short int libretro_input_state_cb(unsigned port,unsigned device,unsigned index,unsigned id){
+short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
 	return input_state_cb(port,device,index,id);
 
 }
@@ -52,26 +45,20 @@ short int libretro_input_state_cb(unsigned port,unsigned device,unsigned index,u
 }
 #endif
 
-void texture_init(){
-		memset(videoBuffer, 0, sizeof(videoBuffer));
+void retro_set_environment(retro_environment_t cb) {
+	bool no_rom = true;
+	environ_cb = cb;
+	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
+	struct retro_variable variables[] = {
+		{
+			"sdlmandel_analog","Use Analog; OFF|ON",
+		},
+		{ NULL, NULL },
+	};
+	cb(RETRO_ENVIRONMENT_SET_VARIABLES, variables);
 }
 
-void retro_set_environment(retro_environment_t cb)
-{
-   bool no_rom = true;
-   environ_cb = cb;
-   cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
-   struct retro_variable variables[] = {
-	  {
-		 "sdlmandel_analog","Use Analog; OFF|ON",
-	  },
-	  { NULL, NULL },
-   };
-   cb(RETRO_ENVIRONMENT_SET_VARIABLES, variables);
-}
-
-static void update_variables(void)
-{
+static void update_variables(void) {
 	struct retro_variable var = {0};
 
 	var.key = "sdlmandel_analog";
@@ -89,16 +76,6 @@ static void update_variables(void)
 
 }
 
-void update_input() {
-	input_poll_cb();
-}
-
-/************************************
- * libretro implementation
- ************************************/
-
-//static struct retro_system_av_info g_av_info;
-
 void retro_get_system_info(struct retro_system_info *info) {
 	memset(info, 0, sizeof(*info));
 	info->library_name = "ChaiGame";
@@ -107,9 +84,7 @@ void retro_get_system_info(struct retro_system_info *info) {
 	info->valid_extensions = "chai";
 }
 
-
-void retro_get_system_av_info(struct retro_system_av_info *info)
-{
+void retro_get_system_av_info(struct retro_system_av_info *info) {
 	struct retro_game_geometry geom = {
 		retrow,
 		retroh,
@@ -126,24 +101,20 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
 	info->timing   = timing;
 }
 
-void retro_set_controller_port_device(unsigned port, unsigned device)
-{
+void retro_set_controller_port_device(unsigned port, unsigned device) {
 	(void)port;
 	(void)device;
 }
 
-size_t retro_serialize_size(void)
-{
+size_t retro_serialize_size(void) {
 	return 0;
 }
 
-bool retro_serialize(void *data, size_t size)
-{
+bool retro_serialize(void *data, size_t size) {
 	return false;
 }
 
-bool retro_unserialize(const void *data, size_t size)
-{
+bool retro_unserialize(const void *data, size_t size) {
 	return false;
 }
 
@@ -151,22 +122,20 @@ void retro_cheat_reset(void) {
 	// Nothing.
 }
 
-void retro_cheat_set(unsigned index, bool enabled, const char *code)
-{
+void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 	(void)index;
 	(void)enabled;
 	(void)code;
 }
 
-bool retro_load_game(const struct retro_game_info *info)
-{
-/*
+bool retro_load_game(const struct retro_game_info *info) {
+	/*
 	const char *full_path;
 
-		full_path = info->path;
+	full_path = info->path;
 
 	strcpy(RPATH,full_path);
-*/
+	*/
 	(void)info;
 
 	printf("LOAD EMU\n");
@@ -182,6 +151,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 }
 
 void retro_unload_game(void) {
+	// Nothing.
 }
 
 unsigned retro_get_region(void) {
@@ -193,43 +163,36 @@ unsigned retro_api_version(void)
 	return RETRO_API_VERSION;
 }
 
-void *retro_get_memory_data(unsigned id)
-{
+void *retro_get_memory_data(unsigned id) {
 	return NULL;
 }
 
-size_t retro_get_memory_size(unsigned id)
-{
+size_t retro_get_memory_size(unsigned id) {
 	return 0;
 }
 
-void retro_init(void)
-{
+void retro_init(void) {
 	const char *system_dir = NULL;
 
-	if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir)
-	{
+	if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
 		// if defined, use the system directory
-		retro_system_directory=system_dir;
+		retro_system_directory = system_dir;
 	}
 
 	const char *content_dir = NULL;
 
-	if (environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir) && content_dir)
-	{
+	if (environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir) && content_dir) {
 		// if defined, use the system directory
 		retro_content_directory=content_dir;
 	}
 
 	const char *save_dir = NULL;
 
-	if (environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir)
-	{
+	if (environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		// If save directory is defined use it, otherwise use system directory
 		retro_save_directory = *save_dir ? save_dir : retro_system_directory;
 	}
-	else
-	{
+	else {
 		// make retro_save_directory the same in case RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY is not implemented by the frontend
 		retro_save_directory=retro_system_directory;
 	}
@@ -243,14 +206,12 @@ void retro_init(void)
 
 	sprintf(retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
 
-	LOGI("Retro SYSTEM_DIRECTORY %s\n",retro_system_directory);
-	LOGI("Retro SAVE_DIRECTORY %s\n",retro_save_directory);
-	LOGI("Retro CONTENT_DIRECTORY %s\n",retro_content_directory);
-
+	printf("Retro SYSTEM_DIRECTORY %s\n",retro_system_directory);
+	printf("Retro SAVE_DIRECTORY %s\n",retro_save_directory);
+	printf("Retro CONTENT_DIRECTORY %s\n",retro_content_directory);
 
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
-	if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt))
-	{
+	if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
 		fprintf(stderr, "Pixel format XRGB8888 not supported by platform, cannot use.\n");
 		exit(0);
 	}
@@ -276,21 +237,33 @@ void retro_init(void)
 	environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, &inputDescriptors);
 
 	update_variables();
-
 }
 
-void retro_deinit(void)
-{
+void retro_deinit(void) {
 	ChaiGame::getInstance()->quit_app();
+	ChaiGame::destroy();
 }
 
-void retro_reset(void)
-{
+void retro_reset(void) {
+	// Nothing.
 }
 
-void retro_run(void)
-{
-	update_input();
-	ChaiGame::getInstance()->exec_app();
-	video_cb(videoBuffer, retrow, retroh, retrow << 2);
+void retro_run(void) {
+	// Only run game loop if ChaiGame is executing.
+	if (ChaiGame::isRunning()) {
+		// Poll all the inputs.
+		input_poll_cb();
+
+		// Update the game.
+		if (ChaiGame::getInstance()->checkInput()) {
+			environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
+			return;
+		}
+
+		// Render the game.
+		ChaiGame::getInstance()->exec_app();
+
+		// Copy the video buffer to the screen.
+		video_cb(ChaiGame::getInstance()->videoBuffer, retrow, retroh, retrow << 2);
+	}
 }
