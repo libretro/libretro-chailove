@@ -79,6 +79,9 @@ FLAGS += -I. \
 
 WARNINGS :=
 
+ifneq ($(DISABLE_CHAISCRIPT),)
+	FLAGS += -D__DISABLE_CHAISCRIPT__
+endif
 FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14

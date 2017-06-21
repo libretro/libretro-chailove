@@ -8,10 +8,6 @@
 extern uint32_t *videoBuffer;
 
 ChaiGame* ChaiGame::m_instance = NULL;
-bool is_file_exist(const char *fileName) {
-    std::ifstream infile(fileName);
-    return infile.good();
-}
 
 int multiply(int i, int j)
 {
@@ -32,10 +28,6 @@ void ChaiGame::quit_app(void) {
 
 bool ChaiGame::init_app() {
 
-	//if (!is_file_exist("main.chai")) {
-	//	return false;
-	//}
-
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return false;
 	}
@@ -54,9 +46,10 @@ bool ChaiGame::init_app() {
 	SDL_ShowCursor(SDL_DISABLE);
 
 
+	#ifndef __DISABLE_CHAISCRIPT__
 	chai.add(chaiscript::fun(&multiply), "multiply");
-
 	chai.eval_file("main.chai");
+	#endif
 
 	return true;
 }
@@ -73,8 +66,11 @@ void ChaiGame::checkInput() {
 				}
 				break;
 			case SDL_KEYDOWN:
+
+				#ifndef __DISABLE_CHAISCRIPT__
 				x += chai.eval<int>("multiply(5, 20);");
 				//x += 100;
+				#endif
 				y+=1;
 			default:
 				break;

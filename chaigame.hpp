@@ -1,5 +1,7 @@
 #include <SDL.h>
+#ifndef __DISABLE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
+#endif
 
 // TODO: Fix Chai loading with the Standard Library.
 //#include <chaiscript/chaiscript_stdlib.hpp>
@@ -15,8 +17,10 @@ public:
 		y = 100;
 	}
 
+	#ifndef __DISABLE_CHAISCRIPT__
 	//chaiscript::ChaiScript chai;
 	chaiscript::ChaiScript chai;
+	#endif
 	SDL_Surface* screen;
 	SDL_Event event;
 	int x, y;
