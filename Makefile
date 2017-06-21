@@ -59,7 +59,7 @@ endif
 
 OBJECTS := libretro.o chaigame.o
 
-all: $(TARGET)
+all: $(TARGET) vendor/libretro-common/include/libretro.h
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -98,5 +98,9 @@ $(TARGET): $(OBJECTS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+
+vendor/libretro-common/include/libretro.h:
+	git submodule init
+	git submodule update
 
 .PHONY: clean
