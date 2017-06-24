@@ -1,3 +1,6 @@
+#ifndef APPLICATION_H
+#define ifndef APPLICATION_H
+
 #include <SDL.h>
 
 #ifndef __DISABLE_CHAISCRIPT__
@@ -7,30 +10,35 @@
 // TODO: Fix Chai loading with the Standard Library.
 //#include <chaiscript/chaiscript_stdlib.hpp>
 
-class ChaiGame {
+class Application {
 public:
-    static ChaiGame* getInstance();
+    static Application* getInstance();
     static bool isRunning();
-	static ChaiGame* m_instance;
+	static Application* m_instance;
 	static void destroy();
 
-	//ChaiGame() : chai(chaiscript::Std_Lib::library()) {
-	ChaiGame() {
+	//Application() : chai(chaiscript::Std_Lib::library()) {
+	Application() {
 		x = 100;
 		y = 100;
 	}
 
 	#ifndef __DISABLE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
+	std::function<void ()> chaiload;
+	std::function<void ()> chaiupdate;
+	std::function<void ()> chaidraw;
 	#endif
 
 	SDL_Surface* screen;
 	SDL_Event event;
 
 	int x, y;
-	void quit_app(void);
-	bool init_app();
-	bool checkInput();
-	void exec_app();
+	void quit(void);
+	bool load();
+	bool update();
+	void draw();
 	uint32_t *videoBuffer;
 };
+
+#endif

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libretro.h>
-#include "chaigame.h"
+#include "Application.h"
 
 char RPATH[512];
 char RETRO_DIR[512];
@@ -140,7 +140,7 @@ bool retro_load_game(const struct retro_game_info *info) {
 
 	printf("LOAD EMU\n");
 
-	return ChaiGame::getInstance()->init_app();
+	return Application::getInstance()->load();
 }
 
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
@@ -240,8 +240,8 @@ void retro_init(void) {
 }
 
 void retro_deinit(void) {
-	ChaiGame::getInstance()->quit_app();
-	ChaiGame::destroy();
+	Application::getInstance()->quit();
+	Application::destroy();
 }
 
 void retro_reset(void) {
@@ -249,21 +249,21 @@ void retro_reset(void) {
 }
 
 void retro_run(void) {
-	// Only run game loop if ChaiGame is executing.
-	if (ChaiGame::isRunning()) {
+	// Only run game loop if Application is executing.
+	if (Application::isRunning()) {
 		// Poll all the inputs.
 		input_poll_cb();
 
 		// Update the game.
-		if (ChaiGame::getInstance()->checkInput()) {
+		if (Application::getInstance()->update()) {
 			environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 			return;
 		}
 
 		// Render the game.
-		ChaiGame::getInstance()->exec_app();
+		Application::getInstance()->draw();
 
 		// Copy the video buffer to the screen.
-		video_cb(ChaiGame::getInstance()->videoBuffer, retrow, retroh, retrow << 2);
+		video_cb(Application::getInstance()->videoBuffer, retrow, retroh, retrow << 2);
 	}
 }

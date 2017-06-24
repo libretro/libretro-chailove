@@ -3,30 +3,34 @@
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 
-#include "chaigame.h"
+#include "Application.h"
 
-ChaiGame* ChaiGame::m_instance = NULL;
+#include "chaigame/chaigame.h"
 
 
-bool ChaiGame::isRunning() {
+Application* Application::m_instance = NULL;
+
+
+bool Application::isRunning() {
 	return m_instance != NULL;
 }
-void ChaiGame::destroy() {
+void Application::destroy() {
 	m_instance = NULL;
 }
 
-ChaiGame* ChaiGame::getInstance() {
+Application* Application::getInstance() {
 	if (!m_instance) {
-		m_instance = new ChaiGame;
+		m_instance = new Application;
 	}
 	return m_instance;
 }
 
-void ChaiGame::quit_app(void) {
+void Application::quit(void) {
+	// Tell SDL to quit.
 	SDL_Quit();
 }
 
-bool ChaiGame::init_app() {
+bool Application::load() {
 	// Initialize SDL.
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return false;
@@ -53,13 +57,22 @@ bool ChaiGame::init_app() {
 	// ChaiScript.
 	#ifndef __DISABLE_CHAISCRIPT__
 	chai.eval_file("main.chai");
+	chaiload = chai.eval<std::function<void ()> >("load");
+	chaiupdate = chai.eval<std::function<void ()> >("update");
+	chaidraw = chai.eval<std::function<void ()> >("draw");
+
+	chai.add(chaiscript::fun(chaigame::graphics::rectangle), "rectangle");
+
+	chaiload();
 	#endif
 
 	return true;
 }
 
-bool ChaiGame::checkInput() {
+bool Application::update() {
 	bool quit = false;
+
+	// TODO: Add a Timer.
 
 	/* Check for events */
 	while (SDL_PollEvent(&event)) {
@@ -83,22 +96,30 @@ bool ChaiGame::checkInput() {
 				break;
 		}
 	}
+	#ifndef __DISABLE_CHAISCRIPT__
+	chaiupdate();
+	#endif
 
 	return quit;
 }
 
-void ChaiGame::exec_app(){
+/**
+ * Render the application.
+ */
+void Application::draw(){
 
 	// Clear the screen
 	Uint32 color = SDL_MapRGBA(screen->format, 0, 0, 0, 255);
 	SDL_FillRect(screen, NULL, color);
 
-	// Draw Background.
-	rectangleRGBA(screen,
-		x, y,
-		x + 100, y + 100,
-		0, 0, 255, 255);
+	// Test drawing a rectangle.
+	chaigame::graphics::rectangle(10, 10, 100, 100, 0, 255, 255, 255);
 
+	#ifndef __DISABLE_CHAISCRIPT__
+	chaidraw();
+	#endif
+
+	// TODO: Do we need to call UpdateRect?
 	//SDL_UpdateRect(screen, 0, 0, 0, 0);
 	SDL_Flip(screen);
 }

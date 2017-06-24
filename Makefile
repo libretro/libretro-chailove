@@ -57,7 +57,7 @@ else
 	SDL_PREFIX := win
 endif
 
-OBJECTS := libretro.o chaigame.o
+OBJECTS := libretro.o Application.o chaigame/chaigame.o chaigame/graphics.o
 
 all: vendor/libretro-common/include/libretro.h $(TARGET)
 
@@ -104,3 +104,9 @@ vendor/libretro-common/include/libretro.h:
 	git submodule update
 
 .PHONY: clean
+
+minimal:
+	make DISABLE_CHAISCRIPT=1
+
+test: minimal
+	retroarch -L *.so

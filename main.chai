@@ -1,1 +1,13 @@
 print("Hello World, from Chai")
+
+def draw() {
+	rectangle(40, 40, 100, 20, 255, 0, 255, 255)
+}
+
+def update() {
+	// Called after updating the input.
+}
+
+def load() {
+	// Called when loading the game.
+}
