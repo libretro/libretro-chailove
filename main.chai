@@ -1,16 +1,21 @@
 print("Hello World, from Chai")
 
-global x = 1;
-
-def draw() {
-	rectangle(x, 40, 100, 20, 255, 0, 255, 255)
-}
-
-def update() {
-	// Called after updating the input.
-	x = x+1;
-}
+global x;
+global y;
 
 def load() {
 	// Called when loading the game.
+	x = 10
+	y = 100
+}
+
+def update(delta) {
+	// Called after updating the input.
+	x = x + delta * 0.15
+	y += delta * 0.10
+}
+
+def draw() {
+	// Called to render the game state.
+	rectangle(x, y, 100, 20, 255, 0, 255, 255)
 }

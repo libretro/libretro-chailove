@@ -54,15 +54,23 @@ bool Application::load() {
 	// Disable the mouse cursor from showing up.
 	SDL_ShowCursor(SDL_DISABLE);
 
+	// Set up the game timer.
+	tick = SDL_GetTicks();
+
 	// ChaiScript.
 	#ifndef __DISABLE_CHAISCRIPT__
+	// Load main.chai.
 	chai.eval_file("main.chai");
+
+	// Find the game functions.
 	chaiload = chai.eval<std::function<void ()> >("load");
-	chaiupdate = chai.eval<std::function<void ()> >("update");
+	chaiupdate = chai.eval<std::function<void (Uint32)> >("update");
 	chaidraw = chai.eval<std::function<void ()> >("draw");
 
+	// Add all the modules.
 	chai.add(chaiscript::fun(chaigame::graphics::rectangle), "rectangle");
 
+	// Initialize the game.
 	chaiload();
 	#endif
 
@@ -72,9 +80,7 @@ bool Application::load() {
 bool Application::update() {
 	bool quit = false;
 
-	// TODO: Add a Timer.
-
-	/* Check for events */
+	// Update all the input.
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_MOUSEBUTTONDOWN:
@@ -91,14 +97,21 @@ bool Application::update() {
 				//x += chai.eval<int>("multiply(5, 20);");
 				//x += 100;
 				#endif
-				y+=1;
 			default:
 				break;
 		}
 	}
+
+	// Retrieve the new game time.
+	Uint32 current = SDL_GetTicks();
+
+	// Update the game.
 	#ifndef __DISABLE_CHAISCRIPT__
-	chaiupdate();
+	chaiupdate(current - tick);
 	#endif
+
+	// Update the timer.
+	tick = current;
 
 	return quit;
 }
@@ -107,7 +120,6 @@ bool Application::update() {
  * Render the application.
  */
 void Application::draw(){
-
 	// Clear the screen
 	Uint32 color = SDL_MapRGBA(screen->format, 0, 0, 0, 255);
 	SDL_FillRect(screen, NULL, color);
@@ -119,7 +131,6 @@ void Application::draw(){
 	chaidraw();
 	#endif
 
-	// TODO: Do we need to call UpdateRect?
-	//SDL_UpdateRect(screen, 0, 0, 0, 0);
+	SDL_UpdateRect(screen, 0, 0, 0, 0);
 	SDL_Flip(screen);
 }

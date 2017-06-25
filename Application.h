@@ -19,26 +19,25 @@ public:
 
 	//Application() : chai(chaiscript::Std_Lib::library()) {
 	Application() {
-		x = 100;
-		y = 100;
+		tick = 0;
 	}
 
 	#ifndef __DISABLE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
 	std::function<void ()> chaiload;
-	std::function<void ()> chaiupdate;
+	std::function<void (Uint32)> chaiupdate;
 	std::function<void ()> chaidraw;
 	#endif
 
 	SDL_Surface* screen;
 	SDL_Event event;
 
-	int x, y;
 	void quit(void);
 	bool load();
 	bool update();
 	void draw();
 	uint32_t *videoBuffer;
+	Uint32 tick;
 };
 
 #endif
