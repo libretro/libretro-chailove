@@ -7,9 +7,7 @@
 
 #include "chaigame/chaigame.h"
 
-
 Application* Application::m_instance = NULL;
-
 
 bool Application::isRunning() {
 	return m_instance != NULL;
@@ -54,9 +52,6 @@ bool Application::load() {
 	// Disable the mouse cursor from showing up.
 	SDL_ShowCursor(SDL_DISABLE);
 
-	// Set up the game timer.
-	tick = SDL_GetTicks();
-
 	// ChaiScript.
 	#ifndef __DISABLE_CHAISCRIPT__
 	// Load main.chai.
@@ -73,6 +68,9 @@ bool Application::load() {
 	// Initialize the game.
 	chaiload();
 	#endif
+
+	// Set up the game timer.
+	tick = SDL_GetTicks();
 
 	return true;
 }
@@ -125,7 +123,8 @@ void Application::draw(){
 	SDL_FillRect(screen, NULL, color);
 
 	// Test drawing a rectangle.
-	chaigame::graphics::rectangle(10, 10, 100, 100, 0, 255, 255, 255);
+	static int x = 10;
+	chaigame::graphics::rectangle(x++, 10, 100, 100, 0, 255, 255, 255);
 
 	#ifndef __DISABLE_CHAISCRIPT__
 	chaidraw();

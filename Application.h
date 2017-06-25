@@ -18,9 +18,8 @@ public:
 	static void destroy();
 
 	//Application() : chai(chaiscript::Std_Lib::library()) {
-	Application() {
-		tick = 0;
-	}
+	//Application() {
+	//}
 
 	#ifndef __DISABLE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
