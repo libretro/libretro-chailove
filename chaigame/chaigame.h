@@ -2,5 +2,6 @@
 #define CHAIGAME_H
 
 #include "graphics.h"
+#include "keyboard.h"
 
 #endif

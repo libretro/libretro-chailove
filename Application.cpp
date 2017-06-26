@@ -52,6 +52,9 @@ bool Application::load() {
 	// Disable the mouse cursor from showing up.
 	SDL_ShowCursor(SDL_DISABLE);
 
+	// Initalize the chaigame subsystems.
+	chaigame::keyboard::load();
+
 	// ChaiScript.
 	#ifndef __DISABLE_CHAISCRIPT__
 	// Load main.chai.
@@ -64,6 +67,12 @@ bool Application::load() {
 
 	// Add all the modules.
 	chai.add(chaiscript::fun(chaigame::graphics::rectangle), "rectangle");
+
+
+
+	//chai.add(chaiscript::fun<bool (std::string)>(chaigame::keyboard::isDown), "isdown");
+    //chai.add(chaiscript::fun(std::static_cast<bool (*)(std::string)>(&chaigame::keyboard::isDown)), "isDown");
+
 
 	// Initialize the game.
 	chaiload();
@@ -100,6 +109,8 @@ bool Application::update() {
 		}
 	}
 
+	chaigame::keyboard::update();
+
 	// Retrieve the new game time.
 	Uint32 current = SDL_GetTicks();
 
@@ -124,7 +135,11 @@ void Application::draw(){
 
 	// Test drawing a rectangle.
 	static int x = 10;
-	chaigame::graphics::rectangle(x++, 10, 100, 100, 0, 255, 255, 255);
+	chaigame::graphics::rectangle(x, 10, 100, 100, 0, 255, 255, 255);
+
+	if (chaigame::keyboard::isDown("down")) {
+		x++;
+	}
 
 	#ifndef __DISABLE_CHAISCRIPT__
 	chaidraw();

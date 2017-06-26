@@ -57,7 +57,10 @@ else
 	SDL_PREFIX := win
 endif
 
-OBJECTS := libretro.o Application.o chaigame/chaigame.o chaigame/graphics.o
+OBJECTS := libretro.o Application.o \
+	chaigame/chaigame.o \
+	chaigame/graphics.o \
+	chaigame/keyboard.o
 
 all: vendor/libretro-common/include/libretro.h $(TARGET)
 
