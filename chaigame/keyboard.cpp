@@ -1,28 +1,28 @@
 #include "keyboard.h"
 
 #include <string>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 namespace chaigame {
 	namespace keyboard {
 		Uint8* keys;
 
-		bool isDown(int key) {
+		bool isKeyDown(int key) {
 			return (bool)keys[key];
 		}
 
 		bool isDown(std::string key) {
 			if (key == "down") {
-				return isDown(SDLK_DOWN);
+				return isKeyDown(SDLK_DOWN);
 			}
 			if (key == "up") {
-				return isDown(SDLK_UP);
+				return isKeyDown(SDLK_UP);
 			}
 			if (key == "left") {
-				return isDown(SDLK_LEFT);
+				return isKeyDown(SDLK_LEFT);
 			}
 			if (key == "right") {
-				return isDown(SDLK_RIGHT);
+				return isKeyDown(SDLK_RIGHT);
 			}
 		}
 

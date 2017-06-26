@@ -68,8 +68,8 @@ bool Application::load() {
 	// Add all the modules.
 	chai.add(chaiscript::fun(chaigame::graphics::rectangle), "rectangle");
 
-
-
+	//auto isDownTime = [](bool, std::string key) { return chaigame::keyboard::isDown(key); };
+	chai.add(chaiscript::fun(chaigame::keyboard::isDown), "isDown");
 	//chai.add(chaiscript::fun<bool (std::string)>(chaigame::keyboard::isDown), "isdown");
     //chai.add(chaiscript::fun(std::static_cast<bool (*)(std::string)>(&chaigame::keyboard::isDown)), "isDown");
 
@@ -135,16 +135,27 @@ void Application::draw(){
 
 	// Test drawing a rectangle.
 	static int x = 10;
-	chaigame::graphics::rectangle(x, 10, 100, 100, 0, 255, 255, 255);
-
-	if (chaigame::keyboard::isDown("down")) {
-		x++;
+	static int y = 10;
+	if (chaigame::keyboard::isDown("up")) {
+		y -= 1;
 	}
+	if (chaigame::keyboard::isDown("down")) {
+		y += 1;
+	}
+	if (chaigame::keyboard::isDown("left")) {
+		x -= 1;
+	}
+	if (chaigame::keyboard::isDown("right")) {
+		x += 1;
+	}
+	chaigame::graphics::rectangle(x, y, 100, 100, 0, 255, 255, 255);
 
+	// Render the game.
 	#ifndef __DISABLE_CHAISCRIPT__
 	chaidraw();
 	#endif
 
+	// Update the screen.
 	SDL_UpdateRect(screen, 0, 0, 0, 0);
 	SDL_Flip(screen);
 }
