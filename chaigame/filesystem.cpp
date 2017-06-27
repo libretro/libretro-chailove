@@ -16,14 +16,8 @@ namespace chaigame {
 
 		PHYSFS_init(NULL);
 
-		if (file.empty()) {
-			PHYSFS_mount("", NULL, 1);
-		}
-		else {
-			PHYSFS_mount(file.c_str(), NULL, 1);
-
-			// TODO: Mount the file's base directory.
-		}
+		// TODO: Load the actual file's directory.
+		mount(".", "/");
 	}
 
 	bool filesystem::unload() {
@@ -39,7 +33,7 @@ namespace chaigame {
 		return NULL;
 	}
 
-	char* filesystem::openChar(std::string filename) {
+	char* filesystem::readChar(std::string filename) {
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 		PHYSFS_sint64 file_size = PHYSFS_fileLength(myfile);
 
@@ -49,9 +43,14 @@ namespace chaigame {
 		return myBuf;
 	}
 
-	std::string filesystem::openString(std::string filename) {
-		char *myBuf = openChar(filename);
+	std::string filesystem::read(std::string filename) {
+		char *myBuf = readChar(filename);
 		std::string contents(myBuf);
 		return contents;
+	}
+
+	bool filesystem::mount(const char* archive, const char* mountpoint) {
+		int returnValue = PHYSFS_mount(archive, mountpoint, 1);
+		return returnValue != 0;
 	}
 }

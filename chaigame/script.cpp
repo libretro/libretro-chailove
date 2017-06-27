@@ -26,9 +26,13 @@ namespace chaigame {
 		chai.add(fun(&image::newImageData), "newImageData");
 		chai.add_global(var(std::ref(app->image)), "image");
 
+		// Register the Filesystem module.
+		chai.add(fun(&filesystem::read), "read");
+		chai.add_global(var(std::ref(app->filesystem)), "filesystem");
+
 		// Load main.chai.
 		std::string file("main.chai");
-		std::string contents = app->filesystem.openString(file);
+		std::string contents = app->filesystem.read(file);
 		chai.eval(contents);
 
 		// Find the game functions.
