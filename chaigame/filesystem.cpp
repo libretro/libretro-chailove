@@ -1,6 +1,8 @@
-#include "filesystem.h"
+
 #include <physfs.h>
 #include <string>
+
+#include "filesystem.h"
 #include "vendor/physfs/extras/physfsrwops.h"
 
 namespace chaigame {
@@ -35,5 +37,21 @@ namespace chaigame {
 		}
 		// TODO: Add error reporting.
 		return NULL;
+	}
+
+	char* filesystem::openChar(std::string filename) {
+		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
+		PHYSFS_sint64 file_size = PHYSFS_fileLength(myfile);
+
+		char *myBuf = new char[file_size];
+		int length_read = PHYSFS_readBytes(myfile, myBuf, file_size);
+		PHYSFS_close(myfile);
+		return myBuf;
+	}
+
+	std::string filesystem::openString(std::string filename) {
+		char *myBuf = openChar(filename);
+		std::string contents(myBuf);
+		return contents;
 	}
 }

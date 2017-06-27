@@ -11,6 +11,8 @@ namespace chaigame {
 		bool load();
 		bool unload();
 		SDL_RWops* openRW(std::string filename);
+		char* openChar(std::string filename);
+		std::string openString(std::string filename);
 	};
 }
 

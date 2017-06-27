@@ -2,7 +2,9 @@
 #include "chaigame.h"
 #include "../Application.h"
 
+#ifndef __DISABLE_CHAISCRIPT__
 using namespace chaiscript;
+#endif
 
 namespace chaigame {
 	script::script() {
@@ -25,7 +27,9 @@ namespace chaigame {
 		chai.add_global(var(std::ref(app->image)), "image");
 
 		// Load main.chai.
-		chai.eval_file("main.chai");
+		std::string file("main.chai");
+		std::string contents = app->filesystem.openString(file);
+		chai.eval(contents);
 
 		// Find the game functions.
 		chaiload = chai.eval<std::function<void ()> >("load");
