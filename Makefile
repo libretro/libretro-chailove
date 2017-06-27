@@ -105,8 +105,8 @@ $(TARGET): $(OBJECTS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
-	rm -rf vendor
-	git submodule update
+	#rm -rf vendor
+	#git submodule update
 
 vendor/libretro-common/include/libretro.h:
 	git submodule init

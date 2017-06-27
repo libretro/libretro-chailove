@@ -17,7 +17,7 @@ public:
 	chaigame::filesystem filesystem;
 
 	void quit(void);
-	bool load();
+	bool load(std::string);
 	bool update();
 	void draw();
 

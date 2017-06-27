@@ -26,11 +26,12 @@ Application* Application::getInstance() {
 }
 
 void Application::quit(void) {
+	filesystem.unload();
 	// Tell SDL to quit.
 	SDL_Quit();
 }
 
-bool Application::load() {
+bool Application::load(std::string file = "main.chai") {
 	// Initialize SDL.
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return false;
@@ -58,7 +59,7 @@ bool Application::load() {
 	keyboard.load();
 
 	// Initialize the file system.
-	filesystem.load();
+	filesystem.load(file);
 
 	// ChaiScript.
 	script = new chaigame::script();

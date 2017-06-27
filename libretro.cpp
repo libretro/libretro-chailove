@@ -1,10 +1,9 @@
-#include <string.h>
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <libretro.h>
 #include "Application.h"
 
-char RPATH[512];
 char RETRO_DIR[512];
 const char *retro_save_directory;
 const char *retro_system_directory;
@@ -129,18 +128,9 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 
 bool retro_load_game(const struct retro_game_info *info) {
-	/*
-	const char *full_path;
-
-	full_path = info->path;
-
-	strcpy(RPATH,full_path);
-	*/
-	(void)info;
-
-	printf("LOAD EMU\n");
-
-	return Application::getInstance()->load();
+	std::string full = info ? info->path : "main.chai";
+	printf("LOAD FILE: %s\n", full.c_str());
+	return Application::getInstance()->load(full);
 }
 
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
