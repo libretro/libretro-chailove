@@ -2,25 +2,27 @@
 #include "chaigame.h"
 #include <string>
 #include "../Application.h"
+using namespace chaiscript;
 
 namespace chaigame {
 	script::script() {
 		#ifndef __DISABLE_CHAISCRIPT__
-		// Register the Graphics module.
-		chai.add(chaiscript::fun(&chaigame::graphics::rectangle), "rectangle");
-		chai.add(chaiscript::fun(&chaigame::graphics::newImage), "newImage");
-		chai.add(chaiscript::fun<void, graphics, Image*>(&chaigame::graphics::draw), "draw");
+		Application* app = Application::getInstance();
 
-		chai.add_global(chaiscript::var(std::ref(Application::getInstance()->graphics)), "graphics");
+		// Register the Graphics module.
+		chai.add(fun(&graphics::rectangle), "rectangle");
+		chai.add(fun(&graphics::newImage), "newImage");
+		chai.add(fun<void, graphics, Image*>(&graphics::draw), "draw");
+		chai.add_global(var(std::ref(app->graphics)), "graphics");
 
 		// Register the Keyboard module.
-		chai.add(chaiscript::fun(&chaigame::keyboard::update), "update");
-		chai.add(chaiscript::fun(&chaigame::keyboard::isDown), "isDown");
-		chai.add_global(chaiscript::var(std::ref(Application::getInstance()->keyboard)), "keyboard");
+		chai.add(fun(&keyboard::update), "update");
+		chai.add(fun(&keyboard::isDown), "isDown");
+		chai.add_global(var(std::ref(app->keyboard)), "keyboard");
 
 		// Register the Image module.
-		chai.add(chaiscript::fun(&chaigame::image::newImageData), "newImageData");
-		chai.add_global(chaiscript::var(std::ref(Application::getInstance()->image)), "image");
+		chai.add(fun(&image::newImageData), "newImageData");
+		chai.add_global(var(std::ref(app->image)), "image");
 
 		// Load main.chai.
 		chai.eval_file("main.chai");
