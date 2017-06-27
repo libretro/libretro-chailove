@@ -10,21 +10,23 @@ def load() {
 }
 
 def update(delta) {
-	if (isDown("up")) {
+	//print("fdsa")
+	print(keyboard.isDown("up"))
+	if (keyboard.isDown("up")) {
 		y -= 1 * delta;
 	}
-	if (isDown("down")) {
+	if (keyboard.isDown("down")) {
 		y += 1 * delta;
 	}
-	if (isDown("left")) {
+	if (keyboard.isDown("left")) {
 		x-=1 * delta;
 	}
-	if (isDown("right")) {
+	if (keyboard.isDown("right")) {
 		x+=1 * delta;
 	}
 }
 
 def draw() {
 	// Called to render the game state.
-	rectangle(x, y, 100, 20, 255, 0, 255, 255)
+	rectangle(x, y, 100, 20, 0, 0, 255, 255)
 }

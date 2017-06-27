@@ -5,15 +5,16 @@
 #include <SDL.h>
 
 namespace chaigame {
-	namespace keyboard {
-
+	class keyboard {
+	public:
+		Uint8* keys;
 		bool load();
 		bool isDown(std::string key);
 		bool isKeyDown(int key);
 		void setKeyRepeat(int delay = 400, int interval = 30);
 		void update();
 
-	}
+	};
 }
 
 #endif

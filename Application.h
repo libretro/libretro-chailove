@@ -2,6 +2,7 @@
 #define ifndef APPLICATION_H
 
 #include <SDL.h>
+#include "chaigame/chaigame.h"
 
 #ifndef __DISABLE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
@@ -30,6 +31,8 @@ public:
 
 	SDL_Surface* screen;
 	SDL_Event event;
+
+	chaigame::keyboard keyboard;
 
 	void quit(void);
 	bool load();

@@ -53,7 +53,7 @@ bool Application::load() {
 	SDL_ShowCursor(SDL_DISABLE);
 
 	// Initalize the chaigame subsystems.
-	chaigame::keyboard::load();
+	keyboard.load();
 
 	// ChaiScript.
 	#ifndef __DISABLE_CHAISCRIPT__
@@ -65,14 +65,13 @@ bool Application::load() {
 	chaiupdate = chai.eval<std::function<void (Uint32)> >("update");
 	chaidraw = chai.eval<std::function<void ()> >("draw");
 
-	// Add all the modules.
+	// Register the Graphics module.
 	chai.add(chaiscript::fun(chaigame::graphics::rectangle), "rectangle");
 
-	//auto isDownTime = [](bool, std::string key) { return chaigame::keyboard::isDown(key); };
-	chai.add(chaiscript::fun(chaigame::keyboard::isDown), "isDown");
-	//chai.add(chaiscript::fun<bool (std::string)>(chaigame::keyboard::isDown), "isdown");
-    //chai.add(chaiscript::fun(std::static_cast<bool (*)(std::string)>(&chaigame::keyboard::isDown)), "isDown");
-
+	// Register the Keyboard module.
+	chai.add(chaiscript::fun(&chaigame::keyboard::update), "update");
+	chai.add(chaiscript::fun(&chaigame::keyboard::isDown), "isDown");
+	chai.add_global(chaiscript::var(std::ref(keyboard)), "keyboard");
 
 	// Initialize the game.
 	chaiload();
@@ -109,7 +108,7 @@ bool Application::update() {
 		}
 	}
 
-	chaigame::keyboard::update();
+	keyboard.update();
 
 	// Retrieve the new game time.
 	Uint32 current = SDL_GetTicks();
@@ -136,17 +135,18 @@ void Application::draw(){
 	// Test drawing a rectangle.
 	static int x = 10;
 	static int y = 10;
-	if (chaigame::keyboard::isDown("up")) {
-		y -= 1;
+
+	if (keyboard.isDown("up")) {
+		y -= 6;
 	}
-	if (chaigame::keyboard::isDown("down")) {
-		y += 1;
+	if (keyboard.isDown("down")) {
+		y += 6;
 	}
-	if (chaigame::keyboard::isDown("left")) {
-		x -= 1;
+	if (keyboard.isDown("left")) {
+		x -= 6;
 	}
-	if (chaigame::keyboard::isDown("right")) {
-		x += 1;
+	if (keyboard.isDown("right")) {
+		x += 6;
 	}
 	chaigame::graphics::rectangle(x, y, 100, 100, 0, 255, 255, 255);
 
