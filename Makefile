@@ -63,7 +63,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/keyboard.o \
 	chaigame/script.o
 
-all: vendor/libretro-common/include/libretro.h $(TARGET)
+all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -74,12 +74,14 @@ endif
 LDFLAGS +=  $(fpic) $(SHARED) \
 	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
 	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
+	vendor/physfs/libphysfs.a \
 	-ldl \
 	-lpthread $(EXTRA_LDF)
 FLAGS += -I. \
 	-Ivendor/sdl-libretro/include \
 	-Ivendor/libretro-common/include \
-	-Ivendor/chaiscript/include
+	-Ivendor/chaiscript/include \
+	-Ivendor/physfs/src
 
 WARNINGS :=
 
@@ -106,6 +108,11 @@ clean:
 vendor/libretro-common/include/libretro.h:
 	git submodule init
 	git submodule update
+
+vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
+	cd vendor/physfs
+	cmake .
+	make
 
 .PHONY: clean
 

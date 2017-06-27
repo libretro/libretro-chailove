@@ -7,6 +7,8 @@
 
 #include "chaigame/chaigame.h"
 
+#include <physfs.h>
+
 Application* Application::m_instance = NULL;
 
 bool Application::isRunning() {
