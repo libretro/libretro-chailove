@@ -10,8 +10,7 @@ def load() {
 }
 
 def update(delta) {
-	//print("fdsa")
-	print(keyboard.isDown("up"))
+	// Called before drawing.
 	if (keyboard.isDown("up")) {
 		y -= 1 * delta;
 	}
@@ -28,5 +27,5 @@ def update(delta) {
 
 def draw() {
 	// Called to render the game state.
-	rectangle(x, y, 100, 20, 0, 0, 255, 255)
+	graphics.rectangle(x, y, 100, 20, 0, 0, 255, 255)
 }

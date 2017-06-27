@@ -128,7 +128,7 @@ void Application::draw(){
 	if (keyboard.isDown("right")) {
 		x += 6;
 	}
-	chaigame::graphics::rectangle(x, y, 100, 100, 0, 255, 255, 255);
+	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
 
 	// Render the game.
 	script->draw();

@@ -13,6 +13,7 @@ public:
 
 	chaigame::keyboard keyboard;
 	chaigame::script* script;
+	chaigame::graphics graphics;
 
 	void quit(void);
 	bool load();
