@@ -5,9 +5,11 @@
 #include "ImageData.h"
 
 namespace chaigame {
+
 	class Image : public ImageData {
 		using ImageData::ImageData;
 	};
+
 }
 
 #endif

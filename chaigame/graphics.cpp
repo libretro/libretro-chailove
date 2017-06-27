@@ -1,8 +1,8 @@
+#include "graphics.h"
 
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 
-#include "graphics.h"
 #include "../Application.h"
 #include "src/ImageData.h"
 #include "src/Image.h"

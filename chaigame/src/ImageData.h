@@ -14,19 +14,6 @@ namespace chaigame {
 		bool loaded();
 		bool loadFromRW(SDL_RWops* rw);
 		bool destroy();
-
-	 /* TODO: Add rwops API
-		SDL_RWops* rw;
-		if ((rw=PHYSFSRWOPS_openRead(filepath.c_str()) == NULL)
-		{
-		    return false; //file doesn't exist
-		}
-
-		SDL_Surface* surface = IMG_Load_RW(rw, 0);
-
-		SDL_FreeRW(rw);
-		*/
-		//void newImageData(std::string filename);
 	};
 }
 

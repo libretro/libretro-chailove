@@ -1,13 +1,8 @@
-#include <stdint.h>
 #include <string>
 #include <SDL.h>
-#include <SDL_gfxPrimitives.h>
 
 #include "Application.h"
-
 #include "chaigame/chaigame.h"
-
-#include <physfs.h>
 
 Application* Application::m_instance = NULL;
 

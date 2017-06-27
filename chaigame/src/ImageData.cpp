@@ -5,6 +5,7 @@
 #include "../../Application.h"
 
 namespace chaigame {
+
 	ImageData::ImageData(SDL_RWops* rw) {
 		loadFromRW(rw);
 	}
@@ -22,6 +23,7 @@ namespace chaigame {
 		}
 		return true;
 	}
+
 	bool ImageData::destroy() {
 		printf("DESTROY IMAGE");
 		if (!surface) {
@@ -30,6 +32,7 @@ namespace chaigame {
 		}
 		return true;
 	}
+
 	ImageData::~ImageData() {
 		destroy();
 	}

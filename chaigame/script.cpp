@@ -1,7 +1,7 @@
 #include "script.h"
 #include "chaigame.h"
-#include <string>
 #include "../Application.h"
+
 using namespace chaiscript;
 
 namespace chaigame {

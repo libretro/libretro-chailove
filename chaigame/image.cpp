@@ -1,5 +1,4 @@
 #include "image.h"
-#include "../Application.h"
 #include <SDL.h>
 #include <string>
 #include <SDL_image.h>
