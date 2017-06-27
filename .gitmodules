@@ -7,6 +7,3 @@
 [submodule "vendor/chaiscript"]
 	path = vendor/chaiscript
 	url = https://github.com/ChaiScript/ChaiScript.git
-[submodule "vendor/physfs"]
-	path = vendor/physfs
-	url = git@github.com:criptych/physfs.git
