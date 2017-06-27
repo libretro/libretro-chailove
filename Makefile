@@ -61,7 +61,8 @@ OBJECTS := libretro.o Application.o \
 	chaigame/chaigame.o \
 	chaigame/graphics.o \
 	chaigame/keyboard.o \
-	chaigame/script.o
+	chaigame/script.o \
+	chaigame/filesystem.o
 
 all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)
 

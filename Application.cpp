@@ -57,6 +57,9 @@ bool Application::load() {
 	// Initalize the chaigame subsystems.
 	keyboard.load();
 
+	// Initialize the file system.
+	filesystem.load();
+
 	// ChaiScript.
 	script = new chaigame::script();
 	script->load();
