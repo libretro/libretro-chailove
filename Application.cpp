@@ -31,7 +31,7 @@ void Application::quit(void) {
 	SDL_Quit();
 }
 
-bool Application::load(std::string file = "main.chai") {
+bool Application::load(std::string file = "") {
 	// Initialize SDL.
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return false;

@@ -8,6 +8,7 @@ namespace chaigame {
 	class filesystem {
 	public:
 		bool load(std::string file);
+		bool load();
 		bool unload();
 	};
 }

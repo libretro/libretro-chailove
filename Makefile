@@ -29,7 +29,7 @@ ifeq ($(platform), unix)
 else ifneq (,$(findstring android,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro_android.so
 	fpic = -fPIC
-	SHARED := -lstdc++ -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
+	SHARED := -lstdc++ -lstd++fs -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
 	CFLAGS +=  -g -O2
 	CC = arm-linux-androideabi-gcc
 	CXX = arm-linux-androideabi-g++
@@ -40,7 +40,7 @@ else ifeq ($(platform), wincross64)
 	CC = x86_64-w64-mingw32-gcc
 	CXX = x86_64-w64-mingw32-g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-	LDFLAGS += -static-libgcc -static-libstdc++
+	LDFLAGS += -static-libgcc -static-libstdc++ -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS +=
 	EXTRA_LDF := -lwinmm -Wl,--export-all-symbols
@@ -50,7 +50,7 @@ else
 	CC = gcc
 	CXX = g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-	LDFLAGS += -static-libgcc -static-libstdc++
+	LDFLAGS += -static-libgcc -static-libstdc++  -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS +=
 	EXTRA_LDF = -lwinmm -Wl,--export-all-symbols

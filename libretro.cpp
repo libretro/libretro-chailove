@@ -81,6 +81,7 @@ void retro_get_system_info(struct retro_system_info *info) {
 	info->library_version = "0.0.2";
 	info->need_fullpath = false;
 	info->valid_extensions = "chai";
+	info->block_extract = true;
 }
 
 void retro_get_system_av_info(struct retro_system_av_info *info) {
@@ -128,7 +129,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 
 bool retro_load_game(const struct retro_game_info *info) {
-	std::string full = info ? info->path : "main.chai";
+	std::string full = info ? info->path : ".";
 	printf("LOAD FILE: %s\n", full.c_str());
 	return Application::getInstance()->load(full);
 }
