@@ -1,9 +1,9 @@
 print("Hello World, from Chai")
 
-global x;
-global y;
+global x
+global y
 
-global logo;
+global logo
 
 def load() {
 	// Called when loading the game.
@@ -16,16 +16,16 @@ def load() {
 def update(delta) {
 	// Called before drawing.
 	if (keyboard.isDown("up")) {
-		y -= 1 * delta;
+		y -= 1 * delta
 	}
 	if (keyboard.isDown("down")) {
-		y += 1 * delta;
+		y += 1 * delta
 	}
 	if (keyboard.isDown("left")) {
-		x-=1 * delta;
+		x-=1 * delta
 	}
 	if (keyboard.isDown("right")) {
-		x+=1 * delta;
+		x+=1 * delta
 	}
 }
 
@@ -33,5 +33,5 @@ def draw() {
 	// Called to render the game state.
 	graphics.rectangle(x, y, 100, 20, 0, 0, 255, 255)
 
-	graphics.draw(logo)
+	graphics.draw(logo, x+100, y)
 }

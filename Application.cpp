@@ -136,8 +136,7 @@ void Application::draw(){
 
 
 	//static chaigame::Image* pic = graphics.newImage("logo.png");
-	//graphics.draw(pic);
-
+	//graphics.draw(pic, x, y);
 
 	// Render the game.
 	script->draw();

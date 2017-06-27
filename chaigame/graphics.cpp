@@ -18,9 +18,12 @@ namespace chaigame {
 		}
 	}
 
-	void graphics::draw(Image* image) {
+	void graphics::draw(Image* image, int x, int y) {
 		if (image && image->loaded()) {
-			SDL_BlitSurface(image->surface, NULL, Application::getInstance()->screen, NULL);
+			SDL_Rect* dstrect = new SDL_Rect();
+			dstrect->x = x;
+			dstrect->y = y;
+			SDL_BlitSurface(image->surface, NULL, Application::getInstance()->screen, dstrect);
 		}
 	}
 
