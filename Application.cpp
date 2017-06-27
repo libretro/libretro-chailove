@@ -7,6 +7,8 @@
 
 #include "chaigame/chaigame.h"
 
+#include <physfs.h>
+
 Application* Application::m_instance = NULL;
 
 bool Application::isRunning() {
@@ -24,11 +26,12 @@ Application* Application::getInstance() {
 }
 
 void Application::quit(void) {
+	filesystem.unload();
 	// Tell SDL to quit.
 	SDL_Quit();
 }
 
-bool Application::load() {
+bool Application::load(std::string file = "") {
 	// Initialize SDL.
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return false;
@@ -54,6 +57,9 @@ bool Application::load() {
 
 	// Initalize the chaigame subsystems.
 	keyboard.load();
+
+	// Initialize the file system.
+	filesystem.load(file);
 
 	// ChaiScript.
 	script = new chaigame::script();

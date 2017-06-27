@@ -29,7 +29,7 @@ ifeq ($(platform), unix)
 else ifneq (,$(findstring android,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro_android.so
 	fpic = -fPIC
-	SHARED := -lstdc++ -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
+	SHARED := -lstdc++ -lstd++fs -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
 	CFLAGS +=  -g -O2
 	CC = arm-linux-androideabi-gcc
 	CXX = arm-linux-androideabi-g++
@@ -40,7 +40,7 @@ else ifeq ($(platform), wincross64)
 	CC = x86_64-w64-mingw32-gcc
 	CXX = x86_64-w64-mingw32-g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-	LDFLAGS += -static-libgcc -static-libstdc++
+	LDFLAGS += -static-libgcc -static-libstdc++ -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS +=
 	EXTRA_LDF := -lwinmm -Wl,--export-all-symbols
@@ -50,7 +50,7 @@ else
 	CC = gcc
 	CXX = g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-	LDFLAGS += -static-libgcc -static-libstdc++
+	LDFLAGS += -static-libgcc -static-libstdc++  -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS +=
 	EXTRA_LDF = -lwinmm -Wl,--export-all-symbols
@@ -61,9 +61,10 @@ OBJECTS := libretro.o Application.o \
 	chaigame/chaigame.o \
 	chaigame/graphics.o \
 	chaigame/keyboard.o \
-	chaigame/script.o
+	chaigame/script.o \
+	chaigame/filesystem.o
 
-all: vendor/libretro-common/include/libretro.h $(TARGET)
+all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -74,12 +75,14 @@ endif
 LDFLAGS +=  $(fpic) $(SHARED) \
 	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
 	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
+	vendor/physfs/libphysfs.a \
 	-ldl \
 	-lpthread $(EXTRA_LDF)
 FLAGS += -I. \
 	-Ivendor/sdl-libretro/include \
 	-Ivendor/libretro-common/include \
-	-Ivendor/chaiscript/include
+	-Ivendor/chaiscript/include \
+	-Ivendor/physfs/src
 
 WARNINGS :=
 
@@ -102,10 +105,15 @@ $(TARGET): $(OBJECTS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+	#rm -rf vendor
+	#git submodule update
 
 vendor/libretro-common/include/libretro.h:
 	git submodule init
 	git submodule update
+
+vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
+	cd vendor/physfs && cmake . && make C_FLAGS=-fPIC
 
 .PHONY: clean
 

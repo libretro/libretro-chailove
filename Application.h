@@ -14,9 +14,10 @@ public:
 	chaigame::keyboard keyboard;
 	chaigame::script* script;
 	chaigame::graphics graphics;
+	chaigame::filesystem filesystem;
 
 	void quit(void);
-	bool load();
+	bool load(std::string);
 	bool update();
 	void draw();
 
