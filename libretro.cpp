@@ -38,7 +38,6 @@ void libretro_audio_cb(int16_t left, int16_t right) {
 
 short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
 	return input_state_cb(port,device,index,id);
-
 }
 #ifdef __cplusplus
 }

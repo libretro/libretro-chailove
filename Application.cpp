@@ -27,6 +27,7 @@ Application* Application::getInstance() {
 
 void Application::quit(void) {
 	filesystem.unload();
+	image.unload();
 	// Tell SDL to quit.
 	SDL_Quit();
 }
@@ -57,6 +58,8 @@ bool Application::load(std::string file = "") {
 
 	// Initalize the chaigame subsystems.
 	keyboard.load();
+
+	image.load();
 
 	// Initialize the file system.
 	filesystem.load(file);
@@ -135,6 +138,11 @@ void Application::draw(){
 		x += 6;
 	}
 	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
+
+
+	//static chaigame::Image* pic = graphics.newImage("logo.png");
+	//graphics.draw(pic);
+
 
 	// Render the game.
 	script->draw();

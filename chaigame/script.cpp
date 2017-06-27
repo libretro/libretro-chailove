@@ -8,12 +8,19 @@ namespace chaigame {
 		#ifndef __DISABLE_CHAISCRIPT__
 		// Register the Graphics module.
 		chai.add(chaiscript::fun(&chaigame::graphics::rectangle), "rectangle");
+		chai.add(chaiscript::fun(&chaigame::graphics::newImage), "newImage");
+		chai.add(chaiscript::fun<void, graphics, Image*>(&chaigame::graphics::draw), "draw");
+
 		chai.add_global(chaiscript::var(std::ref(Application::getInstance()->graphics)), "graphics");
 
 		// Register the Keyboard module.
 		chai.add(chaiscript::fun(&chaigame::keyboard::update), "update");
 		chai.add(chaiscript::fun(&chaigame::keyboard::isDown), "isDown");
 		chai.add_global(chaiscript::var(std::ref(Application::getInstance()->keyboard)), "keyboard");
+
+		// Register the Image module.
+		chai.add(chaiscript::fun(&chaigame::image::newImageData), "newImageData");
+		chai.add_global(chaiscript::var(std::ref(Application::getInstance()->image)), "image");
 
 		// Load main.chai.
 		chai.eval_file("main.chai");

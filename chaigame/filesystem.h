@@ -2,6 +2,7 @@
 #define FILESYSTEM_H
 
 #include <string>
+#include <SDL.h>
 #include <physfs.h>
 
 namespace chaigame {
@@ -10,6 +11,7 @@ namespace chaigame {
 		bool load(std::string file);
 		bool load();
 		bool unload();
+		SDL_RWops* openRW(std::string filename);
 	};
 }
 

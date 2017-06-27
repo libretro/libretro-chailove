@@ -4,6 +4,7 @@
 #include "filesystem.h"
 #include <string>
 #include "../Application.h"
+#include "vendor/physfs/extras/physfsrwops.h"
 
 namespace chaigame {
 	bool filesystem::load() {
@@ -39,4 +40,13 @@ namespace chaigame {
 
 		SDL_FreeRW(rw);
 	*/
+
+	SDL_RWops* filesystem::openRW(std::string filename) {
+		SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
+		if (rw != NULL) {
+			return rw;
+		}
+		// TODO: Add error reporting.
+		return NULL;
+	}
 }
