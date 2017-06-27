@@ -60,7 +60,8 @@ endif
 OBJECTS := libretro.o Application.o \
 	chaigame/chaigame.o \
 	chaigame/graphics.o \
-	chaigame/keyboard.o
+	chaigame/keyboard.o \
+	chaigame/script.o
 
 all: vendor/libretro-common/include/libretro.h $(TARGET)
 
@@ -108,8 +109,8 @@ vendor/libretro-common/include/libretro.h:
 
 .PHONY: clean
 
-minimal:
+noscript:
 	make DISABLE_CHAISCRIPT=1
 
-test: minimal
+test: noscript
 	retroarch -L *.so

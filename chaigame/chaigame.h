@@ -3,5 +3,6 @@
 
 #include "graphics.h"
 #include "keyboard.h"
+#include "script.h"
 
 #endif

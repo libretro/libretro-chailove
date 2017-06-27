@@ -56,26 +56,8 @@ bool Application::load() {
 	keyboard.load();
 
 	// ChaiScript.
-	#ifndef __DISABLE_CHAISCRIPT__
-	// Load main.chai.
-	chai.eval_file("main.chai");
-
-	// Find the game functions.
-	chaiload = chai.eval<std::function<void ()> >("load");
-	chaiupdate = chai.eval<std::function<void (Uint32)> >("update");
-	chaidraw = chai.eval<std::function<void ()> >("draw");
-
-	// Register the Graphics module.
-	chai.add(chaiscript::fun(chaigame::graphics::rectangle), "rectangle");
-
-	// Register the Keyboard module.
-	chai.add(chaiscript::fun(&chaigame::keyboard::update), "update");
-	chai.add(chaiscript::fun(&chaigame::keyboard::isDown), "isDown");
-	chai.add_global(chaiscript::var(std::ref(keyboard)), "keyboard");
-
-	// Initialize the game.
-	chaiload();
-	#endif
+	script = new chaigame::script();
+	script->load();
 
 	// Set up the game timer.
 	tick = SDL_GetTicks();
@@ -114,9 +96,7 @@ bool Application::update() {
 	Uint32 current = SDL_GetTicks();
 
 	// Update the game.
-	#ifndef __DISABLE_CHAISCRIPT__
-	chaiupdate(current - tick);
-	#endif
+	script->update(current - tick);
 
 	// Update the timer.
 	tick = current;
@@ -151,9 +131,7 @@ void Application::draw(){
 	chaigame::graphics::rectangle(x, y, 100, 100, 0, 255, 255, 255);
 
 	// Render the game.
-	#ifndef __DISABLE_CHAISCRIPT__
-	chaidraw();
-	#endif
+	script->draw();
 
 	// Update the screen.
 	SDL_UpdateRect(screen, 0, 0, 0, 0);
