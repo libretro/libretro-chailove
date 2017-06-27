@@ -105,13 +105,15 @@ $(TARGET): $(OBJECTS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+	rm -rf vendor
+	git submodule update
 
 vendor/libretro-common/include/libretro.h:
 	git submodule init
 	git submodule update
 
 vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
-	cd vendor/physfs && cmake . && make
+	cd vendor/physfs && cmake . && make C_FLAGS=-fPIC
 
 .PHONY: clean
 
