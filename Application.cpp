@@ -55,15 +55,11 @@ bool Application::load(const std::string& file) {
 	SDL_ShowCursor(SDL_DISABLE);
 
 	// Initalize the chaigame subsystems.
+	sound.load();
 	keyboard.load();
 	graphics.load();
 	image.load();
-	sound.load();
-	printf("SOUND DONW!");
 	filesystem.load(file);
-	printf("FILESDONW!");
-
-	// ChaiScript.
 	script = new chaigame::script();
 	script->load();
 
@@ -74,31 +70,18 @@ bool Application::load(const std::string& file) {
 }
 
 bool Application::update() {
-	bool quit = false;
-
-	// Update all the input.
+	// Poll all SDL events.
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
-			case SDL_MOUSEBUTTONDOWN:
-				quit = true;
-				if ( event.button.button == SDL_BUTTON_LEFT ) {
-				} else if ( event.button.button == SDL_BUTTON_RIGHT ) {
-					/* Switch to prev graphics */
-					//curprim--;
-				}
-				break;
-			case SDL_KEYDOWN:
-
-				#ifndef __DISABLE_CHAISCRIPT__
-				//x += chai.eval<int>("multiply(5, 20);");
-				//x += 100;
-				#endif
-			default:
+			case SDL_QUIT:
+				return false;
 				break;
 		}
 	}
 
+	// Update any of the sub-systems.
 	keyboard.update();
+	sound.update();
 
 	// Retrieve the new game time.
 	Uint32 current = SDL_GetTicks();
@@ -109,7 +92,7 @@ bool Application::update() {
 	// Update the timer.
 	tick = current;
 
-	return quit;
+	return true;
 }
 
 /**

@@ -7,9 +7,15 @@ namespace chaigame {
 	class sound {
 	public:
 		bool load();
+		bool update();
 		bool unload();
 
-		int numtimesopened,frequency, channels;
+		int numtimesopened;
+		int frequency;
+		int channels;
+    	Uint16 format;
+
+    	bool initialized;
 	};
 }
 

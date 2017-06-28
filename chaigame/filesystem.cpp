@@ -37,6 +37,7 @@ namespace chaigame {
 
 	bool filesystem::unload() {
 		PHYSFS_deinit();
+		return true;
 	}
 
 	SDL_RWops* filesystem::openRW(const std::string& filename) {

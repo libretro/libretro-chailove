@@ -245,7 +245,7 @@ void retro_run(void) {
 		input_poll_cb();
 
 		// Update the game.
-		if (Application::getInstance()->update()) {
+		if (!Application::getInstance()->update()) {
 			environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 			return;
 		}
