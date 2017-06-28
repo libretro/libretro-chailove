@@ -2,7 +2,6 @@
 #define _SOUND_H_INCLUDED_
 
 #include <SDL.h>
-#include <SDL_mixer.h>
 
 namespace chaigame {
 	class sound {
