@@ -18,6 +18,8 @@ public:
 	chaigame::image image;
 	chaigame::system system;
 	chaigame::sound sound;
+	chaigame::audio audio;
+	chaigame::SoundData* music;
 
 	void quit(void);
 	bool load(const std::string& file);

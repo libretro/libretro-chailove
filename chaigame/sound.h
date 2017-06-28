@@ -2,13 +2,15 @@
 #define _SOUND_H_INCLUDED_
 
 #include <SDL.h>
+#include "src/SoundData.h"
 
 namespace chaigame {
 	class sound {
 	public:
 		bool load();
-		bool update();
+		bool hasAudio();
 		bool unload();
+		SoundData* newSoundData(const std::string& file, const std::string& type);
 
 		int numtimesopened;
 		int frequency;

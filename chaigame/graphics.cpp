@@ -10,6 +10,9 @@
 namespace chaigame {
 
 	bool graphics::load() {
+
+		// Disable the mouse cursor from showing up.
+		SDL_ShowCursor(SDL_DISABLE);
 		r = 255;
 		g = 0;
 		b = 0;

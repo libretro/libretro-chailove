@@ -142,6 +142,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 
 void retro_unload_game(void) {
 	// Nothing.
+	retro_deinit();
 }
 
 unsigned retro_get_region(void) {
@@ -231,7 +232,7 @@ void retro_init(void) {
 
 void retro_deinit(void) {
 	Application::getInstance()->quit();
-	Application::destroy();
+	//Application::destroy();
 }
 
 void retro_reset(void) {

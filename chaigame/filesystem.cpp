@@ -45,6 +45,7 @@ namespace chaigame {
 		if (rw != NULL) {
 			return rw;
 		}
+		printf("Error loading file: %s", filename.c_str());
 		// TODO: Add error reporting.
 		return NULL;
 	}

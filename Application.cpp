@@ -32,7 +32,7 @@ void Application::quit(void) {
 
 bool Application::load(const std::string& file) {
 	// Initialize SDL.
-	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
+	if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_EVENTTHREAD) == -1) {
 		return false;
 	}
 
@@ -51,9 +51,6 @@ bool Application::load(const std::string& file) {
 		// Error: Do nothing.
 	}
 
-	// Disable the mouse cursor from showing up.
-	SDL_ShowCursor(SDL_DISABLE);
-
 	// Initalize the chaigame subsystems.
 	sound.load();
 	keyboard.load();
@@ -62,6 +59,8 @@ bool Application::load(const std::string& file) {
 	filesystem.load(file);
 	script = new chaigame::script();
 	script->load();
+
+	music = new chaigame::SoundData("test/beat.ogg", "music");
 
 	// Set up the game timer.
 	tick = SDL_GetTicks();
@@ -76,18 +75,24 @@ bool Application::update() {
 			case SDL_QUIT:
 				return false;
 				break;
+			case SDL_KEYDOWN:
+				if( event.key.keysym.sym == SDLK_LEFT ) {
+					printf("PLAY THE MUISC");
+					audio.play(music);
+				}
+				break;
 		}
 	}
 
 	// Update any of the sub-systems.
 	keyboard.update();
-	sound.update();
 
 	// Retrieve the new game time.
 	Uint32 current = SDL_GetTicks();
 
 	// Update the game.
-	script->update(current - tick);
+	script->update((float)(current - tick) / 1000);
+
 
 	// Update the timer.
 	tick = current;
