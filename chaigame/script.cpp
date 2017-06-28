@@ -14,6 +14,8 @@ namespace chaigame {
 		// Register the Graphics module.
 		chai.add(fun(&graphics::rectangle), "rectangle");
 		chai.add(fun(&graphics::newImage), "newImage");
+		chai.add(fun(&graphics::print), "print");
+		chai.add(fun(&graphics::setColor), "setColor");
 		chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
 		chai.add_global(var(std::ref(app->graphics)), "graphics");
 

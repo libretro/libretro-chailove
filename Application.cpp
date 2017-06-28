@@ -55,14 +55,9 @@ bool Application::load(std::string file = "") {
 
 	// Initalize the chaigame subsystems.
 	keyboard.load();
-
+	graphics.load();
 	image.load();
-
-	// Initialize the file system.
-	bool result = filesystem.load(file);
-	if (result) {
-		std::cout << "\nFile System Registered!";
-	}
+	filesystem.load(file);
 
 	// ChaiScript.
 	script = new chaigame::script();
@@ -140,6 +135,7 @@ void Application::draw(){
 	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
 
 
+	graphics.print(std::string("Hello World!"), 100, 300);
 	//static chaigame::Image* pic = graphics.newImage("logo.png");
 	//graphics.draw(pic, x, y);
 

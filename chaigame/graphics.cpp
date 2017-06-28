@@ -8,6 +8,15 @@
 #include "src/Image.h"
 
 namespace chaigame {
+
+	bool graphics::load() {
+		r = 255;
+		g = 0;
+		b = 0;
+		a = 255;
+		return true;
+	}
+
 	void graphics::rectangle(Sint16 x, Sint16 y, Sint16 width, Sint16 height, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
 		rectangleRGBA(Application::getInstance()->screen, x, y, x + width, y + height, r, g, b, a);
 	}
@@ -35,4 +44,14 @@ namespace chaigame {
 		return NULL;
 	}
 
+	void graphics::print(std::string text, int x, int y) {
+		stringRGBA(Application::getInstance()->screen, x, y, text.c_str(), r, g, b, a);
+	}
+
+	void graphics::setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+		r = red;
+		g = green;
+		b = blue;
+		a = alpha;
+	}
 }

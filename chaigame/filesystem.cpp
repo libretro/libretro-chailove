@@ -5,8 +5,6 @@
 #include "vendor/physfs/extras/physfsrwops.h"
 #include "vendor/filesystem/filesystem/path.h"
 
-#include <iostream>
-
 using namespace filesystem;
 
 namespace chaigame {
@@ -16,15 +14,12 @@ namespace chaigame {
 
 		// Retrieve the parent path and file extension.
 		if (file.empty()) {
-			std::cout << "\nMOUNTING ROOT DIR";
 			return mount(".", "/");
 		}
 		path p(file.c_str());
 		std::string extension(p.extension());
 		path parent(p.parent_path());
 		std::string parentPath(parent.str());
-		std::cout << "\nExtension: "<< extension;
-		std::cout << "\nParent: "<< parentPath;
 
 		// Allow loading from an Archive.
 		if (extension == "chaigame") {
@@ -32,7 +27,6 @@ namespace chaigame {
 		}
 
 		if (parentPath.empty()) {
-			std::cout << "\nRegistering root: ";
 			return mount(".", "/");
 		}
 
