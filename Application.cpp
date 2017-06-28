@@ -59,7 +59,9 @@ bool Application::load(const std::string& file) {
 	graphics.load();
 	image.load();
 	sound.load();
+	printf("SOUND DONW!");
 	filesystem.load(file);
+	printf("FILESDONW!");
 
 	// ChaiScript.
 	script = new chaigame::script();

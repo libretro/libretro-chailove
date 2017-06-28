@@ -64,8 +64,8 @@ namespace chaigame {
 		return contents;
 	}
 
-	bool filesystem::mount(const char* archive, const char* mountpoint) {
-		int returnValue = PHYSFS_mount(archive, mountpoint, 0);
+	bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
+		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
 		return returnValue != 0;
 	}
 }

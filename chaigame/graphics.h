@@ -16,7 +16,7 @@ namespace chaigame {
 		void draw(ImageData* data, int x, int y);
 		void draw(Image* data, int x, int y);
 
-		Image* newImage(std::string filename);
+		Image* newImage(const std::string& filename);
 
 		void print(const std::string& text, int x, int y);
 		void setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);

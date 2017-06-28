@@ -8,6 +8,8 @@ namespace chaigame {
 	public:
 		bool load();
 		bool unload();
+
+		int numtimesopened,frequency, channels;
 	};
 }
 
