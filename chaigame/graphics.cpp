@@ -44,7 +44,7 @@ namespace chaigame {
 		return NULL;
 	}
 
-	void graphics::print(std::string text, int x, int y) {
+	void graphics::print(const std::string& text, int x, int y) {
 		stringRGBA(Application::getInstance()->screen, x, y, text.c_str(), r, g, b, a);
 	}
 

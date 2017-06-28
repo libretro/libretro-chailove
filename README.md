@@ -1,12 +1,13 @@
 # ChaiGame
 
-Experimental framework to make 2D games with [libretro](https://www.libretro.com).
+Experimental framework to make 2D games with [libretro](https://www.libretro.com), inspired by [LÖVE](https://love2d.org).
 
 ## Features
 
 - [libretro](https://www.libretro.com)
 - [SDL](https://www.libsdl.org)
 - [ChaiScript](http://chaiscript.com)
+- [PhysFS](https://www.icculus.org/physfs/)
 
 ## Usage
 

@@ -9,13 +9,15 @@ using namespace filesystem;
 
 namespace chaigame {
 
-	bool filesystem::load(std::string file) {
+	bool filesystem::load(const std::string& file) {
 		PHYSFS_init(NULL);
 
-		// Retrieve the parent path and file extension.
+		// Check if we are simply running the application.
 		if (file.empty()) {
 			return mount(".", "/");
 		}
+
+		// Find the parent and extension of the given file.
 		path p(file.c_str());
 		std::string extension(p.extension());
 		path parent(p.parent_path());
@@ -31,22 +33,13 @@ namespace chaigame {
 		}
 
 		return mount(parentPath.c_str(), "/");
-
-		/*
-		//parentPath.make_absolute();
-		path newP = parent.make_absolute();
-		std::string parentPAccc(newP.str());
-		parentPAccc += "/";
-		std::cout << "\nRegistering root: " << parentPAccc;
-		return mount(parentPAccc.c_str(), "/");
-		*/
 	}
 
 	bool filesystem::unload() {
 		PHYSFS_deinit();
 	}
 
-	SDL_RWops* filesystem::openRW(std::string filename) {
+	SDL_RWops* filesystem::openRW(const std::string& filename) {
 		SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
 		if (rw != NULL) {
 			return rw;
@@ -55,7 +48,7 @@ namespace chaigame {
 		return NULL;
 	}
 
-	char* filesystem::readChar(std::string filename) {
+	char* filesystem::readChar(const std::string& filename) {
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 		PHYSFS_sint64 file_size = PHYSFS_fileLength(myfile);
 
@@ -65,7 +58,7 @@ namespace chaigame {
 		return myBuf;
 	}
 
-	std::string filesystem::read(std::string filename) {
+	std::string filesystem::read(const std::string& filename) {
 		char *myBuf = readChar(filename);
 		std::string contents(myBuf);
 		return contents;

@@ -2,7 +2,6 @@ print("Hello World, from Chai")
 
 global x
 global y
-
 global logo
 
 def load() {

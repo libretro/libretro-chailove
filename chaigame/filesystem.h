@@ -7,11 +7,11 @@
 namespace chaigame {
 	class filesystem {
 	public:
-		bool load(std::string file);
+		bool load(const std::string& file);
 		bool unload();
-		SDL_RWops* openRW(std::string filename);
-		char* readChar(std::string filename);
-		std::string read(std::string filename);
+		SDL_RWops* openRW(const std::string& filename);
+		char* readChar(const std::string& filename);
+		std::string read(const std::string& filename);
 
 		bool mount(const char* archive, const char* mountpoint);
 	};

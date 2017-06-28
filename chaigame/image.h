@@ -8,7 +8,7 @@ namespace chaigame {
 	public:
 		bool load();
 		bool unload();
-		chaigame::ImageData* newImageData(std::string filename);
+		chaigame::ImageData* newImageData(const std::string& filename);
 	};
 }
 

@@ -29,7 +29,7 @@ void Application::quit(void) {
 	SDL_Quit();
 }
 
-bool Application::load(std::string file = "") {
+bool Application::load(const std::string& file) {
 	// Initialize SDL.
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return false;
@@ -135,7 +135,7 @@ void Application::draw(){
 	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
 
 
-	graphics.print(std::string("Hello World!"), 100, 300);
+	graphics.print("Hello World!", 100, 300);
 	//static chaigame::Image* pic = graphics.newImage("logo.png");
 	//graphics.draw(pic, x, y);
 

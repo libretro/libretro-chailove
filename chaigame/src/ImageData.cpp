@@ -37,7 +37,7 @@ namespace chaigame {
 		destroy();
 	}
 
-	ImageData::ImageData(std::string filename) {
+	ImageData::ImageData(const std::string& filename) {
 		SDL_RWops* image = Application::getInstance()->filesystem.openRW(filename);
 		loadFromRW(image);
 	}

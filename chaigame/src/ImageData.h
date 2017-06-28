@@ -9,7 +9,7 @@ namespace chaigame {
 	public:
 		SDL_Surface* surface;
 		ImageData(SDL_RWops* rw);
-		ImageData(std::string filename);
+		ImageData(const std::string& filename);
 		~ImageData();
 		bool loaded();
 		bool loadFromRW(SDL_RWops* rw);

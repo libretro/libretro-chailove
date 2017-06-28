@@ -9,7 +9,7 @@ namespace chaigame {
 		return (bool)keys[key];
 	}
 
-	bool keyboard::isDown(std::string key) {
+	bool keyboard::isDown(const std::string& key) {
 		if (key == "down") {
 			return isKeyDown(SDLK_DOWN);
 		}

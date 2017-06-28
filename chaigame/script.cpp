@@ -32,6 +32,10 @@ namespace chaigame {
 		chai.add(fun(&filesystem::read), "read");
 		chai.add_global(var(std::ref(app->filesystem)), "filesystem");
 
+		// Register the System module.
+		chai.add(fun(&system::getOS), "getOS");
+		chai.add_global(var(std::ref(app->system)), "system");
+
 		// Load main.chai.
 		std::string file("main.chai");
 		std::string contents = app->filesystem.read(file);

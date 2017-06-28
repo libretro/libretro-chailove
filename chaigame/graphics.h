@@ -18,7 +18,7 @@ namespace chaigame {
 
 		Image* newImage(std::string filename);
 
-		void print(std::string text, int x, int y);
+		void print(const std::string& text, int x, int y);
 		void setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
 
 		Uint8 r, g, b, a;

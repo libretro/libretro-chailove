@@ -64,6 +64,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/script.o \
 	chaigame/filesystem.o \
 	chaigame/image.o \
+	chaigame/system.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Image.o \
 	vendor/physfs/extras/physfsrwops.o

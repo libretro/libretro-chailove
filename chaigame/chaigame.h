@@ -6,6 +6,7 @@
 #include "image.h"
 #include "keyboard.h"
 #include "script.h"
+#include "system.h"
 #include "src/Image.h"
 #include "src/ImageData.h"
 

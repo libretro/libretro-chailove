@@ -5,7 +5,7 @@
 #include "src/ImageData.h"
 
 namespace chaigame {
-	chaigame::ImageData* image::newImageData(std::string filename) {
+	chaigame::ImageData* image::newImageData(const std::string& filename) {
 		ImageData* image = new chaigame::ImageData(filename);
 		if (image->loaded()) {
 			return image;

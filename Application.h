@@ -16,9 +16,10 @@ public:
 	chaigame::filesystem filesystem;
 	chaigame::graphics graphics;
 	chaigame::image image;
+	chaigame::system system;
 
 	void quit(void);
-	bool load(std::string);
+	bool load(const std::string& file);
 	bool update();
 	void draw();
 

@@ -9,7 +9,7 @@ namespace chaigame {
 	public:
 		Uint8* keys;
 		bool load();
-		bool isDown(std::string key);
+		bool isDown(const std::string& key);
 		bool isKeyDown(int key);
 		void setKeyRepeat(int delay = 400, int interval = 30);
 		void update();
