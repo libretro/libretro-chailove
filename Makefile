@@ -68,9 +68,11 @@ OBJECTS := libretro.o Application.o \
 	chaigame/system.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Image.o \
-	vendor/physfs/extras/physfsrwops.o
+	vendor/physfs/extras/physfsrwops.o \
+	vendor/libSDL2pp/SDL2pp/SDLMixer.o \
+	vendor/libSDL2pp/SDL2pp/Exception.o
 
-all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)
+all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h vendor/libSDL2pp/SDL2pp/Export.hh $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -91,7 +93,8 @@ FLAGS += -I. \
 	-Ivendor/sdl-libretro/include \
 	-Ivendor/libretro-common/include \
 	-Ivendor/chaiscript/include \
-	-Ivendor/physfs/src
+	-Ivendor/physfs/src \
+	-Ivendor/libSDL2pp
 
 WARNINGS :=
 
@@ -121,6 +124,9 @@ vendor/libretro-common/include/libretro.h:
 
 vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 	cd vendor/physfs && cmake . && make C_FLAGS=-fPIC
+
+vendor/libSDL2pp/SDL2pp/Export.hh:
+	cp chaigame/libSDL2PPExport.hh vendor/libSDL2pp/SDL2pp/Export.hh
 
 .PHONY: clean
 

@@ -3,6 +3,8 @@
 
 #include <SDL.h>
 
+#include <SDL2pp/SDLMixer.hh>
+
 namespace chaigame {
 	class sound {
 	public:
@@ -16,6 +18,8 @@ namespace chaigame {
     	Uint16 format;
 
     	bool initialized;
+
+    	SDL2pp::SDLMixer* mixer;
 	};
 }
 

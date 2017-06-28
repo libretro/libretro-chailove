@@ -13,3 +13,6 @@
 [submodule "vendor/filesystem"]
 	path = vendor/filesystem
 	url = https://github.com/wjakob/filesystem.git
+[submodule "vendor/libSDL2pp"]
+	path = vendor/libSDL2pp
+	url = https://github.com/libSDL2pp/libSDL2pp.git

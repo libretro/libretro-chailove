@@ -2,6 +2,7 @@
 #include "sound.h"
 #include <SDL.h>
 #include <SDL_mixer.h>
+#include <SDL2pp/SDLMixer.hh>
 
 #include <string>
 
@@ -9,12 +10,14 @@
 namespace chaigame {
 	bool sound::load() {
 		int flags = MIX_INIT_OGG | MIX_INIT_MOD;
-		int initted = Mix_Init(flags);
+		/*int initted = Mix_Init(flags);
 		if ((initted & flags) != flags) {
 		    printf("Mix_Init: Failed to init required ogg and mod support!\n");
 		    printf("Mix_Init: %s\n", Mix_GetError());
 		    return false;
-		}
+		}*/
+
+		mixer = new SDL2pp::SDLMixer(flags);
 
 		return true;
 	}
