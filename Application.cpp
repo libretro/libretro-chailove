@@ -100,7 +100,8 @@ bool Application::update() {
 	Uint32 current = SDL_GetTicks();
 
 	// Update the game.
-	script->update(current - tick);
+	double delta = (double)(current - tick);
+	script->update(delta);
 
 	// Update the timer.
 	tick = current;

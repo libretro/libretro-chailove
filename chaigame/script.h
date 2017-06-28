@@ -22,7 +22,7 @@ namespace chaigame {
 		#ifndef __DISABLE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;
 		std::function<void ()> chaiload;
-		std::function<void (Uint32)> chaiupdate;
+		std::function<void (double)> chaiupdate;
 		std::function<void ()> chaidraw;
 		#endif
 	};
