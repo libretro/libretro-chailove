@@ -36,12 +36,16 @@ namespace chaigame {
 			return mount(".", "/");
 		}
 
+		return mount(parentPath.c_str(), "/");
+
+		/*
 		//parentPath.make_absolute();
 		path newP = parent.make_absolute();
 		std::string parentPAccc(newP.str());
 		parentPAccc += "/";
 		std::cout << "\nRegistering root: " << parentPAccc;
 		return mount(parentPAccc.c_str(), "/");
+		*/
 	}
 
 	bool filesystem::unload() {
