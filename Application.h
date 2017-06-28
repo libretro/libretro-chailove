@@ -17,6 +17,7 @@ public:
 	chaigame::graphics graphics;
 	chaigame::image image;
 	chaigame::system system;
+	chaigame::sound sound;
 
 	void quit(void);
 	bool load(const std::string& file);

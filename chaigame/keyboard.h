@@ -12,7 +12,7 @@ namespace chaigame {
 		bool isDown(const std::string& key);
 		bool isKeyDown(int key);
 		void setKeyRepeat(int delay = 400, int interval = 30);
-		void update();
+		bool update();
 	};
 }
 
