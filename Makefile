@@ -126,7 +126,7 @@ vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 	cd vendor/physfs && cmake . && make C_FLAGS=-fPIC
 
 vendor/libSDL2pp/SDL2pp/Export.hh:
-	cp chaigame/libSDL2PPExport.hh vendor/libSDL2pp/SDL2pp/Export.hh
+	cp chaigame/src/SDL2PPExport.hh vendor/libSDL2pp/SDL2pp/Export.hh
 
 .PHONY: clean
 
