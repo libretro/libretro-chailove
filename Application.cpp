@@ -24,6 +24,7 @@ Application* Application::getInstance() {
 
 void Application::quit(void) {
 	filesystem.unload();
+	sound.unload();
 	image.unload();
 	// Tell SDL to quit.
 	SDL_Quit();
@@ -57,6 +58,7 @@ bool Application::load(const std::string& file) {
 	keyboard.load();
 	graphics.load();
 	image.load();
+	sound.load();
 	filesystem.load(file);
 
 	// ChaiScript.
