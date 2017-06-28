@@ -4,6 +4,8 @@
 #include "Application.h"
 #include "chaigame/chaigame.h"
 
+#include <iostream>
+
 Application* Application::m_instance = NULL;
 
 bool Application::isRunning() {
@@ -57,7 +59,10 @@ bool Application::load(std::string file = "") {
 	image.load();
 
 	// Initialize the file system.
-	filesystem.load(file);
+	bool result = filesystem.load(file);
+	if (result) {
+		std::cout << "\nFile System Registered!";
+	}
 
 	// ChaiScript.
 	script = new chaigame::script();

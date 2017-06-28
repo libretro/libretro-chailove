@@ -128,7 +128,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 
 bool retro_load_game(const struct retro_game_info *info) {
-	std::string full = info ? info->path : ".";
+	std::string full(info ? info->path : "main.chai");
 	printf("LOAD FILE: %s\n", full.c_str());
 	return Application::getInstance()->load(full);
 }

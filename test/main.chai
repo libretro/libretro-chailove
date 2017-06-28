@@ -1,4 +1,4 @@
-print("Hello World, from Chai")
+print("Hello World, from TEST Chai")
 
 global x
 global y
@@ -7,8 +7,8 @@ global y
 
 def load() {
 	// Called when loading the game.
-	x = 100
-	y = 100
+	x = 300
+	y = 200
 
 	//logo = graphics.newImage("logo.png")
 }
@@ -31,7 +31,7 @@ def update(delta) {
 
 def draw() {
 	// Called to render the game state.
-	graphics.rectangle(x, y, 100, 100, 0, 255, 0, 255)
+	graphics.rectangle(x, y, 10, 10, 255, 255, 255, 255)
 
 	//graphics.draw(logo, x+100, y)
 }
