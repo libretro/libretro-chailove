@@ -36,7 +36,7 @@ namespace chaigame {
 		}
 	}
 
-	Image* graphics::newImage(std::string filename) {
+	Image* graphics::newImage(const std::string& filename) {
 		Image* image = new Image(filename);
 		if (image->loaded()) {
 			return image;

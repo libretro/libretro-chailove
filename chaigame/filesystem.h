@@ -13,7 +13,7 @@ namespace chaigame {
 		char* readChar(const std::string& filename);
 		std::string read(const std::string& filename);
 
-		bool mount(const char* archive, const char* mountpoint);
+		bool mount(const std::string& archive, const std::string& mountpoint);
 	};
 }
 
