@@ -9,8 +9,9 @@ namespace chaigame {
 	public:
 		bool load();
 		bool hasAudio();
-		bool unload();
+		void unload();
 		SoundData* newSoundData(const std::string& file, const std::string& type);
+		bool update();
 
 		int numtimesopened;
 		int frequency;

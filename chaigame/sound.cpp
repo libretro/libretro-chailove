@@ -12,25 +12,30 @@
 namespace chaigame {
 	bool sound::load() {
 		int flags = MIX_INIT_OGG | MIX_INIT_MOD;
-		/*int initted = Mix_Init(flags);
+		int initted = Mix_Init(flags);
 		if ((initted & flags) != flags) {
 		    printf("Mix_Init: Failed to init required ogg and mod support!\n");
 		    printf("Mix_Init: %s\n", Mix_GetError());
 		    return false;
-		}*/
+		}
 
 		return true;
 	}
 
 	bool sound::hasAudio() {
-		if (!initialized && Application::getInstance()->tick > 2000) {
+		return initialized;
+	}
+
+	bool sound::update() {
+		if (!initialized) {
 			initialized = true;
-			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
+				printf("Mix_OpenAudio:");
+			if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
 				printf("Mix_OpenAudio: %s\n", Mix_GetError());
 				return false;
 			}
 
-		    numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
+		    /*numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 		    if (!numtimesopened) {
 		    	printf("Mix_QuerySpec: %s\n",Mix_GetError());
 		    	return false;
@@ -46,25 +51,34 @@ namespace chaigame {
 	    	    case AUDIO_S16MSB: format_str="S16MSB"; break;
 	    	}
 	    	printf("\n  opened=%d times\n  frequency=%dHz\n  format=%s\n  channels=%d\n",
-	            numtimesopened, frequency, format_str.c_str(), channels);
+	            numtimesopened, frequency, format_str.c_str(), channels);*/
 	    }
 
 	    return initialized;
 	}
 
-	bool sound::unload() {
-		Mix_HaltMusic();
+	void sound::unload() {
+		printf("\nMix_CloseAudio");
+		Mix_CloseAudio();
+		/*Mix_HaltMusic();
 		Mix_HaltChannel(-1);
     	while(Mix_Init(0))
     		Mix_Quit();
-    	Mix_CloseAudio();
+    	Mix_CloseAudio();*/
+
+
+		// force a quit
+		printf("\nMix_Init");
+		//while(Mix_Init(0)) {
+		//	printf("\nMix_Quit");
+		//    Mix_Quit();
+		//}
 	}
 
 	SoundData* sound::newSoundData(const std::string& file, const std::string& type) {
-		SoundData* sound = new SoundData(file, type);
-		if (sound->loaded()) {
-			return sound;
-		}
-		return NULL;
+ 		SDL_RWops* rw = Application::getInstance()->filesystem.openRW(file);
+ 		if (rw) {
+			return new SoundData(rw, type);
+ 		}
 	}
 }

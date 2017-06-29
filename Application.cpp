@@ -23,16 +23,23 @@ Application* Application::getInstance() {
 }
 
 void Application::quit(void) {
+	printf("\nmusic");
+	if (music) {
+		//music->unload();
+	}
+	printf("\nfilesystem");
 	filesystem.unload();
-	sound.unload();
+	printf("\nimage");
 	image.unload();
-	// Tell SDL to quit.
+	printf("\nsound");
+	sound.unload();
+	printf("\nSDL_Quit");
 	SDL_Quit();
 }
 
 bool Application::load(const std::string& file) {
 	// Initialize SDL.
-	if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_EVENTTHREAD) == -1) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
 		return false;
 	}
 
@@ -60,7 +67,7 @@ bool Application::load(const std::string& file) {
 	script = new chaigame::script();
 	script->load();
 
-	music = new chaigame::SoundData("test/beat.ogg", "music");
+	music = new chaigame::SoundData("test/beat.wav", "chunk");
 
 	// Set up the game timer.
 	tick = SDL_GetTicks();
@@ -69,6 +76,8 @@ bool Application::load(const std::string& file) {
 }
 
 bool Application::update() {
+
+	sound.update();
 	// Poll all SDL events.
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {

@@ -11,14 +11,16 @@ namespace chaigame {
 		Mix_Chunk* chunk;
 		Mix_Music* music;
 		SoundData(SDL_RWops* rw, const std::string& type);
-		SoundData(const std::string& filename, const std::string& type);
+		SoundData(const std::string& rw, const std::string& type);
 		~SoundData();
 		bool loaded();
-		bool loadFromRW(SDL_RWops* rw, const std::string& type);
-		bool destroy();
+		bool loadFromRW();
+		bool unload();
+		void play();
 		std::string getType();
 
-		std::string type;
+		SDL_RWops* loadRWops;
+		std::string loadType;
 	};
 }
 
