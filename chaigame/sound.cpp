@@ -57,8 +57,11 @@ namespace chaigame {
 	}
 
 	void sound::unload() {
-		Mix_CloseAudio();
 		initialized = false;
+		while(Mix_Init(0)) {
+			Mix_Quit();
+		}
+		Mix_CloseAudio();
 	}
 
 	SoundData* sound::newSoundData(const std::string& file, const std::string& type) {
