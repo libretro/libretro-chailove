@@ -1,6 +1,7 @@
 #ifndef _SCRIPT_H_INCLUDED_
 #define _SCRIPT_H_INCLUDED_
 
+#include <string>
 #ifndef __DISABLE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
 
@@ -18,6 +19,7 @@ namespace chaigame {
 		void load();
 		void update(float delta);
 		void draw();
+		void loadModule(const std::string& moduleName);
 
 		#ifndef __DISABLE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;

@@ -1,19 +1,20 @@
 print("Hello World, from Chai")
 
-global x
-global y
+global x;
+global y;
 //global logo
 
-global mus
+//global mus
 
 def load() {
 	// Called when loading the game.
-	x = 100
-	y = 100
+	x = 100;
+	y = 100;
 
 	//logo = graphics.newImage("logo.png")
 
-	mus = sound.newSoundData("test/beat.wav", "chunk")
+	//mus = sound.newSoundData("test/beat.wav", "chunk")
+	system.loadModule("test/test.chai");
 }
 
 def update(delta) {
@@ -23,19 +24,19 @@ def update(delta) {
 		y -= velocity * delta
 	}
 	if (keyboard.isDown("down")) {
-		y += velocity * delta
+		y += velocity * delta;
 	}
 	if (keyboard.isDown("left")) {
 		x -= velocity * delta
 	}
 	if (keyboard.isDown("right")) {
 		x += velocity * delta
-		audio.play(mus)
+		//audio.play(mus)
 	}
 }
 
 def draw() {
 	// Called to render the game state.
-	graphics.rectangle(x, y, 100, 100, 0, 255, 0, 255)
+	graphics.rectangle(x, y, 100, 100, 0, 255, 0, 255);
 	//graphics.draw(logo, x + 100, y)
 }

@@ -1,12 +1,21 @@
 #include "script.h"
 #include "chaigame.h"
 #include "../Application.h"
+//#include "filesystem.h"
 
 #ifndef __DISABLE_CHAISCRIPT__
 using namespace chaiscript;
 #endif
 
 namespace chaigame {
+	void script::loadModule(const std::string& moduleName) {
+		#ifndef __DISABLE_CHAISCRIPT__
+		Application* app = Application::getInstance();
+		std::string contents = app->filesystem.read(moduleName);
+		chai.eval(contents);
+		#endif
+	}
+
 	script::script() {
 		#ifndef __DISABLE_CHAISCRIPT__
 		Application* app = Application::getInstance();
@@ -34,6 +43,7 @@ namespace chaigame {
 
 		// Register the System module.
 		chai.add(fun(&system::getOS), "getOS");
+		chai.add(fun(&system::loadModule), "loadModule");
 		chai.add_global(var(std::ref(app->system)), "system");
 
 		// Register the Sound module.
@@ -45,9 +55,7 @@ namespace chaigame {
 		chai.add_global(var(std::ref(app->audio)), "audio");
 
 		// Load main.chai.
-		std::string file("main.chai");
-		std::string contents = app->filesystem.read(file);
-		chai.eval(contents);
+		loadModule("main.chai");
 
 		// Find the game functions.
 		chaiload = chai.eval<std::function<void ()> >("load");

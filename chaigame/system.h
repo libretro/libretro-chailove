@@ -7,6 +7,7 @@ namespace chaigame {
 	class system {
 	public:
 		std::string getOS();
+		void loadModule(const std::string& moduleName);
 	};
 }
 

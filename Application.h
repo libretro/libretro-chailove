@@ -1,5 +1,5 @@
 #ifndef APPLICATION_H
-#define ifndef APPLICATION_H
+#define APPLICATION_H
 
 #include <SDL.h>
 #include "chaigame/chaigame.h"
