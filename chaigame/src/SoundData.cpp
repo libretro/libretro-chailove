@@ -33,8 +33,9 @@ namespace chaigame {
 	}
 
 	bool SoundData::loadFromRW() {
+		std::cout << "SoundData::loadFromRW" << std::endl;
 		if (loadType == "music") {
-			printf("Mix_LoadMUS_RW\n");
+		std::cout << "Mix_LoadMUS_RW" << std::endl;
 			music = Mix_LoadMUS_RW(loadRWops);
 			if (!music) {
 				printf("Mix_LoadMusic: %s\n", Mix_GetError());
@@ -44,7 +45,7 @@ namespace chaigame {
 		}
 
 		if (loadType == "chunk") {
-			printf("Mix_LoadWAV_RW\n");
+		std::cout << "Mix_LoadWAV_RW" << std::endl;
 			chunk = Mix_LoadWAV_RW(loadRWops, 1);
 			if (!chunk) {
 				printf("Mix_LoadWAV_RW: %s\n", Mix_GetError());
@@ -85,18 +86,22 @@ namespace chaigame {
 		if (Application::getInstance()->sound.hasAudio()) {
 			// See if we are to load the file.
 			if (!loaded() && loadRWops) {
+				std::cout << "loadFromRW!!!!" << std::endl;
 				loadFromRW();
 			}
-			else {
-				if (music) {
-					printf("MUSIC TIME\n");
-					Mix_PlayMusic(music, -1);
-					//Mix_VolumeMusic(128);
-				}
-				else if (chunk) {
-					printf("CHUNK TIME\n");
-					Mix_PlayChannel(-1, chunk, 0);
-				}
+
+			if (music) {
+				printf("MUSIC TIME\n");
+				if (Mix_PlayMusic(music, -1) == -1) {
+					printf("Failed to play music! %s\n", Mix_GetError());
+					return;
+				};
+			}
+			else if (chunk) {
+				printf("CHUNK TIME\n");
+				if (Mix_PlayChannel(-1, chunk, 0) == -1) {
+					printf("Failed Chunk Play %s", Mix_GetError());
+				};
 			}
 		}
 	}

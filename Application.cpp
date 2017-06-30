@@ -25,7 +25,7 @@ Application* Application::getInstance() {
 void Application::quit(void) {
 	printf("\nmusic");
 	if (music) {
-		//music->unload();
+		music->unload();
 	}
 	printf("\nfilesystem");
 	filesystem.unload();
@@ -76,8 +76,9 @@ bool Application::load(const std::string& file) {
 }
 
 bool Application::update() {
-
+	// Update some of the sub-systems.
 	sound.update();
+
 	// Poll all SDL events.
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
@@ -101,7 +102,6 @@ bool Application::update() {
 
 	// Update the game.
 	script->update((float)(current - tick) / 1000);
-
 
 	// Update the timer.
 	tick = current;

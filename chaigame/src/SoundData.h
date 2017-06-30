@@ -8,8 +8,8 @@
 namespace chaigame {
 	class SoundData {
 	public:
-		Mix_Chunk* chunk;
-		Mix_Music* music;
+		Mix_Chunk* chunk = NULL;
+		Mix_Music* music = NULL;
 		SoundData(SDL_RWops* rw, const std::string& type);
 		SoundData(const std::string& rw, const std::string& type);
 		~SoundData();
@@ -19,7 +19,7 @@ namespace chaigame {
 		void play();
 		std::string getType();
 
-		SDL_RWops* loadRWops;
+		SDL_RWops* loadRWops = NULL;
 		std::string loadType;
 	};
 }

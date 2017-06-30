@@ -9,6 +9,8 @@
 
 namespace chaigame {
 	void audio::play(SoundData* soundData) {
-		soundData->play();
+		if (soundData) {
+			soundData->play();
+		}
 	}
 }

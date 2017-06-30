@@ -30,12 +30,12 @@ namespace chaigame {
 		if (!initialized) {
 			initialized = true;
 				printf("Mix_OpenAudio:");
-			if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
+			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
 				printf("Mix_OpenAudio: %s\n", Mix_GetError());
 				return false;
 			}
 
-		    /*numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
+		    numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 		    if (!numtimesopened) {
 		    	printf("Mix_QuerySpec: %s\n",Mix_GetError());
 		    	return false;
@@ -51,7 +51,7 @@ namespace chaigame {
 	    	    case AUDIO_S16MSB: format_str="S16MSB"; break;
 	    	}
 	    	printf("\n  opened=%d times\n  frequency=%dHz\n  format=%s\n  channels=%d\n",
-	            numtimesopened, frequency, format_str.c_str(), channels);*/
+	            numtimesopened, frequency, format_str.c_str(), channels);
 	    }
 
 	    return initialized;
@@ -78,7 +78,9 @@ namespace chaigame {
 	SoundData* sound::newSoundData(const std::string& file, const std::string& type) {
  		SDL_RWops* rw = Application::getInstance()->filesystem.openRW(file);
  		if (rw) {
+ 			printf("LOADED FILE!");
 			return new SoundData(rw, type);
  		}
+ 			printf("Failed to load File!");
 	}
 }
