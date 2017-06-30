@@ -16,13 +16,13 @@ namespace chaigame {
 		script();
 
 		void load();
-		void update(Uint32 delta);
+		void update(float delta);
 		void draw();
 
 		#ifndef __DISABLE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;
 		std::function<void ()> chaiload;
-		std::function<void (double)> chaiupdate;
+		std::function<void (float)> chaiupdate;
 		std::function<void ()> chaidraw;
 		#endif
 	};

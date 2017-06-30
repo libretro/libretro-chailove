@@ -38,6 +38,5 @@ namespace chaigame {
 		keys = SDL_GetKeyState(NULL);
 		return true;
 	}
-
 }
 

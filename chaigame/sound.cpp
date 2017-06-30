@@ -40,6 +40,7 @@ namespace chaigame {
 		    	return false;
 		    }
 
+		    /*
 	    	std::string format_str="Unknown";
 	    	switch(format) {
 	    	    case AUDIO_U8: format_str="U8"; break;
@@ -51,6 +52,7 @@ namespace chaigame {
 	    	}
 	    	printf("\n  opened=%d times\n  frequency=%dHz\n  format=%s\n  channels=%d\n",
 	            numtimesopened, frequency, format_str.c_str(), channels);
+	        */
 	    }
 
 	    return initialized;

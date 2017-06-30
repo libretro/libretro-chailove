@@ -17,7 +17,7 @@ TODO: Add usage documentation.
 
 ```
 make
-retroarch -L chaigame_*
+retroarch -L chaigame_libretro.so main.chai
 ```
 
 ### Flags
