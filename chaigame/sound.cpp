@@ -29,7 +29,6 @@ namespace chaigame {
 	bool sound::update() {
 		if (!initialized) {
 			initialized = true;
-				printf("Mix_OpenAudio:");
 			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
 				printf("Mix_OpenAudio: %s\n", Mix_GetError());
 				return false;
@@ -58,29 +57,14 @@ namespace chaigame {
 	}
 
 	void sound::unload() {
-		printf("\nMix_CloseAudio");
 		Mix_CloseAudio();
-		/*Mix_HaltMusic();
-		Mix_HaltChannel(-1);
-    	while(Mix_Init(0))
-    		Mix_Quit();
-    	Mix_CloseAudio();*/
-
-
-		// force a quit
-		printf("\nMix_Init");
-		//while(Mix_Init(0)) {
-		//	printf("\nMix_Quit");
-		//    Mix_Quit();
-		//}
+		initialized = false;
 	}
 
 	SoundData* sound::newSoundData(const std::string& file, const std::string& type) {
  		SDL_RWops* rw = Application::getInstance()->filesystem.openRW(file);
  		if (rw) {
- 			printf("LOADED FILE!");
 			return new SoundData(rw, type);
  		}
- 			printf("Failed to load File!");
 	}
 }

@@ -23,17 +23,9 @@ Application* Application::getInstance() {
 }
 
 void Application::quit(void) {
-	printf("\nmusic");
-	if (music) {
-		music->unload();
-	}
-	printf("\nfilesystem");
 	filesystem.unload();
-	printf("\nimage");
 	image.unload();
-	printf("\nsound");
 	sound.unload();
-	printf("\nSDL_Quit");
 	SDL_Quit();
 }
 
@@ -67,8 +59,6 @@ bool Application::load(const std::string& file) {
 	script = new chaigame::script();
 	script->load();
 
-	music = new chaigame::SoundData("test/beat.wav", "chunk");
-
 	// Set up the game timer.
 	tick = SDL_GetTicks();
 
@@ -87,8 +77,6 @@ bool Application::update() {
 				break;
 			case SDL_KEYDOWN:
 				if( event.key.keysym.sym == SDLK_LEFT ) {
-					printf("PLAY THE MUISC");
-					audio.play(music);
 				}
 				break;
 		}
@@ -134,7 +122,6 @@ void Application::draw(){
 		x += 6;
 	}
 	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
-
 
 	graphics.print("Hello World!", 100, 300);
 	//static chaigame::Image* pic = graphics.newImage("logo.png");
