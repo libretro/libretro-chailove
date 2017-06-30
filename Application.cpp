@@ -25,7 +25,7 @@ Application* Application::getInstance() {
 void Application::quit(void) {
 	filesystem.unload();
 	image.unload();
-	// Tell SDL to quit.
+	sound.unload();
 	SDL_Quit();
 }
 
@@ -50,16 +50,12 @@ bool Application::load(const std::string& file) {
 		// Error: Do nothing.
 	}
 
-	// Disable the mouse cursor from showing up.
-	SDL_ShowCursor(SDL_DISABLE);
-
 	// Initalize the chaigame subsystems.
+	sound.load();
 	keyboard.load();
 	graphics.load();
 	image.load();
 	filesystem.load(file);
-
-	// ChaiScript.
 	script = new chaigame::script();
 	script->load();
 
@@ -70,30 +66,23 @@ bool Application::load(const std::string& file) {
 }
 
 bool Application::update() {
-	bool quit = false;
+	// Update some of the sub-systems.
+	sound.update();
 
-	// Update all the input.
+	// Poll all SDL events.
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
-			case SDL_MOUSEBUTTONDOWN:
-				quit = true;
-				if ( event.button.button == SDL_BUTTON_LEFT ) {
-				} else if ( event.button.button == SDL_BUTTON_RIGHT ) {
-					/* Switch to prev graphics */
-					//curprim--;
-				}
+			case SDL_QUIT:
+				return false;
 				break;
 			case SDL_KEYDOWN:
-
-				#ifndef __DISABLE_CHAISCRIPT__
-				//x += chai.eval<int>("multiply(5, 20);");
-				//x += 100;
-				#endif
-			default:
+				if( event.key.keysym.sym == SDLK_LEFT ) {
+				}
 				break;
 		}
 	}
 
+	// Update any of the sub-systems.
 	keyboard.update();
 
 	// Retrieve the new game time.
@@ -106,7 +95,7 @@ bool Application::update() {
 	// Update the timer.
 	tick = current;
 
-	return quit;
+	return true;
 }
 
 /**
@@ -134,7 +123,6 @@ void Application::draw(){
 		x += 6;
 	}
 	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
-
 
 	graphics.print("Hello World!", 100, 300);
 	//static chaigame::Image* pic = graphics.newImage("logo.png");

@@ -34,8 +34,9 @@ namespace chaigame {
 		SDL_EnableUNICODE(1);
 	}
 
-	void keyboard::update() {
+	bool keyboard::update() {
 		keys = SDL_GetKeyState(NULL);
+		return true;
 	}
 
 }

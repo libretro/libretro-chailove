@@ -37,6 +37,7 @@ namespace chaigame {
 
 	bool filesystem::unload() {
 		PHYSFS_deinit();
+		return true;
 	}
 
 	SDL_RWops* filesystem::openRW(const std::string& filename) {
@@ -44,6 +45,7 @@ namespace chaigame {
 		if (rw != NULL) {
 			return rw;
 		}
+		printf("Error loading file: %s", filename.c_str());
 		// TODO: Add error reporting.
 		return NULL;
 	}

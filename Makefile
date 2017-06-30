@@ -58,15 +58,18 @@ else
 endif
 
 OBJECTS := libretro.o Application.o \
+	chaigame/audio.o \
 	chaigame/chaigame.o \
 	chaigame/graphics.o \
 	chaigame/keyboard.o \
 	chaigame/script.o \
 	chaigame/filesystem.o \
 	chaigame/image.o \
+	chaigame/sound.o \
 	chaigame/system.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Image.o \
+	chaigame/src/SoundData.o \
 	vendor/physfs/extras/physfsrwops.o
 
 all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)
@@ -78,11 +81,13 @@ else
 endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
-	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
 	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
 	vendor/sdl-libretro/SDL_image_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/libSDL_mixer_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
 	vendor/physfs/libphysfs.a \
 	-ldl -ljpeg -lpng \
+	-lmikmod -lvorbisfile -logg \
 	-lpthread $(EXTRA_LDF)
 FLAGS += -I. \
 	-Ivendor/sdl-libretro/include \
