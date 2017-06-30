@@ -89,12 +89,12 @@ namespace chaigame {
 			// If the file has successfully loaded, play the sound.
 			if (music) {
 				if (Mix_PlayMusic(music, -1) == -1) {
-					printf("Failed to play music! %s\n", Mix_GetError());
+					printf("Failed to play music: %s\n", Mix_GetError());
 				};
 			}
 			else if (chunk) {
 				if (Mix_PlayChannel(-1, chunk, 0) == -1) {
-					printf("Failed Chunk Play %s", Mix_GetError());
+					printf("Failed to play chunk: %s\n", Mix_GetError());
 				};
 			}
 		}

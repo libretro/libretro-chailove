@@ -51,7 +51,7 @@ namespace chaigame {
 
 		// Find the game functions.
 		chaiload = chai.eval<std::function<void ()> >("load");
-		chaiupdate = chai.eval<std::function<void (Uint32)> >("update");
+		chaiupdate = chai.eval<std::function<void (double)> >("update");
 		chaidraw = chai.eval<std::function<void ()> >("draw");
 		#endif
 	}

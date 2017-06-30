@@ -17,18 +17,19 @@ def load() {
 }
 
 def update(delta) {
+	var velocity = 0.5
 	// Called before drawing.
 	if (keyboard.isDown("up")) {
-		y -= 1 * delta
+		y -= velocity * delta
 	}
 	if (keyboard.isDown("down")) {
-		y += 1 * delta
+		y += velocity * delta
 	}
 	if (keyboard.isDown("left")) {
-		x -= 1 * delta
+		x -= velocity * delta
 	}
 	if (keyboard.isDown("right")) {
-		x += 1 * delta
+		x += velocity * delta
 		audio.play(mus)
 	}
 }
@@ -36,6 +37,5 @@ def update(delta) {
 def draw() {
 	// Called to render the game state.
 	graphics.rectangle(x, y, 100, 100, 0, 255, 0, 255)
-
 	//graphics.draw(logo, x + 100, y)
 }
