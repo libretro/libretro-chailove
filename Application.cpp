@@ -23,6 +23,7 @@ Application* Application::getInstance() {
 }
 
 void Application::quit(void) {
+	joystick.unload();
 	filesystem.unload();
 	image.unload();
 	sound.unload();
@@ -54,10 +55,13 @@ bool Application::load(const std::string& file) {
 	sound.load();
 	keyboard.load();
 	graphics.load();
+	joystick.load();
 	image.load();
 	filesystem.load(file);
 	script = new chaigame::script();
 	script->load();
+
+	joysticks = joystick.getJoysticks();
 
 	// Set up the game timer.
 	tick = SDL_GetTicks();
@@ -68,6 +72,7 @@ bool Application::load(const std::string& file) {
 bool Application::update() {
 	// Update some of the sub-systems.
 	sound.update();
+	joystick.update();
 
 	// Poll all SDL events.
 	while (SDL_PollEvent(&event)) {
@@ -124,7 +129,17 @@ void Application::draw(){
 	}
 	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
 
-	graphics.print("Hello World!", 100, 300);
+	//graphics.print("Why hello", 100, 300);
+
+	if (joystick.isDown(0, 0)) {
+		x += 6;
+	}
+
+	//std::cout << "Number of Joysticks: " << joystick.getNumJoysticks();
+
+	//std::string name = joysticks[0].getName();
+	//printf("Name: %s", name.c_str());
+
 	//static chaigame::Image* pic = graphics.newImage("logo.png");
 	//graphics.draw(pic, x, y);
 

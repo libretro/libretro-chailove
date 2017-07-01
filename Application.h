@@ -19,6 +19,10 @@ public:
 	chaigame::system system;
 	chaigame::sound sound;
 	chaigame::audio audio;
+	chaigame::joystick joystick;
+
+
+	chaigame::Joystick* joysticks;
 
 	void quit(void);
 	bool load(const std::string& file);

@@ -70,6 +70,8 @@ OBJECTS := libretro.o Application.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Image.o \
 	chaigame/src/SoundData.o \
+	chaigame/src/Joystick.o \
+	chaigame/joystick.o \
 	vendor/physfs/extras/physfsrwops.o
 
 all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)

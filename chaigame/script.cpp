@@ -54,6 +54,10 @@ namespace chaigame {
 		chai.add(fun(&audio::play), "play");
 		chai.add_global(var(std::ref(app->audio)), "audio");
 
+		// Register the Joystick module.
+		chai.add(fun(&joystick::getJoysticks), "getJoysticks");
+		chai.add_global(var(std::ref(app->joystick)), "joystick");
+
 		// Load main.chai.
 		loadModule("main.chai");
 
