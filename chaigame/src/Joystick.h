@@ -8,7 +8,7 @@ namespace chaigame {
 	class Joystick {
 	public:
 		Joystick(int num, SDL_Joystick* joystick);
-		Joystick(SDL_Joystick* joystick);
+		//Joystick(SDL_Joystick* joystick);
 		Joystick();
 		~Joystick();
 		std::string getName();
@@ -17,13 +17,13 @@ namespace chaigame {
 		bool open(int index);
 
 		bool isDown(int button);
-		bool isDown(std::string button);
+		bool isDown(const std::string& button);
 
-		int num = 0;
-
-		SDL_Joystick* joy = NULL;
+		//L_Joystick* joy = NULL;
 		int index = 0;
 		std::string name;
+		Sint16 xaxis;
+		Sint16 yaxis;
 	};
 }
 

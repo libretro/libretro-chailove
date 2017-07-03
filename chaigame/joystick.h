@@ -3,6 +3,7 @@
 
 #include "src/Joystick.h"
 #include <SDL.h>
+#include <string>
 
 namespace chaigame {
 	class joystick {
@@ -11,13 +12,15 @@ namespace chaigame {
 		void update();
 		Joystick* getJoysticks();
 		Joystick* joysticks;
-		int getNumJoysticks();
+		int getJoystickCount();
 		int numJoysticks = 0;
 		bool isOpen(int index);
 		void close(int index);
 		void unload();
 		bool isDown(int index, int button);
-		int getButtonKey(std::string name);
+		bool isDown(int index, const std::string& button);
+		int getButtonKey(const std::string& name);
+		int16_t joystick_cache[4][14];
 	};
 }
 

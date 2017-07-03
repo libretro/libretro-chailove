@@ -17,16 +17,21 @@ signed short soundbuf[1024*2];
 static retro_video_refresh_t video_cb;
 static retro_environment_t environ_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
-static  retro_input_poll_t input_poll_cb;
+//static retro_input_poll_t input_poll_cb;
 
-retro_input_state_t input_state_cb;
+//retro_input_state_t input_state_cb;
 retro_audio_sample_t audio_cb;
 
 void retro_set_video_refresh(retro_video_refresh_t cb) { video_cb = cb; }
 void retro_set_audio_sample(retro_audio_sample_t cb) { audio_cb  =cb; }
 void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) { audio_batch_cb = cb; }
-void retro_set_input_poll(retro_input_poll_t cb) { input_poll_cb = cb; }
-void retro_set_input_state(retro_input_state_t cb) { input_state_cb = cb; }
+void retro_set_input_poll(retro_input_poll_t cb) {
+	Application::input_poll_cb = cb;
+}
+
+void retro_set_input_state(retro_input_state_t cb) {
+	Application::input_state_cb = cb;
+}
 
 // these 2 funtions have to be implemented for Libretro SDL port
 #ifdef __cplusplus
@@ -37,7 +42,7 @@ void libretro_audio_cb(int16_t left, int16_t right) {
 }
 
 short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
-	return input_state_cb(port,device,index,id);
+	return Application::input_state_cb(port, device, index, id);
 }
 #ifdef __cplusplus
 }
@@ -89,7 +94,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 		retroh,
 		retrow,
 		retroh,
-		4.0 / 3.0
+		(float)retrow / (float)retroh
 	};
 	info->geometry = geom;
 
@@ -243,7 +248,7 @@ void retro_run(void) {
 	// Only run game loop if Application is executing.
 	if (Application::isRunning()) {
 		// Poll all the inputs.
-		input_poll_cb();
+		Application::input_poll_cb();
 
 		// Update the game.
 		if (!Application::getInstance()->update()) {

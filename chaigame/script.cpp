@@ -56,6 +56,8 @@ namespace chaigame {
 
 		// Register the Joystick module.
 		chai.add(fun(&joystick::getJoysticks), "getJoysticks");
+		chai.add(fun(&joystick::getJoystickCount), "getJoystickCount");
+		chai.add(fun<bool, joystick, int, const std::string&>(&joystick::isDown), "isDown");
 		chai.add_global(var(std::ref(app->joystick)), "joystick");
 
 		// Load main.chai.
