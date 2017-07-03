@@ -9,7 +9,7 @@ using namespace filesystem;
 
 namespace chaigame {
 
-	bool filesystem::load(const std::string& file) {
+	bool filesystem::init(const std::string& file) {
 		PHYSFS_init(NULL);
 
 		// Check if we are simply running the application.
@@ -33,6 +33,20 @@ namespace chaigame {
 		}
 
 		return mount(parentPath.c_str(), "/");
+	}
+
+	bool filesystem::exists(const std::string& file) {
+		return PHYSFS_exists(file.c_str()) != 0;
+	}
+
+	int filesystem::getSize(const std::string& file) {
+		PHYSFS_File* openfile = PHYSFS_openRead(file.c_str());
+		int size = -1;
+		if (openfile) {
+			size = PHYSFS_fileLength(openfile);
+			PHYSFS_close(openfile);
+		}
+		return size;
 	}
 
 	bool filesystem::unload() {

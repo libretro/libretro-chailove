@@ -39,6 +39,8 @@ namespace chaigame {
 
 		// Register the Filesystem module.
 		chai.add(fun(&filesystem::read), "read");
+		chai.add(fun(&filesystem::exists), "exists");
+		chai.add(fun(&filesystem::getSize), "getSize");
 		chai.add_global(var(std::ref(app->filesystem)), "filesystem");
 
 		// Register the System module.
