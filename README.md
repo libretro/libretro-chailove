@@ -24,8 +24,8 @@ retroarch -L chaigame_libretro.so main.chai
 
 There are a few flags you can enable to change how Chai is compiled and used.
 
-- `DISABLE_CHAISCRIPT` Remove the scripting environment.
+- `HAVE_CHAISCRIPT` Remove the scripting environment.
 
 ```
-make DISABLE_CHAISCRIPT=true
+make HAVE_CHAISCRIPT=0
 ```

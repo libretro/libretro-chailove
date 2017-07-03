@@ -99,10 +99,8 @@ FLAGS += -I. \
 
 WARNINGS :=
 
-ifneq ($(DISABLE_CHAISCRIPT),)
-	FLAGS += -D__DISABLE_CHAISCRIPT__
-else
-	FLAGS += -DCHAISCRIPT_NO_THREADS
+ifeq ($(HAVE_CHAISCRIPT),)
+	FLAGS += -D__HAVE_CHAISCRIPT__
 endif
 FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 
@@ -131,7 +129,7 @@ vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 .PHONY: clean
 
 noscript:
-	make DISABLE_CHAISCRIPT=1
+	make HAVE_CHAISCRIPT=0
 
 test: noscript
 	retroarch -L *.so

@@ -3,13 +3,13 @@
 #include "../Application.h"
 //#include "filesystem.h"
 
-#ifndef __DISABLE_CHAISCRIPT__
+#ifdef __HAVE_CHAISCRIPT__
 using namespace chaiscript;
 #endif
 
 namespace chaigame {
 	void script::loadModule(const std::string& moduleName) {
-		#ifndef __DISABLE_CHAISCRIPT__
+		#ifdef __HAVE_CHAISCRIPT__
 		Application* app = Application::getInstance();
 		std::string contents = app->filesystem.read(moduleName);
 		chai.eval(contents);
@@ -17,7 +17,7 @@ namespace chaigame {
 	}
 
 	script::script() {
-		#ifndef __DISABLE_CHAISCRIPT__
+		#ifdef __HAVE_CHAISCRIPT__
 		Application* app = Application::getInstance();
 
 		// Register the Graphics module.
@@ -71,19 +71,19 @@ namespace chaigame {
 	}
 
 	void script::load() {
-		#ifndef __DISABLE_CHAISCRIPT__
+		#ifdef __HAVE_CHAISCRIPT__
 		chaiload();
 		#endif
 	}
 
 	void script::update(float delta) {
-		#ifndef __DISABLE_CHAISCRIPT__
+		#ifdef __HAVE_CHAISCRIPT__
 		chaiupdate(delta);
 		#endif
 	}
 
 	void script::draw() {
-		#ifndef __DISABLE_CHAISCRIPT__
+		#ifdef __HAVE_CHAISCRIPT__
 		chaidraw();
 		#endif
 	}

@@ -1,15 +1,15 @@
 #ifndef _SCRIPT_H_INCLUDED_
 #define _SCRIPT_H_INCLUDED_
 
+#include <SDL.h>
 #include <string>
-#ifndef __DISABLE_CHAISCRIPT__
+
+#ifdef __HAVE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
 
 // TODO: Fix Chai loading with the Standard Library.
 //#include <chaiscript/chaiscript_stdlib.hpp>
 #endif
-
-#include <SDL.h>
 
 namespace chaigame {
 	class script {
@@ -21,7 +21,7 @@ namespace chaigame {
 		void draw();
 		void loadModule(const std::string& moduleName);
 
-		#ifndef __DISABLE_CHAISCRIPT__
+		#ifdef __HAVE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;
 		std::function<void ()> chaiload;
 		std::function<void (float)> chaiupdate;
