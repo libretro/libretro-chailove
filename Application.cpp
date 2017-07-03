@@ -57,7 +57,7 @@ bool Application::load(const std::string& file) {
 	// Initalize the chaigame subsystems.
 	sound.load();
 	keyboard.load();
-	graphics.load();
+	graphics.load(screen);
 	joystick.load();
 	math.load();
 	image.load();
@@ -103,27 +103,25 @@ bool Application::update() {
  * Render the application.
  */
 void Application::draw(){
-	// Clear the screen
-	Uint32 color = SDL_MapRGBA(screen->format, 0, 0, 0, 255);
-	SDL_FillRect(screen, NULL, color);
+	graphics.clear();
 
 	// Test drawing a rectangle.
 	static int x = 10;
 	static int y = 10;
 
 	if (keyboard.isDown("up")) {
-		y -= 6;
+		y -= 2;
 	}
 	if (keyboard.isDown("down")) {
-		y += 6;
+		y += 2;
 	}
 	if (keyboard.isDown("left")) {
-		x -= 6;
+		x -= 2;
 	}
 	if (keyboard.isDown("right")) {
-		x += 6;
+		x += 2;
 	}
-	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
+	graphics.rectangle("fill", x, y, 50, 50);
 
 	// Render the game.
 	script->draw();

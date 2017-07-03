@@ -2,6 +2,7 @@
 #include "chaigame.h"
 #include "../Application.h"
 //#include "filesystem.h"
+#include <SDL.h>
 
 #ifdef __HAVE_CHAISCRIPT__
 using namespace chaiscript;
@@ -25,7 +26,14 @@ namespace chaigame {
 		chai.add(fun(&graphics::newImage), "newImage");
 		chai.add(fun(&graphics::print), "print");
 		chai.add(fun(&graphics::setColor), "setColor");
+		chai.add(fun(&graphics::point), "point");
+		chai.add(fun(&graphics::line), "line");
+		chai.add(fun<void, graphics, Uint8, Uint8, Uint8, Uint8>(&graphics::setBackgroundColor), "setBackgroundColor");
+		chai.add(fun<void, graphics, Uint8, Uint8, Uint8>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
+		chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");
+		chai.add(fun<void, graphics>(&graphics::clear), "clear");
 		chai.add_global(var(std::ref(app->graphics)), "graphics");
 
 		// Register the Keyboard module.

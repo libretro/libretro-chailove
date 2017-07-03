@@ -10,9 +10,15 @@
 namespace chaigame {
 	class graphics {
 	public:
-		bool load();
+		bool load(SDL_Surface* screen);
 
-		void rectangle(Sint16 x, Sint16 y, Sint16 width, Sint16 height, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		void rectangle(const std::string& mode, Sint16 x, Sint16 y, Sint16 width, Sint16 height);
+		void clear();
+		void clear(int r, int g, int b, int a);
+		void clear(int r, int g, int b);
+		void point(int x, int y);
+		void line(int x1, int y1, int x2, int y2);
+
 		void draw(ImageData* data, int x, int y);
 		void draw(Image* data, int x, int y);
 
@@ -20,8 +26,12 @@ namespace chaigame {
 
 		void print(const std::string& text, int x, int y);
 		void setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
+		void setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
+		void setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue);
 
-		Uint8 r, g, b, a;
+		Uint8 r = 255, g = 0, b = 0, a = 255;
+		Uint8 backR = 0, backG = 0, backB = 0, backA = 255;
+		SDL_Surface* screen;
 	};
 }
 

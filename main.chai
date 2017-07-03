@@ -5,6 +5,8 @@ global velocity = 0.5;
 def load() {
 	x = 100;
 	y = 100;
+
+	graphics.setBackgroundColor(136, 199, 245);
 }
 
 def update(delta) {
@@ -23,5 +25,6 @@ def update(delta) {
 }
 
 def draw() {
-	graphics.rectangle(x, y, 100, 100, 0, 255, 0, 255);
+	//var r = "line"
+	graphics.rectangle("line", x, y, 100, 100);
 }

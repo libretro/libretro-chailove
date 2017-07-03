@@ -9,24 +9,44 @@
 
 namespace chaigame {
 
-	bool graphics::load() {
-
+	bool graphics::load(SDL_Surface* renderScreen) {
 		// Disable the mouse cursor from showing up.
+		screen = renderScreen;
 		SDL_ShowCursor(SDL_DISABLE);
-		r = 255;
-		g = 0;
-		b = 0;
-		a = 255;
 		return true;
 	}
 
-	void graphics::rectangle(Sint16 x, Sint16 y, Sint16 width, Sint16 height, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
-		rectangleRGBA(Application::getInstance()->screen, x, y, x + width, y + height, r, g, b, a);
+	void graphics::clear() {
+		clear(backR, backG, backB, backA);
+	}
+
+	void graphics::clear(int r, int g, int b, int a) {
+		Uint32 color = SDL_MapRGBA(screen->format, r, g, b, a);
+		SDL_FillRect(screen, NULL, color);
+	}
+
+	void graphics::clear(int r, int g, int b) {
+		clear(r, g, b, 255);
+	}
+	void graphics::point(int x, int y) {
+		pixelRGBA(screen, x, y, r, g, b, a);
+	}
+
+	void graphics::rectangle(const std::string& mode, Sint16 x, Sint16 y, Sint16 width, Sint16 height) {
+		if (mode == "line") {
+			rectangleRGBA(screen, x, y, x + width, y + height, r, g, b, a);
+		}
+		else {
+			boxRGBA(screen, x, y, x + width, y + height, r, g, b, a);
+		}
+	}
+	void graphics::line(int x1, int y1, int x2, int y2) {
+		lineRGBA(screen, x1, y1, x2, y2, r, g, b, a);
 	}
 
 	void graphics::draw(ImageData* image, int x, int y) {
 		if (image && image->loaded()) {
-			SDL_BlitSurface(image->surface, NULL, Application::getInstance()->screen, NULL);
+			SDL_BlitSurface(image->surface, NULL, screen, NULL);
 		}
 	}
 
@@ -35,7 +55,7 @@ namespace chaigame {
 			SDL_Rect* dstrect = new SDL_Rect();
 			dstrect->x = x;
 			dstrect->y = y;
-			SDL_BlitSurface(image->surface, NULL, Application::getInstance()->screen, dstrect);
+			SDL_BlitSurface(image->surface, NULL, screen, dstrect);
 		}
 	}
 
@@ -48,7 +68,7 @@ namespace chaigame {
 	}
 
 	void graphics::print(const std::string& text, int x, int y) {
-		stringRGBA(Application::getInstance()->screen, x, y, text.c_str(), r, g, b, a);
+		stringRGBA(screen, x, y, text.c_str(), r, g, b, a);
 	}
 
 	void graphics::setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
@@ -56,5 +76,14 @@ namespace chaigame {
 		g = green;
 		b = blue;
 		a = alpha;
+	}
+	void graphics::setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue) {
+		setBackgroundColor(red, green, blue, 255);
+	}
+	void graphics::setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+		backR = red;
+		backG = green;
+		backB = blue;
+		backA = alpha;
 	}
 }
