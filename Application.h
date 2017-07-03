@@ -24,6 +24,7 @@ public:
 	chaigame::sound sound;
 	chaigame::audio audio;
 	chaigame::joystick joystick;
+	chaigame::math math;
 
 	void quit(void);
 	bool load(const std::string& file);

@@ -59,6 +59,7 @@ bool Application::load(const std::string& file) {
 	keyboard.load();
 	graphics.load();
 	joystick.load();
+	math.load();
 	image.load();
 	filesystem.load(file);
 	script = new chaigame::script();

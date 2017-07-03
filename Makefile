@@ -66,6 +66,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/filesystem.o \
 	chaigame/image.o \
 	chaigame/sound.o \
+	chaigame/math.o \
 	chaigame/system.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Image.o \
