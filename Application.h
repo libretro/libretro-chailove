@@ -2,6 +2,7 @@
 #define APPLICATION_H
 
 #include <SDL.h>
+#include <libretro.h>
 #include "chaigame/chaigame.h"
 
 class Application {
@@ -11,6 +12,9 @@ public:
 	static Application* m_instance;
 	static void destroy();
 
+	static retro_input_state_t input_state_cb;
+	static retro_input_poll_t input_poll_cb;
+
 	chaigame::keyboard keyboard;
 	chaigame::script* script;
 	chaigame::filesystem filesystem;
@@ -19,6 +23,7 @@ public:
 	chaigame::system system;
 	chaigame::sound sound;
 	chaigame::audio audio;
+	chaigame::joystick joystick;
 
 	void quit(void);
 	bool load(const std::string& file);

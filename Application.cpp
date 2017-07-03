@@ -1,12 +1,15 @@
 #include <string>
 #include <SDL.h>
 
+#include <libretro.h>
 #include "Application.h"
 #include "chaigame/chaigame.h"
 
 #include <iostream>
 
 Application* Application::m_instance = NULL;
+retro_input_state_t Application::input_state_cb = NULL;
+retro_input_poll_t Application::input_poll_cb = NULL;
 
 bool Application::isRunning() {
 	return m_instance != NULL;
@@ -23,6 +26,7 @@ Application* Application::getInstance() {
 }
 
 void Application::quit(void) {
+	joystick.unload();
 	filesystem.unload();
 	image.unload();
 	sound.unload();
@@ -54,6 +58,7 @@ bool Application::load(const std::string& file) {
 	sound.load();
 	keyboard.load();
 	graphics.load();
+	joystick.load();
 	image.load();
 	filesystem.load(file);
 	script = new chaigame::script();
@@ -68,16 +73,13 @@ bool Application::load(const std::string& file) {
 bool Application::update() {
 	// Update some of the sub-systems.
 	sound.update();
+	joystick.update();
 
 	// Poll all SDL events.
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_QUIT:
 				return false;
-				break;
-			case SDL_KEYDOWN:
-				if( event.key.keysym.sym == SDLK_LEFT ) {
-				}
 				break;
 		}
 	}
@@ -91,8 +93,6 @@ bool Application::update() {
 	// Update the game.
 	float delta = (float)(current) - (float)(tick);
 	script->update(delta);
-
-	// Update the timer.
 	tick = current;
 
 	return true;
@@ -123,10 +123,6 @@ void Application::draw(){
 		x += 6;
 	}
 	graphics.rectangle(x, y, 100, 100, 0, 255, 255, 255);
-
-	graphics.print("Hello World!", 100, 300);
-	//static chaigame::Image* pic = graphics.newImage("logo.png");
-	//graphics.draw(pic, x, y);
 
 	// Render the game.
 	script->draw();

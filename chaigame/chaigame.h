@@ -13,5 +13,7 @@
 #include "src/Image.h"
 #include "src/ImageData.h"
 #include "src/SoundData.h"
+#include "src/Joystick.h"
+#include "joystick.h"
 
 #endif
