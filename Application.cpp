@@ -121,6 +121,9 @@ void Application::draw(){
 	if (keyboard.isDown("right")) {
 		x += 2;
 	}
+	if (keyboard.isDown("g")) {
+		x += 2;
+	}
 	graphics.rectangle("fill", x, y, 50, 50);
 
 	// Render the game.

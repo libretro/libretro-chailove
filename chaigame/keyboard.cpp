@@ -10,20 +10,12 @@ namespace chaigame {
 	}
 
 	bool keyboard::isDown(const std::string& key) {
-		if (key == "down") {
-			return isKeyDown(SDLK_DOWN);
-		}
-		if (key == "up") {
-			return isKeyDown(SDLK_UP);
-		}
-		if (key == "left") {
-			return isKeyDown(SDLK_LEFT);
-		}
-		if (key == "right") {
-			return isKeyDown(SDLK_RIGHT);
-		}
+		int keycode = getKeyCodeFromName(key);
+		return isKeyDown(keycode);
+	}
 
-		return false;
+	int keyboard::getKeyCodeFromName(const std::string& name) {
+		return keyCodes[name];
 	}
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
@@ -32,6 +24,14 @@ namespace chaigame {
 
 	bool keyboard::load() {
 		SDL_EnableUNICODE(1);
+
+		// Construct the keycode map.
+		for (int i = 0; i < SDLK_LAST; i++) {
+			std::string name(SDL_GetKeyName((SDLKey)i));
+			if (!name.empty()) {
+				keyCodes[name] = i;
+			}
+		}
 	}
 
 	bool keyboard::update() {

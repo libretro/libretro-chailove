@@ -2,6 +2,7 @@
 #define _KEYBOARD_H_INCLUDED_
 
 #include <string>
+#include <map>
 #include <SDL.h>
 
 namespace chaigame {
@@ -13,6 +14,9 @@ namespace chaigame {
 		bool isKeyDown(int key);
 		void setKeyRepeat(int delay = 400, int interval = 30);
 		bool update();
+		int getKeyCodeFromName(const std::string& name);
+
+		std::map<std::string, int> keyCodes;
 	};
 }
 
