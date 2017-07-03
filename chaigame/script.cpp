@@ -70,6 +70,16 @@ namespace chaigame {
 		chai.add(fun(&system::getOS), "getOS");
 		chai.add_global(var(std::ref(app->system)), "system");
 
+		// Register the Mouse module.
+		chai.add(fun(&mouse::setVisible), "setVisible");
+		chai.add(fun(&mouse::isVisible), "isVisible");
+		chai.add(fun(&mouse::setX), "setX");
+		chai.add(fun(&mouse::setY), "setY");
+		chai.add(fun(&mouse::getX), "getX");
+		chai.add(fun(&mouse::getY), "getY");
+		chai.add(fun(&mouse::isDown), "isDown");
+		chai.add_global(var(std::ref(app->mouse)), "mouse");
+
 		// Register the Sound module.
 		chai.add(fun(&sound::newSoundData), "newSoundData");
 		chai.add_global(var(std::ref(app->sound)), "sound");

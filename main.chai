@@ -29,7 +29,7 @@ def draw() {
 	graphics.print("Hello World!", 100, 100);
 	graphics.print("Hello World!", 150, 150);
 	graphics.print("Hello World!", 200, 120);
-	graphics.print("Hello World!", 300, 300);
+	graphics.print("Hello World!!!!!!!!", mouse.getX(), mouse.getY());
 	graphics.print("Hello World!", 400, 400);
 	graphics.print("Hello World!", 500, 100);
 	graphics.print("Hello World!", 100, 0);

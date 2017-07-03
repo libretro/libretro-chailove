@@ -24,6 +24,7 @@ public:
 	chaigame::sound sound;
 	chaigame::audio audio;
 	chaigame::joystick joystick;
+	chaigame::mouse mouse;
 	chaigame::math math;
 
 	void quit(void);

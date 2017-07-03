@@ -60,6 +60,7 @@ bool Application::load(const std::string& file) {
 	graphics.load(screen);
 	joystick.load();
 	math.load();
+	mouse.load();
 	image.load();
 	filesystem.init(file);
 	script = new chaigame::script();
@@ -81,6 +82,12 @@ bool Application::update() {
 		switch (event.type) {
 			case SDL_QUIT:
 				return false;
+				break;
+			case SDL_MOUSEMOTION:
+				mouse.motionEvent(event.motion);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				mouse.buttonEvent(event.button);
 				break;
 		}
 	}
@@ -121,10 +128,13 @@ void Application::draw(){
 	if (keyboard.isDown("right")) {
 		x += 2;
 	}
-	if (keyboard.isDown("g")) {
+	if (mouse.isDown(1)) {
 		x += 2;
 	}
-	graphics.rectangle("fill", x, y, 50, 50);
+	if (mouse.isDown(2)) {
+		x -= 2;
+	}
+	graphics.rectangle("fill", mouse.getX(), mouse.getY(), 50, 50);
 
 	// Render the game.
 	script->draw();

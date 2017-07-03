@@ -67,6 +67,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/image.o \
 	chaigame/sound.o \
 	chaigame/math.o \
+	chaigame/mouse.o \
 	chaigame/system.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Quad.o \
