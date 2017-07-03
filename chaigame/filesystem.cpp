@@ -54,6 +54,9 @@ namespace chaigame {
 			size = PHYSFS_fileLength(openfile);
 			PHYSFS_close(openfile);
 		}
+		else {
+			printf("Error getting size of file %s: %s", file.c_str(), PHYSFS_getLastError());
+		}
 		return size;
 	}
 
@@ -64,29 +67,45 @@ namespace chaigame {
 
 	SDL_RWops* filesystem::openRW(const std::string& filename) {
 		SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
-		if (rw != NULL) {
-			return rw;
+		if (rw == NULL) {
+			printf("Error loading file %s: %s", filename.c_str(), PHYSFS_getLastError());
 		}
-		printf("Error loading file: %s", filename.c_str());
-		// TODO: Add error reporting.
-		return NULL;
+		return rw;
 	}
 
 	char* filesystem::readChar(const std::string& filename) {
+		char *output = NULL;
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
-		PHYSFS_sint64 file_size = PHYSFS_fileLength(myfile);
+		if (myfile == NULL) {
+			printf("Error opening file %s: %s\n", filename.c_str(), PHYSFS_getLastError());
+			return NULL;
+		}
 
-		char *myBuf = new char[file_size];
-		int length_read = PHYSFS_readBytes(myfile, myBuf, file_size);
+		PHYSFS_sint64 file_size = PHYSFS_fileLength(myfile);
+		if (file_size > 0) {
+			output = new char[file_size];
+			int length_read = PHYSFS_readBytes(myfile, output, file_size);
+			if (length_read != file_size) {
+				printf("File System error while reading from file %s: %s\n", filename.c_str(), PHYSFS_getLastError());
+			}
+		}
+		else {
+			printf("Error getting filesize of %s: %s\n", filename.c_str(), PHYSFS_getLastError());
+		}
+
 		PHYSFS_close(myfile);
-		return myBuf;
+		return output;
 	}
 
 	std::string filesystem::read(const std::string& filename) {
+		// Retrieve a character buffer.
 		char* myBuf = readChar(filename);
-		// Construct a new string with the correct size.
-		std::string contents(myBuf, strlen(myBuf));
-		std::cout << contents;
+		if (myBuf == NULL) {
+			return "";
+		}
+
+		// We use strlen() - 1 to remove the final unneeded character.
+		std::string contents(myBuf, strlen(myBuf) - 1);
 		return contents;
 	}
 

@@ -27,4 +27,10 @@ def update(delta) {
 def draw() {
 	graphics.draw(logo, q, x, y);
 	graphics.print("Hello World!", 100, 100);
+	graphics.print("Hello World!", 150, 150);
+	graphics.print("Hello World!", 200, 120);
+	graphics.print("Hello World!", 300, 300);
+	graphics.print("Hello World!", 400, 400);
+	graphics.print("Hello World!", 500, 100);
+	graphics.print("Hello World!", 100, 0);
 }
