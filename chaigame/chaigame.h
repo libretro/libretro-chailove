@@ -8,6 +8,7 @@
 #include "script.h"
 #include "sound.h"
 #include "math.h"
+#include "src/Quad.h"
 #include "system.h"
 #include "audio.h"
 #include "sound.h"

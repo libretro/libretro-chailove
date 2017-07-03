@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
+#include <SDL_gfxBlitFunc.h>
 
 #include "../Application.h"
 #include "src/ImageData.h"
@@ -59,12 +60,29 @@ namespace chaigame {
 		}
 	}
 
+	void graphics::draw(Image* image, Quad quad, int x, int y) {
+		if (image && image->loaded()) {
+			SDL_Rect* dest = new SDL_Rect();
+			dest->x = x;
+			dest->y = y;
+			dest->w = x + quad.width;
+			dest->h = y + quad.height;
+			if (SDL_gfxBlitRGBA(image->surface, quad.toRect(), screen, dest) == -1) {
+				printf("Error on blitting");
+			}
+		}
+	}
+
 	Image* graphics::newImage(const std::string& filename) {
 		Image* image = new Image(filename);
 		if (image->loaded()) {
 			return image;
 		}
 		return NULL;
+	}
+
+	Quad graphics::newQuad(int x, int y, int width, int height, int sw, int sh) {
+		return Quad(x, y, width, height, sw, sh);
 	}
 
 	void graphics::print(const std::string& text, int x, int y) {

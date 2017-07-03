@@ -24,6 +24,15 @@ namespace chaigame {
 		#ifdef __HAVE_CHAISCRIPT__
 		Application* app = Application::getInstance();
 
+		// Add the Quad.
+		chai.add(user_type<Quad>(), "Quad");
+		chai.add(fun(&Quad::x), "x");
+		chai.add(fun(&Quad::y), "y");
+		chai.add(fun(&Quad::width), "width");
+		chai.add(fun(&Quad::height), "height");
+		chai.add(fun(&Quad::sx), "sx");
+		chai.add(fun(&Quad::sy), "sy");
+
 		// Register the Graphics module.
 		chai.add(fun(&graphics::rectangle), "rectangle");
 		chai.add(fun(&graphics::newImage), "newImage");
@@ -31,9 +40,11 @@ namespace chaigame {
 		chai.add(fun(&graphics::setColor), "setColor");
 		chai.add(fun(&graphics::point), "point");
 		chai.add(fun(&graphics::line), "line");
+		chai.add(fun(&graphics::newQuad), "newQuad");
 		chai.add(fun<void, graphics, Uint8, Uint8, Uint8, Uint8>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, Uint8, Uint8, Uint8>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics>(&graphics::clear), "clear");

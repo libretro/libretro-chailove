@@ -6,6 +6,7 @@
 
 #include "src/ImageData.h"
 #include "src/Image.h"
+#include "src/Quad.h"
 
 namespace chaigame {
 	class graphics {
@@ -21,6 +22,9 @@ namespace chaigame {
 
 		void draw(ImageData* data, int x, int y);
 		void draw(Image* data, int x, int y);
+		void draw(Image* image, Quad quad, int x, int y);
+
+		Quad newQuad(int x, int y, int width, int height, int sw, int sh);
 
 		Image* newImage(const std::string& filename);
 

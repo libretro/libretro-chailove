@@ -1,13 +1,12 @@
 #include "math.h"
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 
 namespace chaigame {
 
 	bool math::load() {
-	    time_t t;
-	    srand((unsigned) time(&t));
-	    return true;
+		srand((int)time(0));
+		return true;
 	}
 
 	double math::random() {

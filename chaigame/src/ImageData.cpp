@@ -41,4 +41,18 @@ namespace chaigame {
 		SDL_RWops* image = Application::getInstance()->filesystem.openRW(filename);
 		loadFromRW(image);
 	}
+
+	int ImageData::getWidth() {
+		if (surface != NULL) {
+			return surface->w;
+		}
+		return -1;
+	}
+
+	int ImageData::getHeight() {
+		if (surface != NULL) {
+			return surface->h;
+		}
+		return -1;
+	}
 }

@@ -14,6 +14,9 @@ namespace chaigame {
 		bool loaded();
 		bool loadFromRW(SDL_RWops* rw);
 		bool destroy();
+
+		int getWidth();
+		int getHeight();
 	};
 }
 
