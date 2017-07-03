@@ -30,8 +30,8 @@ namespace chaigame {
 		chai.add(fun(&Quad::y), "y");
 		chai.add(fun(&Quad::width), "width");
 		chai.add(fun(&Quad::height), "height");
-		chai.add(fun(&Quad::sx), "sx");
-		chai.add(fun(&Quad::sy), "sy");
+		chai.add(fun(&Quad::sw), "sw");
+		chai.add(fun(&Quad::sh), "sh");
 
 		// Register the Graphics module.
 		chai.add(fun(&graphics::rectangle), "rectangle");

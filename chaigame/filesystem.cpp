@@ -6,6 +6,8 @@
 #include "vendor/filesystem/filesystem/path.h"
 #include "../Application.h"
 
+#include <iostream>
+
 using namespace filesystem;
 
 namespace chaigame {
@@ -81,8 +83,10 @@ namespace chaigame {
 	}
 
 	std::string filesystem::read(const std::string& filename) {
-		char *myBuf = readChar(filename);
-		std::string contents(myBuf);
+		char* myBuf = readChar(filename);
+		// Construct a new string with the correct size.
+		std::string contents(myBuf, strlen(myBuf));
+		std::cout << contents;
 		return contents;
 	}
 

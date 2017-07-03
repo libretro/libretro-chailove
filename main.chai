@@ -1,16 +1,11 @@
-global x;
-global y;
+global x = 100;
+global y = 100;
 global velocity = 0.5;
-
 global logo;
 global q;
 
 def load() {
-	x = 100;
-	y = 100;
-
 	q = graphics.newQuad(110, 0, 200, 100, 0, 0);
-
 	logo = graphics.newImage("test/logo.png");
 }
 
@@ -31,4 +26,5 @@ def update(delta) {
 
 def draw() {
 	graphics.draw(logo, q, x, y);
+	graphics.print("Hello World!", 100, 100);
 }
