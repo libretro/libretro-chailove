@@ -4,6 +4,7 @@
 #include "filesystem.h"
 #include "vendor/physfs/extras/physfsrwops.h"
 #include "vendor/filesystem/filesystem/path.h"
+#include "../Application.h"
 
 using namespace filesystem;
 
@@ -33,6 +34,11 @@ namespace chaigame {
 		}
 
 		return mount(parentPath.c_str(), "/");
+	}
+
+	bool filesystem::load(const std::string& file) {
+		Application* app = Application::getInstance();
+		return app->script->loadModule(file);
 	}
 
 	bool filesystem::exists(const std::string& file) {

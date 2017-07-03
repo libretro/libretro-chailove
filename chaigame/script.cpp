@@ -9,11 +9,14 @@ using namespace chaiscript;
 #endif
 
 namespace chaigame {
-	void script::loadModule(const std::string& moduleName) {
+	bool script::loadModule(const std::string& moduleName) {
 		#ifdef __HAVE_CHAISCRIPT__
 		Application* app = Application::getInstance();
 		std::string contents = app->filesystem.read(moduleName);
 		chai.eval(contents);
+		return true;
+		#else
+		return false;
 		#endif
 	}
 
@@ -49,11 +52,11 @@ namespace chaigame {
 		chai.add(fun(&filesystem::read), "read");
 		chai.add(fun(&filesystem::exists), "exists");
 		chai.add(fun(&filesystem::getSize), "getSize");
+		chai.add(fun(&filesystem::load), "load");
 		chai.add_global(var(std::ref(app->filesystem)), "filesystem");
 
 		// Register the System module.
 		chai.add(fun(&system::getOS), "getOS");
-		chai.add(fun(&system::loadModule), "loadModule");
 		chai.add_global(var(std::ref(app->system)), "system");
 
 		// Register the Sound module.

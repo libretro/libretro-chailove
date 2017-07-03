@@ -19,7 +19,7 @@ namespace chaigame {
 		void load();
 		void update(float delta);
 		void draw();
-		void loadModule(const std::string& moduleName);
+		bool loadModule(const std::string& moduleName);
 
 		#ifdef __HAVE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;

@@ -7,6 +7,7 @@
 namespace chaigame {
 	class filesystem {
 	public:
+		bool load(const std::string& file);
 		bool init(const std::string& file);
 		bool unload();
 		SDL_RWops* openRW(const std::string& filename);
