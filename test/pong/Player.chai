@@ -1,0 +1,26 @@
+class Player {
+  def Player(isAI, xPos, yPos) {
+    this.ai = isAI;
+    this.x = xPos;
+    this.y = yPos;
+    this.width = 10;
+    this.height = 100;
+  }
+  var width;
+  var height;
+  var ai;
+  var y;
+  var x;
+  def draw() {
+    graphics.setColor(48, 63, 159);
+    graphics.rectangle("fill", this.x, this.y, this.width, this.height);
+  }
+  def update(delta) {
+    if (joystick.isDown(0, "up")) {
+      this.y -= 0.5f * delta;
+    }
+    else if (joystick.isDown(0, "down")) {
+      this.y += 0.5f * delta;
+    }
+  }
+};
