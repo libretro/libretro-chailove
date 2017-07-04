@@ -10,6 +10,8 @@ namespace chaigame {
 		double random();
 		void setRandomSeed(int seed);
 		void setRandomSeed(int low, int high);
+
+		float abs(float x);
 	};
 }
 

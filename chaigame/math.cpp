@@ -1,6 +1,7 @@
 #include "math.h"
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 namespace chaigame {
 
@@ -35,5 +36,8 @@ namespace chaigame {
 	}
 	void math::setRandomSeed(int low, int high) {
 		srand(low + high);
+	}
+	float math::abs(float x) {
+		return std::abs(x);
 	}
 }

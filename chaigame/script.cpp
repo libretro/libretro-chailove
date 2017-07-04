@@ -100,6 +100,7 @@ namespace chaigame {
 		chai.add_global(var(std::ref(app->joystick)), "joystick");
 
 		// Register the Math module.
+		chai.add(fun<float, math, float>(&math::abs), "abs");
 		chai.add(fun<double, math>(&math::random), "random");
 		chai.add(fun<int, math, int>(&math::random), "random");
 		chai.add(fun<int, math, int, int>(&math::random), "random");
