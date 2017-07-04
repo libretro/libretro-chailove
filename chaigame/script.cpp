@@ -101,10 +101,30 @@ namespace chaigame {
 		chai.add_global(var(std::ref(app->joystick)), "joystick");
 
 		// Register the Math module.
-		chai.add(fun<float, math, float>(&math::abs), "abs");
-		chai.add(fun<float, math, float>(&math::sin), "sin");
-		chai.add(fun<float, math, float>(&math::cos), "cos");
-		chai.add(fun<float, math, float>(&math::tan), "tan");
+		chai.add(fun(&math::abs), "abs");
+		chai.add(fun(&math::acos), "acod");
+		chai.add(fun(&math::asin), "asin");
+		chai.add(fun(&math::atan), "atan");
+		chai.add(fun(&math::atan2), "atan2");
+		chai.add(fun(&math::ceil), "ceil");
+		chai.add(fun(&math::cos), "cos");
+		chai.add(fun(&math::cosh), "cosh");
+		chai.add(fun(&math::deg), "deg");
+		chai.add(fun(&math::exp), "exp");
+		chai.add(fun(&math::floor), "floor");
+		chai.add(fun(&math::fmod), "fmod");
+		chai.add(fun(&math::frexp), "frexp");
+		chai.add(fun(&math::ldexp), "ldexp");
+		chai.add(fun(&math::log), "log");
+		chai.add(fun(&math::log10), "log10");
+		chai.add(fun(&math::modf), "modf");
+		chai.add(fun(&math::pow), "pow");
+		chai.add(fun(&math::sin), "sin");
+		chai.add(fun(&math::sinh), "sinh");
+		chai.add(fun(&math::sqrt), "sqrt");
+		chai.add(fun(&math::tan), "tan");
+		chai.add(fun(&math::tanh), "tanh");
+		chai.add(fun(&math::pi), "pi");
 		chai.add(fun<double, math>(&math::random), "random");
 		chai.add(fun<int, math, int>(&math::random), "random");
 		chai.add(fun<int, math, int, int>(&math::random), "random");
