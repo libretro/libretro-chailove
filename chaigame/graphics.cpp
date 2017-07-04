@@ -120,4 +120,13 @@ namespace chaigame {
 	int graphics::getHeight() {
 		return getScreen()->h;
 	}
+
+	void graphics::circle(const std::string& mode, int x, int y, int radius) {
+		if (mode == "line") {
+			circleRGBA(getScreen(), x, y, radius, r, g, b, a);
+		}
+		else {
+			filledCircleRGBA(getScreen(), x, y, radius, r, g, b, a);
+		}
+	}
 }

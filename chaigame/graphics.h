@@ -40,6 +40,8 @@ namespace chaigame {
 
 		int getWidth();
 		int getHeight();
+
+		void circle(const std::string& mode, int x, int y, int radius);
 	};
 }
 

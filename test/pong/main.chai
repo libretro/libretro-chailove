@@ -61,7 +61,7 @@ def draw() {
     players[i].draw()
   }
   graphics.setColor(183, 28, 28)
-  graphics.rectangle("fill", ball["x"], ball["y"], 10, 10)
+  graphics.circle("fill", ball["x"], ball["y"], ball["radius"]);
 }
 
 def ballReset() {
@@ -69,21 +69,22 @@ def ballReset() {
     "x": graphics.getWidth() / 2.0f,
     "y": graphics.getHeight() / 2.0f,
     "xspeed": 0.2f,
-    "yspeed": 0.05f
+    "yspeed": 0.05f,
+    "radius": 5
   ]
 }
 
 def ballCollide(player) {
-  if (ball["y"] + 10 <= player.y) {
+  if (ball["y"] + ball["radius"] <= player.y) {
     return false
   }
-  if (ball["y"] >= player.y + player.height) {
+  if (ball["y"] - ball["radius"]>= player.y + player.height) {
     return false
   }
-  if (ball["x"] + 10 <= player.x) {
+  if (ball["x"] + ball["radius"] <= player.x) {
     return false
   }
-  if (ball["x"] > player.x + player.width) {
+  if (ball["x"] - ball["radius"] > player.x + player.width) {
     return false
   }
   if (ball["yspeed"] > 0) {
