@@ -37,6 +37,7 @@ namespace chaigame {
 		float tan(float x);
 		float tanh(float x);
 		float pi = 3.14159265358979323846f;
+		float e = 2.718281828459045f;
 	};
 }
 

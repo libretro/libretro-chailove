@@ -125,6 +125,7 @@ namespace chaigame {
 		chai.add(fun(&math::tan), "tan");
 		chai.add(fun(&math::tanh), "tanh");
 		chai.add(fun(&math::pi), "pi");
+		chai.add(fun(&math::e), "e");
 		chai.add(fun<double, math>(&math::random), "random");
 		chai.add(fun<int, math, int>(&math::random), "random");
 		chai.add(fun<int, math, int, int>(&math::random), "random");
