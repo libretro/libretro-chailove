@@ -30,33 +30,12 @@ void Application::quit(void) {
 	filesystem.unload();
 	image.unload();
 	sound.unload();
-	SDL_Quit();
+	window.unload();
 }
 
 bool Application::load(const std::string& file) {
-	// Initialize SDL.
-	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
-		printf("Unable to initialize SDL: %s", SDL_GetError());
-		return false;
-	}
-
-	// Build the Screen.
-	screen = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE);
-	if (screen == NULL) {
-		printf("Unable to create screen: %s", SDL_GetError());
-		SDL_Quit();
-		return false;
-	}
-
-	// Enable video buffering.
-	videoBuffer = (unsigned int *)screen->pixels;
-
-	// Fix alpha blending.
-	if (SDL_SetAlpha(screen, SDL_SRCALPHA, 0) == -1) {
-		printf("Warning: Enabling alpha blending failed.");
-	}
-
 	// Initalize the chaigame subsystems.
+	window.load();
 	filesystem.init(file);
 	graphics.load();
 	keyboard.load();
@@ -144,5 +123,9 @@ void Application::draw(){
 
 	// Update the screen.
 	SDL_UpdateRect(screen, 0, 0, 0, 0);
-	SDL_Flip(screen);
+
+	// Flip the buffer.
+	if (SDL_Flip(screen) == -1) {
+		printf("Failed to swap the buffers: %s\n", SDL_GetError());
+	}
 }

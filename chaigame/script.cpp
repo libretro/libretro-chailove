@@ -1,7 +1,6 @@
 #include "script.h"
 #include "chaigame.h"
 #include "../Application.h"
-//#include "filesystem.h"
 #include <SDL.h>
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -88,6 +87,11 @@ namespace chaigame {
 		// Register the Audio module.
 		chai.add(fun(&audio::play), "play");
 		chai.add_global(var(std::ref(app->audio)), "audio");
+
+		// Register the Window module.
+		chai.add(fun(&window::setTitle), "setTitle");
+		chai.add(fun(&window::getTitle), "getTitle");
+		chai.add_global(var(std::ref(app->window)), "window");
 
 		// Register the Joystick module.
 		chai.add(fun(&joystick::getJoysticks), "getJoysticks");

@@ -16,6 +16,10 @@ namespace chaigame {
 	}
 
 	bool graphics::load() {
+		// Enable alpha blending.
+		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
+			printf("Warning: Enabling alpha blending failed.");
+		}
 		return true;
 	}
 

@@ -9,6 +9,7 @@
 #include "sound.h"
 #include "math.h"
 #include "mouse.h"
+#include "window.h"
 #include "src/Quad.h"
 #include "system.h"
 #include "audio.h"

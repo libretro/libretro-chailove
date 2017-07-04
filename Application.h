@@ -26,6 +26,7 @@ public:
 	chaigame::joystick joystick;
 	chaigame::mouse mouse;
 	chaigame::math math;
+	chaigame::window window;
 
 	void quit(void);
 	bool load(const std::string& file);
