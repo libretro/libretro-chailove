@@ -9,6 +9,17 @@ def load() {
 	logo = graphics.newImage("test/logo.png");
 }
 
+def draw() {
+	graphics.draw(logo, q, x, y);
+	graphics.print("Hello World!", 100, 100);
+	graphics.print("Hello World!", 150, 150);
+	graphics.print("Hello World!", 200, 120);
+	graphics.print("Hello World!!!!!!!!", mouse.getX(), mouse.getY());
+	graphics.print("Hello World!", 400, 400);
+	graphics.print("Hello World!", 500, 100);
+	graphics.print("Hello World!", 100, 0);
+}
+
 def update(delta) {
 	if (joystick.isDown(0, "up")) {
 		y -= velocity * delta;
@@ -22,15 +33,4 @@ def update(delta) {
 	if (joystick.isDown(0, "right")) {
 		x += velocity * delta;
 	}
-}
-
-def draw() {
-	graphics.draw(logo, q, x, y);
-	graphics.print("Hello World!", 100, 100);
-	graphics.print("Hello World!", 150, 150);
-	graphics.print("Hello World!", 200, 120);
-	graphics.print("Hello World!!!!!!!!", mouse.getX(), mouse.getY());
-	graphics.print("Hello World!", 400, 400);
-	graphics.print("Hello World!", 500, 100);
-	graphics.print("Hello World!", 100, 0);
 }

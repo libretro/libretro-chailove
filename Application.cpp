@@ -36,12 +36,14 @@ void Application::quit(void) {
 bool Application::load(const std::string& file) {
 	// Initialize SDL.
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
+		printf("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
 	}
 
 	// Build the Screen.
 	screen = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE);
 	if (screen == NULL) {
+		printf("Unable to create screen: %s", SDL_GetError());
 		SDL_Quit();
 		return false;
 	}
@@ -51,18 +53,18 @@ bool Application::load(const std::string& file) {
 
 	// Fix alpha blending.
 	if (SDL_SetAlpha(screen, SDL_SRCALPHA, 0) == -1) {
-		// Error: Do nothing.
+		printf("Warning: Enabling alpha blending failed.");
 	}
 
 	// Initalize the chaigame subsystems.
-	sound.load();
+	filesystem.init(file);
+	graphics.load();
 	keyboard.load();
-	graphics.load(screen);
 	joystick.load();
 	math.load();
 	mouse.load();
 	image.load();
-	filesystem.init(file);
+	sound.load();
 	script = new chaigame::script();
 	script->load();
 
@@ -75,6 +77,7 @@ bool Application::load(const std::string& file) {
 bool Application::update() {
 	// Update some of the sub-systems.
 	sound.update();
+	keyboard.update();
 	joystick.update();
 
 	// Poll all SDL events.
@@ -89,11 +92,11 @@ bool Application::update() {
 			case SDL_MOUSEBUTTONDOWN:
 				mouse.buttonEvent(event.button);
 				break;
+			case SDL_MOUSEBUTTONUP:
+				mouse.buttonEvent(event.button);
+				break;
 		}
 	}
-
-	// Update any of the sub-systems.
-	keyboard.update();
 
 	// Retrieve the new game time.
 	Uint32 current = SDL_GetTicks();
@@ -134,7 +137,7 @@ void Application::draw(){
 	if (mouse.isDown(2)) {
 		x -= 2;
 	}
-	graphics.rectangle("fill", mouse.getX(), mouse.getY(), 50, 50);
+	graphics.rectangle("fill", x, y, 50, 50);
 
 	// Render the game.
 	script->draw();

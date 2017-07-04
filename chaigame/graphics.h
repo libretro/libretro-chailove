@@ -11,7 +11,7 @@
 namespace chaigame {
 	class graphics {
 	public:
-		bool load(SDL_Surface* screen);
+		bool load();
 
 		void rectangle(const std::string& mode, Sint16 x, Sint16 y, Sint16 width, Sint16 height);
 		void clear();
@@ -35,7 +35,7 @@ namespace chaigame {
 
 		Uint8 r = 255, g = 0, b = 0, a = 255;
 		Uint8 backR = 0, backG = 0, backB = 0, backA = 255;
-		SDL_Surface* screen;
+		SDL_Surface* getScreen();
 	};
 }
 

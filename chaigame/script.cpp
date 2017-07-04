@@ -12,12 +12,13 @@ namespace chaigame {
 	bool script::loadModule(const std::string& moduleName) {
 		#ifdef __HAVE_CHAISCRIPT__
 		Application* app = Application::getInstance();
-		std::string contents = app->filesystem.read(moduleName);
-		chai.eval(contents, Exception_Handler(), moduleName);
-		return true;
-		#else
-		return false;
+		std::string contents(app->filesystem.read(moduleName));
+		if (!contents.empty()) {
+			chai.eval(contents, Exception_Handler(), moduleName);
+			return true;
+		}
 		#endif
+		return false;
 	}
 
 	script::script() {
@@ -114,19 +115,40 @@ namespace chaigame {
 
 	void script::load() {
 		#ifdef __HAVE_CHAISCRIPT__
-		chaiload();
+		try {
+			chaiload();
+		}
+		catch (chaiscript::exception::dispatch_error& e) {
+			printf("Calling load() failed: %s", e.what());
+		}
 		#endif
 	}
 
 	void script::update(float delta) {
 		#ifdef __HAVE_CHAISCRIPT__
-		chaiupdate(delta);
+		try {
+			if (hasUpdate) {
+				chaiupdate(delta);
+			}
+		}
+		catch (chaiscript::exception::dispatch_error& e) {
+			hasUpdate = false;
+			printf("Calling update() failed: %s", e.what());
+		}
 		#endif
 	}
 
 	void script::draw() {
 		#ifdef __HAVE_CHAISCRIPT__
-		chaidraw();
+		try {
+			if (hasDraw) {
+				chaidraw();
+			}
+		}
+		catch (chaiscript::exception::dispatch_error& e) {
+			hasDraw = false;
+			printf("Calling draw() failed: %s", e.what());
+		}
 		#endif
 	}
 }

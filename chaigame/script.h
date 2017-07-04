@@ -26,6 +26,8 @@ namespace chaigame {
 		std::function<void ()> chaiload;
 		std::function<void (float)> chaiupdate;
 		std::function<void ()> chaidraw;
+		bool hasUpdate = true;
+		bool hasDraw = true;
 		#endif
 	};
 }

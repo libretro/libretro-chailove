@@ -10,9 +10,12 @@
 
 namespace chaigame {
 
-	bool graphics::load(SDL_Surface* renderScreen) {
-		// Disable the mouse cursor from showing up.
-		screen = renderScreen;
+
+	SDL_Surface* graphics::getScreen() {
+		return Application::getInstance()->screen;
+	}
+
+	bool graphics::load() {
 		return true;
 	}
 
@@ -21,6 +24,7 @@ namespace chaigame {
 	}
 
 	void graphics::clear(int r, int g, int b, int a) {
+		SDL_Surface* screen = getScreen();
 		Uint32 color = SDL_MapRGBA(screen->format, r, g, b, a);
 		SDL_FillRect(screen, NULL, color);
 	}
@@ -29,24 +33,24 @@ namespace chaigame {
 		clear(r, g, b, 255);
 	}
 	void graphics::point(int x, int y) {
-		pixelRGBA(screen, x, y, r, g, b, a);
+		pixelRGBA(getScreen(), x, y, r, g, b, a);
 	}
 
 	void graphics::rectangle(const std::string& mode, Sint16 x, Sint16 y, Sint16 width, Sint16 height) {
 		if (mode == "line") {
-			rectangleRGBA(screen, x, y, x + width, y + height, r, g, b, a);
+			rectangleRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
 		}
 		else {
-			boxRGBA(screen, x, y, x + width, y + height, r, g, b, a);
+			boxRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
 		}
 	}
 	void graphics::line(int x1, int y1, int x2, int y2) {
-		lineRGBA(screen, x1, y1, x2, y2, r, g, b, a);
+		lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
 	}
 
 	void graphics::draw(ImageData* image, int x, int y) {
 		if (image && image->loaded()) {
-			SDL_BlitSurface(image->surface, NULL, screen, NULL);
+			SDL_BlitSurface(image->surface, NULL, getScreen(), NULL);
 		}
 	}
 
@@ -55,7 +59,7 @@ namespace chaigame {
 			SDL_Rect* dstrect = new SDL_Rect();
 			dstrect->x = x;
 			dstrect->y = y;
-			SDL_BlitSurface(image->surface, NULL, screen, dstrect);
+			SDL_BlitSurface(image->surface, NULL, getScreen(), dstrect);
 		}
 	}
 
@@ -66,7 +70,7 @@ namespace chaigame {
 			dest->y = y;
 			dest->w = x + quad.width;
 			dest->h = y + quad.height;
-			if (SDL_gfxBlitRGBA(image->surface, quad.toRect(), screen, dest) == -1) {
+			if (SDL_gfxBlitRGBA(image->surface, quad.toRect(), getScreen(), dest) == -1) {
 				printf("Error on blitting");
 			}
 		}
@@ -85,7 +89,7 @@ namespace chaigame {
 	}
 
 	void graphics::print(const std::string& text, int x, int y) {
-		stringRGBA(screen, x, y, text.c_str(), r, g, b, a);
+		stringRGBA(getScreen(), x, y, text.c_str(), r, g, b, a);
 	}
 
 	void graphics::setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
