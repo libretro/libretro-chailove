@@ -5,32 +5,23 @@ global logo;
 global q;
 
 def load() {
-	q = graphics.newQuad(110, 0, 200, 100, 0, 0);
-	logo = graphics.newImage("test/logo.png");
+    q = graphics.newQuad(110, 0, 200, 100, 0, 0);
+    logo = graphics.newImage("test/logo.png");
 }
 
 def draw() {
-	graphics.draw(logo, q, x, y);
-	graphics.print("Hello World!", 100, 100);
-	graphics.print("Hello World!", 150, 150);
-	graphics.print("Hello World!", 200, 120);
-	graphics.print("Hello World!!!!!!!!", mouse.getX(), mouse.getY());
-	graphics.print("Hello World!", 400, 400);
-	graphics.print("Hello World!", 500, 100);
-	graphics.print("Hello World!", 100, 0);
-}
-
-def update(delta) {
-	if (joystick.isDown(0, "up")) {
-		y -= velocity * delta;
-	}
-	if (joystick.isDown(0, "down")) {
-		y += velocity * delta;
-	}
-	if (joystick.isDown(0, "left")) {
-		x -= velocity * delta;
-	}
-	if (joystick.isDown(0, "right")) {
-		x += velocity * delta;
-	}
+    graphics.draw(logo, q, x, y);
+    graphics.print("Hello World!!!!!!!!", mouse.getX(), mouse.getY());
+    if (isgreater(1.0, 0.5)) {
+        print("1: It is greater!\n");
+    }
+    else {
+        print("1: NO!\n");
+    }
+    if (isgreater(0.5, 1.0)) {
+        print("2: YES!\n");
+    }
+    else {
+        print("2: No!\n");
+    }
 }

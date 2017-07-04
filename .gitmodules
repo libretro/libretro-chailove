@@ -13,3 +13,6 @@
 [submodule "vendor/filesystem"]
 	path = vendor/filesystem
 	url = https://github.com/wjakob/filesystem.git
+[submodule "vendor/ChaiScript_Extras"]
+	path = vendor/ChaiScript_Extras
+	url = https://github.com/ChaiScript/ChaiScript_Extras.git
