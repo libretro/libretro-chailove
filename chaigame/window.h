@@ -2,11 +2,12 @@
 #define _WINDOW_H_INCLUDED_
 
 #include <string>
+#include "chaigame.h"
 
 namespace chaigame {
 	class window {
 	public:
-		bool load();
+		bool load(config& config);
 		bool unload();
 
 		std::string getTitle();

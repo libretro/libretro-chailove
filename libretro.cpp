@@ -10,8 +10,6 @@ const char *retro_system_directory;
 const char *retro_content_directory;
 char retro_system_conf[512];
 bool opt_analog;
-unsigned int retrow=640;
-unsigned int retroh=480;
 signed short soundbuf[1024*2];
 
 static retro_video_refresh_t video_cb;
@@ -89,12 +87,20 @@ void retro_get_system_info(struct retro_system_info *info) {
 }
 
 void retro_get_system_av_info(struct retro_system_av_info *info) {
+	Application* app = Application::getInstance();
+	unsigned int width = 640;
+	unsigned int height = 480;
+	if (app != NULL) {
+		width = app->config.window.width;
+		height = app->config.window.height;
+	}
+
 	struct retro_game_geometry geom = {
-		retrow,
-		retroh,
-		retrow,
-		retroh,
-		(float)retrow / (float)retroh
+		width,
+		height,
+		width,
+		height,
+		(float)width / (float)height
 	};
 	info->geometry = geom;
 
@@ -134,7 +140,6 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 
 bool retro_load_game(const struct retro_game_info *info) {
 	std::string full(info ? info->path : "main.chai");
-	printf("LOAD FILE: %s\n", full.c_str());
 	return Application::getInstance()->load(full);
 }
 
@@ -236,7 +241,9 @@ void retro_init(void) {
 }
 
 void retro_deinit(void) {
-	Application::getInstance()->quit();
+	if (Application::isRunning()) {
+		Application::getInstance()->quit();
+	}
 	//Application::destroy();
 }
 
@@ -247,19 +254,22 @@ void retro_reset(void) {
 void retro_run(void) {
 	// Only run game loop if Application is executing.
 	if (Application::isRunning()) {
+		// Retrieve the application.
+		Application* app = Application::getInstance();
+
 		// Poll all the inputs.
 		Application::input_poll_cb();
 
 		// Update the game.
-		if (!Application::getInstance()->update()) {
+		if (!app->update()) {
 			environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 			return;
 		}
 
 		// Render the game.
-		Application::getInstance()->draw();
+		app->draw();
 
 		// Copy the video buffer to the screen.
-		video_cb(Application::getInstance()->videoBuffer, retrow, retroh, retrow << 2);
+		video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
 	}
 }

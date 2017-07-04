@@ -15,6 +15,7 @@ public:
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
 
+	chaigame::config config;
 	chaigame::keyboard keyboard;
 	chaigame::script* script;
 	chaigame::filesystem filesystem;
@@ -22,6 +23,7 @@ public:
 	chaigame::image image;
 	chaigame::system system;
 	chaigame::sound sound;
+	chaigame::timer timer;
 	chaigame::audio audio;
 	chaigame::joystick joystick;
 	chaigame::mouse mouse;

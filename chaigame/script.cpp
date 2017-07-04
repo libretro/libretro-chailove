@@ -34,6 +34,20 @@ namespace chaigame {
 		chai.add(fun(&Quad::sw), "sw");
 		chai.add(fun(&Quad::sh), "sh");
 
+		// Add ImageData.
+		chai.add(user_type<ImageData>(), "ImageData");
+		chai.add(fun(&ImageData::getWidth), "getWidth");
+		chai.add(fun(&ImageData::getHeight), "getHeight");
+
+		// Add the Config.
+		chai.add(user_type<windowConfig>(), "windowConfig");
+		chai.add(fun(&windowConfig::width), "width");
+		chai.add(fun(&windowConfig::height), "height");
+		chai.add(fun(&windowConfig::bbp), "bbp");
+		chai.add(fun(&windowConfig::title), "title");
+		chai.add(user_type<config>(), "Config");
+		chai.add(fun(&config::window), "window");
+
 		// Register the Graphics module.
 		chai.add(fun(&graphics::rectangle), "rectangle");
 		chai.add(fun(&graphics::newImage), "newImage");
@@ -95,6 +109,11 @@ namespace chaigame {
 		chai.add(fun(&window::getTitle), "getTitle");
 		chai.add_global(var(std::ref(app->window)), "window");
 
+		// Register the Timer module.
+		chai.add(fun(&timer::getDelta), "getDelta");
+		chai.add(fun(&timer::step), "step");
+		chai.add_global(var(std::ref(app->timer)), "timer");
+
 		// Register the Joystick module.
 		chai.add(fun(&joystick::getJoysticks), "getJoysticks");
 		chai.add(fun(&joystick::getJoystickCount), "getJoystickCount");
@@ -117,9 +136,47 @@ namespace chaigame {
 		loadModule("main.chai");
 
 		// Find the game functions.
-		chaiload = chai.eval<std::function<void ()> >("load");
-		chaiupdate = chai.eval<std::function<void (float)> >("update");
-		chaidraw = chai.eval<std::function<void ()> >("draw");
+		try {
+			chaiload = chai.eval<std::function<void ()> >("load");
+		}
+		catch (std::exception& e) {
+			printf("Skipping getting load(): %s", e.what());
+		}
+		try {
+			chaiupdate = chai.eval<std::function<void (float)> >("update");
+		}
+		catch (std::exception& e) {
+			printf("Skipping getting update(delta): %s", e.what());
+		}
+		try {
+			chaiconf = chai.eval<std::function<void (config&)> >("conf");
+		}
+		catch (std::exception& e) {
+			printf("Skipping getting conf(t): %s", e.what());
+		}
+		try {
+			chaidraw = chai.eval<std::function<void ()> >("draw");
+		}
+		catch (std::exception& e) {
+			printf("Skipping getting draw(): %s", e.what());
+		}
+		#endif
+	}
+
+	void script::conf(config& t) {
+		#ifdef __HAVE_CHAISCRIPT__
+		try {
+			chaiconf(t);
+		}
+		catch (chaiscript::exception::dispatch_error& e) {
+			printf("Skipping call to conf(t): %s", e.what());
+		}
+		catch (std::exception& e) {
+			printf("Skipping conf(t): %s", e.what());
+		}
+		catch (...) {
+			printf("Skipping conf(t)");
+		}
 		#endif
 	}
 
@@ -129,7 +186,7 @@ namespace chaigame {
 			chaiload();
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
-			printf("Calling load() failed: %s", e.what());
+			printf("Skipping call to load(): %s", e.what());
 		}
 		#endif
 	}
@@ -143,7 +200,7 @@ namespace chaigame {
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
 			hasUpdate = false;
-			printf("Calling update() failed: %s", e.what());
+			printf("Skipping call to update(): %s", e.what());
 		}
 		#endif
 	}
@@ -157,7 +214,7 @@ namespace chaigame {
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
 			hasDraw = false;
-			printf("Calling draw() failed: %s", e.what());
+			printf("Skipping call to draw(): %s", e.what());
 		}
 		#endif
 	}

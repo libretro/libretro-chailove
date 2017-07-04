@@ -67,6 +67,8 @@ OBJECTS := libretro.o Application.o \
 	chaigame/image.o \
 	chaigame/sound.o \
 	chaigame/math.o \
+	chaigame/timer.o \
+	chaigame/config.o \
 	chaigame/window.o \
 	chaigame/mouse.o \
 	chaigame/system.o \

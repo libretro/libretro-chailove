@@ -2,10 +2,11 @@
 #include "../Application.h"
 #include <SDL.h>
 #include <string>
+#include "chaigame.h"
 
 namespace chaigame {
 
-	bool window::load() {
+	bool window::load(config& config) {
 		Application* app = Application::getInstance();
 
 		// Initialize SDL.
@@ -15,7 +16,7 @@ namespace chaigame {
 		}
 
 		// Build the Screen.
-		app->screen = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE);
+		app->screen = SDL_SetVideoMode(config.window.width, config.window.height, config.window.bbp, SDL_SWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE);
 		if (app->screen == NULL) {
 			printf("Unable to create screen: %s", SDL_GetError());
 			SDL_Quit();
@@ -26,7 +27,7 @@ namespace chaigame {
 		app->videoBuffer = (unsigned int *)app->screen->pixels;
 
 		// Set the title.
-		setTitle("ChaiGame");
+		setTitle(config.window.title);
 	}
 
 	bool window::unload() {

@@ -4,6 +4,11 @@ global velocity = 0.5;
 global logo;
 global q;
 
+def conf(t) {
+    t.window.width = 1024;
+    t.window.height = 768;
+}
+
 def load() {
     q = graphics.newQuad(110, 0, 200, 100, 0, 0);
     logo = graphics.newImage("test/logo.png");
@@ -12,16 +17,4 @@ def load() {
 def draw() {
     graphics.draw(logo, q, x, y);
     graphics.print("Hello World!!!!!!!!", mouse.getX(), mouse.getY());
-    if (isgreater(1.0, 0.5)) {
-        print("1: It is greater!\n");
-    }
-    else {
-        print("1: NO!\n");
-    }
-    if (isgreater(0.5, 1.0)) {
-        print("2: YES!\n");
-    }
-    else {
-        print("2: No!\n");
-    }
 }

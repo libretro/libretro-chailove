@@ -35,8 +35,10 @@ void Application::quit(void) {
 
 bool Application::load(const std::string& file) {
 	// Initalize the chaigame subsystems.
-	window.load();
 	filesystem.init(file);
+	script = new chaigame::script();
+	script->conf(config);
+	window.load(config);
 	graphics.load();
 	keyboard.load();
 	joystick.load();
@@ -44,11 +46,8 @@ bool Application::load(const std::string& file) {
 	mouse.load();
 	image.load();
 	sound.load();
-	script = new chaigame::script();
+	timer.load();
 	script->load();
-
-	// Set up the game timer.
-	tick = SDL_GetTicks();
 
 	return true;
 }
@@ -77,13 +76,8 @@ bool Application::update() {
 		}
 	}
 
-	// Retrieve the new game time.
-	Uint32 current = SDL_GetTicks();
-
-	// Update the game.
-	float delta = (float)(current) - (float)(tick);
-	script->update(delta);
-	tick = current;
+	timer.step();
+	script->update(timer.getDelta());
 
 	return true;
 }
@@ -99,22 +93,22 @@ void Application::draw(){
 	static int y = 10;
 
 	if (keyboard.isDown("up")) {
-		y -= 2;
+		y -= 0.5f * timer.getDelta();
 	}
 	if (keyboard.isDown("down")) {
-		y += 2;
+		y += 0.5f * timer.getDelta();
 	}
 	if (keyboard.isDown("left")) {
-		x -= 2;
+		x -= 0.5f * timer.getDelta();
 	}
 	if (keyboard.isDown("right")) {
-		x += 2;
+		x += 0.5f * timer.getDelta();
 	}
 	if (mouse.isDown(1)) {
-		x += 2;
+		x += 3;
 	}
 	if (mouse.isDown(2)) {
-		x -= 2;
+		x -= 0.5f;
 	}
 	graphics.rectangle("fill", x, y, 50, 50);
 
