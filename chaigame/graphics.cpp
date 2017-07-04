@@ -40,7 +40,7 @@ namespace chaigame {
 		pixelRGBA(getScreen(), x, y, r, g, b, a);
 	}
 
-	void graphics::rectangle(const std::string& mode, Sint16 x, Sint16 y, Sint16 width, Sint16 height) {
+	void graphics::rectangle(const std::string& mode, int x, int y, int width, int height) {
 		if (mode == "line") {
 			rectangleRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
 		}
@@ -96,16 +96,19 @@ namespace chaigame {
 		stringRGBA(getScreen(), x, y, text.c_str(), r, g, b, a);
 	}
 
-	void graphics::setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+	void graphics::setColor(int red, int green, int blue, int alpha) {
 		r = red;
 		g = green;
 		b = blue;
 		a = alpha;
 	}
-	void graphics::setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue) {
+	void graphics::setColor(int red, int green, int blue) {
+		setColor(red, green, blue, 255);
+	}
+	void graphics::setBackgroundColor(int red, int green, int blue) {
 		setBackgroundColor(red, green, blue, 255);
 	}
-	void graphics::setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+	void graphics::setBackgroundColor(int red, int green, int blue, int alpha) {
 		backR = red;
 		backG = green;
 		backB = blue;

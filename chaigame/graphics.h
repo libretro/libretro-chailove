@@ -13,7 +13,7 @@ namespace chaigame {
 	public:
 		bool load();
 
-		void rectangle(const std::string& mode, Sint16 x, Sint16 y, Sint16 width, Sint16 height);
+		void rectangle(const std::string& mode, int x, int y, int width, int height);
 		void clear();
 		void clear(int r, int g, int b, int a);
 		void clear(int r, int g, int b);
@@ -29,9 +29,10 @@ namespace chaigame {
 		Image* newImage(const std::string& filename);
 
 		void print(const std::string& text, int x, int y);
-		void setColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
-		void setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
-		void setBackgroundColor(Uint8 red, Uint8 green, Uint8 blue);
+		void setColor(int red, int green, int blue, int alpha);
+		void setColor(int red, int green, int blue);
+		void setBackgroundColor(int red, int green, int blue, int alpha);
+		void setBackgroundColor(int red, int green, int blue);
 
 		Uint8 r = 255, g = 0, b = 0, a = 255;
 		Uint8 backR = 0, backG = 0, backB = 0, backA = 255;

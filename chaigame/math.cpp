@@ -40,4 +40,13 @@ namespace chaigame {
 	float math::abs(float x) {
 		return std::abs(x);
 	}
+	float math::sin(float x) {
+		return std::sin(x);
+	}
+	float math::cos(float x) {
+		return std::cos(x);
+	}
+	float math::tan(float x) {
+		return std::tan(x);
+	}
 }

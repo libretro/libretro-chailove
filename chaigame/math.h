@@ -12,6 +12,9 @@ namespace chaigame {
 		void setRandomSeed(int low, int high);
 
 		float abs(float x);
+		float sin(float x);
+		float cos(float x);
+		float tan(float x);
 	};
 }
 

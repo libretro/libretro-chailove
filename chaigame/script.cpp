@@ -37,12 +37,13 @@ namespace chaigame {
 		chai.add(fun(&graphics::rectangle), "rectangle");
 		chai.add(fun(&graphics::newImage), "newImage");
 		chai.add(fun(&graphics::print), "print");
-		chai.add(fun(&graphics::setColor), "setColor");
 		chai.add(fun(&graphics::point), "point");
 		chai.add(fun(&graphics::line), "line");
 		chai.add(fun(&graphics::newQuad), "newQuad");
-		chai.add(fun<void, graphics, Uint8, Uint8, Uint8, Uint8>(&graphics::setBackgroundColor), "setBackgroundColor");
-		chai.add(fun<void, graphics, Uint8, Uint8, Uint8>(&graphics::setBackgroundColor), "setBackgroundColor");
+		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setColor), "setColor");
+		chai.add(fun<void, graphics, int, int, int>(&graphics::setColor), "setColor");
+		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
+		chai.add(fun<void, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
 		chai.add(fun<void, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
@@ -101,6 +102,9 @@ namespace chaigame {
 
 		// Register the Math module.
 		chai.add(fun<float, math, float>(&math::abs), "abs");
+		chai.add(fun<float, math, float>(&math::sin), "sin");
+		chai.add(fun<float, math, float>(&math::cos), "cos");
+		chai.add(fun<float, math, float>(&math::tan), "tan");
 		chai.add(fun<double, math>(&math::random), "random");
 		chai.add(fun<int, math, int>(&math::random), "random");
 		chai.add(fun<int, math, int, int>(&math::random), "random");
