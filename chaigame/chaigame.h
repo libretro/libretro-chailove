@@ -1,7 +1,6 @@
 #ifndef CHAIGAME_H
 #define CHAIGAME_H
 
-#include "config.h"
 #include "filesystem.h"
 #include "graphics.h"
 #include "image.h"
@@ -18,6 +17,7 @@
 #include "sound.h"
 #include "src/Image.h"
 #include "src/ImageData.h"
+#include "src/Config.h"
 #include "src/SoundData.h"
 #include "src/Joystick.h"
 #include "joystick.h"

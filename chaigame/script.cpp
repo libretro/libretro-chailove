@@ -45,8 +45,8 @@ namespace chaigame {
 		chai.add(fun(&windowConfig::height), "height");
 		chai.add(fun(&windowConfig::bbp), "bbp");
 		chai.add(fun(&windowConfig::title), "title");
-		chai.add(user_type<config>(), "Config");
-		chai.add(fun(&config::window), "window");
+		chai.add(user_type<Config>(), "Config");
+		chai.add(fun(&Config::window), "window");
 
 		// Register the Graphics module.
 		chai.add(fun(&graphics::rectangle), "rectangle");
@@ -149,7 +149,7 @@ namespace chaigame {
 			printf("Skipping getting update(delta): %s", e.what());
 		}
 		try {
-			chaiconf = chai.eval<std::function<void (config&)> >("conf");
+			chaiconf = chai.eval<std::function<void (Config&)> >("conf");
 		}
 		catch (std::exception& e) {
 			printf("Skipping getting conf(t): %s", e.what());
@@ -163,7 +163,7 @@ namespace chaigame {
 		#endif
 	}
 
-	void script::conf(config& t) {
+	void script::conf(Config& t) {
 		#ifdef __HAVE_CHAISCRIPT__
 		try {
 			chaiconf(t);

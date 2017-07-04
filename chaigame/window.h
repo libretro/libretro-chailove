@@ -7,7 +7,7 @@
 namespace chaigame {
 	class window {
 	public:
-		bool load(config& config);
+		bool load(Config& config);
 		bool unload();
 
 		std::string getTitle();

@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 #include <string>
-#include "config.h"
+#include "src/Config.h"
 
 #ifdef __HAVE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
@@ -17,7 +17,7 @@ namespace chaigame {
 	public:
 		script();
 
-		void conf(config& t);
+		void conf(Config& t);
 		void load();
 		void update(float delta);
 		void draw();
@@ -26,7 +26,7 @@ namespace chaigame {
 		#ifdef __HAVE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;
 		std::function<void ()> chaiload;
-		std::function<void (config&)> chaiconf;
+		std::function<void (Config&)> chaiconf;
 		std::function<void (float)> chaiupdate;
 		std::function<void ()> chaidraw;
 		bool hasUpdate = true;

@@ -27,10 +27,10 @@ Application* Application::getInstance() {
 
 void Application::quit(void) {
 	joystick.unload();
-	filesystem.unload();
 	image.unload();
 	sound.unload();
 	window.unload();
+	filesystem.unload();
 }
 
 bool Application::load(const std::string& file) {

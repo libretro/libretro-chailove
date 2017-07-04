@@ -68,13 +68,13 @@ OBJECTS := libretro.o Application.o \
 	chaigame/sound.o \
 	chaigame/math.o \
 	chaigame/timer.o \
-	chaigame/config.o \
 	chaigame/window.o \
 	chaigame/mouse.o \
 	chaigame/system.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Quad.o \
 	chaigame/src/Image.o \
+	chaigame/src/Config.o \
 	chaigame/src/SoundData.o \
 	chaigame/src/Joystick.o \
 	chaigame/joystick.o \

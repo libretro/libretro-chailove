@@ -11,9 +11,9 @@ namespace chaigame {
 		std::string title = "ChaiGame";
 	};
 
-	class config {
+	class Config {
 	public:
-		config();
+		Config();
 		windowConfig window;
 	};
 }

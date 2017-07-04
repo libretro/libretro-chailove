@@ -15,7 +15,7 @@ public:
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
 
-	chaigame::config config;
+	chaigame::Config config;
 	chaigame::keyboard keyboard;
 	chaigame::script* script;
 	chaigame::filesystem filesystem;
@@ -36,7 +36,6 @@ public:
 	void draw();
 
 	uint32_t *videoBuffer;
-	Uint32 tick;
 	SDL_Surface* screen;
 	SDL_Event event;
 };

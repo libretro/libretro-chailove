@@ -15,6 +15,8 @@ TODO: Add usage documentation.
 
 ## Development
 
+Building takes some time, so be patient.
+
 ```
 make
 retroarch -L chaigame_libretro.so main.chai

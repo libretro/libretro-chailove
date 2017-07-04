@@ -6,7 +6,7 @@
 
 namespace chaigame {
 
-	bool window::load(config& config) {
+	bool window::load(Config& config) {
 		Application* app = Application::getInstance();
 
 		// Initialize SDL.

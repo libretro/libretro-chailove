@@ -1,7 +1,7 @@
-#include "config.h"
+#include "Config.h"
 
 namespace chaigame {
-	config::config() {
+	Config::Config() {
 		// Nothing.
 	}
 }
