@@ -26,6 +26,7 @@ Application* Application::getInstance() {
 }
 
 void Application::quit(void) {
+	// Quit all the subsystems.
 	joystick.unload();
 	image.unload();
 	sound.unload();
@@ -34,7 +35,7 @@ void Application::quit(void) {
 }
 
 bool Application::load(const std::string& file) {
-	// Initalize the chaigame subsystems.
+	// Initalize all the subsystems.
 	filesystem.init(file);
 	script = new chaigame::script();
 	script->conf(config);
@@ -76,6 +77,7 @@ bool Application::update() {
 		}
 	}
 
+	// Step forward the timer, and update the game.
 	timer.step();
 	script->update(timer.getDelta());
 
@@ -86,31 +88,8 @@ bool Application::update() {
  * Render the application.
  */
 void Application::draw(){
+	// Clear the screen.
 	graphics.clear();
-
-	// Test drawing a rectangle.
-	static int x = 10;
-	static int y = 10;
-
-	if (keyboard.isDown("up")) {
-		y -= 0.5f * timer.getDelta();
-	}
-	if (keyboard.isDown("down")) {
-		y += 0.5f * timer.getDelta();
-	}
-	if (keyboard.isDown("left")) {
-		x -= 0.5f * timer.getDelta();
-	}
-	if (keyboard.isDown("right")) {
-		x += 0.5f * timer.getDelta();
-	}
-	if (mouse.isDown(1)) {
-		x += 3;
-	}
-	if (mouse.isDown(2)) {
-		x -= 0.5f;
-	}
-	graphics.rectangle("fill", x, y, 50, 50);
 
 	// Render the game.
 	script->draw();

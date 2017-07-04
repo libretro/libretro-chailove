@@ -1,0 +1,112 @@
+global players = [];
+global ball = ["x": 100.0f, "y": 100.0f, "xspeed": 0.2f, "yspeed": 0.05f];
+global pongSound;
+
+class Player {
+  def Player(isAI, xPos, yPos) {
+    this.ai = isAI;
+    this.x = xPos;
+    this.y = yPos;
+  }
+  var ai;
+  var y;
+  var x;
+  def draw() {
+    graphics.setColor(48, 63, 159);
+    graphics.rectangle("fill", this.x, this.y, 5, 100);
+  }
+  def update(delta) {
+    if (joystick.isDown(0, "up")) {
+      this.y -= 0.5f * delta;
+    }
+    else if (joystick.isDown(0, "down")) {
+      this.y += 0.5f * delta;
+    }
+  }
+};
+def conf(t) {
+
+}
+def load() {
+  players = [
+    Player(false, 50.0f, graphics.getHeight() / 2.0f),
+    Player(true, graphics.getWidth() - 50.0f, graphics.getHeight() / 2.0f)
+  ];
+
+  graphics.setBackgroundColor(245, 245, 245);
+  pongSound = sound.newSoundData("pong.wav", "chunk");
+}
+
+def ballCollide(player) {
+  if (ball["y"] + 10 <= player.y) {
+    return false;
+  }
+  if (ball["y"] >= player.y + 100) {
+    return false;
+  }
+  if (ball["x"] + 10 <= player.x) {
+    return false;
+  }
+  if (ball["x"] > player.x + 5) {
+    return false;
+  }
+  if (ball["yspeed"] > 0) {
+    if (ball["y"] < player.y + 30) {
+      ball["yspeed"] *= -1;
+    }
+  }
+  else if (ball["yspeed"] < 0) {
+    if (ball["y"] > player.y + 70) {
+      ball["yspeed"] *= -1;
+    }
+  }
+  audio.play(pongSound);
+  ball["xspeed"] *= 1.1f;
+  return true;
+}
+
+def update(delta) {
+  for (var i = 0; i < 2; ++i) {
+    players[i].update(delta);
+  }
+
+  if (ball["yspeed"] < 0) {
+    if (ball["y"] < 0) {
+        ball["yspeed"] *= -1;
+    }
+  }
+  else if (ball["yspeed"] > 0) {
+    if (ball["y"] > graphics.getHeight()) {
+        ball["yspeed"] *= -1;
+    }
+  }
+  if (ball["x"] < 0) {
+    ball["x"] = graphics.getWidth() / 2.0f;
+  }
+  else if (ball["x"] > graphics.getWidth()) {
+    ball["x"] = graphics.getWidth() / 2.0f;
+  }
+
+  if (ball["xspeed"] <= 0) {
+    if (ballCollide(players[0])) {
+      ball["xspeed"] *= -1;
+    }
+  }
+  else {
+    if (ballCollide(players[1])) {
+      ball["xspeed"] *= -1;
+    }
+  }
+
+  ball["x"] += ball["xspeed"] * delta;
+  ball["y"] += ball["yspeed"] * delta;
+}
+
+
+def draw() {
+  for (var i = 0; i < 2; ++i) {
+    players[i].draw()
+  }
+  graphics.setColor(183, 28, 28);
+  graphics.rectangle("fill", ball["x"], ball["y"], 10, 10);
+}

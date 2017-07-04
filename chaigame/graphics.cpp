@@ -114,4 +114,10 @@ namespace chaigame {
 		backB = blue;
 		backA = alpha;
 	}
+	int graphics::getWidth() {
+		return getScreen()->w;
+	}
+	int graphics::getHeight() {
+		return getScreen()->h;
+	}
 }

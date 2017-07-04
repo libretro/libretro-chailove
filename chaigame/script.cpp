@@ -53,6 +53,8 @@ namespace chaigame {
 		chai.add(fun(&graphics::newImage), "newImage");
 		chai.add(fun(&graphics::print), "print");
 		chai.add(fun(&graphics::point), "point");
+		chai.add(fun(&graphics::getWidth), "getWidth");
+		chai.add(fun(&graphics::getHeight), "getHeight");
 		chai.add(fun(&graphics::line), "line");
 		chai.add(fun(&graphics::newQuad), "newQuad");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setColor), "setColor");

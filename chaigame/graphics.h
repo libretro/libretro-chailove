@@ -37,6 +37,9 @@ namespace chaigame {
 		Uint8 r = 255, g = 0, b = 0, a = 255;
 		Uint8 backR = 0, backG = 0, backB = 0, backA = 255;
 		SDL_Surface* getScreen();
+
+		int getWidth();
+		int getHeight();
 	};
 }
 

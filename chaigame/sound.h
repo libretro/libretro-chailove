@@ -13,12 +13,12 @@ namespace chaigame {
 		SoundData* newSoundData(const std::string& file, const std::string& type);
 		bool update();
 
-		int numtimesopened;
-		int frequency;
-		int channels;
+		int numtimesopened = 0;
+		int frequency = 0;
+		int channels = 0;
     	Uint16 format;
 
-    	bool initialized;
+    	bool initialized = false;
 	};
 }
 
