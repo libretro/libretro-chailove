@@ -99,6 +99,7 @@ FLAGS += -I. \
 	-Ivendor/sdl-libretro/include \
 	-Ivendor/libretro-common/include \
 	-Ivendor/chaiscript/include \
+	-Ivendor/ChaiScript_Extras/include \
 	-Ivendor/physfs/src
 
 WARNINGS :=
