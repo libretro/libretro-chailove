@@ -11,9 +11,6 @@ Application* Application::m_instance = NULL;
 retro_input_state_t Application::input_state_cb = NULL;
 retro_input_poll_t Application::input_poll_cb = NULL;
 
-bool Application::isRunning() {
-	return m_instance != NULL;
-}
 void Application::destroy() {
 	m_instance = NULL;
 }
@@ -30,8 +27,8 @@ void Application::quit(void) {
 	joystick.unload();
 	image.unload();
 	sound.unload();
-	window.unload();
 	filesystem.unload();
+	window.unload();
 }
 
 bool Application::load(const std::string& file) {
@@ -40,13 +37,13 @@ bool Application::load(const std::string& file) {
 	script = new chaigame::script();
 	script->conf(config);
 	window.load(config);
+	sound.load();
 	graphics.load();
+	image.load();
 	keyboard.load();
 	joystick.load();
 	math.load();
 	mouse.load();
-	image.load();
-	sound.load();
 	timer.load();
 	script->load();
 
@@ -54,16 +51,17 @@ bool Application::load(const std::string& file) {
 }
 
 bool Application::update() {
-	// Update some of the sub-systems.
+	if (!running) {
+		return false;
+	}
+
 	sound.update();
-	keyboard.update();
-	joystick.update();
 
 	// Poll all SDL events.
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_QUIT:
-				return false;
+				return running = false;
 				break;
 			case SDL_MOUSEMOTION:
 				mouse.motionEvent(event.motion);
@@ -77,28 +75,34 @@ bool Application::update() {
 		}
 	}
 
+	// Update some of the sub-systems.
+	joystick.update();
+	keyboard.update();
+
 	// Step forward the timer, and update the game.
 	timer.step();
 	script->update(timer.getDelta());
 
-	return true;
+	return running;
 }
 
 /**
  * Render the application.
  */
-void Application::draw(){
-	// Clear the screen.
-	graphics.clear();
+void Application::draw() {
+	if (running) {
+		// Clear the screen.
+		graphics.clear();
 
-	// Render the game.
-	script->draw();
+		// Render the game.
+		script->draw();
 
-	// Update the screen.
-	SDL_UpdateRect(screen, 0, 0, 0, 0);
+		// Update the screen.
+		SDL_UpdateRect(screen, 0, 0, 0, 0);
 
-	// Flip the buffer.
-	if (SDL_Flip(screen) == -1) {
-		printf("Failed to swap the buffers: %s\n", SDL_GetError());
+		// Flip the buffer.
+		if (SDL_Flip(screen) == -1) {
+			printf("Failed to swap the buffers: %s\n", SDL_GetError());
+		}
 	}
 }

@@ -138,6 +138,13 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 	(void)code;
 }
 
+void texture_init(){
+	Application* app = Application::getInstance();
+	if (app->videoBuffer) {
+        memset(app->videoBuffer, 0, sizeof(app->videoBuffer));
+	}
+}
+
 bool retro_load_game(const struct retro_game_info *info) {
 	std::string full(info ? info->path : "main.chai");
 	return Application::getInstance()->load(full);
@@ -152,7 +159,9 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 
 void retro_unload_game(void) {
 	// Nothing.
-	retro_deinit();
+	printf("retro_unload_game\n");
+	Application* app = Application::getInstance();
+	app->running = false;
 }
 
 unsigned retro_get_region(void) {
@@ -241,22 +250,22 @@ void retro_init(void) {
 }
 
 void retro_deinit(void) {
-	if (Application::isRunning()) {
-		Application::getInstance()->quit();
+	printf("retro_deinit\n");
+	Application* app = Application::getInstance();
+	if (app) {
+		app->running = false;
+		app->quit();
 	}
-	//Application::destroy();
 }
 
 void retro_reset(void) {
 	// Nothing.
+	printf("retro_reset\n");
 }
 
 void retro_run(void) {
-	// Only run game loop if Application is executing.
-	if (Application::isRunning()) {
-		// Retrieve the application.
-		Application* app = Application::getInstance();
-
+	Application* app = Application::getInstance();
+	if (app != NULL && app->running) {
 		// Poll all the inputs.
 		Application::input_poll_cb();
 

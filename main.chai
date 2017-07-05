@@ -1,20 +1,3 @@
-global x = 100;
-global y = 100;
-global velocity = 0.5;
-global logo;
-global q;
-
-def conf(t) {
-    t.window.width = 1024;
-    t.window.height = 768;
-}
-
-def load() {
-    q = graphics.newQuad(110, 0, 200, 100, 0, 0);
-    logo = graphics.newImage("test/logo.png");
-}
-
 def draw() {
-    graphics.draw(logo, q, x, y);
     graphics.print("Hello World!!!!!!!!", mouse.getX(), mouse.getY());
 }

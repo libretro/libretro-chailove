@@ -32,10 +32,6 @@ namespace chaigame {
 	Joystick::Joystick() {
 	}
 
-	Joystick::~Joystick() {
-		close();
-	}
-
 	bool Joystick::isDown(int button) {
 		return (bool)Application::getInstance()->joystick.joystick_cache[index][button];
 

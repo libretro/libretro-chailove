@@ -17,6 +17,9 @@ namespace chaigame {
 			chai.eval(contents, Exception_Handler(), moduleName);
 			return true;
 		}
+		else {
+			printf("Module %s was empty.", moduleName.c_str());
+		}
 		#endif
 		return false;
 	}
@@ -191,6 +194,9 @@ namespace chaigame {
 		catch (chaiscript::exception::dispatch_error& e) {
 			printf("Skipping call to load(): %s", e.what());
 		}
+		catch (...) {
+			printf("Skipping load()");
+		}
 		#endif
 	}
 
@@ -205,6 +211,9 @@ namespace chaigame {
 			hasUpdate = false;
 			printf("Skipping call to update(): %s", e.what());
 		}
+		catch (...) {
+			printf("Skipping update()");
+		}
 		#endif
 	}
 
@@ -218,6 +227,9 @@ namespace chaigame {
 		catch (chaiscript::exception::dispatch_error& e) {
 			hasDraw = false;
 			printf("Skipping call to draw(): %s", e.what());
+		}
+		catch (...) {
+			printf("Skipping update()");
 		}
 		#endif
 	}

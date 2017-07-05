@@ -10,7 +10,6 @@ namespace chaigame {
 		Joystick(int num, SDL_Joystick* joystick);
 		//Joystick(SDL_Joystick* joystick);
 		Joystick();
-		~Joystick();
 		std::string getName();
 		bool isOpen();
 		void close();

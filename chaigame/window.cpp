@@ -4,6 +4,8 @@
 #include <string>
 #include "chaigame.h"
 
+#include <iostream>
+
 namespace chaigame {
 
 	bool window::load(Config& config) {
@@ -16,7 +18,8 @@ namespace chaigame {
 		}
 
 		// Build the Screen.
-		app->screen = SDL_SetVideoMode(config.window.width, config.window.height, config.window.bbp, SDL_SWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE);
+		Uint32 flags = SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE;
+		app->screen = SDL_SetVideoMode(config.window.width, config.window.height, config.window.bbp, flags);
 		if (app->screen == NULL) {
 			printf("Unable to create screen: %s", SDL_GetError());
 			SDL_Quit();

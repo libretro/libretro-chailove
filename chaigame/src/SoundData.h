@@ -12,7 +12,6 @@ namespace chaigame {
 		Mix_Music* music = NULL;
 		SoundData(SDL_RWops* rw, const std::string& type);
 		SoundData(const std::string& rw, const std::string& type);
-		~SoundData();
 		bool loaded();
 		bool loadFromRW();
 		bool unload();

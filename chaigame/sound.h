@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include "src/SoundData.h"
+#include <vector>
 
 namespace chaigame {
 	class sound {
@@ -19,6 +20,10 @@ namespace chaigame {
     	Uint16 format;
 
     	bool initialized = false;
+    	bool firstRun = true;
+    	bool loaded = false;
+
+    	std::vector<SoundData*> sounds;
 	};
 }
 

@@ -3,6 +3,7 @@
 #include <SDL_mixer.h>
 #include <string>
 #include "../../Application.h"
+#include <iostream>
 
 namespace chaigame {
 
@@ -22,16 +23,16 @@ namespace chaigame {
 
 	std::string SoundData::getType() {
 		if (music) {
-			return "music";
+			return "stream";
 		}
 		if (chunk) {
-			return "chunk";
+			return "static";
 		}
 		return "";
 	}
 
 	bool SoundData::loadFromRW() {
-		if (loadType == "music") {
+		if (loadType == "stream") {
 			music = Mix_LoadMUS_RW(loadRWops);
 			if (!music) {
 				printf("Mix_LoadMusic: %s\n", Mix_GetError());
@@ -40,7 +41,7 @@ namespace chaigame {
 			return true;
 		}
 
-		if (loadType == "chunk") {
+		if (loadType == "static") {
 			chunk = Mix_LoadWAV_RW(loadRWops, 1);
 			if (!chunk) {
 				printf("Mix_LoadWAV_RW: %s\n", Mix_GetError());
@@ -49,11 +50,15 @@ namespace chaigame {
 
 			return true;
 		}
+
+		printf("loadType must be either 'stream' or 'static'.");
 	}
 
 	bool SoundData::unload() {
 		// Only call Mixer functions if the audio system is up.
-		if (Application::getInstance()->sound.hasAudio()) {
+		Application* app = Application::getInstance();
+			std::cout << "SoundData::unload" << std::endl;
+		if (app != NULL && app->sound.hasAudio()) {
 			if (music) {
 				Mix_FreeMusic(music);
 				music = NULL;
@@ -74,13 +79,10 @@ namespace chaigame {
 		return false;
 	}
 
-	SoundData::~SoundData() {
-		unload();
-	}
-
 	void SoundData::play() {
+		Application* app = Application::getInstance();
 		// Make sure we have an audio system.
-		if (Application::getInstance()->sound.hasAudio()) {
+		if (app && app->sound.hasAudio()) {
 			// See if we are to load the file.
 			if (!loaded() && loadRWops) {
 				loadFromRW();

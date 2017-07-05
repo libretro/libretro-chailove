@@ -8,7 +8,6 @@
 class Application {
 public:
     static Application* getInstance();
-    static bool isRunning();
 	static Application* m_instance;
 	static void destroy();
 
@@ -34,6 +33,7 @@ public:
 	bool load(const std::string& file);
 	bool update();
 	void draw();
+	bool running = true;
 
 	uint32_t *videoBuffer;
 	SDL_Surface* screen;

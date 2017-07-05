@@ -25,7 +25,6 @@ namespace chaigame {
 	}
 
 	bool ImageData::destroy() {
-		printf("DESTROY IMAGE");
 		if (!surface) {
 			SDL_FreeSurface(surface);
 			surface = NULL;
