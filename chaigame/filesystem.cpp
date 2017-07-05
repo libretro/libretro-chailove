@@ -74,7 +74,6 @@ namespace chaigame {
 	}
 
 	char* filesystem::readChar(const std::string& filename) {
-		std::cout << "script file: " << filename << std::endl;
 		char *output = NULL;
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 		if (myfile == NULL) {
