@@ -105,7 +105,7 @@ namespace chaigame {
 		}
 
 		// We use strlen() - 1 to remove the final unneeded character.
-		std::string contents(myBuf, strlen(myBuf) - 1);
+		std::string contents(myBuf, sizeof(myBuf));
 		return contents;
 	}
 

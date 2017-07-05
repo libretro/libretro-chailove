@@ -12,7 +12,7 @@ namespace chaigame {
 	bool script::loadModule(const std::string& moduleName) {
 		#ifdef __HAVE_CHAISCRIPT__
 		Application* app = Application::getInstance();
-		std::string contents(app->filesystem.read(moduleName));
+		std::string contents = app->filesystem.read(moduleName);
 		if (!contents.empty()) {
 			chai.eval(contents, Exception_Handler(), moduleName);
 			return true;
