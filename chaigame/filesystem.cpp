@@ -83,7 +83,7 @@ namespace chaigame {
 
 		PHYSFS_sint64 file_size = PHYSFS_fileLength(myfile);
 		if (file_size > 0) {
-			output = new char[file_size];
+			output = new char[file_size + 1];
 			int length_read = PHYSFS_readBytes(myfile, output, file_size);
 			if (length_read != file_size) {
 				printf("File System error while reading from file %s: %s\n", filename.c_str(), PHYSFS_getLastError());
@@ -101,12 +101,9 @@ namespace chaigame {
 		// Retrieve a character buffer.
 		char* myBuf = readChar(filename);
 		if (myBuf == NULL) {
-			return "";
+			return std::string("");
 		}
-
-		// We use strlen() - 1 to remove the final unneeded character.
-		std::string contents(myBuf, strlen(myBuf) - 1);
-		return contents;
+		return std::string(myBuf);
 	}
 
 	bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
