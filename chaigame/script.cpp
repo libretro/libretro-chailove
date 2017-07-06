@@ -149,25 +149,25 @@ namespace chaigame {
 			chaiload = chai.eval<std::function<void ()> >("load");
 		}
 		catch (std::exception& e) {
-			printf("Skipping getting load(): %s", e.what());
+			printf("Skipping getting load(): %s\n", e.what());
 		}
 		try {
 			chaiupdate = chai.eval<std::function<void (float)> >("update");
 		}
 		catch (std::exception& e) {
-			printf("Skipping getting update(delta): %s", e.what());
+			printf("Skipping getting update(delta): %s\n", e.what());
 		}
 		try {
 			chaiconf = chai.eval<std::function<void (Config&)> >("conf");
 		}
 		catch (std::exception& e) {
-			printf("Skipping getting conf(t): %s", e.what());
+			printf("Skipping getting conf(t): %s\n", e.what());
 		}
 		try {
 			chaidraw = chai.eval<std::function<void ()> >("draw");
 		}
 		catch (std::exception& e) {
-			printf("Skipping getting draw(): %s", e.what());
+			printf("Skipping getting draw(): %s\n", e.what());
 		}
 		#endif
 	}
@@ -178,10 +178,13 @@ namespace chaigame {
 			chaiconf(t);
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
-			printf("Skipping call to conf(t): %s", e.what());
+			printf("Skipping call to conf(t): %s\n", e.what());
+		}
+		catch (const chaiscript::exception::eval_error &e) {
+			printf("Skipping call to conf(): %s\n", e.what());
 		}
 		catch (std::exception& e) {
-			printf("Skipping conf(t): %s", e.what());
+			printf("Skipping conf(t): %s\n", e.what());
 		}
 		catch (...) {
 			printf("Skipping conf(t)");
@@ -195,7 +198,10 @@ namespace chaigame {
 			chaiload();
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
-			printf("Skipping call to load(): %s", e.what());
+			printf("Skipping call to load(): %s\n", e.what());
+		}
+		catch (const chaiscript::exception::eval_error &e) {
+			printf("Failed calling load(): %s\n", e.what());
 		}
 		catch (...) {
 			printf("Skipping load()");
@@ -212,10 +218,17 @@ namespace chaigame {
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
 			hasUpdate = false;
-			printf("Skipping call to update(): %s", e.what());
+			printf("Skipping call to update(): %s\n", e.what());
+		}
+		catch (const chaiscript::exception::eval_error &e) {
+			hasUpdate = false;
+			printf("Skipping call to update(): %s\n", e.what());
+		}
+		catch (std::exception& e) {
+			printf("Failed to call update(t): %s\n", e.what());
 		}
 		catch (...) {
-			printf("Skipping update()");
+			printf("Unhandled exception in update()");
 		}
 		#endif
 	}
@@ -229,10 +242,17 @@ namespace chaigame {
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
 			hasDraw = false;
-			printf("Skipping call to draw(): %s", e.what());
+			printf("Skipping call to draw(): %s\n", e.what());
+		}
+		catch (const chaiscript::exception::eval_error &e) {
+			hasDraw = false;
+			printf("Skipping call to update(): %s\n", e.what());
+		}
+		catch (std::exception& e) {
+			printf("Failed to call update(t): %s\n", e.what());
 		}
 		catch (...) {
-			printf("Skipping update()");
+			printf("Unhandled exception in draw()");
 		}
 		#endif
 	}

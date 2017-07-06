@@ -5,6 +5,7 @@ class Player {
   var ai
   var y
   var x
+  var score;
 
   def Player(isAI, xPos, yPos) {
     this.ai = isAI
@@ -12,11 +13,14 @@ class Player {
     this.y = yPos
     this.width = 10
     this.height = 100
+    this.score = 0
   }
 
   def draw() {
-    graphics.setColor(48, 63, 159)
-    graphics.rectangle("fill", this.x, this.y, this.width, this.height)
+    graphics.setColor(170, 130, 57);
+    graphics.rectangle("fill", this.x, this.y, this.width, this.height);
+    graphics.setColor(102, 153, 153);
+    graphics.print(to_string(this.score), this.x, 50);
   }
 
   def update(delta) {
@@ -27,5 +31,4 @@ class Player {
       this.y += 0.5f * delta
     }
   }
-
 };
