@@ -7,6 +7,8 @@ namespace chaigame {
 	class audio {
 	public:
 		void play(SoundData* soundData);
+		SoundData* newSource(const std::string& filename, const std::string& type);
+		SoundData* newSource(const std::string& filename);
 	};
 }
 

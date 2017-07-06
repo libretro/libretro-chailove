@@ -61,7 +61,7 @@ namespace chaigame {
 
 	void sound::unload() {
 		// Unload all sounds.
-		for(std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {
+		for (std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {
 			sounds[i]->unload();
 		}
 
@@ -87,5 +87,9 @@ namespace chaigame {
  			return newSound;
  		}
  		printf("Error loading newSoundData()\n");
+	}
+
+	SoundData* sound::newSoundData(const std::string& file) {
+		return newSoundData(file, "static");
 	}
 }

@@ -12,6 +12,7 @@ namespace chaigame {
 		bool hasAudio();
 		void unload();
 		SoundData* newSoundData(const std::string& file, const std::string& type);
+		SoundData* newSoundData(const std::string& file);
 		bool update();
 
 		int numtimesopened = 0;

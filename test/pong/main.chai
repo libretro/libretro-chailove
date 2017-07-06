@@ -8,15 +8,24 @@ def conf(t) {
 }
 
 def load() {
+  graphics.setBackgroundColor(200, 200, 240)
+  pongSound = sound.newSoundData("pong.wav")
+
+  ballReset()
+
   filesystem.load("Player.chai")
   players = [
     Player(false, 80.0f, graphics.getHeight() / 2.0f),
     Player(true, graphics.getWidth() - 80.0f, graphics.getHeight() / 2.0f)
   ]
+}
 
-  graphics.setBackgroundColor(200, 200, 240)
-  pongSound = sound.newSoundData("pong.wav", "chunk")
-  ballReset()
+def draw() {
+  for (var i = 0; i < 2; ++i) {
+    players[i].draw()
+  }
+  graphics.setColor(183, 28, 28)
+  graphics.circle("fill", ball["x"], ball["y"], ball["radius"]);
 }
 
 def update(delta) {
@@ -56,14 +65,6 @@ def update(delta) {
   ball["y"] += ball["yspeed"] * delta
 }
 
-def draw() {
-  for (var i = 0; i < 2; ++i) {
-    players[i].draw()
-  }
-  graphics.setColor(183, 28, 28)
-  graphics.circle("fill", ball["x"], ball["y"], ball["radius"]);
-}
-
 def ballReset() {
   ball = [
     "x": graphics.getWidth() / 2.0f,
@@ -87,6 +88,9 @@ def ballCollide(player) {
   if (ball["x"] - ball["radius"] > player.x + player.width) {
     return false
   }
+
+  // The ball hit.
+  ball["xspeed"] *= 1.1f
   if (ball["yspeed"] > 0) {
     if (ball["y"] < player.y + player.height / 4) {
       ball["yspeed"] *= -1
@@ -97,7 +101,8 @@ def ballCollide(player) {
       ball["yspeed"] *= -1
     }
   }
+
+  // Make a sound.
   audio.play(pongSound)
-  ball["xspeed"] *= 1.1f
   return true
 }

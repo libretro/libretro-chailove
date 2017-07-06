@@ -31,6 +31,5 @@ def update(delta) {
 }
 
 def draw() {
-	// DRaw
 	graphics.rectangle("fill", x, y, 100, 100)
 }

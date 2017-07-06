@@ -19,7 +19,9 @@ namespace chaigame {
 	}
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
-		SDL_EnableKeyRepeat(delay, interval);
+		if (SDL_EnableKeyRepeat(delay, interval) == -1) {
+			printf("Error setting KeyRepeat.");
+		}
 	}
 
 	bool keyboard::load() {

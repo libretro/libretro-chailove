@@ -103,11 +103,14 @@ namespace chaigame {
 		chai.add_global(var(std::ref(app->mouse)), "mouse");
 
 		// Register the Sound module.
-		chai.add(fun(&sound::newSoundData), "newSoundData");
+		chai.add(fun<SoundData*, sound, const std::string&, const std::string&>(&sound::newSoundData), "newSoundData");
+		chai.add(fun<SoundData*, sound, const std::string&>(&sound::newSoundData), "newSoundData");
 		chai.add_global(var(std::ref(app->sound)), "sound");
 
 		// Register the Audio module.
 		chai.add(fun(&audio::play), "play");
+		chai.add(fun<SoundData*, audio, const std::string&, const std::string&>(&audio::newSource), "newSource");
+		chai.add(fun<SoundData*, audio, const std::string&>(&audio::newSource), "newSource");
 		chai.add_global(var(std::ref(app->audio)), "audio");
 
 		// Register the Window module.
