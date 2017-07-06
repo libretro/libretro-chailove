@@ -26,8 +26,17 @@ retroarch -L chaigame_libretro.so main.chai
 
 There are a few flags you can enable to change how Chai is compiled and used.
 
-- `HAVE_CHAISCRIPT` Remove the scripting environment.
+- `HAVE_CHAISCRIPT=0` Remove the scripting environment for fast compilation
+- `HAVE_TESTS=1` Enables [`test/Test.cpp`](Test.cpp) for testing
 
 ```
-make HAVE_CHAISCRIPT=0
+make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
+```
+
+### Testing
+
+To compile and run the testing framework, use:
+
+```
+make test
 ```

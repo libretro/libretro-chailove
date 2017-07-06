@@ -5,6 +5,10 @@
 #include <libretro.h>
 #include "chaigame/chaigame.h"
 
+#ifdef __HAVE_TESTS__
+#include "test/Test.h"
+#endif
+
 class Application {
 public:
     static Application* getInstance();
@@ -38,6 +42,10 @@ public:
 	uint32_t *videoBuffer;
 	SDL_Surface* screen;
 	SDL_Event event;
+
+	#ifdef __HAVE_TESTS__
+	Test test;
+	#endif
 };
 
 #endif

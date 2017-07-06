@@ -71,6 +71,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/window.o \
 	chaigame/mouse.o \
 	chaigame/system.o \
+	test/Test.o \
 	chaigame/src/ImageData.o \
 	chaigame/src/Quad.o \
 	chaigame/src/Image.o \
@@ -109,6 +110,10 @@ WARNINGS :=
 ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -D__HAVE_CHAISCRIPT__
 endif
+ifneq ($(HAVE_TESTS),)
+	FLAGS += -D__HAVE_TESTS__
+endif
+
 FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
@@ -135,8 +140,8 @@ vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 
 .PHONY: clean
 
-noscript:
-	make HAVE_CHAISCRIPT=0
+testing:
+	make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
-test: noscript
-	retroarch -L *.so
+test: testing
+	retroarch -L $(TARGET)

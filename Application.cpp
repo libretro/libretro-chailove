@@ -36,6 +36,9 @@ bool Application::load(const std::string& file) {
 	filesystem.init(file);
 	script = new chaigame::script();
 	script->conf(config);
+	#ifdef __HAVE_TESTS__
+	test.conf(config);
+	#endif
 	window.load(config);
 	sound.load();
 	graphics.load();
@@ -46,6 +49,10 @@ bool Application::load(const std::string& file) {
 	mouse.load();
 	timer.load();
 	script->load();
+
+	#ifdef __HAVE_TESTS__
+	test.load();
+	#endif
 
 	return true;
 }
@@ -83,6 +90,10 @@ bool Application::update() {
 	timer.step();
 	script->update(timer.getDelta());
 
+	#ifdef __HAVE_TESTS__
+	test.update(timer.getDelta());
+	#endif
+
 	return running;
 }
 
@@ -96,6 +107,10 @@ void Application::draw() {
 
 		// Render the game.
 		script->draw();
+
+		#ifdef __HAVE_TESTS__
+		test.draw();
+		#endif
 
 		// Update the screen.
 		SDL_UpdateRect(screen, 0, 0, 0, 0);
