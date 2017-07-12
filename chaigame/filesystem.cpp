@@ -49,13 +49,25 @@ namespace chaigame {
 
 	int filesystem::getSize(const std::string& file) {
 		PHYSFS_File* openfile = PHYSFS_openRead(file.c_str());
-		int size = -1;
+		PHYSFS_sint64 size = -1;
 		if (openfile) {
-			size = PHYSFS_fileLength(openfile);
+			size = getSize(openfile);
 			PHYSFS_close(openfile);
 		}
+		return (int)size;
+	}
+
+	PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
+		PHYSFS_sint64 size = -1;
+		if (file) {
+			size = PHYSFS_fileLength(file);
+			if (size < 0) {
+				printf("Error getting size of file: %s", PHYSFS_getLastError());
+				return -1;
+			}
+		}
 		else {
-			printf("Error getting size of file %s: %s", file.c_str(), PHYSFS_getLastError());
+			printf("The file is not open: %s", PHYSFS_getLastError());
 		}
 		return size;
 	}
@@ -74,20 +86,23 @@ namespace chaigame {
 	}
 
 	char* filesystem::readChar(const std::string& filename) {
-		char *output = NULL;
+		char* output = NULL;
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 		if (myfile == NULL) {
 			printf("Error opening file %s: %s\n", filename.c_str(), PHYSFS_getLastError());
 			return NULL;
 		}
 
-		PHYSFS_sint64 file_size = PHYSFS_fileLength(myfile);
+		PHYSFS_sint64 file_size = getSize(myfile);
 		if (file_size > 0) {
 			output = new char[file_size + 1];
 			int length_read = PHYSFS_readBytes(myfile, output, file_size);
 			if (length_read != file_size) {
 				printf("File System error while reading from file %s: %s\n", filename.c_str(), PHYSFS_getLastError());
+				output = NULL;
 			}
+			// Make sure there is a null terminating character at the end of the string.
+			output[file_size] = '\0';
 		}
 		else {
 			printf("Error getting filesize of %s: %s\n", filename.c_str(), PHYSFS_getLastError());

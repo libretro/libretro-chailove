@@ -3,6 +3,7 @@
 
 #include <string>
 #include <SDL.h>
+#include <physfs.h>
 
 namespace chaigame {
 	class filesystem {
@@ -16,6 +17,7 @@ namespace chaigame {
 		bool exists(const std::string& file);
 		int getSize(const std::string& file);
 		bool mount(const std::string& archive, const std::string& mountpoint);
+		PHYSFS_sint64 getSize(PHYSFS_File* file);
 	};
 }
 

@@ -10,6 +10,7 @@ void Test::conf(chaigame::Config& t) {
 }
 
 bool Test::load() {
+
 }
 
 void Test::update(float delta) {

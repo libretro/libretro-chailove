@@ -14,6 +14,7 @@ namespace chaigame {
 		Application* app = Application::getInstance();
 		std::string contents = app->filesystem.read(moduleName);
 		if (!contents.empty()) {
+			contents = replaceString(contents, "\t", "  ");
 			chai.eval(contents, Exception_Handler(), moduleName);
 			return true;
 		}
@@ -84,7 +85,7 @@ namespace chaigame {
 		// Register the Filesystem module.
 		chai.add(fun(&filesystem::read), "read");
 		chai.add(fun(&filesystem::exists), "exists");
-		chai.add(fun(&filesystem::getSize), "getSize");
+		chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
 		chai.add(fun(&filesystem::load), "load");
 		chai.add_global(var(std::ref(app->filesystem)), "filesystem");
 
@@ -165,6 +166,12 @@ namespace chaigame {
 		}
 		try {
 			chaidraw = chai.eval<std::function<void ()> >("draw");
+		}
+		catch (std::exception& e) {
+			printf("Skipping getting draw(): %s\n", e.what());
+		}
+		try {
+			chaijoystickpressed = chai.eval<std::function<void (int, int)> >("joystickpressed");
 		}
 		catch (std::exception& e) {
 			printf("Skipping getting draw(): %s\n", e.what());
@@ -255,5 +262,27 @@ namespace chaigame {
 			printf("Unhandled exception in draw()");
 		}
 		#endif
+	}
+
+	void script::joystickpressed(int joystick, int button) {
+		#ifdef __HAVE_CHAISCRIPT__
+		try {
+			if (hasjoystickpressed) {
+				chaijoystickpressed(joystick, button);
+			}
+		}
+		catch (...) {
+			hasjoystickpressed = false;
+		}
+		#endif
+	}
+
+	std::string script::replaceString(std::string subject, const std::string& search, const std::string& replace) {
+	    size_t pos = 0;
+	    while ((pos = subject.find(search, pos)) != std::string::npos) {
+	         subject.replace(pos, search.length(), replace);
+	         pos += replace.length();
+	    }
+	    return subject;
 	}
 }

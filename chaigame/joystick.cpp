@@ -74,6 +74,9 @@ namespace chaigame {
 					joystick_cache[i][u] = state;
 
 					// TODO: Invoke an event.
+					if (state == 1) {
+						Application::getInstance()->joystickpressed(i, u);
+					}
 				}
 			}
 		}

@@ -22,6 +22,7 @@ namespace chaigame {
 		void update(float delta);
 		void draw();
 		bool loadModule(const std::string& moduleName);
+		void joystickpressed(int joystick, int button);
 
 		#ifdef __HAVE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;
@@ -29,9 +30,13 @@ namespace chaigame {
 		std::function<void (Config&)> chaiconf;
 		std::function<void (float)> chaiupdate;
 		std::function<void ()> chaidraw;
+		std::function<void (int, int)> chaijoystickpressed;
 		bool hasUpdate = true;
 		bool hasDraw = true;
+		bool hasjoystickpressed = true;
 		#endif
+
+		std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
 	};
 }
 

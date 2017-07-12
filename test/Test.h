@@ -11,6 +11,7 @@ public:
 	bool load();
 	void update(float delta);
 	void draw();
+	int tester = 0;
 };
 
 #endif

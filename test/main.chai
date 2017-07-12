@@ -8,24 +8,29 @@ def load() {
 	x = 300;
 	y = 100;
 
-	filesystem.load("test.chai");
+	//filesystem.load("test.chai");
 
 	graphics.setBackgroundColor(245, 199, 50);
 }
+def joystickpressed(joystick, button)  {
+	print("Triggered");
+	x = 10
+}
+
 
 def update(delta) {
 	var velocity = 0.5
 	// Called before drawing.
-	if (keyboard.isDown("up")) {
+	if (joystick.isDown(0, "up")) {
 		y -= velocity * delta
 	}
-	if (keyboard.isDown("down")) {
+	if (joystick.isDown(0, "down")) {
 		y += velocity * delta
 	}
-	if (keyboard.isDown("left")) {
+	if (joystick.isDown(0, "left")) {
 		x -= velocity * delta
 	}
-	if (keyboard.isDown("right")) {
+	if (joystick.isDown(0, "right")) {
 		x += velocity * delta
 	}
 }

@@ -46,6 +46,8 @@ public:
 	#ifdef __HAVE_TESTS__
 	Test test;
 	#endif
+
+	void joystickpressed(int joystick, int button);
 };
 
 #endif
