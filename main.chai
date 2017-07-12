@@ -8,11 +8,12 @@ def load() {
 
 def draw() {
     graphics.print("Hello World!!!!!!!!", x, y);
-    print(window.getTitle());
+    //print(window.getTitle());
 }
 
 def joystickpressed(joystick, button) {
   if (button == 0) {
-    x = x + 1
+    event.quit()
+    print("QUIT!")
   }
 }

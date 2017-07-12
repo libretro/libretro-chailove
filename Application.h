@@ -32,16 +32,16 @@ public:
 	chaigame::mouse mouse;
 	chaigame::math math;
 	chaigame::window window;
+	chaigame::event event;
 
 	void quit(void);
 	bool load(const std::string& file);
 	bool update();
 	void draw();
-	bool running = true;
 
 	uint32_t *videoBuffer;
 	SDL_Surface* screen;
-	SDL_Event event;
+	SDL_Event sdlEvent;
 
 	#ifdef __HAVE_TESTS__
 	Test test;

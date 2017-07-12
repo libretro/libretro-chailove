@@ -58,26 +58,27 @@ bool Application::load(const std::string& file) {
 }
 
 bool Application::update() {
-	if (!running) {
+	if (event.quitstatus) {
 		return false;
 	}
 
 	sound.update();
 
 	// Poll all SDL events.
-	while (SDL_PollEvent(&event)) {
-		switch (event.type) {
+	while (SDL_PollEvent(&sdlEvent)) {
+		switch (sdlEvent.type) {
 			case SDL_QUIT:
-				return running = false;
+				event.quit();
+				return !event.quitstatus;
 				break;
 			case SDL_MOUSEMOTION:
-				mouse.motionEvent(event.motion);
+				mouse.motionEvent(sdlEvent.motion);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				mouse.buttonEvent(event.button);
+				mouse.buttonEvent(sdlEvent.button);
 				break;
 			case SDL_MOUSEBUTTONUP:
-				mouse.buttonEvent(event.button);
+				mouse.buttonEvent(sdlEvent.button);
 				break;
 		}
 	}
@@ -94,14 +95,14 @@ bool Application::update() {
 	test.update(timer.getDelta());
 	#endif
 
-	return running;
+	return !event.quitstatus;
 }
 
 /**
  * Render the application.
  */
 void Application::draw() {
-	if (running) {
+	if (!event.quitstatus) {
 		// Clear the screen.
 		graphics.clear();
 

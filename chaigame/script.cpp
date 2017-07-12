@@ -78,6 +78,10 @@ namespace chaigame {
 		chai.add(fun(&keyboard::isDown), "isDown");
 		chai.add_global(var(std::ref(app->keyboard)), "keyboard");
 
+		// Register the Event module.
+		chai.add(fun(&event::quit), "quit");
+		chai.add_global(var(std::ref(app->event)), "event");
+
 		// Register the Image module.
 		chai.add(fun(&image::newImageData), "newImageData");
 		chai.add_global(var(std::ref(app->image)), "image");

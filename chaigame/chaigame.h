@@ -14,6 +14,7 @@
 #include "src/Quad.h"
 #include "system.h"
 #include "audio.h"
+#include "event.h"
 #include "sound.h"
 #include "src/Image.h"
 #include "src/ImageData.h"

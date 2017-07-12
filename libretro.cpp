@@ -161,7 +161,7 @@ void retro_unload_game(void) {
 	// Nothing.
 	printf("retro_unload_game\n");
 	Application* app = Application::getInstance();
-	app->running = false;
+	app->event.quit();
 }
 
 unsigned retro_get_region(void) {
@@ -253,7 +253,7 @@ void retro_deinit(void) {
 	printf("retro_deinit\n");
 	Application* app = Application::getInstance();
 	if (app) {
-		app->running = false;
+		app->event.quit();
 		app->quit();
 	}
 }
@@ -265,7 +265,7 @@ void retro_reset(void) {
 
 void retro_run(void) {
 	Application* app = Application::getInstance();
-	if (app != NULL && app->running) {
+	if (app != NULL && app->event.quitstatus == false) {
 		// Poll all the inputs.
 		Application::input_poll_cb();
 
