@@ -40,8 +40,8 @@ namespace chaigame {
 		pixelRGBA(getScreen(), x, y, r, g, b, a);
 	}
 
-	void graphics::rectangle(const std::string& mode, int x, int y, int width, int height) {
-		if (mode == "line") {
+	void graphics::rectangle(const std::string& drawmode, int x, int y, int width, int height) {
+		if (drawmode == "line") {
 			rectangleRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
 		}
 		else {
@@ -121,12 +121,30 @@ namespace chaigame {
 		return getScreen()->h;
 	}
 
-	void graphics::circle(const std::string& mode, int x, int y, int radius) {
-		if (mode == "line") {
+	void graphics::circle(const std::string& drawmode, int x, int y, int radius) {
+		if (drawmode == "line") {
 			circleRGBA(getScreen(), x, y, radius, r, g, b, a);
 		}
 		else {
 			filledCircleRGBA(getScreen(), x, y, radius, r, g, b, a);
+		}
+	}
+
+	void graphics::arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2) {
+		if (drawmode == "line") {
+			arcRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
+		}
+		else {
+			filledPieRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
+		}
+	}
+
+	void graphics::ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy) {
+		if (drawmode == "line") {
+			ellipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
+		}
+		else {
+			filledEllipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
 		}
 	}
 }

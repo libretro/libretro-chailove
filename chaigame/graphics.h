@@ -13,7 +13,7 @@ namespace chaigame {
 	public:
 		bool load();
 
-		void rectangle(const std::string& mode, int x, int y, int width, int height);
+		void rectangle(const std::string& drawmode, int x, int y, int width, int height);
 		void clear();
 		void clear(int r, int g, int b, int a);
 		void clear(int r, int g, int b);
@@ -41,7 +41,9 @@ namespace chaigame {
 		int getWidth();
 		int getHeight();
 
-		void circle(const std::string& mode, int x, int y, int radius);
+		void circle(const std::string& drawmode, int x, int y, int radius);
+		void ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
+		void arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
 	};
 }
 

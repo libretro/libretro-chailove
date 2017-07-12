@@ -60,6 +60,8 @@ namespace chaigame {
 		chai.add(fun(&graphics::newImage), "newImage");
 		chai.add(fun(&graphics::print), "print");
 		chai.add(fun(&graphics::point), "point");
+		chai.add(fun(&graphics::arc), "arc");
+		chai.add(fun(&graphics::ellipse), "ellipse");
 		chai.add(fun(&graphics::getWidth), "getWidth");
 		chai.add(fun(&graphics::getHeight), "getHeight");
 		chai.add(fun(&graphics::circle), "circle");
