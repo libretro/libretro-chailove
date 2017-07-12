@@ -121,7 +121,3 @@ void Application::draw() {
 		}
 	}
 }
-
-void Application::joystickpressed(int joystick, int button) {
-	script->joystickpressed(joystick, button);
-}

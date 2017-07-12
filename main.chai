@@ -8,6 +8,7 @@ def load() {
 
 def draw() {
     graphics.print("Hello World!!!!!!!!", x, y);
+    print(window.getTitle());
 }
 
 def joystickpressed(joystick, button) {

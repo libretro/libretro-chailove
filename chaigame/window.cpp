@@ -39,8 +39,9 @@ namespace chaigame {
 	}
 
 	std::string window::getTitle() {
-		// TODO: Implement SDL_WM_GetCaption().
-		return "ChaiGame";
+		char* titleChar;
+		SDL_WM_GetCaption(&titleChar, NULL);
+		return std::string(titleChar);
 	}
 
 	void window::setTitle(std::string title) {

@@ -75,7 +75,7 @@ namespace chaigame {
 
 					// TODO: Invoke an event.
 					if (state == 1) {
-						Application::getInstance()->joystickpressed(i, u);
+						Application::getInstance()->script->joystickpressed(i, u);
 					}
 				}
 			}
