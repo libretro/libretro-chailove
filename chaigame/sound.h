@@ -23,6 +23,7 @@ namespace chaigame {
     	bool initialized = false;
     	bool firstRun = true;
     	bool loaded = false;
+    	bool toInit = false;
 
     	std::vector<SoundData*> sounds;
 	};

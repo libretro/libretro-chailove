@@ -49,8 +49,11 @@ namespace chaigame {
 		chai.add(fun(&windowConfig::height), "height");
 		chai.add(fun(&windowConfig::bbp), "bbp");
 		chai.add(fun(&windowConfig::title), "title");
+		chai.add(user_type<moduleConfig>(), "moduleConfig");
+		chai.add(fun(&moduleConfig::sound), "sound");
 		chai.add(user_type<Config>(), "Config");
 		chai.add(fun(&Config::window), "window");
+		chai.add(fun(&Config::modules), "modules");
 
 		// Register the Graphics module.
 		chai.add(fun(&graphics::rectangle), "rectangle");
@@ -178,7 +181,7 @@ namespace chaigame {
 			chaijoystickpressed = chai.eval<std::function<void (int, int)> >("joystickpressed");
 		}
 		catch (std::exception& e) {
-			printf("Skipping getting draw(): %s\n", e.what());
+			printf("Skipping getting joystickpressed(): %s\n", e.what());
 		}
 		#endif
 	}

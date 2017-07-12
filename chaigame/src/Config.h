@@ -11,10 +11,15 @@ namespace chaigame {
 		std::string title = "ChaiGame";
 	};
 
+	struct moduleConfig {
+		bool sound = true;
+	};
+
 	class Config {
 	public:
 		Config();
 		windowConfig window;
+		moduleConfig modules;
 	};
 }
 

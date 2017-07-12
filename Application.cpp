@@ -40,7 +40,9 @@ bool Application::load(const std::string& file) {
 	test.conf(config);
 	#endif
 	window.load(config);
-	sound.load();
+	if (config.modules.sound) {
+		sound.load();
+	}
 	graphics.load();
 	image.load();
 	keyboard.load();

@@ -14,6 +14,7 @@
 
 namespace chaigame {
 	bool sound::load() {
+		toInit = true;
 		int flags = MIX_INIT_OGG | MIX_INIT_MOD;
 		int initted = Mix_Init(flags);
 		if ((initted & flags) != flags) {
@@ -29,7 +30,7 @@ namespace chaigame {
 	}
 
 	bool sound::update() {
-		if (firstRun) {
+		if (firstRun && toInit) {
 			firstRun = false;
 			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
 				printf("Mix_OpenAudio: %s\n", Mix_GetError());
@@ -70,6 +71,7 @@ namespace chaigame {
 			Mix_Quit();
 			loaded = false;
 		}
+
 		// Unload the audio system.
 		if (initialized) {
 			std::cout << "Mix_CloseAudio(): ";
