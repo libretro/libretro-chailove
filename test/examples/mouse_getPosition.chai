@@ -8,7 +8,7 @@ class mouse_getPosition {
 	def load() {}
 
 	def draw() {
-		graphics.setColor(0, 255, 0)
+		graphics.setColor(255, 150, 0)
 		var pos = mouse.getPosition()
 		var output = "(" + to_string(pos.x) + "," + to_string(pos.y) + ")"
 		graphics.print(output, pos.x, pos.y);
