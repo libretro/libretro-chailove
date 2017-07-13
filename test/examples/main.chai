@@ -1,0 +1,17 @@
+global tests
+global currenttest
+
+def load() {
+
+	filesystem.load("Tester.chai")
+	currenttest = 0
+	tests = [Tester()]
+}
+
+def draw() {
+	tests[currenttest].draw()
+}
+
+def update() {
+	tests[currenttest].update()
+}

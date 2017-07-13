@@ -1,0 +1,11 @@
+class Tester {
+	def draw() {
+		graphics.print("Hello, Wrold! Tester", 100, 100);
+	}
+	def update() {
+
+	}
+	def load() {
+
+	}
+};
