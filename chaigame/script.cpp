@@ -91,8 +91,8 @@ namespace chaigame {
 		chai.add_global(var(std::ref(app->graphics)), "graphics");
 
 		// Register the Keyboard module.
-		chai.add(fun(&keyboard::update), "update");
-		chai.add(fun(&keyboard::isDown), "isDown");
+		chai.add(fun<bool, keyboard, const std::string&>(&keyboard::isDown), "isDown");
+		chai.add(fun(&keyboard::setKeyRepeat), "setKeyRepeat");
 		chai.add_global(var(std::ref(app->keyboard)), "keyboard");
 
 		// Register the Event module.
@@ -106,6 +106,7 @@ namespace chaigame {
 		// Register the Filesystem module.
 		chai.add(fun(&filesystem::read), "read");
 		chai.add(fun(&filesystem::exists), "exists");
+		chai.add(fun(&filesystem::mount), "mount");
 		chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
 		chai.add(fun(&filesystem::load), "load");
 		chai.add_global(var(std::ref(app->filesystem)), "filesystem");
@@ -262,9 +263,11 @@ namespace chaigame {
 			printf("Skipping call to update(): %s\n", e.what());
 		}
 		catch (std::exception& e) {
+			hasUpdate = false;
 			printf("Failed to call update(t): %s\n", e.what());
 		}
 		catch (...) {
+			hasUpdate = false;
 			printf("Unhandled exception in update()");
 		}
 		#endif

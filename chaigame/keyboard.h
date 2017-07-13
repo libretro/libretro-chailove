@@ -11,7 +11,7 @@ namespace chaigame {
 		Uint8* keys;
 		bool load();
 		bool isDown(const std::string& key);
-		bool isKeyDown(int key);
+		bool isDown(int key);
 		void setKeyRepeat(int delay = 400, int interval = 30);
 		bool update();
 		int getKeyCodeFromName(const std::string& name);

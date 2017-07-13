@@ -5,13 +5,13 @@
 
 namespace chaigame {
 
-	bool keyboard::isKeyDown(int key) {
+	bool keyboard::isDown(int key) {
 		return (bool)keys[key];
 	}
 
 	bool keyboard::isDown(const std::string& key) {
 		int keycode = getKeyCodeFromName(key);
-		return isKeyDown(keycode);
+		return isDown(keycode);
 	}
 
 	int keyboard::getKeyCodeFromName(const std::string& name) {
