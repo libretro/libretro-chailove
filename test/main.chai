@@ -17,10 +17,10 @@ def update(delta) {
 	}
 
 	// Allow increasing the amount of sprites.
-	if (joystick.isDown(0, "up")) {
+	if (joystick[0].isDown("up")) {
 		sprites.push_back(Sprite())
 	}
-	if (joystick.isDown(0, "down") && sprites.size() > 1) {
+	if (joystick[0].isDown("down") && sprites.size() > 1) {
 		sprites.pop_back()
 	}
 }
@@ -34,7 +34,7 @@ def draw() {
 	// Write the text on the screen.
 	graphics.setColor(255, 255, 255)
 	graphics.print("Sprites: " + to_string(sprites.size()), 5, 5)
-	graphics.print("Press up/down add more", 5, 20)
+	graphics.print("Press up/down", 5, 20)
 }
 
 class Sprite {

@@ -60,6 +60,13 @@ namespace chaigame {
 		chai.add(fun(&Config::window), "window");
 		chai.add(fun(&Config::modules), "modules");
 
+		// Add Joystick.
+		chai.add(user_type<Joystick>(), "Joystick");
+		chai.add(fun<bool, Joystick, const std::string&>(&Joystick::isDown), "isDown");
+		chai.add(fun<bool, Joystick, int>(&Joystick::isDown), "isDown");
+		chai.add(fun(&Joystick::getName), "getName");
+		chai.add(fun(&Joystick::isOpen), "isOpen");
+
 		// Register the Graphics module.
 		chai.add(fun(&graphics::rectangle), "rectangle");
 		chai.add(fun(&graphics::newImage), "newImage");
@@ -143,6 +150,8 @@ namespace chaigame {
 		chai.add(fun(&joystick::getJoysticks), "getJoysticks");
 		chai.add(fun(&joystick::getJoystickCount), "getJoystickCount");
 		chai.add(fun<bool, joystick, int, const std::string&>(&joystick::isDown), "isDown");
+		chai.add(fun<bool, joystick, int, int>(&joystick::isDown), "isDown");
+		chai.add(fun(&joystick::operator[]), "[]");
 		chai.add_global(var(std::ref(app->joystick)), "joystick");
 
 		// Register the Math module.
@@ -190,6 +199,12 @@ namespace chaigame {
 		}
 		catch (std::exception& e) {
 			printf("Skipping getting joystickpressed(): %s\n", e.what());
+		}
+		try {
+			chaijoystickreleased = chai.eval<std::function<void (int, int)> >("joystickreleased");
+		}
+		catch (std::exception& e) {
+			printf("Skipping getting joystickreleased(): %s\n", e.what());
 		}
 		#endif
 	}
@@ -288,6 +303,19 @@ namespace chaigame {
 		}
 		catch (...) {
 			hasjoystickpressed = false;
+		}
+		#endif
+	}
+
+	void script::joystickreleased(int joystick, int button) {
+		#ifdef __HAVE_CHAISCRIPT__
+		try {
+			if (hasjoystickreleased) {
+				chaijoystickreleased(joystick, button);
+			}
+		}
+		catch (...) {
+			hasjoystickreleased = false;
 		}
 		#endif
 	}

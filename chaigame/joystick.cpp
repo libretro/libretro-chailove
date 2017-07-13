@@ -77,9 +77,19 @@ namespace chaigame {
 					if (state == 1) {
 						Application::getInstance()->script->joystickpressed(i, u);
 					}
+					else if (state == 0) {
+						Application::getInstance()->script->joystickreleased(i, u);
+					}
 				}
 			}
 		}
+	}
+
+	Joystick& joystick::operator[](int i) {
+		if (i < 0 || i >= numJoysticks) {
+			i = 0;
+		}
+		return joysticks[i];
 	}
 
 	int joystick::getButtonKey(const std::string& name) {

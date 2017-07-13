@@ -19,6 +19,7 @@ def load() {
     Player(false, 80.0f, graphics.getHeight() / 2.0f),
     Player(true, graphics.getWidth() - 80.0f, graphics.getHeight() / 2.0f)
   ]
+
 }
 
 def draw() {

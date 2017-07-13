@@ -18,11 +18,13 @@ void Test::update(float delta) {
 
 void Test::draw() {
 	Application* app = Application::getInstance();
-	app->graphics.setColor(200, 100, 100);
-	app->graphics.print("Test.cpp: Hello World!", 100, app->graphics.getHeight() - 100);
+	app->graphics.setColor(0, 255, 100);
+	app->graphics.print("Hello World! Press UP", 100, app->graphics.getHeight() - 100);
 
-	app->graphics.setColor(200, 200, 200);
-	app->graphics.ellipse("fill", 200, 200, 75, 20);
+	if (app->joystick[0].isDown("up")) {
+		app->graphics.setColor(100, 0, 255);
+		app->graphics.ellipse("fill", 200, 200, 75, 20);
+	}
 }
 
 #endif

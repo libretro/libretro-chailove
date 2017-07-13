@@ -34,7 +34,7 @@ def update(delta) {
 }
 
 def joystickpressed(joystick, button) {
-	if (button == 0) {
+	if (button == 0 || button == 1) {
 		currenttest = currenttest + 1
 		if (currenttest >= tests.size()) {
 			currenttest = 0

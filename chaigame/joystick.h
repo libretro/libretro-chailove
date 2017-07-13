@@ -21,6 +21,8 @@ namespace chaigame {
 		bool isDown(int index, const std::string& button);
 		int getButtonKey(const std::string& name);
 		int16_t joystick_cache[4][14];
+
+		Joystick& operator[](int i);
 	};
 }
 

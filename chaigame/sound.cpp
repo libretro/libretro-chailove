@@ -52,8 +52,7 @@ namespace chaigame {
 	    	    case AUDIO_U16MSB: format_str="U16MSB"; break;
 	    	    case AUDIO_S16MSB: format_str="S16MSB"; break;
 	    	}
-	    	printf("\n  opened=%d times\n  frequency=%dHz\n  format=%s\n  channels=%d\n",
-	            numtimesopened, frequency, format_str.c_str(), channels);
+	    	// printf("\n  opened=%d times\n  frequency=%dHz\n  format=%s\n  channels=%d\n", numtimesopened, frequency, format_str.c_str(), channels);
 
 	    }
 
