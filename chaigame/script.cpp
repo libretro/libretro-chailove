@@ -71,8 +71,8 @@ namespace chaigame {
 		chai.add(fun<void, graphics, int, int, int>(&graphics::setColor), "setColor");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
-		chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
-		chai.add(fun<void, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, ImageData*, int, int>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, ImageData*, Quad, int, int>(&graphics::draw), "draw");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics>(&graphics::clear), "clear");

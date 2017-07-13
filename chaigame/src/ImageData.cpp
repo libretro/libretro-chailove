@@ -45,13 +45,13 @@ namespace chaigame {
 		if (surface != NULL) {
 			return surface->w;
 		}
-		return -1;
+		return 0;
 	}
 
 	int ImageData::getHeight() {
 		if (surface != NULL) {
 			return surface->h;
 		}
-		return -1;
+		return 0;
 	}
 }

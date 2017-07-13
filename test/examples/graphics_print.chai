@@ -1,16 +1,22 @@
 class graphics_print {
 	var name;
+	var x;
+	var y;
+
 	def graphics_print() {
-		this.name = __CLASS__;
+		this.name = "graphics.print()";
 	}
 
-	def load() {}
+	def load() {
+		this.x = 100;
+		this.y = graphics.getHeight() / 2.0f - 30;
+	}
 
 	def draw() {
-		graphics.print("graphics.print()", 100, 100);
+		graphics.setColor(0, 255, 0)
+		graphics.print("Press the A button to switch tests", this.x, this.y);
 	}
 
 	def update(delta) {
-
 	}
 };

@@ -54,12 +54,6 @@ namespace chaigame {
 
 	void graphics::draw(ImageData* image, int x, int y) {
 		if (image && image->loaded()) {
-			SDL_BlitSurface(image->surface, NULL, getScreen(), NULL);
-		}
-	}
-
-	void graphics::draw(Image* image, int x, int y) {
-		if (image && image->loaded()) {
 			SDL_Rect* dstrect = new SDL_Rect();
 			dstrect->x = x;
 			dstrect->y = y;
@@ -67,7 +61,7 @@ namespace chaigame {
 		}
 	}
 
-	void graphics::draw(Image* image, Quad quad, int x, int y) {
+	void graphics::draw(ImageData* image, Quad quad, int x, int y) {
 		if (image && image->loaded()) {
 			SDL_Rect* dest = new SDL_Rect();
 			dest->x = x;
@@ -80,8 +74,8 @@ namespace chaigame {
 		}
 	}
 
-	Image* graphics::newImage(const std::string& filename) {
-		Image* image = new Image(filename);
+	ImageData* graphics::newImage(const std::string& filename) {
+		ImageData* image = new ImageData(filename);
 		if (image->loaded()) {
 			return image;
 		}
