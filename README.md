@@ -1,25 +1,37 @@
 # ChaiGame
 
-Experimental framework to make 2D games with [libretro](https://www.libretro.com), inspired by [LÖVE](https://love2d.org).
-
-## Features
-
-- [libretro](https://www.libretro.com)
-- [SDL](https://www.libsdl.org)
-- [ChaiScript](http://chaiscript.com)
-- [PhysFS](https://www.icculus.org/physfs/)
+Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
 ## Usage
 
-TODO: Add usage documentation.
+ChaiGame is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
+
+``` lua
+def draw() {
+    graphics.print("Hello World!", 400, 300)
+}
+```
+
+To run it, execute the following:
+
+```
+retroarch -L chaigame_libretro.so main.chai
+```
 
 ## Development
 
-Building takes some time, so be patient.
+Building ChaiGame takes some time, so have patience. Use the following command to compile the core:
 
 ```
 make
-retroarch -L chaigame_libretro.so main.chai
+```
+
+### Testing
+
+To compile and run the testing framework, use:
+
+```
+make testscripts
 ```
 
 ### Flags
@@ -31,12 +43,4 @@ There are a few flags you can enable to change how Chai is compiled and used.
 
 ```
 make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
-```
-
-### Testing
-
-To compile and run the testing framework, use:
-
-```
-make test
 ```

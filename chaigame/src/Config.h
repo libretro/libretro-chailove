@@ -5,8 +5,8 @@
 
 namespace chaigame {
 	struct windowConfig {
-		int width = 640;
-		int height = 480;
+		int width = 800;
+		int height = 600;
 		int bbp = 32;
 		std::string title = "ChaiGame";
 	};
