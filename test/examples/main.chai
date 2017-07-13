@@ -2,7 +2,8 @@ global tests = []
 global currenttest = 0
 global testNames = [
 	"graphics_print",
-	"graphics_draw"
+	"graphics_draw",
+	"mouse_getPosition"
 ]
 
 def conf(t) {

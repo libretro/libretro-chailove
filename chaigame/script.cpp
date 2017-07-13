@@ -38,6 +38,11 @@ namespace chaigame {
 		chai.add(fun(&Quad::sw), "sw");
 		chai.add(fun(&Quad::sh), "sh");
 
+		// Add the Point.
+		chai.add(user_type<Point>(), "Point");
+		chai.add(fun(&Point::x), "x");
+		chai.add(fun(&Point::y), "y");
+
 		// Add ImageData.
 		chai.add(user_type<ImageData>(), "ImageData");
 		chai.add(fun(&ImageData::getWidth), "getWidth");
@@ -109,6 +114,7 @@ namespace chaigame {
 		chai.add(fun(&mouse::setY), "setY");
 		chai.add(fun(&mouse::getX), "getX");
 		chai.add(fun(&mouse::getY), "getY");
+		chai.add(fun(&mouse::getPosition), "getPosition");
 		chai.add(fun(&mouse::isDown), "isDown");
 		chai.add_global(var(std::ref(app->mouse)), "mouse");
 

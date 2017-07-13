@@ -78,6 +78,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/src/Image.o \
 	chaigame/src/Config.o \
 	chaigame/src/SoundData.o \
+	chaigame/src/Point.o \
 	chaigame/src/Joystick.o \
 	chaigame/joystick.o \
 	vendor/physfs/extras/physfsrwops.o
@@ -143,6 +144,9 @@ vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 
 testing:
 	make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
+
+testscripts: all
+	retroarch -L $(TARGET) test/examples/main.chai
 
 test: testing
 	retroarch -L $(TARGET)

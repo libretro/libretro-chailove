@@ -1,6 +1,7 @@
 #include "mouse.h"
 
 #include <SDL.h>
+#include "src/Point.h"
 
 namespace chaigame {
 
@@ -59,5 +60,7 @@ namespace chaigame {
 		// TODO: Trigger mouse button event.
 	}
 
-
+	Point mouse::getPosition() {
+		return Point(m_x, m_y);
+	}
 }
