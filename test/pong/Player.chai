@@ -30,5 +30,12 @@ class Player {
     else if (joystick.isDown(0, "down")) {
       this.y += 0.5f * delta
     }
+
+    if (this.y + this.height > graphics.getHeight()) {
+        this.y = graphics.getHeight() - this.height;
+    }
+    else if (this.y < 0) {
+        this.y = 0;
+    }
   }
 };
