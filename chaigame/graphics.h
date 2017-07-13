@@ -20,13 +20,12 @@ namespace chaigame {
 		void point(int x, int y);
 		void line(int x1, int y1, int x2, int y2);
 
-		void draw(ImageData* data, int x, int y);
-		void draw(Image* data, int x, int y);
-		void draw(Image* image, Quad quad, int x, int y);
+		void draw(ImageData* image, int x, int y);
+		void draw(ImageData* image, Quad quad, int x, int y);
 
 		Quad newQuad(int x, int y, int width, int height, int sw, int sh);
 
-		Image* newImage(const std::string& filename);
+		ImageData* newImage(const std::string& filename);
 
 		void print(const std::string& text, int x, int y);
 		void setColor(int red, int green, int blue, int alpha);

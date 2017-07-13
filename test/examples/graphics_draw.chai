@@ -1,0 +1,23 @@
+class graphics_draw {
+	var name;
+	var x;
+	var y;
+	var image;
+
+	def graphics_draw() {
+		this.name = "graphics.draw()";
+	}
+
+	def load() {
+		this.image = graphics.newImage("graphics_draw.png");
+		this.x = graphics.getWidth() / 2.0f - this.image.getWidth() / 2.0f;
+		this.y = graphics.getHeight() / 2.0f - this.image.getHeight() / 2.0f;
+	}
+
+	def draw() {
+		graphics.draw(this.image, this.x, this.y);
+	}
+
+	def update(delta) {
+	}
+};

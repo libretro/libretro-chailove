@@ -2,6 +2,7 @@
 #define _MOUSE_H_INCLUDED_
 
 #include <SDL.h>
+#include "src/Point.h"
 
 namespace chaigame {
 	class mouse {
@@ -14,6 +15,7 @@ namespace chaigame {
 		void setY(int y);
 		int getX();
 		int getY();
+		Point getPosition();
 
 		bool isDown(int button);
 

@@ -18,6 +18,7 @@
 #include "sound.h"
 #include "src/Image.h"
 #include "src/ImageData.h"
+#include "src/Point.h"
 #include "src/Config.h"
 #include "src/SoundData.h"
 #include "src/Joystick.h"

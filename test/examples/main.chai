@@ -1,0 +1,43 @@
+global tests = []
+global currenttest = 0
+global testNames = [
+	"graphics_print",
+	"graphics_draw",
+	"mouse_getPosition"
+]
+
+def conf(t) {
+	t.window.width = 460
+	t.window.height = 320
+}
+
+def load() {
+	for (name : testNames) {
+		filesystem.load(name + ".chai");
+		tests.push_back(eval(name + "()"));
+	}
+
+	for (test : tests) {
+		test.load();
+	}
+}
+
+def draw() {
+	tests[currenttest].draw();
+
+	graphics.setColor(255, 255, 255)
+	graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
+}
+
+def update(delta) {
+	tests[currenttest].update(delta)
+}
+
+def joystickpressed(joystick, button) {
+	if (button == 0) {
+		currenttest = currenttest + 1
+		if (currenttest >= tests.size()) {
+			currenttest = 0
+		}
+	}
+}
