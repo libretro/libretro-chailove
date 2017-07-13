@@ -1,0 +1,16 @@
+class graphics_print {
+	var name;
+	def graphics_print() {
+		this.name = __CLASS__;
+	}
+
+	def load() {}
+
+	def draw() {
+		graphics.print("graphics.print()", 100, 100);
+	}
+
+	def update(delta) {
+
+	}
+};

@@ -1,17 +1,21 @@
-global tests
-global currenttest
+global tests = []
+global currenttest = 0
+global testNames = [
+	"graphics_print"
+]
 
 def load() {
-
-	filesystem.load("Tester.chai")
-	currenttest = 0
-	tests = [Tester()]
+	for (name : testNames) {
+		filesystem.load(name + ".chai");
+		tests.push_back(eval(name + "()"));
+	}
 }
 
 def draw() {
-	tests[currenttest].draw()
+	tests[currenttest].draw();
+	graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
 }
 
-def update() {
-	tests[currenttest].update()
+def update(delta) {
+	tests[currenttest].update(delta)
 }
