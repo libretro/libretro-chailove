@@ -1,0 +1,116 @@
+global WIDTH
+global HEIGHT
+global LEN
+
+global S
+global dir
+global t
+global T
+
+def conf(config) {
+	WIDTH = 32
+	HEIGHT = 32
+	LEN = 5
+	config.window.width  = WIDTH*12
+	config.window.height = HEIGHT*12
+}
+
+def init() {
+	S = []
+	for (var i = 0; i < LEN; ++i) {
+		S.push_back([WIDTH / 2, HEIGHT / 2])
+	}
+	dir = 0
+	t = 0
+	T = [math.random(WIDTH - 2), math.random(HEIGHT - 2)]
+}
+
+def load() {
+	graphics.setBackgroundColor(0, 0, 255)
+
+	init()
+}
+
+def update(dt) {
+	t = t + 1
+
+	if (joystick[0].isDown("up")) {
+		if (dir != 2) {
+			dir = 1
+		}
+	}
+	if (joystick[0].isDown("down")) {
+		if (dir != 1) {
+			dir = 2
+		}
+	}
+	if (joystick[0].isDown("left")) {
+		if (dir != 4) {
+			dir = 3
+		}
+	}
+	if (joystick[0].isDown("right")) {
+		if (dir != 3) {
+			dir = 4
+		}
+	}
+
+	if (t % 5 != 0) {
+		return
+	}
+
+	var head = S.back()
+
+	if (dir == 1) {
+		S.push_back([head[0] + 0, head[1] - 1])
+	}
+	if (dir == 2) {
+		S.push_back([head[0] + 0, head[1] + 1])
+	}
+	if (dir == 3) {
+		S.push_back([head[0] - 1, head[1] + 0])
+	}
+	if (dir == 4) {
+		S.push_back([head[0] + 1, head[1] + 0])
+	}
+
+	head = S.back()
+
+	if (head[0] < 0 || head[0] == WIDTH || head[1] < 0 || head[1] == HEIGHT) {
+		init()
+	}
+
+	for (var i = 0; i < S.size() - 1; ++i) {
+		if (head[0] == S[i][0] && head[1] == S[i][1] && dir > 0) {
+			init()
+		}
+	}
+
+	if (head[0] == T[0] && head[1] == T[1]) {
+		T = [math.random(WIDTH - 2), math.random(HEIGHT - 2)]
+	}
+	else if (dir > 0) {
+		var newS = []
+		for (var sTime = 1; sTime < S.size(); ++sTime) {
+			newS.push_back(S[sTime])
+		}
+		S = newS
+	}
+}
+
+def draw() {
+	graphics.setColor(134, 201, 0)
+	for (var y = 0; y < HEIGHT; ++y) {
+		for (var x = 0; x < WIDTH; ++x) {
+			graphics.rectangle("fill", x*12, y*12, 11, 11)
+		}
+	}
+
+	graphics.setColor(216, 6, 0)
+	for (var i = 0; i < S.size(); ++i) {
+		graphics.rectangle("fill", S[i][0]*12, S[i][1]*12, 10, 10)
+	}
+
+	graphics.setColor(2, 116, 132)
+	graphics.rectangle("fill", T[0]*12, T[1]*12, 10, 10)
+}
