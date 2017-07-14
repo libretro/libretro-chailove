@@ -11,8 +11,8 @@ def conf(config) {
 	WIDTH = 32
 	HEIGHT = 32
 	LEN = 5
-	config.window.width  = WIDTH*12
-	config.window.height = HEIGHT*12
+	config.window.width  = WIDTH * 12
+	config.window.height = HEIGHT * 12
 }
 
 def init() {
@@ -26,7 +26,7 @@ def init() {
 }
 
 def load() {
-	graphics.setBackgroundColor(0, 0, 255)
+	graphics.setBackgroundColor(133, 188, 22)
 
 	init()
 }
@@ -102,7 +102,7 @@ def draw() {
 	graphics.setColor(134, 201, 0)
 	for (var y = 0; y < HEIGHT; ++y) {
 		for (var x = 0; x < WIDTH; ++x) {
-			graphics.rectangle("fill", x*12, y*12, 11, 11)
+			graphics.rectangle("fill", x*12, y*12, 10, 10)
 		}
 	}
 
