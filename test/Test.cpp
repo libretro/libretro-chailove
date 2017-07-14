@@ -11,7 +11,8 @@ void Test::conf(chaigame::Config& t) {
 
 bool Test::load() {
 	Application* app = Application::getInstance();
-	thefont = app->graphics.newFont("test/examples/assets/Raleway-Regular.ttf", 60);
+	secondfont = app->graphics.newFont("test/examples/assets/Raleway-Regular.ttf", 60);
+	thefont = app->graphics.newFont("test/examples/assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
 }
 
 void Test::update(float delta) {}
@@ -20,11 +21,21 @@ void Test::draw() {
 	Application* app = Application::getInstance();
 
 	app->graphics.setColor(77, 182, 172);
-	app->graphics.ellipse("fill", 300, 400, 200, 180);
+	app->graphics.ellipse("fill", 0, 768, 200, 180);
+
+	int width = thefont->getWidth("Bitmap Commodore Font!");
+	int height = app->graphics.getHeight() / 2.0f - thefont->getHeight() / 2.0f;
 
 	app->graphics.setColor(100, 181, 246);
 	app->graphics.setFont(thefont);
-	app->graphics.print("Hello World!", 300, 100);
+	app->graphics.print("Bitmap Commodore Font!", app->graphics.getWidth() / 2.0f - width / 2.0f, 200);
+
+	app->graphics.setColor(255, 181, 0);
+	app->graphics.setFont(secondfont);
+
+	width = secondfont->getWidth("TTF Font here!");
+	height = app->graphics.getHeight() / 2.0f - secondfont->getHeight() / 2.0f;
+	app->graphics.print("TTF Font here!", app->graphics.getWidth() / 2.0f - width / 2.0f, height);
 }
 
 #endif

@@ -52,6 +52,7 @@ namespace chaigame {
 		chai.add(user_type<Font>(), "Font");
 		chai.add(fun(&Font::loaded), "loaded");
 		chai.add(fun(&Font::getHeight), "getHeight");
+		chai.add(fun(&Font::getWidth), "getWidth");
 
 		// Add the Config.
 		chai.add(user_type<windowConfig>(), "windowConfig");
@@ -86,6 +87,7 @@ namespace chaigame {
 		chai.add(fun(&graphics::newQuad), "newQuad");
 		chai.add(fun<Font*, graphics, const std::string&, int>(&graphics::newFont), "newFont");
 		chai.add(fun<Font*, graphics, const std::string&>(&graphics::newFont), "newFont");
+		chai.add(fun<Font*, graphics, const std::string&, int, int, const std::string&>(&graphics::newFont), "newFont");
 		chai.add(fun<Font*, graphics>(&graphics::newFont), "newFont");
 		chai.add(fun<void, graphics, Font*>(&graphics::setFont), "setFont");
 		chai.add(fun<void, graphics>(&graphics::setFont), "setFont");
