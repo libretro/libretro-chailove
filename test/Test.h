@@ -12,6 +12,7 @@ public:
 	void update(float delta);
 	void draw();
 	int tester = 0;
+	chaigame::Font* thefont;
 };
 
 #endif

@@ -67,6 +67,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/image.o \
 	chaigame/sound.o \
 	chaigame/math.o \
+	chaigame/font.o \
 	chaigame/timer.o \
 	chaigame/event.o \
 	chaigame/window.o \
@@ -77,6 +78,7 @@ OBJECTS := libretro.o Application.o \
 	chaigame/src/Quad.o \
 	chaigame/src/Image.o \
 	chaigame/src/Config.o \
+	chaigame/src/Font.o \
 	chaigame/src/SoundData.o \
 	chaigame/src/Point.o \
 	chaigame/src/Joystick.o \
@@ -96,14 +98,17 @@ LDFLAGS +=  $(fpic) $(SHARED) \
 	vendor/sdl-libretro/SDL_image_$(SDL_PREFIX).a \
 	vendor/sdl-libretro/libSDL_mixer_$(SDL_PREFIX).a \
 	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/SDL_ttf_$(SDL_PREFIX).a \
 	vendor/physfs/libphysfs.a \
 	-ldl -ljpeg -lpng \
+	-lfreetype \
 	-lmikmod -lvorbisfile -logg \
 	-lpthread $(EXTRA_LDF)
 FLAGS += -I. \
 	-Ivendor/sdl-libretro/include \
 	-Ivendor/libretro-common/include \
 	-Ivendor/chaiscript/include \
+	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
 	-Ivendor/ChaiScript_Extras/include \
 	-Ivendor/physfs/src
 

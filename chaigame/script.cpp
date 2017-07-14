@@ -48,6 +48,11 @@ namespace chaigame {
 		chai.add(fun(&ImageData::getWidth), "getWidth");
 		chai.add(fun(&ImageData::getHeight), "getHeight");
 
+		// Add Font.
+		chai.add(user_type<Font>(), "Font");
+		chai.add(fun(&Font::loaded), "loaded");
+		chai.add(fun(&Font::getHeight), "getHeight");
+
 		// Add the Config.
 		chai.add(user_type<windowConfig>(), "windowConfig");
 		chai.add(fun(&windowConfig::width), "width");
@@ -79,6 +84,11 @@ namespace chaigame {
 		chai.add(fun(&graphics::circle), "circle");
 		chai.add(fun(&graphics::line), "line");
 		chai.add(fun(&graphics::newQuad), "newQuad");
+		chai.add(fun<Font*, graphics, const std::string&, int>(&graphics::newFont), "newFont");
+		chai.add(fun<Font*, graphics, const std::string&>(&graphics::newFont), "newFont");
+		chai.add(fun<Font*, graphics>(&graphics::newFont), "newFont");
+		chai.add(fun<void, graphics, Font*>(&graphics::setFont), "setFont");
+		chai.add(fun<void, graphics>(&graphics::setFont), "setFont");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setColor), "setColor");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::setColor), "setColor");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
@@ -89,6 +99,10 @@ namespace chaigame {
 		chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics>(&graphics::clear), "clear");
 		chai.add_global(var(std::ref(app->graphics)), "graphics");
+
+		// Register the Font module.
+		chai.add(fun(&font::isOpen), "isOpen");
+		chai.add_global(var(std::ref(app->font)), "font");
 
 		// Register the Keyboard module.
 		chai.add(fun<bool, keyboard, const std::string&>(&keyboard::isDown), "isDown");

@@ -7,9 +7,13 @@
 #include "../Application.h"
 #include "src/ImageData.h"
 #include "src/Image.h"
+#include "src/Font.h"
 
 namespace chaigame {
 
+	graphics::graphics() {
+		activeFont = new Font();
+	}
 
 	SDL_Surface* graphics::getScreen() {
 		return Application::getInstance()->screen;
@@ -20,6 +24,7 @@ namespace chaigame {
 		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
 			printf("Warning: Enabling alpha blending failed.");
 		}
+
 		return true;
 	}
 
@@ -87,7 +92,7 @@ namespace chaigame {
 	}
 
 	void graphics::print(const std::string& text, int x, int y) {
-		stringRGBA(getScreen(), x, y, text.c_str(), r, g, b, a);
+		activeFont->print(text, x, y, r, g, b, a);
 	}
 
 	void graphics::setColor(int red, int green, int blue, int alpha) {
@@ -140,5 +145,29 @@ namespace chaigame {
 		else {
 			filledEllipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
 		}
+	}
+
+	Font* graphics::newFont(const std::string& filename, int size) {
+		return new Font(filename, size);
+	}
+
+	Font* graphics::newFont() {
+		return new Font();
+	}
+
+	Font* graphics::newFont(const std::string& filename) {
+		return newFont(filename, 12);
+	}
+
+	void graphics::setFont(Font* font) {
+		activeFont = font;
+	}
+
+	void graphics::setFont() {
+		activeFont = new Font();
+	}
+
+	Font* graphics::getFont() {
+		return activeFont;
 	}
 }

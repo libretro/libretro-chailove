@@ -9,7 +9,7 @@ class graphics_draw {
 	}
 
 	def load() {
-		this.image = graphics.newImage("graphics_draw.png");
+		this.image = graphics.newImage("assets/graphics_draw.png");
 		this.x = graphics.getWidth() / 2.0f - this.image.getWidth() / 2.0f;
 		this.y = graphics.getHeight() / 2.0f - this.image.getHeight() / 2.0f;
 	}

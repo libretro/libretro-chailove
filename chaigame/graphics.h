@@ -7,10 +7,13 @@
 #include "src/ImageData.h"
 #include "src/Image.h"
 #include "src/Quad.h"
+#include "src/Font.h"
 
 namespace chaigame {
 	class graphics {
 	public:
+
+		graphics();
 		bool load();
 
 		void rectangle(const std::string& drawmode, int x, int y, int width, int height);
@@ -26,6 +29,12 @@ namespace chaigame {
 		Quad newQuad(int x, int y, int width, int height, int sw, int sh);
 
 		ImageData* newImage(const std::string& filename);
+		Font* newFont();
+		Font* newFont(const std::string& filename);
+		Font* newFont(const std::string& filename, int size);
+		void setFont(Font* font);
+		void setFont();
+		Font* getFont();
 
 		void print(const std::string& text, int x, int y);
 		void setColor(int red, int green, int blue, int alpha);
@@ -43,6 +52,8 @@ namespace chaigame {
 		void circle(const std::string& drawmode, int x, int y, int radius);
 		void ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
 		void arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
+
+		Font* activeFont;
 	};
 }
 

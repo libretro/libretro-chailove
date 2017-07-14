@@ -1,9 +1,13 @@
+/**
+ * ChaiGame Benchmark
+ */
+
 // The Sprites and the image to load.
 global sprites = []
 global img
 
 def load() {
-	img = graphics.newImage("examples/graphics_draw.png")
+	img = graphics.newImage("examples/assets/graphics_draw.png")
 	graphics.setBackgroundColor(0, 61, 0)
 
 	// Add the first sprite.

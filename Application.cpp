@@ -25,6 +25,7 @@ Application* Application::getInstance() {
 void Application::quit(void) {
 	// Quit all the subsystems.
 	joystick.unload();
+	font.unload();
 	image.unload();
 	sound.unload();
 	filesystem.unload();
@@ -49,6 +50,7 @@ bool Application::load(const std::string& file) {
 	joystick.load();
 	math.load();
 	mouse.load();
+	font.load();
 	timer.load();
 	script->load();
 

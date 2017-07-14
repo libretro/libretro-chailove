@@ -1,0 +1,20 @@
+class graphics_print_font {
+	var name;
+	var thefont;
+
+	def graphics_print_font() {
+		this.name = "graphics.print(font)";
+	}
+
+	def load() {
+		this.thefont = graphics.newFont("assets/Raleway-Regular.ttf", 40)
+	}
+
+	def draw() {
+		graphics.setFont(this.thefont)
+		graphics.setColor(255, 200, 0)
+		graphics.print("Hello World!", 100, 100);
+	}
+
+	def update(delta) {}
+};

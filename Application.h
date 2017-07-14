@@ -26,6 +26,7 @@ public:
 	chaigame::image image;
 	chaigame::system system;
 	chaigame::sound sound;
+	chaigame::font font;
 	chaigame::timer timer;
 	chaigame::audio audio;
 	chaigame::joystick joystick;

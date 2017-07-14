@@ -80,7 +80,7 @@ namespace chaigame {
 	SDL_RWops* filesystem::openRW(const std::string& filename) {
 		SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
 		if (rw == NULL) {
-			printf("Error loading file %s: %s", filename.c_str(), PHYSFS_getLastError());
+			printf("Error loading file %s: %s %s", filename.c_str(), PHYSFS_getLastError(), SDL_GetError());
 		}
 		return rw;
 	}
