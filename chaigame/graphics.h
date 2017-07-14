@@ -32,6 +32,7 @@ namespace chaigame {
 		Font* newFont();
 		Font* newFont(const std::string& filename);
 		Font* newFont(const std::string& filename, int size);
+		Font* newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters);
 		void setFont(Font* font);
 		void setFont();
 		Font* getFont();

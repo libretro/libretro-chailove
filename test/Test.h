@@ -13,6 +13,7 @@ public:
 	void draw();
 	int tester = 0;
 	chaigame::Font* thefont;
+	chaigame::Font* secondfont;
 };
 
 #endif

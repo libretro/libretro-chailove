@@ -1,6 +1,7 @@
 class graphics_print_font {
 	var name;
 	var thefont;
+	var secondfont;
 
 	def graphics_print_font() {
 		this.name = "graphics.print(font)";
@@ -8,12 +9,19 @@ class graphics_print_font {
 
 	def load() {
 		this.thefont = graphics.newFont("assets/Raleway-Regular.ttf", 40)
+		this.secondfont = graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 	}
 
 	def draw() {
+		var text = "Hello World!"
 		graphics.setFont(this.thefont)
 		graphics.setColor(255, 200, 0)
-		graphics.print("Hello World!", 100, 100);
+		graphics.print(text, 100, 100)
+
+		graphics.setFont(this.secondfont)
+		var width = this.secondfont.getWidth(text)
+		var height = this.secondfont.getHeight()
+		graphics.print(text, graphics.getWidth() / 2.0f - width / 2.0f, graphics.getHeight() - height)
 	}
 
 	def update(delta) {}

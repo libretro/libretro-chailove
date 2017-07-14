@@ -83,7 +83,9 @@ OBJECTS := libretro.o Application.o \
 	chaigame/src/Point.o \
 	chaigame/src/Joystick.o \
 	chaigame/joystick.o \
-	vendor/physfs/extras/physfsrwops.o
+	vendor/physfs/extras/physfsrwops.o \
+	vendor/SDL_tty/src/SDL_fnt.o \
+	vendor/SDL_tty/src/SDL_tty.o
 
 all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)
 
@@ -108,6 +110,7 @@ FLAGS += -I. \
 	-Ivendor/sdl-libretro/include \
 	-Ivendor/libretro-common/include \
 	-Ivendor/chaiscript/include \
+	-Ivendor/SDL_tty/include \
 	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
 	-Ivendor/ChaiScript_Extras/include \
 	-Ivendor/physfs/src

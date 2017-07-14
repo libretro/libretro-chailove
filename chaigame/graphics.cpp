@@ -147,6 +147,10 @@ namespace chaigame {
 		}
 	}
 
+	Font* graphics::newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
+		return new Font(filename, glyphWidth, glyphHeight, letters);
+	}
+
 	Font* graphics::newFont(const std::string& filename, int size) {
 		return new Font(filename, size);
 	}
