@@ -30,74 +30,74 @@ else ifneq ($(findstring MINGW,$(shell uname -a)),)
 endif
 
 
-CORE_DIR    += .
+CORE_DIR += .
 TARGET_NAME := chaigame
-LIBM		    = -lm
+LIBM = -lm
 
 ifeq ($(ARCHFLAGS),)
 ifeq ($(archs),ppc)
-   ARCHFLAGS = -arch ppc -arch ppc64
+	ARCHFLAGS = -arch ppc -arch ppc64
 else
-   ARCHFLAGS = -arch i386 -arch x86_64
+	ARCHFLAGS = -arch i386 -arch x86_64
 endif
 endif
 
 ifeq ($(platform), osx)
-ifndef ($(NOUNIVERSAL))
-   CXXFLAGS += $(ARCHFLAGS)
-   LFLAGS += $(ARCHFLAGS)
-endif
+	ifndef ($(NOUNIVERSAL))
+		CXXFLAGS += $(ARCHFLAGS)
+		LFLAGS += $(ARCHFLAGS)
+	endif
 endif
 
 ifeq ($(STATIC_LINKING), 1)
-EXT := a
+	EXT := a
 endif
 
 ifeq ($(platform), unix)
 	EXT ?= so
-   TARGET := $(TARGET_NAME)_libretro.$(EXT)
-   fpic := -fPIC
-   SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
+	TARGET := $(TARGET_NAME)_libretro.$(EXT)
+	fpic := -fPIC
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
 else ifeq ($(platform), linux-portable)
-   TARGET := $(TARGET_NAME)_libretro.$(EXT)
-   fpic := -fPIC -nostdlib
-   SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T
+	TARGET := $(TARGET_NAME)_libretro.$(EXT)
+	fpic := -fPIC -nostdlib
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T
 	LIBM :=
 else ifneq (,$(findstring osx,$(platform)))
-   TARGET := $(TARGET_NAME)_libretro.dylib
-   fpic := -fPIC
-   SHARED := -dynamiclib
+	TARGET := $(TARGET_NAME)_libretro.dylib
+	fpic := -fPIC
+	SHARED := -dynamiclib
 else ifneq (,$(findstring ios,$(platform)))
-   TARGET := $(TARGET_NAME)_libretro_ios.dylib
+	TARGET := $(TARGET_NAME)_libretro_ios.dylib
 	fpic := -fPIC
 	SHARED := -dynamiclib
 
-ifeq ($(IOSSDK),)
-   IOSSDK := $(shell xcodebuild -version -sdk iphoneos Path)
-endif
+	ifeq ($(IOSSDK),)
+		IOSSDK := $(shell xcodebuild -version -sdk iphoneos Path)
+	endif
 
 	DEFINES := -DIOS
 	CC = cc -arch armv7 -isysroot $(IOSSDK)
-ifeq ($(platform),ios9)
-CC     += -miphoneos-version-min=8.0
-CXXFLAGS += -miphoneos-version-min=8.0
-else
-CC     += -miphoneos-version-min=5.0
-CXXFLAGS += -miphoneos-version-min=5.0
-endif
+	ifeq ($(platform),ios9)
+		CC += -miphoneos-version-min=8.0
+		CXXFLAGS += -miphoneos-version-min=8.0
+	else
+		CC += -miphoneos-version-min=5.0
+		CXXFLAGS += -miphoneos-version-min=5.0
+	endif
 else ifneq (,$(findstring qnx,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro_qnx.so
-   fpic := -fPIC
-   SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
+	fpic := -fPIC
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
 else ifeq ($(platform), emscripten)
-   TARGET := $(TARGET_NAME)_libretro_emscripten.bc
-   fpic := -fPIC
-   SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
+	TARGET := $(TARGET_NAME)_libretro_emscripten.bc
+	fpic := -fPIC
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
 else ifeq ($(platform), vita)
-   TARGET := $(TARGET_NAME)_vita.a
-   CC = arm-vita-eabi-gcc
-   AR = arm-vita-eabi-ar
-   CXXFLAGS += -Wl,-q -Wall -O3
+	TARGET := $(TARGET_NAME)_vita.a
+	CC = arm-vita-eabi-gcc
+	AR = arm-vita-eabi-ar
+	CXXFLAGS += -Wl,-q -Wall -O3
 	STATIC_LINKING = 1
 else
    CC = gcc
@@ -108,9 +108,9 @@ endif
 LDFLAGS += $(LIBM)
 
 ifeq ($(DEBUG), 1)
-   CXXFLAGS += -O0 -g
+	CXXFLAGS += -O0 -g
 else
-   CXXFLAGS += -O3
+	CXXFLAGS += -O3
 endif
 
 include Makefile.common
@@ -120,7 +120,7 @@ OBJECTS := $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o)
 CFLAGS   += -Wall -D__LIBRETRO__ $(fpic) $(INCLUDES)
 CXXFLAGS += -Wall -D__LIBRETRO__ $(fpic) $(INCLUDES)
 
-all: | physfs $(TARGET)
+all: | dependencies $(TARGET)
 
 $(TARGET): $(OBJECTS)
 ifeq ($(STATIC_LINKING), 1)
@@ -136,3 +136,7 @@ clean:
 	rm -f $(OBJECTS) $(TARGET)
 
 .PHONY: clean
+
+dependencies:
+	git submodule update --init --recursive
+	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
