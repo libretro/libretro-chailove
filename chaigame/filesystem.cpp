@@ -63,12 +63,17 @@ namespace chaigame {
 		if (file) {
 			size = PHYSFS_fileLength(file);
 			if (size < 0) {
-				log()->error("Could not get size of file: {}", PHYSFS_getLastError());
+				const char* errorChar = PHYSFS_getLastError();
+				std::string physErr("");
+				if (errorChar != NULL) {
+					physErr = errorChar;
+				}
+				log()->error("Could not get size of file: {}", physErr);
 				return -1;
 			}
 		}
 		else {
-			log()->error("The file is not open: {}", PHYSFS_getLastError());
+			log()->error("The file is not open.");
 		}
 		return size;
 	}
@@ -81,7 +86,19 @@ namespace chaigame {
 	SDL_RWops* filesystem::openRW(const std::string& filename) {
 		SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
 		if (rw == NULL) {
-			log()->error("Error loading file {}: {} {}", filename.c_str(), PHYSFS_getLastError(), SDL_GetError());
+			const char* errorChar = PHYSFS_getLastError();
+			std::string physErr("");
+			if (errorChar != NULL) {
+				physErr = errorChar;
+			}
+
+			errorChar = SDL_GetError();
+			std::string sdlErr("");
+			if (errorChar != NULL) {
+				sdlErr = errorChar;
+			}
+
+			log()->error("Error loading file {}: {} {}", filename, physErr, sdlErr);
 		}
 		return rw;
 	}
@@ -90,7 +107,12 @@ namespace chaigame {
 		char* output = NULL;
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 		if (myfile == NULL) {
-			log()->error("Error opening file {}: {}", filename.c_str(), PHYSFS_getLastError());
+			const char* errorChar = PHYSFS_getLastError();
+			std::string physErr("");
+			if (errorChar != NULL) {
+				physErr = errorChar;
+			}
+			log()->error("Error opening file {}: {}", filename, physErr);
 			return NULL;
 		}
 
@@ -99,14 +121,20 @@ namespace chaigame {
 			output = new char[file_size + 1];
 			int length_read = PHYSFS_readBytes(myfile, output, file_size);
 			if (length_read != file_size) {
-				log()->error("File System error while reading from file {}: {}", filename.c_str(), PHYSFS_getLastError());
+				const char* errorChar = PHYSFS_getLastError();
+				std::string physErr("");
+				if (errorChar != NULL) {
+					physErr = errorChar;
+				}
+				log()->error("File System error while reading from file {}: {}", filename, physErr);
 				output = NULL;
 			}
 			// Make sure there is a null terminating character at the end of the string.
 			output[file_size] = '\0';
 		}
 		else {
-			log()->error("Error getting filesize of {}: {}", filename.c_str(), PHYSFS_getLastError());
+			std::string physErr = PHYSFS_getLastError();
+			log()->error("Error getting filesize of {}: {}", filename, physErr);
 		}
 
 		PHYSFS_close(myfile);

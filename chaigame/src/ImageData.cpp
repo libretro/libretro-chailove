@@ -19,7 +19,12 @@ namespace chaigame {
 		surface = IMG_Load_RW(rw, 1);
 
 		if (!surface) {
-			log()->error("IMG_Load_RW: {}", IMG_GetError());
+			const char* errorChar = IMG_GetError();
+			std::string errString("");
+			if (errorChar != NULL) {
+				errString = errorChar;
+			}
+			log()->error("IMG_Load_RW failed to load data: {}", errString);
 			return false;
 		}
 		return true;
