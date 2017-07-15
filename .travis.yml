@@ -24,8 +24,8 @@ addons:
 
 script:
   # Link gcc-6 and g++-6 to their standard commands
-  - ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-  - ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  - sudo ln -sf /usr/bin/gcc-6 /usr/local/bin/gcc
+  - sudo ln -sf /usr/bin/g++-6 /usr/local/bin/g++
   # Check versions of gcc, g++ and cmake
   - gcc -v
   - g++ -v
