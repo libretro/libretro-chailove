@@ -20,6 +20,19 @@ addons:
     - libvorbis-dev
     - libogg-dev
     - g++-6
+    - gcc-6
+
+script:
+  # Link gcc-6 and g++-6 to their standard commands
+  - ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+  - ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  # Check versions of gcc, g++ and cmake
+  - gcc -v
+  - g++ -v
+  # Run through the make commands
+  - ./configure
+  - make
+  - make test
 
 notifications:
   email: false
