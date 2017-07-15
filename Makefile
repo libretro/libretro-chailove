@@ -29,7 +29,6 @@ else ifneq ($(findstring MINGW,$(shell uname -a)),)
 	system_platform = win
 endif
 
-
 CORE_DIR += .
 TARGET_NAME := chaigame
 LIBM = -lm
