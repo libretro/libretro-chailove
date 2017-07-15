@@ -1,5 +1,5 @@
-#ifndef _CHAIGAME_TEST_TEST_H_
-#define _CHAIGAME_TEST_TEST_H_
+#ifndef CHAIGAME_TEST_TEST_H
+#define CHAIGAME_TEST_TEST_H
 
 #include "../chaigame/src/Font.h"
 #include "../chaigame/src/Config.h"
