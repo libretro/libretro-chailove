@@ -35,6 +35,8 @@ namespace chaigame {
 				keyCodes[name] = i;
 			}
 		}
+
+		return true;
 	}
 
 	bool keyboard::update() {
