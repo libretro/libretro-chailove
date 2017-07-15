@@ -28,7 +28,7 @@ namespace chaigame {
 		std::string parentPath(parent.str());
 
 		// Allow loading from an Archive.
-		if (extension == "chaigame") {
+		if (extension == "chaigame" || extension == "zip") {
 			return mount(file.c_str(), "/");
 		}
 
