@@ -146,7 +146,7 @@ submodules:
 	git submodule update --init --recursive
 
 vendor/physfs/libphysfs.a: submodules
-	cd vendor/physfs && cmake . && $(MAKE) C_FLAGS=-fPIC
+	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
 
 .PHONY: clean
 
