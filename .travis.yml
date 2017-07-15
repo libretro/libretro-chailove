@@ -1,0 +1,43 @@
+sudo: required
+language: cpp
+dist: trusty
+compiler: g++
+
+before_install:
+  - sudo apt-get -qq update
+
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    packages:
+    - cmake
+    - time
+    - libjpeg-dev
+    - libpng12-dev
+    - libfreetype6-dev
+    - libmikmod-dev
+    - libvorbis-dev
+    - libogg-dev
+    - g++-5
+    - gcc-5
+
+script:
+  # Link gcc-6 and g++-6 to their standard commands
+  - sudo ln -sf /usr/bin/gcc-5 /usr/local/bin/gcc
+  - sudo ln -sf /usr/bin/g++-5 /usr/local/bin/g++
+  # Check versions of gcc and g++
+  - gcc --version
+  - g++ --version
+  # Run through the make commands
+  - ./configure
+  - make
+  - make test
+
+notifications:
+  email: false
+
+cache:
+    apt: true
+    directories:
+    - vendor
