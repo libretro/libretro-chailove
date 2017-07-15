@@ -10,8 +10,9 @@ void Test::conf(chaigame::Config& t) {
 
 bool Test::load() {
 	Application* app = Application::getInstance();
-	secondfont = app->graphics.newFont("test/examples/assets/Raleway-Regular.ttf", 60);
-	thefont = app->graphics.newFont("test/examples/assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+	app->filesystem.mount("test", "/");
+	secondfont = app->graphics.newFont("examples/assets/Raleway-Regular.ttf", 60);
+	thefont = app->graphics.newFont("examples/assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
 }
 
 void Test::update(float delta) {}

@@ -14,6 +14,7 @@ namespace chaigame {
 		Application* app = Application::getInstance();
 		std::string contents = app->filesystem.read(moduleName);
 		if (!contents.empty()) {
+			// TODO: Are tabs problematic?
 			contents = replaceString(contents, "\t", "  ");
 			chai.eval(contents, Exception_Handler(), moduleName);
 			return true;
@@ -340,11 +341,11 @@ namespace chaigame {
 	}
 
 	std::string script::replaceString(std::string subject, const std::string& search, const std::string& replace) {
-	    size_t pos = 0;
-	    while ((pos = subject.find(search, pos)) != std::string::npos) {
-	         subject.replace(pos, search.length(), replace);
-	         pos += replace.length();
-	    }
-	    return subject;
+		size_t pos = 0;
+		while ((pos = subject.find(search, pos)) != std::string::npos) {
+			 subject.replace(pos, search.length(), replace);
+			 pos += replace.length();
+		}
+		return subject;
 	}
 }

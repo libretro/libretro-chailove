@@ -18,8 +18,14 @@ namespace chaigame {
 		int flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int initted = IMG_Init(flags);
 		if(flags != (initted & flags)) {
-		    log()->error("Failed to call IMG_Init with jpg/png: {}", IMG_GetError());
-		    return false;
+
+			const char* errorChar = IMG_GetError();
+			std::string errString("");
+			if (errorChar != NULL) {
+				errString = errorChar;
+			}
+			log()->error("Failed to call IMG_Init with jpg/png: {}", errString);
+			return false;
 		}
 		return true;
 	}

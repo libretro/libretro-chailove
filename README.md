@@ -31,7 +31,7 @@ make
 To compile and run the testing framework, use:
 
 ```
-make testscripts
+make examples
 ```
 
 ### Flags
