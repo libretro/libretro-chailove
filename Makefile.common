@@ -83,8 +83,8 @@ ifneq ($(HAVE_TESTS),)
 	CXXFLAGS += -D__HAVE_TESTS__
 endif
 
-CFLAGS += -std=gnu99
-CXXFLAGS += -std=c++14
+CFLAGS += -std=gnu99 -DLSB_FIRST
+CXXFLAGS += -std=c++14 -DLSB_FIRST
 
 # -fpermissive
 
