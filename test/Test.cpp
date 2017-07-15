@@ -1,7 +1,7 @@
 #ifdef __HAVE_TESTS__
 
 #include "Test.h"
-#include "../Application.h"
+#include "../Game.h"
 
 void Test::conf(chaigame::Config& t) {
 	t.window.width = 1080;
@@ -9,7 +9,7 @@ void Test::conf(chaigame::Config& t) {
 }
 
 bool Test::load() {
-	Application* app = Application::getInstance();
+	Game* app = Game::getInstance();
 	app->filesystem.mount("test", "/");
 	secondfont = app->graphics.newFont("examples/assets/Raleway-Regular.ttf", 60);
 	thefont = app->graphics.newFont("examples/assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
@@ -18,7 +18,7 @@ bool Test::load() {
 void Test::update(float delta) {}
 
 void Test::draw() {
-	Application* app = Application::getInstance();
+	Game* app = Game::getInstance();
 
 	app->graphics.setColor(77, 182, 172);
 	app->graphics.ellipse("fill", 0, 768, 200, 180);

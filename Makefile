@@ -56,7 +56,7 @@ else
 	SDL_PREFIX := win
 endif
 
-OBJECTS := libretro.o Application.o \
+OBJECTS := libretro.o Game.o \
 	chaigame/audio.o \
 	chaigame/log.o \
 	chaigame/graphics.o \

@@ -2,25 +2,25 @@
 #include "SDL.h"
 
 #include "libretro.h"
-#include "Application.h"
+#include "Game.h"
 #include "chaigame/log.h"
 
-Application* Application::m_instance = NULL;
-retro_input_state_t Application::input_state_cb = NULL;
-retro_input_poll_t Application::input_poll_cb = NULL;
+Game* Game::m_instance = NULL;
+retro_input_state_t Game::input_state_cb = NULL;
+retro_input_poll_t Game::input_poll_cb = NULL;
 
-void Application::destroy() {
+void Game::destroy() {
 	m_instance = NULL;
 }
 
-Application* Application::getInstance() {
+Game* Game::getInstance() {
 	if (!m_instance) {
-		m_instance = new Application;
+		m_instance = new Game;
 	}
 	return m_instance;
 }
 
-void Application::quit(void) {
+void Game::quit(void) {
 	// Quit all the subsystems.
 	joystick.unload();
 	font.unload();
@@ -31,7 +31,7 @@ void Application::quit(void) {
 	chaigame::log()->info("Finish");
 }
 
-bool Application::load(const std::string& file) {
+bool Game::load(const std::string& file) {
 	// Initalize all the subsystems.
 	chaigame::log()->info("Welcome to ChaiGame");
 	filesystem.init(file);
@@ -65,7 +65,7 @@ bool Application::load(const std::string& file) {
 	return true;
 }
 
-bool Application::update() {
+bool Game::update() {
 	if (event.quitstatus) {
 		return false;
 	}
@@ -107,9 +107,9 @@ bool Application::update() {
 }
 
 /**
- * Render the application.
+ * Render the Game.
  */
-void Application::draw() {
+void Game::draw() {
 	if (!event.quitstatus) {
 		// Clear the screen.
 		graphics.clear();

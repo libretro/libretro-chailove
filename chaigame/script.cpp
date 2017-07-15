@@ -1,6 +1,6 @@
 #include "script.h"
 #include "log.h"
-#include "../Application.h"
+#include "../Game.h"
 #include "SDL.h"
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -11,7 +11,7 @@ using namespace chaiscript;
 namespace chaigame {
 	bool script::loadModule(const std::string& moduleName) {
 		#ifdef __HAVE_CHAISCRIPT__
-		Application* app = Application::getInstance();
+		Game* app = Game::getInstance();
 		std::string contents = app->filesystem.read(moduleName);
 		if (!contents.empty()) {
 			// TODO: Are tabs problematic?
@@ -28,7 +28,7 @@ namespace chaigame {
 
 	script::script() {
 		#ifdef __HAVE_CHAISCRIPT__
-		Application* app = Application::getInstance();
+		Game* app = Game::getInstance();
 
 		// Add the Quad.
 		chai.add(user_type<Quad>(), "Quad");

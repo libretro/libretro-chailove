@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libretro.h>
-#include "Application.h"
+#include "Game.h"
 
 char RETRO_DIR[512];
 const char *retro_save_directory;
@@ -24,11 +24,11 @@ void retro_set_video_refresh(retro_video_refresh_t cb) { video_cb = cb; }
 void retro_set_audio_sample(retro_audio_sample_t cb) { audio_cb  =cb; }
 void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) { audio_batch_cb = cb; }
 void retro_set_input_poll(retro_input_poll_t cb) {
-	Application::input_poll_cb = cb;
+	Game::input_poll_cb = cb;
 }
 
 void retro_set_input_state(retro_input_state_t cb) {
-	Application::input_state_cb = cb;
+	Game::input_state_cb = cb;
 }
 
 // these 2 funtions have to be implemented for Libretro SDL port
@@ -40,7 +40,7 @@ void libretro_audio_cb(int16_t left, int16_t right) {
 }
 
 short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
-	return Application::input_state_cb(port, device, index, id);
+	return Game::input_state_cb(port, device, index, id);
 }
 #ifdef __cplusplus
 }
@@ -87,7 +87,7 @@ void retro_get_system_info(struct retro_system_info *info) {
 }
 
 void retro_get_system_av_info(struct retro_system_av_info *info) {
-	Application* app = Application::getInstance();
+	Game* app = Game::getInstance();
 	unsigned int width = 640;
 	unsigned int height = 480;
 	if (app != NULL) {
@@ -139,7 +139,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 
 void texture_init(){
-	Application* app = Application::getInstance();
+	Game* app = Game::getInstance();
 	if (app->videoBuffer) {
         memset(app->videoBuffer, 0, sizeof(app->videoBuffer));
 	}
@@ -147,7 +147,7 @@ void texture_init(){
 
 bool retro_load_game(const struct retro_game_info *info) {
 	std::string full(info ? info->path : "main.chai");
-	return Application::getInstance()->load(full);
+	return Game::getInstance()->load(full);
 }
 
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
@@ -160,7 +160,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 void retro_unload_game(void) {
 	// Nothing.
 	printf("retro_unload_game\n");
-	Application* app = Application::getInstance();
+	Game* app = Game::getInstance();
 	app->event.quit();
 }
 
@@ -251,7 +251,7 @@ void retro_init(void) {
 
 void retro_deinit(void) {
 	printf("retro_deinit\n");
-	Application* app = Application::getInstance();
+	Game* app = Game::getInstance();
 	if (app) {
 		app->event.quit();
 		app->quit();
@@ -264,10 +264,10 @@ void retro_reset(void) {
 }
 
 void retro_run(void) {
-	Application* app = Application::getInstance();
+	Game* app = Game::getInstance();
 	if (app != NULL && app->event.quitstatus == false) {
 		// Poll all the inputs.
-		Application::input_poll_cb();
+		Game::input_poll_cb();
 
 		// Update the game.
 		if (!app->update()) {
