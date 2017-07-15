@@ -142,8 +142,7 @@ clean:
 	rm -f $(TARGET) $(OBJECTS)
 
 vendor/libretro-common/include/libretro.h:
-	git submodule init
-	git submodule update
+	git submodule update --init
 
 vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 	cd vendor/physfs && cmake . && make C_FLAGS=-fPIC
