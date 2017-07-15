@@ -12,7 +12,12 @@ namespace chaigame {
 
 		// Initialize SDL.
 		if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
-			log()->critical("Unable to initialize SDL: {}", SDL_GetError());
+			const char* errorChar = SDL_GetError();
+			std::string errString("");
+			if (errorChar != NULL) {
+				errString = errorChar;
+			}
+			log()->critical("Unable to initialize SDL: {}", errString);
 			return false;
 		}
 
@@ -20,7 +25,12 @@ namespace chaigame {
 		Uint32 flags = SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE;
 		app->screen = SDL_SetVideoMode(config.window.width, config.window.height, config.window.bbp, flags);
 		if (app->screen == NULL) {
-			log()->critical("Unable to create screen: {}", SDL_GetError());
+			const char* errorChar = SDL_GetError();
+			std::string errString("");
+			if (errorChar != NULL) {
+				errString = errorChar;
+			}
+			log()->critical("Unable to create screen: {}", errString);
 			SDL_Quit();
 			return false;
 		}

@@ -16,7 +16,12 @@ namespace chaigame {
 		if (rwops) {
 			SDL_Surface* surface = IMG_Load_RW(rwops, 1);
 			if (surface == NULL) {
-				log()->error("Font::Font: {}", IMG_GetError());
+				const char* errorChar = IMG_GetError();
+				std::string errString("");
+				if (errorChar != NULL) {
+					errString = errorChar;
+				}
+				log()->error("Font::Font: {}", errString);
 				return;
 			}
 
@@ -37,7 +42,12 @@ namespace chaigame {
 		if (rwops) {
 			TTF_Font* newFont = TTF_OpenFontRW(rwops, 1, ptsize);
 			if (!newFont) {
-				log()->error("TTF_OpenFontRW: {}", TTF_GetError());
+				const char* errorChar = TTF_GetError();
+				std::string errString("");
+				if (errorChar != NULL) {
+					errString = errorChar;
+				}
+				log()->error("TTF_OpenFontRW: {}", errString);
 				return;
 			}
 
@@ -99,7 +109,12 @@ namespace chaigame {
 			SDL_Color color = {(Uint8)r, (Uint8)g, (Uint8)b};
 			SDL_Surface* surface = TTF_RenderText_Blended(ttfFont, text.c_str(), color);
 			if (!surface) {
-				log()->error("Font::print - {}", TTF_GetError());
+				const char* errorChar = TTF_GetError();
+				std::string errString("");
+				if (errorChar != NULL) {
+					errString = errorChar;
+				}
+				log()->error("Font::print - {}", errString);
 				return;
 			}
 
