@@ -76,13 +76,17 @@ namespace chaigame {
 
 		// Unload SDL_Mixer.
 		if (loaded) {
+			log()->info("Mix_Quit(): Starting");
 			Mix_Quit();
+			log()->info("Mix_Quit(): Finished");
 			loaded = false;
 		}
 
 		// Unload the audio system.
 		if (initialized) {
+			log()->info("Mix_CloseAudio: Starting");
 			Mix_CloseAudio();
+			log()->info("Mix_CloseAudio: Finished");
 			initialized = false;
 		}
 	}
