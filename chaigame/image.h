@@ -2,6 +2,7 @@
 #define _IMAGE_H_INCLUDED_
 
 #include "src/ImageData.h"
+#include <string>
 
 namespace chaigame {
 	class image {

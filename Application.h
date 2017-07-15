@@ -3,8 +3,22 @@
 
 #include "SDL.h"
 #include "libretro.h"
-#include "chaigame/chaigame.h"
-#include "spdlog/spdlog.h"
+#include "chaigame/keyboard.h"
+#include "chaigame/src/Config.h"
+#include "chaigame/script.h"
+#include "chaigame/filesystem.h"
+#include "chaigame/graphics.h"
+#include "chaigame/image.h"
+#include "chaigame/system.h"
+#include "chaigame/sound.h"
+#include "chaigame/font.h"
+#include "chaigame/timer.h"
+#include "chaigame/audio.h"
+#include "chaigame/joystick.h"
+#include "chaigame/mouse.h"
+#include "chaigame/window.h"
+#include "chaigame/math.h"
+#include "chaigame/event.h"
 
 #ifdef __HAVE_TESTS__
 #include "test/Test.h"
@@ -12,7 +26,6 @@
 
 class Application {
 public:
-	Application();
     static Application* getInstance();
 	static Application* m_instance;
 	static void destroy();
@@ -36,7 +49,6 @@ public:
 	chaigame::math math;
 	chaigame::window window;
 	chaigame::event event;
-	std::shared_ptr<spdlog::logger> log;
 
 	void quit(void);
 	bool load(const std::string& file);

@@ -6,6 +6,7 @@
 #include <SDL_fnt.h>
 #include "../../Application.h"
 #include "SDL_image.h"
+#include "../log.h"
 
 namespace chaigame {
 	Font::Font() {}
@@ -15,13 +16,13 @@ namespace chaigame {
 		if (rwops) {
 			SDL_Surface* surface = IMG_Load_RW(rwops, 1);
 			if (surface == NULL) {
-				printf("Font::Font: %s\n", IMG_GetError());
+				log()->error("Font::Font: {}", IMG_GetError());
 				return;
 			}
 
 			TTY_Font* newFont = FNT_Create(surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
-				printf("Error creating FNT_Create()\n");
+				log()->error("Error creating FNT_Create()\n");
 				return;
 			}
 
@@ -36,7 +37,7 @@ namespace chaigame {
 		if (rwops) {
 			TTF_Font* newFont = TTF_OpenFontRW(rwops, 1, ptsize);
 			if (!newFont) {
-				printf("TTF_OpenFontRW: %s\n", TTF_GetError());
+				log()->error("TTF_OpenFontRW: {}", TTF_GetError());
 				return;
 			}
 
@@ -98,7 +99,7 @@ namespace chaigame {
 			SDL_Color color = {(Uint8)r, (Uint8)g, (Uint8)b};
 			SDL_Surface* surface = TTF_RenderText_Blended(ttfFont, text.c_str(), color);
 			if (!surface) {
-				printf("Font::print - %s\n", TTF_GetError());
+				log()->error("Font::print - {}", TTF_GetError());
 				return;
 			}
 

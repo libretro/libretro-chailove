@@ -3,7 +3,8 @@
 #ifndef _TEST_H_INCLUDED_
 #define _TEST_H_INCLUDED_
 
-#include "../chaigame/chaigame.h"
+#include "../chaigame/src/Font.h"
+#include "../chaigame/src/Config.h"
 
 class Test {
 public:

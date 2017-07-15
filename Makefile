@@ -59,7 +59,7 @@ endif
 
 OBJECTS := libretro.o Application.o \
 	chaigame/audio.o \
-	chaigame/chaigame.o \
+	chaigame/log.o \
 	chaigame/graphics.o \
 	chaigame/keyboard.o \
 	chaigame/script.o \

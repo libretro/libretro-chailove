@@ -8,6 +8,7 @@
 #include "src/ImageData.h"
 #include "src/Image.h"
 #include "src/Font.h"
+#include "log.h"
 
 namespace chaigame {
 
@@ -22,7 +23,7 @@ namespace chaigame {
 	bool graphics::load() {
 		// Enable alpha blending.
 		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
-			Application::getInstance()->log->warn("Enabling alpha blending failed");
+			log()->warn("Enabling alpha blending failed");
 		}
 
 		return true;
@@ -74,7 +75,7 @@ namespace chaigame {
 			dest->w = x + quad.width;
 			dest->h = y + quad.height;
 			if (SDL_gfxBlitRGBA(image->surface, quad.toRect(), getScreen(), dest) == -1) {
-				Application::getInstance()->log->error("Error calling SDL_gfxBlitRGBA");
+				log()->error("Error calling SDL_gfxBlitRGBA");
 			}
 		}
 	}
