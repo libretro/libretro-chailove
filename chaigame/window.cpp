@@ -40,6 +40,8 @@ namespace chaigame {
 
 		// Set the title.
 		setTitle(config.window.title);
+
+		return true;
 	}
 
 	bool window::unload() {

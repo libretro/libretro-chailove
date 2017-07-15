@@ -5,6 +5,8 @@ namespace chaigame {
 
 	bool timer::load() {
 		current = last = SDL_GetTicks();
+
+		return true;
 	}
 
 	void timer::step() {

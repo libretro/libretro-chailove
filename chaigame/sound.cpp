@@ -99,6 +99,7 @@ namespace chaigame {
 			return newSound;
 		}
 		log()->error("Error loading newSoundData('{}', '{}')", file, type);
+		return NULL;
 	}
 
 	SoundData* sound::newSoundData(const std::string& file) {

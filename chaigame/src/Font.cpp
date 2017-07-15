@@ -73,6 +73,8 @@ namespace chaigame {
 			FNT_Free(ttyFont);
 			ttyFont = NULL;
 		}
+
+		return true;
 	}
 
 	int Font::getHeight() {
