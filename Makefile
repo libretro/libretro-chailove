@@ -29,7 +29,6 @@ else ifneq ($(findstring MINGW,$(shell uname -a)),)
 	system_platform = win
 endif
 
-
 CORE_DIR += .
 TARGET_NAME := chaigame
 LIBM = -lm
@@ -121,6 +120,9 @@ CFLAGS   += -Wall -D__LIBRETRO__ $(fpic) $(INCLUDES)
 CXXFLAGS += -Wall -D__LIBRETRO__ $(fpic) $(INCLUDES)
 
 all: | dependencies $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 $(TARGET): $(OBJECTS)
 ifeq ($(STATIC_LINKING), 1)
