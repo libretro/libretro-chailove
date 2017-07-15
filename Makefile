@@ -87,7 +87,7 @@ OBJECTS := libretro.o Application.o \
 	vendor/SDL_tty/src/SDL_fnt.o \
 	vendor/SDL_tty/src/SDL_tty.o
 
-all: vendor/physfs/libphysfs.a vendor/libretro-common/include/libretro.h $(TARGET)
+all: $(TARGET) | vendor/physfs/libphysfs.a
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -150,7 +150,7 @@ vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 .PHONY: clean
 
 testing:
-	make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
+	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 testscripts: all
 	retroarch -L $(TARGET) test/examples/main.chai
