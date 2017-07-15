@@ -3,6 +3,7 @@
 #include <string>
 #include "SDL_image.h"
 #include "src/ImageData.h"
+#include "../Application.h"
 
 namespace chaigame {
 	chaigame::ImageData* image::newImageData(const std::string& filename) {
@@ -17,8 +18,7 @@ namespace chaigame {
 		int flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int initted = IMG_Init(flags);
 		if(flags != (initted & flags)) {
-		    printf("IMG_Init: Failed to init required jpg and png support!\n");
-		    printf("IMG_Init: %s\n", IMG_GetError());
+		    Application::getInstance()->log->error("Failed to call IMG_Init with jpg/png: {}", IMG_GetError());
 		    return false;
 		}
 		return true;

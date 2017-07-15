@@ -2,6 +2,7 @@
 
 #include <string>
 #include "SDL.h"
+#include "../Application.h"
 
 namespace chaigame {
 
@@ -20,7 +21,7 @@ namespace chaigame {
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
 		if (SDL_EnableKeyRepeat(delay, interval) == -1) {
-			printf("Error setting KeyRepeat.");
+			Application::getInstance()->log->error("Error setting KeyRepeat.");
 		}
 	}
 

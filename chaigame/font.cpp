@@ -3,13 +3,13 @@
 #include "SDL_ttf.h"
 #include "font.h"
 #include "src/Font.h"
+#include "../Application.h"
 
 namespace chaigame {
 	bool font::load() {
 		int result = TTF_Init();
 		if(result == -1) {
-		    printf("TTF_Init: Failed to init font system:\n");
-		    printf("TTF_Init: %s\n", TTF_GetError());
+			Application::getInstance()->log->error("TTF_Init failed to initialize font system: {}", TTF_GetError());
 		    return false;
 		}
 		return true;

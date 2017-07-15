@@ -13,7 +13,7 @@ namespace chaigame {
 
 		// Initialize SDL.
 		if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
-			printf("Unable to initialize SDL: %s", SDL_GetError());
+			Application::getInstance()->log->critical("Unable to initialize SDL: {}", SDL_GetError());
 			return false;
 		}
 
@@ -21,7 +21,7 @@ namespace chaigame {
 		Uint32 flags = SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE;
 		app->screen = SDL_SetVideoMode(config.window.width, config.window.height, config.window.bbp, flags);
 		if (app->screen == NULL) {
-			printf("Unable to create screen: %s", SDL_GetError());
+			Application::getInstance()->log->critical("Unable to create screen: {}", SDL_GetError());
 			SDL_Quit();
 			return false;
 		}

@@ -62,12 +62,12 @@ namespace chaigame {
 		if (file) {
 			size = PHYSFS_fileLength(file);
 			if (size < 0) {
-				printf("Error getting size of file: %s", PHYSFS_getLastError());
+				Application::getInstance()->log->error("Could not get size of file: {}", PHYSFS_getLastError());
 				return -1;
 			}
 		}
 		else {
-			printf("The file is not open: %s", PHYSFS_getLastError());
+			Application::getInstance()->log->error("The file is not open: {}", PHYSFS_getLastError());
 		}
 		return size;
 	}
@@ -80,7 +80,7 @@ namespace chaigame {
 	SDL_RWops* filesystem::openRW(const std::string& filename) {
 		SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
 		if (rw == NULL) {
-			printf("Error loading file %s: %s %s", filename.c_str(), PHYSFS_getLastError(), SDL_GetError());
+			Application::getInstance()->log->error("Error loading file {}: {} {}", filename.c_str(), PHYSFS_getLastError(), SDL_GetError());
 		}
 		return rw;
 	}
@@ -89,7 +89,7 @@ namespace chaigame {
 		char* output = NULL;
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 		if (myfile == NULL) {
-			printf("Error opening file %s: %s\n", filename.c_str(), PHYSFS_getLastError());
+			Application::getInstance()->log->error("Error opening file {}: {}", filename.c_str(), PHYSFS_getLastError());
 			return NULL;
 		}
 
@@ -98,14 +98,14 @@ namespace chaigame {
 			output = new char[file_size + 1];
 			int length_read = PHYSFS_readBytes(myfile, output, file_size);
 			if (length_read != file_size) {
-				printf("File System error while reading from file %s: %s\n", filename.c_str(), PHYSFS_getLastError());
+				Application::getInstance()->log->error("File System error while reading from file {}: {}", filename.c_str(), PHYSFS_getLastError());
 				output = NULL;
 			}
 			// Make sure there is a null terminating character at the end of the string.
 			output[file_size] = '\0';
 		}
 		else {
-			printf("Error getting filesize of %s: %s\n", filename.c_str(), PHYSFS_getLastError());
+			Application::getInstance()->log->error("Error getting filesize of {}: {}", filename.c_str(), PHYSFS_getLastError());
 		}
 
 		PHYSFS_close(myfile);
