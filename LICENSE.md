@@ -1,6 +1,6 @@
 # LICENSE
 
-Dockie are released under the MIT License:
+[ChaiGame](http://github.com/robloach/chaigame) is released under the MIT License:
 
 > Copyright (C) 2017+ [Rob Loach](http://robloach.net)
 >
