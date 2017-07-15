@@ -1,0 +1,20 @@
+before_install:
+  - sudo apt-get -qq update
+
+addons:
+  apt:
+    packages:
+    - cmake
+    - time
+    - libjpeg-dev
+    - libpng12-dev
+    - libfreetype6-dev
+    - libmikmod-dev
+    - libvorbis-dev
+    - libogg-dev
+
+script:
+    - make
+
+notifications:
+  email: false
