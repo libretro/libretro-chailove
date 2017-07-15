@@ -122,9 +122,6 @@ CXXFLAGS += -Wall -D__LIBRETRO__ $(fpic) $(INCLUDES)
 all: | dependencies $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CXX) -o $@ $^ $(LDFLAGS)
-
-$(TARGET): $(OBJECTS)
 ifeq ($(STATIC_LINKING), 1)
 	$(AR) rcs $@ $(OBJECTS)
 else
