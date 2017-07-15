@@ -1,6 +1,6 @@
 #include "graphics.h"
 
-#include <SDL.h>
+#include "SDL.h"
 #include <SDL_gfxPrimitives.h>
 #include <SDL_gfxBlitFunc.h>
 

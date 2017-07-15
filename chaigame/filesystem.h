@@ -2,8 +2,8 @@
 #define FILESYSTEM_H
 
 #include <string>
-#include <SDL.h>
-#include <physfs.h>
+#include "SDL.h"
+#include "physfs.h"
 
 namespace chaigame {
 	class filesystem {

@@ -1,7 +1,7 @@
 #ifndef _MOUSE_H_INCLUDED_
 #define _MOUSE_H_INCLUDED_
 
-#include <SDL.h>
+#include "SDL.h"
 #include "src/Point.h"
 
 namespace chaigame {

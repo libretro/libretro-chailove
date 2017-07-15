@@ -1,9 +1,8 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-
+#include "SDL.h"
+#include "SDL_gfxPrimitives.h"
 #include "src/ImageData.h"
 #include "src/Image.h"
 #include "src/Quad.h"

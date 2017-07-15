@@ -1,8 +1,8 @@
 #ifndef _SRCFONT_H_INCLUDED_
 #define _SRCFONT_H_INCLUDED_
 
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include "SDL.h"
+#include "SDL_ttf.h"
 #include <string>
 #include <SDL_fnt.h>
 

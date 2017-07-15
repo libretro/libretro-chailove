@@ -1,8 +1,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <SDL.h>
-#include <libretro.h>
+#include "SDL.h"
+#include "libretro.h"
 #include "chaigame/chaigame.h"
 
 #ifdef __HAVE_TESTS__

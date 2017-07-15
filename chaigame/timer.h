@@ -1,7 +1,7 @@
 #ifndef _TIMER_H_INCLUDED_
 #define _TIMER_H_INCLUDED_
 
-#include <SDL.h>
+#include "SDL.h"
 
 namespace chaigame {
 	class timer {

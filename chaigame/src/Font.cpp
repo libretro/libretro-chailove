@@ -1,11 +1,11 @@
 #include "Font.h"
-#include <SDL.h>
+#include "SDL.h"
 #include <string>
-#include <SDL_ttf.h>
+#include "SDL_ttf.h"
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
 #include "../../Application.h"
-#include <SDL_image.h>
+#include "SDL_image.h"
 
 namespace chaigame {
 	Font::Font() {}

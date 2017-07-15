@@ -1,7 +1,7 @@
 #ifndef _SRCJOYSTICK_H_INCLUDED_
 #define _SRCJOYSTICK_H_INCLUDED_
 
-#include <SDL.h>
+#include "SDL.h"
 #include <string>
 
 namespace chaigame {

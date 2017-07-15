@@ -1,6 +1,6 @@
 #include "window.h"
 #include "../Application.h"
-#include <SDL.h>
+#include "SDL.h"
 #include <string>
 #include "chaigame.h"
 

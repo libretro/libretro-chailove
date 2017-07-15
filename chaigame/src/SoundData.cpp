@@ -1,6 +1,6 @@
 #include "SoundData.h"
-#include <SDL.h>
-#include <SDL_mixer.h>
+#include "SDL.h"
+#include "SDL_mixer.h"
 #include <string>
 #include "../../Application.h"
 #include <iostream>

@@ -1,7 +1,7 @@
 #ifndef _SOUND_H_INCLUDED_
 #define _SOUND_H_INCLUDED_
 
-#include <SDL.h>
+#include "SDL.h"
 #include "src/SoundData.h"
 #include <vector>
 

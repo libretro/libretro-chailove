@@ -1,7 +1,7 @@
 #ifndef _IMAGEDATA_H_INCLUDED_
 #define _IMAGEDATA_H_INCLUDED_
 
-#include <SDL.h>
+#include "SDL.h"
 #include <string>
 
 namespace chaigame {

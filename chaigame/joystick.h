@@ -2,7 +2,7 @@
 #define _JOYSTICK_H_INCLUDED_
 
 #include "src/Joystick.h"
-#include <SDL.h>
+#include "SDL.h"
 #include <string>
 
 namespace chaigame {

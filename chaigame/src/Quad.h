@@ -1,7 +1,7 @@
 #ifndef _SRCQUAD_H_INCLUDED_
 #define _SRCQUAD_H_INCLUDED_
 
-#include <SDL.h>
+#include "SDL.h"
 
 namespace chaigame {
 	class Quad {

@@ -1,7 +1,7 @@
 #include "keyboard.h"
 
 #include <string>
-#include <SDL.h>
+#include "SDL.h"
 
 namespace chaigame {
 

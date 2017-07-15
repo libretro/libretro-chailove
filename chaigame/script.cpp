@@ -1,7 +1,7 @@
 #include "script.h"
 #include "chaigame.h"
 #include "../Application.h"
-#include <SDL.h>
+#include "SDL.h"
 
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"

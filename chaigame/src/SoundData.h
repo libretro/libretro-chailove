@@ -1,8 +1,8 @@
 #ifndef _SOUNDDATA_H_
 #define _SOUNDDATA_H_
 
-#include <SDL.h>
-#include <SDL_mixer.h>
+#include "SDL.h"
+#include "SDL_mixer.h"
 #include <string>
 
 namespace chaigame {

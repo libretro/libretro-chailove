@@ -3,7 +3,7 @@
 
 #include <string>
 #include <map>
-#include <SDL.h>
+#include "SDL.h"
 
 namespace chaigame {
 	class keyboard {

@@ -1,7 +1,7 @@
 #ifndef _SCRIPT_H_INCLUDED_
 #define _SCRIPT_H_INCLUDED_
 
-#include <SDL.h>
+#include "SDL.h"
 #include <string>
 #include "src/Config.h"
 

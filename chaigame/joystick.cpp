@@ -1,5 +1,5 @@
 #include "joystick.h"
-#include <SDL.h>
+#include "SDL.h"
 #include <string>
 #include <vector>
 #include <libretro.h>

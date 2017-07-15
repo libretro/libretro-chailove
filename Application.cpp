@@ -1,11 +1,9 @@
 #include <string>
-#include <SDL.h>
+#include "SDL.h"
 
-#include <libretro.h>
+#include "libretro.h"
 #include "Application.h"
 #include "chaigame/chaigame.h"
-
-#include <iostream>
 
 Application* Application::m_instance = NULL;
 retro_input_state_t Application::input_state_cb = NULL;
