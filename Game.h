@@ -1,5 +1,5 @@
-#ifndef Game_H
-#define Game_H
+#ifndef CHAIGAME_GAME_H
+#define CHAIGAME_GAME_H
 
 #include "SDL.h"
 #include "libretro.h"

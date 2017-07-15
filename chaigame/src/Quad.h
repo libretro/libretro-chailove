@@ -1,5 +1,5 @@
-#ifndef _SRCQUAD_H_INCLUDED_
-#define _SRCQUAD_H_INCLUDED_
+#ifndef CHAIGAME_UTILITY_QUAD_H
+#define CHAIGAME_UTILITY_QUAD_H
 
 #include "SDL.h"
 

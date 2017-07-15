@@ -1,5 +1,5 @@
-#ifndef _SRCIMAGE_H_INCLUDED_
-#define _SRCIMAGE_H_INCLUDED_
+#ifndef CHAIGAME_UTILITY_IMAGE_H
+#define CHAIGAME_UTILITY_IMAGE_H
 
 #include <string>
 #include "ImageData.h"

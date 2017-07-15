@@ -1,5 +1,5 @@
-#ifndef _SCRIPT_H_INCLUDED_
-#define _SCRIPT_H_INCLUDED_
+#ifndef CHAIGAME_SCRIPT_H
+#define CHAIGAME_SCRIPT_H
 
 #include <string>
 #include "src/Config.h"

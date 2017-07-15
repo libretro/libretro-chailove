@@ -1,5 +1,5 @@
-#ifndef _FONT_H_INCLUDED_
-#define _FONT_H_INCLUDED_
+#ifndef CHAIGAME_FONT_H
+#define CHAIGAME_FONT_H
 
 #include "src/Font.h"
 

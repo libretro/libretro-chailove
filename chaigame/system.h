@@ -1,5 +1,5 @@
-#ifndef _SYSTEM_H_INCLUDED_
-#define _SYSTEM_H_INCLUDED_
+#ifndef CHAIGAME_SYSTEM_H
+#define CHAIGAME_SYSTEM_H
 
 #include <string>
 

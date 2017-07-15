@@ -1,5 +1,5 @@
-#ifndef _AUDIO_H_INCLUDED_
-#define _AUDIO_H_INCLUDED_
+#ifndef CHAIGAME_AUDIO_H
+#define CHAIGAME_AUDIO_H
 
 #include "src/SoundData.h"
 

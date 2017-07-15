@@ -1,5 +1,5 @@
-#ifndef _SOUNDDATA_H_
-#define _SOUNDDATA_H_
+#ifndef CHAIGAME_UTILITY_SOUNDDATA_H
+#define CHAIGAME_UTILITY_SOUNDDATA_H
 
 #include "SDL.h"
 #include "SDL_mixer.h"

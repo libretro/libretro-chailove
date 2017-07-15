@@ -1,5 +1,5 @@
-#ifndef CHAIGAMELOG_H
-#define CHAIGAMELOG_H
+#ifndef CHAIGAME_LOG_H
+#define CHAIGAME_LOG_H
 
 #include "spdlog/spdlog.h"
 

@@ -1,5 +1,5 @@
-#ifndef _TIMER_H_INCLUDED_
-#define _TIMER_H_INCLUDED_
+#ifndef CHAIGAME_TIMER_H
+#define CHAIGAME_TIMER_H
 
 #include "SDL.h"
 

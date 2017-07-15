@@ -1,5 +1,5 @@
-#ifndef _CONFIG_H_INCLUDED_
-#define _CONFIG_H_INCLUDED_
+#ifndef CHAIGAME_UTILITY_CONFIG_H
+#define CHAIGAME_UTILITY_CONFIG_H
 
 #include <string>
 
