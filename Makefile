@@ -130,7 +130,7 @@ FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): | vendor/physfs/libphysfs.a $(OBJECTS)
+$(TARGET): $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
