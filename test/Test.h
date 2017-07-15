@@ -1,3 +1,4 @@
+#ifdef __HAVE_TESTS__
 #ifndef CHAIGAME_TEST_TEST_H
 #define CHAIGAME_TEST_TEST_H
 
@@ -15,4 +16,5 @@ public:
 	chaigame::Font* secondfont;
 };
 
+#endif
 #endif
