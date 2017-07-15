@@ -21,7 +21,7 @@ namespace chaigame {
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
 		if (SDL_EnableKeyRepeat(delay, interval) == -1) {
-			Application::getInstance()->log->error("Error setting KeyRepeat.");
+			log()->error("Error setting KeyRepeat.");
 		}
 	}
 

@@ -3,8 +3,7 @@
 
 #include "SDL.h"
 #include "libretro.h"
-#include "chaigame/chaigame.h"
-#include "spdlog/spdlog.h"
+#include "chaigame/log.h"
 
 #ifdef __HAVE_TESTS__
 #include "test/Test.h"
@@ -12,7 +11,6 @@
 
 class Application {
 public:
-	Application();
     static Application* getInstance();
 	static Application* m_instance;
 	static void destroy();
@@ -36,7 +34,6 @@ public:
 	chaigame::math math;
 	chaigame::window window;
 	chaigame::event event;
-	std::shared_ptr<spdlog::logger> log;
 
 	void quit(void);
 	bool load(const std::string& file);

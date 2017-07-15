@@ -9,7 +9,7 @@ namespace chaigame {
 	bool font::load() {
 		int result = TTF_Init();
 		if(result == -1) {
-			Application::getInstance()->log->error("TTF_Init failed to initialize font system: {}", TTF_GetError());
+			log()->error("TTF_Init failed to initialize font system: {}", TTF_GetError());
 		    return false;
 		}
 		return true;

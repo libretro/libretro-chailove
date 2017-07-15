@@ -18,7 +18,7 @@ namespace chaigame {
 		int flags = MIX_INIT_OGG | MIX_INIT_MOD;
 		int initted = Mix_Init(flags);
 		if ((initted & flags) != flags) {
-		    Application::getInstance()->log->error("[sound] Mix_Init() failed requiring ogg and mod support: {}", Mix_GetError());
+		    log()->error("[sound] Mix_Init() failed requiring ogg and mod support: {}", Mix_GetError());
 		    return false;
 		}
 		return loaded = true;
@@ -32,13 +32,13 @@ namespace chaigame {
 		if (firstRun && toInit) {
 			firstRun = false;
 			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
-				Application::getInstance()->log->error("Mix_OpenAudio: {}", Mix_GetError());
+				log()->error("Mix_OpenAudio: {}", Mix_GetError());
 				return false;
 			}
 
 		    numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 		    if (!numtimesopened) {
-		    	Application::getInstance()->log->error("Mix_QuerySpec: {}", Mix_GetError());
+		    	log()->error("Mix_QuerySpec: {}", Mix_GetError());
 		    	return false;
 		    }
 			initialized = true;
@@ -86,7 +86,7 @@ namespace chaigame {
  			sounds.push_back(newSound);
  			return newSound;
  		}
- 		Application::getInstance()->log->error("Error loading newSoundData('{}', '{}')", file, type);
+ 		log()->error("Error loading newSoundData('{}', '{}')", file, type);
 	}
 
 	SoundData* sound::newSoundData(const std::string& file) {

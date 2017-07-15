@@ -18,7 +18,7 @@ namespace chaigame {
 		int flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int initted = IMG_Init(flags);
 		if(flags != (initted & flags)) {
-		    Application::getInstance()->log->error("Failed to call IMG_Init with jpg/png: {}", IMG_GetError());
+		    log()->error("Failed to call IMG_Init with jpg/png: {}", IMG_GetError());
 		    return false;
 		}
 		return true;

@@ -1,5 +1,5 @@
 #include "script.h"
-#include "chaigame.h"
+#include "log.h"
 #include "../Application.h"
 #include "SDL.h"
 
@@ -19,7 +19,7 @@ namespace chaigame {
 			return true;
 		}
 		else {
-			Application::getInstance()->log->error("Module {} was empty.", moduleName);
+			log()->error("Module {} was empty.", moduleName);
 		}
 		#endif
 		return false;
@@ -191,37 +191,37 @@ namespace chaigame {
 			chaiload = chai.eval<std::function<void ()> >("load");
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Skipping load() - {}", e.what());
+			log()->warn("[script] Skipping load() - {}", e.what());
 		}
 		try {
 			chaiupdate = chai.eval<std::function<void (float)> >("update");
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Skipping update(delta) - {}", e.what());
+			log()->warn("[script] Skipping update(delta) - {}", e.what());
 		}
 		try {
 			chaiconf = chai.eval<std::function<void (Config&)> >("conf");
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Skipping conf(t) - {}", e.what());
+			log()->warn("[script] Skipping conf(t) - {}", e.what());
 		}
 		try {
 			chaidraw = chai.eval<std::function<void ()> >("draw");
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Skipping draw() - {}", e.what());
+			log()->warn("[script] Skipping draw() - {}", e.what());
 		}
 		try {
 			chaijoystickpressed = chai.eval<std::function<void (int, int)> >("joystickpressed");
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Skipping joystickpressed() - {}", e.what());
+			log()->warn("[script] Skipping joystickpressed() - {}", e.what());
 		}
 		try {
 			chaijoystickreleased = chai.eval<std::function<void (int, int)> >("joystickreleased");
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Skipping joystickreleased() - {}", e.what());
+			log()->warn("[script] Skipping joystickreleased() - {}", e.what());
 		}
 		#endif
 	}
@@ -232,16 +232,16 @@ namespace chaigame {
 			chaiconf(t);
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
-			Application::getInstance()->log->warn("[script] Failed to invoke call to conf(t): {}", e.what());
+			log()->warn("[script] Failed to invoke call to conf(t): {}", e.what());
 		}
 		catch (const chaiscript::exception::eval_error &e) {
-			Application::getInstance()->log->warn("[script] Failed to invoke call to conf(): {}", e.what());
+			log()->warn("[script] Failed to invoke call to conf(): {}", e.what());
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Failed to invoke conf(t): {}", e.what());
+			log()->warn("[script] Failed to invoke conf(t): {}", e.what());
 		}
 		catch (...) {
-			Application::getInstance()->log->warn("[script] Failed to invoke conf(t)");
+			log()->warn("[script] Failed to invoke conf(t)");
 		}
 		#endif
 	}
@@ -252,13 +252,13 @@ namespace chaigame {
 			chaiload();
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
-			Application::getInstance()->log->warn("[script] Failed to invoke call to load(): {}", e.what());
+			log()->warn("[script] Failed to invoke call to load(): {}", e.what());
 		}
 		catch (const chaiscript::exception::eval_error &e) {
-			Application::getInstance()->log->warn("[script] Failed calling load(): {}", e.what());
+			log()->warn("[script] Failed calling load(): {}", e.what());
 		}
 		catch (...) {
-			Application::getInstance()->log->warn("[script] Failed to invoke load()");
+			log()->warn("[script] Failed to invoke load()");
 		}
 		#endif
 	}
@@ -272,19 +272,19 @@ namespace chaigame {
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
 			hasUpdate = false;
-			Application::getInstance()->log->error("[script] Failed to invoke call to update(): {}", e.what());
+			log()->error("[script] Failed to invoke call to update(): {}", e.what());
 		}
 		catch (const chaiscript::exception::eval_error &e) {
 			hasUpdate = false;
-			Application::getInstance()->log->error("[script] Failed to invoke call to update(): {}", e.what());
+			log()->error("[script] Failed to invoke call to update(): {}", e.what());
 		}
 		catch (std::exception& e) {
 			hasUpdate = false;
-			Application::getInstance()->log->error("[script] Failed to call update(t): {}", e.what());
+			log()->error("[script] Failed to call update(t): {}", e.what());
 		}
 		catch (...) {
 			hasUpdate = false;
-			Application::getInstance()->log->error("[script] Unhandled exception in update()");
+			log()->error("[script] Unhandled exception in update()");
 		}
 		#endif
 	}
@@ -298,17 +298,17 @@ namespace chaigame {
 		}
 		catch (chaiscript::exception::dispatch_error& e) {
 			hasDraw = false;
-			Application::getInstance()->log->warn("[script] Failed to invoke call to draw(): {}", e.what());
+			log()->warn("[script] Failed to invoke call to draw(): {}", e.what());
 		}
 		catch (const chaiscript::exception::eval_error &e) {
 			hasDraw = false;
-			Application::getInstance()->log->warn("[script] Failed to invoke call to update(): {}", e.what());
+			log()->warn("[script] Failed to invoke call to update(): {}", e.what());
 		}
 		catch (std::exception& e) {
-			Application::getInstance()->log->warn("[script] Failed to call update(t): {}", e.what());
+			log()->warn("[script] Failed to call update(t): {}", e.what());
 		}
 		catch (...) {
-			Application::getInstance()->log->warn("[script] Unhandled exception in draw()");
+			log()->warn("[script] Unhandled exception in draw()");
 		}
 		#endif
 	}

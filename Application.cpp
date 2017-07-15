@@ -3,15 +3,12 @@
 
 #include "libretro.h"
 #include "Application.h"
-#include "chaigame/chaigame.h"
+#include "chaigame/log.h"
 
 Application* Application::m_instance = NULL;
 retro_input_state_t Application::input_state_cb = NULL;
 retro_input_poll_t Application::input_poll_cb = NULL;
 
-Application::Application() {
-	log = spdlog::stdout_color_mt("ChaiGame");
-}
 void Application::destroy() {
 	m_instance = NULL;
 }
@@ -31,7 +28,7 @@ void Application::quit(void) {
 	sound.unload();
 	filesystem.unload();
 	window.unload();
-	log->info("Quit");
+	chaigame::log()->info("Quit");
 }
 
 bool Application::load(const std::string& file) {
@@ -124,7 +121,7 @@ void Application::draw() {
 
 		// Flip the buffer.
 		if (SDL_Flip(screen) == -1) {
-			log->error("Failed to swap the buffers: {}", SDL_GetError());
+			chaigame::log()->error("Failed to swap the buffers: {}", SDL_GetError());
 		}
 	}
 }

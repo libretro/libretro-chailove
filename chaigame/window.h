@@ -2,7 +2,7 @@
 #define _WINDOW_H_INCLUDED_
 
 #include <string>
-#include "chaigame.h"
+#include "log.h"
 
 namespace chaigame {
 	class window {
