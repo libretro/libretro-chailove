@@ -1,10 +1,15 @@
+sudo: required
 language: cpp
+dist: trusty
+compiler: g++
 
 before_install:
   - sudo apt-get -qq update
 
 addons:
   apt:
+    sources:
+    - sourceline: 'ppa:ubuntu-toolchain-r/test'
     packages:
     - cmake
     - time
@@ -14,6 +19,7 @@ addons:
     - libmikmod-dev
     - libvorbis-dev
     - libogg-dev
+    - g++-6
 
 notifications:
   email: false
