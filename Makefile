@@ -87,7 +87,8 @@ OBJECTS := libretro.o Application.o \
 	vendor/SDL_tty/src/SDL_fnt.o \
 	vendor/SDL_tty/src/SDL_tty.o
 
-all: | vendor/physfs/libphysfs.a $(TARGET)
+all: vendor/physfs/libphysfs.a
+	$(MAKE) $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
