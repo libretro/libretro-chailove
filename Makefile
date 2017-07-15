@@ -87,7 +87,7 @@ OBJECTS := libretro.o \
 	vendor/SDL_tty/src/SDL_fnt.o \
 	vendor/SDL_tty/src/SDL_tty.o
 
-all: | submodules vendor/physfs/libphysfs.a $(TARGET)
+all: $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -130,7 +130,7 @@ FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): $(OBJECTS)
+$(TARGET): | vendor/physfs/libphysfs.a $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
@@ -150,14 +150,17 @@ vendor/physfs/libphysfs.a: submodules
 
 .PHONY: clean
 
+test: $(TARGET)
+	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
+
+examples: $(TARGET)
+	retroarch -L $(TARGET) test/examples/main.chai
+
+test-script: $(TARGET)
+	retroarch -L $(TARGET) test/main.chai
+
 noscript:
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
-examples: all
-	retroarch -L $(TARGET) test/examples/main.chai
-
-test: all
-	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
-
-quicktest: noscript
+test-noscript: noscript
 	retroarch -L $(TARGET) test/main.chai

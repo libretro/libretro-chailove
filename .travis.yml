@@ -19,16 +19,16 @@ addons:
     - libmikmod-dev
     - libvorbis-dev
     - libogg-dev
-    - g++-6
-    - gcc-6
+    - g++-5
+    - gcc-5
 
 script:
   # Link gcc-6 and g++-6 to their standard commands
-  - sudo ln -sf /usr/bin/gcc-6 /usr/local/bin/gcc
-  - sudo ln -sf /usr/bin/g++-6 /usr/local/bin/g++
-  # Check versions of gcc, g++ and cmake
-  - gcc -v
-  - g++ -v
+  - sudo ln -sf /usr/bin/gcc-5 /usr/local/bin/gcc
+  - sudo ln -sf /usr/bin/g++-5 /usr/local/bin/g++
+  # Check versions of gcc and g++
+  - gcc --version
+  - g++ --version
   # Run through the make commands
   - ./configure
   - make
@@ -36,3 +36,8 @@ script:
 
 notifications:
   email: false
+
+cache:
+    apt: true
+    directories:
+    - vendor
