@@ -1,7 +1,5 @@
-#ifdef __HAVE_TESTS__
-
-#ifndef _TEST_H_INCLUDED_
-#define _TEST_H_INCLUDED_
+#ifndef CHAIGAME_TEST_TEST_H
+#define CHAIGAME_TEST_TEST_H
 
 #include "../chaigame/src/Font.h"
 #include "../chaigame/src/Config.h"

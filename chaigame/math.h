@@ -1,5 +1,5 @@
-#ifndef _MATH_H_INCLUDED_
-#define _MATH_H_INCLUDED_
+#ifndef CHAIGAME_MATH_H
+#define CHAIGAME_MATH_H
 
 namespace chaigame {
 	class math {

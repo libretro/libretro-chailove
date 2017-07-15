@@ -1,5 +1,5 @@
-#ifndef FILESYSTEM_H
-#define FILESYSTEM_H
+#ifndef CHAIGAME_FILESYSTEM_H
+#define CHAIGAME_FILESYSTEM_H
 
 #include <string>
 #include "SDL.h"

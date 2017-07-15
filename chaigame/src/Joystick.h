@@ -1,5 +1,5 @@
-#ifndef _SRCJOYSTICK_H_INCLUDED_
-#define _SRCJOYSTICK_H_INCLUDED_
+#ifndef CHAIGAME_UTILITY_JOYSTICK_H
+#define CHAIGAME_UTILITY_JOYSTICK_H
 
 #include "SDL.h"
 #include <string>

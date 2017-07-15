@@ -1,5 +1,5 @@
-#ifndef _IMAGEDATA_H_INCLUDED_
-#define _IMAGEDATA_H_INCLUDED_
+#ifndef CHAIGAME_UTILITY_IMAGEDATA_H
+#define CHAIGAME_UTILITY_IMAGEDATA_H
 
 #include "SDL.h"
 #include <string>

@@ -1,5 +1,5 @@
-#ifndef _POSITIONH_INCLUDED_
-#define _POSITIONH_INCLUDED_
+#ifndef CHAIGAME_UTILITY_POINT_H
+#define CHAIGAME_UTILITY_POINT_H
 
 namespace chaigame {
 	struct Point {

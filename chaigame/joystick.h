@@ -1,5 +1,5 @@
-#ifndef _JOYSTICK_H_INCLUDED_
-#define _JOYSTICK_H_INCLUDED_
+#ifndef CHAIGAME_JOYSTICK_H
+#define CHAIGAME_JOYSTICK_H
 
 #include "src/Joystick.h"
 #include "SDL.h"

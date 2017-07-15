@@ -1,5 +1,5 @@
-#ifndef _SOUND_H_INCLUDED_
-#define _SOUND_H_INCLUDED_
+#ifndef CHAIGAME_SOUND_H
+#define CHAIGAME_SOUND_H
 
 #include "SDL.h"
 #include "src/SoundData.h"

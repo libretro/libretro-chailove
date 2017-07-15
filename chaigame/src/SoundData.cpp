@@ -2,7 +2,7 @@
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include <string>
-#include "../../Application.h"
+#include "../../Game.h"
 #include <iostream>
 
 namespace chaigame {
@@ -13,7 +13,7 @@ namespace chaigame {
 	}
 
 	SoundData::SoundData(const std::string& file, const std::string& type) {
- 		loadRWops = Application::getInstance()->filesystem.openRW(file);
+ 		loadRWops = Game::getInstance()->filesystem.openRW(file);
  		loadType = type;
 	}
 
@@ -56,7 +56,7 @@ namespace chaigame {
 
 	bool SoundData::unload() {
 		// Only call Mixer functions if the audio system is up.
-		Application* app = Application::getInstance();
+		Game* app = Game::getInstance();
 			std::cout << "SoundData::unload" << std::endl;
 		if (app != NULL && app->sound.hasAudio()) {
 			if (music) {
@@ -80,7 +80,7 @@ namespace chaigame {
 	}
 
 	void SoundData::play() {
-		Application* app = Application::getInstance();
+		Game* app = Game::getInstance();
 		// Make sure we have an audio system.
 		if (app && app->sound.hasAudio()) {
 			// See if we are to load the file.

@@ -1,5 +1,5 @@
-#ifndef _KEYBOARD_H_INCLUDED_
-#define _KEYBOARD_H_INCLUDED_
+#ifndef CHAIGAME_KEYBOARD_H
+#define CHAIGAME_KEYBOARD_H
 
 #include <string>
 #include <map>

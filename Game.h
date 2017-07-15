@@ -1,5 +1,5 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef CHAIGAME_GAME_H
+#define CHAIGAME_GAME_H
 
 #include "SDL.h"
 #include "libretro.h"
@@ -24,10 +24,10 @@
 #include "test/Test.h"
 #endif
 
-class Application {
+class Game {
 public:
-    static Application* getInstance();
-	static Application* m_instance;
+    static Game* getInstance();
+	static Game* m_instance;
 	static void destroy();
 
 	static retro_input_state_t input_state_cb;

@@ -1,5 +1,5 @@
-#ifndef _EVENT_H_INCLUDED_
-#define _EVENT_H_INCLUDED_
+#ifndef CHAIGAME_EVENT_H
+#define CHAIGAME_EVENT_H
 
 namespace chaigame {
 	class event {

@@ -1,5 +1,5 @@
 #include "window.h"
-#include "../Application.h"
+#include "../Game.h"
 #include "SDL.h"
 #include <string>
 #include "log.h"
@@ -8,7 +8,7 @@
 namespace chaigame {
 
 	bool window::load(Config& config) {
-		Application* app = Application::getInstance();
+		Game* app = Game::getInstance();
 
 		// Initialize SDL.
 		if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {

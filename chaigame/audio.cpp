@@ -4,7 +4,7 @@
 #include <string>
 
 #include "src/SoundData.h"
-#include "../Application.h"
+#include "../Game.h"
 
 namespace chaigame {
 	void audio::play(SoundData* soundData) {
@@ -14,10 +14,10 @@ namespace chaigame {
 	}
 
 	SoundData* audio::newSource(const std::string& filename, const std::string& type) {
-		return Application::getInstance()->sound.newSoundData(filename, type);
+		return Game::getInstance()->sound.newSoundData(filename, type);
 	}
 
 	SoundData* audio::newSource(const std::string& filename) {
-		return Application::getInstance()->sound.newSoundData(filename);
+		return Game::getInstance()->sound.newSoundData(filename);
 	}
 }

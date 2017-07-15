@@ -1,5 +1,5 @@
-#ifndef _WINDOW_H_INCLUDED_
-#define _WINDOW_H_INCLUDED_
+#ifndef CHAIGAME_WINDOW_H
+#define CHAIGAME_WINDOW_H
 
 #include <string>
 #include "src/Config.h"

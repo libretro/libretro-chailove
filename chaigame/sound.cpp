@@ -1,7 +1,7 @@
 #include "sound.h"
 #include "SDL.h"
 #include "SDL_mixer.h"
-#include "../Application.h"
+#include "../Game.h"
 #include <vector>
 #include <string>
 #include "src/SoundData.h"
@@ -92,7 +92,7 @@ namespace chaigame {
 	}
 
 	SoundData* sound::newSoundData(const std::string& file, const std::string& type) {
-		SDL_RWops* rw = Application::getInstance()->filesystem.openRW(file);
+		SDL_RWops* rw = Game::getInstance()->filesystem.openRW(file);
 		if (rw) {
 			SoundData* newSound = new SoundData(rw, type);
 			sounds.push_back(newSound);

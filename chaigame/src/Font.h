@@ -1,5 +1,5 @@
-#ifndef _SRCFONT_H_INCLUDED_
-#define _SRCFONT_H_INCLUDED_
+#ifndef CHAIGAME_UTILITY_FONT_H
+#define CHAIGAME_UTILITY_FONT_H
 
 #include "SDL.h"
 #include "SDL_ttf.h"

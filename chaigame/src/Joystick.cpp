@@ -1,6 +1,6 @@
 #include "Joystick.h"
 #include "SDL.h"
-#include "../../Application.h"
+#include "../../Game.h"
 #include <string>
 
 namespace chaigame {
@@ -33,7 +33,7 @@ namespace chaigame {
 	}
 
 	bool Joystick::isDown(int button) {
-		return (bool)Application::getInstance()->joystick.joystick_cache[index][button];
+		return (bool)Game::getInstance()->joystick.joystick_cache[index][button];
 
 		// TODO: Switch from libretro joysticks to SDL.
 		/*if (joy) {
@@ -44,7 +44,7 @@ namespace chaigame {
 	}
 
 	bool Joystick::isDown(const std::string& button) {
-		int key = Application::getInstance()->joystick.getButtonKey(button);
+		int key = Game::getInstance()->joystick.getButtonKey(button);
 		return isDown(key);
 	}
 

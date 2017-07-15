@@ -2,7 +2,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <string>
-#include "../../Application.h"
+#include "../../Game.h"
 #include "../log.h"
 
 namespace chaigame {
@@ -43,7 +43,7 @@ namespace chaigame {
 	}
 
 	ImageData::ImageData(const std::string& filename) {
-		SDL_RWops* image = Application::getInstance()->filesystem.openRW(filename);
+		SDL_RWops* image = Game::getInstance()->filesystem.openRW(filename);
 		loadFromRW(image);
 	}
 

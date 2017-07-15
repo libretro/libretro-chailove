@@ -4,7 +4,7 @@
 #include "SDL_ttf.h"
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
-#include "../../Application.h"
+#include "../../Game.h"
 #include "SDL_image.h"
 #include "../log.h"
 
@@ -12,7 +12,7 @@ namespace chaigame {
 	Font::Font() {}
 
 	Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-		SDL_RWops* rwops = Application::getInstance()->filesystem.openRW(filename);
+		SDL_RWops* rwops = Game::getInstance()->filesystem.openRW(filename);
 		if (rwops) {
 			SDL_Surface* surface = IMG_Load_RW(rwops, 1);
 			if (surface == NULL) {
@@ -38,7 +38,7 @@ namespace chaigame {
 	}
 
 	Font::Font(const std::string& filename, int ptsize) {
-		SDL_RWops* rwops = Application::getInstance()->filesystem.openRW(filename);
+		SDL_RWops* rwops = Game::getInstance()->filesystem.openRW(filename);
 		if (rwops) {
 			TTF_Font* newFont = TTF_OpenFontRW(rwops, 1, ptsize);
 			if (!newFont) {
@@ -102,7 +102,7 @@ namespace chaigame {
 	}
 
 	void Font::print(const std::string& text, int x, int y, int r, int g, int b, int a) {
-		SDL_Surface* screen = Application::getInstance()->screen;
+		SDL_Surface* screen = Game::getInstance()->screen;
 
 		// Attempt to render the TTF Font.
 		if (ttfFont != NULL) {

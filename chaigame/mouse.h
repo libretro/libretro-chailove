@@ -1,5 +1,5 @@
-#ifndef _MOUSE_H_INCLUDED_
-#define _MOUSE_H_INCLUDED_
+#ifndef CHAIGAME_MOUSE_H
+#define CHAIGAME_MOUSE_H
 
 #include "SDL.h"
 #include "src/Point.h"
