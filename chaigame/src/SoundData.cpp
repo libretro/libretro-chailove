@@ -3,7 +3,7 @@
 #include "SDL_mixer.h"
 #include <string>
 #include "../../Game.h"
-#include <iostream>
+#include "../log.h"
 
 namespace chaigame {
 
@@ -35,7 +35,12 @@ namespace chaigame {
 		if (loadType == "stream") {
 			music = Mix_LoadMUS_RW(loadRWops);
 			if (!music) {
-				printf("Mix_LoadMusic: %s\n", Mix_GetError());
+				const char* errChar = Mix_GetError();
+				std::string errString("");
+				if (errChar != NULL) {
+					errString = errChar;
+				}
+				log()->error("Mix_LoadMusic: {}", errString);
 				return false;
 			}
 			return true;
@@ -44,7 +49,12 @@ namespace chaigame {
 		if (loadType == "static") {
 			chunk = Mix_LoadWAV_RW(loadRWops, 1);
 			if (!chunk) {
-				printf("Mix_LoadWAV_RW: %s\n", Mix_GetError());
+				const char* errChar = Mix_GetError();
+				std::string errString("");
+				if (errChar != NULL) {
+					errString = errChar;
+				}
+				log()->error("Mix_LoadWAV_RW: {}", errString);
 				return false;
 			}
 
@@ -52,12 +62,12 @@ namespace chaigame {
 		}
 
 		printf("loadType must be either 'stream' or 'static'.");
+		return false;
 	}
 
 	bool SoundData::unload() {
 		// Only call Mixer functions if the audio system is up.
 		Game* app = Game::getInstance();
-			std::cout << "SoundData::unload" << std::endl;
 		if (app != NULL && app->sound.hasAudio()) {
 			if (music) {
 				Mix_FreeMusic(music);
@@ -91,12 +101,22 @@ namespace chaigame {
 			// If the file has successfully loaded, play the sound.
 			if (music) {
 				if (Mix_PlayMusic(music, -1) == -1) {
-					printf("Failed to play music: %s\n", Mix_GetError());
+					const char* errChar = Mix_GetError();
+					std::string errString("");
+					if (errChar != NULL) {
+						errString = errChar;
+					}
+					log()->error("Failed to play music: {}", errString);
 				};
 			}
 			else if (chunk) {
 				if (Mix_PlayChannel(-1, chunk, 0) == -1) {
-					printf("Failed to play chunk: %s\n", Mix_GetError());
+					const char* errChar = Mix_GetError();
+					std::string errString("");
+					if (errChar != NULL) {
+						errString = errChar;
+					}
+					log()->error("Failed to play chunk: {}", errString);
 				};
 			}
 		}
