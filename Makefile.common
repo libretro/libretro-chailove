@@ -83,7 +83,10 @@ ifneq ($(HAVE_TESTS),)
 	CXXFLAGS += -D__HAVE_TESTS__
 endif
 
-CXXFLAGS += -std=c++14 -fpermissive
+CFLAGS += -std=gnu99
+CXXFLAGS += -std=c++14
+
+# -fpermissive
 
 #FLAGS +=  $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 
