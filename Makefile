@@ -1,4 +1,3 @@
-
 DEBUG = 0
 
 ifeq ($(platform),)
@@ -87,7 +86,7 @@ OBJECTS := libretro.o Application.o \
 	vendor/SDL_tty/src/SDL_fnt.o \
 	vendor/SDL_tty/src/SDL_tty.o
 
-all: | vendor/physfs/libphysfs.a $(TARGET)
+all: | submodules vendor/physfs/libphysfs.a $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -142,10 +141,10 @@ $(TARGET): $(OBJECTS)
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 
-vendor/libretro-common/include/libretro.h:
-	git submodule update --init
+submodules:
+	git submodule update --init --recursive
 
-vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
+vendor/physfs/libphysfs.a: submodules
 	cd vendor/physfs && cmake . && $(MAKE) C_FLAGS=-fPIC
 
 .PHONY: clean
