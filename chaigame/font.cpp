@@ -14,7 +14,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			log()->error("TTF_Init failed to initialize font system: {}", errString());
+			log()->error("TTF_Init failed to initialize font system: {}", errString);
 			return false;
 		}
 		return true;

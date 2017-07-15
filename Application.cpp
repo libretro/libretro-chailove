@@ -37,13 +37,17 @@ bool Application::load(const std::string& file) {
 	filesystem.init(file);
 	script = new chaigame::script();
 	script->conf(config);
+
 	#ifdef __HAVE_TESTS__
 	test.conf(config);
 	#endif
+
 	window.load(config);
+
 	if (config.modules.sound) {
 		sound.load();
 	}
+
 	graphics.load();
 	image.load();
 	keyboard.load();
