@@ -1,4 +1,4 @@
 {
-	global: retro_*;
-	local: *;
+   global: retro_*;
+   local: *;
 };

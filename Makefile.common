@@ -1,0 +1,134 @@
+TARGET_NAME := chaigame
+
+# Find the correct SDL_PREFIX.
+ifeq ($(platform), unix)
+	SDL_PREFIX := unix
+else ifneq (,$(findstring android,$(platform)))
+	SDL_PREFIX := unix
+else ifeq ($(platform), wincross64)
+	SDL_PREFIX := win
+else
+	SDL_PREFIX := win
+endif
+
+SOURCES_C := $(CORE_DIR)/vendor/physfs/extras/physfsrwops.c \
+	$(CORE_DIR)/vendor/SDL_tty/src/SDL_fnt.c \
+	$(CORE_DIR)/vendor/SDL_tty/src/SDL_tty.c
+
+SOURCES_CXX := $(CORE_DIR)/libretro.cpp \
+	$(CORE_DIR)/Game.cpp \
+	$(CORE_DIR)/chaigame/audio.cpp \
+	$(CORE_DIR)/chaigame/log.cpp \
+	$(CORE_DIR)/chaigame/graphics.cpp \
+	$(CORE_DIR)/chaigame/keyboard.cpp \
+	$(CORE_DIR)/chaigame/script.cpp \
+	$(CORE_DIR)/chaigame/filesystem.cpp \
+	$(CORE_DIR)/chaigame/image.cpp \
+	$(CORE_DIR)/chaigame/sound.cpp \
+	$(CORE_DIR)/chaigame/math.cpp \
+	$(CORE_DIR)/chaigame/font.cpp \
+	$(CORE_DIR)/chaigame/timer.cpp \
+	$(CORE_DIR)/chaigame/event.cpp \
+	$(CORE_DIR)/chaigame/window.cpp \
+	$(CORE_DIR)/chaigame/mouse.cpp \
+	$(CORE_DIR)/chaigame/system.cpp \
+	$(CORE_DIR)/test/Test.cpp \
+	$(CORE_DIR)/chaigame/src/ImageData.cpp \
+	$(CORE_DIR)/chaigame/src/Quad.cpp \
+	$(CORE_DIR)/chaigame/src/Image.cpp \
+	$(CORE_DIR)/chaigame/src/Config.cpp \
+	$(CORE_DIR)/chaigame/src/Font.cpp \
+	$(CORE_DIR)/chaigame/src/SoundData.cpp \
+	$(CORE_DIR)/chaigame/src/Point.cpp \
+	$(CORE_DIR)/chaigame/src/Joystick.cpp \
+	$(CORE_DIR)/chaigame/joystick.cpp
+
+LDFLAGS +=  $(fpic) $(SHARED) \
+	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/SDL_image_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/libSDL_mixer_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/SDL_ttf_$(SDL_PREFIX).a \
+	vendor/physfs/libphysfs.a \
+	-ldl \
+	-ljpeg -lpng \
+	-lfreetype \
+	-lmikmod -lvorbisfile -logg \
+	-lpthread $(EXTRA_LDF)
+
+#FLAGS += -I. \
+#	-Ivendor/sdl-libretro/include \
+#	-Ivendor/libretro-common/include \
+#	-Ivendor/chaiscript/include \
+#	-Ivendor/SDL_tty/include \
+#	-Ivendor/spdlog/include \
+#	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
+#	-Ivendor/ChaiScript_Extras/include \
+#	-Ivendor/physfs/src
+
+INCLUDES += -I. \
+	-Ivendor/sdl-libretro/include \
+	-Ivendor/libretro-common/include \
+	-Ivendor/chaiscript/include \
+	-Ivendor/SDL_tty/include \
+	-Ivendor/spdlog/include \
+	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
+	-Ivendor/ChaiScript_Extras/include \
+	-Ivendor/physfs/src
+
+ifeq ($(HAVE_CHAISCRIPT),)
+	CXXFLAGS += -D__HAVE_CHAISCRIPT__
+endif
+ifneq ($(HAVE_TESTS),)
+	CXXFLAGS += -D__HAVE_TESTS__
+endif
+
+CFLAGS += -std=gnu99 -DLSB_FIRST
+CXXFLAGS += -std=c++14 -DLSB_FIRST
+
+# -fpermissive
+
+#FLAGS +=  $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
+
+#CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
+#CFLAGS += $(FLAGS) -std=gnu99
+
+#$(TARGET): | vendor/physfs/libphysfs.a $(OBJECTS)
+#	$(CXX) -o $@ $^ $(LDFLAGS)
+
+#%.cpp: %.cpp
+#	$(CXX) -c -o $@ $< $(CXXFLAGS)
+
+#%.cpp: %.c
+#	$(CC) -c -o $@ $< $(CFLAGS)
+
+#clean:
+#	rm -f $(TARGET) $(OBJECTS)
+
+#submodules:
+#	git submodule update --init --recursive
+
+#vendor/physfs/libphysfs.a: submodules
+#	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
+
+#.PHONY: clean
+
+#test: $(TARGET)
+#	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
+
+#examples: $(TARGET)
+#	retroarch -L $(TARGET) test/examples/main.chai
+
+#test-script: $(TARGET)
+#	retroarch -L $(TARGET) test/main.chai
+
+#noscript:
+#	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
+
+#test-noscript: noscript
+#	retroarch -L $(TARGET) test/main.chai
+
+DESTDIR := /usr/lib/libretro
+install: all
+	mkdir -p $(DESTDIR)
+	cp $(TARGET) $(DESTDIR)

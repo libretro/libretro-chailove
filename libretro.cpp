@@ -138,12 +138,15 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 	(void)code;
 }
 
+/**
+ * TODO: Is this needed?
 void texture_init(){
 	Game* app = Game::getInstance();
 	if (app->videoBuffer) {
         memset(app->videoBuffer, 0, sizeof(app->videoBuffer));
 	}
 }
+*/
 
 bool retro_load_game(const struct retro_game_info *info) {
 	std::string full(info ? info->path : "main.chai");

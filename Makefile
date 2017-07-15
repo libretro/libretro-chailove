@@ -1,171 +1,141 @@
-DEBUG = 0
+STATIC_LINKING := 0
+AR             := ar
 
 ifeq ($(platform),)
-	platform = unix
+platform = unix
 ifeq ($(shell uname -a),)
-	platform = win
-else ifneq ($(findstring Darwin,$(shell uname -a)),)
-	platform = osx
+   platform = win
 else ifneq ($(findstring MINGW,$(shell uname -a)),)
-	platform = win
+   platform = win
+else ifneq ($(findstring Darwin,$(shell uname -a)),)
+   platform = osx
+else ifneq ($(findstring win,$(shell uname -a)),)
+   platform = win
 endif
 endif
 
+# system platform
+system_platform = unix
+ifeq ($(shell uname -a),)
+	EXE_EXT = .exe
+	system_platform = win
+else ifneq ($(findstring Darwin,$(shell uname -a)),)
+	system_platform = osx
+	arch = intel
+ifeq ($(shell uname -p),powerpc)
+	arch = ppc
+endif
+else ifneq ($(findstring MINGW,$(shell uname -a)),)
+	system_platform = win
+endif
+
+CORE_DIR += .
 TARGET_NAME := chaigame
+LIBM = -lm
+
+ifeq ($(ARCHFLAGS),)
+ifeq ($(archs),ppc)
+	ARCHFLAGS = -arch ppc -arch ppc64
+else
+	ARCHFLAGS = -arch i386 -arch x86_64
+endif
+endif
+
+ifeq ($(platform), osx)
+	ifndef ($(NOUNIVERSAL))
+		CXXFLAGS += $(ARCHFLAGS)
+		LFLAGS += $(ARCHFLAGS)
+	endif
+endif
+
+ifeq ($(STATIC_LINKING), 1)
+	EXT := a
+endif
 
 ifeq ($(platform), unix)
-	CC = gcc
-	CXX = g++
-	CFLAGS = -g -O2
-	CXXFLAGS = -g -O2  -fno-merge-constants
-	TARGET := $(TARGET_NAME)_libretro.so
+	EXT ?= so
+	TARGET := $(TARGET_NAME)_libretro.$(EXT)
 	fpic := -fPIC
-	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-	ENDIANNESS_DEFINES := -DLSB_FIRST
-	FLAGS += -D__LINUX__
-	SDL_PREFIX := unix
-# android arm
-else ifneq (,$(findstring android,$(platform)))
-	TARGET := $(TARGET_NAME)_libretro_android.so
-	fpic = -fPIC
-	SHARED := -lstdc++ -lstd++fs -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
-	CFLAGS +=  -g -O2
-	CC = arm-linux-androideabi-gcc
-	CXX = arm-linux-androideabi-g++
-# cross Windows
-else ifeq ($(platform), wincross64)
-	TARGET := $(TARGET_NAME)_libretro.dll
-	AR = x86_64-w64-mingw32-ar
-	CC = x86_64-w64-mingw32-gcc
-	CXX = x86_64-w64-mingw32-g++
-	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-	LDFLAGS += -static-libgcc -static-libstdc++ -lstd++fs
-	ENDIANNESS_DEFINES := -DLSB_FIRST
-	FLAGS +=
-	EXTRA_LDF := -lwinmm -Wl,--export-all-symbols
-	SDL_PREFIX := win
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
+else ifeq ($(platform), linux-portable)
+	TARGET := $(TARGET_NAME)_libretro.$(EXT)
+	fpic := -fPIC -nostdlib
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T
+	LIBM :=
+else ifneq (,$(findstring osx,$(platform)))
+	TARGET := $(TARGET_NAME)_libretro.dylib
+	fpic := -fPIC
+	SHARED := -dynamiclib
+else ifneq (,$(findstring ios,$(platform)))
+	TARGET := $(TARGET_NAME)_libretro_ios.dylib
+	fpic := -fPIC
+	SHARED := -dynamiclib
+
+	ifeq ($(IOSSDK),)
+		IOSSDK := $(shell xcodebuild -version -sdk iphoneos Path)
+	endif
+
+	DEFINES := -DIOS
+	CC = cc -arch armv7 -isysroot $(IOSSDK)
+	ifeq ($(platform),ios9)
+		CC += -miphoneos-version-min=8.0
+		CXXFLAGS += -miphoneos-version-min=8.0
+	else
+		CC += -miphoneos-version-min=5.0
+		CXXFLAGS += -miphoneos-version-min=5.0
+	endif
+else ifneq (,$(findstring qnx,$(platform)))
+	TARGET := $(TARGET_NAME)_libretro_qnx.so
+	fpic := -fPIC
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
+else ifeq ($(platform), emscripten)
+	TARGET := $(TARGET_NAME)_libretro_emscripten.bc
+	fpic := -fPIC
+	SHARED := -shared -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
+else ifeq ($(platform), vita)
+	TARGET := $(TARGET_NAME)_vita.a
+	CC = arm-vita-eabi-gcc
+	AR = arm-vita-eabi-ar
+	CXXFLAGS += -Wl,-q -Wall -O3
+	STATIC_LINKING = 1
 else
-	TARGET :=  $(TARGET_NAME)_retro.dll
-	CC = gcc
-	CXX = g++
-	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
-	LDFLAGS += -static-libgcc -static-libstdc++  -lstd++fs
-	ENDIANNESS_DEFINES := -DLSB_FIRST
-	FLAGS +=
-	EXTRA_LDF = -lwinmm -Wl,--export-all-symbols
-	SDL_PREFIX := win
+   CC = gcc
+   TARGET := $(TARGET_NAME)_libretro.dll
+   SHARED := -shared -static-libgcc -static-libstdc++ -s -Wl,--version-script=$(CORE_DIR)/link.T -Wl,--no-undefined
 endif
 
-OBJECTS := libretro.o \
-	Game.o \
-	chaigame/audio.o \
-	chaigame/log.o \
-	chaigame/graphics.o \
-	chaigame/keyboard.o \
-	chaigame/script.o \
-	chaigame/filesystem.o \
-	chaigame/image.o \
-	chaigame/sound.o \
-	chaigame/math.o \
-	chaigame/font.o \
-	chaigame/timer.o \
-	chaigame/event.o \
-	chaigame/window.o \
-	chaigame/mouse.o \
-	chaigame/system.o \
-	test/Test.o \
-	chaigame/src/ImageData.o \
-	chaigame/src/Quad.o \
-	chaigame/src/Image.o \
-	chaigame/src/Config.o \
-	chaigame/src/Font.o \
-	chaigame/src/SoundData.o \
-	chaigame/src/Point.o \
-	chaigame/src/Joystick.o \
-	chaigame/joystick.o \
-	vendor/physfs/extras/physfsrwops.o \
-	vendor/SDL_tty/src/SDL_fnt.o \
-	vendor/SDL_tty/src/SDL_tty.o
+LDFLAGS += $(LIBM)
 
-all: | vendor/physfs/libphysfs.a $(TARGET)
-
-ifeq ($(DEBUG), 0)
-   FLAGS += -O3 -ffast-math -fomit-frame-pointer
+ifeq ($(DEBUG), 1)
+	CXXFLAGS += -O0 -g
 else
-   FLAGS += -O0 -g
+	CXXFLAGS += -O3
 endif
 
-LDFLAGS +=  $(fpic) $(SHARED) \
-	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
-	vendor/sdl-libretro/SDL_image_$(SDL_PREFIX).a \
-	vendor/sdl-libretro/libSDL_mixer_$(SDL_PREFIX).a \
-	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
-	vendor/sdl-libretro/SDL_ttf_$(SDL_PREFIX).a \
-	vendor/physfs/libphysfs.a \
-	-ldl -ljpeg -lpng \
-	-lfreetype \
-	-lmikmod -lvorbisfile -logg \
-	-lpthread $(EXTRA_LDF)
-FLAGS += -I. \
-	-Ivendor/sdl-libretro/include \
-	-Ivendor/libretro-common/include \
-	-Ivendor/chaiscript/include \
-	-Ivendor/SDL_tty/include \
-	-Ivendor/spdlog/include \
-	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
-	-Ivendor/ChaiScript_Extras/include \
-	-Ivendor/physfs/src
+include Makefile.common
 
-WARNINGS :=
+OBJECTS := $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o)
 
-ifeq ($(HAVE_CHAISCRIPT),)
-	FLAGS += -D__HAVE_CHAISCRIPT__
-endif
-ifneq ($(HAVE_TESTS),)
-	FLAGS += -D__HAVE_TESTS__
-endif
+CFLAGS   += -Wall -D__LIBRETRO__ $(fpic) $(INCLUDES)
+CXXFLAGS += -Wall -D__LIBRETRO__ $(fpic) $(INCLUDES)
 
-FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
-
-CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
-CFLAGS += $(FLAGS) -std=gnu99
+all: | dependencies $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CXX) -o $@ $^ $(LDFLAGS)
-
-%.o: %.cpp
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
+ifeq ($(STATIC_LINKING), 1)
+	$(AR) rcs $@ $(OBJECTS)
+else
+	$(CXX) $(fpic) $(SHARED) $(INCLUDES) -o $@ $(OBJECTS) $(LDFLAGS)
+endif
 
 %.o: %.c
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CXX) $(CXXFLAGS) $(fpic) -c -o $@ $<
 
 clean:
-	rm -f $(TARGET) $(OBJECTS)
-
-submodules:
-	git submodule update --init --recursive
-
-vendor/physfs/libphysfs.a: submodules
-	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
+	rm -f $(OBJECTS) $(TARGET)
 
 .PHONY: clean
 
-test: all
-	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
-
-examples: all
-	retroarch -L $(TARGET) test/examples/main.chai
-
-test-script: all
-	retroarch -L $(TARGET) test/main.chai
-
-noscript:
-	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
-
-test-noscript: noscript
-	retroarch -L $(TARGET) test/main.chai
-
-DESTDIR := /usr/lib/libretro
-install: all
-	mkdir -p $(DESTDIR)
-	cp $(TARGET) $(DESTDIR)
+dependencies:
+	git submodule update --init --recursive
+	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
