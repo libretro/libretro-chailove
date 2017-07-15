@@ -87,8 +87,7 @@ OBJECTS := libretro.o Application.o \
 	vendor/SDL_tty/src/SDL_fnt.o \
 	vendor/SDL_tty/src/SDL_tty.o
 
-all: vendor/physfs/libphysfs.a
-	$(MAKE) $(TARGET)
+all: | vendor/physfs/libphysfs.a $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -131,7 +130,7 @@ FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): $(OBJECTS)
+$(TARGET): | vendor/physfs/libphysfs.a $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
@@ -154,8 +153,8 @@ vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
 testing:
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
-testscripts: all
+examples: all
 	retroarch -L $(TARGET) test/examples/main.chai
 
 test: testing
-	retroarch -L $(TARGET)
+	retroarch -L $(TARGET) test/main.chai
