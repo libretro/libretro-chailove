@@ -145,7 +145,7 @@ vendor/libretro-common/include/libretro.h:
 	git submodule update --init
 
 vendor/physfs/libphysfs.a: vendor/libretro-common/include/libretro.h
-	cd vendor/physfs && cmake . && make C_FLAGS=-fPIC
+	cd vendor/physfs && cmake . && $(MAKE) C_FLAGS=-fPIC
 
 .PHONY: clean
 
