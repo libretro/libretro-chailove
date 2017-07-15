@@ -1,7 +1,6 @@
 #ifdef __HAVE_TESTS__
 
 #include "Test.h"
-#include "../chaigame/chaigame.h"
 #include "../Application.h"
 
 void Test::conf(chaigame::Config& t) {

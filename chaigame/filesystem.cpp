@@ -5,6 +5,7 @@
 #include "vendor/physfs/extras/physfsrwops.h"
 #include "vendor/filesystem/filesystem/path.h"
 #include "../Application.h"
+#include "log.h"
 
 #include <iostream>
 

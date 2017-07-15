@@ -3,7 +3,7 @@
 #include "SDL_ttf.h"
 #include "font.h"
 #include "src/Font.h"
-#include "../Application.h"
+#include "log.h"
 
 namespace chaigame {
 	bool font::load() {

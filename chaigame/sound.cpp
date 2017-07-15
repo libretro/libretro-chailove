@@ -1,16 +1,11 @@
-
 #include "sound.h"
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include "../Application.h"
 #include <vector>
-
 #include <string>
-
-#include <iostream>
-
 #include "src/SoundData.h"
-
+#include "log.h"
 
 namespace chaigame {
 	bool sound::load() {
@@ -72,9 +67,7 @@ namespace chaigame {
 
 		// Unload the audio system.
 		if (initialized) {
-			std::cout << "Mix_CloseAudio(): ";
 			Mix_CloseAudio();
-			std::cout << "Complete" << std::endl;
 			initialized = false;
 		}
 	}

@@ -28,11 +28,12 @@ void Application::quit(void) {
 	sound.unload();
 	filesystem.unload();
 	window.unload();
-	chaigame::log()->info("Quit");
+	chaigame::log()->info("Finish");
 }
 
 bool Application::load(const std::string& file) {
 	// Initalize all the subsystems.
+	chaigame::log()->info("Welcome to ChaiGame");
 	filesystem.init(file);
 	script = new chaigame::script();
 	script->conf(config);

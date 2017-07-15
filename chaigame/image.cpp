@@ -3,7 +3,7 @@
 #include <string>
 #include "SDL_image.h"
 #include "src/ImageData.h"
-#include "../Application.h"
+#include "log.h"
 
 namespace chaigame {
 	chaigame::ImageData* image::newImageData(const std::string& filename) {

@@ -8,6 +8,7 @@
 #include "src/ImageData.h"
 #include "src/Image.h"
 #include "src/Font.h"
+#include "log.h"
 
 namespace chaigame {
 

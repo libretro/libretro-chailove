@@ -3,6 +3,7 @@
 #include "SDL_image.h"
 #include <string>
 #include "../../Application.h"
+#include "../log.h"
 
 namespace chaigame {
 
@@ -18,7 +19,7 @@ namespace chaigame {
 		surface = IMG_Load_RW(rw, 1);
 
 		if (!surface) {
-			printf("IMG_Load_RW: %s\n", IMG_GetError());
+			log()->error("IMG_Load_RW: {}", IMG_GetError());
 			return false;
 		}
 		return true;

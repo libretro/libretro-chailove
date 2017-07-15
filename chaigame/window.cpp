@@ -3,8 +3,7 @@
 #include "SDL.h"
 #include <string>
 #include "log.h"
-
-#include <iostream>
+#include "src/Config.h"
 
 namespace chaigame {
 

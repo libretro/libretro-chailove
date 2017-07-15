@@ -2,7 +2,7 @@
 
 #include <string>
 #include "SDL.h"
-#include "../Application.h"
+#include "log.h"
 
 namespace chaigame {
 
