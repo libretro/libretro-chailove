@@ -164,3 +164,8 @@ noscript:
 
 test-noscript: noscript
 	retroarch -L $(TARGET) test/main.chai
+
+DESTDIR := /usr/lib/libretro
+install: all
+	mkdir -p $(DESTDIR)
+	cp $(TARGET) $(DESTDIR)
