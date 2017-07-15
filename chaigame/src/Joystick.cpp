@@ -27,6 +27,7 @@ namespace chaigame {
 		//joy = sdlJoystick;
 		index = i;
 		name = "RetroPad";
+		return true;
 	}
 
 	Joystick::Joystick() {
