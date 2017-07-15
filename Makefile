@@ -150,11 +150,14 @@ vendor/physfs/libphysfs.a: submodules
 
 .PHONY: clean
 
-testing:
+noscript:
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 examples: all
 	retroarch -L $(TARGET) test/examples/main.chai
 
-test: testing
+test: all
+	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
+
+quicktest: noscript
 	retroarch -L $(TARGET) test/main.chai
