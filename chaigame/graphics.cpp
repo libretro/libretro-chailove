@@ -1,8 +1,8 @@
 #include "graphics.h"
 
-#include "SDL.h"
-#include <SDL_gfxPrimitives.h>
-#include <SDL_gfxBlitFunc.h>
+//#include "SDL.h"
+//#include <SDL_gfxPrimitives.h>
+//#include <SDL_gfxBlitFunc.h>
 
 #include "../Game.h"
 #include "src/ImageData.h"
@@ -16,15 +16,15 @@ namespace chaigame {
 		activeFont = new Font();
 	}
 
-	SDL_Surface* graphics::getScreen() {
+	/*SDL_Surface* graphics::getScreen() {
 		return Game::getInstance()->screen;
-	}
+	}*/
 
 	bool graphics::load() {
 		// Enable alpha blending.
-		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
+		/*if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
 			log()->warn("Enabling alpha blending failed");
-		}
+		}*/
 
 		return true;
 	}
@@ -34,41 +34,41 @@ namespace chaigame {
 	}
 
 	void graphics::clear(int r, int g, int b, int a) {
-		SDL_Surface* screen = getScreen();
-		Uint32 color = SDL_MapRGBA(screen->format, r, g, b, a);
-		SDL_FillRect(screen, NULL, color);
+		//SDL_Surface* screen = getScreen();
+		//Uint32 color = SDL_MapRGBA(screen->format, r, g, b, a);
+		//SDL_FillRect(screen, NULL, color);
 	}
 
 	void graphics::clear(int r, int g, int b) {
 		clear(r, g, b, 255);
 	}
 	void graphics::point(int x, int y) {
-		pixelRGBA(getScreen(), x, y, r, g, b, a);
+		//pixelRGBA(getScreen(), x, y, r, g, b, a);
 	}
 
 	void graphics::rectangle(const std::string& drawmode, int x, int y, int width, int height) {
-		if (drawmode == "line") {
+		/*if (drawmode == "line") {
 			rectangleRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
 		}
 		else {
 			boxRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
-		}
+		}*/
 	}
 	void graphics::line(int x1, int y1, int x2, int y2) {
-		lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
+		//lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
 	}
 
 	void graphics::draw(ImageData* image, int x, int y) {
-		if (image && image->loaded()) {
+		/*if (image && image->loaded()) {
 			SDL_Rect* dstrect = new SDL_Rect();
 			dstrect->x = x;
 			dstrect->y = y;
 			SDL_BlitSurface(image->surface, NULL, getScreen(), dstrect);
-		}
+		}*/
 	}
 
 	void graphics::draw(ImageData* image, Quad quad, int x, int y) {
-		if (image && image->loaded()) {
+		/*if (image && image->loaded()) {
 			SDL_Rect* dest = new SDL_Rect();
 			dest->x = x;
 			dest->y = y;
@@ -77,7 +77,7 @@ namespace chaigame {
 			if (SDL_gfxBlitRGBA(image->surface, quad.toRect(), getScreen(), dest) == -1) {
 				log()->error("Error calling SDL_gfxBlitRGBA");
 			}
-		}
+		}*/
 	}
 
 	ImageData* graphics::newImage(const std::string& filename) {
@@ -115,37 +115,39 @@ namespace chaigame {
 		backA = alpha;
 	}
 	int graphics::getWidth() {
-		return getScreen()->w;
+		return 640;
+		//return getScreen()->w;
 	}
 	int graphics::getHeight() {
-		return getScreen()->h;
+		return 480;
+		//return getScreen()->h;
 	}
 
 	void graphics::circle(const std::string& drawmode, int x, int y, int radius) {
-		if (drawmode == "line") {
+		/*if (drawmode == "line") {
 			circleRGBA(getScreen(), x, y, radius, r, g, b, a);
 		}
 		else {
 			filledCircleRGBA(getScreen(), x, y, radius, r, g, b, a);
-		}
+		}*/
 	}
 
 	void graphics::arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2) {
-		if (drawmode == "line") {
+		/*if (drawmode == "line") {
 			arcRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
 		}
 		else {
 			filledPieRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
-		}
+		}*/
 	}
 
 	void graphics::ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy) {
-		if (drawmode == "line") {
+		/*if (drawmode == "line") {
 			ellipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
 		}
 		else {
 			filledEllipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
-		}
+		}*/
 	}
 
 	Font* graphics::newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {

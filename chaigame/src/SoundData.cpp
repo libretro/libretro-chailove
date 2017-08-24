@@ -7,31 +7,32 @@
 
 namespace chaigame {
 
-	SoundData::SoundData(SDL_RWops* rw, const std::string& type) {
+	/*SoundData::SoundData(SDL_RWops* rw, const std::string& type) {
 		loadRWops = rw;
 		loadType = type;
-	}
+	}*/
 
 	SoundData::SoundData(const std::string& file, const std::string& type) {
- 		loadRWops = Game::getInstance()->filesystem.openRW(file);
- 		loadType = type;
+ 		//loadRWops = Game::getInstance()->filesystem.openRW(file);
+ 		//loadType = type;
 	}
 
 	bool SoundData::loaded() {
-		return (music != NULL) || (chunk != NULL);
+		return true;
+		//return (music != NULL) || (chunk != NULL);
 	}
 
 	std::string SoundData::getType() {
-		if (music) {
+		//if (music) {
 			return "stream";
-		}
-		if (chunk) {
+		//}
+		//if (chunk) {
 			return "static";
-		}
+		//}
 		return "";
 	}
 
-	bool SoundData::loadFromRW() {
+	/*bool SoundData::loadFromRW() {
 		if (loadType == "stream") {
 			music = Mix_LoadMUS_RW(loadRWops);
 			if (!music) {
@@ -63,11 +64,11 @@ namespace chaigame {
 
 		printf("loadType must be either 'stream' or 'static'.");
 		return false;
-	}
+	}*/
 
 	bool SoundData::unload() {
 		// Only call Mixer functions if the audio system is up.
-		Game* app = Game::getInstance();
+		/*Game* app = Game::getInstance();
 		if (app != NULL && app->sound.hasAudio()) {
 			if (music) {
 				Mix_FreeMusic(music);
@@ -85,12 +86,12 @@ namespace chaigame {
 		if (loadRWops) {
 			SDL_RWclose(loadRWops);
 			loadRWops = NULL;
-		}
+		}*/
 		return false;
 	}
 
 	void SoundData::play() {
-		Game* app = Game::getInstance();
+		/*Game* app = Game::getInstance();
 		// Make sure we have an audio system.
 		if (app && app->sound.hasAudio()) {
 			// See if we are to load the file.
@@ -119,6 +120,6 @@ namespace chaigame {
 					log()->error("Failed to play chunk: {}", errString);
 				};
 			}
-		}
+		}*/
 	}
 }

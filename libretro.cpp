@@ -9,7 +9,7 @@ const char *retro_save_directory;
 const char *retro_system_directory;
 const char *retro_content_directory;
 char retro_system_conf[512];
-bool opt_analog;
+bool opt_awesome;
 signed short soundbuf[1024*2];
 
 static retro_video_refresh_t video_cb;
@@ -52,7 +52,7 @@ void retro_set_environment(retro_environment_t cb) {
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 	struct retro_variable variables[] = {
 		{
-			"sdlmandel_analog","Use Analog; OFF|ON",
+			"awesomeoption","Use Awesome; OFF|ON",
 		},
 		{ NULL, NULL },
 	};
@@ -62,25 +62,24 @@ void retro_set_environment(retro_environment_t cb) {
 static void update_variables(void) {
 	struct retro_variable var = {0};
 
-	var.key = "sdlmandel_analog";
+	var.key = "awesomeoption";
 	var.value = NULL;
 
 	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
-		fprintf(stderr, "value: %s\n", var.value);
+		fprintf(stderr, "Awesome: %s\n", var.value);
 		if (strcmp(var.value, "OFF") == 0)
-			opt_analog = false;
+			opt_awesome = false;
 		if (strcmp(var.value, "ON") == 0)
-			opt_analog = true;
+			opt_awesome = true;
 
-		fprintf(stderr, "[libretro-test]: Analog: %s.\n",opt_analog?"ON":"OFF");
+		fprintf(stderr, "[libretro-chaigame]: Awesome: %s.\n", opt_awesome ? "ON" : "OFF");
 	}
-
 }
 
 void retro_get_system_info(struct retro_system_info *info) {
 	memset(info, 0, sizeof(*info));
 	info->library_name = "ChaiGame";
-	info->library_version = "0.1.1";
+	info->library_version = "0.2.0";
 	info->need_fullpath = true;
 	info->valid_extensions = "chai|chaigame";
 	info->block_extract = true;
@@ -108,7 +107,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 		60.0,
 		44100.0
 	};
-	info->timing   = timing;
+	info->timing = timing;
 }
 
 void retro_set_controller_port_device(unsigned port, unsigned device) {
@@ -193,7 +192,7 @@ void retro_init(void) {
 
 	if (environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir) && content_dir) {
 		// if defined, use the system directory
-		retro_content_directory=content_dir;
+		retro_content_directory = content_dir;
 	}
 
 	const char *save_dir = NULL;
@@ -204,7 +203,7 @@ void retro_init(void) {
 	}
 	else {
 		// make retro_save_directory the same in case RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY is not implemented by the frontend
-		retro_save_directory=retro_system_directory;
+		retro_save_directory = retro_system_directory;
 	}
 
 	if (retro_system_directory == NULL) {

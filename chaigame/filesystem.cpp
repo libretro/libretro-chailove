@@ -83,7 +83,7 @@ namespace chaigame {
 		return true;
 	}
 
-	SDL_RWops* filesystem::openRW(const std::string& filename) {
+	/*SDL_RWops* filesystem::openRW(const std::string& filename) {
 		SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
 		if (rw == NULL) {
 			const char* errorChar = PHYSFS_getLastError();
@@ -101,7 +101,7 @@ namespace chaigame {
 			log()->error("Error loading file {}: {} {}", filename, physErr, sdlErr);
 		}
 		return rw;
-	}
+	}*/
 
 	char* filesystem::readChar(const std::string& filename) {
 		char* output = NULL;

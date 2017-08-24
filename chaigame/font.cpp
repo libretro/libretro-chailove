@@ -1,13 +1,13 @@
 #include <string>
-#include "SDL.h"
-#include "SDL_ttf.h"
+//#include "SDL.h"
+//#include "SDL_ttf.h"
 #include "font.h"
 #include "src/Font.h"
 #include "log.h"
 
 namespace chaigame {
 	bool font::load() {
-		int result = TTF_Init();
+		/*int result = TTF_Init();
 		if(result == -1) {
 			const char* errorChar = TTF_GetError();
 			std::string errString("");
@@ -18,16 +18,15 @@ namespace chaigame {
 			return false;
 		}
 		return true;
+		*/
 	}
 
 	bool font::unload() {
-		if (isOpen()) {
-			TTF_Quit();
-		}
 		return true;
 	}
 
 	bool font::isOpen() {
-		return TTF_WasInit();
+		return true;
+		//return TTF_WasInit();
 	}
 }

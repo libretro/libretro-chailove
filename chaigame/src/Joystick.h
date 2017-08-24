@@ -1,13 +1,13 @@
 #ifndef CHAIGAME_UTILITY_JOYSTICK_H
 #define CHAIGAME_UTILITY_JOYSTICK_H
 
-#include "SDL.h"
+//#include "SDL.h"
 #include <string>
 
 namespace chaigame {
 	class Joystick {
 	public:
-		Joystick(int num, SDL_Joystick* joystick);
+		//Joystick(int num, SDL_Joystick* joystick);
 		//Joystick(SDL_Joystick* joystick);
 		Joystick();
 		std::string getName();
@@ -21,8 +21,8 @@ namespace chaigame {
 		//L_Joystick* joy = NULL;
 		int index = 0;
 		std::string name;
-		Sint16 xaxis;
-		Sint16 yaxis;
+		int xaxis;
+		int yaxis;
 	};
 }
 

@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_SOUND_H
 #define CHAIGAME_SOUND_H
 
-#include "SDL.h"
+//#include "SDL.h"
 #include "src/SoundData.h"
 #include <vector>
 
@@ -18,7 +18,7 @@ namespace chaigame {
 		int numtimesopened = 0;
 		int frequency = 0;
 		int channels = 0;
-    	Uint16 format;
+    	int format;
 
     	bool initialized = false;
     	bool firstRun = true;

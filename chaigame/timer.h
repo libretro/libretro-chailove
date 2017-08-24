@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_TIMER_H
 #define CHAIGAME_TIMER_H
 
-#include "SDL.h"
+//#include "SDL.h"
 
 namespace chaigame {
 	class timer {
@@ -9,8 +9,8 @@ namespace chaigame {
 		bool load();
 		void step();
 		float getDelta();
-		Uint32 last;
-		Uint32 current;
+		int last;
+		int current;
 		float delta;
 	};
 }
