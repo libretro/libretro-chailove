@@ -1,7 +1,7 @@
 #include "keyboard.h"
 
 #include <string>
-#include "SDL.h"
+//#include "SDL.h"
 #include "log.h"
 
 namespace chaigame {
@@ -20,27 +20,27 @@ namespace chaigame {
 	}
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
-		if (SDL_EnableKeyRepeat(delay, interval) == -1) {
+		/*if (SDL_EnableKeyRepeat(delay, interval) == -1) {
 			log()->error("Error setting KeyRepeat.");
-		}
+		}*/
 	}
 
 	bool keyboard::load() {
-		SDL_EnableUNICODE(1);
+		//SDL_EnableUNICODE(1);
 
 		// Construct the keycode map.
-		for (int i = 0; i < SDLK_LAST; i++) {
-			std::string name(SDL_GetKeyName((SDLKey)i));
+		//for (int i = 0; i < SDLK_LAST; i++) {
+			/*std::string name(SDL_GetKeyName((SDLKey)i));
 			if (!name.empty()) {
 				keyCodes[name] = i;
-			}
-		}
+			}*/
+		//}
 
 		return true;
 	}
 
 	bool keyboard::update() {
-		keys = SDL_GetKeyState(NULL);
+		//keys = SDL_GetKeyState(NULL);
 		return true;
 	}
 }

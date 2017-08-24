@@ -1,7 +1,7 @@
 #include "image.h"
-#include "SDL.h"
+//#include "SDL.h"
 #include <string>
-#include "SDL_image.h"
+//#include "SDL_image.h"
 #include "src/ImageData.h"
 #include "log.h"
 
@@ -15,7 +15,8 @@ namespace chaigame {
 	}
 
 	bool image::load() {
-		int flags = IMG_INIT_PNG | IMG_INIT_JPG;
+		return false;
+		/*int flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int initted = IMG_Init(flags);
 		if(flags != (initted & flags)) {
 
@@ -27,11 +28,11 @@ namespace chaigame {
 			log()->error("Failed to call IMG_Init with jpg/png: {}", errString);
 			return false;
 		}
-		return true;
+		return true;*/
 	}
 
 	bool image::unload() {
-		IMG_Quit();
+		//IMG_Quit();
 		return true;
 	}
 }

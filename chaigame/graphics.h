@@ -1,8 +1,8 @@
 #ifndef CHAIGAME_GRAPHICS_H
 #define CHAIGAME_GRAPHICS_H
 
-#include "SDL.h"
-#include "SDL_gfxPrimitives.h"
+//#include "SDL.h"
+//#include "SDL_gfxPrimitives.h"
 #include "src/ImageData.h"
 #include "src/Image.h"
 #include "src/Quad.h"
@@ -42,9 +42,9 @@ namespace chaigame {
 		void setBackgroundColor(int red, int green, int blue, int alpha);
 		void setBackgroundColor(int red, int green, int blue);
 
-		Uint8 r = 255, g = 255, b = 255, a = 255;
-		Uint8 backR = 0, backG = 0, backB = 0, backA = 255;
-		SDL_Surface* getScreen();
+		int r = 255, g = 255, b = 255, a = 255;
+		int backR = 0, backG = 0, backB = 0, backA = 255;
+		//SDL_Surface* getScreen();
 
 		int getWidth();
 		int getHeight();

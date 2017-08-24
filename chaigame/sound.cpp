@@ -9,7 +9,7 @@
 
 namespace chaigame {
 	bool sound::load() {
-		toInit = true;
+		/*toInit = true;
 		int flags = MIX_INIT_OGG | MIX_INIT_MOD;
 		int initted = Mix_Init(flags);
 		if ((initted & flags) != flags) {
@@ -20,7 +20,7 @@ namespace chaigame {
 			}
 			log()->error("[sound] Mix_Init() failed requiring ogg and mod support: {}", errString);
 			return false;
-		}
+		}*/
 		return loaded = true;
 	}
 
@@ -29,7 +29,7 @@ namespace chaigame {
 	}
 
 	bool sound::update() {
-		if (firstRun && toInit) {
+		/*if (firstRun && toInit) {
 			firstRun = false;
 			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
 				const char* errorChar = Mix_GetError();
@@ -64,7 +64,7 @@ namespace chaigame {
 			// printf("\n  opened=%d times\n  frequency=%dHz\n  format=%s\n  channels=%d\n", numtimesopened, frequency, format_str.c_str(), channels);
 
 		}
-
+		*/
 		return initialized;
 	}
 
@@ -73,7 +73,7 @@ namespace chaigame {
 		for (std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {
 			sounds[i]->unload();
 		}
-
+/*
 		// Unload SDL_Mixer.
 		if (loaded) {
 			log()->info("Mix_Quit(): Starting");
@@ -88,16 +88,16 @@ namespace chaigame {
 			Mix_CloseAudio();
 			log()->info("Mix_CloseAudio: Finished");
 			initialized = false;
-		}
+		}*/
 	}
 
 	SoundData* sound::newSoundData(const std::string& file, const std::string& type) {
-		SDL_RWops* rw = Game::getInstance()->filesystem.openRW(file);
+		/*SDL_RWops* rw = Game::getInstance()->filesystem.openRW(file);
 		if (rw) {
 			SoundData* newSound = new SoundData(rw, type);
 			sounds.push_back(newSound);
 			return newSound;
-		}
+		}*/
 		log()->error("Error loading newSoundData('{}', '{}')", file, type);
 		return NULL;
 	}

@@ -1,17 +1,17 @@
 #include "timer.h"
-#include "SDL.h"
+//#include "SDL.h"
 
 namespace chaigame {
 
 	bool timer::load() {
-		current = last = SDL_GetTicks();
+		current = last = 0;//SDL_GetTicks();
 
 		return true;
 	}
 
 	void timer::step() {
 		last = current;
-		current = SDL_GetTicks();
+		current = 0;//SDL_GetTicks();
 		delta = (float)current - (float)last;
 	}
 

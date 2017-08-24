@@ -7,7 +7,7 @@
 
 namespace chaigame {
 
-	bool window::load(Config& config) {
+	bool window::load(Config& config) {/*
 		Game* app = Game::getInstance();
 
 		// Initialize SDL.
@@ -36,7 +36,7 @@ namespace chaigame {
 		}
 
 		// Enable video buffering.
-		app->videoBuffer = (unsigned int *)app->screen->pixels;
+		app->videoBuffer = (unsigned int *)app->screen->pixels;*/
 
 		// Set the title.
 		setTitle(config.window.title);
@@ -45,17 +45,17 @@ namespace chaigame {
 	}
 
 	bool window::unload() {
-		SDL_Quit();
+		//SDL_Quit();
 		return true;
 	}
 
 	std::string window::getTitle() {
 		char* titleChar;
-		SDL_WM_GetCaption(&titleChar, NULL);
+		//SDL_WM_GetCaption(&titleChar, NULL);
 		return std::string(titleChar);
 	}
 
 	void window::setTitle(std::string title) {
-		SDL_WM_SetCaption(title.c_str(), 0);
+		//SDL_WM_SetCaption(title.c_str(), 0);
 	}
 }
