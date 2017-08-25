@@ -13,6 +13,7 @@ namespace chaigame {
 
 	bool ImageData::loaded() {
 		//return surface != NULL;
+		return true;
 	}
 
 	/*bool ImageData::loadFromRW(SDL_RWops* rw) {

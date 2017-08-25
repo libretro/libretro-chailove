@@ -17,8 +17,8 @@ namespace chaigame {
 			log()->error("TTF_Init failed to initialize font system: {}", errString);
 			return false;
 		}
-		return true;
 		*/
+		return true;
 	}
 
 	bool font::unload() {

@@ -1,0 +1,50 @@
+SOURCES_C   :=
+SOURCES_CXX := $(CORE_DIR)/libretro.cpp \
+	$(CORE_DIR)/Game.cpp \
+	$(CORE_DIR)/chaigame/audio.cpp \
+	$(CORE_DIR)/chaigame/log.cpp \
+	$(CORE_DIR)/chaigame/graphics.cpp \
+	$(CORE_DIR)/chaigame/keyboard.cpp \
+	$(CORE_DIR)/chaigame/script.cpp \
+	$(CORE_DIR)/chaigame/filesystem.cpp \
+	$(CORE_DIR)/chaigame/image.cpp \
+	$(CORE_DIR)/chaigame/sound.cpp \
+	$(CORE_DIR)/chaigame/math.cpp \
+	$(CORE_DIR)/chaigame/font.cpp \
+	$(CORE_DIR)/chaigame/timer.cpp \
+	$(CORE_DIR)/chaigame/event.cpp \
+	$(CORE_DIR)/chaigame/window.cpp \
+	$(CORE_DIR)/chaigame/mouse.cpp \
+	$(CORE_DIR)/chaigame/system.cpp \
+	$(CORE_DIR)/test/Test.cpp \
+	$(CORE_DIR)/chaigame/src/ImageData.cpp \
+	$(CORE_DIR)/chaigame/src/Quad.cpp \
+	$(CORE_DIR)/chaigame/src/Image.cpp \
+	$(CORE_DIR)/chaigame/src/Config.cpp \
+	$(CORE_DIR)/chaigame/src/Font.cpp \
+	$(CORE_DIR)/chaigame/src/SoundData.cpp \
+	$(CORE_DIR)/chaigame/src/Point.cpp \
+	$(CORE_DIR)/chaigame/src/Joystick.cpp \
+	$(CORE_DIR)/chaigame/joystick.cpp
+
+LDFLAGS +=  $(fpic) $(SHARED) \
+	vendor/physfs/libphysfs.a \
+	-ldl \
+	-lpthread $(EXTRA_LDF)
+
+INCLUDES += -I. \
+	-Ivendor/libretro-common/include \
+	-Ivendor/chaiscript/include \
+	-Ivendor/spdlog/include \
+	-Ivendor/ChaiScript_Extras/include \
+	-Ivendor/physfs/src
+
+ifeq ($(HAVE_CHAISCRIPT),)
+	CXXFLAGS += -D__HAVE_CHAISCRIPT__
+endif
+ifneq ($(HAVE_TESTS),)
+	CXXFLAGS += -D__HAVE_TESTS__
+endif
+
+CFLAGS += -std=gnu99 -DLSB_FIRST
+CXXFLAGS += -std=c++14 -DLSB_FIRST
