@@ -56,8 +56,8 @@ public:
 	void draw();
 
 	uint32_t *videoBuffer;
-	SDL_Surface* screen;
-	SDL_Event sdlEvent;
+	//SDL_Surface* screen;
+	//SDL_Event sdlEvent;
 
 	#ifdef __HAVE_TESTS__
 	Test test;

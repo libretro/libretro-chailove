@@ -1,6 +1,6 @@
 #include "sound.h"
-#include "SDL.h"
-#include "SDL_mixer.h"
+//#include "SDL.h"
+//#include "SDL_mixer.h"
 #include "../Game.h"
 #include <vector>
 #include <string>

@@ -3,12 +3,12 @@
 
 #include <string>
 #include <map>
-#include "SDL.h"
+//#include "SDL.h"
 
 namespace chaigame {
 	class keyboard {
 	public:
-		Uint8* keys;
+		int* keys;
 		bool load();
 		bool isDown(const std::string& key);
 		bool isDown(int key);

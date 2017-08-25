@@ -1,6 +1,6 @@
 #include "Quad.h"
 
-#include "SDL.h"
+//#include "SDL.h"
 
 namespace chaigame {
 	Quad::Quad(int t_x, int t_y, int t_width, int t_height, int t_sw, int t_sh)

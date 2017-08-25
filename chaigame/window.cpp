@@ -1,6 +1,6 @@
 #include "window.h"
 #include "../Game.h"
-#include "SDL.h"
+//#include "SDL.h"
 #include <string>
 #include "log.h"
 #include "src/Config.h"
@@ -50,9 +50,8 @@ namespace chaigame {
 	}
 
 	std::string window::getTitle() {
-		char* titleChar;
 		//SDL_WM_GetCaption(&titleChar, NULL);
-		return std::string(titleChar);
+		return std::string("ChaiGame");
 	}
 
 	void window::setTitle(std::string title) {
