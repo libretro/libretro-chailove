@@ -28,3 +28,6 @@
 [submodule "vendor/DanielGibsonSnippets"]
 	path = vendor/DanielGibsonSnippets
 	url = https://github.com/RobLoach/Snippets.git
+[submodule "vendor/DanielGibsonSnippetsSDL1"]
+	path = vendor/DanielGibsonSnippetsSDL1
+	url = https://github.com/RobLoach/Snippets.git
