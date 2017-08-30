@@ -1,6 +1,8 @@
 #include "ImageData.h"
-//#include "SDL.h"
-//#include "SDL_image.h"
+#include "SDL.h"
+#define SDL_STBIMAGE_IMPLEMENTATION
+#include "SDL_stbimage.h"
+
 #include <string>
 #include "../../Game.h"
 #include "../log.h"
@@ -16,19 +18,18 @@ namespace chaigame {
 	}
 
 	bool ImageData::loadFromRW(SDL_RWops* rw) {
-		return false;
-		/*surface = IMG_Load_RW(rw, 1);
+		surface = STBIMG_Load_RW(rw, 1);
 
 		if (!surface) {
-			const char* errorChar = IMG_GetError();
+			const char* errorChar = SDL_GetError();
 			std::string errString("");
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			log()->error("IMG_Load_RW failed to load data: {}", errString);
+			log()->error("STBIMG_Load_RW failed to load data: {}", errString);
 			return false;
 		}
-		return true;*/
+		return true;
 	}
 
 	bool ImageData::destroy() {

@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_UTILITY_IMAGEDATA_H
 #define CHAIGAME_UTILITY_IMAGEDATA_H
 
-#include "SDL.h"
+#include <SDL.h>
 #include <string>
 
 namespace chaigame {

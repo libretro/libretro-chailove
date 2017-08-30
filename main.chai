@@ -1,31 +1,34 @@
-global x
-global y
+global x = 1000.0f
+global y = 800.0f
+global img
 
 def load() {
-	x = graphics.getWidth() / 2
-	y = graphics.getHeight() / 2
 
 	graphics.setBackgroundColor(40, 86, 83)
 	graphics.setColor(113, 169, 155)
+
+    img = graphics.newImage("test/examples/assets/graphics_draw.png")
 }
 
 def draw() {
 	graphics.print("Hello World!!!!!!!!", x, y)
 	graphics.circle("fill", x, y, 80)
+
+    graphics.draw(img, x, y)
 }
 
 def update(delta) {
     if (joystick.isDown(0, "up")) {
-      y -= 0.5f * delta
+      y -= 0.2 * delta
     }
     else if (joystick.isDown(0, "down")) {
-      y += 0.5f * delta
+      y += 0.2 * delta
     }
     if (joystick.isDown(0, "left")) {
-      x -= 0.5f * delta
+      x -= 0.2 * delta
     }
     else if (joystick.isDown(0, "right")) {
-      x += 0.5f * delta
+      x += 0.2 * delta
     }
 }
 

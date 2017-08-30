@@ -113,7 +113,9 @@ FLAGS += -I. \
 	-Ivendor/spdlog/include \
 	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
 	-Ivendor/ChaiScript_Extras/include \
-	-Ivendor/physfs/src
+	-Ivendor/physfs/src \
+	-Ivendor/DanielGibsonSnippets \
+	-Ivendor/stb
 
 WARNINGS :=
 
