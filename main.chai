@@ -1,8 +1,10 @@
-global x = 1000.0f
-global y = 800.0f
+global x
+global y
 global img
 
 def load() {
+    x = graphics.getWidth() / 2
+    y = graphics.getHeight() / 2
 
 	graphics.setBackgroundColor(40, 86, 83)
 	graphics.setColor(113, 169, 155)
@@ -14,21 +16,21 @@ def draw() {
 	graphics.print("Hello World!!!!!!!!", x, y)
 	graphics.circle("fill", x, y, 80)
 
-    graphics.draw(img, x, y)
+    graphics.draw(img, x - img.getWidth() / 2, y - img.getHeight() / 2)
 }
 
 def update(delta) {
     if (joystick.isDown(0, "up")) {
-      y -= 0.2 * delta
+      y -= 0.5f * delta
     }
     else if (joystick.isDown(0, "down")) {
-      y += 0.2 * delta
+      y += 0.5f * delta
     }
     if (joystick.isDown(0, "left")) {
-      x -= 0.2 * delta
+      x -= 0.5f * delta
     }
     else if (joystick.isDown(0, "right")) {
-      x += 0.2 * delta
+      x += 0.5f * delta
     }
 }
 
