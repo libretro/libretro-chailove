@@ -85,7 +85,12 @@ OBJECTS := libretro.o \
 	chaigame/joystick.o \
 	vendor/physfs/extras/physfsrwops.o
 
-all: | vendor/physfs/libphysfs.a $(TARGET)
+# Build all the dependencies, and the core.
+all: | \
+	vendor/physfs/libphysfs.a \
+	vendor/SDL_$(platform).a \
+	vendor/SDL_gfx_$(platform).a \
+	$(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -95,8 +100,8 @@ endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
 	vendor/physfs/libphysfs.a \
-	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
-	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
+	vendor/SDL_$(platform).a \
+	vendor/SDL_gfx_$(platform).a \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)
@@ -142,7 +147,11 @@ vendor/sdl-libretro/Makefile.libretro:
 vendor/physfs/libphysfs.a: vendor/sdl-libretro/Makefile.libretro
 	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
 
-.PHONY: clean
+vendor/SDL_$(platform).a: vendor/sdl-libretro/Makefile.libretro
+	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL_$(platform).a
+
+vendor/SDL_gfx_$(platform).a: vendor/sdl-libretro/Makefile.libretro
+	cd vendor/sdl-libretro/tests/SDL_gfx-2.0.26 && make -f Makefile.libretro STATIC_LIB=../../../SDL_gfx_$(platform).a
 
 test: all
 	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
