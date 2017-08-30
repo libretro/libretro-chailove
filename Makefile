@@ -85,7 +85,7 @@ OBJECTS := libretro.o \
 	chaigame/joystick.o \
 	vendor/physfs/extras/physfsrwops.o
 
-all: $(TARGET)
+all: | vendor/physfs/libphysfs.a vendor/SDL.a vendor/SDL_gfx.a $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -124,7 +124,7 @@ FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): | vendor/physfs/libphysfs.a vendor/SDL.a vendor/SDL_gfx.a $(OBJECTS)
+$(TARGET): $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
