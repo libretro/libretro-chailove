@@ -85,7 +85,7 @@ OBJECTS := libretro.o \
 	chaigame/joystick.o \
 	vendor/physfs/extras/physfsrwops.o
 
-all: | vendor/physfs/libphysfs.a $(TARGET)
+all: $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -124,7 +124,7 @@ FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): $(OBJECTS)
+$(TARGET): | vendor/physfs/libphysfs.a $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
@@ -136,10 +136,10 @@ $(TARGET): $(OBJECTS)
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 
-submodules:
+vendor/sdl-libretro/Makefile.libretro:
 	git submodule update --init --recursive
 
-vendor/physfs/libphysfs.a: submodules
+vendor/physfs/libphysfs.a: vendor/sdl-libretro/Makefile.libretro
 	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
 
 .PHONY: clean
