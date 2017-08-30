@@ -25,3 +25,6 @@
 [submodule "vendor/stb"]
 	path = vendor/stb
 	url = https://github.com/nothings/stb.git
+[submodule "vendor/Snippets"]
+	path = vendor/Snippets
+	url = https://github.com/DanielGibson/Snippets.git
