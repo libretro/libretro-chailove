@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_UTILITY_QUAD_H
 #define CHAIGAME_UTILITY_QUAD_H
 
-//#include "SDL.h"
+#include "SDL.h"
 
 namespace chaigame {
 	class Quad {
@@ -10,7 +10,7 @@ namespace chaigame {
 		Quad();
 		Quad(int x, int y, int width, int height, int sw, int sh);
 		Quad(int x, int y, int width, int height);
-		//SDL_Rect* toRect();
+		SDL_Rect* toRect();
 	};
 }
 

@@ -7,16 +7,17 @@
 
 namespace chaigame {
 
-	/*ImageData::ImageData(SDL_RWops* rw) {
+	ImageData::ImageData(SDL_RWops* rw) {
 		loadFromRW(rw);
-	}*/
-
-	bool ImageData::loaded() {
-		//return surface != NULL;
 	}
 
-	/*bool ImageData::loadFromRW(SDL_RWops* rw) {
-		surface = IMG_Load_RW(rw, 1);
+	bool ImageData::loaded() {
+		return surface != NULL;
+	}
+
+	bool ImageData::loadFromRW(SDL_RWops* rw) {
+		return false;
+		/*surface = IMG_Load_RW(rw, 1);
 
 		if (!surface) {
 			const char* errorChar = IMG_GetError();
@@ -27,14 +28,14 @@ namespace chaigame {
 			log()->error("IMG_Load_RW failed to load data: {}", errString);
 			return false;
 		}
-		return true;
-	}*/
+		return true;*/
+	}
 
 	bool ImageData::destroy() {
-		//if (!surface) {
-			//SDL_FreeSurface(surface);
-		//	surface = NULL;
-		//}
+		if (!surface) {
+			SDL_FreeSurface(surface);
+			surface = NULL;
+		}
 		return true;
 	}
 
@@ -43,21 +44,21 @@ namespace chaigame {
 	}
 
 	ImageData::ImageData(const std::string& filename) {
-		//SDL_RWops* image = Game::getInstance()->filesystem.openRW(filename);
-		//loadFromRW(image);
+		SDL_RWops* image = Game::getInstance()->filesystem.openRW(filename);
+		loadFromRW(image);
 	}
 
 	int ImageData::getWidth() {
-		//if (surface != NULL) {
-			//return surface->w;
-		//}
+		if (surface != NULL) {
+			return surface->w;
+		}
 		return 0;
 	}
 
 	int ImageData::getHeight() {
-		//if (surface != NULL) {
-			//return surface->h;
-		//}
+		if (surface != NULL) {
+			return surface->h;
+		}
 		return 0;
 	}
 }

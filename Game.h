@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_GAME_H
 #define CHAIGAME_GAME_H
 
-//#include "SDL.h"
+#include "SDL.h"
 #include "libretro.h"
 #include "chaigame/keyboard.h"
 #include "chaigame/src/Config.h"

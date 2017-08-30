@@ -1,5 +1,5 @@
 #include <string>
-//#include "SDL.h"
+#include "SDL.h"
 
 #include "libretro.h"
 #include "Game.h"
@@ -73,7 +73,7 @@ bool Game::update() {
 	sound.update();
 
 	// Poll all SDL events.
-	/*while (SDL_PollEvent(&sdlEvent)) {
+	while (SDL_PollEvent(&sdlEvent)) {
 		switch (sdlEvent.type) {
 			case SDL_QUIT:
 				event.quit();
@@ -89,7 +89,7 @@ bool Game::update() {
 				mouse.buttonEvent(sdlEvent.button);
 				break;
 		}
-	}*/
+	}
 
 	// Update some of the sub-systems.
 	joystick.update();
@@ -122,11 +122,11 @@ void Game::draw() {
 		#endif
 
 		// Update the screen.
-		//SDL_UpdateRect(screen, 0, 0, 0, 0);
+		SDL_UpdateRect(screen, 0, 0, 0, 0);
 
 		// Flip the buffer.
-		/*if (SDL_Flip(screen) == -1) {
+		if (SDL_Flip(screen) == -1) {
 			chaigame::log()->error("Failed to swap the buffers: {}", SDL_GetError());
-		}*/
+		}
 	}
 }

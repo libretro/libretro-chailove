@@ -2,18 +2,36 @@ global x
 global y
 
 def load() {
-	x = 100
-	y = 100
+	x = graphics.getWidth() / 2
+	y = graphics.getHeight() / 2
+
+	graphics.setBackgroundColor(40, 86, 83)
+	graphics.setColor(113, 169, 155)
 }
 
 def draw() {
-    graphics.print("Hello World!!!!!!!!", x, y);
-    print(window.getTitle());
+	graphics.print("Hello World!!!!!!!!", x, y)
+	graphics.circle("fill", x, y, 80)
+}
+
+def update(delta) {
+    if (joystick.isDown(0, "up")) {
+      y -= 0.5f * delta
+    }
+    else if (joystick.isDown(0, "down")) {
+      y += 0.5f * delta
+    }
+    if (joystick.isDown(0, "left")) {
+      x -= 0.5f * delta
+    }
+    else if (joystick.isDown(0, "right")) {
+      x += 0.5f * delta
+    }
 }
 
 def joystickpressed(joystick, button) {
   if (button == 0) {
-    event.quit()
-    print("QUIT!")
+	event.quit()
+	print("QUIT!")
   }
 }

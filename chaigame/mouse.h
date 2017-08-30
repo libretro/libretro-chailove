@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_MOUSE_H
 #define CHAIGAME_MOUSE_H
 
-//#include "SDL.h"
+#include <SDL.h>
 #include "src/Point.h"
 
 namespace chaigame {
@@ -22,8 +22,8 @@ namespace chaigame {
 		int m_x, m_y;
 		int buttonState[20];
 
-		//void motionEvent(SDL_MouseMotionEvent event);
-		//void buttonEvent(SDL_MouseButtonEvent event);
+		void motionEvent(SDL_MouseMotionEvent event);
+		void buttonEvent(SDL_MouseButtonEvent event);
 	};
 }
 

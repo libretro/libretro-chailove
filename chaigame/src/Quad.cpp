@@ -15,7 +15,7 @@ namespace chaigame {
 	Quad::Quad() {
 		// Nothing.
 	}
-/*
+
 	SDL_Rect* Quad::toRect() {
 		SDL_Rect* rect = new SDL_Rect();
 		rect->x = x;
@@ -23,5 +23,5 @@ namespace chaigame {
 		rect->w = width;
 		rect->h = height;
 		return rect;
-	}*/
+	}
 }

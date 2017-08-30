@@ -1,7 +1,6 @@
 #ifndef CHAIGAME_SOUND_H
 #define CHAIGAME_SOUND_H
 
-//#include "SDL.h"
 #include "src/SoundData.h"
 #include <vector>
 

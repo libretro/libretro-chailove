@@ -82,7 +82,8 @@ OBJECTS := libretro.o \
 	chaigame/src/SoundData.o \
 	chaigame/src/Point.o \
 	chaigame/src/Joystick.o \
-	chaigame/joystick.o
+	chaigame/joystick.o \
+	vendor/physfs/extras/physfsrwops.o
 
 all: | vendor/physfs/libphysfs.a $(TARGET)
 
@@ -94,6 +95,8 @@ endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
 	vendor/physfs/libphysfs.a \
+	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
+	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)

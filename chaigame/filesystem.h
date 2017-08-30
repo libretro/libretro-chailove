@@ -2,7 +2,7 @@
 #define CHAIGAME_FILESYSTEM_H
 
 #include <string>
-//#include "SDL.h"
+#include "SDL.h"
 #include "physfs.h"
 
 namespace chaigame {
@@ -11,7 +11,7 @@ namespace chaigame {
 		bool load(const std::string& file);
 		bool init(const std::string& file);
 		bool unload();
-		//SDL_RWops* openRW(const std::string& filename);
+		SDL_RWops* openRW(const std::string& filename);
 		char* readChar(const std::string& filename);
 		std::string read(const std::string& filename);
 		bool exists(const std::string& file);
