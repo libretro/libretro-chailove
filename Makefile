@@ -143,16 +143,16 @@ $(TARGET): $(OBJECTS)
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 
-vendor/sdl-libretro/Makefile.libretro:
+vendor/Snippets/README.md:
 	git submodule update --init --recursive
 
-vendor/physfs/libphysfs.a: vendor/sdl-libretro/Makefile.libretro
+vendor/physfs/libphysfs.a: vendor/Snippets/README.md
 	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
 
-vendor/SDL_$(platform).a: vendor/sdl-libretro/Makefile.libretro
+vendor/SDL_$(platform).a: vendor/Snippets/README.md
 	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL_$(platform).a
 
-vendor/SDL_gfx_$(platform).a: vendor/sdl-libretro/Makefile.libretro
+vendor/SDL_gfx_$(platform).a: vendor/Snippets/README.md
 	cd vendor/sdl-libretro/tests/SDL_gfx-2.0.26 && make -f Makefile.libretro STATIC_LIB=../../../SDL_gfx_$(platform).a
 
 test: all
