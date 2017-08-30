@@ -95,8 +95,8 @@ endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
 	vendor/physfs/libphysfs.a \
-	vendor/sdl-libretro/libSDL_$(SDL_PREFIX).a \
-	vendor/sdl-libretro/libSDL_gfx_$(SDL_PREFIX).a \
+	vendor/SDL.a \
+	vendor/SDL_gfx.a \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)
@@ -124,7 +124,7 @@ FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): | vendor/physfs/libphysfs.a $(OBJECTS)
+$(TARGET): | vendor/physfs/libphysfs.a vendor/SDL.a vendor/SDL_gfx.a $(OBJECTS)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
@@ -142,7 +142,11 @@ vendor/sdl-libretro/Makefile.libretro:
 vendor/physfs/libphysfs.a: vendor/sdl-libretro/Makefile.libretro
 	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
 
-.PHONY: clean
+vendor/SDL.a: vendor/sdl-libretro/Makefile.libretro
+	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL.a
+
+vendor/SDL_gfx.a: vendor/sdl-libretro/Makefile.libretro
+	cd vendor/sdl-libretro/tests/SDL_gfx-2.0.26 && make -f Makefile.libretro STATIC_LIB=../../../SDL_gfx.a
 
 test: all
 	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
