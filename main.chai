@@ -1,17 +1,22 @@
 global x
 global y
+global img
 
 def load() {
-	x = graphics.getWidth() / 2
-	y = graphics.getHeight() / 2
+    x = graphics.getWidth() / 2
+    y = graphics.getHeight() / 2
 
 	graphics.setBackgroundColor(40, 86, 83)
 	graphics.setColor(113, 169, 155)
+
+    img = graphics.newImage("test/examples/assets/graphics_draw.png")
 }
 
 def draw() {
 	graphics.print("Hello World!!!!!!!!", x, y)
 	graphics.circle("fill", x, y, 80)
+
+    graphics.draw(img, x - img.getWidth() / 2, y - img.getHeight() / 2)
 }
 
 def update(delta) {

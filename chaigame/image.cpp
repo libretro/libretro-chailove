@@ -1,7 +1,5 @@
 #include "image.h"
-//#include "SDL.h"
 #include <string>
-//#include "SDL_image.h"
 #include "src/ImageData.h"
 #include "log.h"
 
@@ -15,7 +13,7 @@ namespace chaigame {
 	}
 
 	bool image::load() {
-		return false;
+		return true;
 		/*int flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int initted = IMG_Init(flags);
 		if(flags != (initted & flags)) {
