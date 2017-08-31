@@ -52,7 +52,7 @@ namespace chaigame {
 	}
 
 	bool Font::loaded() {
-		return ttfFont != NULL || ttyFont != NULL;
+		return /*ttfFont != NULL ||*/ ttyFont != NULL;
 	}
 
 	bool Font::destroy() {
