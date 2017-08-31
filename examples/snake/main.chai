@@ -61,17 +61,23 @@ def update(dt) {
 
 	var head = S.back()
 
-	if (dir == 1) {
-		S.push_back([head[0] + 0, head[1] - 1])
-	}
-	if (dir == 2) {
-		S.push_back([head[0] + 0, head[1] + 1])
-	}
-	if (dir == 3) {
-		S.push_back([head[0] - 1, head[1] + 0])
-	}
-	if (dir == 4) {
-		S.push_back([head[0] + 1, head[1] + 0])
+	switch (dir) {
+		case (1) {
+			S.push_back([head[0] + 0, head[1] - 1])
+			break
+		}
+		case (2) {
+			S.push_back([head[0] + 0, head[1] + 1])
+			break
+		}
+		case (3) {
+			S.push_back([head[0] - 1, head[1] + 0])
+			break
+		}
+		case (4) {
+			S.push_back([head[0] + 1, head[1] + 0])
+			break
+		}
 	}
 
 	head = S.back()
