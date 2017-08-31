@@ -27,7 +27,6 @@ def init() {
 
 def load() {
 	graphics.setBackgroundColor(133, 188, 22)
-
 	init()
 }
 
@@ -61,17 +60,23 @@ def update(dt) {
 
 	var head = S.back()
 
-	if (dir == 1) {
-		S.push_back([head[0] + 0, head[1] - 1])
-	}
-	if (dir == 2) {
-		S.push_back([head[0] + 0, head[1] + 1])
-	}
-	if (dir == 3) {
-		S.push_back([head[0] - 1, head[1] + 0])
-	}
-	if (dir == 4) {
-		S.push_back([head[0] + 1, head[1] + 0])
+	switch (dir) {
+		case (1) {
+			S.push_back([head[0] + 0, head[1] - 1])
+			break;
+		}
+		case (2) {
+			S.push_back([head[0] + 0, head[1] + 1])
+			break;
+		}
+		case (3) {
+			S.push_back([head[0] - 1, head[1] + 0])
+			break;
+		}
+		case (4) {
+			S.push_back([head[0] + 1, head[1] + 0])
+			break;
+		}
 	}
 
 	head = S.back()
@@ -99,6 +104,7 @@ def update(dt) {
 }
 
 def draw() {
+	// Draw the grid.
 	graphics.setColor(134, 201, 0)
 	for (var y = 0; y < HEIGHT; ++y) {
 		for (var x = 0; x < WIDTH; ++x) {
@@ -106,11 +112,13 @@ def draw() {
 		}
 	}
 
+	// Draw the snake.
 	graphics.setColor(216, 6, 0)
 	for (var i = 0; i < S.size(); ++i) {
 		graphics.rectangle("fill", S[i][0]*12, S[i][1]*12, 10, 10)
 	}
 
+	// Draw the point.
 	graphics.setColor(2, 116, 132)
 	graphics.rectangle("fill", T[0]*12, T[1]*12, 10, 10)
 }
