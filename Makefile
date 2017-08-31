@@ -83,7 +83,9 @@ OBJECTS := src/libretro.o \
 	src/chaigame/audio/SoundData.o \
 	src/chaigame/system/Config.o \
 	test/Test.o \
-	vendor/physfs/extras/physfsrwops.o
+	vendor/physfs/extras/physfsrwops.o \
+	vendor/SDL_tty/src/SDL_tty.o \
+	vendor/SDL_tty/src/SDL_fnt.o
 
 # Build all the dependencies, and the core.
 all: | dependencies	$(TARGET)

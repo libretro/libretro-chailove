@@ -1,5 +1,5 @@
 #include <string>
-//#include "SDL.h"
+#include "SDL.h"
 //#include "SDL_ttf.h"
 #include "font.h"
 #include "graphics/Font.h"
@@ -16,9 +16,8 @@ namespace chaigame {
 			}
 			log()->error("TTF_Init failed to initialize font system: {}", errString);
 			return false;
-		}
+		}*/
 		return true;
-		*/
 	}
 
 	bool font::unload() {
@@ -27,6 +26,8 @@ namespace chaigame {
 
 	bool font::isOpen() {
 		return true;
-		//return TTF_WasInit();
+		/*
+		return TTF_WasInit();
+		*/
 	}
 }

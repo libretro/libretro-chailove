@@ -1,10 +1,11 @@
 #ifndef CHAIGAME_UTILITY_FONT_H
 #define CHAIGAME_UTILITY_FONT_H
 
-//#include "SDL.h"
+#include "SDL.h"
 //#include "SDL_ttf.h"
 #include <string>
-//#include "SDL_fnt.h"
+#include "SDL_fnt.h"
+#include "ImageData.h"
 
 namespace chaigame {
 	class Font {
@@ -17,10 +18,11 @@ namespace chaigame {
 		bool destroy();
 		void print(const std::string& text, int x, int y, int r, int g, int b, int a);
 		//TTF_Font* ttfFont = NULL;
-		//TTY_Font* ttyFont = NULL;
-		//int ttyFontWidth, ttyFontHeight;
+		TTY_Font* ttyFont = NULL;
+		int ttyFontWidth, ttyFontHeight;
 		int getHeight();
 		int getWidth(const std::string& text);
+		ImageData* imageData;
 	};
 }
 
