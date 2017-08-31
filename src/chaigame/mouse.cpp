@@ -1,7 +1,7 @@
 #include "mouse.h"
 
 #include <SDL.h>
-#include "src/Point.h"
+#include "graphics/Point.h"
 
 namespace chaigame {
 

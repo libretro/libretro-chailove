@@ -1,6 +1,6 @@
 #include "image.h"
 #include <string>
-#include "src/ImageData.h"
+#include "graphics/ImageData.h"
 #include "log.h"
 
 namespace chaigame {

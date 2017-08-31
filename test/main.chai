@@ -1,82 +1,48 @@
-/**
- * ChaiGame Benchmark
- */
+global testNames = [
+	"graphics_print",
+	"graphics_draw",
+	"mouse_getPosition",
+	"graphics_print_font"
+]
+global tests = []
+global currenttest = 0
+global defaultFont
 
-// The Sprites and the image to load.
-global sprites = []
-global img
-
-def load() {
-	img = graphics.newImage("examples/assets/graphics_draw.png")
-	graphics.setBackgroundColor(0, 61, 0)
-
-	// Add the first sprite.
-	sprites.push_back(Sprite())
+def conf(t) {
+	t.window.width = 460
+	t.window.height = 320
 }
 
-def update(delta) {
-	// Update all the sprites.
-	for (sprite : sprites) {
-		sprite.update(delta)
+def load() {
+	for (name : testNames) {
+		filesystem.load(name + ".chai");
+		tests.push_back(eval(name + "()"));
 	}
 
-	// Allow increasing the amount of sprites.
-	if (joystick[0].isDown("up")) {
-		sprites.push_back(Sprite())
+	for (test : tests) {
+		test.load();
 	}
-	if (joystick[0].isDown("down") && sprites.size() > 1) {
-		sprites.pop_back()
-	}
+
+	defaultFont = graphics.newFont()
 }
 
 def draw() {
-	// Draw all the sprites.
-	for (sprite : sprites) {
-		sprite.draw()
-	}
+	tests[currenttest].draw();
 
-	// Write the text on the screen.
+	graphics.setFont(defaultFont)
 	graphics.setColor(255, 255, 255)
-	graphics.print("Sprites: " + to_string(sprites.size()), 5, 5)
-	graphics.print("Press up/down", 5, 20)
+	graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
 }
 
-class Sprite {
-	var x
-	var y
-	var xspeed
-	var yspeed
+def update(delta) {
+	tests[currenttest].update(delta)
+}
 
-	def Sprite() {
-		this.x = math.random(graphics.getWidth()) * 1.0f
-		this.y = math.random(graphics.getHeight()) * 1.0f
-		this.xspeed = math.random(10) * 0.05f
-		this.yspeed = math.random(10) * 0.05f
-	}
-
-	def draw() {
-		graphics.draw(img, this.x, this.y)
-	}
-
-	def update(delta) {
-		this.x += this.xspeed * delta
-		this.y += this.yspeed * delta
-
-		if (this.x + img.getWidth() > graphics.getWidth()) {
-			this.xspeed = this.xspeed * -1.0f
-			this.x = graphics.getWidth() - img.getWidth()
-		}
-		if (this.x < 0) {
-			this.xspeed = this.xspeed * -1.0f
-			this.x = 0
-		}
-		if (this.y + img.getHeight() > graphics.getHeight()) {
-			this.yspeed = this.yspeed * -1.0f
-			this.y = graphics.getHeight() - img.getHeight()
-		}
-		if (this.y < 0) {
-			this.yspeed = this.yspeed * -1.0f
-			this.y = 0
+def joystickpressed(joystick, button) {
+	if (button == 0 || button == 1) {
+		currenttest = currenttest + 1
+		if (currenttest >= tests.size()) {
+			currenttest = 0
 		}
 	}
-};
+}

@@ -2,7 +2,7 @@
 //#include "SDL.h"
 //#include "SDL_ttf.h"
 #include "font.h"
-#include "src/Font.h"
+#include "graphics/Font.h"
 #include "log.h"
 
 namespace chaigame {

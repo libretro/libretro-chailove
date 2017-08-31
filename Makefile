@@ -56,33 +56,33 @@ else
 	SDL_PREFIX := win
 endif
 
-OBJECTS := libretro.o \
-	Game.o \
-	chaigame/audio.o \
-	chaigame/log.o \
-	chaigame/graphics.o \
-	chaigame/keyboard.o \
-	chaigame/script.o \
-	chaigame/filesystem.o \
-	chaigame/image.o \
-	chaigame/sound.o \
-	chaigame/math.o \
-	chaigame/font.o \
-	chaigame/timer.o \
-	chaigame/event.o \
-	chaigame/window.o \
-	chaigame/mouse.o \
-	chaigame/system.o \
+OBJECTS := src/libretro.o \
+	src/Game.o \
+	src/chaigame/audio.o \
+	src/chaigame/log.o \
+	src/chaigame/graphics.o \
+	src/chaigame/keyboard.o \
+	src/chaigame/script.o \
+	src/chaigame/filesystem.o \
+	src/chaigame/image.o \
+	src/chaigame/sound.o \
+	src/chaigame/math.o \
+	src/chaigame/font.o \
+	src/chaigame/timer.o \
+	src/chaigame/event.o \
+	src/chaigame/window.o \
+	src/chaigame/mouse.o \
+	src/chaigame/system.o \
+	src/chaigame/joystick.o \
+	src/chaigame/graphics/ImageData.o \
+	src/chaigame/graphics/Quad.o \
+	src/chaigame/graphics/Image.o \
+	src/chaigame/graphics/Font.o \
+	src/chaigame/graphics/Point.o \
+	src/chaigame/input/Joystick.o \
+	src/chaigame/audio/SoundData.o \
+	src/chaigame/system/Config.o \
 	test/Test.o \
-	chaigame/src/ImageData.o \
-	chaigame/src/Quad.o \
-	chaigame/src/Image.o \
-	chaigame/src/Config.o \
-	chaigame/src/Font.o \
-	chaigame/src/SoundData.o \
-	chaigame/src/Point.o \
-	chaigame/src/Joystick.o \
-	chaigame/joystick.o \
 	vendor/physfs/extras/physfsrwops.o
 
 # Build all the dependencies, and the core.

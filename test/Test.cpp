@@ -1,7 +1,7 @@
 #ifdef __HAVE_TESTS__
 
 #include "Test.h"
-#include "../Game.h"
+#include "../src/Game.h"
 
 Game* app;
 chaigame::ImageData* img;
@@ -14,10 +14,10 @@ void Test::conf(chaigame::Config& t) {
 bool Test::load() {
 	app = Game::getInstance();
 	app->filesystem.mount("test", "/");
-	secondfont = app->graphics.newFont("examples/assets/Raleway-Regular.ttf", 60);
-	thefont = app->graphics.newFont("examples/assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+	secondfont = app->graphics.newFont("assets/Raleway-Regular.ttf", 60);
+	thefont = app->graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
 
-	img = app->graphics.newImage("examples/assets/graphics_draw.png");
+	img = app->graphics.newImage("assets/graphics_draw.png");
 }
 
 void Test::update(float delta) {}
