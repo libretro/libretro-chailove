@@ -3,25 +3,27 @@
  *
  * Small example of what a ChaiGame script could look like.
  */
-
 global x
 global y
 global img
 
 def load() {
+    graphics.setBackgroundColor(54, 172, 248)
     x = graphics.getWidth() / 2
     y = graphics.getHeight() / 2
-
-	graphics.setBackgroundColor(40, 86, 83)
-	graphics.setColor(113, 169, 155)
-
-    img = graphics.newImage("test/examples/assets/graphics_draw.png")
+    img = graphics.newImage("examples/benchmark/sprite.png")
 }
 
 def draw() {
-	graphics.print("Hello World!!!!!!!!", x, y)
-	graphics.circle("fill", x, y, 80)
+    // Hello World
+    graphics.setColor(247, 247, 247)
+	graphics.print("Hello World!", 100, 100)
 
+    // Circle
+    graphics.setColor(247, 196, 54)
+	graphics.circle("fill", x, y, 40)
+
+    // Image
     graphics.draw(img, x - img.getWidth() / 2, y - img.getHeight() / 2)
 }
 

@@ -1,3 +1,6 @@
+/**
+ * ChaiGame: Pong
+ */
 global players = []
 global pongSound
 global ball

@@ -1,3 +1,6 @@
+/**
+ * ChaiGame: Testing Framework
+ */
 global testNames = [
 	"graphics_print",
 	"graphics_draw",
@@ -14,15 +17,18 @@ def conf(t) {
 }
 
 def load() {
+	// Index the test cases.
 	for (name : testNames) {
 		filesystem.load(name + ".chai");
 		tests.push_back(eval(name + "()"));
 	}
 
+	// Load all the tests.
 	for (test : tests) {
 		test.load();
 	}
 
+	// Engage the default fault.
 	defaultFont = graphics.newFont()
 }
 

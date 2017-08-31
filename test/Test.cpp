@@ -1,3 +1,11 @@
+/**
+ * ChaiGame: Native Tests
+ *
+ * Tests some of the usage of ChaiGame without the need of scripts.
+ *
+ * Usage: make test-noscript
+ */
+
 #ifdef __HAVE_TESTS__
 
 #include "Test.h"

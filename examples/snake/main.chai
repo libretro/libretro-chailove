@@ -1,3 +1,6 @@
+/**
+ * ChaiGame: Snake
+ */
 global WIDTH
 global HEIGHT
 global LEN

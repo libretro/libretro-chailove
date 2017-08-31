@@ -4,13 +4,23 @@
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
+![ChaiGame Benchmark Screenshot](examples/benchmark/screenshot.png)
+
 ## Usage
 
 ChaiGame is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
 
 ``` lua
+def load() {
+	// Load assets.
+}
+
 def draw() {
     graphics.print("Hello World!", 400, 300)
+}
+
+def update(delta) {
+	// Change something on the screen.
 }
 ```
 
