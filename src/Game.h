@@ -4,7 +4,7 @@
 #include "SDL.h"
 #include "libretro.h"
 #include "chaigame/keyboard.h"
-#include "chaigame/src/Config.h"
+#include "chaigame/system/Config.h"
 #include "chaigame/script.h"
 #include "chaigame/filesystem.h"
 #include "chaigame/graphics.h"

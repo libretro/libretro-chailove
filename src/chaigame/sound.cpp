@@ -1,10 +1,10 @@
+#include <vector>
+#include <string>
 #include "sound.h"
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include "../Game.h"
-#include <vector>
-#include <string>
-#include "src/SoundData.h"
+#include "audio/SoundData.h"
 #include "log.h"
 
 namespace chaigame {

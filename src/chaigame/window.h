@@ -2,7 +2,7 @@
 #define CHAIGAME_WINDOW_H
 
 #include <string>
-#include "src/Config.h"
+#include "system/Config.h"
 
 namespace chaigame {
 	class window {

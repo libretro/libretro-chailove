@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <libretro.h>
-#include "src/Joystick.h"
+#include "input/Joystick.h"
 #include "../Game.h"
 
 #include <iostream>

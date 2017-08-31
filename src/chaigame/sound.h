@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_SOUND_H
 #define CHAIGAME_SOUND_H
 
-#include "src/SoundData.h"
+#include "audio/SoundData.h"
 #include <vector>
 
 namespace chaigame {

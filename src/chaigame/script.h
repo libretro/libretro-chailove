@@ -2,7 +2,7 @@
 #define CHAIGAME_SCRIPT_H
 
 #include <string>
-#include "src/Config.h"
+#include "system/Config.h"
 
 #ifdef __HAVE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>

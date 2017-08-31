@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_IMAGE_H
 #define CHAIGAME_IMAGE_H
 
-#include "src/ImageData.h"
+#include "graphics/ImageData.h"
 #include <string>
 
 namespace chaigame {

@@ -1,3 +1,9 @@
+/**
+ * ChaiGame: Example
+ *
+ * Small example of what a ChaiGame script could look like.
+ */
+
 global x
 global y
 global img

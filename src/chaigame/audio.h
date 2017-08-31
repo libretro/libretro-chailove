@@ -1,7 +1,7 @@
 #ifndef CHAIGAME_AUDIO_H
 #define CHAIGAME_AUDIO_H
 
-#include "src/SoundData.h"
+#include "audio/SoundData.h"
 
 namespace chaigame {
 	class audio {

@@ -3,7 +3,7 @@
 //#include "SDL_mixer.h"
 #include <string>
 
-#include "src/SoundData.h"
+#include "audio/SoundData.h"
 #include "../Game.h"
 
 namespace chaigame {

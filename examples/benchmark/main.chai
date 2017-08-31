@@ -1,0 +1,82 @@
+/**
+ * ChaiGame Benchmark
+ */
+
+// The Sprites and the image to load.
+global sprites = []
+global img
+
+def load() {
+	img = graphics.newImage("sprite.png")
+	graphics.setBackgroundColor(54, 172, 248)
+
+	// Add the first sprite.
+	sprites.push_back(Sprite())
+}
+
+def update(delta) {
+	// Update all the sprites.
+	for (sprite : sprites) {
+		sprite.update(delta)
+	}
+
+	// Allow increasing the amount of sprites.
+	if (joystick[0].isDown("up")) {
+		sprites.push_back(Sprite())
+	}
+	if (joystick[0].isDown("down") && sprites.size() > 1) {
+		sprites.pop_back()
+	}
+}
+
+def draw() {
+	// Draw all the sprites.
+	for (sprite : sprites) {
+		sprite.draw()
+	}
+
+	// Write the text on the screen.
+	graphics.setColor(255, 255, 255)
+	graphics.print("Sprites: " + to_string(sprites.size()), 5, 5)
+	graphics.print("Press up/down", 5, 20)
+}
+
+class Sprite {
+	var x
+	var y
+	var xspeed
+	var yspeed
+
+	def Sprite() {
+		this.x = math.random(graphics.getWidth()) * 1.0f
+		this.y = math.random(graphics.getHeight()) * 1.0f
+		this.xspeed = math.random(10) * 0.05f
+		this.yspeed = math.random(10) * 0.05f
+	}
+
+	def draw() {
+		graphics.draw(img, this.x, this.y)
+	}
+
+	def update(delta) {
+		this.x += this.xspeed * delta
+		this.y += this.yspeed * delta
+
+		if (this.x + img.getWidth() > graphics.getWidth()) {
+			this.xspeed = this.xspeed * -1.0f
+			this.x = graphics.getWidth() - img.getWidth()
+		}
+		if (this.x < 0) {
+			this.xspeed = this.xspeed * -1.0f
+			this.x = 0
+		}
+		if (this.y + img.getHeight() > graphics.getHeight()) {
+			this.yspeed = this.yspeed * -1.0f
+			this.y = graphics.getHeight() - img.getHeight()
+		}
+		if (this.y < 0) {
+			this.yspeed = this.yspeed * -1.0f
+			this.y = 0
+		}
+	}
+};

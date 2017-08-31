@@ -1,9 +1,9 @@
 #include "window.h"
+#include <string>
 #include "../Game.h"
 #include "SDL.h"
-#include <string>
 #include "log.h"
-#include "src/Config.h"
+#include "system/Config.h"
 
 namespace chaigame {
 

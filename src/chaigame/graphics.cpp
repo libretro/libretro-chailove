@@ -5,9 +5,9 @@
 #include <SDL_gfxBlitFunc.h>
 
 #include "../Game.h"
-#include "src/ImageData.h"
-#include "src/Image.h"
-#include "src/Font.h"
+#include "graphics/ImageData.h"
+#include "graphics/Image.h"
+#include "graphics/Font.h"
 #include "log.h"
 
 namespace chaigame {

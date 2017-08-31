@@ -3,10 +3,10 @@
 
 #include "SDL.h"
 #include "SDL_gfxPrimitives.h"
-#include "src/ImageData.h"
-#include "src/Image.h"
-#include "src/Quad.h"
-#include "src/Font.h"
+#include "graphics/ImageData.h"
+#include "graphics/Image.h"
+#include "graphics/Quad.h"
+#include "graphics/Font.h"
 
 namespace chaigame {
 	class graphics {

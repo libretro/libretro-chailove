@@ -2,7 +2,7 @@
 #define CHAIGAME_MOUSE_H
 
 #include <SDL.h>
-#include "src/Point.h"
+#include "graphics/Point.h"
 
 namespace chaigame {
 	class mouse {
