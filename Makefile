@@ -86,7 +86,7 @@ OBJECTS := libretro.o \
 	vendor/physfs/extras/physfsrwops.o
 
 # Build all the dependencies, and the core.
-all: | \
+all: | submodules \
 	vendor/physfs/libphysfs.a \
 	vendor/SDL_$(platform).a \
 	vendor/SDL_gfx_$(platform).a \
@@ -143,16 +143,16 @@ $(TARGET): $(OBJECTS)
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 
-vendor/Snippets/README.md:
+submodules:
 	git submodule update --init --recursive
 
-vendor/physfs/libphysfs.a: vendor/Snippets/README.md
+vendor/physfs/libphysfs.a: submodules
 	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
 
-vendor/SDL_$(platform).a: vendor/Snippets/README.md
+vendor/SDL_$(platform).a: submodules
 	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL_$(platform).a
 
-vendor/SDL_gfx_$(platform).a: vendor/Snippets/README.md
+vendor/SDL_gfx_$(platform).a: submodules
 	cd vendor/sdl-libretro/tests/SDL_gfx-2.0.26 && make -f Makefile.libretro STATIC_LIB=../../../SDL_gfx_$(platform).a
 
 test: all
