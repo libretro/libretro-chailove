@@ -86,11 +86,7 @@ OBJECTS := libretro.o \
 	vendor/physfs/extras/physfsrwops.o
 
 # Build all the dependencies, and the core.
-all: | submodules \
-	vendor/physfs/libphysfs.a \
-	vendor/SDL_$(platform).a \
-	vendor/SDL_gfx_$(platform).a \
-	$(TARGET)
+all: | dependencies	$(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -155,6 +151,9 @@ vendor/SDL_$(platform).a: submodules
 vendor/SDL_gfx_$(platform).a: submodules
 	cd vendor/sdl-libretro/tests/SDL_gfx-2.0.26 && make -f Makefile.libretro STATIC_LIB=../../../SDL_gfx_$(platform).a
 
+dependencies: vendor/physfs/libphysfs.a vendor/SDL_$(platform).a vendor/SDL_gfx_$(platform).a
+	@echo "Built dependencies\n"
+
 test: all
 	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
 
@@ -164,13 +163,14 @@ examples: all
 test-script: all
 	retroarch -L $(TARGET) test/main.chai
 
-noscript:
+noscript: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 test-noscript: noscript
 	retroarch -L $(TARGET) test/main.chai
 
-DESTDIR := /usr/lib/libretro
+PREFIX := /usr
+INSTALLDIR := $(PREFIX)/lib/libretro
 install: all
-	mkdir -p $(DESTDIR)
-	cp $(TARGET) $(DESTDIR)
+	mkdir -p $(DESTDIR)$(INSTALLDIR)
+	cp $(TARGET) $(DESTDIR)$(INSTALLDIR)
