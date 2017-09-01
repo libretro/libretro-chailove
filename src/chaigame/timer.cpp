@@ -3,19 +3,11 @@
 
 namespace chaigame {
 
-	bool timer::load() {
-		current = last = SDL_GetTicks();
-
-		return true;
-	}
-
-	void timer::step() {
-		last = current;
-		current = SDL_GetTicks();
-		delta = (float)current - (float)last;
-	}
-
 	float timer::getDelta() {
-		return delta;
+		return m_delta;
+	}
+
+	void timer::step(float delta) {
+		m_delta = delta;
 	}
 }

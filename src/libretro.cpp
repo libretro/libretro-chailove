@@ -144,7 +144,16 @@ void texture_init(){
 	}
 }
 
+void frame_time_cb(retro_usec_t usec) {
+	Game* app = Game::getInstance();
+	double delta = usec / 1000000.0;
+	app->timer.step(delta);
+}
+
 bool retro_load_game(const struct retro_game_info *info) {
+	struct retro_frame_time_callback frame_cb = { frame_time_cb, 1000000 / 60 };
+	environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
+
 	std::string full(info ? info->path : "main.chai");
 	return Game::getInstance()->load(full);
 }

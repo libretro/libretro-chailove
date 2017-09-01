@@ -4,12 +4,9 @@
 namespace chaigame {
 	class timer {
 	public:
-		bool load();
-		void step();
+		void step(float delta);
 		float getDelta();
-		int last;
-		int current;
-		float delta;
+		float m_delta;
 	};
 }
 
