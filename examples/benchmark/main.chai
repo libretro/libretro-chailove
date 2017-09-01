@@ -50,8 +50,8 @@ class Sprite {
 	def Sprite() {
 		this.x = math.random(graphics.getWidth()) * 1.0f
 		this.y = math.random(graphics.getHeight()) * 1.0f
-		this.xspeed = math.random(10) * 0.05f
-		this.yspeed = math.random(10) * 0.05f
+		this.xspeed = math.random(10) * 50.0f
+		this.yspeed = math.random(10) * 50.0f
 	}
 
 	def draw() {

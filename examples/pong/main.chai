@@ -76,8 +76,8 @@ def ballReset() {
   ball = [
     "x": graphics.getWidth() / 2.0f,
     "y": graphics.getHeight() / 2.0f,
-    "xspeed": 0.2f,
-    "yspeed": 0.05f,
+    "xspeed": 200.0f,
+    "yspeed": 100.0f,
     "radius": 5
   ]
 }
