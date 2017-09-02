@@ -18,7 +18,7 @@ namespace chaigame {
 
 		void conf(Config& t);
 		void load();
-		void update(float delta);
+		void update(double delta);
 		void draw();
 		bool loadModule(const std::string& moduleName);
 		void joystickpressed(int joystick, int button);
@@ -28,7 +28,7 @@ namespace chaigame {
 		chaiscript::ChaiScript chai;
 		std::function<void ()> chaiload;
 		std::function<void (Config&)> chaiconf;
-		std::function<void (float)> chaiupdate;
+		std::function<void (double)> chaiupdate;
 		std::function<void ()> chaidraw;
 		std::function<void (int, int)> chaijoystickpressed;
 		std::function<void (int, int)> chaijoystickreleased;

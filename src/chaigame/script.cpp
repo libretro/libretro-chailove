@@ -161,6 +161,7 @@ namespace chaigame {
 
 		// Register the Timer module.
 		chai.add(fun(&timer::getDelta), "getDelta");
+		chai.add(fun(&timer::getFPS), "getFPS");
 		chai.add(fun(&timer::step), "step");
 		chai.add_global(var(std::ref(app->timer)), "timer");
 
@@ -195,7 +196,7 @@ namespace chaigame {
 			log()->warn("[script] Skipping load() - {}", e.what());
 		}
 		try {
-			chaiupdate = chai.eval<std::function<void (float)> >("update");
+			chaiupdate = chai.eval<std::function<void (double)> >("update");
 		}
 		catch (std::exception& e) {
 			log()->warn("[script] Skipping update(delta) - {}", e.what());
@@ -264,7 +265,7 @@ namespace chaigame {
 		#endif
 	}
 
-	void script::update(float delta) {
+	void script::update(double delta) {
 		#ifdef __HAVE_CHAISCRIPT__
 		try {
 			if (hasUpdate) {

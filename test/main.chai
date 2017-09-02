@@ -38,6 +38,7 @@ def draw() {
 	graphics.setFont(defaultFont)
 	graphics.setColor(255, 255, 255)
 	graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
+	graphics.print("FPS " + to_string(timer.getFPS()), 5, 20);
 }
 
 def update(delta) {
