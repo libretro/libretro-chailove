@@ -3,19 +3,29 @@
 
 namespace chaigame {
 
-	bool timer::load() {
-		current = last = SDL_GetTicks();
-
-		return true;
+	timer::timer() {
+		m_delta = 0;
+		m_deltaCounter = 0;
+		m_frameCounter = 0;
 	}
 
-	void timer::step() {
-		last = current;
-		current = SDL_GetTicks();
-		delta = (float)current - (float)last;
+	double timer::getDelta() {
+		return m_delta;
 	}
 
-	float timer::getDelta() {
-		return delta;
+	void timer::step(double delta) {
+		m_delta = delta;
+		m_deltaCounter += delta;
+		m_frameCounter++;
+
+		if (m_deltaCounter >= 1.0) {
+			m_fps = m_frameCounter;
+			m_frameCounter = 0;
+			m_deltaCounter = 0;
+		}
+	}
+
+	int timer::getFPS() {
+		return m_fps;
 	}
 }

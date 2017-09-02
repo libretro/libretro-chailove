@@ -25,10 +25,10 @@ class Player {
 
   def update(delta) {
     if (joystick.isDown(0, "up")) {
-      this.y -= 0.5f * delta
+      this.y -= 300.0f * delta
     }
     else if (joystick.isDown(0, "down")) {
-      this.y += 0.5f * delta
+      this.y += 300.0f * delta
     }
 
     if (this.y + this.height > graphics.getHeight()) {

@@ -9,7 +9,7 @@ class Test {
 public:
 	void conf(chaigame::Config& t);
 	bool load();
-	void update(float delta);
+	void update(double delta);
 	void draw();
 	int tester = 0;
 	chaigame::Font* thefont;

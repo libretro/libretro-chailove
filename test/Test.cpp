@@ -28,7 +28,7 @@ bool Test::load() {
 	img = app->graphics.newImage("assets/graphics_draw.png");
 }
 
-void Test::update(float delta) {}
+void Test::update(double delta) {}
 
 void Test::draw() {
 	app->graphics.setColor(77, 182, 172);

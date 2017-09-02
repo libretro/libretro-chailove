@@ -55,7 +55,6 @@ bool Game::load(const std::string& file) {
 	math.load();
 	mouse.load();
 	font.load();
-	timer.load();
 	script->load();
 
 	#ifdef __HAVE_TESTS__
@@ -96,7 +95,6 @@ bool Game::update() {
 	keyboard.update();
 
 	// Step forward the timer, and update the game.
-	timer.step();
 	script->update(timer.getDelta());
 
 	#ifdef __HAVE_TESTS__
