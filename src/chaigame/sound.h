@@ -4,6 +4,35 @@
 #include "audio/SoundData.h"
 #include <vector>
 
+
+
+#define WAV_HEADER_SIZE 44
+
+typedef struct
+{
+   char ChunkID[4];
+   uint32_t ChunkSize;
+   char Format[4];
+   char Subchunk1ID[4];
+   uint32_t Subchunk1Size;
+   uint16_t AudioFormat;
+   uint16_t NumChannels;
+   uint32_t SampleRate;
+   uint32_t ByteRate;
+   uint16_t BlockAlign;
+   uint16_t BitsPerSample;
+   char Subchunk2ID[4];
+   uint32_t Subchunk2Size;
+} wavhead_t;
+
+typedef struct
+{
+   void* fp;
+   wavhead_t head;
+} snd_SoundData;
+
+
+
 namespace chaigame {
 	class sound {
 	public:
@@ -27,5 +56,4 @@ namespace chaigame {
     	std::vector<SoundData*> sounds;
 	};
 }
-
 #endif

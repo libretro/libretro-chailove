@@ -8,6 +8,8 @@
 #include "log.h"
 
 namespace chaigame {
+
+
 	bool sound::load() {
 		/*toInit = true;
 		int flags = MIX_INIT_OGG | MIX_INIT_MOD;
