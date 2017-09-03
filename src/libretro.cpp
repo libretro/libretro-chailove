@@ -15,7 +15,7 @@ int16_t audio_buffer[2 * (44100 / 60)];
 
 static retro_video_refresh_t video_cb;
 static retro_environment_t environ_cb;
-static retro_audio_sample_t audio_cb;
+retro_audio_sample_t audio_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
 //static retro_input_poll_t input_poll_cb;
 
