@@ -4,6 +4,7 @@
 
 #include "../src/chaigame/graphics/Font.h"
 #include "../src/chaigame/system/Config.h"
+#include "../src/chaigame/audio/SoundData.h"
 
 class Test {
 public:
@@ -14,6 +15,7 @@ public:
 	int tester = 0;
 	chaigame::Font* thefont;
 	chaigame::Font* secondfont;
+	chaigame::SoundData* jump;
 };
 
 #endif
