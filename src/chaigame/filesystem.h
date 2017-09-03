@@ -18,6 +18,7 @@ namespace chaigame {
 		int getSize(const std::string& file);
 		bool mount(const std::string& archive, const std::string& mountpoint);
 		PHYSFS_sint64 getSize(PHYSFS_File* file);
+		PHYSFS_file* openFile(const std::string& filename);
 	};
 }
 

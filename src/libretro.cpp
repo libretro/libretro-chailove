@@ -42,7 +42,7 @@ static void emit_audio(void)
 {
 	Game* app = Game::getInstance();
 	app->audio.mixer_render(audio_buffer);
-	audio_batch_cb(audio_buffer, AUDIO_FRAMES);
+	audio_batch_cb(audio_buffer, (44100 / 60));
 }
 
 static void audio_set_state(bool enable)

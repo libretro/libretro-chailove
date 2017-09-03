@@ -30,7 +30,7 @@ bool Test::load() {
 }
 
 void Test::update(double delta) {
-	if (app->joystick.isDown(0, 0)) {
+	if (app->joystick.isDown(0, 0) && !jump->isPlaying()) {
 		app->audio.play(jump);
 	}
 }
