@@ -8,27 +8,46 @@ char RETRO_DIR[512];
 const char *retro_save_directory;
 const char *retro_system_directory;
 const char *retro_content_directory;
-char retro_system_conf[512];
+//char retro_system_conf[512];
 bool opt_awesome;
-signed short soundbuf[1024*2];
+static bool use_audio_cb;
+int16_t audio_buffer[2 * (44100 / 60)];
 
 static retro_video_refresh_t video_cb;
 static retro_environment_t environ_cb;
+retro_audio_sample_t audio_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
 //static retro_input_poll_t input_poll_cb;
 
 //retro_input_state_t input_state_cb;
-retro_audio_sample_t audio_cb;
 
-void retro_set_video_refresh(retro_video_refresh_t cb) { video_cb = cb; }
-void retro_set_audio_sample(retro_audio_sample_t cb) { audio_cb  =cb; }
-void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) { audio_batch_cb = cb; }
+void retro_set_video_refresh(retro_video_refresh_t cb) {
+	video_cb = cb;
+}
+void retro_set_audio_sample(retro_audio_sample_t cb) {
+	audio_cb = cb;
+}
+void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) {
+	audio_batch_cb = cb;
+}
 void retro_set_input_poll(retro_input_poll_t cb) {
 	Game::input_poll_cb = cb;
 }
 
 void retro_set_input_state(retro_input_state_t cb) {
 	Game::input_state_cb = cb;
+}
+
+static void emit_audio(void)
+{
+	Game* app = Game::getInstance();
+	app->audio.mixer_render(audio_buffer);
+	audio_batch_cb(audio_buffer, (44100 / 60));
+}
+
+static void audio_set_state(bool enable)
+{
+   (void)enable;
 }
 
 // these 2 funtions have to be implemented for Libretro SDL port
@@ -94,20 +113,14 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 		height = app->config.window.height;
 	}
 
-	struct retro_game_geometry geom = {
-		width,
-		height,
-		width,
-		height,
-		(float)width / (float)height
-	};
-	info->geometry = geom;
+	info->geometry.base_width   = width;
+	info->geometry.base_height  = height;
+	info->geometry.max_width    = width;
+	info->geometry.max_height   = width;
+	info->geometry.aspect_ratio = (float)width / (float)height;
 
-	struct retro_system_timing timing = {
-		60.0,
-		44100.0
-	};
-	info->timing = timing;
+	info->timing.fps = 60.0;
+	info->timing.sample_rate = 44100.0;
 }
 
 void retro_set_controller_port_device(unsigned port, unsigned device) {
@@ -153,6 +166,9 @@ void frame_time_cb(retro_usec_t usec) {
 bool retro_load_game(const struct retro_game_info *info) {
 	struct retro_frame_time_callback frame_cb = { frame_time_cb, 1000000 / 60 };
 	environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
+
+	struct retro_audio_callback audio_cb = { emit_audio, audio_set_state };
+	use_audio_cb = environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
 	std::string full(info ? info->path : "main.chai");
 	return Game::getInstance()->load(full);
@@ -222,7 +238,7 @@ void retro_init(void) {
 		sprintf(RETRO_DIR, "%s\n", retro_system_directory);
 	}
 
-	sprintf(retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
+	//sprintf(retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
 
 	printf("Retro SYSTEM_DIRECTORY %s\n",retro_system_directory);
 	printf("Retro SAVE_DIRECTORY %s\n",retro_save_directory);

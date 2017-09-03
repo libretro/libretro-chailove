@@ -4,28 +4,17 @@
 #include "audio/SoundData.h"
 #include <vector>
 
+
 namespace chaigame {
 	class sound {
 	public:
 		bool load();
 		bool hasAudio();
 		void unload();
-		SoundData* newSoundData(const std::string& file, const std::string& type);
-		SoundData* newSoundData(const std::string& file);
 		bool update();
-
-		int numtimesopened = 0;
-		int frequency = 0;
-		int channels = 0;
-    	int format;
-
-    	bool initialized = false;
-    	bool firstRun = true;
-    	bool loaded = false;
-    	bool toInit = false;
+        SoundData* newSoundData(const std::string& filename);
 
     	std::vector<SoundData*> sounds;
 	};
 }
-
 #endif

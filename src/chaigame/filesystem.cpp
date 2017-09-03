@@ -103,8 +103,7 @@ namespace chaigame {
 		return rw;
 	}
 
-	char* filesystem::readChar(const std::string& filename) {
-		char* output = NULL;
+	PHYSFS_file* filesystem::openFile(const std::string& filename) {
 		PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 		if (myfile == NULL) {
 			const char* errorChar = PHYSFS_getLastError();
@@ -113,6 +112,15 @@ namespace chaigame {
 				physErr = errorChar;
 			}
 			log()->error("Error opening file {}: {}", filename, physErr);
+			return NULL;
+		}
+		return myfile;
+	}
+
+	char* filesystem::readChar(const std::string& filename) {
+		char* output = NULL;
+		PHYSFS_file* myfile = openFile(filename);
+		if (myfile == NULL) {
 			return NULL;
 		}
 

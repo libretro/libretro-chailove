@@ -5,13 +5,19 @@
 // The Sprites and the image to load.
 global sprites = []
 global img
+global music
 
 def load() {
-	img = graphics.newImage("sprite.png")
 	graphics.setBackgroundColor(54, 172, 248)
 
 	// Add the first sprite.
+	img = graphics.newImage("sprite.png")
 	sprites.push_back(Sprite())
+
+	// Load the music.
+	music = audio.newSource("music.wav")
+	music.setLooping(true)
+	music.play()
 }
 
 def update(delta) {

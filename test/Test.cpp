@@ -26,9 +26,14 @@ bool Test::load() {
 	thefont = app->graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
 
 	img = app->graphics.newImage("assets/graphics_draw.png");
+	jump = app->sound.newSoundData("assets/jump.wav");
 }
 
-void Test::update(double delta) {}
+void Test::update(double delta) {
+	if (app->joystick.isDown(0, 0) && !jump->isPlaying()) {
+		app->audio.play(jump);
+	}
+}
 
 void Test::draw() {
 	app->graphics.setColor(77, 182, 172);
