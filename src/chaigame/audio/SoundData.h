@@ -34,8 +34,10 @@ namespace chaigame {
 	class SoundData {
 	public:
 		SoundData(const std::string& filename);
+		~SoundData();
 		bool play();
 		bool stop();
+		void unload();
 		snd_SoundData sndta;
 		unsigned bps = 0;
 		bool loop = false;
@@ -45,6 +47,9 @@ namespace chaigame {
 		bool isLoaded();
 		bool isPlaying();
 		int WAV_HEADER_SIZE = 44;
+
+		bool isLooping();
+		void setLooping(bool loop);
 	};
 }
 

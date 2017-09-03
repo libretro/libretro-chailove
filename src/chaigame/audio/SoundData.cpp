@@ -26,6 +26,17 @@ namespace chaigame {
 		bps = sndta.head.NumChannels * sndta.head.BitsPerSample / 8;
 	}
 
+	SoundData::~SoundData() {
+		unload();
+	}
+
+	void SoundData::unload() {
+		if (isLoaded()) {
+			PHYSFS_close(sndta.fp);
+			sndta.fp = NULL;
+		}
+	}
+
 	bool SoundData::play() {
 		if (isLoaded()) {
 			PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
@@ -49,5 +60,13 @@ namespace chaigame {
 
 	bool SoundData::isPlaying() {
 		return state == Playing;
+	}
+
+	bool SoundData::isLooping() {
+		return loop;
+	}
+
+	void SoundData::setLooping(bool looping) {
+		loop = looping;
 	}
 }

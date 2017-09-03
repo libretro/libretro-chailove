@@ -49,6 +49,13 @@ namespace chaigame {
 		chai.add(fun(&ImageData::getWidth), "getWidth");
 		chai.add(fun(&ImageData::getHeight), "getHeight");
 
+		// Add SoundData.
+		chai.add(user_type<SoundData>(), "SoundData");
+		chai.add(fun(&SoundData::isLooping), "isLooping");
+		chai.add(fun(&SoundData::setLooping), "setLooping");
+		chai.add(fun(&SoundData::stop), "stop");
+		chai.add(fun(&SoundData::play), "play");
+
 		// Add Font.
 		chai.add(user_type<Font>(), "Font");
 		chai.add(fun(&Font::loaded), "loaded");
@@ -144,13 +151,11 @@ namespace chaigame {
 		chai.add_global(var(std::ref(app->mouse)), "mouse");
 
 		// Register the Sound module.
-		chai.add(fun<SoundData*, sound, const std::string&, const std::string&>(&sound::newSoundData), "newSoundData");
 		chai.add(fun<SoundData*, sound, const std::string&>(&sound::newSoundData), "newSoundData");
 		chai.add_global(var(std::ref(app->sound)), "sound");
 
 		// Register the Audio module.
 		chai.add(fun(&audio::play), "play");
-		chai.add(fun<SoundData*, audio, const std::string&, const std::string&>(&audio::newSource), "newSource");
 		chai.add(fun<SoundData*, audio, const std::string&>(&audio::newSource), "newSource");
 		chai.add_global(var(std::ref(app->audio)), "audio");
 

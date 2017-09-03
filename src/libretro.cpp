@@ -113,20 +113,14 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 		height = app->config.window.height;
 	}
 
-	struct retro_game_geometry geom = {
-		width,
-		height,
-		width,
-		height,
-		(float)width / (float)height
-	};
-	info->geometry = geom;
+	info->geometry.base_width   = width;
+	info->geometry.base_height  = height;
+	info->geometry.max_width    = width;
+	info->geometry.max_height   = width;
+	info->geometry.aspect_ratio = (float)width / (float)height;
 
-	struct retro_system_timing timing = {
-		60.0,
-		44100.0
-	};
-	info->timing = timing;
+	info->timing.fps = 60.0;
+	info->timing.sample_rate = 44100.0;
 }
 
 void retro_set_controller_port_device(unsigned port, unsigned device) {
