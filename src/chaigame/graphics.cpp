@@ -74,9 +74,7 @@ namespace chaigame {
 			dest->y = y;
 			dest->w = x + quad.width;
 			dest->h = y + quad.height;
-			if (SDL_gfxBlitRGBA(image->surface, quad.toRect(), getScreen(), dest) == -1) {
-				log()->error("Error calling SDL_gfxBlitRGBA");
-			}
+			SDL_BlitSurface(image->surface, quad.toRect(), getScreen(), dest);
 		}
 	}
 
