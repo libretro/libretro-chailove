@@ -32,6 +32,7 @@ namespace chaigame {
 
 		// Add the Quad.
 		chai.add(user_type<Quad>(), "Quad");
+		chai.add(constructor<Quad()>(), "Quad");
 		chai.add(fun(&Quad::x), "x");
 		chai.add(fun(&Quad::y), "y");
 		chai.add(fun(&Quad::width), "width");
