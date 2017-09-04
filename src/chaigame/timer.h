@@ -5,12 +5,12 @@ namespace chaigame {
 	class timer {
 	public:
 		timer();
-		void step(double delta);
-		double getDelta();
+		void step(float delta);
+		float getDelta();
 
 		int getFPS();
-		double m_delta;
-		double m_deltaCounter;
+		float m_delta;
+		float m_deltaCounter;
 		int m_frameCounter;
 		int m_fps;
 	};

@@ -9,11 +9,11 @@ namespace chaigame {
 		m_frameCounter = 0;
 	}
 
-	double timer::getDelta() {
+	float timer::getDelta() {
 		return m_delta;
 	}
 
-	void timer::step(double delta) {
+	void timer::step(float delta) {
 		m_delta = delta;
 		m_deltaCounter += delta;
 		m_frameCounter++;

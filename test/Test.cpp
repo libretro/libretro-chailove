@@ -29,7 +29,7 @@ bool Test::load() {
 	jump = app->sound.newSoundData("assets/jump.wav");
 }
 
-void Test::update(double delta) {
+void Test::update(float delta) {
 	if (app->joystick.isDown(0, 0) && !jump->isPlaying()) {
 		app->audio.play(jump);
 	}

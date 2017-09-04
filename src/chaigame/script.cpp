@@ -202,7 +202,7 @@ namespace chaigame {
 			log()->warn("[script] Skipping load() - {}", e.what());
 		}
 		try {
-			chaiupdate = chai.eval<std::function<void (double)> >("update");
+			chaiupdate = chai.eval<std::function<void (float)> >("update");
 		}
 		catch (std::exception& e) {
 			log()->warn("[script] Skipping update(delta) - {}", e.what());
@@ -271,7 +271,7 @@ namespace chaigame {
 		#endif
 	}
 
-	void script::update(double delta) {
+	void script::update(float delta) {
 		#ifdef __HAVE_CHAISCRIPT__
 		try {
 			if (hasUpdate) {

@@ -159,7 +159,7 @@ void texture_init(){
 
 void frame_time_cb(retro_usec_t usec) {
 	Game* app = Game::getInstance();
-	double delta = usec / 1000000.0;
+	float delta = usec / 1000000.0;
 	app->timer.step(delta);
 }
 
