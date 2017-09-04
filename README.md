@@ -4,6 +4,10 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 
 ![ChaiGame Benchmark Screenshot](examples/benchmark/screenshot.png)
 
+## Games
+
+- [FlappyBird](https://github.com/RobLoach/chaigame-flappybird)
+
 ## Usage
 
 ChaiGame is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
