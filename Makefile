@@ -145,7 +145,7 @@ submodules:
 	git submodule update --init --recursive
 
 vendor/physfs/libphysfs.a: submodules
-	cd vendor/physfs && cmake -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
+	cd vendor/physfs && cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
 
 vendor/SDL_$(platform).a: submodules
 	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL_$(platform).a
