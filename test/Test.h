@@ -16,6 +16,8 @@ public:
 	chaigame::Font* thefont;
 	chaigame::Font* secondfont;
 	chaigame::SoundData* jump;
+
+
 };
 
 #endif

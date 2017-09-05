@@ -48,6 +48,10 @@ def draw() {
 	graphics.print("FPS: " + to_string(timer.getFPS()), 5, 35)
 }
 
+def mousepressed(x, y, button) {
+	sprites.push_back(Sprite())
+}
+
 class Sprite {
 	var x
 	var y

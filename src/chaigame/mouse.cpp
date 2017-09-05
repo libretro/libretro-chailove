@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "graphics/Point.h"
+#include "../Game.h"
 
 namespace chaigame {
 
@@ -51,12 +52,17 @@ namespace chaigame {
 	void mouse::motionEvent(SDL_MouseMotionEvent event) {
 		m_x = event.x;
 		m_y = event.y;
-		// TODO: Trigger mouse event.
+		// TODO: Trigger mousemove event.
 	}
-void mouse::buttonEvent(SDL_MouseButtonEvent event) {
-		buttonState[event.button] = event.state;
 
-		// TODO: Trigger mouse button event.
+	void mouse::buttonEvent(SDL_MouseButtonEvent event) {
+		if (event.state == SDL_PRESSED) {
+			Game::getInstance()->script->mousepressed(m_x, m_y, event.button);
+		}
+		else if (event.state == SDL_RELEASED) {
+			Game::getInstance()->script->mousereleased(m_x, m_y, event.button);
+		}
+		buttonState[event.button] = event.state;
 	}
 
 	Point mouse::getPosition() {

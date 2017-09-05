@@ -198,151 +198,170 @@ namespace chaigame {
 		try {
 			chaiload = chai.eval<std::function<void ()> >("load");
 		}
-		catch (std::exception& e) {
-			log()->warn("[script] Skipping load() - {}", e.what());
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping load() - {}", e.what());
+			hasload = false;
 		}
 		try {
 			chaiupdate = chai.eval<std::function<void (float)> >("update");
 		}
-		catch (std::exception& e) {
-			log()->warn("[script] Skipping update(delta) - {}", e.what());
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping update(delta) - {}", e.what());
+			hasUpdate = false;
 		}
 		try {
 			chaiconf = chai.eval<std::function<void (Config&)> >("conf");
 		}
-		catch (std::exception& e) {
-			log()->warn("[script] Skipping conf(t) - {}", e.what());
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping conf(t) - {}", e.what());
+			hasconf = false;
 		}
 		try {
 			chaidraw = chai.eval<std::function<void ()> >("draw");
 		}
-		catch (std::exception& e) {
-			log()->warn("[script] Skipping draw() - {}", e.what());
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping draw() - {}", e.what());
+			hasDraw = false;
 		}
 		try {
 			chaijoystickpressed = chai.eval<std::function<void (int, int)> >("joystickpressed");
 		}
-		catch (std::exception& e) {
-			log()->warn("[script] Skipping joystickpressed() - {}", e.what());
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping joystickpressed() - {}", e.what());
+			hasjoystickpressed = false;
 		}
 		try {
 			chaijoystickreleased = chai.eval<std::function<void (int, int)> >("joystickreleased");
 		}
-		catch (std::exception& e) {
-			log()->warn("[script] Skipping joystickreleased() - {}", e.what());
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping joystickreleased() - {}", e.what());
+			hasjoystickreleased = false;
+		}
+		try {
+			chaimousepressed = chai.eval<std::function<void (int, int, int)> >("mousepressed");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping mousepressed() - {}", e.what());
+			hasmousepressed = false;
+		}
+		try {
+			chaimousereleased = chai.eval<std::function<void (int, int, int)> >("mousereleased");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping mousereleased() - {}", e.what());
+			hasmousereleased = false;
 		}
 		#endif
 	}
 
 	void script::conf(Config& t) {
 		#ifdef __HAVE_CHAISCRIPT__
-		try {
-			chaiconf(t);
-		}
-		catch (chaiscript::exception::dispatch_error& e) {
-			log()->warn("[script] Failed to invoke call to conf(t): {}", e.what());
-		}
-		catch (const chaiscript::exception::eval_error &e) {
-			log()->warn("[script] Failed to invoke call to conf(): {}", e.what());
-		}
-		catch (std::exception& e) {
-			log()->warn("[script] Failed to invoke conf(t): {}", e.what());
-		}
-		catch (...) {
-			log()->warn("[script] Failed to invoke conf(t)");
+		if (hasconf) {
+			try {
+				chaiconf(t);
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to invoke conf(t): {}", e.what());
+				hasconf = false;
+			}
 		}
 		#endif
 	}
 
 	void script::load() {
 		#ifdef __HAVE_CHAISCRIPT__
-		try {
-			chaiload();
-		}
-		catch (chaiscript::exception::dispatch_error& e) {
-			log()->warn("[script] Failed to invoke call to load(): {}", e.what());
-		}
-		catch (const chaiscript::exception::eval_error &e) {
-			log()->warn("[script] Failed calling load(): {}", e.what());
-		}
-		catch (...) {
-			log()->warn("[script] Failed to invoke load()");
+		if (hasload) {
+			try {
+				chaiload();
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call load(): {}", e.what());
+				hasload = false;
+			}
 		}
 		#endif
 	}
 
 	void script::update(float delta) {
 		#ifdef __HAVE_CHAISCRIPT__
-		try {
-			if (hasUpdate) {
+		if (hasUpdate) {
+			try {
 				chaiupdate(delta);
 			}
-		}
-		catch (chaiscript::exception::dispatch_error& e) {
-			hasUpdate = false;
-			log()->error("[script] Failed to invoke call to update(): {}", e.what());
-		}
-		catch (const chaiscript::exception::eval_error &e) {
-			hasUpdate = false;
-			log()->error("[script] Failed to invoke call to update(): {}", e.what());
-		}
-		catch (std::exception& e) {
-			hasUpdate = false;
-			log()->error("[script] Failed to call update(t): {}", e.what());
-		}
-		catch (...) {
-			hasUpdate = false;
-			log()->error("[script] Unhandled exception in update()");
+			catch (const std::exception& e) {
+				hasUpdate = false;
+				log()->error("[script] Failed to call update(delta): {}", e.what());
+			}
 		}
 		#endif
 	}
 
 	void script::draw() {
 		#ifdef __HAVE_CHAISCRIPT__
-		try {
-			if (hasDraw) {
+		if (hasDraw) {
+			try {
 				chaidraw();
 			}
-		}
-		catch (chaiscript::exception::dispatch_error& e) {
-			hasDraw = false;
-			log()->warn("[script] Failed to invoke call to draw(): {}", e.what());
-		}
-		catch (const chaiscript::exception::eval_error &e) {
-			hasDraw = false;
-			log()->warn("[script] Failed to invoke call to update(): {}", e.what());
-		}
-		catch (std::exception& e) {
-			log()->warn("[script] Failed to call update(t): {}", e.what());
-		}
-		catch (...) {
-			log()->warn("[script] Unhandled exception in draw()");
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call draw(): {}", e.what());
+				hasDraw = false;
+			}
 		}
 		#endif
 	}
 
 	void script::joystickpressed(int joystick, int button) {
 		#ifdef __HAVE_CHAISCRIPT__
-		try {
-			if (hasjoystickpressed) {
+		if (hasjoystickpressed) {
+			try {
 				chaijoystickpressed(joystick, button);
 			}
-		}
-		catch (...) {
-			hasjoystickpressed = false;
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call joystickpressed(): {}", e.what());
+				hasjoystickpressed = false;
+			}
 		}
 		#endif
 	}
 
 	void script::joystickreleased(int joystick, int button) {
 		#ifdef __HAVE_CHAISCRIPT__
-		try {
-			if (hasjoystickreleased) {
+		if (hasjoystickreleased) {
+			try {
 				chaijoystickreleased(joystick, button);
 			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call joystickreleased(): {}", e.what());
+				hasjoystickreleased = false;
+			}
 		}
-		catch (...) {
-			hasjoystickreleased = false;
+		#endif
+	}
+
+	void script::mousepressed(int x, int y, int button) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hasmousepressed) {
+			try {
+				chaimousepressed(x, y, button);
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call mousepressed(): {}", e.what());
+				hasmousepressed = false;
+			}
+		}
+		#endif
+	}
+
+	void script::mousereleased(int x, int y, int button) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hasmousereleased) {
+			try {
+				chaimousereleased(x, y, button);
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call mousereleased(): {}", e.what());
+				hasmousereleased = false;
+			}
 		}
 		#endif
 	}
