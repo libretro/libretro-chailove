@@ -22,7 +22,7 @@ ifeq ($(platform), unix)
 	fpic := -fPIC
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	ENDIANNESS_DEFINES := -DLSB_FIRST
-	FLAGS += -D__LINUX__
+	FLAGS += -D__LINUX__ -D__linux
 	SDL_PREFIX := unix
 # android arm
 else ifneq (,$(findstring android,$(platform)))
@@ -30,6 +30,7 @@ else ifneq (,$(findstring android,$(platform)))
 	fpic = -fPIC
 	SHARED := -lstdc++ -lstd++fs -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
 	CFLAGS +=  -g -O2
+	FLAGS += -DANDROID
 	CC = arm-linux-androideabi-gcc
 	CXX = arm-linux-androideabi-g++
 # cross Windows
@@ -41,7 +42,7 @@ else ifeq ($(platform), wincross64)
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++ -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
-	FLAGS +=
+	FLAGS += -D_WIN64
 	EXTRA_LDF := -lwinmm -Wl,--export-all-symbols
 	SDL_PREFIX := win
 else
@@ -51,9 +52,14 @@ else
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++  -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
-	FLAGS +=
+	FLAGS += -D_WIN32
 	EXTRA_LDF = -lwinmm -Wl,--export-all-symbols
 	SDL_PREFIX := win
+endif
+
+# MacOSX
+ifeq ($(platform), osx)
+	FLAGS += -D__APPLE__
 endif
 
 OBJECTS := src/libretro.o \
@@ -85,7 +91,25 @@ OBJECTS := src/libretro.o \
 	test/Test.o \
 	vendor/physfs/extras/physfsrwops.o \
 	vendor/SDL_tty/src/SDL_tty.o \
-	vendor/SDL_tty/src/SDL_fnt.o
+	vendor/SDL_tty/src/SDL_fnt.o \
+	vendor/physfs/src/archiver_dir.o \
+	vendor/physfs/src/archiver_grp.o \
+	vendor/physfs/src/archiver_hog.o \
+	vendor/physfs/src/archiver_iso9660.o \
+	vendor/physfs/src/archiver_lzma.o \
+	vendor/physfs/src/archiver_mvl.o \
+	vendor/physfs/src/archiver_qpak.o \
+	vendor/physfs/src/archiver_slb.o \
+	vendor/physfs/src/archiver_unpacked.o \
+	vendor/physfs/src/archiver_wad.o \
+	vendor/physfs/src/archiver_zip.o \
+	vendor/physfs/src/physfs_byteorder.o \
+	vendor/physfs/src/physfs.o \
+	vendor/physfs/src/physfs_unicode.o \
+	vendor/physfs/src/platform_macosx.o \
+	vendor/physfs/src/platform_posix.o \
+	vendor/physfs/src/platform_unix.o \
+	vendor/physfs/src/platform_windows.o
 
 # Build all the dependencies, and the core.
 all: | dependencies	$(TARGET)
@@ -97,7 +121,6 @@ else
 endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
-	vendor/physfs/libphysfs.a \
 	vendor/SDL_$(platform).a \
 	vendor/SDL_gfx_$(platform).a \
 	-ldl \
@@ -144,16 +167,13 @@ clean:
 submodules:
 	git submodule update --init --recursive
 
-vendor/physfs/libphysfs.a: submodules
-	cd vendor/physfs && cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -D PHYSFS_BUILD_TEST=false . && $(MAKE) C_FLAGS=-fPIC
-
 vendor/SDL_$(platform).a: submodules
 	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL_$(platform).a
 
 vendor/SDL_gfx_$(platform).a: submodules
 	cd vendor/sdl-libretro/tests/SDL_gfx-2.0.26 && make -f Makefile.libretro STATIC_LIB=../../../SDL_gfx_$(platform).a
 
-dependencies: vendor/physfs/libphysfs.a vendor/SDL_$(platform).a vendor/SDL_gfx_$(platform).a
+dependencies: vendor/SDL_$(platform).a vendor/SDL_gfx_$(platform).a
 	@echo "Built dependencies\n"
 
 test: all
