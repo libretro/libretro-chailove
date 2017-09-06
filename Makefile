@@ -14,12 +14,8 @@ endif
 TARGET_NAME := chaigame
 
 ifeq ($(platform), unix)
-	CC = gcc
-	CXX = g++
-	CFLAGS = -g -O2
-	CXXFLAGS = -g -O2  -fno-merge-constants
 	TARGET := $(TARGET_NAME)_libretro.so
-	fpic := -fPIC
+	fpic += -fPIC
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS += -D__LINUX__ -D__linux
@@ -27,18 +23,13 @@ ifeq ($(platform), unix)
 # android arm
 else ifneq (,$(findstring android,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro_android.so
-	fpic = -fPIC
+	fpic += -fPIC
 	SHARED := -lstdc++ -lstd++fs -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
 	CFLAGS +=  -g -O2
 	FLAGS += -DANDROID
-	CC = arm-linux-androideabi-gcc
-	CXX = arm-linux-androideabi-g++
 # cross Windows
 else ifeq ($(platform), wincross64)
 	TARGET := $(TARGET_NAME)_libretro.dll
-	AR = x86_64-w64-mingw32-ar
-	CC = x86_64-w64-mingw32-gcc
-	CXX = x86_64-w64-mingw32-g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++ -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
@@ -47,13 +38,11 @@ else ifeq ($(platform), wincross64)
 	SDL_PREFIX := win
 else
 	TARGET :=  $(TARGET_NAME)_retro.dll
-	CC = gcc
-	CXX = g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++  -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS += -D_WIN32
-	EXTRA_LDF = -lwinmm -Wl,--export-all-symbols
+	EXTRA_LDF += -lwinmm -Wl,--export-all-symbols
 	SDL_PREFIX := win
 endif
 
