@@ -282,9 +282,14 @@ void retro_deinit(void) {
 	}
 }
 
+/**
+ * The frontend requested to reset the game.
+ */
 void retro_reset(void) {
-	// Nothing.
-	printf("retro_reset\n");
+	Game* app = Game::getInstance();
+	if (app) {
+		app->reset();
+	}
 }
 
 void retro_run(void) {

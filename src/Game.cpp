@@ -105,6 +105,15 @@ bool Game::update() {
 }
 
 /**
+ * Reset the current game.
+ */
+void Game::reset() {
+	// Tell the script that we are to reset the game.
+	chaigame::log()->info("[game] Reset");
+	script->reset();
+}
+
+/**
  * Render the Game.
  */
 void Game::draw() {
