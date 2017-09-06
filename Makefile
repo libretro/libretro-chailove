@@ -30,6 +30,9 @@ else ifneq (,$(findstring android,$(platform)))
 # cross Windows
 else ifeq ($(platform), wincross64)
 	TARGET := $(TARGET_NAME)_libretro.dll
+	AR = x86_64-w64-mingw32-ar		
+ 	CC = x86_64-w64-mingw32-gcc		
+ 	CXX = x86_64-w64-mingw32-g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++ -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
@@ -38,6 +41,8 @@ else ifeq ($(platform), wincross64)
 	SDL_PREFIX := win
 else
 	TARGET :=  $(TARGET_NAME)_retro.dll
+	CC = gcc		
+ 	CXX = g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++  -lstd++fs
 	ENDIANNESS_DEFINES := -DLSB_FIRST
