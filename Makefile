@@ -56,7 +56,7 @@ ifeq ($(platform), osx)
 	FLAGS += -D__APPLE__
 endif
 
-OBJECTS := src/libretro.o \
+OBJECTS += src/libretro.o \
 	src/Game.o \
 	src/chaigame/audio.o \
 	src/chaigame/log.o \
@@ -110,6 +110,13 @@ OBJECTS := src/libretro.o \
 	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_imageFilter.o \
 	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_rotozoom.o
 
+ifeq ($(platform), win)
+	SDL_SOURCES_C := $(wildcard ./vendor/sdl-libretro/src/*.c  ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/win32/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/thread/win32/SDL_sysmutex.c ./vendor/sdl-libretro/src/thread/win32/SDL_syssem.c ./vendor/sdl-libretro/src/thread/win32/SDL_systhread.c ./vendor/sdl-libretro/src/thread/generic/SDL_syscond.c ./vendor/sdl-libretro/src/loadso/dummy/*.c)
+else
+	SDL_SOURCES_C := $(wildcard ./vendor/sdl-libretro/src/*.c ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/linux/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/thread/pthread/*.c ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/loadso/dummy/*.c)
+endif
+OBJECTS += $(SDL_SOURCES_C:.c=.o)
+
 # Build all the dependencies, and the core.
 all: | dependencies	$(TARGET)
 
@@ -120,7 +127,6 @@ else
 endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
-	vendor/SDL_$(platform).a \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)
@@ -163,14 +169,8 @@ $(TARGET): $(OBJECTS)
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 
-submodules:
+dependencies:
 	git submodule update --init --recursive
-
-vendor/SDL_$(platform).a: submodules
-	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL_$(platform).a
-
-dependencies: vendor/SDL_$(platform).a
-	@echo "Built dependencies\n"
 
 test: all
 	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
