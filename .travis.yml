@@ -13,12 +13,6 @@ addons:
     packages:
     - cmake
     - time
-    - libjpeg-dev
-    - libpng12-dev
-    - libfreetype6-dev
-    - libmikmod-dev
-    - libvorbis-dev
-    - libogg-dev
     - g++-5
     - gcc-5
 
