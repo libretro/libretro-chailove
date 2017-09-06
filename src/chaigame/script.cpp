@@ -203,6 +203,13 @@ namespace chaigame {
 			hasload = false;
 		}
 		try {
+			chaireset = chai.eval<std::function<void ()> >("reset");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping reset() - {}", e.what());
+			hasreset = false;
+		}
+		try {
 			chaiupdate = chai.eval<std::function<void (float)> >("update");
 		}
 		catch (const std::exception& e) {
@@ -277,6 +284,20 @@ namespace chaigame {
 			catch (const std::exception& e) {
 				log()->error("[script] Failed to call load(): {}", e.what());
 				hasload = false;
+			}
+		}
+		#endif
+	}
+
+	void script::reset() {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hasreset) {
+			try {
+				chaireset();
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call reset(): {}", e.what());
+				hasreset = false;
 			}
 		}
 		#endif

@@ -20,6 +20,7 @@ namespace chaigame {
 		void load();
 		void update(float delta);
 		void draw();
+		void reset();
 		bool loadModule(const std::string& moduleName);
 		void joystickpressed(int joystick, int button);
 		void joystickreleased(int joystick, int button);
@@ -32,6 +33,7 @@ namespace chaigame {
 		std::function<void (Config&)> chaiconf;
 		std::function<void (float)> chaiupdate;
 		std::function<void ()> chaidraw;
+		std::function<void ()> chaireset;
 		std::function<void (int, int)> chaijoystickpressed;
 		std::function<void (int, int)> chaijoystickreleased;
 		std::function<void (int, int, int)> chaimousepressed;
@@ -44,6 +46,7 @@ namespace chaigame {
 		bool hasmousereleased = true;
 		bool hasload = true;
 		bool hasconf = true;
+		bool hasreset = true;
 		#endif
 
 		std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
