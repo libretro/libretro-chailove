@@ -30,8 +30,8 @@ else ifneq (,$(findstring android,$(platform)))
 # cross Windows
 else ifeq ($(platform), wincross64)
 	TARGET := $(TARGET_NAME)_libretro.dll
-	AR = x86_64-w64-mingw32-ar		
- 	CC = x86_64-w64-mingw32-gcc		
+	AR = x86_64-w64-mingw32-ar
+ 	CC = x86_64-w64-mingw32-gcc
  	CXX = x86_64-w64-mingw32-g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++ -lstd++fs
@@ -41,7 +41,7 @@ else ifeq ($(platform), wincross64)
 	SDL_PREFIX := win
 else
 	TARGET :=  $(TARGET_NAME)_retro.dll
-	CC = gcc		
+	CC = gcc
  	CXX = g++
 	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
 	LDFLAGS += -static-libgcc -static-libstdc++  -lstd++fs
@@ -103,7 +103,12 @@ OBJECTS := src/libretro.o \
 	vendor/physfs/src/platform_macosx.o \
 	vendor/physfs/src/platform_posix.o \
 	vendor/physfs/src/platform_unix.o \
-	vendor/physfs/src/platform_windows.o
+	vendor/physfs/src/platform_windows.o \
+	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_framerate.o \
+	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_gfxBlitFunc.o \
+	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_gfxPrimitives.o \
+	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_imageFilter.o \
+	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_rotozoom.o
 
 # Build all the dependencies, and the core.
 all: | dependencies	$(TARGET)
@@ -116,7 +121,6 @@ endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
 	vendor/SDL_$(platform).a \
-	vendor/SDL_gfx_$(platform).a \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)
@@ -126,6 +130,7 @@ FLAGS += -I. \
 	-Ivendor/chaiscript/include \
 	-Ivendor/SDL_tty/include \
 	-Ivendor/spdlog/include \
+	-Ivendor/sdl-libretro/tests/SDL_gfx-2.0.26 \
 	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
 	-Ivendor/ChaiScript_Extras/include \
 	-Ivendor/physfs/src \
@@ -164,10 +169,7 @@ submodules:
 vendor/SDL_$(platform).a: submodules
 	cd vendor/sdl-libretro && make -f Makefile.libretro TARGET_NAME=../SDL_$(platform).a
 
-vendor/SDL_gfx_$(platform).a: submodules
-	cd vendor/sdl-libretro/tests/SDL_gfx-2.0.26 && make -f Makefile.libretro STATIC_LIB=../../../SDL_gfx_$(platform).a
-
-dependencies: vendor/SDL_$(platform).a vendor/SDL_gfx_$(platform).a
+dependencies: vendor/SDL_$(platform).a
 	@echo "Built dependencies\n"
 
 test: all
