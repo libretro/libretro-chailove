@@ -4,9 +4,9 @@
 namespace chaigame {
 	struct Point {
 		Point() : x(0), y(0) {}
-		Point(int val) : x(val), y(val) {}
-		Point(int xPoint, int yPoint) : x(xPoint), y(yPoint) {}
-		int x, y;
+		Point(float val) : x(val), y(val) {}
+		Point(float xPoint, float yPoint) : x(xPoint), y(yPoint) {}
+		float x, y;
 	};
 }
 

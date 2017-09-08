@@ -1,7 +1,6 @@
 #include "ImageData.h"
 #include "SDL.h"
-#define SDL_STBIMAGE_IMPLEMENTATION
-#include "SDL_stbimage.h"
+#include "SDL_gpu.h"
 
 #include <string>
 #include "../../Game.h"
@@ -18,7 +17,7 @@ namespace chaigame {
 	}
 
 	bool ImageData::loadFromRW(SDL_RWops* rw) {
-		surface = STBIMG_Load_RW(rw, 1);
+		surface = GPU_LoadImage_RW(rw, 1);
 
 		if (!surface) {
 			const char* errorChar = SDL_GetError();
@@ -26,7 +25,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			log()->error("STBIMG_Load_RW failed to load data: {}", errString);
+			log()->error("GPU_LoadImage_RW failed to load data: {}", errString);
 			return false;
 		}
 		return true;
@@ -34,7 +33,7 @@ namespace chaigame {
 
 	bool ImageData::destroy() {
 		if (!surface) {
-			SDL_FreeSurface(surface);
+			GPU_FreeImage(surface);
 			surface = NULL;
 		}
 		return true;

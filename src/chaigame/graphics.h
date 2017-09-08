@@ -7,6 +7,7 @@
 #include "graphics/Image.h"
 #include "graphics/Quad.h"
 #include "graphics/Font.h"
+#include "graphics/Color.h"
 
 namespace chaigame {
 	class graphics {
@@ -15,15 +16,15 @@ namespace chaigame {
 		graphics();
 		bool load();
 
-		void rectangle(const std::string& drawmode, int x, int y, int width, int height);
+		void rectangle(const std::string& drawmode, float x, float y, float width, float height);
 		void clear();
 		void clear(int r, int g, int b, int a);
 		void clear(int r, int g, int b);
-		void point(int x, int y);
-		void line(int x1, int y1, int x2, int y2);
+		void point(float x, float y);
+		void line(float x1, float y1, float x2, float y2);
 
-		void draw(ImageData* image, int x, int y);
-		void draw(ImageData* image, Quad quad, int x, int y);
+		void draw(ImageData* image, float x, float y);
+		void draw(ImageData* image, Quad quad, float x, float y);
 
 		Quad newQuad(int x, int y, int width, int height, int sw, int sh);
 
@@ -36,22 +37,22 @@ namespace chaigame {
 		void setFont();
 		Font* getFont();
 
-		void print(const std::string& text, int x, int y);
+		void print(const std::string& text, float x, float y);
 		void setColor(int red, int green, int blue, int alpha);
 		void setColor(int red, int green, int blue);
 		void setBackgroundColor(int red, int green, int blue, int alpha);
 		void setBackgroundColor(int red, int green, int blue);
 
-		Uint8 r = 255, g = 255, b = 255, a = 255;
-		Uint8 backR = 0, backG = 0, backB = 0, backA = 255;
-		SDL_Surface* getScreen();
+		Color color;
+		Color backColor;
+		GPU_Target* getScreen();
 
 		int getWidth();
 		int getHeight();
 
-		void circle(const std::string& drawmode, int x, int y, int radius);
-		void ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
-		void arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
+		void circle(const std::string& drawmode, float x, float y, float radius);
+		void ellipse(const std::string& drawmode, float x, float y, float radiusx, float radiusy, float degrees);
+		void arc(const std::string& drawmode, float x, float y, float radius, float angle1, float angle2);
 
 		Font* activeFont;
 	};

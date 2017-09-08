@@ -20,6 +20,7 @@ ifeq ($(platform), unix)
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS += -D__LINUX__ -D__linux
 	SDL_PREFIX := unix
+	GL_LIB := -lGL
 # android arm
 else ifneq (,$(findstring android,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro_android.so
@@ -27,6 +28,7 @@ else ifneq (,$(findstring android,$(platform)))
 	SHARED := -lstdc++ -lstd++fs -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
 	CFLAGS +=  -g -O2
 	FLAGS += -DANDROID
+	GL_LIB := -lGL
 # cross Windows
 else ifeq ($(platform), wincross64)
 	TARGET := $(TARGET_NAME)_libretro.dll
@@ -39,6 +41,7 @@ else ifeq ($(platform), wincross64)
 	FLAGS += -D_WIN64
 	EXTRA_LDF := -lwinmm -Wl,--export-all-symbols
 	SDL_PREFIX := win
+	GL_LIB := -lopengl32
 else
 	TARGET :=  $(TARGET_NAME)_retro.dll
 	CC = gcc
@@ -49,11 +52,28 @@ else
 	FLAGS += -D_WIN32
 	EXTRA_LDF += -lwinmm -Wl,--export-all-symbols
 	SDL_PREFIX := win
+	GL_LIB := -lopengl32
 endif
 
 # MacOSX
 ifeq ($(platform), osx)
 	FLAGS += -D__APPLE__
+endif
+
+OBJECTS += src/glsym/rglgen.o
+ifeq ($(GLES), 1)
+   CFLAGS += -DHAVE_OPENGLES -DHAVE_OPENGLES2
+   ifeq ($(GLES31), 1)
+      CFLAGS += -DHAVE_OPENGLES3 -DHAVE_OPENGLES_3_1
+   else ifeq ($(GLES3), 1)
+      CFLAGS += -DHAVE_OPENGLES3
+   endif
+   # Still link against GLESv2 when using GLES3 API, at least on desktop Linux.
+   LIBS += -lGLESv2
+   OBJECTS += src/glsym/glsym_es2.o
+else
+   OBJECTS += src/glsym/glsym_gl.o
+   LIBS += $(GL_LIB)
 endif
 
 OBJECTS += src/libretro.o \
@@ -77,6 +97,7 @@ OBJECTS += src/libretro.o \
 	src/chaigame/graphics/ImageData.o \
 	src/chaigame/graphics/Quad.o \
 	src/chaigame/graphics/Image.o \
+	src/chaigame/graphics/Color.o \
 	src/chaigame/graphics/Font.o \
 	src/chaigame/graphics/Point.o \
 	src/chaigame/input/Joystick.o \
@@ -117,6 +138,9 @@ else
 endif
 OBJECTS += $(SDL_SOURCES_C:.c=.o)
 
+SDL_GPU_SOURCES_C := $(wildcard ./vendor/sdl-gpu/src/*.c ./vendoro/sdl-gpu/src/externals/gl3stub/*.c ./vendor/sdl-gpu/src/externals/glew/*.c ./vendor/sdl-gpu/src/externals/stb_image/*.c ./vendor/sdl-gpu/src/externals/stb_image_write/*.c )
+OBJECTS += $(SDL_GPU_SOURCES_C:.c=.o)
+
 # Build all the dependencies, and the core.
 all: | dependencies	$(TARGET)
 
@@ -127,6 +151,7 @@ else
 endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
+	-$(LIBS) \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)
@@ -141,7 +166,13 @@ FLAGS += -I. \
 	-Ivendor/ChaiScript_Extras/include \
 	-Ivendor/physfs/src \
 	-Ivendor/Snippets \
-	-Ivendor/stb
+	-Ivendor/sdl-gpu/include \
+	-Ivendor/sdl-gpu/src/externals/gl3stub \
+	-Ivendor/sdl-gpu/src/externals/glew \
+	-Ivendor/sdl-gpu/src/externals/glew/GL \
+	-Ivendor/sdl-gpu/src/externals/stb_image \
+	-Ivendor/sdl-gpu/src/externals/stb_image_write \
+	-Isrc/glsym
 
 WARNINGS :=
 
@@ -152,7 +183,7 @@ ifneq ($(HAVE_TESTS),)
 	FLAGS += -D__HAVE_TESTS__
 endif
 
-FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
+FLAGS += -D__LIBRETRO__ -DSDL_GPU_DISABLE_GLES $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99

@@ -129,11 +129,9 @@ void Game::draw() {
 		#endif
 
 		// Update the screen.
-		SDL_UpdateRect(screen, 0, 0, 0, 0);
+		//SDL_UpdateRect(screen, 0, 0, 0, 0);
 
 		// Flip the buffer.
-		if (SDL_Flip(screen) == -1) {
-			chaigame::log()->error("Failed to swap the buffers: {}", SDL_GetError());
-		}
+		GPU_Flip(screen);
 	}
 }

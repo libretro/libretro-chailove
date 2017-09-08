@@ -13,7 +13,7 @@ namespace chaigame {
 	Font::Font() {}
 
 	Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-		imageData = new ImageData(filename);
+		/*imageData = new ImageData(filename);
 		if (imageData->loaded()) {
 			TTY_Font* newFont = FNT_Create(imageData->surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
@@ -25,6 +25,7 @@ namespace chaigame {
 			ttyFontWidth = glyphWidth;
 			ttyFontHeight = glyphHeight;
 		}
+		*/
 	}
 
 	Font::Font(const std::string& filename, int ptsize) {
@@ -99,7 +100,7 @@ namespace chaigame {
 	}
 
 	void Font::print(const std::string& text, int x, int y, int r, int g, int b, int a) {
-		SDL_Surface* screen = Game::getInstance()->screen;
+		GPU_Target* screen = Game::getInstance()->screen;
 
 		/*
 		// Attempt to render the TTF Font.
@@ -128,11 +129,11 @@ namespace chaigame {
 
 		// Use TTY to print the bitmap font?
 		if (ttyFont != NULL) {
-			FNT_Print(ttyFont, screen, x, y, FNT_ALIGN_LEFT, text.c_str());
+			//FNT_Print(ttyFont, screen, x, y, FNT_ALIGN_LEFT, text.c_str());
 			return;
 		}
 
 		// Fall back to SDL_gfx primitives.
-		stringRGBA(screen, x, y, text.c_str(), r, g, b, a);
+		//stringRGBA(screen, x, y, text.c_str(), r, g, b, a);
 	}
 }
