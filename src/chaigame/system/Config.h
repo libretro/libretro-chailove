@@ -9,6 +9,9 @@ namespace chaigame {
 		int height = 600;
 		int bbp = 32;
 		std::string title = "ChaiGame";
+		bool asyncblit = true;
+		bool hwsurface = true;
+		bool doublebuffering = true;
 	};
 
 	struct moduleConfig {
