@@ -11,7 +11,7 @@ namespace chaigame {
 		Game* app = Game::getInstance();
 
 		// Initialize SDL.
-		if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
+		if (SDL_Init(SDL_INIT_VIDEO) == -1) {
 			const char* errorChar = SDL_GetError();
 			std::string errString("");
 			if (errorChar != NULL) {
@@ -22,7 +22,19 @@ namespace chaigame {
 		}
 
 		// Build the Screen.
-		Uint32 flags = SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_SRCALPHA | SDL_RESIZABLE;
+		Uint32 flags;
+		if (config.window.hwsurface) {
+			flags = SDL_HWSURFACE;
+		}
+		else {
+			flags = SDL_SWSURFACE;
+		}
+		if (config.window.asyncblit) {
+			flags |= SDL_ASYNCBLIT;
+		}
+		if (config.window.doublebuffering) {
+			flags |= SDL_DOUBLEBUF;
+		}
 		app->screen = SDL_SetVideoMode(config.window.width, config.window.height, config.window.bbp, flags);
 		if (app->screen == NULL) {
 			const char* errorChar = SDL_GetError();
