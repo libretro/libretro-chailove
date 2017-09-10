@@ -9,7 +9,7 @@ global speed = 200.0f
 global img
 
 def load() {
-	graphics.setBackgroundColor(54, 172, 248)
+	graphics.setBackgroundColor(39, 107, 187)
 	x = graphics.getWidth() / 2
 	y = graphics.getHeight() / 2
 	img = graphics.newImage("examples/benchmark/sprite.png")

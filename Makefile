@@ -76,70 +76,50 @@ else
    LIBS += $(GL_LIB)
 endif
 
-OBJECTS += src/libretro.o \
-	src/Game.o \
-	src/chaigame/audio.o \
-	src/chaigame/log.o \
-	src/chaigame/graphics.o \
-	src/chaigame/keyboard.o \
-	src/chaigame/script.o \
-	src/chaigame/filesystem.o \
-	src/chaigame/image.o \
-	src/chaigame/sound.o \
-	src/chaigame/math.o \
-	src/chaigame/font.o \
-	src/chaigame/timer.o \
-	src/chaigame/event.o \
-	src/chaigame/window.o \
-	src/chaigame/mouse.o \
-	src/chaigame/system.o \
-	src/chaigame/joystick.o \
-	src/chaigame/graphics/ImageData.o \
-	src/chaigame/graphics/Quad.o \
-	src/chaigame/graphics/Image.o \
-	src/chaigame/graphics/Color.o \
-	src/chaigame/graphics/Font.o \
-	src/chaigame/graphics/Point.o \
-	src/chaigame/input/Joystick.o \
-	src/chaigame/audio/SoundData.o \
-	src/chaigame/system/Config.o \
-	test/Test.o \
-	vendor/physfs/extras/physfsrwops.o \
-	vendor/SDL_tty/src/SDL_tty.o \
-	vendor/SDL_tty/src/SDL_fnt.o \
-	vendor/physfs/src/archiver_dir.o \
-	vendor/physfs/src/archiver_grp.o \
-	vendor/physfs/src/archiver_hog.o \
-	vendor/physfs/src/archiver_iso9660.o \
-	vendor/physfs/src/archiver_lzma.o \
-	vendor/physfs/src/archiver_mvl.o \
-	vendor/physfs/src/archiver_qpak.o \
-	vendor/physfs/src/archiver_slb.o \
-	vendor/physfs/src/archiver_unpacked.o \
-	vendor/physfs/src/archiver_wad.o \
-	vendor/physfs/src/archiver_zip.o \
-	vendor/physfs/src/physfs_byteorder.o \
-	vendor/physfs/src/physfs.o \
-	vendor/physfs/src/physfs_unicode.o \
-	vendor/physfs/src/platform_macosx.o \
-	vendor/physfs/src/platform_posix.o \
-	vendor/physfs/src/platform_unix.o \
-	vendor/physfs/src/platform_windows.o \
-	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_framerate.o \
-	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_gfxBlitFunc.o \
-	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_gfxPrimitives.o \
-	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_imageFilter.o \
-	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/SDL_rotozoom.o
+# ChaiGame
+SOURCES_CXX += $(wildcard \
+	src/*.cpp \
+	src/chaigame/*.cpp \
+	test/*.cpp \
+	src/chaigame/graphics/*.cpp \
+	src/chaigame/input/*.cpp \
+	src/chaigame/audio/*.cpp \
+	src/chaigame/system/*.cpp \
+)
 
+# PhysFS
+SOURCES_C += $(wildcard \
+	vendor/physfs/extras/physfsrwops.c \
+	vendor/physfs/src/*.c \
+)
+
+# SDL_tty
+SOURCES_C += $(wildcard \
+	vendor/SDL_tty/src/SDL_tty.c \
+	vendor/SDL_tty/src/SDL_fnt.c \
+)
+
+# SDL_gfx
+SOURCES_C += $(wildcard \
+	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/*.c \
+)
+
+# SDL
 ifeq ($(platform), win)
-	SDL_SOURCES_C := $(wildcard ./vendor/sdl-libretro/src/*.c  ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/win32/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/thread/win32/SDL_sysmutex.c ./vendor/sdl-libretro/src/thread/win32/SDL_syssem.c ./vendor/sdl-libretro/src/thread/win32/SDL_systhread.c ./vendor/sdl-libretro/src/thread/generic/SDL_syscond.c ./vendor/sdl-libretro/src/loadso/dummy/*.c)
+	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c  ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/win32/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/thread/win32/SDL_sysmutex.c ./vendor/sdl-libretro/src/thread/win32/SDL_syssem.c ./vendor/sdl-libretro/src/thread/win32/SDL_systhread.c ./vendor/sdl-libretro/src/thread/generic/SDL_syscond.c ./vendor/sdl-libretro/src/loadso/dummy/*.c)
 else
-	SDL_SOURCES_C := $(wildcard ./vendor/sdl-libretro/src/*.c ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/linux/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/thread/pthread/*.c ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/loadso/dummy/*.c)
+	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/linux/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/thread/pthread/*.c ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/loadso/dummy/*.c)
 endif
-OBJECTS += $(SDL_SOURCES_C:.c=.o)
 
-SDL_GPU_SOURCES_C := $(wildcard ./vendor/sdl-gpu/src/*.c ./vendoro/sdl-gpu/src/externals/gl3stub/*.c ./vendor/sdl-gpu/src/externals/glew/*.c ./vendor/sdl-gpu/src/externals/stb_image/*.c ./vendor/sdl-gpu/src/externals/stb_image_write/*.c )
-OBJECTS += $(SDL_GPU_SOURCES_C:.c=.o)
+# SDL_gpu
+SOURCES_C += $(wildcard \
+	./vendor/sdl-gpu/src/*.c \
+	./vendor/sdl-gpu/src/externals/glew/*.c \
+	./vendor/sdl-gpu/src/externals/stb_image/*.c \
+	./vendor/sdl-gpu/src/externals/stb_image_write/*.c \
+)
+
+OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 
 # Build all the dependencies, and the core.
 all: | dependencies	$(TARGET)
@@ -151,7 +131,7 @@ else
 endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
-	-$(LIBS) \
+	$(LIBS) \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)
@@ -201,6 +181,7 @@ clean:
 	rm -f $(TARGET) $(OBJECTS)
 
 dependencies:
+	echo $(OBJECTS)
 	git submodule update --init --recursive
 
 test: all

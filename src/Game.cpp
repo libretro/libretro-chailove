@@ -128,9 +128,6 @@ void Game::draw() {
 		test.draw();
 		#endif
 
-		// Update the screen.
-		//SDL_UpdateRect(screen, 0, 0, 0, 0);
-
 		// Flip the buffer.
 		GPU_Flip(screen);
 	}

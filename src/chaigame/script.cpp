@@ -69,6 +69,9 @@ namespace chaigame {
 		chai.add(fun(&windowConfig::height), "height");
 		chai.add(fun(&windowConfig::bbp), "bbp");
 		chai.add(fun(&windowConfig::title), "title");
+		chai.add(fun(&windowConfig::asyncblit), "asyncblit");
+		chai.add(fun(&windowConfig::hwsurface), "hwsurface");
+		chai.add(fun(&windowConfig::doublebuffering), "doublebuffering");
 		chai.add(user_type<moduleConfig>(), "moduleConfig");
 		chai.add(fun(&moduleConfig::sound), "sound");
 		chai.add(user_type<Config>(), "Config");
