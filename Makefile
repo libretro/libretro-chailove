@@ -78,10 +78,10 @@ endif
 
 # SDL_gpu
 SOURCES_C += $(wildcard \
-	./vendor/sdl-gpu/src/*.c \
-	./vendor/sdl-gpu/src/externals/glew/*.c \
-	./vendor/sdl-gpu/src/externals/stb_image/*.c \
-	./vendor/sdl-gpu/src/externals/stb_image_write/*.c \
+	./vendor/robloach-sdl_gpu/src/*.c \
+	./vendor/robloach-sdl_gpu/src/externals/glew/*.c \
+	./vendor/robloach-sdl_gpu/src/externals/stb_image/*.c \
+	./vendor/robloach-sdl_gpu/src/externals/stb_image_write/*.c \
 )
 
 # ChaiGame
@@ -146,12 +146,12 @@ FLAGS += -I. \
 	-Ivendor/ChaiScript_Extras/include \
 	-Ivendor/physfs/src \
 	-Ivendor/Snippets \
-	-Ivendor/sdl-gpu/include \
-	-Ivendor/sdl-gpu/src/externals/gl3stub \
-	-Ivendor/sdl-gpu/src/externals/glew \
-	-Ivendor/sdl-gpu/src/externals/glew/GL \
-	-Ivendor/sdl-gpu/src/externals/stb_image \
-	-Ivendor/sdl-gpu/src/externals/stb_image_write \
+	-Ivendor/robloach-sdl_gpu/include \
+	-Ivendor/robloach-sdl_gpu/src/externals/gl3stub \
+	-Ivendor/robloach-sdl_gpu/src/externals/glew \
+	-Ivendor/robloach-sdl_gpu/src/externals/glew/GL \
+	-Ivendor/robloach-sdl_gpu/src/externals/stb_image \
+	-Ivendor/robloach-sdl_gpu/src/externals/stb_image_write \
 	-Isrc/glsym
 
 WARNINGS :=
