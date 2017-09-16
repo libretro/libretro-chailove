@@ -4,11 +4,22 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 
 ![ChaiGame Benchmark Screenshot](examples/benchmark/screenshot.png)
 
-## Games
+## Examples
 
-- [FlappyBird](https://github.com/RobLoach/chaigame-flappybird)
+- [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird)
 
 ## Usage
+
+ChaiGame is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird), run RetroArch and
+
+1. Download the ChaiGame core through RetroArch at...
+    - *Online Updater* → *Core Updator* → *ChaiGame*
+2. Download *Floppy Bird* through RetroArch at...
+    - *Online Updater* → *Content Downloader* → *ChaiGame* → *Floppy Bird*
+3. Launch the game over through...
+    - *Load Content* → *Downloads* → *Floppy Bird.chaigame*
+
+## API
 
 ChaiGame is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
 
