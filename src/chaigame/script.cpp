@@ -137,6 +137,8 @@ namespace chaigame {
 
 		// Register the Filesystem module.
 		chai.add(fun(&filesystem::read), "read");
+		chai.add(fun(&filesystem::isDirectory), "isDirectory");
+		chai.add(fun(&filesystem::isFile), "isFile");
 		chai.add(fun(&filesystem::exists), "exists");
 		chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 		chai.add(fun(&filesystem::mount), "mount");

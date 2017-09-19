@@ -187,4 +187,20 @@ namespace chaigame {
 
 		return result;
 	}
+
+	bool filesystem::isDirectory(const std::string& filename) {
+		PHYSFS_Stat stat;
+		if (PHYSFS_stat(filename.c_str(), &stat) == 0) {
+			return false;
+		}
+		return stat.filetype == PHYSFS_FILETYPE_DIRECTORY;
+	}
+
+	bool filesystem::isFile(const std::string& filename) {
+		PHYSFS_Stat stat;
+		if (PHYSFS_stat(filename.c_str(), &stat) == 0) {
+			return false;
+		}
+		return stat.filetype == PHYSFS_FILETYPE_REGULAR;
+	}
 }

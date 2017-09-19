@@ -21,6 +21,8 @@ namespace chaigame {
 		PHYSFS_sint64 getSize(PHYSFS_File* file);
 		PHYSFS_file* openFile(const std::string& filename);
 		std::vector<std::string> getDirectoryItems(const std::string& dir);
+		bool isDirectory(const std::string& filename);
+		bool isFile(const std::string& filename);
 	};
 }
 
