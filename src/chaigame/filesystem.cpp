@@ -162,4 +162,29 @@ namespace chaigame {
 		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
 		return returnValue != 0;
 	}
+
+	/**
+	 * Lists all items in the given directory.
+	 */
+	std::vector<std::string> filesystem::getDirectoryItems(const std::string& dir) {
+		// Construct the list of files that will result.
+		std::vector<std::string> result;
+
+		// Ask PhysFS for the enumerated files.
+		char** rc = PHYSFS_enumerateFiles(dir.c_str());
+		if (rc != NULL) {
+			char **i;
+			for (i = rc; *i != NULL; i++) {
+				// Build the file string.
+				std::string thefile(*i);
+				result.push_back(thefile);
+			}
+			PHYSFS_freeList(rc);
+		}
+		else {
+			log()->warn("Error enumerating files from {}", dir);
+		}
+
+		return result;
+	}
 }
