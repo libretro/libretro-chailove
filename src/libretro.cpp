@@ -1,6 +1,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sstream>
 #include "libretro.h"
 #include "Game.h"
 
@@ -129,15 +130,33 @@ void retro_set_controller_port_device(unsigned port, unsigned device) {
 }
 
 size_t retro_serialize_size(void) {
-	return 0;
+	// Random size for save slots.
+	return 10000;
 }
 
 bool retro_serialize(void *data, size_t size) {
-	return false;
+	// Ask ChaiGame for save data.
+	Game* app = Game::getInstance();
+	std::string state = app->savestate();
+	if (state.empty()) {
+		return false;
+	}
+
+	// Save the information to the state data.
+	std::copy(state.begin(), state.end(), reinterpret_cast<char*>(data));
+	return true;
 }
 
 bool retro_unserialize(const void *data, size_t size) {
-	return false;
+	std::stringstream ss(std::string(
+		reinterpret_cast<const char*>(data),
+		reinterpret_cast<const char*>(data) + size));
+
+	std::string loadData = ss.str();
+
+	// Tell ChaiScript that we are loading loadData.
+	Game* app = Game::getInstance();
+	return app->loadstate(loadData);
 }
 
 void retro_cheat_reset(void) {

@@ -55,6 +55,8 @@ public:
 	bool update();
 	void draw();
 	void reset();
+	std::string savestate();
+	bool loadstate(std::string data);
 
 	uint32_t *videoBuffer;
 	SDL_Surface* screen;

@@ -261,6 +261,20 @@ namespace chaigame {
 			log()->info("[script] Skipping mousereleased() - {}", e.what());
 			hasmousereleased = false;
 		}
+		try {
+			chailoadstate = chai.eval<std::function<bool (std::string)> >("loadstate");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping loadstate() - {}", e.what());
+			hasloadstate = false;
+		}
+		try {
+			chaisavestate = chai.eval<std::function<std::string ()> >("savestate");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping savestate() - {}", e.what());
+			hassavestate = false;
+		}
 		#endif
 	}
 
@@ -388,6 +402,36 @@ namespace chaigame {
 			}
 		}
 		#endif
+	}
+
+	std::string script::savestate() {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hassavestate) {
+			try {
+				return chaisavestate();
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call savestate(): {}", e.what());
+				hassavestate = false;
+			}
+		}
+		#endif
+		return std::string("");
+	}
+
+	bool script::loadstate(std::string data) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hasloadstate) {
+			try {
+				return chailoadstate(data);
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call loadstate(): {}", e.what());
+				hasloadstate = false;
+			}
+		}
+		#endif
+		return false;
 	}
 
 	std::string script::replaceString(std::string subject, const std::string& search, const std::string& replace) {

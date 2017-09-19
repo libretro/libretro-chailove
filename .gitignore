@@ -1,2 +1,3 @@
 *.o
 *.so
+examples/benchmark/main.state*

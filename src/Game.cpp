@@ -134,3 +134,11 @@ void Game::draw() {
 		}
 	}
 }
+
+std::string Game::savestate() {
+	return script->savestate();
+}
+
+bool Game::loadstate(std::string data) {
+	return script->loadstate(data);
+}
