@@ -32,10 +32,15 @@ namespace chaigame {
 	}
 
 	void math::setRandomSeed(int seed) {
+		m_seed = seed;
 		srand(seed);
 	}
 
 	void math::setRandomSeed(int low, int high) {
-		srand(low + high);
+		setRandomSeed(low + high);
+	}
+
+	int math::getRandomSeed() {
+		return m_seed;
 	}
 }

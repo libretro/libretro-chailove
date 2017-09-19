@@ -10,9 +10,11 @@ namespace chaigame {
 		double random();
 		void setRandomSeed(int seed);
 		void setRandomSeed(int low, int high);
+		int getRandomSeed();
 
 		float pi = 3.14159265358979323846f;
 		float e = 2.718281828459045f;
+		int m_seed;
 	};
 }
 
