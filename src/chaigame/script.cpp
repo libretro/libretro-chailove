@@ -404,6 +404,9 @@ namespace chaigame {
 		#endif
 	}
 
+	/**
+	 * Call the script's savestate() function and retrieve a string.
+	 */
 	std::string script::savestate() {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hassavestate) {
@@ -416,9 +419,14 @@ namespace chaigame {
 			}
 		}
 		#endif
+
+		// If there is no state data, return an empty string.
 		return std::string("");
 	}
 
+	/**
+	 * Pass the state data string over to the script, asking it to load the state.
+	 */
 	bool script::loadstate(std::string data) {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hasloadstate) {
@@ -431,6 +439,8 @@ namespace chaigame {
 			}
 		}
 		#endif
+
+		// If there is an error in loading the state, return false.
 		return false;
 	}
 

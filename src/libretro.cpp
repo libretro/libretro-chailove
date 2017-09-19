@@ -129,11 +129,17 @@ void retro_set_controller_port_device(unsigned port, unsigned device) {
 	(void)device;
 }
 
+/**
+ * Return the amount of bytes required to save a state.
+ */
 size_t retro_serialize_size(void) {
-	// Random size for save slots.
+	// Save states will be 10 kilobytes.
 	return 10000;
 }
 
+/**
+ * Serialize the current state to save a slot.
+ */
 bool retro_serialize(void *data, size_t size) {
 	// Ask ChaiGame for save data.
 	Game* app = Game::getInstance();
@@ -147,14 +153,19 @@ bool retro_serialize(void *data, size_t size) {
 	return true;
 }
 
+/**
+ * Unserialize the given data and load the state.
+ */
 bool retro_unserialize(const void *data, size_t size) {
+	// Create a string stream from the data.
 	std::stringstream ss(std::string(
 		reinterpret_cast<const char*>(data),
 		reinterpret_cast<const char*>(data) + size));
 
+	// Port the string stream to a straight string.
 	std::string loadData = ss.str();
 
-	// Tell ChaiScript that we are loading loadData.
+	// Pass the string to the script.
 	Game* app = Game::getInstance();
 	return app->loadstate(loadData);
 }
