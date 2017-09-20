@@ -30,6 +30,10 @@ namespace chaigame {
 		#ifdef __HAVE_CHAISCRIPT__
 		Game* app = Game::getInstance();
 
+		// ChaiScript Standard Library Additions
+		// This adds some basic type definitions to ChaiScript.
+		chai.add(chaiscript::bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
+
 		// Add the Quad.
 		chai.add(user_type<Quad>(), "Quad");
 		chai.add(constructor<Quad()>(), "Quad");
@@ -133,7 +137,10 @@ namespace chaigame {
 
 		// Register the Filesystem module.
 		chai.add(fun(&filesystem::read), "read");
+		chai.add(fun(&filesystem::isDirectory), "isDirectory");
+		chai.add(fun(&filesystem::isFile), "isFile");
 		chai.add(fun(&filesystem::exists), "exists");
+		chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 		chai.add(fun(&filesystem::mount), "mount");
 		chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
 		chai.add(fun(&filesystem::load), "load");

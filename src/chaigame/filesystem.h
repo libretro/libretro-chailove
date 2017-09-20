@@ -2,6 +2,7 @@
 #define CHAIGAME_FILESYSTEM_H
 
 #include <string>
+#include <vector>
 #include "SDL.h"
 #include "physfs.h"
 
@@ -19,6 +20,9 @@ namespace chaigame {
 		bool mount(const std::string& archive, const std::string& mountpoint);
 		PHYSFS_sint64 getSize(PHYSFS_File* file);
 		PHYSFS_file* openFile(const std::string& filename);
+		std::vector<std::string> getDirectoryItems(const std::string& dir);
+		bool isDirectory(const std::string& filename);
+		bool isFile(const std::string& filename);
 	};
 }
 
