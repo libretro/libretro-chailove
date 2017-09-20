@@ -59,7 +59,7 @@ public:
 	bool loadstate(std::string data);
 
 	uint32_t *videoBuffer;
-	SDL_Surface* screen;
+	GPU_Target* screen;
 	SDL_Event sdlEvent;
 
 	#ifdef __HAVE_TESTS__

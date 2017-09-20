@@ -2,12 +2,13 @@
 #define CHAIGAME_UTILITY_IMAGEDATA_H
 
 #include <SDL.h>
+#include "SDL_gpu.h"
 #include <string>
 
 namespace chaigame {
 	class ImageData {
 	public:
-		SDL_Surface* surface;
+		GPU_Image* surface;
 		ImageData(SDL_RWops* rw);
 		ImageData(const std::string& filename);
 		~ImageData();

@@ -8,6 +8,7 @@
 #include "graphics/ImageData.h"
 #include "graphics/Image.h"
 #include "graphics/Font.h"
+#include "graphics/Color.h"
 #include "log.h"
 
 namespace chaigame {
@@ -16,65 +17,62 @@ namespace chaigame {
 		activeFont = new Font();
 	}
 
-	SDL_Surface* graphics::getScreen() {
+	GPU_Target* graphics::getScreen() {
 		return Game::getInstance()->screen;
 	}
 
 	bool graphics::load() {
 		// Enable alpha blending.
-		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
-			log()->warn("Enabling alpha blending failed");
-		}
+		//if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
+		//	log()->warn("Enabling alpha blending failed");
+		//}
 
 		return true;
 	}
 
 	void graphics::clear() {
-		clear(backR, backG, backB, backA);
+		clear(backColor.r, backColor.g, backColor.b, backColor.a);
 	}
 
 	void graphics::clear(int r, int g, int b, int a) {
-		SDL_Surface* screen = getScreen();
-		Uint32 color = SDL_MapRGBA(screen->format, r, g, b, a);
-		SDL_FillRect(screen, NULL, color);
+		GPU_Target* screen = getScreen();
+		GPU_ClearRGBA(screen, r, g, b, a);
 	}
 
 	void graphics::clear(int r, int g, int b) {
-		clear(r, g, b, 255);
+		GPU_Target* screen = getScreen();
+		GPU_ClearRGB(screen, r, g, b);
 	}
-	void graphics::point(int x, int y) {
-		pixelRGBA(getScreen(), x, y, r, g, b, a);
+	void graphics::point(float x, float y) {
+		GPU_Pixel(getScreen(), x, y, color.toSDLColor());
 	}
 
-	void graphics::rectangle(const std::string& drawmode, int x, int y, int width, int height) {
+	void graphics::rectangle(const std::string& drawmode, float x, float y, float width, float height) {
 		if (drawmode == "line") {
-			rectangleRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
+			GPU_Rectangle(getScreen(), x, y, x + width, y + height, color.toSDLColor());
 		}
 		else {
-			boxRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
+			GPU_RectangleFilled(getScreen(), x, y, x + width, y + height, color.toSDLColor());
 		}
 	}
-	void graphics::line(int x1, int y1, int x2, int y2) {
-		lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
+	void graphics::line(float x1, float y1, float x2, float y2) {
+		GPU_Line(getScreen(), x1, y1, x2, y2, color.toSDLColor());
 	}
 
-	void graphics::draw(ImageData* image, int x, int y) {
+	void graphics::draw(ImageData* image, float x, float y) {
 		if (image && image->loaded()) {
-			SDL_Rect* dstrect = new SDL_Rect();
-			dstrect->x = x;
-			dstrect->y = y;
-			SDL_BlitSurface(image->surface, NULL, getScreen(), dstrect);
+			GPU_Blit(image->surface, NULL, getScreen(), x, y);
 		}
 	}
 
-	void graphics::draw(ImageData* image, Quad quad, int x, int y) {
+	void graphics::draw(ImageData* image, Quad quad, float x, float y) {
 		if (image && image->loaded()) {
-			SDL_Rect* dest = new SDL_Rect();
-			dest->x = x;
-			dest->y = y;
-			dest->w = x + quad.width;
-			dest->h = y + quad.height;
-			SDL_BlitSurface(image->surface, quad.toRect(), getScreen(), dest);
+			GPU_Rect* src = new GPU_Rect();
+			src->x = x;
+			src->y = y;
+			src->w = x + quad.width;
+			src->h = y + quad.height;
+			GPU_Blit(image->surface, quad.toRect(), getScreen(), x, y);
 		}
 	}
 
@@ -90,15 +88,15 @@ namespace chaigame {
 		return Quad(x, y, width, height, sw, sh);
 	}
 
-	void graphics::print(const std::string& text, int x, int y) {
-		activeFont->print(text, x, y, r, g, b, a);
+	void graphics::print(const std::string& text, float x, float y) {
+		activeFont->print(text, x, y, color.r, color.g, color.b, color.a);
 	}
 
 	void graphics::setColor(int red, int green, int blue, int alpha) {
-		r = red;
-		g = green;
-		b = blue;
-		a = alpha;
+		color.r = red;
+		color.g = green;
+		color.b = blue;
+		color.a = alpha;
 	}
 	void graphics::setColor(int red, int green, int blue) {
 		setColor(red, green, blue, 255);
@@ -107,10 +105,10 @@ namespace chaigame {
 		setBackgroundColor(red, green, blue, 255);
 	}
 	void graphics::setBackgroundColor(int red, int green, int blue, int alpha) {
-		backR = red;
-		backG = green;
-		backB = blue;
-		backA = alpha;
+		backColor.r = red;
+		backColor.g = green;
+		backColor.b = blue;
+		backColor.a = alpha;
 	}
 	int graphics::getWidth() {
 		return getScreen()->w;
@@ -119,30 +117,30 @@ namespace chaigame {
 		return getScreen()->h;
 	}
 
-	void graphics::circle(const std::string& drawmode, int x, int y, int radius) {
+	void graphics::circle(const std::string& drawmode, float x, float y, float radius) {
 		if (drawmode == "line") {
-			circleRGBA(getScreen(), x, y, radius, r, g, b, a);
+			GPU_Circle(getScreen(), x, y, radius, color.toSDLColor());
 		}
 		else {
-			filledCircleRGBA(getScreen(), x, y, radius, r, g, b, a);
+			GPU_CircleFilled(getScreen(), x, y, radius, color.toSDLColor());
 		}
 	}
 
-	void graphics::arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2) {
+	void graphics::arc(const std::string& drawmode, float x, float y, float radius, float start_angle, float end_angle) {
 		if (drawmode == "line") {
-			arcRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
+			GPU_Arc(getScreen(), x, y, radius, start_angle, end_angle, color.toSDLColor());
 		}
 		else {
-			filledPieRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
+			GPU_ArcFilled(getScreen(), x, y, radius, start_angle, end_angle, color.toSDLColor());
 		}
 	}
 
-	void graphics::ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy) {
+	void graphics::ellipse(const std::string& drawmode, float x, float y, float radiusx, float radiusy, float degrees) {
 		if (drawmode == "line") {
-			ellipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
+			GPU_Ellipse(getScreen(), x, y, radiusx, radiusy, degrees, color.toSDLColor());
 		}
 		else {
-			filledEllipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
+			GPU_EllipseFilled(getScreen(), x, y, radiusx, radiusy, degrees, color.toSDLColor());
 		}
 	}
 

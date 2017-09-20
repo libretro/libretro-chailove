@@ -20,6 +20,7 @@ ifeq ($(platform), unix)
 	ENDIANNESS_DEFINES := -DLSB_FIRST
 	FLAGS += -D__LINUX__ -D__linux
 	SDL_PREFIX := unix
+	GL_LIB := -lGL
 # android arm
 else ifneq (,$(findstring android,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro_android.so
@@ -27,6 +28,7 @@ else ifneq (,$(findstring android,$(platform)))
 	SHARED := -lstdc++ -lstd++fs -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
 	CFLAGS +=  -g -O2
 	FLAGS += -DANDROID
+	GL_LIB := -lGL
 # cross Windows
 else ifeq ($(platform), wincross64)
 	TARGET := $(TARGET_NAME)_libretro.dll
@@ -39,6 +41,7 @@ else ifeq ($(platform), wincross64)
 	FLAGS += -D_WIN64
 	EXTRA_LDF := -lwinmm -Wl,--export-all-symbols
 	SDL_PREFIX := win
+	GL_LIB := -lopengl32
 else
 	TARGET :=  $(TARGET_NAME)_retro.dll
 	CC = gcc
@@ -49,12 +52,37 @@ else
 	FLAGS += -D_WIN32
 	EXTRA_LDF += -lwinmm -Wl,--export-all-symbols
 	SDL_PREFIX := win
+	GL_LIB := -lopengl32
 endif
 
 # MacOSX
 ifeq ($(platform), osx)
 	FLAGS += -D__APPLE__
 endif
+
+OBJECTS += src/glsym/rglgen.o
+ifeq ($(GLES), 1)
+   CFLAGS += -DHAVE_OPENGLES -DHAVE_OPENGLES2
+   ifeq ($(GLES31), 1)
+      CFLAGS += -DHAVE_OPENGLES3 -DHAVE_OPENGLES_3_1
+   else ifeq ($(GLES3), 1)
+      CFLAGS += -DHAVE_OPENGLES3
+   endif
+   # Still link against GLESv2 when using GLES3 API, at least on desktop Linux.
+   LIBS += -lGLESv2
+   OBJECTS += src/glsym/glsym_es2.o
+else
+   OBJECTS += src/glsym/glsym_gl.o
+   LIBS += $(GL_LIB)
+endif
+
+# SDL_gpu
+SOURCES_C += $(wildcard \
+	./vendor/robloach-sdl_gpu/src/*.c \
+	./vendor/robloach-sdl_gpu/src/externals/glew/*.c \
+	./vendor/robloach-sdl_gpu/src/externals/stb_image/*.c \
+	./vendor/robloach-sdl_gpu/src/externals/stb_image_write/*.c \
+)
 
 # ChaiGame
 SOURCES_CXX += $(wildcard \
@@ -103,6 +131,7 @@ else
 endif
 
 LDFLAGS +=  $(fpic) $(SHARED) \
+	$(LIBS) \
 	-ldl \
 	-lpthread \
 	$(EXTRA_LDF)
@@ -117,7 +146,13 @@ FLAGS += -I. \
 	-Ivendor/ChaiScript_Extras/include \
 	-Ivendor/physfs/src \
 	-Ivendor/Snippets \
-	-Ivendor/stb
+	-Ivendor/robloach-sdl_gpu/include \
+	-Ivendor/robloach-sdl_gpu/src/externals/gl3stub \
+	-Ivendor/robloach-sdl_gpu/src/externals/glew \
+	-Ivendor/robloach-sdl_gpu/src/externals/glew/GL \
+	-Ivendor/robloach-sdl_gpu/src/externals/stb_image \
+	-Ivendor/robloach-sdl_gpu/src/externals/stb_image_write \
+	-Isrc/glsym
 
 WARNINGS :=
 
@@ -128,7 +163,7 @@ ifneq ($(HAVE_TESTS),)
 	FLAGS += -D__HAVE_TESTS__
 endif
 
-FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
+FLAGS += -D__LIBRETRO__ -DSDL_GPU_DISABLE_GLES $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic)
 
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99

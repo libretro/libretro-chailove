@@ -28,3 +28,9 @@
 [submodule "vendor/Snippets"]
 	path = vendor/Snippets
 	url = https://github.com/DanielGibson/Snippets.git
+[submodule "vendor/sdl-gpu"]
+	path = vendor/sdl-gpu
+	url = https://github.com/grimfang4/sdl-gpu.git
+[submodule "vendor/robloach-sdl_gpu"]
+	path = vendor/robloach-sdl_gpu
+	url = https://github.com/RobLoach/sdl-gpu.git

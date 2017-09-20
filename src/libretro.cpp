@@ -4,6 +4,25 @@
 #include <sstream>
 #include "libretro.h"
 #include "Game.h"
+#include "SDL_gpu.h"
+#include "glsym/glsym.h"
+
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+static struct retro_hw_render_callback hw_render;
+
+#if defined(HAVE_PSGL)
+#define RARCH_GL_FRAMEBUFFER GL_FRAMEBUFFER_OES
+#define RARCH_GL_FRAMEBUFFER_COMPLETE GL_FRAMEBUFFER_COMPLETE_OES
+#define RARCH_GL_COLOR_ATTACHMENT0 GL_COLOR_ATTACHMENT0_EXT
+#elif defined(OSX_PPC)
+#define RARCH_GL_FRAMEBUFFER GL_FRAMEBUFFER_EXT
+#define RARCH_GL_FRAMEBUFFER_COMPLETE GL_FRAMEBUFFER_COMPLETE_EXT
+#define RARCH_GL_COLOR_ATTACHMENT0 GL_COLOR_ATTACHMENT0_EXT
+#else
+#define RARCH_GL_FRAMEBUFFER GL_FRAMEBUFFER
+#define RARCH_GL_FRAMEBUFFER_COMPLETE GL_FRAMEBUFFER_COMPLETE
+#define RARCH_GL_COLOR_ATTACHMENT0 GL_COLOR_ATTACHMENT0
+#endif
 
 char RETRO_DIR[512];
 const char *retro_save_directory;
@@ -22,6 +41,15 @@ static retro_audio_sample_batch_t audio_batch_cb;
 
 //retro_input_state_t input_state_cb;
 
+static void context_reset(void)
+{
+   fprintf(stderr, "Context reset!\n");
+   rglgen_resolve_symbols(hw_render.get_proc_address);
+}
+static void context_destroy(void)
+{
+   fprintf(stderr, "Context destroy!\n");
+}
 void retro_set_video_refresh(retro_video_refresh_t cb) {
 	video_cb = cb;
 }
@@ -193,12 +221,56 @@ void frame_time_cb(retro_usec_t usec) {
 	app->timer.step(delta);
 }
 
+
+#ifdef HAVE_OPENGLES
+static bool retro_init_hw_context(void)
+{
+#if defined(HAVE_OPENGLES_3_1)
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES_VERSION;
+   hw_render.version_major = 3;
+   hw_render.version_minor = 1;
+#elif defined(HAVE_OPENGLES3)
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES3;
+#else
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGLES2;
+#endif
+   hw_render.context_reset = context_reset;
+   hw_render.context_destroy = context_destroy;
+   hw_render.depth = true;
+   hw_render.bottom_left_origin = true;
+
+   if (!environ_cb(RETRO_ENVIRONMENT_SET_HW_RENDER, &hw_render))
+      return false;
+
+   return true;
+}
+#else
+static bool retro_init_hw_context(void)
+{
+   hw_render.context_type = RETRO_HW_CONTEXT_OPENGL;
+   hw_render.context_reset = context_reset;
+   hw_render.context_destroy = context_destroy;
+   hw_render.depth = true;
+   hw_render.bottom_left_origin = true;
+
+   if (!environ_cb(RETRO_ENVIRONMENT_SET_HW_RENDER, &hw_render))
+      return false;
+
+   return true;
+}
+#endif
+
 bool retro_load_game(const struct retro_game_info *info) {
 	struct retro_frame_time_callback frame_cb = { frame_time_cb, 1000000 / 60 };
 	environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
 
 	struct retro_audio_callback audio_cb = { emit_audio, audio_set_state };
 	use_audio_cb = environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
+
+	if (!retro_init_hw_context()) {
+		fprintf(stderr, "HW Context could not be initialized, exiting...\n");
+		return false;
+	}
 
 	std::string full(info ? info->path : "main.chai");
 	return Game::getInstance()->load(full);
@@ -328,6 +400,9 @@ void retro_run(void) {
 		// Poll all the inputs.
 		Game::input_poll_cb();
 
+
+   		glBindFramebuffer(RARCH_GL_FRAMEBUFFER, hw_render.get_current_framebuffer());
+
 		// Update the game.
 		if (!app->update()) {
 			environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
@@ -338,6 +413,11 @@ void retro_run(void) {
 		app->draw();
 
 		// Copy the video buffer to the screen.
+		// TODO: Is this right?
+		/*SDL_Surface* screenSurface = GPU_CopySurfaceFromTarget(app->screen);
+		app->videoBuffer = (unsigned int *)screenSurface->pixels;
 		video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
+		SDL_FreeSurface(screenSurface);*/
+		video_cb(RETRO_HW_FRAME_BUFFER_VALID, app->config.window.width, app->config.window.height, app->config.window.width << 2);
 	}
 }
