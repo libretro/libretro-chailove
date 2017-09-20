@@ -134,3 +134,17 @@ void Game::draw() {
 		}
 	}
 }
+
+/**
+ * Tell the script to return a string representing the game data.
+ */
+std::string Game::savestate() {
+	return script->savestate();
+}
+
+/**
+ * Ask the script to load the given string.
+ */
+bool Game::loadstate(std::string data) {
+	return script->loadstate(data);
+}

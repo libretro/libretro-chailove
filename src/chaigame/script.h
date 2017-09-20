@@ -26,6 +26,8 @@ namespace chaigame {
 		void joystickreleased(int joystick, int button);
 		void mousepressed(int x, int y, int button);
 		void mousereleased(int x, int y, int button);
+		std::string savestate();
+		bool loadstate(std::string data);
 
 		#ifdef __HAVE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;
@@ -34,6 +36,8 @@ namespace chaigame {
 		std::function<void (float)> chaiupdate;
 		std::function<void ()> chaidraw;
 		std::function<void ()> chaireset;
+		std::function<bool (std::string)> chailoadstate;
+		std::function<std::string ()> chaisavestate;
 		std::function<void (int, int)> chaijoystickpressed;
 		std::function<void (int, int)> chaijoystickreleased;
 		std::function<void (int, int, int)> chaimousepressed;
@@ -44,6 +48,8 @@ namespace chaigame {
 		bool hasjoystickreleased = true;
 		bool hasmousepressed = true;
 		bool hasmousereleased = true;
+		bool hasloadstate = true;
+		bool hassavestate = true;
 		bool hasload = true;
 		bool hasconf = true;
 		bool hasreset = true;

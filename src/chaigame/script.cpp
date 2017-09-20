@@ -261,6 +261,20 @@ namespace chaigame {
 			log()->info("[script] Skipping mousereleased() - {}", e.what());
 			hasmousereleased = false;
 		}
+		try {
+			chailoadstate = chai.eval<std::function<bool (std::string)> >("loadstate");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping loadstate() - {}", e.what());
+			hasloadstate = false;
+		}
+		try {
+			chaisavestate = chai.eval<std::function<std::string ()> >("savestate");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping savestate() - {}", e.what());
+			hassavestate = false;
+		}
 		#endif
 	}
 
@@ -388,6 +402,46 @@ namespace chaigame {
 			}
 		}
 		#endif
+	}
+
+	/**
+	 * Call the script's savestate() function and retrieve a string.
+	 */
+	std::string script::savestate() {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hassavestate) {
+			try {
+				return chaisavestate();
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call savestate(): {}", e.what());
+				hassavestate = false;
+			}
+		}
+		#endif
+
+		// If there is no state data, return an empty string.
+		return std::string("");
+	}
+
+	/**
+	 * Pass the state data string over to the script, asking it to load the state.
+	 */
+	bool script::loadstate(std::string data) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hasloadstate) {
+			try {
+				return chailoadstate(data);
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call loadstate(): {}", e.what());
+				hasloadstate = false;
+			}
+		}
+		#endif
+
+		// If there is an error in loading the state, return false.
+		return false;
 	}
 
 	std::string script::replaceString(std::string subject, const std::string& search, const std::string& replace) {

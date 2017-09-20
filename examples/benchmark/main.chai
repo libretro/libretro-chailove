@@ -91,3 +91,32 @@ class Sprite {
 		}
 	}
 };
+
+def loadstate(data) {
+	print("Load State")
+	print(data)
+	var info = from_json(data)
+	var num = info["number"]
+
+	// Do something with the loaded number.
+	sprites.clear()
+	for (var i = 0; i < num; ++i) {
+		sprites.push_back(Sprite())
+	}
+
+	// The state loaded correctly, so return true.
+	return true
+}
+
+def savestate() {
+	// Retrieve the number to save.
+	var num = sprites.size()
+
+	// Construct the JSON data.
+	var data = ["number": num]
+	print("Save State")
+	print(to_json(data))
+
+	// Tell the system to save the JSON data.
+	return to_json(data)
+}

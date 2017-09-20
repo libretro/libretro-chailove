@@ -4,6 +4,7 @@
 global WIDTH
 global HEIGHT
 global LEN
+global gridScale
 
 global S
 global dir
@@ -14,8 +15,9 @@ def conf(config) {
 	WIDTH = 32
 	HEIGHT = 32
 	LEN = 5
-	config.window.width  = WIDTH * 12
-	config.window.height = HEIGHT * 12
+	gridScale = 10
+	config.window.width  = WIDTH * gridScale
+	config.window.height = HEIGHT * gridScale
 }
 
 def init() {
@@ -111,15 +113,36 @@ def draw() {
 	graphics.setColor(134, 201, 0)
 	for (var y = 0; y < HEIGHT; ++y) {
 		for (var x = 0; x < WIDTH; ++x) {
-			graphics.rectangle("fill", x*12, y*12, 10, 10)
+			graphics.rectangle("fill", x*gridScale, y*gridScale, gridScale - 2, gridScale - 2)
 		}
 	}
 
 	graphics.setColor(216, 6, 0)
 	for (var i = 0; i < S.size(); ++i) {
-		graphics.rectangle("fill", S[i][0]*12, S[i][1]*12, 10, 10)
+		graphics.rectangle("fill", S[i][0]*gridScale, S[i][1]*gridScale, gridScale - 2, gridScale - 2)
 	}
 
 	graphics.setColor(2, 116, 132)
-	graphics.rectangle("fill", T[0]*12, T[1]*12, 10, 10)
+	graphics.rectangle("fill", T[0]*gridScale, T[1]*gridScale, gridScale - 2, gridScale - 2)
+}
+
+
+def loadstate(data) {
+	print("Load State")
+	print(data)
+	var info = from_json(data)
+	LEN = info["number"]
+
+	// The state loaded correctly, so return true.
+	return true
+}
+
+def savestate() {
+	// Construct the JSON data.
+	var data = ["number": LEN]
+	print("Save State")
+	print(to_json(data))
+
+	// Tell the system to save the JSON data.
+	return to_json(data)
 }
