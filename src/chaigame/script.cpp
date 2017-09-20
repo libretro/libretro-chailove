@@ -192,6 +192,7 @@ namespace chaigame {
 		chai.add(fun<int, math, int, int>(&math::random), "random");
 		chai.add(fun<void, math, int>(&math::setRandomSeed), "setRandomSeed");
 		chai.add(fun<void, math, int, int>(&math::setRandomSeed), "setRandomSeed");
+		chai.add(fun(&math::getRandomSeed), "getRandomSeed");
 		chai.add_global(var(std::ref(app->math)), "math");
 
 		// Load main.chai.
