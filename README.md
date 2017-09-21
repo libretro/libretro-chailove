@@ -4,32 +4,33 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 
 ![ChaiGame Benchmark Screenshot](examples/benchmark/screenshot.png)
 
-## Examples
+## Sample Games
 
 - [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird)
 
 ## Usage
 
-ChaiGame is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird), run RetroArch and
+ChaiGame is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird), run RetroArch and...
 
-1. Download the ChaiGame core through RetroArch at...
-    - *Online Updater* → *Core Updator* → *ChaiGame*
-2. Download *Floppy Bird* through RetroArch at...
-    - *Online Updater* → *Content Downloader* → *ChaiGame* → *Floppy Bird*
-3. Launch the game over through...
-    - *Load Content* → *Downloads* → *Floppy Bird.chaigame*
+1. Run [RetroArch](http://retroarch.com/)
+2. Download the ChaiGame core through RetroArch at *Online Updater* → *Core Updator* → *ChaiGame*
+3. Download *Floppy Bird* through RetroArch at *Online Updater* → *Content Downloader* → *ChaiGame* → *Floppy Bird*
+4. Launch the game over through *Load Content* → *Downloads* → *Floppy Bird.chaigame*
 
 ## API
 
 ChaiGame is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
 
 ``` lua
+global logo
+
 def load() {
-	// Load assets.
+	logo = graphics.newImage("logo.png")
 }
 
 def draw() {
     graphics.print("Hello World!", 400, 300)
+    graphics.draw(logo, 100, 100)
 }
 
 def update(delta) {
