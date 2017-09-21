@@ -2,6 +2,7 @@
 
 namespace chaigame {
 	Config::Config() {
-		// Nothing.
+		options["alphablending"] = true;
+		options["highquality"] = true;
 	}
 }

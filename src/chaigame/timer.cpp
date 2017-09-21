@@ -18,7 +18,7 @@ namespace chaigame {
 		m_deltaCounter += delta;
 		m_frameCounter++;
 
-		if (m_deltaCounter >= 1.0) {
+		if (m_deltaCounter >= 1.0f) {
 			m_fps = m_frameCounter;
 			m_frameCounter = 0;
 			m_deltaCounter = 0;

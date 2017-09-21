@@ -10,7 +10,6 @@ const char *retro_save_directory;
 const char *retro_system_directory;
 const char *retro_content_directory;
 //char retro_system_conf[512];
-bool opt_awesome;
 static bool use_audio_cb;
 int16_t audio_buffer[2 * (44100 / 60)];
 
@@ -70,9 +69,14 @@ void retro_set_environment(retro_environment_t cb) {
 	bool no_rom = true;
 	environ_cb = cb;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
+
+	// Set the Variables.
 	struct retro_variable variables[] = {
 		{
-			"awesomeoption","Use Awesome; OFF|ON",
+			"chaigame_alphablending", "Alpha Blending; enabled|disabled",
+		},
+		{
+			"chaigame_highquality", "High Quality; enabled|disabled",
 		},
 		{ NULL, NULL },
 	};
@@ -80,19 +84,27 @@ void retro_set_environment(retro_environment_t cb) {
 }
 
 static void update_variables(void) {
+	Game* game = Game::getInstance();
 	struct retro_variable var = {0};
 
-	var.key = "awesomeoption";
+	// Alpha Blending
+	var.key = "chaigame_alphablending";
 	var.value = NULL;
-
 	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
-		fprintf(stderr, "Awesome: %s\n", var.value);
-		if (strcmp(var.value, "OFF") == 0)
-			opt_awesome = false;
-		if (strcmp(var.value, "ON") == 0)
-			opt_awesome = true;
+		std::string varvalue(var.value);
+		if (varvalue == "disabled") {
+			game->config.options["alphablending"] = false;
+		}
+	}
 
-		fprintf(stderr, "[libretro-chaigame]: Awesome: %s.\n", opt_awesome ? "ON" : "OFF");
+	// High Quality
+	var.key = "chaigame_highquality";
+	var.value = NULL;
+	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+		std::string varvalue(var.value);
+		if (varvalue == "disabled") {
+			game->config.options["highquality"] = false;
+		}
 	}
 }
 
@@ -188,18 +200,24 @@ void texture_init(){
 }
 
 void frame_time_cb(retro_usec_t usec) {
-	Game* app = Game::getInstance();
 	float delta = usec / 1000000.0;
+	Game* app = Game::getInstance();
 	app->timer.step(delta);
 }
 
 bool retro_load_game(const struct retro_game_info *info) {
+	// Update the core options.
+	update_variables();
+
+	// Set the frame rate callback.
 	struct retro_frame_time_callback frame_cb = { frame_time_cb, 1000000 / 60 };
 	environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
 
+	// Make the audio callback.
 	struct retro_audio_callback audio_cb = { emit_audio, audio_set_state };
 	use_audio_cb = environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
+	// Load the game.
 	std::string full(info ? info->path : "main.chai");
 	return Game::getInstance()->load(full);
 }
@@ -299,8 +317,6 @@ void retro_init(void) {
 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L3, "L3" }
 	};
 	environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, &inputDescriptors);
-
-	update_variables();
 }
 
 void retro_deinit(void) {

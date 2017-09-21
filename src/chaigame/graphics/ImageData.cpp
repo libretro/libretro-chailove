@@ -31,12 +31,18 @@ namespace chaigame {
 		}
 
 		// Optimize the image to the display format.
-		//Uint32 colorkey = SDL_MapRGBA(surface->format, 0, 0xFF, 0, 0xFF);
-		//SDL_SetColorKey(surface, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
-		//SDL_SetAlpha(surface, SDL_SRCALPHA, SDL_ALPHA_TRANSPARENT);
-		SDL_Surface* optimizedImage = SDL_DisplayFormatAlpha(surface);
+		Game* game = Game::getInstance();
+		SDL_Surface* optimizedImage = NULL;
+		if (game->config.options["alphablending"]) {
+			optimizedImage = SDL_DisplayFormatAlpha(surface);
+		}
+		else {
+			Uint32 colorkey = SDL_MapRGBA(surface->format, 0, 0, 0, 0xFF);
+			SDL_SetColorKey(surface, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
+			optimizedImage = SDL_DisplayFormat(surface);
+		}
 		if (!optimizedImage) {
-			log()->warn("SDL_DisplayFormatAlpha failed to optimize the image.");
+			log()->warn("SDL_DisplayFormat failed to optimize the image.");
 		}
 		else {
 			SDL_FreeSurface(surface);

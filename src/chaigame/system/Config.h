@@ -2,6 +2,7 @@
 #define CHAIGAME_UTILITY_CONFIG_H
 
 #include <string>
+#include <map>
 
 namespace chaigame {
 	struct windowConfig {
@@ -23,6 +24,7 @@ namespace chaigame {
 		Config();
 		windowConfig window;
 		moduleConfig modules;
+		std::map<std::string, bool> options;
 	};
 }
 

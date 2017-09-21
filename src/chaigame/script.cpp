@@ -33,6 +33,7 @@ namespace chaigame {
 		// ChaiScript Standard Library Additions
 		// This adds some basic type definitions to ChaiScript.
 		chai.add(chaiscript::bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
+		chai.add(chaiscript::bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
 
 		// Add the Quad.
 		chai.add(user_type<Quad>(), "Quad");
@@ -81,6 +82,8 @@ namespace chaigame {
 		chai.add(user_type<Config>(), "Config");
 		chai.add(fun(&Config::window), "window");
 		chai.add(fun(&Config::modules), "modules");
+		chai.add(fun(&Config::options), "options");
+		chai.add_global(var(std::ref(app->config)), "config");
 
 		// Add Joystick.
 		chai.add(user_type<Joystick>(), "Joystick");
