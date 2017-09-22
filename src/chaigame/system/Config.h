@@ -3,7 +3,6 @@
 
 #include <string>
 #include <map>
-#include "../../Game.h"
 
 namespace chaigame {
 	struct windowConfig {
@@ -24,7 +23,7 @@ namespace chaigame {
 	public:
 		Config();
 		std::string identity = "chaigame";
-		std::string version = CHAIGAME_VERSION_STRING;
+		std::string version;
 		windowConfig window;
 		moduleConfig modules;
 		std::map<std::string, bool> options;
