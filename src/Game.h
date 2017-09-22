@@ -1,6 +1,11 @@
 #ifndef CHAIGAME_GAME_H
 #define CHAIGAME_GAME_H
 
+#define CHAIGAME_VERSION_MAJOR 0
+#define CHAIGAME_VERSION_MINOR 4
+#define CHAIGAME_VERSION_PATCH 0
+#define CHAIGAME_VERSION_STRING "0.4.0"
+
 #include "SDL.h"
 #include "libretro.h"
 #include "chaigame/keyboard.h"

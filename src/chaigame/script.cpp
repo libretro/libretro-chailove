@@ -80,6 +80,8 @@ namespace chaigame {
 		chai.add(user_type<moduleConfig>(), "moduleConfig");
 		chai.add(fun(&moduleConfig::sound), "sound");
 		chai.add(user_type<Config>(), "Config");
+		chai.add(fun(&Config::identity), "identity");
+		chai.add(fun(&Config::version), "version");
 		chai.add(fun(&Config::window), "window");
 		chai.add(fun(&Config::modules), "modules");
 		chai.add(fun(&Config::options), "options");
