@@ -22,6 +22,8 @@ namespace chaigame {
 	class Config {
 	public:
 		Config();
+		std::string identity = "chaigame";
+		std::string version;
 		windowConfig window;
 		moduleConfig modules;
 		std::map<std::string, bool> options;
