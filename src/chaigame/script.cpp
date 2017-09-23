@@ -65,8 +65,9 @@ namespace chaigame {
 		// Add Font.
 		chai.add(user_type<Font>(), "Font");
 		chai.add(fun(&Font::loaded), "loaded");
-		chai.add(fun(&Font::getHeight), "getHeight");
-		chai.add(fun(&Font::getWidth), "getWidth");
+		chai.add(fun<int, Font>(&Font::getHeight), "getHeight");
+		chai.add(fun<int, Font, const std::string&>(&Font::getHeight), "getHeight");
+		chai.add(fun<int, Font, const std::string&>(&Font::getWidth), "getWidth");
 
 		// Add the Config.
 		chai.add(user_type<windowConfig>(), "windowConfig");

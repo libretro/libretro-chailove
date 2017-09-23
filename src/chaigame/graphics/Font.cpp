@@ -75,12 +75,23 @@ namespace chaigame {
 		return true;
 	}
 
-	int Font::getHeight() {
+	int Font::getHeight(const std::string& text) {
 		/*if (ttfFont != NULL) {
 			return TTF_FontHeight(ttfFont);
 		}*/
 		if (ttyFont != NULL) {
 			return FNT_GetTextHeight(ttyFont, text.c_str());
+		}
+
+		return 12;
+	}
+
+	int Font::getHeight() {
+		/*if (ttfFont != NULL) {
+			return TTF_FontHeight(ttfFont);
+		}*/
+		if (ttyFont != NULL) {
+			return ttyFontHeight;
 		}
 
 		return 12;
