@@ -2,25 +2,25 @@
 #include "SDL.h"
 
 #include "libretro.h"
-#include "Game.h"
+#include "ChaiGame.h"
 #include "chaigame/log.h"
 
-Game* Game::m_instance = NULL;
-retro_input_state_t Game::input_state_cb = NULL;
-retro_input_poll_t Game::input_poll_cb = NULL;
+ChaiGame* ChaiGame::m_instance = NULL;
+retro_input_state_t ChaiGame::input_state_cb = NULL;
+retro_input_poll_t ChaiGame::input_poll_cb = NULL;
 
-void Game::destroy() {
+void ChaiGame::destroy() {
 	m_instance = NULL;
 }
 
-Game* Game::getInstance() {
+ChaiGame* ChaiGame::getInstance() {
 	if (!m_instance) {
-		m_instance = new Game;
+		m_instance = new ChaiGame;
 	}
 	return m_instance;
 }
 
-void Game::quit(void) {
+void ChaiGame::quit(void) {
 	// Quit all the subsystems.
 	joystick.unload();
 	font.unload();
@@ -31,7 +31,7 @@ void Game::quit(void) {
 	chaigame::log()->info("Finish");
 }
 
-bool Game::load(const std::string& file) {
+bool ChaiGame::load(const std::string& file) {
 	// Initalize all the subsystems.
 	chaigame::log()->info("Welcome to ChaiGame");
 	filesystem.init(file);
@@ -64,7 +64,7 @@ bool Game::load(const std::string& file) {
 	return true;
 }
 
-bool Game::update() {
+bool ChaiGame::update() {
 	if (event.quitstatus) {
 		return false;
 	}
@@ -107,16 +107,16 @@ bool Game::update() {
 /**
  * Reset the current game.
  */
-void Game::reset() {
+void ChaiGame::reset() {
 	// Tell the script that we are to reset the game.
 	chaigame::log()->info("[game] Reset");
 	script->reset();
 }
 
 /**
- * Render the Game.
+ * Render the ChaiGame.
  */
-void Game::draw() {
+void ChaiGame::draw() {
 	if (!event.quitstatus) {
 		// Clear the screen.
 		graphics.clear();
@@ -138,13 +138,13 @@ void Game::draw() {
 /**
  * Tell the script to return a string representing the game data.
  */
-std::string Game::savestate() {
+std::string ChaiGame::savestate() {
 	return script->savestate();
 }
 
 /**
  * Ask the script to load the given string.
  */
-bool Game::loadstate(std::string data) {
+bool ChaiGame::loadstate(std::string data) {
 	return script->loadstate(data);
 }

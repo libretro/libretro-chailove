@@ -1,5 +1,5 @@
 #include "Config.h"
-#include "../../Game.h"
+#include "../../ChaiGame.h"
 
 namespace chaigame {
 	Config::Config() {

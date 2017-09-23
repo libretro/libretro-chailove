@@ -4,7 +4,7 @@
 #include "SDL_stbimage.h"
 
 #include <string>
-#include "../../Game.h"
+#include "../../ChaiGame.h"
 #include "../log.h"
 
 namespace chaigame {
@@ -31,7 +31,7 @@ namespace chaigame {
 		}
 
 		// Optimize the image to the display format.
-		Game* game = Game::getInstance();
+		ChaiGame* game = ChaiGame::getInstance();
 		SDL_Surface* optimizedImage = NULL;
 		if (game->config.options["alphablending"]) {
 			optimizedImage = SDL_DisplayFormatAlpha(surface);
@@ -64,7 +64,7 @@ namespace chaigame {
 	}
 
 	ImageData::ImageData(const std::string& filename) {
-		SDL_RWops* image = Game::getInstance()->filesystem.openRW(filename);
+		SDL_RWops* image = ChaiGame::getInstance()->filesystem.openRW(filename);
 		loadFromRW(image);
 	}
 

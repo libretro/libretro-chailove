@@ -3,18 +3,18 @@
 #include "sound.h"
 #include "SDL.h"
 #include "SDL_mixer.h"
-#include "../Game.h"
+#include "../ChaiGame.h"
 #include "audio/SoundData.h"
 #include "log.h"
 
 namespace chaigame {
-
 
 	bool sound::load() {
 		return true;
 	}
 
 	bool sound::update() {
+		// Nothing.
 	}
 
 	void sound::unload() {
@@ -23,7 +23,8 @@ namespace chaigame {
 			sounds[i]->unload();
 		}
 	}
+
     SoundData* sound::newSoundData(const std::string& filename) {
-    	return Game::getInstance()->audio.newSource(filename);
+    	return ChaiGame::getInstance()->audio.newSource(filename);
     }
 }

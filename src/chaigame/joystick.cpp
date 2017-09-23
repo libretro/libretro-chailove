@@ -4,7 +4,7 @@
 #include <vector>
 #include <libretro.h>
 #include "input/Joystick.h"
-#include "../Game.h"
+#include "../ChaiGame.h"
 
 #include <iostream>
 
@@ -67,17 +67,17 @@ namespace chaigame {
 			// Loop through each button.
 			for (u = 0; u < 14; u++) {
 				// Retrieve the state of the button.
-				state = Game::input_state_cb(i, RETRO_DEVICE_JOYPAD, 0, u);
+				state = ChaiGame::input_state_cb(i, RETRO_DEVICE_JOYPAD, 0, u);
 
 				// Check if there's a change of state.
 				if (joystick_cache[i][u] != state) {
 					joystick_cache[i][u] = state;
 
 					if (state == 1) {
-						Game::getInstance()->script->joystickpressed(i, u);
+						ChaiGame::getInstance()->script->joystickpressed(i, u);
 					}
 					else if (state == 0) {
-						Game::getInstance()->script->joystickreleased(i, u);
+						ChaiGame::getInstance()->script->joystickreleased(i, u);
 					}
 				}
 			}

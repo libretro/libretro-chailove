@@ -5,7 +5,7 @@
 
 #include "audio/SoundData.h"
 #include "audio/AudioState.h"
-#include "../Game.h"
+#include "../ChaiGame.h"
 #include "sound.h"
 #include "physfs.h"
 
@@ -19,14 +19,14 @@ namespace chaigame {
 	SoundData* audio::newSource(const std::string& filename) {
 		SoundData* newSound = new SoundData(filename);
 		if (newSound->isLoaded()) {
-			Game::getInstance()->sound.sounds.push_back(newSound);
+			ChaiGame::getInstance()->sound.sounds.push_back(newSound);
 			return newSound;
 		}
 		return NULL;
 	}
 
 	void audio::mixer_render(int16_t *buffer) {
-		Game* app = Game::getInstance();
+		ChaiGame* app = ChaiGame::getInstance();
 		// Clear buffer
 		memset(buffer, 0, AUDIO_FRAMES * 2 * sizeof(int16_t));
 		for (std::vector<SoundData*>::size_type i = 0; i != app->sound.sounds.size(); i++) {

@@ -4,7 +4,7 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 
 ![ChaiGame Benchmark Screenshot](examples/benchmark/screenshot.png)
 
-## Sample Games
+## Sample ChaiGames
 
 - [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird)
 

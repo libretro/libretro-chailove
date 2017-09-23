@@ -29,10 +29,10 @@
 #include "test/Test.h"
 #endif
 
-class Game {
+class ChaiGame {
 public:
-    static Game* getInstance();
-	static Game* m_instance;
+    static ChaiGame* getInstance();
+	static ChaiGame* m_instance;
 	static void destroy();
 
 	static retro_input_state_t input_state_cb;

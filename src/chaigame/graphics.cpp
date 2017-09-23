@@ -4,7 +4,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_gfxBlitFunc.h>
 
-#include "../Game.h"
+#include "../ChaiGame.h"
 #include "graphics/ImageData.h"
 #include "graphics/Image.h"
 #include "graphics/Font.h"
@@ -17,7 +17,7 @@ namespace chaigame {
 	}
 
 	SDL_Surface* graphics::getScreen() {
-		return Game::getInstance()->screen;
+		return ChaiGame::getInstance()->screen;
 	}
 
 	bool graphics::load() {
