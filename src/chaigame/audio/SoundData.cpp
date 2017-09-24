@@ -3,14 +3,14 @@
 //#include "SDL_mixer.h"
 #include <string>
 #include "../log.h"
-#include "../../Game.h"
+#include "../../ChaiGame.h"
 #include "AudioState.h"
 #include "physfs.h"
 #include "../log.h"
 
 namespace chaigame {
 	SoundData::SoundData(const std::string& filename) {
-		Game* app = Game::getInstance();
+		ChaiGame* app = ChaiGame::getInstance();
 		PHYSFS_file* file = app->filesystem.openFile(filename);
 		if (file == NULL) {
 			return;

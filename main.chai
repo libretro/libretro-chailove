@@ -24,7 +24,7 @@ def load() {
 
 def draw() {
 	// Hello World
-	graphics.setColor(247, 247, 247)
+	graphics.setColor(0, 247, 247)
 	graphics.print("Hello World!", 100, 100)
 
 	// Circle

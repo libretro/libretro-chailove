@@ -2,7 +2,7 @@
 
 #include <SDL.h>
 #include "graphics/Point.h"
-#include "../Game.h"
+#include "../ChaiGame.h"
 
 namespace chaigame {
 
@@ -57,10 +57,10 @@ namespace chaigame {
 
 	void mouse::buttonEvent(SDL_MouseButtonEvent event) {
 		if (event.state == SDL_PRESSED) {
-			Game::getInstance()->script->mousepressed(m_x, m_y, event.button);
+			ChaiGame::getInstance()->script->mousepressed(m_x, m_y, event.button);
 		}
 		else if (event.state == SDL_RELEASED) {
-			Game::getInstance()->script->mousereleased(m_x, m_y, event.button);
+			ChaiGame::getInstance()->script->mousereleased(m_x, m_y, event.button);
 		}
 		buttonState[event.button] = event.state;
 	}

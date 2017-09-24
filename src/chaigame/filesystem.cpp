@@ -4,7 +4,7 @@
 #include "filesystem.h"
 #include "vendor/physfs/extras/physfsrwops.h"
 #include "vendor/filesystem/filesystem/path.h"
-#include "../Game.h"
+#include "../ChaiGame.h"
 #include "log.h"
 
 #include <iostream>
@@ -16,7 +16,7 @@ namespace chaigame {
 	bool filesystem::init(const std::string& file) {
 		PHYSFS_init(NULL);
 
-		// Check if we are simply running the Game.
+		// Check if we are simply running the ChaiGame.
 		if (file.empty()) {
 			return mount(".", "/");
 		}
@@ -40,7 +40,7 @@ namespace chaigame {
 	}
 
 	bool filesystem::load(const std::string& file) {
-		Game* app = Game::getInstance();
+		ChaiGame* app = ChaiGame::getInstance();
 		return app->script->loadModule(file);
 	}
 

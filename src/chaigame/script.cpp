@@ -1,6 +1,6 @@
 #include "script.h"
 #include "log.h"
-#include "../Game.h"
+#include "../ChaiGame.h"
 //#include "SDL.h"
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -11,7 +11,7 @@ using namespace chaiscript;
 namespace chaigame {
 	bool script::loadModule(const std::string& moduleName) {
 		#ifdef __HAVE_CHAISCRIPT__
-		Game* app = Game::getInstance();
+		ChaiGame* app = ChaiGame::getInstance();
 		std::string contents = app->filesystem.read(moduleName);
 		if (!contents.empty()) {
 			// TODO: Are tabs problematic?
@@ -28,7 +28,7 @@ namespace chaigame {
 
 	script::script() {
 		#ifdef __HAVE_CHAISCRIPT__
-		Game* app = Game::getInstance();
+		ChaiGame* app = ChaiGame::getInstance();
 
 		// ChaiScript Standard Library Additions
 		// This adds some basic type definitions to ChaiScript.
@@ -65,8 +65,9 @@ namespace chaigame {
 		// Add Font.
 		chai.add(user_type<Font>(), "Font");
 		chai.add(fun(&Font::loaded), "loaded");
-		chai.add(fun(&Font::getHeight), "getHeight");
-		chai.add(fun(&Font::getWidth), "getWidth");
+		chai.add(fun<int, Font>(&Font::getHeight), "getHeight");
+		chai.add(fun<int, Font, const std::string&>(&Font::getHeight), "getHeight");
+		chai.add(fun<int, Font, const std::string&>(&Font::getWidth), "getWidth");
 
 		// Add the Config.
 		chai.add(user_type<windowConfig>(), "windowConfig");

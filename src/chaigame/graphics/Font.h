@@ -20,6 +20,7 @@ namespace chaigame {
 		//TTF_Font* ttfFont = NULL;
 		TTY_Font* ttyFont = NULL;
 		int ttyFontWidth, ttyFontHeight;
+		int getHeight(const std::string& text);
 		int getHeight();
 		int getWidth(const std::string& text);
 		ImageData* imageData;

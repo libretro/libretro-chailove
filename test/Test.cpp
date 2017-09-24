@@ -9,9 +9,9 @@
 #ifdef __HAVE_TESTS__
 
 #include "Test.h"
-#include "../src/Game.h"
+#include "../src/ChaiGame.h"
 
-Game* app;
+ChaiGame* app;
 chaigame::ImageData* img;
 
 void Test::conf(chaigame::Config& t) {
@@ -20,7 +20,7 @@ void Test::conf(chaigame::Config& t) {
 }
 
 bool Test::load() {
-	app = Game::getInstance();
+	app = ChaiGame::getInstance();
 	app->filesystem.mount("test", "/");
 	secondfont = app->graphics.newFont("assets/Raleway-Regular.ttf", 60);
 	thefont = app->graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
