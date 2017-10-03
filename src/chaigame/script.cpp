@@ -1,6 +1,7 @@
 #include "script.h"
 #include "log.h"
 #include "../ChaiGame.h"
+#include "vendor/filesystem/filesystem/path.h"
 //#include "SDL.h"
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -26,7 +27,7 @@ namespace chaigame {
 		return false;
 	}
 
-	script::script() {
+	script::script(const std::string& file) {
 		#ifdef __HAVE_CHAISCRIPT__
 		ChaiGame* app = ChaiGame::getInstance();
 
@@ -208,8 +209,17 @@ namespace chaigame {
 		chai.add(fun(&math::getRandomSeed), "getRandomSeed");
 		chai.add_global(var(std::ref(app->math)), "math");
 
-		// Load main.chai.
-		loadModule("main.chai");
+		// Load main.chai if it's a ChaiGame file.
+		::filesystem::path p(file.c_str());
+		std::string extension(p.extension());
+		if (extension == "chaigame" || file.empty()) {
+			loadModule("main.chai");
+		}
+		else {
+			// Otherwise, load the actual file.
+			std::string filename(p.filename());
+			loadModule(filename);
+		}
 
 		// Find the game functions.
 		try {

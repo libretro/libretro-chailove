@@ -1,0 +1,4 @@
+
+def draw() {
+	graphics.print("Test1", 5, 20)
+}

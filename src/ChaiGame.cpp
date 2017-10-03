@@ -35,7 +35,7 @@ bool ChaiGame::load(const std::string& file) {
 	// Initalize all the subsystems.
 	chaigame::log()->info("Welcome to ChaiGame");
 	filesystem.init(file);
-	script = new chaigame::script();
+	script = new chaigame::script(file);
 	script->conf(config);
 
 	#ifdef __HAVE_TESTS__

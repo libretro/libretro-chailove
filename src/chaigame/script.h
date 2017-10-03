@@ -14,7 +14,7 @@
 namespace chaigame {
 	class script {
 	public:
-		script();
+		script(const std::string& file);
 
 		void conf(Config& t);
 		void load();
