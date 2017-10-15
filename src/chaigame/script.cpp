@@ -368,6 +368,9 @@ namespace chaigame {
 				hasDraw = false;
 			}
 		}
+		else {
+			ChaiGame::getInstance()->graphics.print("ChaiGame: def draw() not found.", 100, 100);
+		}
 		#endif
 	}
 
@@ -450,7 +453,7 @@ namespace chaigame {
 	/**
 	 * Pass the state data string over to the script, asking it to load the state.
 	 */
-	bool script::loadstate(std::string data) {
+	bool script::loadstate(const std::string& data) {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hasloadstate) {
 			try {

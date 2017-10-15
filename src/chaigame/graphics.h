@@ -54,6 +54,7 @@ namespace chaigame {
 		void arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
 
 		Font* activeFont;
+		Font defaultFont;
 	};
 }
 

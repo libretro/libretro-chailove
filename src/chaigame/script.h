@@ -27,7 +27,7 @@ namespace chaigame {
 		void mousepressed(int x, int y, int button);
 		void mousereleased(int x, int y, int button);
 		std::string savestate();
-		bool loadstate(std::string data);
+		bool loadstate(const std::string& data);
 
 		#ifdef __HAVE_CHAISCRIPT__
 		chaiscript::ChaiScript chai;

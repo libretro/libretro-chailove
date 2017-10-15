@@ -13,7 +13,7 @@
 namespace chaigame {
 
 	graphics::graphics() {
-		activeFont = new Font();
+		setFont();
 	}
 
 	SDL_Surface* graphics::getScreen() {
@@ -167,7 +167,7 @@ namespace chaigame {
 	}
 
 	void graphics::setFont() {
-		activeFont = new Font();
+		activeFont = &defaultFont;
 	}
 
 	Font* graphics::getFont() {
