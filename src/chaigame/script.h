@@ -22,8 +22,8 @@ namespace chaigame {
 		void draw();
 		void reset();
 		bool loadModule(const std::string& moduleName);
-		void joystickpressed(int joystick, int button);
-		void joystickreleased(int joystick, int button);
+		void joystickpressed(int joystick, const std::string& button);
+		void joystickreleased(int joystick, const std::string& button);
 		void mousepressed(int x, int y, int button);
 		void mousereleased(int x, int y, int button);
 		std::string savestate();
@@ -38,8 +38,8 @@ namespace chaigame {
 		std::function<void ()> chaireset;
 		std::function<bool (std::string)> chailoadstate;
 		std::function<std::string ()> chaisavestate;
-		std::function<void (int, int)> chaijoystickpressed;
-		std::function<void (int, int)> chaijoystickreleased;
+		std::function<void (int, const std::string&)> chaijoystickpressed;
+		std::function<void (int, const std::string&)> chaijoystickreleased;
 		std::function<void (int, int, int)> chaimousepressed;
 		std::function<void (int, int, int)> chaimousereleased;
 		bool hasUpdate = true;

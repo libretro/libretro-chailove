@@ -73,11 +73,12 @@ namespace chaigame {
 				if (joystick_cache[i][u] != state) {
 					joystick_cache[i][u] = state;
 
+					std::string name = getButtonName(u);
 					if (state == 1) {
-						ChaiGame::getInstance()->script->joystickpressed(i, u);
+						ChaiGame::getInstance()->script->joystickpressed(i, name);
 					}
 					else if (state == 0) {
-						ChaiGame::getInstance()->script->joystickreleased(i, u);
+						ChaiGame::getInstance()->script->joystickreleased(i, name);
 					}
 				}
 			}
@@ -89,6 +90,45 @@ namespace chaigame {
 			i = 0;
 		}
 		return joysticks[i];
+	}
+
+	std::string joystick::getButtonName(int key) {
+		switch (key) {
+			case RETRO_DEVICE_ID_JOYPAD_A:
+				return "a";
+			case RETRO_DEVICE_ID_JOYPAD_B:
+				return "b";
+			case RETRO_DEVICE_ID_JOYPAD_X:
+				return "x";
+			case RETRO_DEVICE_ID_JOYPAD_Y:
+				return "y";
+			case RETRO_DEVICE_ID_JOYPAD_SELECT:
+				return "select";
+			case RETRO_DEVICE_ID_JOYPAD_START:
+				return "start";
+			case RETRO_DEVICE_ID_JOYPAD_L:
+				return "l1";
+			case RETRO_DEVICE_ID_JOYPAD_R:
+				return "r1";
+			case RETRO_DEVICE_ID_JOYPAD_L2:
+				return "l2";
+			case RETRO_DEVICE_ID_JOYPAD_R2:
+				return "r2";
+			case RETRO_DEVICE_ID_JOYPAD_L3:
+				return "l3";
+			case RETRO_DEVICE_ID_JOYPAD_R3:
+				return "r3";
+			case RETRO_DEVICE_ID_JOYPAD_UP:
+				return "up";
+			case RETRO_DEVICE_ID_JOYPAD_DOWN:
+				return "down";
+			case RETRO_DEVICE_ID_JOYPAD_LEFT:
+				return "left";
+			case RETRO_DEVICE_ID_JOYPAD_RIGHT:
+				return "right";
+		}
+
+		return "unknown";
 	}
 
 	int joystick::getButtonKey(const std::string& name) {

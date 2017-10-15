@@ -257,14 +257,14 @@ namespace chaigame {
 			hasDraw = false;
 		}
 		try {
-			chaijoystickpressed = chai.eval<std::function<void (int, int)> >("joystickpressed");
+			chaijoystickpressed = chai.eval<std::function<void (int, const std::string&)> >("joystickpressed");
 		}
 		catch (const std::exception& e) {
 			log()->info("[script] Skipping joystickpressed() - {}", e.what());
 			hasjoystickpressed = false;
 		}
 		try {
-			chaijoystickreleased = chai.eval<std::function<void (int, int)> >("joystickreleased");
+			chaijoystickreleased = chai.eval<std::function<void (int, const std::string&)> >("joystickreleased");
 		}
 		catch (const std::exception& e) {
 			log()->info("[script] Skipping joystickreleased() - {}", e.what());
@@ -371,7 +371,7 @@ namespace chaigame {
 		#endif
 	}
 
-	void script::joystickpressed(int joystick, int button) {
+	void script::joystickpressed(int joystick, const std::string& button) {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hasjoystickpressed) {
 			try {
@@ -385,7 +385,7 @@ namespace chaigame {
 		#endif
 	}
 
-	void script::joystickreleased(int joystick, int button) {
+	void script::joystickreleased(int joystick, const std::string& button) {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hasjoystickreleased) {
 			try {
