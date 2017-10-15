@@ -137,8 +137,10 @@ namespace chaigame {
 				log()->error("File System error while reading from file {}: {}", filename, physErr);
 				output = NULL;
 			}
-			// Make sure there is a null terminating character at the end of the string.
-			output[file_size] = '\0';
+			else {
+				// Make sure there is a null terminating character at the end of the string.
+				output[file_size] = '\0';
+			}
 		}
 		else {
 			std::string physErr = PHYSFS_getLastError();
