@@ -4,7 +4,6 @@
 #include "audio/SoundData.h"
 #include <vector>
 
-
 namespace chaigame {
 	class sound {
 	public:

@@ -2,7 +2,6 @@
 #include <string>
 #include "sound.h"
 #include "SDL.h"
-#include "SDL_mixer.h"
 #include "../ChaiGame.h"
 #include "audio/SoundData.h"
 #include "log.h"

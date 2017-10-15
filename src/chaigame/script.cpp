@@ -2,7 +2,6 @@
 #include "log.h"
 #include "../ChaiGame.h"
 #include "vendor/filesystem/filesystem/path.h"
-//#include "SDL.h"
 
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
