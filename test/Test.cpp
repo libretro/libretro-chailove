@@ -12,7 +12,6 @@
 #include "../src/ChaiGame.h"
 
 ChaiGame* app;
-chaigame::ImageData* img;
 
 void Test::conf(chaigame::Config& t) {
 	t.window.width = 1080;

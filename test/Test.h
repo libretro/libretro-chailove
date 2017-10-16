@@ -1,3 +1,4 @@
+
 #ifdef __HAVE_TESTS__
 #ifndef CHAIGAME_TEST_TEST_H
 #define CHAIGAME_TEST_TEST_H
@@ -16,6 +17,7 @@ public:
 	chaigame::Font* thefont;
 	chaigame::Font* secondfont;
 	chaigame::SoundData* jump;
+	chaigame::ImageData* img;
 };
 
 #endif

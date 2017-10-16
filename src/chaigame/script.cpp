@@ -257,14 +257,14 @@ namespace chaigame {
 			hasDraw = false;
 		}
 		try {
-			chaijoystickpressed = chai.eval<std::function<void (int, int)> >("joystickpressed");
+			chaijoystickpressed = chai.eval<std::function<void (int, const std::string&)> >("joystickpressed");
 		}
 		catch (const std::exception& e) {
 			log()->info("[script] Skipping joystickpressed() - {}", e.what());
 			hasjoystickpressed = false;
 		}
 		try {
-			chaijoystickreleased = chai.eval<std::function<void (int, int)> >("joystickreleased");
+			chaijoystickreleased = chai.eval<std::function<void (int, const std::string&)> >("joystickreleased");
 		}
 		catch (const std::exception& e) {
 			log()->info("[script] Skipping joystickreleased() - {}", e.what());
@@ -368,10 +368,13 @@ namespace chaigame {
 				hasDraw = false;
 			}
 		}
+		else {
+			ChaiGame::getInstance()->graphics.print("ChaiGame: def draw() not found.", 100, 100);
+		}
 		#endif
 	}
 
-	void script::joystickpressed(int joystick, int button) {
+	void script::joystickpressed(int joystick, const std::string& button) {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hasjoystickpressed) {
 			try {
@@ -385,7 +388,7 @@ namespace chaigame {
 		#endif
 	}
 
-	void script::joystickreleased(int joystick, int button) {
+	void script::joystickreleased(int joystick, const std::string& button) {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hasjoystickreleased) {
 			try {
@@ -450,7 +453,7 @@ namespace chaigame {
 	/**
 	 * Pass the state data string over to the script, asking it to load the state.
 	 */
-	bool script::loadstate(std::string data) {
+	bool script::loadstate(const std::string& data) {
 		#ifdef __HAVE_CHAISCRIPT__
 		if (hasloadstate) {
 			try {

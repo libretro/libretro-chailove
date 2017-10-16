@@ -14,7 +14,7 @@ class graphics_print {
 
 	def draw() {
 		graphics.setColor(0, 255, 0)
-		graphics.print("Press the A button to switch tests", this.x, this.y);
+		graphics.print("Press left/right to switch tests", this.x, this.y);
 	}
 
 	def update(delta) {

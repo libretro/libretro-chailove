@@ -145,6 +145,6 @@ std::string ChaiGame::savestate() {
 /**
  * Ask the script to load the given string.
  */
-bool ChaiGame::loadstate(std::string data) {
+bool ChaiGame::loadstate(const std::string& data) {
 	return script->loadstate(data);
 }
