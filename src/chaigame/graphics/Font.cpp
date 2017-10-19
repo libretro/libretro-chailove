@@ -1,7 +1,7 @@
 #include "Font.h"
 #include "SDL.h"
 #include <string>
-//#include "SDL_ttf.h"
+#include "SDL_ttf.h"
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
 #include "../../ChaiGame.h"
@@ -31,7 +31,7 @@ namespace chaigame {
 
 	Font::Font(const std::string& filename, int ptsize) {
 		log()->error("TTF fonts are not supported by ChaiGame, currently.");
-		/*
+
 		SDL_RWops* rwops = ChaiGame::getInstance()->filesystem.openRW(filename);
 		if (rwops) {
 			TTF_Font* newFont = TTF_OpenFontRW(rwops, 1, ptsize);
@@ -47,7 +47,7 @@ namespace chaigame {
 
 			ttfFont = newFont;
 		}
-		*/
+
 	}
 
 	Font::~Font() {
@@ -55,14 +55,14 @@ namespace chaigame {
 	}
 
 	bool Font::loaded() {
-		return /*ttfFont != NULL ||*/ ttyFont != NULL;
+		return ttfFont != NULL || ttyFont != NULL;
 	}
 
 	bool Font::destroy() {
-		/*if (ttfFont != NULL) {
+		if (ttfFont != NULL) {
 			TTF_CloseFont(ttfFont);
 			ttfFont = NULL;
-		}*/
+		}
 
 		if (ttyFont != NULL) {
 			FNT_Free(ttyFont);
@@ -76,9 +76,9 @@ namespace chaigame {
 	}
 
 	int Font::getHeight(const std::string& text) {
-		/*if (ttfFont != NULL) {
+		if (ttfFont != NULL) {
 			return TTF_FontHeight(ttfFont);
-		}*/
+		}
 		if (ttyFont != NULL) {
 			return FNT_GetTextHeight(ttyFont, text.c_str());
 		}
@@ -87,9 +87,9 @@ namespace chaigame {
 	}
 
 	int Font::getHeight() {
-		/*if (ttfFont != NULL) {
+		if (ttfFont != NULL) {
 			return TTF_FontHeight(ttfFont);
-		}*/
+		}
 		if (ttyFont != NULL) {
 			return ttyFontHeight;
 		}
@@ -98,12 +98,12 @@ namespace chaigame {
 	}
 
 	int Font::getWidth(const std::string& text) {
-		/*if (ttfFont != NULL) {
+		if (ttfFont != NULL) {
 			int w;
 			if (TTF_SizeText(ttfFont, text.c_str(), &w, NULL) == 0) {
 				return w;
 			}
-		}*/
+		}
 
 		if (ttyFont != NULL) {
 			return FNT_GetTextWidth(ttyFont, text.c_str());
@@ -115,7 +115,7 @@ namespace chaigame {
 	void Font::print(const std::string& text, int x, int y, int r, int g, int b, int a) {
 		SDL_Surface* screen = ChaiGame::getInstance()->screen;
 
-		/*
+
 		// Attempt to render the TTF Font.
 		if (ttfFont != NULL) {
 			SDL_Color color = {(Uint8)r, (Uint8)g, (Uint8)b};
@@ -138,7 +138,7 @@ namespace chaigame {
 			// TODO: Allow re-use of text renderings.
 			SDL_FreeSurface(surface);
 			return;
-		}*/
+		}
 
 		// Use TTY to print the bitmap font?
 		if (ttyFont != NULL) {
