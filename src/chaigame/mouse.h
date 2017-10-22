@@ -22,7 +22,7 @@ namespace chaigame {
 		int m_x, m_y;
 		int buttonState[20];
 
-		void motionEvent(SDL_MouseMotionEvent event);
+		void moveEvent(SDL_MouseMotionEvent event);
 		void buttonEvent(SDL_MouseButtonEvent event);
 	};
 }

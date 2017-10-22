@@ -49,10 +49,10 @@ namespace chaigame {
 		return buttonState[button] == true;
 	}
 
-	void mouse::motionEvent(SDL_MouseMotionEvent event) {
+	void mouse::moveEvent(SDL_MouseMotionEvent event) {
 		m_x = event.x;
 		m_y = event.y;
-		// TODO: Trigger mousemove event.
+		ChaiGame::getInstance()->script->mousemove(m_x, m_y);
 	}
 
 	void mouse::buttonEvent(SDL_MouseButtonEvent event) {

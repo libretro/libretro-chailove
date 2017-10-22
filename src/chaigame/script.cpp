@@ -285,6 +285,13 @@ namespace chaigame {
 			hasmousereleased = false;
 		}
 		try {
+			chaimousemove = chai.eval<std::function<void (int, int)> >("mousemove");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping mousemove() - {}", e.what());
+			hasmousemove = false;
+		}
+		try {
 			chailoadstate = chai.eval<std::function<bool (std::string)> >("loadstate");
 		}
 		catch (const std::exception& e) {
@@ -425,6 +432,20 @@ namespace chaigame {
 			catch (const std::exception& e) {
 				log()->error("[script] Failed to call mousereleased(): {}", e.what());
 				hasmousereleased = false;
+			}
+		}
+		#endif
+	}
+
+	void script::mousemove(int x, int y) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hasmousemove) {
+			try {
+				chaimousemove(x, y);
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call mousemove(): {}", e.what());
+				hasmousemove = false;
 			}
 		}
 		#endif
