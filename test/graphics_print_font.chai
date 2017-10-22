@@ -17,12 +17,12 @@ class graphics_print_font {
 		graphics.setFont();
 		var text = "Default Font"
 		graphics.setColor(10, 230, 0)
-		graphics.print(text, 200, 100)
+		graphics.print(text, 100, 100)
 
 		graphics.setFont(this.ttffont)
-		var text = "Raleway-Regular.ttf"
+		text = "Raleway-Regular.ttf"
 		graphics.setColor(255, 200, 0)
-		graphics.print(text, 100, 100)
+		graphics.print(text, 100, 200)
 
 		graphics.setFont(this.pngfont)
 		text = "Commodore 64"
