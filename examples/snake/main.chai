@@ -8,7 +8,7 @@ global gridScale
 
 global S
 global dir
-global t
+global t = 0.0f
 global T
 
 def conf(config) {
@@ -37,7 +37,7 @@ def load() {
 }
 
 def update(dt) {
-	t = t + 1
+	t = t + dt
 
 	if (joystick[0].isDown("up")) {
 		if (dir != 2) {
@@ -60,7 +60,10 @@ def update(dt) {
 		}
 	}
 
-	if (t % 5 != 0) {
+	if (t >= 0.08f) {
+		t = 0.0f
+	}
+	else {
 		return
 	}
 
