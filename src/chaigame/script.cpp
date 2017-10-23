@@ -164,7 +164,8 @@ namespace chaigame {
 		chai.add(fun(&mouse::getX), "getX");
 		chai.add(fun(&mouse::getY), "getY");
 		chai.add(fun(&mouse::getPosition), "getPosition");
-		chai.add(fun(&mouse::isDown), "isDown");
+		chai.add(fun<bool, mouse, const std::string&>(&mouse::isDown), "isDown");
+		chai.add(fun<bool, mouse, int>(&mouse::isDown), "isDown");
 		chai.add_global(var(std::ref(app->mouse)), "mouse");
 
 		// Register the Sound module.
