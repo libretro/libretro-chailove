@@ -44,4 +44,3 @@ namespace chaigame {
 		return true;
 	}
 }
-

@@ -5,7 +5,6 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
 #include "../../ChaiGame.h"
-#include "SDL_image.h"
 #include "ImageData.h"
 #include "../log.h"
 

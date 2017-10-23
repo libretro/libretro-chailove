@@ -343,7 +343,7 @@ void retro_reset(void) {
 
 void retro_run(void) {
 	ChaiGame* app = ChaiGame::getInstance();
-	if (app != NULL && app->event.quitstatus == false) {
+	if (!app->event.quitstatus) {
 		// Poll all the inputs.
 		ChaiGame::input_poll_cb();
 

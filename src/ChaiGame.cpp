@@ -79,7 +79,7 @@ bool ChaiGame::update() {
 				return !event.quitstatus;
 				break;
 			case SDL_MOUSEMOTION:
-				mouse.motionEvent(sdlEvent.motion);
+				mouse.moveEvent(sdlEvent.motion);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 				mouse.buttonEvent(sdlEvent.button);

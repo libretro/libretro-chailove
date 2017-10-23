@@ -26,6 +26,7 @@ namespace chaigame {
 		void joystickreleased(int joystick, const std::string& button);
 		void mousepressed(int x, int y, int button);
 		void mousereleased(int x, int y, int button);
+		void mousemove(int x, int y);
 		std::string savestate();
 		bool loadstate(const std::string& data);
 
@@ -42,12 +43,14 @@ namespace chaigame {
 		std::function<void (int, const std::string&)> chaijoystickreleased;
 		std::function<void (int, int, int)> chaimousepressed;
 		std::function<void (int, int, int)> chaimousereleased;
+		std::function<void (int, int)> chaimousemove;
 		bool hasUpdate = true;
 		bool hasDraw = true;
 		bool hasjoystickpressed = true;
 		bool hasjoystickreleased = true;
 		bool hasmousepressed = true;
 		bool hasmousereleased = true;
+		bool hasmousemove = true;
 		bool hasloadstate = true;
 		bool hassavestate = true;
 		bool hasload = true;

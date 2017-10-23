@@ -49,3 +49,8 @@ def update(delta) {
 		x += speed * delta
 	}
 }
+
+def mousemove(xs, ys) {
+	x = xs
+	y = ys
+}

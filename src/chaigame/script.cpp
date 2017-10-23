@@ -164,7 +164,8 @@ namespace chaigame {
 		chai.add(fun(&mouse::getX), "getX");
 		chai.add(fun(&mouse::getY), "getY");
 		chai.add(fun(&mouse::getPosition), "getPosition");
-		chai.add(fun(&mouse::isDown), "isDown");
+		chai.add(fun<bool, mouse, const std::string&>(&mouse::isDown), "isDown");
+		chai.add(fun<bool, mouse, int>(&mouse::isDown), "isDown");
 		chai.add_global(var(std::ref(app->mouse)), "mouse");
 
 		// Register the Sound module.
@@ -283,6 +284,13 @@ namespace chaigame {
 		catch (const std::exception& e) {
 			log()->info("[script] Skipping mousereleased() - {}", e.what());
 			hasmousereleased = false;
+		}
+		try {
+			chaimousemove = chai.eval<std::function<void (int, int)> >("mousemove");
+		}
+		catch (const std::exception& e) {
+			log()->info("[script] Skipping mousemove() - {}", e.what());
+			hasmousemove = false;
 		}
 		try {
 			chailoadstate = chai.eval<std::function<bool (std::string)> >("loadstate");
@@ -425,6 +433,20 @@ namespace chaigame {
 			catch (const std::exception& e) {
 				log()->error("[script] Failed to call mousereleased(): {}", e.what());
 				hasmousereleased = false;
+			}
+		}
+		#endif
+	}
+
+	void script::mousemove(int x, int y) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (hasmousemove) {
+			try {
+				chaimousemove(x, y);
+			}
+			catch (const std::exception& e) {
+				log()->error("[script] Failed to call mousemove(): {}", e.what());
+				hasmousemove = false;
 			}
 		}
 		#endif

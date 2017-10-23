@@ -1,8 +1,10 @@
 #include "mouse.h"
 
 #include <SDL.h>
+#include <libretro.h>
 #include "graphics/Point.h"
 #include "../ChaiGame.h"
+#include <string>
 
 namespace chaigame {
 
@@ -38,21 +40,61 @@ namespace chaigame {
 	}
 
 	bool mouse::isDown(int button) {
-		// Switch the secondary and middle indexes to match LOVE:
-		// https://love2d.org/wiki/love.mouse.isDown
-		if (button == 2) {
-			button = 3;
-		}
-		else if (button == 3) {
-			button = 2;
-		}
 		return buttonState[button] == true;
 	}
+	bool mouse::isDown(const std::string& button) {
+		return isDown(getButtonKey(button));
+	}
 
-	void mouse::motionEvent(SDL_MouseMotionEvent event) {
+	int mouse::getButtonKey(const std::string& button) {
+		if (button == "left") {
+			return RETRO_DEVICE_ID_MOUSE_LEFT;
+		}
+		else if (button == "right") {
+			return RETRO_DEVICE_ID_MOUSE_RIGHT;
+		}
+		else if (button == "middle") {
+			return RETRO_DEVICE_ID_MOUSE_MIDDLE;
+		}
+		else if (button == "wheelup") {
+			return RETRO_DEVICE_ID_MOUSE_WHEELUP;
+		}
+		else if (button == "wheeldown") {
+			return RETRO_DEVICE_ID_MOUSE_WHEELDOWN;
+		}
+		else if (button == "horizwheelup") {
+			return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELUP;
+		}
+		else if (button == "horizwheeldown") {
+			return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELDOWN;
+		}
+		return -1;
+	}
+
+	std::string mouse::getButtonName(int button) {
+		switch (button) {
+			case RETRO_DEVICE_ID_MOUSE_LEFT:
+				return "left";
+			case RETRO_DEVICE_ID_MOUSE_RIGHT:
+				return "right";
+			case RETRO_DEVICE_ID_MOUSE_MIDDLE:
+				return "middle";
+			case RETRO_DEVICE_ID_MOUSE_WHEELUP:
+				return "wheelup";
+			case RETRO_DEVICE_ID_MOUSE_WHEELDOWN:
+				return "wheeldown";
+			case RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELUP:
+				return "horizwheelup";
+			case RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELDOWN:
+				return "horizwheeldown";
+		}
+		return "unknown";
+	}
+
+	void mouse::moveEvent(SDL_MouseMotionEvent event) {
 		m_x = event.x;
 		m_y = event.y;
-		// TODO: Trigger mousemove event.
+		ChaiGame::getInstance()->script->mousemove(m_x, m_y);
 	}
 
 	void mouse::buttonEvent(SDL_MouseButtonEvent event) {
