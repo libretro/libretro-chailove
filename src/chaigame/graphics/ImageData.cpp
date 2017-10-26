@@ -3,9 +3,10 @@
 #define SDL_STBIMAGE_IMPLEMENTATION
 #include "SDL_stbimage.h"
 
+#include <iostream>
 #include <string>
 #include "../../ChaiGame.h"
-#include "../log.h"
+
 
 namespace chaigame {
 
@@ -26,7 +27,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			log()->error("STBIMG_Load_RW failed to load data: {}", errString);
+			std::cout << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
 			return false;
 		}
 
@@ -42,7 +43,7 @@ namespace chaigame {
 			optimizedImage = SDL_DisplayFormat(surface);
 		}
 		if (!optimizedImage) {
-			log()->warn("SDL_DisplayFormat failed to optimize the image.");
+			std::cout << "SDL_DisplayFormat failed to optimize the image." << std::endl;
 		}
 		else {
 			SDL_FreeSurface(surface);

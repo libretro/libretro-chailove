@@ -6,7 +6,7 @@
 #include <SDL_fnt.h>
 #include "../../ChaiGame.h"
 #include "ImageData.h"
-#include "../log.h"
+
 
 namespace chaigame {
 	Font::Font() {
@@ -18,7 +18,7 @@ namespace chaigame {
 		if (imageData->loaded()) {
 			TTY_Font* newFont = FNT_Create(imageData->surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
-				log()->error("Error creating FNT_Create()\n");
+				printf("Error creating FNT_Create()\n");
 				return;
 			}
 
@@ -29,7 +29,7 @@ namespace chaigame {
 	}
 
 	Font::Font(const std::string& filename, int ptsize) {
-		log()->error("TTF fonts are not supported by ChaiGame, currently.");
+		printf("TTF fonts are not supported by ChaiGame, currently.");
 		/*
 		SDL_RWops* rwops = ChaiGame::getInstance()->filesystem.openRW(filename);
 		if (rwops) {
@@ -40,7 +40,7 @@ namespace chaigame {
 				if (errorChar != NULL) {
 					errString = errorChar;
 				}
-				log()->error("TTF_OpenFontRW: {}", errString);
+				std::cout << "TTF_OpenFontRW: {}", errString);
 				return;
 			}
 
@@ -125,7 +125,7 @@ namespace chaigame {
 				if (errorChar != NULL) {
 					errString = errorChar;
 				}
-				log()->error("Font::print - {}", errString);
+				std::cout << "Font::print - %s", errString);
 				return;
 			}
 

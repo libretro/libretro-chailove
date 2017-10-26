@@ -1,9 +1,9 @@
 #include <string>
+#include <iostream>
 #include "SDL.h"
 
 #include "libretro.h"
 #include "ChaiGame.h"
-#include "chaigame/log.h"
 
 ChaiGame* ChaiGame::m_instance = NULL;
 retro_input_state_t ChaiGame::input_state_cb = NULL;
@@ -28,7 +28,7 @@ void ChaiGame::quit(void) {
 	sound.unload();
 	filesystem.unload();
 	window.unload();
-	chaigame::log()->info("Finish");
+	std::cout << "Finish" << std::endl;
 }
 
 bool ChaiGame::load(const std::string& file) {
@@ -37,7 +37,7 @@ bool ChaiGame::load(const std::string& file) {
 #define GIT_VERSION ""
 #endif
 	std::string version = CHAIGAME_VERSION_STRING GIT_VERSION;
-	chaigame::log()->info("ChaiGame {0}", version);
+	std::cout << "ChaiGame " << version.c_str() << std::endl;
 
 	// Initalize all the subsystems.
 	filesystem.init(file);
@@ -115,7 +115,7 @@ bool ChaiGame::update() {
  */
 void ChaiGame::reset() {
 	// Tell the script that we are to reset the game.
-	chaigame::log()->info("[game] Reset");
+	std::cout << "[game] Reset" << std::endl;
 	script->reset();
 }
 
@@ -136,7 +136,7 @@ void ChaiGame::draw() {
 
 		// Flip the buffer.
 		if (SDL_Flip(screen) == -1) {
-			chaigame::log()->error("Failed to swap the buffers: {}", SDL_GetError());
+			std::cout << "[game] Failed to swap the buffers: " << SDL_GetError() << std::endl;
 		}
 	}
 }

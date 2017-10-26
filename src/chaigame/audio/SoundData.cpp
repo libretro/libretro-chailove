@@ -2,11 +2,11 @@
 //#include "SDL.h"
 //#include "SDL_mixer.h"
 #include <string>
-#include "../log.h"
+
 #include "../../ChaiGame.h"
 #include "AudioState.h"
 #include "physfs.h"
-#include "../log.h"
+
 
 namespace chaigame {
 	SoundData::SoundData(const std::string& filename) {
@@ -18,7 +18,7 @@ namespace chaigame {
 
 		int result = PHYSFS_readBytes(file, &sndta.head, sizeof(uint8_t) * WAV_HEADER_SIZE);
 		if (result < 0) {
-			log()->error("Failed to load SoundData('{}'): {}", filename, PHYSFS_getLastError());
+			std::cout << "Failed to load SoundData('{}'): {}", filename, PHYSFS_getLastError());
 			return;
 		}
 
