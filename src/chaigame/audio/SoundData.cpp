@@ -18,7 +18,7 @@ namespace chaigame {
 
 		int result = PHYSFS_readBytes(file, &sndta.head, sizeof(uint8_t) * WAV_HEADER_SIZE);
 		if (result < 0) {
-			std::cout << "Failed to load SoundData('{}'): {}", filename, PHYSFS_getLastError());
+			std::cout << "Failed to load SoundData " << filename << PHYSFS_getLastError() << std::endl;
 			return;
 		}
 

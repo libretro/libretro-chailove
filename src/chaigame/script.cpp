@@ -19,7 +19,7 @@ namespace chaigame {
 			return true;
 		}
 		else {
-			std::cout << "Module {} was empty.", moduleName);
+			std::cout << "Module {} was empty." << moduleName << std::endl;
 		}
 		#endif
 		return false;

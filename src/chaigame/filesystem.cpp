@@ -97,7 +97,7 @@ namespace chaigame {
 				sdlErr = errorChar;
 			}
 
-			std::cout << "Error loading file %s: %s %s", filename, physErr, sdlErr);
+			std::cout << "Error loading file " << filename << physErr << sdlErr << std::endl;
 		}
 		return rw;
 	}
@@ -110,7 +110,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				physErr = errorChar;
 			}
-			std::cout << "Error opening file %s: %s", filename, physErr);
+			std::cout << "Error opening file " << filename << physErr << std::endl;
 			return NULL;
 		}
 		return myfile;
@@ -143,7 +143,7 @@ namespace chaigame {
 		}
 		else {
 			std::string physErr = PHYSFS_getLastError();
-			std::cout << "Error getting filesize of %s: %s", filename, physErr);
+			std::cout << "Error getting filesize of " << filename << physErr << std::endl;
 		}
 
 		PHYSFS_close(myfile);
