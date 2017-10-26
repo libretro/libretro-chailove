@@ -32,8 +32,14 @@ void ChaiGame::quit(void) {
 }
 
 bool ChaiGame::load(const std::string& file) {
+	// Display a welcome message from ChaiGame.
+#ifndef GIT_VERSION
+#define GIT_VERSION ""
+#endif
+	std::string version = CHAIGAME_VERSION_STRING GIT_VERSION;
+	chaigame::log()->info("ChaiGame {0}", version);
+
 	// Initalize all the subsystems.
-	chaigame::log()->info("Welcome to ChaiGame");
 	filesystem.init(file);
 	script = new chaigame::script(file);
 	script->conf(config);
