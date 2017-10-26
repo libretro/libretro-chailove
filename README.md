@@ -1,4 +1,4 @@
-# ChaiGame [![Build Status](https://travis-ci.org/RobLoach/ChaiGame.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiGame) [![Build Status](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chaigame)](https://img.shields.io/badge/platform-libretro-green.png)
+# ChaiGame [![Build Status](https://travis-ci.org/RobLoach/ChaiGame.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiGame) [![Build Status](https://img.shields.io/badge/platform-libretro-green.png)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chaigame)
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
