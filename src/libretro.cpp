@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
+#include <iostream>
 #include "libretro.h"
 #include "ChaiGame.h"
 
@@ -283,17 +284,17 @@ void retro_init(void) {
 	}
 
 	if (retro_system_directory == NULL) {
-		sprintf(RETRO_DIR, "%s\n",".");
+		std::cout << RETRO_DIR << std::endl;
 	}
 	else {
-		sprintf(RETRO_DIR, "%s\n", retro_system_directory);
+		std::cout << RETRO_DIR << retro_system_directory << std::endl;
 	}
 
-	//sprintf(retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
+	//std::cout << retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
 
-	printf("Retro SYSTEM_DIRECTORY %s\n",retro_system_directory);
-	printf("Retro SAVE_DIRECTORY %s\n",retro_save_directory);
-	printf("Retro CONTENT_DIRECTORY %s\n",retro_content_directory);
+	std::cout << "Retro SYSTEM_DIRECTORY " << retro_system_directory << std::endl;
+	std::cout << "Retro SAVE_DIRECTORY " << retro_save_directory << std::endl;
+	std::cout << "Retro CONTENT_DIRECTORY " << retro_content_directory << std::endl;
 
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
@@ -323,7 +324,7 @@ void retro_init(void) {
 }
 
 void retro_deinit(void) {
-	printf("retro_deinit\n");
+	std::cout << "retro_deinit" << std::endl;
 	ChaiGame* app = ChaiGame::getInstance();
 	if (app) {
 		app->event.quit();

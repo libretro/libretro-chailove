@@ -2,7 +2,6 @@
 #include <string>
 #include "../ChaiGame.h"
 #include "SDL.h"
-#include "log.h"
 #include "system/Config.h"
 
 namespace chaigame {
@@ -17,7 +16,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			log()->critical("Unable to initialize SDL: {}", errString);
+			std::cout << "[game] Unable to initialize SDL " << errString << std::endl;
 			return false;
 		}
 
@@ -42,7 +41,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			log()->critical("Unable to create screen: {}", errString);
+			std::cout << "[game] Unable to initialize SDL" << errString << std::endl;
 			SDL_Quit();
 			return false;
 		}

@@ -5,7 +5,6 @@
 #include "vendor/physfs/extras/physfsrwops.h"
 #include "vendor/filesystem/filesystem/path.h"
 #include "../ChaiGame.h"
-#include "log.h"
 
 #include <iostream>
 
@@ -68,12 +67,12 @@ namespace chaigame {
 				if (errorChar != NULL) {
 					physErr = errorChar;
 				}
-				log()->error("Could not get size of file: {}", physErr);
+				std::cout << "Could not get size of file " << physErr << std::endl;
 				return -1;
 			}
 		}
 		else {
-			log()->error("The file is not open.");
+			printf("The file is not open.");
 		}
 		return size;
 	}
@@ -98,7 +97,7 @@ namespace chaigame {
 				sdlErr = errorChar;
 			}
 
-			log()->error("Error loading file {}: {} {}", filename, physErr, sdlErr);
+			std::cout << "Error loading file " << filename << physErr << sdlErr << std::endl;
 		}
 		return rw;
 	}
@@ -111,7 +110,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				physErr = errorChar;
 			}
-			log()->error("Error opening file {}: {}", filename, physErr);
+			std::cout << "Error opening file " << filename << physErr << std::endl;
 			return NULL;
 		}
 		return myfile;
@@ -134,7 +133,7 @@ namespace chaigame {
 				if (errorChar != NULL) {
 					physErr = errorChar;
 				}
-				log()->error("File System error while reading from file {}: {}", filename, physErr);
+				std::cout << "File System error while reading from file " << filename << physErr << std::endl;
 				output = NULL;
 			}
 			else {
@@ -144,7 +143,7 @@ namespace chaigame {
 		}
 		else {
 			std::string physErr = PHYSFS_getLastError();
-			log()->error("Error getting filesize of {}: {}", filename, physErr);
+			std::cout << "Error getting filesize of " << filename << physErr << std::endl;
 		}
 
 		PHYSFS_close(myfile);
@@ -184,7 +183,7 @@ namespace chaigame {
 			PHYSFS_freeList(rc);
 		}
 		else {
-			log()->warn("Error enumerating files from {}", dir);
+			std::cout << "Error enumerating files from " << dir << std::endl;
 		}
 
 		return result;

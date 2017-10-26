@@ -1,8 +1,8 @@
 #include "keyboard.h"
 
 #include <string>
+#include <iostream>
 //#include "SDL.h"
-#include "log.h"
 
 namespace chaigame {
 
@@ -21,7 +21,7 @@ namespace chaigame {
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
 		if (SDL_EnableKeyRepeat(delay, interval) == -1) {
-			log()->error("Error setting KeyRepeat.");
+			std::cout << "Error setting KeyRepeat." << std::endl;
 		}
 	}
 

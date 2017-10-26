@@ -3,7 +3,6 @@
 //#include "SDL_ttf.h"
 #include "font.h"
 #include "graphics/Font.h"
-#include "log.h"
 
 namespace chaigame {
 	bool font::load() {
@@ -14,7 +13,7 @@ namespace chaigame {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			log()->error("TTF_Init failed to initialize font system: {}", errString);
+			std::cout << "TTF_Init failed to initialize font system: {}", errString);
 			return false;
 		}*/
 		return true;

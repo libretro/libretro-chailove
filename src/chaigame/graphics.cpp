@@ -8,7 +8,6 @@
 #include "graphics/ImageData.h"
 #include "graphics/Image.h"
 #include "graphics/Font.h"
-#include "log.h"
 
 namespace chaigame {
 
@@ -23,7 +22,7 @@ namespace chaigame {
 	bool graphics::load() {
 		// Enable alpha blending.
 		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
-			log()->warn("Enabling alpha blending failed");
+			printf("Enabling alpha blending failed");
 		}
 
 		return true;

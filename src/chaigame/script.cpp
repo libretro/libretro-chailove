@@ -1,5 +1,4 @@
 #include "script.h"
-#include "log.h"
 #include "../ChaiGame.h"
 #include "vendor/filesystem/filesystem/path.h"
 
@@ -20,7 +19,7 @@ namespace chaigame {
 			return true;
 		}
 		else {
-			log()->error("Module {} was empty.", moduleName);
+			std::cout << "Module {} was empty." << moduleName << std::endl;
 		}
 		#endif
 		return false;
@@ -226,84 +225,84 @@ namespace chaigame {
 			chaiload = chai.eval<std::function<void ()> >("load");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping load() - {}", e.what());
+			std::cout << "[script] Skipping load() " << e.what() << std::endl;
 			hasload = false;
 		}
 		try {
 			chaireset = chai.eval<std::function<void ()> >("reset");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping reset() - {}", e.what());
+			std::cout << "[script] Skipping reset() " << e.what() << std::endl;
 			hasreset = false;
 		}
 		try {
 			chaiupdate = chai.eval<std::function<void (float)> >("update");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping update(delta) - {}", e.what());
+			std::cout << "[script] Skipping update(delta) " << e.what() << std::endl;
 			hasUpdate = false;
 		}
 		try {
 			chaiconf = chai.eval<std::function<void (Config&)> >("conf");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping conf(t) - {}", e.what());
+			std::cout << "[script] Skipping conf(t) " << e.what() << std::endl;
 			hasconf = false;
 		}
 		try {
 			chaidraw = chai.eval<std::function<void ()> >("draw");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping draw() - {}", e.what());
+			std::cout << "[script] Skipping draw() " << e.what() << std::endl;
 			hasDraw = false;
 		}
 		try {
 			chaijoystickpressed = chai.eval<std::function<void (int, const std::string&)> >("joystickpressed");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping joystickpressed() - {}", e.what());
+			std::cout << "[script] Skipping joystickpressed() " << e.what() << std::endl;
 			hasjoystickpressed = false;
 		}
 		try {
 			chaijoystickreleased = chai.eval<std::function<void (int, const std::string&)> >("joystickreleased");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping joystickreleased() - {}", e.what());
+			std::cout << "[script] Skipping joystickreleased() " << e.what() << std::endl;
 			hasjoystickreleased = false;
 		}
 		try {
 			chaimousepressed = chai.eval<std::function<void (int, int, int)> >("mousepressed");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping mousepressed() - {}", e.what());
+			std::cout << "[script] Skipping mousepressed() " << e.what() << std::endl;
 			hasmousepressed = false;
 		}
 		try {
 			chaimousereleased = chai.eval<std::function<void (int, int, int)> >("mousereleased");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping mousereleased() - {}", e.what());
+			std::cout << "[script] Skipping mousereleased() " << e.what() << std::endl;
 			hasmousereleased = false;
 		}
 		try {
 			chaimousemove = chai.eval<std::function<void (int, int)> >("mousemove");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping mousemove() - {}", e.what());
+			std::cout << "[script] Skipping mousemove() " << e.what() << std::endl;
 			hasmousemove = false;
 		}
 		try {
 			chailoadstate = chai.eval<std::function<bool (std::string)> >("loadstate");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping loadstate() - {}", e.what());
+			std::cout << "[script] Skipping loadstate() " << e.what() << std::endl;
 			hasloadstate = false;
 		}
 		try {
 			chaisavestate = chai.eval<std::function<std::string ()> >("savestate");
 		}
 		catch (const std::exception& e) {
-			log()->info("[script] Skipping savestate() - {}", e.what());
+			std::cout << "[script] Skipping savestate() " << e.what() << std::endl;
 			hassavestate = false;
 		}
 		#endif
@@ -316,7 +315,7 @@ namespace chaigame {
 				chaiconf(t);
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to invoke conf(t): {}", e.what());
+				std::cout << "[script] Failed to invoke conf(t): " << e.what() << std::endl;
 				hasconf = false;
 			}
 		}
@@ -330,7 +329,7 @@ namespace chaigame {
 				chaiload();
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call load(): {}", e.what());
+				std::cout << "[script] Failed to call load(): " << e.what() << std::endl;
 				hasload = false;
 			}
 		}
@@ -344,7 +343,7 @@ namespace chaigame {
 				chaireset();
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call reset(): {}", e.what());
+				std::cout << "[script] Failed to call reset(): " << e.what() << std::endl;
 				hasreset = false;
 			}
 		}
@@ -359,7 +358,7 @@ namespace chaigame {
 			}
 			catch (const std::exception& e) {
 				hasUpdate = false;
-				log()->error("[script] Failed to call update(delta): {}", e.what());
+				std::cout << "[script] Failed to call update(delta): " << e.what() << std::endl;
 			}
 		}
 		#endif
@@ -372,7 +371,7 @@ namespace chaigame {
 				chaidraw();
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call draw(): {}", e.what());
+				std::cout << "[script] Failed to call draw(): " << e.what() << std::endl;
 				hasDraw = false;
 			}
 		}
@@ -389,7 +388,7 @@ namespace chaigame {
 				chaijoystickpressed(joystick, button);
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call joystickpressed(): {}", e.what());
+				std::cout << "[script] Failed to call joystickpressed(): " << e.what() << std::endl;
 				hasjoystickpressed = false;
 			}
 		}
@@ -403,7 +402,7 @@ namespace chaigame {
 				chaijoystickreleased(joystick, button);
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call joystickreleased(): {}", e.what());
+				std::cout << "[script] Failed to call joystickreleased(): " << e.what() << std::endl;
 				hasjoystickreleased = false;
 			}
 		}
@@ -417,7 +416,7 @@ namespace chaigame {
 				chaimousepressed(x, y, button);
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call mousepressed(): {}", e.what());
+				std::cout << "[script] Failed to call mousepressed(): " << e.what() << std::endl;
 				hasmousepressed = false;
 			}
 		}
@@ -431,7 +430,7 @@ namespace chaigame {
 				chaimousereleased(x, y, button);
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call mousereleased(): {}", e.what());
+				std::cout << "[script] Failed to call mousereleased(): " << e.what() << std::endl;
 				hasmousereleased = false;
 			}
 		}
@@ -445,7 +444,7 @@ namespace chaigame {
 				chaimousemove(x, y);
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call mousemove(): {}", e.what());
+				std::cout << "[script] Failed to call mousemove(): " << e.what() << std::endl;
 				hasmousemove = false;
 			}
 		}
@@ -462,7 +461,7 @@ namespace chaigame {
 				return chaisavestate();
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call savestate(): {}", e.what());
+				std::cout << "[script] Failed to call savestate(): " << e.what() << std::endl;
 				hassavestate = false;
 			}
 		}
@@ -482,7 +481,7 @@ namespace chaigame {
 				return chailoadstate(data);
 			}
 			catch (const std::exception& e) {
-				log()->error("[script] Failed to call loadstate(): {}", e.what());
+				std::cout << "[script] Failed to call loadstate(): " << e.what() << std::endl;
 				hasloadstate = false;
 			}
 		}

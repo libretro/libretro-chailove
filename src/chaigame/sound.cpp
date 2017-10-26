@@ -4,7 +4,6 @@
 #include "SDL.h"
 #include "../ChaiGame.h"
 #include "audio/SoundData.h"
-#include "log.h"
 
 namespace chaigame {
 
