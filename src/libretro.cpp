@@ -4,7 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include "libretro.h"
-#include "ChaiGame.h"
+#include "ChaiLove.h"
 
 char RETRO_DIR[512];
 const char *retro_save_directory;
@@ -32,16 +32,16 @@ void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) {
 	audio_batch_cb = cb;
 }
 void retro_set_input_poll(retro_input_poll_t cb) {
-	ChaiGame::input_poll_cb = cb;
+	ChaiLove::input_poll_cb = cb;
 }
 
 void retro_set_input_state(retro_input_state_t cb) {
-	ChaiGame::input_state_cb = cb;
+	ChaiLove::input_state_cb = cb;
 }
 
 static void emit_audio(void)
 {
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	app->audio.mixer_render(audio_buffer);
 	audio_batch_cb(audio_buffer, (44100 / 60));
 }
@@ -60,7 +60,7 @@ void libretro_audio_cb(int16_t left, int16_t right) {
 }
 
 short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
-	return ChaiGame::input_state_cb(port, device, index, id);
+	return ChaiLove::input_state_cb(port, device, index, id);
 }
 #ifdef __cplusplus
 }
@@ -74,10 +74,10 @@ void retro_set_environment(retro_environment_t cb) {
 	// Set the Variables.
 	struct retro_variable variables[] = {
 		{
-			"chaigame_alphablending", "Alpha Blending; enabled|disabled",
+			"chailove_alphablending", "Alpha Blending; enabled|disabled",
 		},
 		{
-			"chaigame_highquality", "High Quality; enabled|disabled",
+			"chailove_highquality", "High Quality; enabled|disabled",
 		},
 		{ NULL, NULL },
 	};
@@ -85,11 +85,11 @@ void retro_set_environment(retro_environment_t cb) {
 }
 
 static void update_variables(void) {
-	ChaiGame* game = ChaiGame::getInstance();
+	ChaiLove* game = ChaiLove::getInstance();
 	struct retro_variable var = {0};
 
 	// Alpha Blending
-	var.key = "chaigame_alphablending";
+	var.key = "chailove_alphablending";
 	var.value = NULL;
 	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
 		std::string varvalue(var.value);
@@ -99,7 +99,7 @@ static void update_variables(void) {
 	}
 
 	// High Quality
-	var.key = "chaigame_highquality";
+	var.key = "chailove_highquality";
 	var.value = NULL;
 	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
 		std::string varvalue(var.value);
@@ -111,18 +111,18 @@ static void update_variables(void) {
 
 void retro_get_system_info(struct retro_system_info *info) {
 	memset(info, 0, sizeof(*info));
-	info->library_name = "ChaiGame";
+	info->library_name = "ChaiLove";
 #ifndef GIT_VERSION
 #define GIT_VERSION ""
 #endif
-	info->library_version  = CHAIGAME_VERSION_STRING GIT_VERSION;
+	info->library_version  = CHAILOVE_VERSION_STRING GIT_VERSION;
 	info->need_fullpath = true;
-	info->valid_extensions = "chai|chaigame";
+	info->valid_extensions = "chai|chailove";
 	info->block_extract = true;
 }
 
 void retro_get_system_av_info(struct retro_system_av_info *info) {
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	unsigned int width = 640;
 	unsigned int height = 480;
 	if (app != NULL) {
@@ -157,8 +157,8 @@ size_t retro_serialize_size(void) {
  * Serialize the current state to save a slot.
  */
 bool retro_serialize(void *data, size_t size) {
-	// Ask ChaiGame for save data.
-	ChaiGame* app = ChaiGame::getInstance();
+	// Ask ChaiLove for save data.
+	ChaiLove* app = ChaiLove::getInstance();
 	std::string state = app->savestate();
 	if (state.empty()) {
 		return false;
@@ -182,7 +182,7 @@ bool retro_unserialize(const void *data, size_t size) {
 	std::string loadData = ss.str();
 
 	// Pass the string to the script.
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	return app->loadstate(loadData);
 }
 
@@ -197,7 +197,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 
 void texture_init(){
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	if (app->videoBuffer) {
         memset(app->videoBuffer, 0, sizeof(app->videoBuffer));
 	}
@@ -205,7 +205,7 @@ void texture_init(){
 
 void frame_time_cb(retro_usec_t usec) {
 	float delta = usec / 1000000.0;
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	app->timer.step(delta);
 }
 
@@ -223,7 +223,7 @@ bool retro_load_game(const struct retro_game_info *info) {
 
 	// Load the game.
 	std::string full(info ? info->path : "main.chai");
-	return ChaiGame::getInstance()->load(full);
+	return ChaiLove::getInstance()->load(full);
 }
 
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
@@ -236,7 +236,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 void retro_unload_game(void) {
 	// Nothing.
 	printf("retro_unload_game\n");
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	app->event.quit();
 }
 
@@ -325,7 +325,7 @@ void retro_init(void) {
 
 void retro_deinit(void) {
 	std::cout << "retro_deinit" << std::endl;
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	if (app) {
 		app->event.quit();
 		app->quit();
@@ -336,17 +336,17 @@ void retro_deinit(void) {
  * The frontend requested to reset the game.
  */
 void retro_reset(void) {
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	if (app) {
 		app->reset();
 	}
 }
 
 void retro_run(void) {
-	ChaiGame* app = ChaiGame::getInstance();
+	ChaiLove* app = ChaiLove::getInstance();
 	if (!app->event.quitstatus) {
 		// Poll all the inputs.
-		ChaiGame::input_poll_cb();
+		ChaiLove::input_poll_cb();
 
 		// Update the game.
 		if (!app->update()) {

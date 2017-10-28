@@ -1,25 +1,25 @@
-# ChaiGame [![Build Status](https://travis-ci.org/RobLoach/ChaiGame.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiGame) [![Build Status](https://img.shields.io/badge/platform-libretro-green.png)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chaigame)
+# ChaiLove [![Build Status](https://travis-ci.org/RobLoach/ChaiLove.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiLove) [![Build Status](https://img.shields.io/badge/platform-libretro-green.png)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
-![ChaiGame Benchmark Screenshot](examples/benchmark/screenshot.png)
+![ChaiLove Benchmark Screenshot](examples/benchmark/screenshot.png)
 
 ## Sample Games
 
-- [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird)
+- [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)
 
 ## Usage
 
-ChaiGame is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play [Floppy Bird](https://github.com/RobLoach/ChaiGame-FloppyBird), run RetroArch and...
+ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird), run RetroArch and...
 
 1. Run [RetroArch](http://retroarch.com/)
-2. Download the ChaiGame core through RetroArch at *Online Updater* → *Core Updator* → *ChaiGame*
-3. Download *Floppy Bird* through RetroArch at *Online Updater* → *Content Downloader* → *ChaiGame* → *Floppy Bird*
-4. Launch the game over through *Load Content* → *Downloads* → *Floppy Bird.chaigame*
+2. Download the ChaiLove core through RetroArch at *Online Updater* → *Core Updator* → *ChaiLove*
+3. Download *Floppy Bird* through RetroArch at *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
+4. Launch the game over through *Load Content* → *Downloads* → *Floppy Bird.chailove*
 
 ## API
 
-ChaiGame is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
+ChaiLove is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
 
 ``` lua
 global logo
@@ -41,12 +41,12 @@ def update(delta) {
 To run it, execute the following:
 
 ```
-retroarch -L chaigame_libretro.so main.chai
+retroarch -L chailove_libretro.so main.chai
 ```
 
 ## Development
 
-Building ChaiGame takes some time, so have patience. Use the following command to compile the core:
+Building ChaiLove takes some time, so have patience. Use the following command to compile the core:
 
 ```
 make

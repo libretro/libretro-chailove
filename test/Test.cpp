@@ -1,7 +1,7 @@
 /**
- * ChaiGame: Native Tests
+ * ChaiLove: Native Tests
  *
- * Tests some of the usage of ChaiGame without the need of scripts.
+ * Tests some of the usage of ChaiLove without the need of scripts.
  *
  * Usage: make test-noscript
  */
@@ -9,17 +9,17 @@
 #ifdef __HAVE_TESTS__
 
 #include "Test.h"
-#include "../src/ChaiGame.h"
+#include "../src/ChaiLove.h"
 
-ChaiGame* app;
+ChaiLove* app;
 
-void Test::conf(chaigame::Config& t) {
+void Test::conf(chailove::Config& t) {
 	t.window.width = 1080;
 	t.window.height = 768;
 }
 
 bool Test::load() {
-	app = ChaiGame::getInstance();
+	app = ChaiLove::getInstance();
 	app->filesystem.mount("test", "/");
 	secondfont = app->graphics.newFont("assets/Raleway-Regular.ttf", 60);
 	thefont = app->graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");

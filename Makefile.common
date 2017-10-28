@@ -1,13 +1,13 @@
 
-# ChaiGame
+# ChaiLove
 SOURCES_CXX += $(wildcard \
 	src/*.cpp \
-	src/chaigame/*.cpp \
+	src/chailove/*.cpp \
 	test/*.cpp \
-	src/chaigame/graphics/*.cpp \
-	src/chaigame/input/*.cpp \
-	src/chaigame/audio/*.cpp \
-	src/chaigame/system/*.cpp \
+	src/chailove/graphics/*.cpp \
+	src/chailove/input/*.cpp \
+	src/chailove/audio/*.cpp \
+	src/chailove/system/*.cpp \
 )
 
 # PhysFS

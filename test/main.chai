@@ -1,5 +1,5 @@
 /**
- * ChaiGame: Testing Framework
+ * ChaiLove: Testing Framework
  */
 global testNames = [
 	"graphics_print",
