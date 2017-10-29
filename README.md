@@ -4,7 +4,7 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 
 ![ChaiLove Benchmark Screenshot](examples/benchmark/screenshot.png)
 
-## Sample Games
+## Games
 
 - [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)
 
@@ -19,7 +19,7 @@ ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run throu
 
 ## API
 
-ChaiLove is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a Hello World sample application:
+ChaiLove is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a simple Hello World sample application:
 
 ``` lua
 global logo
