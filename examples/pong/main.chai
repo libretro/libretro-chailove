@@ -1,5 +1,5 @@
 /**
- * ChaiGame: Pong
+ * ChaiLove: Pong
  */
 global players = []
 global pongSound

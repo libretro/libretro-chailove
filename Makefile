@@ -1,4 +1,4 @@
-TARGET_NAME := chaigame
+TARGET_NAME := chailove
 
 include Makefile.libretro
 include Makefile.common

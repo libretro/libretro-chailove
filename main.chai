@@ -1,7 +1,7 @@
 /**
- * ChaiGame: Example
+ * ChaiLove: Example
  *
- * Small example of what a ChaiGame script could look like.
+ * Small example of what a ChaiLove script could look like.
  */
 global x = 10.0f
 global y = 10.0f
