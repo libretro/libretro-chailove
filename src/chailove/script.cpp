@@ -11,16 +11,34 @@ namespace chailove {
 	bool script::loadModule(const std::string& moduleName) {
 		#ifdef __HAVE_CHAISCRIPT__
 		ChaiLove* app = ChaiLove::getInstance();
-		std::string contents = app->filesystem.read(moduleName);
-		if (!contents.empty()) {
-			// TODO: Are tabs problematic?
-			contents = replaceString(contents, "\t", "  ");
-			chai.eval(contents, Exception_Handler(), moduleName);
-			return true;
+
+		// Store a filename for the module.
+		std::string filename = moduleName;
+
+		// Make sure it exists.
+		if (!app->filesystem.exists(filename)) {
+			// See if we are to append .chai.
+			filename = filename + ".chai";
+			if (!app->filesystem.exists(filename)) {
+				std::cout << "[script] Module " << moduleName << " not found." << std::endl;
+				return false;
+			}
 		}
-		else {
-			std::cout << "Module {} was empty." << moduleName << std::endl;
+
+		// Load the contents of the file.
+		std::string contents = app->filesystem.read(filename);
+
+		// Make sure it was not empty.
+		if (contents.empty()) {
+			std::cout << "[script] Module " << moduleName << " was loaded, but empty." << std::endl;
+			return false;
 		}
+
+		// Replace possible problematic tabs, and evaluate the script.
+		contents = replaceString(contents, "\t", "  ");
+		chai.eval(contents, Exception_Handler(), filename);
+		return true;
+
 		#endif
 		return false;
 	}
@@ -491,6 +509,9 @@ namespace chailove {
 		return false;
 	}
 
+	/**
+	 * Replaces all instances of a string in a given subject string.
+	 */
 	std::string script::replaceString(std::string subject, const std::string& search, const std::string& replace) {
 		size_t pos = 0;
 		while ((pos = subject.find(search, pos)) != std::string::npos) {

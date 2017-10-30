@@ -44,7 +44,7 @@ namespace chailove {
 	}
 
 	bool filesystem::exists(const std::string& file) {
-		return PHYSFS_exists(file.c_str()) != 0;
+		return PHYSFS_exists(file.c_str()) > 0;
 	}
 
 	int filesystem::getSize(const std::string& file) {
