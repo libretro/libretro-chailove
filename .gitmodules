@@ -15,7 +15,7 @@
 	url = https://github.com/wjakob/filesystem.git
 [submodule "vendor/ChaiScript_Extras"]
 	path = vendor/ChaiScript_Extras
-	url = https://github.com/ChaiScript/ChaiScript_Extras.git
+	url = https://github.com/RobLoach/ChaiScript_Extras.git
 [submodule "vendor/SDL_tty"]
 	path = vendor/SDL_tty
 	url = https://github.com/Grumbel/SDL_tty.git
