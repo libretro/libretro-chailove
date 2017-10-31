@@ -28,3 +28,6 @@
 [submodule "vendor/Snippets"]
 	path = vendor/Snippets
 	url = https://github.com/DanielGibson/Snippets.git
+[submodule "vendor/RobLoach-ChaiScript_Extras"]
+	path = vendor/RobLoach-ChaiScript_Extras
+	url = git@github.com:RobLoach/ChaiScript_Extras.git
