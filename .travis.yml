@@ -18,6 +18,7 @@ env:
     - PLATFORM=ngc
     - PLATFORM=wii
     - PLATFORM=wiiu
+    - PLATFORM=osx_x64
 before_script:
   - pwd
   - mkdir -p ~/bin
