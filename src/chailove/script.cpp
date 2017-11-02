@@ -135,6 +135,9 @@ namespace chailove {
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, ImageData*, int, int>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, ImageData*, float, float>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, ImageData*, int, float>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, ImageData*, float, int>(&graphics::draw), "draw");
 		chai.add(fun<void, graphics, ImageData*, Quad, int, int>(&graphics::draw), "draw");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");

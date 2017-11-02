@@ -23,6 +23,9 @@ namespace chailove {
 		void line(int x1, int y1, int x2, int y2);
 
 		void draw(ImageData* image, int x, int y);
+		void draw(ImageData* image, float x, float y);
+		void draw(ImageData* image, float x, int y);
+		void draw(ImageData* image, int x, float y);
 		void draw(ImageData* image, Quad quad, int x, int y);
 
 		Quad newQuad(int x, int y, int width, int height, int sw, int sh);

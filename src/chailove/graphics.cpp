@@ -65,6 +65,15 @@ namespace chailove {
 			SDL_BlitSurface(image->surface, NULL, getScreen(), dstrect);
 		}
 	}
+	void graphics::draw(ImageData* image, float x, float y) {
+		draw(image, (int)x, (int)y);
+	}
+	void graphics::draw(ImageData* image, int x, float y) {
+		draw(image, x, (int)y);
+	}
+	void graphics::draw(ImageData* image, float x, int y) {
+		draw(image, (int)x, y);
+	}
 
 	void graphics::draw(ImageData* image, Quad quad, int x, int y) {
 		if (image && image->loaded()) {
