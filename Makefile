@@ -12,13 +12,13 @@ FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): $(OBJECTS)
+$(TARGET): $(OBJECTS) | dependencies
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
-%.o: %.cpp
+%.o: %.cpp | dependencies
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-%.o: %.c
+%.o: %.c | dependencies
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
