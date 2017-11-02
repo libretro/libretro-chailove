@@ -13,7 +13,7 @@ CXXFLAGS += $(FLAGS) -fpermissive
 CFLAGS += $(FLAGS) -std=gnu99
 
 ifeq ($(platform), osx)
-	CXXFLAGS += -stdlib=libc++ -mmacosx-version-min=10.9
+	CXXFLAGS += -std=c++14 -stdlib=libc++ -mmacosx-version-min=10.9
 else
 	CXXFLAGS += -std=c++14
 endif
