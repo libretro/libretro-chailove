@@ -9,11 +9,13 @@ endif
 
 FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES) $(WARNINGS) $(fpic)
 
-CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
+CXXFLAGS += $(FLAGS) -fpermissive
 CFLAGS += $(FLAGS) -std=gnu99
 
 ifeq ($(platform), osx)
-	CXXFLAGS += -stdlib=libc++ -mmacosx-version-min=10.4
+	CXXFLAGS += -stdlib=libc++ -mmacosx-version-min=10.9
+else
+	CXXFLAGS += -std=c++14
 endif
 
 $(TARGET): $(OBJECTS) | dependencies
