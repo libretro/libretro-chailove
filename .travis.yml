@@ -1,36 +1,37 @@
-language: generic
-os: linux
-dist: trusty
 sudo: required
+language: cpp
+dist: trusty
+compiler: g++
+
+before_install:
+  - sudo apt-get -qq update
+
 addons:
   apt:
-    packages:
-      - g++-7
     sources:
-      - ubuntu-toolchain-r-test
-env:
-  global:
-    - CORE=chailove
-    - COMPILER_NAME=gcc CXX=g++-7 CC=gcc-7
-  matrix:
-    - PLATFORM=3ds
-    - PLATFORM=linux_x64
-    - PLATFORM=ngc
-    - PLATFORM=wii
-    - PLATFORM=wiiu
-before_script:
-  - pwd
-  - mkdir -p ~/bin
-  - ln -s /usr/bin/gcc-7 ~/bin/gcc
-  - ln -s /usr/bin/g++-7 ~/bin/g++
-  - ln -s /usr/bin/cpp-7 ~/bin/cpp
-  - export PATH=~/bin:$PATH
-  - ls -l ~/bin
-  - echo $PATH
-  - g++-7 --version
-  - g++ --version
+    - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    packages:
+    - cmake
+    - time
+    - g++-5
+    - gcc-5
+
 script:
-  - cd ~/
-  - git clone --depth=50 https://github.com/libretro/libretro-super
-  - cd libretro-super/travis
-  - ./build.sh
+  # Link gcc-6 and g++-6 to their standard commands
+  - sudo ln -sf /usr/bin/gcc-5 /usr/local/bin/gcc
+  - sudo ln -sf /usr/bin/g++-5 /usr/local/bin/g++
+  # Check versions of gcc and g++
+  - gcc --version
+  - g++ --version
+  # Run through the make commands
+  - ./configure
+  - make
+  - make test
+
+notifications:
+  email: false
+
+cache:
+    apt: true
+    directories:
+    - vendor
