@@ -1,7 +1,7 @@
 #include "ImageData.h"
 #include "SDL.h"
 #define SDL_STBIMAGE_IMPLEMENTATION
-#include "SDL_stbimage.h"
+#include <SDL_stbimage.h>
 
 #include <iostream>
 #include <string>

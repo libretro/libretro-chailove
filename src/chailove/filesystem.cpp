@@ -2,8 +2,8 @@
 
 #include "physfs.h"
 #include "filesystem.h"
-#include "vendor/physfs/extras/physfsrwops.h"
-#include "vendor/filesystem/filesystem/path.h"
+#include <physfsrwops.h>
+#include <filesystem/path.h>
 #include "../ChaiLove.h"
 
 #include <iostream>
