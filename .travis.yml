@@ -30,7 +30,6 @@ before_script:
   - g++-7 --version
   - g++ --version
 script:
-  - cd ~/
-  - git clone --depth=50 https://github.com/libretro/libretro-super
-  - cd libretro-super/travis
+  - git clone --depth=1 -b patch-29 https://github.com/RobLoach/libretro-super ~/libretro-super
+  - cd ~/libretro-super/travis
   - ./build.sh
