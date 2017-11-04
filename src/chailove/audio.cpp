@@ -5,7 +5,7 @@
 #include "audio/AudioState.h"
 #include "../ChaiLove.h"
 #include "sound.h"
-#include "physfs.h"
+#include <physfs.h>
 
 namespace chailove {
 	void audio::play(SoundData* soundData) {
