@@ -37,7 +37,7 @@ endif
 
 LOCAL_MODULE    := libretro
 
-include ../../../Makefile.common
+include ../Makefile.common
 
 LOCAL_SRC_FILES := $(SOURCES_CXX) $(SOURCES_C)
 GLOBAL_DEFINES :=  $(JIT) -fexceptions
