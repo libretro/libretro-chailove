@@ -35,3 +35,6 @@ script:
   - git clone --depth=50 https://github.com/libretro/libretro-super
   - cd libretro-super/travis
   - ./build.sh
+
+ notifications:
+   email: false
