@@ -28,3 +28,6 @@
 [submodule "vendor/RobLoachChaiScript_Extras"]
 	path = vendor/RobLoachChaiScript_Extras
 	url = https://github.com/RobLoach/ChaiScript_Extras.git
+[submodule "vendor/deps"]
+	path = vendor/deps
+	url = https://github.com/libretro/libretro-deps.git
