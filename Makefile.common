@@ -9,12 +9,60 @@ SOURCES_CXX += $(wildcard \
 	src/chailove/audio/*.cpp \
 	src/chailove/system/*.cpp \
 )
+FLAGS += -Ivendor
 
 # filesystem
 FLAGS += -Ivendor/filesystem
 
 # libretro-common
 FLAGS += -Ivendor/libretro-common/include
+SOURCES_C += $(wildcard \
+	vendor/libretro-common/lists/*.c \
+	vendor/libretro-common/features/*.c \
+	vendor/libretro-common/file/file_path.c \
+	vendor/libretro-common/file/retro_dirent.c \
+	vendor/libretro-common/file/config_file.c \
+	vendor/libretro-common/file/config_file_userdata.c \
+	vendor/libretro-common/memmap/memalign.c \
+	vendor/libretro-common/streams/file_stream.c \
+	vendor/libretro-common/formats/wav/*.c \
+	vendor/libretro-common/audio/*.c \
+	vendor/libretro-common/audio/resampler/*.c \
+	vendor/libretro-common/audio/resampler/drivers/*.c \
+	vendor/libretro-common/audio/conversion/*.c \
+	vendor/libretro-common/compat/*.c \
+	vendor/libretro-common/hash/*.c \
+)
+
+#	vendor/libretro-common/file/*.c \
+#	vendor/libretro-common/streams/*.c \
+#	vendor/libretro-common/formats/libchdr/*.c \
+
+
+# libFLAC
+#FLAGS += -Ivendor/deps/libFLAC/include
+#SOURCES_C += $(wildcard \
+#	vendor/deps/libFLAC/*.c \
+#)
+
+# libogg
+#FLAGS += -Ivendor/deps/libogg/include
+#SOURCES_C += $(wildcard \
+#	vendor/deps/libogg/src/*.c \
+#)
+
+# libz
+#FLAGS += -Ivendor/deps/libz
+#SOURCES_C += $(wildcard \
+#	vendor/deps/libz/*.c \
+#)
+#FLAGS += -DWANT_ZLIB -DZ_SOLO
+
+# 7zip
+#FLAGS += -Ivendor/deps/lib7z
+#SOURCES_C += $(wildcard \
+#	vendor/deps/lib7z/*.c \
+#)
 
 # PhysFS
 FLAGS += -Ivendor/physfs/src
