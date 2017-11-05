@@ -1,6 +1,6 @@
 #include "script.h"
 #include "../ChaiLove.h"
-#include "vendor/filesystem/filesystem/path.h"
+#include <filesystem/path.h>
 
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"

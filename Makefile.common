@@ -10,22 +10,55 @@ SOURCES_CXX += $(wildcard \
 	src/chailove/system/*.cpp \
 )
 
+# filesystem
+FLAGS += -Ivendor/filesystem
+
+# libretro-common
+FLAGS += -Ivendor/libretro-common/include
+
 # PhysFS
+FLAGS += -Ivendor/physfs/src
+FLAGS += -Ivendor/physfs/extras
+FLAGS += -DPHYSFS_NO_CDROM_SUPPORT=1
 SOURCES_C += $(wildcard \
 	vendor/physfs/extras/physfsrwops.c \
 	vendor/physfs/src/*.c \
 )
 
 # SDL_tty
+FLAGS += -Ivendor/SDL_tty/include
 SOURCES_C += $(wildcard \
 	vendor/SDL_tty/src/SDL_tty.c \
 	vendor/SDL_tty/src/SDL_fnt.c \
 )
 
 # SDL_gfx
+FLAGS += -Ivendor/sdl-libretro/tests/SDL_gfx-2.0.26
 SOURCES_C += $(wildcard \
 	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/*.c \
 )
+
+# SDL_ttf
+# TODO Fix TTF Support https://github.com/RobLoach/ChaiLove/issues/48
+#FLAGS += -Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
+#SOURCES_C += $(wildcard \
+#	vendor/sdl-libretro/tests/SDL_ttf-2.0.11/*.c \
+#)
+
+# SDL_stbimage
+FLAGS += -Ivendor/Snippets
+
+# STB
+FLAGS += -Ivendor/stb
+
+# ChaiScript
+ifeq ($(HAVE_CHAISCRIPT),)
+	FLAGS += -Ivendor/chaiscript/include
+	FLAGS += -Ivendor/RobLoachChaiScript_Extras/include
+	FLAGS += -D__HAVE_CHAISCRIPT__
+	FLAGS += -DCHAISCRIPT_NO_THREADS -DCHAISCRIPT_NO_THREADS_WARNING -DCHAISCRIPT_NO_DYNLOAD
+	FLAGS += -DCHAISCRIPT_EXTRAS_MATH_DISABLE_ISINF -DCHAISCRIPT_EXTRAS_MATH_DISABLE_ISNAN
+endif
 
 # SDL
 ifeq ($(platform), win)
@@ -34,6 +67,8 @@ else
 	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/dummy/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/thread/generic/*.c ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/loadso/dummy/*.c)
 endif
 FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
+FLAGS += -Ivendor/sdl-libretro/include
+
 
 OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 
@@ -47,25 +82,8 @@ else
 endif
 
 LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
-FLAGS += -I. \
-	-Ivendor/sdl-libretro/include \
-	-Ivendor/libretro-common/include \
-	-Ivendor/chaiscript/include \
-	-Ivendor/SDL_tty/include \
-	-Ivendor/sdl-libretro/tests/SDL_gfx-2.0.26 \
-	-Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include \
-	-Ivendor/RobLoachChaiScript_Extras/include \
-	-Ivendor/physfs/src \
-	-Ivendor/Snippets \
-	-Ivendor/stb
 
 WARNINGS :=
-
-ifeq ($(HAVE_CHAISCRIPT),)
-	FLAGS += -D__HAVE_CHAISCRIPT__
-	FLAGS += -DCHAISCRIPT_NO_THREADS -DCHAISCRIPT_NO_THREADS_WARNING -DCHAISCRIPT_NO_DYNLOAD
-	FLAGS += -DCHAISCRIPT_EXTRAS_MATH_DISABLE_ISINF -DCHAISCRIPT_EXTRAS_MATH_DISABLE_ISNAN
-endif
 
 ifneq ($(HAVE_TESTS),)
 	FLAGS += -D__HAVE_TESTS__

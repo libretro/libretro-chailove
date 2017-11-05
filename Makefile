@@ -12,10 +12,6 @@ FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES)
 CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-ifeq ($(platform), osx)
-	CXXFLAGS += -stdlib=libc++ -mmacosx-version-min=10.4
-endif
-
 $(TARGET): $(OBJECTS) | dependencies
 	$(CXX) -o $@ $^ $(LDFLAGS)
 

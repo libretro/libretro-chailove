@@ -4,7 +4,7 @@
 #include "SDL.h"
 //#include "SDL_ttf.h"
 #include <string>
-#include "SDL_fnt.h"
+#include <SDL_fnt.h>
 #include "ImageData.h"
 
 namespace chailove {

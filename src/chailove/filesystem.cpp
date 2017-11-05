@@ -2,8 +2,8 @@
 
 #include "physfs.h"
 #include "filesystem.h"
-#include "vendor/physfs/extras/physfsrwops.h"
-#include "vendor/filesystem/filesystem/path.h"
+#include <physfsrwops.h>
+#include <filesystem/path.h>
 #include "../ChaiLove.h"
 
 #include <iostream>
@@ -13,7 +13,10 @@ using namespace filesystem;
 namespace chailove {
 
 	bool filesystem::init(const std::string& file) {
-		PHYSFS_init(NULL);
+		if (PHYSFS_init(NULL) == 0) {
+			std::cout << "[filesystem] Error loading PhysFS - " << PHYSFS_getLastError() << std::endl;
+			return false;
+		}
 
 		// Check if we are simply running the ChaiLove.
 		if (file.empty()) {
@@ -27,14 +30,16 @@ namespace chailove {
 		std::string parentPath(parent.str());
 
 		// Allow loading from an Archive.
-		if (extension == "chailove" || extension == "zip") {
+		if (extension == "chaigame" || extension == "chailove" || extension == "zip") {
 			return mount(file.c_str(), "/");
 		}
 
+		// If we are just running the cour, load the base path.
 		if (parentPath.empty()) {
 			return mount(".", "/");
 		}
 
+		// Otherwise, we are loading a .chai file directly. Load it.
 		return mount(parentPath.c_str(), "/");
 	}
 
@@ -160,6 +165,7 @@ namespace chailove {
 	}
 
 	bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
+		std::cout << "[filesystem] Mounting " << archive << " to " << mountpoint << std::endl;
 		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
 		return returnValue != 0;
 	}
