@@ -36,5 +36,5 @@ script:
   - cd libretro-super/travis
   - ./build.sh
 
- notifications:
-   email: false
+notifications:
+  email: false
