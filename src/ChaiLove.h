@@ -3,8 +3,8 @@
 
 #define CHAILOVE_VERSION_MAJOR 0
 #define CHAILOVE_VERSION_MINOR 6
-#define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.6.0"
+#define CHAILOVE_VERSION_PATCH 1
+#define CHAILOVE_VERSION_STRING "0.6.1"
 
 #include "SDL.h"
 #include "libretro.h"
