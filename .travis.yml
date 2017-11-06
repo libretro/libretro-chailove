@@ -28,10 +28,10 @@ script:
   - make
   - make test
 
-notifications:
-  email: false
-
 cache:
     apt: true
     directories:
     - vendor
+
+notifications:
+  email: false
