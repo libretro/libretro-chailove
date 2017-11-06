@@ -25,6 +25,8 @@ namespace chailove {
 
 	void audio::mixer_render(int16_t *buffer) {
 		ChaiLove* app = ChaiLove::getInstance();
+
+		/*
 		// Clear buffer
 		memset(buffer, 0, AUDIO_FRAMES * 2 * sizeof(int16_t));
 		for (std::vector<SoundData*>::size_type i = 0; i != app->sound.sounds.size(); i++) {
@@ -69,6 +71,6 @@ namespace chailove {
 			}
 
 			free(rawsamples8);
-		}
+		}*/
 	}
 }
