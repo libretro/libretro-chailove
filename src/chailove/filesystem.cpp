@@ -12,7 +12,11 @@ using namespace filesystem;
 
 namespace chailove {
 
+	/**
+	 * Initialize the file system.
+	 */
 	bool filesystem::init(const std::string& file) {
+		// Initialize PhysFS
 		if (PHYSFS_init(NULL) == 0) {
 			std::cout << "[filesystem] Error loading PhysFS - " << PHYSFS_getLastError() << std::endl;
 			return false;

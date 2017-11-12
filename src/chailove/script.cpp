@@ -229,7 +229,7 @@ namespace chailove {
 		// Load main.chai if it's a ChaiLove file.
 		::filesystem::path p(file.c_str());
 		std::string extension(p.extension());
-		if (extension == "chailove" || file.empty()) {
+		if (extension == "chailove" || file.empty() || extension == "chaigame") {
 			loadModule("main.chai");
 		}
 		else {

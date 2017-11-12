@@ -39,17 +39,22 @@ bool ChaiLove::load(const std::string& file) {
 	std::string version = CHAILOVE_VERSION_STRING GIT_VERSION;
 	std::cout << "ChaiLove " << version.c_str() << std::endl;
 
-	// Initalize all the subsystems.
+	// Initalize the file system.
 	filesystem.init(file);
+
+	// Initialize the scripting system.
 	script = new chailove::script(file);
 	script->conf(config);
 
+	// Testing.
 	#ifdef __HAVE_TESTS__
 	test.conf(config);
 	#endif
 
+	// Load up the window dimensions.
 	window.load(config);
 
+	// Initialize the soud, if needed.
 	if (config.modules.sound) {
 		sound.load();
 	}
@@ -61,6 +66,8 @@ bool ChaiLove::load(const std::string& file) {
 	math.load();
 	mouse.load();
 	font.load();
+
+	// Now that all subsystems are loaded, start the script.
 	script->load();
 
 	#ifdef __HAVE_TESTS__

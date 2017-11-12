@@ -178,7 +178,6 @@ void init_descriptors() {
       { 4, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R,     "R" },
       { 4, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT,   "Select" },
       { 4, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START,    "Start" },
-
       { 0 },
    };
 
@@ -317,8 +316,9 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 }
 
 void retro_unload_game(void) {
-	// Nothing.
-	printf("retro_unload_game\n");
+	std::cout << "retro_unload_game();" << std::endl;
+
+	// Invoke the quit event.
 	ChaiLove* app = ChaiLove::getInstance();
 	app->event.quit();
 }
