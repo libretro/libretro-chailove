@@ -192,6 +192,8 @@ namespace chailove {
 		// Register the Audio module.
 		chai.add(fun(&audio::play), "play");
 		chai.add(fun<SoundData*, audio, const std::string&>(&audio::newSource), "newSource");
+		chai.add(fun(&audio::getVolume), "getVolume");
+		chai.add(fun(&audio::setVolume), "setVolume");
 		chai.add_global(var(std::ref(app->audio)), "audio");
 
 		// Register the Window module.

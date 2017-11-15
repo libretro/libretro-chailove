@@ -6,7 +6,7 @@
 #include <SDL_fnt.h>
 #include "../../ChaiLove.h"
 #include "ImageData.h"
-
+#include <iostream>
 
 namespace chailove {
 	Font::Font() {
@@ -18,7 +18,7 @@ namespace chailove {
 		if (imageData->loaded()) {
 			TTY_Font* newFont = FNT_Create(imageData->surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
-				printf("Error creating FNT_Create()\n");
+				std::cout << "Error creating FNT_Create()" << std::endl;
 				return;
 			}
 
@@ -29,7 +29,7 @@ namespace chailove {
 	}
 
 	Font::Font(const std::string& filename, int ptsize) {
-		printf("TTF fonts are not supported by ChaiLove, currently.");
+		std::cout << "TTF fonts are not supported by ChaiLove, currently." << std::endl;
 		/*
 		SDL_RWops* rwops = ChaiLove::getInstance()->filesystem.openRW(filename);
 		if (rwops) {

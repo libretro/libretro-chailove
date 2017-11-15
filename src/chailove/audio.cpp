@@ -23,6 +23,16 @@ namespace chailove {
 		return NULL;
 	}
 
+	float audio::getVolume() {
+		return m_volume;
+	}
+
+	void audio::setVolume(float volume) {
+		if (volume >= 0.0f && volume <= 1.0f) {
+			m_volume = volume;
+		}
+	}
+
 	void audio::mixer_render(int16_t *buffer) {
 		ChaiLove* app = ChaiLove::getInstance();
 		// Clear buffer
@@ -55,8 +65,8 @@ namespace chailove {
 					left = rawsamples16[j*2+0];
 					right=rawsamples16[j*2+1];
 				}
-				buffer[j * 2 + 0] += left  * currentSound->volume * volume;
-				buffer[j * 2 + 1] += right * currentSound->volume * volume;
+				buffer[j * 2 + 0] += left  * currentSound->volume * m_volume;
+				buffer[j * 2 + 1] += right * currentSound->volume * m_volume;
 			}
 
 			if (end) {
