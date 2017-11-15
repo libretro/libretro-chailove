@@ -14,7 +14,10 @@ namespace chailove {
 
 		int AUDIO_FRAMES = 735; // 44100 / 60
 		int WAV_HEADER_SIZE = 44;
-		float volume = 1.0f;
+		float m_volume = 1.0f;
+
+		float getVolume();
+		void setVolume(float volume);
 	};
 }
 #endif

@@ -81,7 +81,7 @@ namespace chailove {
 			}
 		}
 		else {
-			printf("The file is not open.");
+			std::cout << "The file is not open." << std::endl;
 		}
 		return size;
 	}

@@ -316,7 +316,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 }
 
 void retro_unload_game(void) {
-	std::cout << "retro_unload_game();" << std::endl;
+	std::cout << "[ChaiLove] retro_unload_game()" << std::endl;
 
 	// Invoke the quit event.
 	ChaiLove* app = ChaiLove::getInstance();
@@ -374,10 +374,9 @@ void retro_init(void) {
 	}
 
 	//std::cout << retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
-
-	std::cout << "Retro SYSTEM_DIRECTORY " << retro_system_directory << std::endl;
-	std::cout << "Retro SAVE_DIRECTORY " << retro_save_directory << std::endl;
-	std::cout << "Retro CONTENT_DIRECTORY " << retro_content_directory << std::endl;
+	//std::cout << "[ChaiLove] SYSTEM_DIRECTORY " << retro_system_directory << std::endl;
+	//std::cout << "[ChaiLove] SAVE_DIRECTORY " << retro_save_directory << std::endl;
+	//std::cout << "[ChaiLove] CONTENT_DIRECTORY " << retro_content_directory << std::endl;
 
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
@@ -387,7 +386,7 @@ void retro_init(void) {
 }
 
 void retro_deinit(void) {
-	std::cout << "retro_deinit" << std::endl;
+	std::cout << "[ChaiLove] retro_deinit()" << std::endl;
 	ChaiLove* app = ChaiLove::getInstance();
 	if (app) {
 		app->event.quit();

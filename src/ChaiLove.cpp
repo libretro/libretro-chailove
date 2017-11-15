@@ -28,7 +28,7 @@ void ChaiLove::quit(void) {
 	sound.unload();
 	filesystem.unload();
 	window.unload();
-	std::cout << "Finish" << std::endl;
+	std::cout << "[ChaiLove] Unloaded all systems" << std::endl;
 }
 
 bool ChaiLove::load(const std::string& file) {
@@ -37,7 +37,7 @@ bool ChaiLove::load(const std::string& file) {
 #define GIT_VERSION ""
 #endif
 	std::string version = CHAILOVE_VERSION_STRING GIT_VERSION;
-	std::cout << "ChaiLove " << version.c_str() << std::endl;
+	std::cout << "[ChaiLove] ChaiLove " << version.c_str() << std::endl;
 
 	// Initalize the file system.
 	filesystem.init(file);
