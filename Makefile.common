@@ -69,6 +69,9 @@ endif
 FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
 FLAGS += -Ivendor/sdl-libretro/include
 
+ifeq ($(platform), osx)
+	CXXFLAGS += -stdlib=libc++
+endif
 
 OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 
