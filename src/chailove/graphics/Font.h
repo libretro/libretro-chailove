@@ -23,7 +23,8 @@ namespace chailove {
 		int getHeight(const std::string& text);
 		int getHeight();
 		int getWidth(const std::string& text);
-		Image* Image;
+
+		Image* m_image;
 	};
 }
 

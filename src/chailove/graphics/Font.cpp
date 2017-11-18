@@ -14,9 +14,9 @@ namespace chailove {
 	}
 
 	Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-		Image = new Image(filename);
-		if (Image->loaded()) {
-			TTY_Font* newFont = FNT_Create(Image->surface, glyphWidth, glyphHeight, letters.c_str());
+		image = new Image(filename);
+		if (m_image->loaded()) {
+			TTY_Font* newFont = FNT_Create(m_image->surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
 				std::cout << "Error creating FNT_Create()" << std::endl;
 				return;
@@ -67,9 +67,9 @@ namespace chailove {
 			FNT_Free(ttyFont);
 			ttyFont = NULL;
 		}
-		if (Image != NULL) {
-			delete Image;
-			Image = NULL;
+		if (m_image != NULL) {
+			delete m_image;
+			m_image = NULL;
 		}
 		return true;
 	}
