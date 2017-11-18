@@ -23,6 +23,8 @@ namespace chailove {
 		std::vector<std::string> getDirectoryItems(const std::string& dir);
 		bool isDirectory(const std::string& filename);
 		bool isFile(const std::string& filename);
+		std::vector<std::string> lines(const std::string& filename);
+		std::vector<std::string> lines(const std::string& filename, const std::string& delimiter);
 	};
 }
 
