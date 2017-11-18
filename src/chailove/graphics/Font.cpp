@@ -14,7 +14,7 @@ namespace chailove {
 	}
 
 	Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-		image = new Image(filename);
+		m_image = new Image(filename);
 		if (m_image->loaded()) {
 			TTY_Font* newFont = FNT_Create(m_image->surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
