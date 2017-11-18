@@ -49,8 +49,8 @@ namespace chailove {
 
 		// ChaiScript Standard Library Additions
 		// This adds some basic type definitions to ChaiScript.
-		chai.add(chaiscript::bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
-		chai.add(chaiscript::bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
+		chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
+		chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
 
 		// Add the Quad.
 		chai.add(user_type<Quad>(), "Quad");
@@ -66,6 +66,9 @@ namespace chailove {
 		chai.add(user_type<Point>(), "Point");
 		chai.add(fun(&Point::x), "x");
 		chai.add(fun(&Point::y), "y");
+		chai.add(constructor<Point()>(), "Point");
+		chai.add(constructor<Point(float)>(), "Point");
+		chai.add(constructor<Point(float, float)>(), "Point");
 
 		// Add ImageData.
 		chai.add(user_type<ImageData>(), "ImageData");
@@ -116,7 +119,12 @@ namespace chailove {
 		chai.add(fun(&graphics::rectangle), "rectangle");
 		chai.add(fun(&graphics::newImage), "newImage");
 		chai.add(fun(&graphics::print), "print");
-		chai.add(fun(&graphics::point), "point");
+		chai.add(fun<void, graphics, int, int>(&graphics::point), "point");
+		chai.add(fun<void, graphics, Point*>(&graphics::point), "point");
+		//chai.add(bootstrap::standard_library::vector_type<std::vector<Point*>>("VectorPointPointer"));
+		//chai.add(bootstrap::standard_library::vector_type<std::vector<Point>>("VectorPoint"));
+		//chai.add(fun<void, graphics, std::vector<Point*>>(&graphics::points), "points");
+		//chai.add(fun<void, graphics, std::vector<Point>>(&graphics::points), "points");
 		chai.add(fun(&graphics::arc), "arc");
 		chai.add(fun(&graphics::ellipse), "ellipse");
 		chai.add(fun(&graphics::getWidth), "getWidth");

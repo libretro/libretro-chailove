@@ -44,6 +44,22 @@ namespace chailove {
 	void graphics::point(int x, int y) {
 		pixelRGBA(getScreen(), x, y, r, g, b, a);
 	}
+	void graphics::point(Point* p) {
+		point(p->x, p->y);
+	}
+	/*
+	void graphics::points(std::vector<Point*> points) {
+		for (std::vector<Point*>::iterator it = points.begin() ; it != points.end(); ++it) {
+			point(*it);
+		}
+	}
+	void graphics::points(std::vector<Point> points) {
+		for (std::vector<Point>::iterator it = points.begin() ; it != points.end(); ++it) {
+			Point a = *it;
+			point(a.x, a.y);
+		}
+	}
+	*/
 
 	void graphics::rectangle(const std::string& drawmode, int x, int y, int width, int height) {
 		if (drawmode == "line") {
