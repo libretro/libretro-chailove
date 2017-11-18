@@ -168,6 +168,13 @@ namespace chailove {
 		return std::string(myBuf);
 	}
 
+
+	bool filesystem::unmount(const std::string& archive) {
+		std::cout << "[filesystem] Unmounting " << archive << std::endl;
+		int returnValue = PHYSFS_unmount(archive.c_str());
+		return returnValue != 0;
+	}
+
 	bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
 		std::cout << "[filesystem] Mounting " << archive << " to " << mountpoint << std::endl;
 		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);

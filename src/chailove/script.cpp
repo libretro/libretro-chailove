@@ -159,6 +159,7 @@ namespace chailove {
 		chai.add_global(var(std::ref(app->image)), "image");
 
 		// Register the Filesystem module.
+		chai.add(fun(&filesystem::unmount), "unmount");
 		chai.add(fun(&filesystem::read), "read");
 		chai.add(fun(&filesystem::isDirectory), "isDirectory");
 		chai.add(fun(&filesystem::isFile), "isFile");
