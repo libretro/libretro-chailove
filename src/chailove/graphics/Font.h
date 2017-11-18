@@ -5,7 +5,7 @@
 //#include "SDL_ttf.h"
 #include <string>
 #include <SDL_fnt.h>
-#include "ImageData.h"
+#include "Image.h"
 
 namespace chailove {
 	class Font {
@@ -23,7 +23,7 @@ namespace chailove {
 		int getHeight(const std::string& text);
 		int getHeight();
 		int getWidth(const std::string& text);
-		ImageData* imageData;
+		Image* Image;
 	};
 }
 

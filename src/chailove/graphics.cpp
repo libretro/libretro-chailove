@@ -5,7 +5,6 @@
 #include <SDL_gfxBlitFunc.h>
 
 #include "../ChaiLove.h"
-#include "graphics/ImageData.h"
 #include "graphics/Image.h"
 #include "graphics/Font.h"
 
@@ -57,7 +56,7 @@ namespace chailove {
 		lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
 	}
 
-	void graphics::draw(ImageData* image, int x, int y) {
+	void graphics::draw(Image* image, int x, int y) {
 		if (image && image->loaded()) {
 			SDL_Rect* dstrect = new SDL_Rect();
 			dstrect->x = x;
@@ -66,7 +65,7 @@ namespace chailove {
 		}
 	}
 
-	void graphics::draw(ImageData* image, Quad quad, int x, int y) {
+	void graphics::draw(Image* image, Quad quad, int x, int y) {
 		if (image && image->loaded()) {
 			SDL_Rect* dest = new SDL_Rect();
 			dest->x = x;
@@ -77,8 +76,8 @@ namespace chailove {
 		}
 	}
 
-	ImageData* graphics::newImage(const std::string& filename) {
-		ImageData* image = new ImageData(filename);
+	Image* graphics::newImage(const std::string& filename) {
+		Image* image = new Image(filename);
 		if (image->loaded()) {
 			return image;
 		}

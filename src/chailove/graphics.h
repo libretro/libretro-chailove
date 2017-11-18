@@ -3,7 +3,6 @@
 
 #include "SDL.h"
 #include "SDL_gfxPrimitives.h"
-#include "graphics/ImageData.h"
 #include "graphics/Image.h"
 #include "graphics/Quad.h"
 #include "graphics/Font.h"
@@ -22,12 +21,12 @@ namespace chailove {
 		void point(int x, int y);
 		void line(int x1, int y1, int x2, int y2);
 
-		void draw(ImageData* image, int x, int y);
-		void draw(ImageData* image, Quad quad, int x, int y);
+		void draw(Image* image, int x, int y);
+		void draw(Image* image, Quad quad, int x, int y);
 
 		Quad newQuad(int x, int y, int width, int height, int sw, int sh);
 
-		ImageData* newImage(const std::string& filename);
+		Image* newImage(const std::string& filename);
 		Font* newFont();
 		Font* newFont(const std::string& filename);
 		Font* newFont(const std::string& filename, int size);

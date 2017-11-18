@@ -5,7 +5,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
 #include "../../ChaiLove.h"
-#include "ImageData.h"
+#include "Image.h"
 #include <iostream>
 
 namespace chailove {
@@ -14,9 +14,9 @@ namespace chailove {
 	}
 
 	Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-		imageData = new ImageData(filename);
-		if (imageData->loaded()) {
-			TTY_Font* newFont = FNT_Create(imageData->surface, glyphWidth, glyphHeight, letters.c_str());
+		Image = new Image(filename);
+		if (Image->loaded()) {
+			TTY_Font* newFont = FNT_Create(Image->surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
 				std::cout << "Error creating FNT_Create()" << std::endl;
 				return;
@@ -67,9 +67,9 @@ namespace chailove {
 			FNT_Free(ttyFont);
 			ttyFont = NULL;
 		}
-		if (imageData != NULL) {
-			delete imageData;
-			imageData = NULL;
+		if (Image != NULL) {
+			delete Image;
+			Image = NULL;
 		}
 		return true;
 	}
