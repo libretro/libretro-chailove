@@ -18,7 +18,7 @@ namespace chailove {
 		if (imageData->loaded()) {
 			TTY_Font* newFont = FNT_Create(imageData->surface, glyphWidth, glyphHeight, letters.c_str());
 			if (newFont == NULL) {
-				std::cout << "Error creating FNT_Create()" << std::endl;
+				std::cout << "[ChaiLove] Error creating FNT_Create()" << std::endl;
 				return;
 			}
 
@@ -29,7 +29,7 @@ namespace chailove {
 	}
 
 	Font::Font(const std::string& filename, int ptsize) {
-		std::cout << "TTF fonts are not supported by ChaiLove, currently." << std::endl;
+		std::cout << "[ChaiLove] TTF fonts are not supported by ChaiLove, currently." << std::endl;
 		/*
 		SDL_RWops* rwops = ChaiLove::getInstance()->filesystem.openRW(filename);
 		if (rwops) {
@@ -125,7 +125,7 @@ namespace chailove {
 				if (errorChar != NULL) {
 					errString = errorChar;
 				}
-				std::cout << "Font::print - %s", errString);
+				std::cout << "[ChaiLove] Font::print - %s", errString);
 				return;
 			}
 

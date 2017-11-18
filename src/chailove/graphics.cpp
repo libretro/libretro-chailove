@@ -22,7 +22,7 @@ namespace chailove {
 	bool graphics::load() {
 		// Enable alpha blending.
 		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
-			std::cout << "Enabling alpha blending failed" << std::endl;
+			std::cout << "[ChaiLove] Enabling alpha blending failed" << std::endl;
 		}
 
 		return true;

@@ -367,10 +367,10 @@ void retro_init(void) {
 	}
 
 	if (retro_system_directory == NULL) {
-		std::cout << RETRO_DIR << std::endl;
+		std::cout << "[ChaiLove] " << RETRO_DIR << std::endl;
 	}
 	else {
-		std::cout << RETRO_DIR << retro_system_directory << std::endl;
+		std::cout << "[ChaiLove] " << RETRO_DIR << retro_system_directory << std::endl;
 	}
 
 	//std::cout << retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
@@ -380,7 +380,7 @@ void retro_init(void) {
 
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
-		fprintf(stderr, "Pixel format XRGB8888 not supported by platform, cannot use.\n");
+		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
 		exit(0);
 	}
 }

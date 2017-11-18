@@ -13,7 +13,7 @@ namespace chailove {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			std::cout << "TTF_Init failed to initialize font system: {}", errString);
+			std::cout << "[ChaiLove] TTF_Init failed to initialize font system: {}", errString);
 			return false;
 		}*/
 		return true;

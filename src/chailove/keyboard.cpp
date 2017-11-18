@@ -21,7 +21,7 @@ namespace chailove {
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
 		if (SDL_EnableKeyRepeat(delay, interval) == -1) {
-			std::cout << "Error setting KeyRepeat." << std::endl;
+			std::cout << "[ChaiLove] Error setting KeyRepeat." << std::endl;
 		}
 	}
 

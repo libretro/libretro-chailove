@@ -27,7 +27,7 @@ namespace chailove {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			std::cout << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
+			std::cout << "[ChaiLove] STBIMG_Load_RW failed to load data: " << errString << std::endl;
 			return false;
 		}
 
@@ -43,7 +43,7 @@ namespace chailove {
 			optimizedImage = SDL_DisplayFormat(surface);
 		}
 		if (!optimizedImage) {
-			std::cout << "SDL_DisplayFormat failed to optimize the image." << std::endl;
+			std::cout << "[ChaiLove] SDL_DisplayFormat failed to optimize the image." << std::endl;
 		}
 		else {
 			SDL_FreeSurface(surface);
