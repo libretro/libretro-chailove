@@ -20,7 +20,7 @@ ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run throu
 
 ## API
 
-ChaiLove is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). See the [ChaiLove API](https://robloach.github.io/ChaiLove/) for the docs. The following `main.chai` is a simple Hello World example:
+The [ChaiLove API](https://robloach.github.io/ChaiLove/) is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a [simple Hello World example](examples/simple/main.chai):
 
 ``` lua
 global logo

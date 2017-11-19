@@ -31,7 +31,7 @@ test: all
 	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
 
 examples: all
-	retroarch -L $(TARGET) test/examples/main.chai
+	retroarch -L $(TARGET) examples/benchmark/main.chai
 
 test-script: all
 	retroarch -L $(TARGET) test/main.chai
