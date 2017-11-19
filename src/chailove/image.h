@@ -5,11 +5,17 @@
 #include <string>
 
 namespace chailove {
+	/**
+	 * @brief Provides an interface to decode encoded image data.
+	 */
 	class image {
 	public:
 		bool load();
 		bool unload();
-		chailove::Image* newImage(const std::string& filename);
+		/**
+		 * @brief Creates a new ImageData object.
+		 */
+		chailove::Image* newImageData(const std::string& filename);
 	};
 }
 

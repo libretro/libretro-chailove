@@ -49,6 +49,7 @@ namespace chailove {
 
 		// ChaiScript Standard Library Additions
 		// This adds some basic type definitions to ChaiScript.
+		chai.add(bootstrap::standard_library::vector_type<std::vector<int>>("VectorInt"));
 		chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
 		chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
 
@@ -78,6 +79,7 @@ namespace chailove {
 		// Add SoundData.
 		chai.add(user_type<SoundData>(), "SoundData");
 		chai.add(fun(&SoundData::isLooping), "isLooping");
+		chai.add(fun(&SoundData::isPlaying), "isPlaying");
 		chai.add(fun(&SoundData::setLooping), "setLooping");
 		chai.add(fun(&SoundData::stop), "stop");
 		chai.add(fun(&SoundData::play), "play");
@@ -163,7 +165,7 @@ namespace chailove {
 		chai.add_global(var(std::ref(app->event)), "event");
 
 		// Register the Image module.
-		chai.add(fun(&image::newImage), "newImage");
+		chai.add(fun(&image::newImageData), "newImageData");
 		chai.add_global(var(std::ref(app->image)), "image");
 
 		// Register the Filesystem module.
@@ -182,6 +184,8 @@ namespace chailove {
 
 		// Register the System module.
 		chai.add(fun(&system::getOS), "getOS");
+		chai.add(fun(&system::getVersion), "getVersion");
+		chai.add(fun(&system::getVersionString), "getVersionString");
 		chai.add_global(var(std::ref(app->system)), "system");
 
 		// Register the Mouse module.

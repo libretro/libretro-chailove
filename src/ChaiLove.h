@@ -19,9 +19,9 @@
  * - \link chailove::image image \endlink
  * - \link chailove::joystick joystick \endlink
  * - \link chailove::keyboard keyboard \endlink
+ * - \link chailove::script script \endlink
  * - \link chailove::math math \endlink
  * - \link chailove::mouse mouse \endlink
- * - \link chailove::script script \endlink
  * - \link chailove::timer timer \endlink
  * - \link chailove::window window \endlink
  *
@@ -36,9 +36,9 @@
 #define CHAILOVE_GAME_H
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 7
+#define CHAILOVE_VERSION_MINOR 8
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.7.0"
+#define CHAILOVE_VERSION_STRING "0.8.0"
 
 #include "SDL.h"
 #include "libretro.h"

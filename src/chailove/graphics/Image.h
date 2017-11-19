@@ -5,6 +5,9 @@
 #include <string>
 
 namespace chailove {
+	/**
+	 * @brief Drawable image type.
+	 */
 	class Image {
 	public:
 		SDL_Surface* surface;
@@ -15,7 +18,13 @@ namespace chailove {
 		bool loadFromRW(SDL_RWops* rw);
 		bool destroy();
 
+		/**
+		 * @brief Gets the width of the Texture.
+		 */
 		int getWidth();
+		/**
+		 * @brief Gets the height of the Texture.
+		 */
 		int getHeight();
 	};
 }
