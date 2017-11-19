@@ -20,6 +20,7 @@ namespace chailove {
 		std::string read(const std::string& filename);
 		bool exists(const std::string& file);
 		int getSize(const std::string& file);
+		bool unmount(const std::string& archive);
 		bool mount(const std::string& archive, const std::string& mountpoint);
 		PHYSFS_sint64 getSize(PHYSFS_File* file);
 		PHYSFS_file* openFile(const std::string& filename);
