@@ -1,11 +1,14 @@
 #ifndef CHAILOVE_GRAPHICS_H
 #define CHAILOVE_GRAPHICS_H
 
+#include <vector>
+
 #include "SDL.h"
 #include "SDL_gfxPrimitives.h"
 #include "graphics/Image.h"
 #include "graphics/Quad.h"
 #include "graphics/Font.h"
+#include "graphics/Point.h"
 
 namespace chailove {
 
@@ -36,6 +39,9 @@ namespace chailove {
 		void clear(int r, int g, int b, int a);
 		void clear(int r, int g, int b);
 		void point(int x, int y);
+		void point(Point* p);
+		//void points(std::vector<Point*>);
+		//void points(std::vector<Point>);
 		void line(int x1, int y1, int x2, int y2);
 
 		void draw(Image* image, int x, int y);
