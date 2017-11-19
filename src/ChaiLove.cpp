@@ -43,7 +43,7 @@ bool ChaiLove::load(const std::string& file) {
 	filesystem.init(file);
 
 	// Initialize the scripting system.
-	script = new chailove::script(file);
+	script = new Modules::script(file);
 	script->conf(config);
 
 	// Testing.

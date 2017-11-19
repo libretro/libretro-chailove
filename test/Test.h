@@ -3,22 +3,29 @@
 #ifndef CHAILOVE_TEST_TEST_H
 #define CHAILOVE_TEST_TEST_H
 
-#include "../src/chailove/graphics/Image.h"
-#include "../src/chailove/graphics/Font.h"
-#include "../src/chailove/system/Config.h"
-#include "../src/chailove/audio/SoundData.h"
+#include "../src/Types/Graphics/Image.h"
+#include "../src/Types/Graphics/Font.h"
+#include "../src/Types/System/Config.h"
+#include "../src/Types/Audio/SoundData.h"
+
+using Types::Graphics::Image;
+using Types::Graphics::Font;
+using Types::System::Config;
+using Types::Audio::SoundData;
+using ::ChaiLove;
 
 class Test {
 public:
-	void conf(chailove::Config& t);
+	void conf(Config& t);
 	bool load();
 	void update(float delta);
 	void draw();
 	int tester = 0;
-	chailove::Font* thefont;
-	chailove::Font* secondfont;
-	chailove::SoundData* jump;
-	chailove::Image* img;
+	Font* thefont;
+	Font* secondfont;
+	SoundData* jump;
+	Image* img;
+	ChaiLove* app;
 };
 
 #endif
