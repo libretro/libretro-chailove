@@ -19,6 +19,7 @@
  * - \link chailove::image image \endlink
  * - \link chailove::joystick joystick \endlink
  * - \link chailove::keyboard keyboard \endlink
+ * - \link chailove::script script \endlink
  * - \link chailove::math math \endlink
  * - \link chailove::mouse mouse \endlink
  * - \link chailove::timer timer \endlink
