@@ -48,6 +48,7 @@ namespace chailove {
 		point(p->x, p->y);
 	}
 	/*
+    TODO: Fix graphics.points(Vector<Points>)
 	void graphics::points(std::vector<Point*> points) {
 		for (std::vector<Point*>::iterator it = points.begin() ; it != points.end(); ++it) {
 			point(*it);
