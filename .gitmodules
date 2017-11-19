@@ -16,9 +16,6 @@
 [submodule "vendor/SDL_tty"]
 	path = vendor/SDL_tty
 	url = https://github.com/Grumbel/SDL_tty.git
-[submodule "vendor/spdlog"]
-	path = vendor/spdlog
-	url = https://github.com/gabime/spdlog.git
 [submodule "vendor/stb"]
 	path = vendor/stb
 	url = https://github.com/nothings/stb.git
