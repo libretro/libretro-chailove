@@ -36,6 +36,9 @@ examples: all
 test-script: all
 	retroarch -L $(TARGET) test/main.chai
 
+docs: dependencies
+	doxygen docs/Doxyfile
+
 noscript: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 

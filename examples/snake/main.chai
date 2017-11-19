@@ -1,5 +1,7 @@
 /**
  * ChaiLove: Snake
+ *
+ * This is an example of using ChaiLove with Snake.
  */
 global WIDTH
 global HEIGHT
