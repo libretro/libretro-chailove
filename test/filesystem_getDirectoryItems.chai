@@ -1,0 +1,27 @@
+class filesystem_getDirectoryItems {
+	var name;
+	var x;
+	var y;
+	var files;
+
+	def filesystem_getDirectoryItems() {
+		this.name = "filesystem.getDirectoryItems()";
+	}
+
+	def load() {
+		this.x = 100;
+		this.y = graphics.getHeight() / 3.0f;
+		this.files = filesystem.getDirectoryItems("/")
+	}
+
+	def draw() {
+		var y = this.y
+		for (file : this.files) {
+			graphics.print("- " + file, this.x, y)
+			y += 10
+		}
+	}
+
+	def update(delta) {
+	}
+};

@@ -1,4 +1,5 @@
-# ChaiLove [![Build Status](https://travis-ci.org/RobLoach/ChaiLove.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiLove) [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
+# ChaiLove
+[![Build Status](https://travis-ci.org/RobLoach/ChaiLove.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiLove) [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
@@ -19,7 +20,7 @@ ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run throu
 
 ## API
 
-ChaiLove is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a simple Hello World sample application:
+The [ChaiLove API](https://robloach.github.io/ChaiLove/) is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a [simple Hello World example](examples/simple/main.chai):
 
 ``` lua
 global logo
@@ -58,6 +59,12 @@ To compile and run the testing framework, use:
 
 ```
 make examples
+```
+
+### Documentation
+
+```
+make docs
 ```
 
 ### Flags

@@ -1,10 +1,10 @@
 #include "image.h"
 #include <string>
-#include "graphics/ImageData.h"
+#include "graphics/Image.h"
 
 namespace chailove {
-	chailove::ImageData* image::newImageData(const std::string& filename) {
-		ImageData* image = new chailove::ImageData(filename);
+	chailove::Image* image::newImage(const std::string& filename) {
+		Image* image = new chailove::Image(filename);
 		if (image->loaded()) {
 			return image;
 		}

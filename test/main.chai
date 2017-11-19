@@ -5,7 +5,8 @@ global testNames = [
 	"graphics_print",
 	"graphics_draw",
 	"mouse_getPosition",
-	"graphics_print_font"
+	"graphics_print_font",
+	"filesystem_getDirectoryItems"
 ]
 global tests = []
 global currenttest = 0
@@ -46,13 +47,16 @@ def update(delta) {
 }
 
 def joystickpressed(joystick, button) {
-	if (button == "left") {
+	if (button == "left" || button == "down") {
 		currenttest = currenttest - 1
+		if (currenttest < 0) {
+			currenttest = tests.size() - 1
+		}
 	}
-	else if (button == "right") {
+	else if (button == "right" || button == "up") {
 		currenttest = currenttest + 1
-	}
-	if (currenttest >= tests.size() || currenttest <= 0) {
-		currenttest = 0
+		if (currenttest >= tests.size()) {
+			currenttest = 0
+		}
 	}
 }

@@ -1,4 +1,38 @@
-#ifndef CHAILOVE_GAME_H
+/**
+ * \file ChaiLove.h
+ *
+ * Main header file for ChaiLove.
+ */
+
+/**
+ * \mainpage ChaiLove API
+ *
+ * This is the API documentation for [ChaiLove](https://github.com/RobLoach/ChaiLove). For more information about ChaiLove itself, see the [ChaiLove homepage](https://github.com/RobLoach/ChaiLove).
+ *
+ * ## Modules
+ *
+ * - \link chailove::audio audio \endlink
+ * - \link chailove::event event \endlink
+ * - \link chailove::filesystem filesystem \endlink
+ * - \link chailove::font font \endlink
+ * - \link chailove::graphics graphics \endlink
+ * - \link chailove::image image \endlink
+ * - \link chailove::joystick joystick \endlink
+ * - \link chailove::keyboard keyboard \endlink
+ * - \link chailove::math math \endlink
+ * - \link chailove::mouse mouse \endlink
+ * - \link chailove::script script \endlink
+ * - \link chailove::timer timer \endlink
+ * - \link chailove::window window \endlink
+ *
+ * ## Example
+ *
+ * The below is a simple hello world example.
+ *
+ * \snippet simple/main.chai
+ */
+
+ #ifndef CHAILOVE_GAME_H
 #define CHAILOVE_GAME_H
 
 #define CHAILOVE_VERSION_MAJOR 0

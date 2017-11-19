@@ -67,10 +67,10 @@ namespace chailove {
 		chai.add(fun(&Point::x), "x");
 		chai.add(fun(&Point::y), "y");
 
-		// Add ImageData.
-		chai.add(user_type<ImageData>(), "ImageData");
-		chai.add(fun(&ImageData::getWidth), "getWidth");
-		chai.add(fun(&ImageData::getHeight), "getHeight");
+		// Add Image.
+		chai.add(user_type<Image>(), "Image");
+		chai.add(fun(&Image::getWidth), "getWidth");
+		chai.add(fun(&Image::getHeight), "getHeight");
 
 		// Add SoundData.
 		chai.add(user_type<SoundData>(), "SoundData");
@@ -134,8 +134,8 @@ namespace chailove {
 		chai.add(fun<void, graphics, int, int, int>(&graphics::setColor), "setColor");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
-		chai.add(fun<void, graphics, ImageData*, int, int>(&graphics::draw), "draw");
-		chai.add(fun<void, graphics, ImageData*, Quad, int, int>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
+		chai.add(fun<void, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
 		chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");
 		chai.add(fun<void, graphics>(&graphics::clear), "clear");
@@ -155,10 +155,11 @@ namespace chailove {
 		chai.add_global(var(std::ref(app->event)), "event");
 
 		// Register the Image module.
-		chai.add(fun(&image::newImageData), "newImageData");
+		chai.add(fun(&image::newImage), "newImage");
 		chai.add_global(var(std::ref(app->image)), "image");
 
 		// Register the Filesystem module.
+		chai.add(fun(&filesystem::unmount), "unmount");
 		chai.add(fun(&filesystem::read), "read");
 		chai.add(fun(&filesystem::isDirectory), "isDirectory");
 		chai.add(fun(&filesystem::isFile), "isFile");

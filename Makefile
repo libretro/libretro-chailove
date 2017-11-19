@@ -31,10 +31,16 @@ test: all
 	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
 
 examples: all
-	retroarch -L $(TARGET) test/examples/main.chai
+	retroarch -L $(TARGET) examples/benchmark/main.chai
 
 test-script: all
 	retroarch -L $(TARGET) test/main.chai
+
+docs: dependencies
+	doxygen docs/Doxyfile
+
+docs-deploy: docs
+	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=gh-pages
 
 noscript: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
