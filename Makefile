@@ -36,6 +36,12 @@ examples: all
 test-script: all
 	retroarch -L $(TARGET) test/main.chai
 
+docs: dependencies
+	doxygen docs/Doxyfile
+
+docs-deploy: docs
+	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=gh-pages
+
 noscript: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
