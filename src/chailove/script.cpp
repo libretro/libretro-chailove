@@ -167,6 +167,8 @@ namespace chailove {
 		chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 		chai.add(fun(&filesystem::mount), "mount");
 		chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
+		chai.add(fun<std::vector<std::string>, filesystem, const std::string&>(&filesystem::lines), "lines");
+		chai.add(fun<std::vector<std::string>, filesystem, const std::string&, const std::string&>(&filesystem::lines), "lines");
 		chai.add(fun(&filesystem::load), "load");
 		chai.add_global(var(std::ref(app->filesystem)), "filesystem");
 
