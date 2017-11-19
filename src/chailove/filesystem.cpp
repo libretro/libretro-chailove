@@ -18,7 +18,7 @@ namespace chailove {
 	bool filesystem::init(const std::string& file) {
 		// Initialize PhysFS
 		if (PHYSFS_init(NULL) == 0) {
-			std::cout << "[filesystem] Error loading PhysFS - " << PHYSFS_getLastError() << std::endl;
+			std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << PHYSFS_getLastError() << std::endl;
 			return false;
 		}
 
@@ -76,12 +76,12 @@ namespace chailove {
 				if (errorChar != NULL) {
 					physErr = errorChar;
 				}
-				std::cout << "Could not get size of file " << physErr << std::endl;
+				std::cout << "[ChaiLove] [filesystem] Could not get size of file " << physErr << std::endl;
 				return -1;
 			}
 		}
 		else {
-			std::cout << "The file is not open." << std::endl;
+			std::cout << "[ChaiLove] [filesystem] The file is not currently open." << std::endl;
 		}
 		return size;
 	}
@@ -106,7 +106,7 @@ namespace chailove {
 				sdlErr = errorChar;
 			}
 
-			std::cout << "Error loading file " << filename << physErr << sdlErr << std::endl;
+			std::cout << "[ChaiLove] [filesystem] Error loading file " << filename << physErr << sdlErr << std::endl;
 		}
 		return rw;
 	}
@@ -119,7 +119,7 @@ namespace chailove {
 			if (errorChar != NULL) {
 				physErr = errorChar;
 			}
-			std::cout << "Error opening file " << filename << physErr << std::endl;
+			std::cout << "[ChaiLove] [filesystem] Error opening file " << filename << physErr << std::endl;
 			return NULL;
 		}
 		return myfile;
@@ -142,7 +142,7 @@ namespace chailove {
 				if (errorChar != NULL) {
 					physErr = errorChar;
 				}
-				std::cout << "File System error while reading from file " << filename << physErr << std::endl;
+				std::cout << "[ChaiLove] [filesystem] File System error while reading from file " << filename << physErr << std::endl;
 				output = NULL;
 			}
 			else {
@@ -152,7 +152,7 @@ namespace chailove {
 		}
 		else {
 			std::string physErr = PHYSFS_getLastError();
-			std::cout << "Error getting filesize of " << filename << physErr << std::endl;
+			std::cout << "[ChaiLove] [filesystem] Error getting filesize of " << filename << physErr << std::endl;
 		}
 
 		PHYSFS_close(myfile);
@@ -176,7 +176,7 @@ namespace chailove {
 	}
 
 	bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
-		std::cout << "[filesystem] Mounting " << archive << " to " << mountpoint << std::endl;
+		std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " to " << mountpoint << std::endl;
 		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
 		return returnValue != 0;
 	}
@@ -200,7 +200,7 @@ namespace chailove {
 			PHYSFS_freeList(rc);
 		}
 		else {
-			std::cout << "Error enumerating files from " << dir << std::endl;
+			std::cout << "[ChaiLove] [filesystem] Error enumerating files from " << dir << std::endl;
 		}
 
 		return result;

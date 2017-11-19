@@ -122,7 +122,7 @@ bool ChaiLove::update() {
  */
 void ChaiLove::reset() {
 	// Tell the script that we are to reset the game.
-	std::cout << "[game] Reset" << std::endl;
+	std::cout << "[ChaiLove] Reset" << std::endl;
 	script->reset();
 }
 
@@ -143,7 +143,7 @@ void ChaiLove::draw() {
 
 		// Flip the buffer.
 		if (SDL_Flip(screen) == -1) {
-			std::cout << "[game] Failed to swap the buffers: " << SDL_GetError() << std::endl;
+			std::cout << "[ChaiLove] Failed to swap the buffers: " << SDL_GetError() << std::endl;
 		}
 	}
 }
