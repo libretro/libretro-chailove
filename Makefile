@@ -39,6 +39,9 @@ test-script: all
 docs: dependencies
 	doxygen docs/Doxyfile
 
+docs-deploy: docs
+	git subtree push --prefix docs/html origin gh-pages
+
 noscript: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
