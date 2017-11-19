@@ -11,19 +11,19 @@
  *
  * ## Modules
  *
- * - \link chailove::audio audio \endlink
- * - \link chailove::event event \endlink
- * - \link chailove::filesystem filesystem \endlink
- * - \link chailove::font font \endlink
- * - \link chailove::graphics graphics \endlink
- * - \link chailove::image image \endlink
- * - \link chailove::joystick joystick \endlink
- * - \link chailove::keyboard keyboard \endlink
- * - \link chailove::script script \endlink
- * - \link chailove::math math \endlink
- * - \link chailove::mouse mouse \endlink
- * - \link chailove::timer timer \endlink
- * - \link chailove::window window \endlink
+ * - \link Modules::audio audio \endlink
+ * - \link Modules::event event \endlink
+ * - \link Modules::filesystem filesystem \endlink
+ * - \link Modules::font font \endlink
+ * - \link Modules::graphics graphics \endlink
+ * - \link Modules::image image \endlink
+ * - \link Modules::joystick joystick \endlink
+ * - \link Modules::keyboard keyboard \endlink
+ * - \link Modules::script script \endlink
+ * - \link Modules::math math \endlink
+ * - \link Modules::mouse mouse \endlink
+ * - \link Modules::timer timer \endlink
+ * - \link Modules::window window \endlink
  *
  * ## Example
  *
@@ -63,26 +63,28 @@
 
 #include "SDL.h"
 #include "libretro.h"
-#include "chailove/keyboard.h"
-#include "chailove/system/Config.h"
-#include "chailove/script.h"
-#include "chailove/filesystem.h"
-#include "chailove/graphics.h"
-#include "chailove/image.h"
-#include "chailove/system.h"
-#include "chailove/sound.h"
-#include "chailove/font.h"
-#include "chailove/timer.h"
-#include "chailove/audio.h"
-#include "chailove/joystick.h"
-#include "chailove/mouse.h"
-#include "chailove/window.h"
-#include "chailove/math.h"
-#include "chailove/event.h"
+#include "Modules/keyboard.h"
+#include "Types/System/Config.h"
+#include "Modules/script.h"
+#include "Modules/filesystem.h"
+#include "Modules/graphics.h"
+#include "Modules/image.h"
+#include "Modules/system.h"
+#include "Modules/sound.h"
+#include "Modules/font.h"
+#include "Modules/timer.h"
+#include "Modules/audio.h"
+#include "Modules/joystick.h"
+#include "Modules/mouse.h"
+#include "Modules/window.h"
+#include "Modules/math.h"
+#include "Modules/event.h"
 
 #ifdef __HAVE_TESTS__
 #include "test/Test.h"
 #endif
+
+using Types::System::Config;
 
 class ChaiLove {
 public:
@@ -93,22 +95,22 @@ public:
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
 
-	chailove::Config config;
-	chailove::keyboard keyboard;
-	chailove::script* script;
-	chailove::filesystem filesystem;
-	chailove::graphics graphics;
-	chailove::image image;
-	chailove::system system;
-	chailove::sound sound;
-	chailove::font font;
-	chailove::timer timer;
-	chailove::audio audio;
-	chailove::joystick joystick;
-	chailove::mouse mouse;
-	chailove::math math;
-	chailove::window window;
-	chailove::event event;
+	Config config;
+	Modules::keyboard keyboard;
+	Modules::script* script;
+	Modules::filesystem filesystem;
+	Modules::graphics graphics;
+	Modules::image image;
+	Modules::system system;
+	Modules::sound sound;
+	Modules::font font;
+	Modules::timer timer;
+	Modules::audio audio;
+	Modules::joystick joystick;
+	Modules::mouse mouse;
+	Modules::math math;
+	Modules::window window;
+	Modules::event event;
 
 	void quit(void);
 	bool load(const std::string& file);

@@ -11,9 +11,9 @@
 #include "Test.h"
 #include "../src/ChaiLove.h"
 
-ChaiLove* app;
+using Types::System::Config;
 
-void Test::conf(chailove::Config& t) {
+void Test::conf(Config& t) {
 	t.window.width = 1080;
 	t.window.height = 768;
 }

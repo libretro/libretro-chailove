@@ -2,12 +2,13 @@
 # ChaiLove
 SOURCES_CXX += $(wildcard \
 	src/*.cpp \
-	src/chailove/*.cpp \
+	src/Modules/*.cpp \
+	src/Types/*.cpp \
+	src/Types/Audio/*.cpp \
+	src/Types/Graphics/*.cpp \
+	src/Types/Input/*.cpp \
+	src/Types/System/*.cpp \
 	test/*.cpp \
-	src/chailove/graphics/*.cpp \
-	src/chailove/input/*.cpp \
-	src/chailove/audio/*.cpp \
-	src/chailove/system/*.cpp \
 )
 
 # filesystem

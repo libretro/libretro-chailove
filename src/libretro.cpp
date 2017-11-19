@@ -365,13 +365,14 @@ void retro_init(void) {
 		// make retro_save_directory the same in case RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY is not implemented by the frontend
 		retro_save_directory = retro_system_directory;
 	}
-
+    /*
 	if (retro_system_directory == NULL) {
 		std::cout << "[ChaiLove] " << RETRO_DIR << std::endl;
 	}
 	else {
 		std::cout << "[ChaiLove] " << RETRO_DIR << retro_system_directory << std::endl;
 	}
+	*/
 
 	//std::cout << retro_system_conf, "%s/testsdl.cfg\n",RETRO_DIR);
 	//std::cout << "[ChaiLove] SYSTEM_DIRECTORY " << retro_system_directory << std::endl;
