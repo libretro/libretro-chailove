@@ -7,6 +7,9 @@
 #include "physfs.h"
 
 namespace chailove {
+	/**
+	 * \brief Provides an interface to the user's filesystem.
+	 */
 	class filesystem {
 	public:
 		bool load(const std::string& file);
