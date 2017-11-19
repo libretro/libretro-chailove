@@ -3,7 +3,7 @@
 #include "graphics/Image.h"
 
 namespace chailove {
-	chailove::Image* image::newImage(const std::string& filename) {
+	chailove::Image* image::newImageData(const std::string& filename) {
 		Image* image = new chailove::Image(filename);
 		if (image->loaded()) {
 			return image;

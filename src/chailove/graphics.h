@@ -13,7 +13,7 @@
 namespace chailove {
 
 	/**
-	 * \brief The primary purpose of the graphics module is to draw to the screen.
+	 * @brief The primary purpose of the graphics module is to draw to the screen.
 	 */
 	class graphics {
 	public:

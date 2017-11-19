@@ -78,6 +78,7 @@ namespace chailove {
 		// Add SoundData.
 		chai.add(user_type<SoundData>(), "SoundData");
 		chai.add(fun(&SoundData::isLooping), "isLooping");
+		chai.add(fun(&SoundData::isPlaying), "isPlaying");
 		chai.add(fun(&SoundData::setLooping), "setLooping");
 		chai.add(fun(&SoundData::stop), "stop");
 		chai.add(fun(&SoundData::play), "play");
@@ -163,7 +164,7 @@ namespace chailove {
 		chai.add_global(var(std::ref(app->event)), "event");
 
 		// Register the Image module.
-		chai.add(fun(&image::newImage), "newImage");
+		chai.add(fun(&image::newImageData), "newImageData");
 		chai.add_global(var(std::ref(app->image)), "image");
 
 		// Register the Filesystem module.

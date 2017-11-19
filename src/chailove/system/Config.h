@@ -19,13 +19,33 @@ namespace chailove {
 		bool sound = true;
 	};
 
+	/**
+	 * @brief The configuration object for ChaiLove.
+	 */
 	class Config {
 	public:
 		Config();
+		/**
+		 * @brief The machine name of the project.
+		 */
 		std::string identity = "chailove";
+		/**
+		 * @brief The ChaiLove version the game was made on.
+		 */
 		std::string version;
+
+		/**
+		 * @brief The window configuration.
+		 */
 		windowConfig window;
+		/**
+		 * @brief Enable or disable modules.
+		 */
 		moduleConfig modules;
+
+		/**
+		 * @brief Generic map of boolean configuration options.
+		 */
 		std::map<std::string, bool> options;
 	};
 }

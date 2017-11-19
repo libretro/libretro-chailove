@@ -4,6 +4,9 @@
 #include "SDL.h"
 
 namespace chailove {
+	/**
+	 * @brief An x, y, width, height, source width and source height.
+	 */
 	class Quad {
 	public:
 		int x, y, width, height, sw, sh;

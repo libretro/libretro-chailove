@@ -8,6 +8,9 @@
 #include "Image.h"
 
 namespace chailove {
+	/**
+	 * @brief Defines the shape of characters that can be drawn onto the screen.
+	 */
 	class Font {
 	public:
 		Font();
@@ -20,8 +23,17 @@ namespace chailove {
 		//TTF_Font* ttfFont = NULL;
 		TTY_Font* ttyFont = NULL;
 		int ttyFontWidth, ttyFontHeight;
+		/**
+		 * @brief Determines the vertical size the given text needs.
+		 */
 		int getHeight(const std::string& text);
+		/**
+		 * @brief Determines the vertical size a line of text needs.
+		 */
 		int getHeight();
+		/**
+		 * @brief Determines the horizontal size a line of text needs.
+		 */
 		int getWidth(const std::string& text);
 
 		Image* m_image;

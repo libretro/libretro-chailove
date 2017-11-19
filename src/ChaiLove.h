@@ -21,7 +21,6 @@
  * - \link chailove::keyboard keyboard \endlink
  * - \link chailove::math math \endlink
  * - \link chailove::mouse mouse \endlink
- * - \link chailove::script script \endlink
  * - \link chailove::timer timer \endlink
  * - \link chailove::window window \endlink
  *
