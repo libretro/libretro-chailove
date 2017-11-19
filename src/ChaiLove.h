@@ -27,9 +27,30 @@
  *
  * ## Example
  *
- * The below is a simple hello world example.
+ * The below `main.chai` is a simple hello world example:
  *
- * \snippet simple/main.chai
+ * @code
+ * global logo
+ * global x
+ * global y
+ *
+ * def load() {
+ * 	graphics.setBackgroundColor(54, 172, 248)
+ * 	logo = graphics.newImage("logo.png")
+ * 	x = 10.0f
+ * 	y = 10.0f
+ * }
+ *
+ * def draw() {
+ *     graphics.print("Hello World!", 100, 100)
+ *     graphics.draw(logo, x, y)
+ * }
+ *
+ * def update(delta) {
+ * 	x += delta * 60.0f
+ * 	y += delta * 30.0f
+ * }
+ * @endcode
  */
 
  #ifndef CHAILOVE_GAME_H
