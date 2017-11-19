@@ -1,16 +1,16 @@
-#ifndef CHAILOVE_UTILITY_IMAGEDATA_H
-#define CHAILOVE_UTILITY_IMAGEDATA_H
+#ifndef CHAILOVE_UTILITY_Image_H
+#define CHAILOVE_UTILITY_Image_H
 
 #include <SDL.h>
 #include <string>
 
 namespace chailove {
-	class ImageData {
+	class Image {
 	public:
 		SDL_Surface* surface;
-		ImageData(SDL_RWops* rw);
-		ImageData(const std::string& filename);
-		~ImageData();
+		Image(SDL_RWops* rw);
+		Image(const std::string& filename);
+		~Image();
 		bool loaded();
 		bool loadFromRW(SDL_RWops* rw);
 		bool destroy();

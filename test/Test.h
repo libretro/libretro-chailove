@@ -3,6 +3,7 @@
 #ifndef CHAILOVE_TEST_TEST_H
 #define CHAILOVE_TEST_TEST_H
 
+#include "../src/chailove/graphics/Image.h"
 #include "../src/chailove/graphics/Font.h"
 #include "../src/chailove/system/Config.h"
 #include "../src/chailove/audio/SoundData.h"
@@ -17,7 +18,7 @@ public:
 	chailove::Font* thefont;
 	chailove::Font* secondfont;
 	chailove::SoundData* jump;
-	chailove::ImageData* img;
+	chailove::Image* img;
 };
 
 #endif
