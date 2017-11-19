@@ -1,6 +1,7 @@
 #ifndef CHAILOVE_SYSTEM_H
 #define CHAILOVE_SYSTEM_H
 
+#include <vector>
 #include <string>
 
 namespace chailove {
@@ -13,6 +14,16 @@ namespace chailove {
 		 * @brief Gets the current operating system.
 		 */
 		std::string getOS();
+
+		/**
+		 * @brief Retreves the running ChaiLove version information.
+		 */
+		std::vector<int> getVersion();
+
+		/**
+		 * @brief Retreves the running ChaiLove version, as a string.
+		 */
+		std::string getVersionString();
 	};
 }
 

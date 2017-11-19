@@ -49,6 +49,7 @@ namespace chailove {
 
 		// ChaiScript Standard Library Additions
 		// This adds some basic type definitions to ChaiScript.
+		chai.add(bootstrap::standard_library::vector_type<std::vector<int>>("VectorInt"));
 		chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
 		chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
 
@@ -183,6 +184,8 @@ namespace chailove {
 
 		// Register the System module.
 		chai.add(fun(&system::getOS), "getOS");
+		chai.add(fun(&system::getVersion), "getVersion");
+		chai.add(fun(&system::getVersionString), "getVersionString");
 		chai.add_global(var(std::ref(app->system)), "system");
 
 		// Register the Mouse module.
