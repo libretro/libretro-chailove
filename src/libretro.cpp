@@ -67,7 +67,7 @@ short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index
 #endif
 
 void retro_set_environment(retro_environment_t cb) {
-	bool no_rom = true;
+	bool no_rom = false;
 	environ_cb = cb;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
