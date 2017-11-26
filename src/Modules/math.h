@@ -35,21 +35,24 @@ namespace Modules {
 		 */
 		int getRandomSeed();
 
-		/**
-		 * @brief Compress the given string.
-		 *
-		 * @param str The string to compress.
-		 *
-		 * @return Compressed data in the form of a string.
-		 */
 		std::string compress(const std::string& str);
 
 		/**
-		 * @brief Decompress the given string.
+		 * @brief Compresses a string or data using a specific compression level.
 		 *
-		 * @param str The string to decompress.
+		 * @param str The raw (un-compressed) string to compress.
+		 * @param level (-1) The level of compression to use, between 0 and 9. -1 indicates the default level.
 		 *
-		 * @return The decompressed string.
+		 * @return Compressed data in the form of a string.
+		 */
+		std::string compress(const std::string& str, int level);
+
+		/**
+		 * @brief Decompresses a compressed string.
+		 *
+		 * @param str A string containing data previously compressed with math.compress().
+		 *
+		 * @return A string containing the raw decompressed data.
 		 */
 		std::string decompress(const std::string& str);
 

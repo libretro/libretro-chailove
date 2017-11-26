@@ -50,7 +50,13 @@ namespace Modules {
 	}
 
 	std::string math::compress(const std::string& str) {
-		int compressionlevel = Z_BEST_COMPRESSION;
+		return compress(str, Z_BEST_SPEED);
+	}
+
+	std::string math::compress(const std::string& str, int compressionlevel) {
+		if (compressionlevel < 0 || compressionlevel > 9) {
+			compressionlevel = Z_BEST_SPEED;
+		}
 	    z_stream zs;
 	    memset(&zs, 0, sizeof(zs));
 
