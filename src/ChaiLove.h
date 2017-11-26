@@ -1,10 +1,4 @@
 /**
- * \file ChaiLove.h
- *
- * Main header file for ChaiLove.
- */
-
-/**
  * \mainpage ChaiLove API
  *
  * This is the API documentation for [ChaiLove](https://github.com/RobLoach/ChaiLove). For more information about ChaiLove itself, see the [ChaiLove homepage](https://github.com/RobLoach/ChaiLove).
@@ -57,9 +51,9 @@
 #define CHAILOVE_GAME_H
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 8
+#define CHAILOVE_VERSION_MINOR 9
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.8.0"
+#define CHAILOVE_VERSION_STRING "0.9.0"
 
 #include "SDL.h"
 #include "libretro.h"
