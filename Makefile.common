@@ -1,4 +1,3 @@
-
 # ChaiLove
 SOURCES_CXX += $(wildcard \
 	src/*.cpp \
@@ -16,6 +15,20 @@ FLAGS += -Ivendor/filesystem
 
 # libretro-common
 FLAGS += -Ivendor/libretro-common/include
+
+# zlib
+SOURCES_C += \
+	vendor/zlib/crc32.c \
+	vendor/zlib/deflate.c \
+	vendor/zlib/trees.c \
+	vendor/zlib/inftrees.c \
+	vendor/zlib/adler32.c \
+	vendor/zlib/zutil.c \
+	vendor/zlib/inflate.c \
+	vendor/zlib/infback.c \
+	vendor/zlib/inffast.c
+FLAGS += -Ivendor/zlib
+FLAGS += -DWANT_ZLIB
 
 # PhysFS
 FLAGS += -Ivendor/physfs/src

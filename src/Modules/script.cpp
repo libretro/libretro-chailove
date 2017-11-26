@@ -251,6 +251,8 @@ namespace Modules {
 		chai.add(fun<void, math, int>(&math::setRandomSeed), "setRandomSeed");
 		chai.add(fun<void, math, int, int>(&math::setRandomSeed), "setRandomSeed");
 		chai.add(fun(&math::getRandomSeed), "getRandomSeed");
+		chai.add(fun(&math::compress), "compress");
+		chai.add(fun(&math::decompress), "decompress");
 		chai.add_global(var(std::ref(app->math)), "math");
 
 		// Load main.chai if it's a ChaiLove file.
