@@ -1,4 +1,21 @@
 
+global keyPressed;
+global keyReleased;
+
+def load() {
+	keyPressed = "a"
+	keyReleased = "a"
+}
+
 def draw() {
-	graphics.print("Test1", 5, 20)
+	graphics.print(keyPressed, 5, 20)
+	graphics.print(keyReleased, 5, 100)
+}
+
+def keypressed(key, scancode) {
+	keyPressed = key
+}
+
+def keyreleased(key, scancode) {
+	keyReleased = key
 }

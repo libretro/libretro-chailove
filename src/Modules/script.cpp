@@ -168,6 +168,8 @@ namespace Modules {
 		// Register the Keyboard module.
 		chai.add(fun<bool, keyboard, const std::string&>(&keyboard::isDown), "isDown");
 		chai.add(fun(&keyboard::setKeyRepeat), "setKeyRepeat");
+		chai.add(fun(&keyboard::getKeyFromScancode), "getKeyFromScancode");
+		chai.add(fun(&keyboard::getScancodeFromKey), "getScancodeFromKey");
 		chai.add_global(var(std::ref(app->keyboard)), "keyboard");
 
 		// Register the Event module.
@@ -340,6 +342,20 @@ namespace Modules {
 			hasmousemove = false;
 		}
 		try {
+			chaikeypressed = chai.eval<std::function<void (const std::string&, int)> >("keypressed");
+		}
+		catch (const std::exception& e) {
+			std::cout << "[ChaiLove] [script] Skipping keypressed() " << e.what() << std::endl;
+			haskeypressed = false;
+		}
+		try {
+			chaikeyreleased = chai.eval<std::function<void (const std::string&, int)> >("keyreleased");
+		}
+		catch (const std::exception& e) {
+			std::cout << "[ChaiLove] [script] Skipping keyreleased() " << e.what() << std::endl;
+			haskeyreleased = false;
+		}
+		try {
 			chailoadstate = chai.eval<std::function<bool (std::string)> >("loadstate");
 		}
 		catch (const std::exception& e) {
@@ -494,6 +510,34 @@ namespace Modules {
 			catch (const std::exception& e) {
 				std::cout << "[ChaiLove] [script] Failed to call mousemove(): " << e.what() << std::endl;
 				hasmousemove = false;
+			}
+		}
+		#endif
+	}
+
+	void script::keypressed(const std::string& key, int scancode) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (haskeypressed) {
+			try {
+				chaikeypressed(key, scancode);
+			}
+			catch (const std::exception& e) {
+				std::cout << "[ChaiLove] [script] Failed to call keypressed(): " << e.what() << std::endl;
+				haskeypressed = false;
+			}
+		}
+		#endif
+	}
+
+	void script::keyreleased(const std::string& key, int scancode) {
+		#ifdef __HAVE_CHAISCRIPT__
+		if (haskeyreleased) {
+			try {
+				chaikeyreleased(key, scancode);
+			}
+			catch (const std::exception& e) {
+				std::cout << "[ChaiLove] [script] Failed to call keyreleased(): " << e.what() << std::endl;
+				haskeyreleased = false;
 			}
 		}
 		#endif
