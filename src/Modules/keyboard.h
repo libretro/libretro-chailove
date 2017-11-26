@@ -26,9 +26,20 @@ namespace Modules {
 		 */
 		void setKeyRepeat(int delay = 400, int interval = 30);
 		bool update();
-		int getKeyCodeFromName(const std::string& name);
+
+		/**
+		 * @brief Retrieve a scancode from the given key.
+		 */
+		int getScancodeFromKey(const std::string& key);
+		/**
+		 * @brief Retrieve a key from the given scancode.
+		 */
+		std::string getKeyFromScancode(int scancode);
 
 		std::map<std::string, int> keyCodes;
+
+		void eventKeyDown(int key);
+		void eventKeyUp(int key);
 	};
 }
 

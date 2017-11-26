@@ -124,6 +124,17 @@ namespace Modules {
 		 * @brief Called when the mouse is moved.
 		 */
 		void mousemove(int x, int y);
+
+		/**
+		 * @brief Called when a key on the keyboard has been pressed.
+		 */
+		void keypressed(const std::string& key, int scancode);
+
+		/**
+		 * @brief Called when a key on the keyboard is released.
+		 */
+		void keyreleased(const std::string& key, int scancode);
+
 		/**
 		 * @brief Called when requested to save the current state.
 		 *
@@ -151,6 +162,8 @@ namespace Modules {
 		std::function<void (int, int, int)> chaimousepressed;
 		std::function<void (int, int, int)> chaimousereleased;
 		std::function<void (int, int)> chaimousemove;
+		std::function<void (const std::string&, int)> chaikeypressed;
+		std::function<void (const std::string&, int)> chaikeyreleased;
 		bool hasUpdate = true;
 		bool hasDraw = true;
 		bool hasjoystickpressed = true;
@@ -158,6 +171,8 @@ namespace Modules {
 		bool hasmousepressed = true;
 		bool hasmousereleased = true;
 		bool hasmousemove = true;
+		bool haskeypressed = true;
+		bool haskeyreleased = true;
 		bool hasloadstate = true;
 		bool hassavestate = true;
 		bool hasload = true;

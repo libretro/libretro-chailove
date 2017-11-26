@@ -2,7 +2,8 @@
 
 #include <string>
 #include <iostream>
-//#include "SDL.h"
+#include "../ChaiLove.h"
+#include "SDL.h"
 
 namespace Modules {
 
@@ -11,12 +12,8 @@ namespace Modules {
 	}
 
 	bool keyboard::isDown(const std::string& key) {
-		int keycode = getKeyCodeFromName(key);
+		int keycode = getScancodeFromKey(key);
 		return isDown(keycode);
-	}
-
-	int keyboard::getKeyCodeFromName(const std::string& name) {
-		return keyCodes[name];
 	}
 
 	void keyboard::setKeyRepeat(int delay, int interval) {
@@ -39,8 +36,28 @@ namespace Modules {
 		return true;
 	}
 
+	int keyboard::getScancodeFromKey(const std::string& name) {
+		return keyCodes[name];
+	}
+
+	std::string keyboard::getKeyFromScancode(int scancode) {
+		std::string name(SDL_GetKeyName((SDLKey)scancode));
+		return name;
+	}
+
 	bool keyboard::update() {
 		keys = SDL_GetKeyState(NULL);
 		return true;
+	}
+
+	void keyboard::eventKeyDown(int key) {
+		std::string name = getKeyFromScancode(key);
+		ChaiLove* app = ChaiLove::getInstance();
+		app->script->keypressed(name, key);
+	}
+	void keyboard::eventKeyUp(int key) {
+		std::string name = getKeyFromScancode(key);
+		ChaiLove* app = ChaiLove::getInstance();
+		app->script->keyreleased(name, key);
 	}
 }
