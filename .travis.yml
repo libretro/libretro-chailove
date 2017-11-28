@@ -32,9 +32,6 @@ addons:
     - libc6-dbg
 
 script:
-  # Link gcc-6 and g++-6 to their standard commands
-  #- sudo ln -sf /usr/bin/gcc-7 /usr/local/bin/gcc
-  #- sudo ln -sf /usr/bin/g++-7 /usr/local/bin/g++
   # Check versions of gcc and g++
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then gcc --version ; fi
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then g++ --version ; fi
