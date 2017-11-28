@@ -586,24 +586,3 @@ else
 	LINKOUT  = -o
 	LD = $(CC)
 endif
-
-ifeq ($(platform), theos_ios)
-COMMON_FLAGS := -DIOS $(COMMON_DEFINES) $(INCFLAGS) -I$(THEOS_INCLUDE_PATH) -Wno-error
-$(LIBRARY_NAME)_CFLAGS += $(COMMON_FLAGS) $(CFLAGS)
-${LIBRARY_NAME}_FILES = $(SOURCES_C)
-include $(THEOS_MAKE_PATH)/library.mk
-else
-all: $(TARGET)
-$(TARGET): $(OBJECTS)
-ifeq ($(STATIC_LINKING),1)
-ifneq (,$(findstring msvc,$(platform)))
-	$(LD) $(LINKOUT)$@ $(OBJECTS)
-else
-	$(AR) rcs $@ $(OBJECTS)
-endif
-else
-	$(LD) $(LINKOUT)$@ $(SHARED) $(OBJECTS) $(LDFLAGS) $(LIBS)
-endif
-
-print-%:
-	@echo '$*=$($*)'
