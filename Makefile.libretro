@@ -1,4 +1,18 @@
-DEBUG = 0
+DEBUG=0
+PSS_STYLE=1
+EXTERNAL_ZLIB=0
+HAVE_GRIFFIN=1
+STATIC_LINKING=0
+ENDIANNESS_DEFINES=
+
+SPACE :=
+SPACE := $(SPACE) $(SPACE)
+BACKSLASH :=
+BACKSLASH := \$(BACKSLASH)
+filter_out1 = $(filter-out $(firstword $1),$1)
+filter_out2 = $(call filter_out1,$(call filter_out1,$1))
+unixpath = $(subst \,/,$1)
+unixcygpath = /$(subst :,,$(call unixpath,$1))
 
 ifeq ($(platform),)
 	platform = unix
@@ -32,6 +46,7 @@ else ifneq ($(findstring MINGW,$(shell uname -a)),)
 	system_platform = win
 endif
 
+TARGET_NAME := chailove
 GIT_VERSION := " $(shell git rev-parse --short HEAD || echo unknown)"
 ifneq ($(GIT_VERSION)," unknown")
 	CFLAGS += -DGIT_VERSION=\"$(GIT_VERSION)\"
@@ -527,3 +542,81 @@ ifeq ($(EXTERNAL_ZLIB), 1)
 endif
 
 CORE_DIR := .
+
+include Makefile.common
+
+CFLAGS += -DWANT_GRIFFIN
+
+OBJECTS := $(SOURCES_C:.c=.o)
+
+DEFINES := $(COREDEFINES) $(PLATFORM_DEFINES)
+
+ifeq ($(STATIC_LINKING),1)
+	DEFINES += -DSTATIC_LINKING
+endif
+
+ifeq ($(platform), sncps3)
+WARNING_DEFINES =
+else ifneq (,$(findstring msvc,$(platform)))
+WARNING_DEFINES =
+LIBM :=
+else
+WARNING_DEFINES = -Wno-write-strings
+endif
+
+CFLAGS += $(COREDEFINES) $(fpic) $(WARNING_DEFINES) $(DEFINES) $(ENDIANNESS_DEFINES)
+LDFLAGS += $(LIBM)
+
+ifeq ($(platform), psp1)
+	INCFLAGS += -I$(shell psp-config --pspsdk-path)/include
+endif
+
+
+ifneq (,$(findstring msvc,$(platform)))
+	OBJOUT = -Fo
+	LINKOUT = -out:
+ifeq ($(STATIC_LINKING),1)
+	LD ?= lib.exe
+	STATIC_LINKING=0
+else
+	LD = link.exe
+endif
+else
+	OBJOUT   = -o
+	LINKOUT  = -o
+	LD = $(CC)
+endif
+
+ifeq ($(platform), theos_ios)
+COMMON_FLAGS := -DIOS $(COMMON_DEFINES) $(INCFLAGS) -I$(THEOS_INCLUDE_PATH) -Wno-error
+$(LIBRARY_NAME)_CFLAGS += $(COMMON_FLAGS) $(CFLAGS)
+${LIBRARY_NAME}_FILES = $(SOURCES_C)
+include $(THEOS_MAKE_PATH)/library.mk
+else
+all: $(TARGET)
+$(TARGET): $(OBJECTS)
+ifeq ($(STATIC_LINKING),1)
+ifneq (,$(findstring msvc,$(platform)))
+	$(LD) $(LINKOUT)$@ $(OBJECTS)
+else
+	$(AR) rcs $@ $(OBJECTS)
+endif
+else
+	$(LD) $(LINKOUT)$@ $(SHARED) $(OBJECTS) $(LDFLAGS) $(LIBS)
+endif
+
+%.o: %.c
+	$(CC) -c $(OBJOUT)$@ $< $(CFLAGS) $(INCFLAGS)
+
+clean-objs:
+	rm -f $(OBJECTS)
+
+clean:
+	rm -f $(OBJECTS)
+	rm -f $(TARGET)
+
+.PHONY: clean clean-objs
+endif
+
+print-%:
+	@echo '$*=$($*)'
