@@ -52,12 +52,68 @@ SOURCES_C += $(wildcard \
 	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/*.c \
 )
 
+# FreeType
+# See https://github.com/emscripten-ports/FreeType/blob/master/builds/amiga/makefile
+FLAGS += -Ivendor/libretro-deps/freetype/include
+FLAGS += -DFT2_BUILD_LIBRARY \
+	-DFT_USE_AUTOFIT \
+	-DFT_USE_RASTER \
+	-DFT_USE_SMOOTH \
+	-DFT_USE_TT \
+	-DFT_USE_T1 \
+	-DFT_USE_T42 \
+	-DFT_USE_T1CID \
+	-DFT_USE_CFF \
+	-DFT_USE_OTV \
+	-DFT_USE_GXV
+
+SOURCES_C += \
+	vendor/libretro-deps/freetype/src/base/ftbase.c \
+	vendor/libretro-deps/freetype/src/base/ftinit.c \
+	vendor/libretro-deps/freetype/src/base/ftsystem.c \
+	vendor/libretro-deps/freetype/src/base/ftdebug.c \
+	vendor/libretro-deps/freetype/src/base/ftbbox.c \
+	vendor/libretro-deps/freetype/src/base/ftbdf.c \
+	vendor/libretro-deps/freetype/src/base/ftstroke.c \
+	vendor/libretro-deps/freetype/src/base/ftbitmap.c \
+	vendor/libretro-deps/freetype/src/base/ftcid.c \
+	vendor/libretro-deps/freetype/src/base/ftfntfmt.c \
+	vendor/libretro-deps/freetype/src/base/ftfstype.c \
+	vendor/libretro-deps/freetype/src/base/ftgasp.c \
+	vendor/libretro-deps/freetype/src/base/ftglyph.c \
+	vendor/libretro-deps/freetype/src/base/ftgxval.c \
+	vendor/libretro-deps/freetype/src/base/ftlcdfil.c \
+	vendor/libretro-deps/freetype/src/base/ftmm.c \
+	vendor/libretro-deps/freetype/src/base/ftotval.c \
+	vendor/libretro-deps/freetype/src/base/ftpatent.c \
+	vendor/libretro-deps/freetype/src/base/ftpfr.c \
+	vendor/libretro-deps/freetype/src/base/ftsynth.c \
+	vendor/libretro-deps/freetype/src/base/fttype1.c \
+	vendor/libretro-deps/freetype/src/base/ftwinfnt.c \
+	vendor/libretro-deps/freetype/src/autofit/autofit.c \
+	vendor/libretro-deps/freetype/src/pshinter/pshinter.c \
+	vendor/libretro-deps/freetype/src/psaux/psaux.c \
+	vendor/libretro-deps/freetype/src/psnames/psnames.c \
+	vendor/libretro-deps/freetype/src/raster/raster.c \
+	vendor/libretro-deps/freetype/src/smooth/smooth.c \
+	vendor/libretro-deps/freetype/src/cache/ftcache.c \
+	vendor/libretro-deps/freetype/src/bdf/bdf.c \
+	vendor/libretro-deps/freetype/src/cff/cff.c \
+	vendor/libretro-deps/freetype/src/pcf/pcf.c \
+	vendor/libretro-deps/freetype/src/winfonts/winfnt.c \
+	vendor/libretro-deps/freetype/src/sfnt/sfnt.c \
+	vendor/libretro-deps/freetype/src/pfr/pfr.c \
+	vendor/libretro-deps/freetype/src/truetype/truetype.c \
+	vendor/libretro-deps/freetype/src/type1/type1.c \
+	vendor/libretro-deps/freetype/src/type42/type42.c \
+	vendor/libretro-deps/freetype/src/cid/type1cid.c \
+	vendor/libretro-deps/freetype/src/gzip/ftgzip.c \
+	vendor/libretro-deps/freetype/src/bzip2/ftbzip2.c \
+	vendor/libretro-deps/freetype/src/lzw/ftlzw.c
+
 # SDL_ttf
-# TODO Fix TTF Support https://github.com/RobLoach/ChaiLove/issues/48
-#FLAGS += -Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
-#SOURCES_C += $(wildcard \
-#	vendor/sdl-libretro/tests/SDL_ttf-2.0.11/*.c \
-#)
+FLAGS += -Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
+SOURCES_C += vendor/sdl-libretro/tests/SDL_ttf-2.0.11/SDL_ttf.c
 
 # SDL_stbimage
 FLAGS += -Ivendor/Snippets
