@@ -547,8 +547,6 @@ include Makefile.common
 
 CFLAGS += -DWANT_GRIFFIN
 
-OBJECTS := $(SOURCES_C:.c=.o)
-
 DEFINES := $(COREDEFINES) $(PLATFORM_DEFINES)
 
 ifeq ($(STATIC_LINKING),1)
