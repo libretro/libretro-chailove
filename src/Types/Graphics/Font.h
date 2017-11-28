@@ -18,6 +18,10 @@ namespace Types {
 		Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters);
 		Font(const std::string& filename, int ptsize);
 		~Font();
+
+		/**
+		 * @brief Retrieves whether or not the font is loaded.
+		 */
 		bool loaded();
 		bool destroy();
 		void print(const std::string& text, int x, int y, int r, int g, int b, int a);

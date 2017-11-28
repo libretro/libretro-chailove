@@ -76,6 +76,10 @@ namespace Modules {
 
 		/**
 		 * @brief Draws an image on screen.
+		 *
+		 * @param image The image to draw on the screen.
+		 * @param x The position to draw the object (x-axis).
+		 * @param y The position to draw the object (y-axis).
 		 */
 		void draw(Image* image, int x, int y);
 
@@ -90,26 +94,51 @@ namespace Modules {
 		Quad newQuad(int x, int y, int width, int height, int sw, int sh);
 
 		/**
-		 * @brief Creates a new Image.
+		 * @brief Creates a new Image from a given filepath.
+		 *
+		 * @param filename The filepath to the image file.
+		 *
+		 * @return An image object which can be drawn to the screen.
 		 */
 		Image* newImage(const std::string& filename);
 
 		Font* newFont();
+
 		/**
-		 * @brief Creates a new Font from a TrueType Font or BMFont file.
+		 * @brief Creates a new TrueType font, with a default size of 12.
+		 *
+		 * @param filename The path to the TrueType font.
+		 *
+		 * @return The created TrueType font.
 		 */
 		Font* newFont(const std::string& filename);
+
 		/**
-		 * @brief Creates a new Font from a TrueType Font or BMFont file.
+		 * @brief Creates a new TrueType font, with the given font size.
+		 *
+		 * @param filename The path to the TrueType font.
+		 * @param size The size of the font to create.
+		 *
+		 * @return The created TrueType font.
 		 */
 		Font* newFont(const std::string& filename, int size);
+
 		/**
-		 * @brief Creates a new BMFont.
+		 * @brief Creates a new BMFont with the given spec.
+		 *
+		 * @param filename The path to the font image.
+		 * @param glyphWidth The width of each character.
+		 * @param glyphHeight The height of each character.
+		 * @param letters The letters presented in the font image.
+		 *
+		 * @return The created BMFont.
 		 */
 		Font* newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters);
 
 		/**
 		 * @brief Set an already-loaded Font as the current font.
+		 *
+		 * @param The font to set as the active font.
 		 */
 		void setFont(Font* font);
 		void setFont();
