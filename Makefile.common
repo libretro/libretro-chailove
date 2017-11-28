@@ -38,6 +38,9 @@ SOURCES_C += $(wildcard \
 	vendor/physfs/extras/physfsrwops.c \
 	vendor/physfs/src/*.c \
 )
+ifeq ($(platform), osx)
+	FLAGS += -DPHYSFS_PLATFORM_MACOSX
+endif
 
 # SDL_tty
 FLAGS += -Ivendor/SDL_tty/include
