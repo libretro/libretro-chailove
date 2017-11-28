@@ -605,18 +605,5 @@ else
 	$(LD) $(LINKOUT)$@ $(SHARED) $(OBJECTS) $(LDFLAGS) $(LIBS)
 endif
 
-%.o: %.c
-	$(CC) -c $(OBJOUT)$@ $< $(CFLAGS) $(INCFLAGS)
-
-clean-objs:
-	rm -f $(OBJECTS)
-
-clean:
-	rm -f $(OBJECTS)
-	rm -f $(TARGET)
-
-.PHONY: clean clean-objs
-endif
-
 print-%:
 	@echo '$*=$($*)'
