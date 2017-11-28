@@ -5,6 +5,7 @@ compiler: g++
 
 before_install:
   - sudo apt-get -qq update
+  - sudo apt-get upgrade -y
 
 addons:
   apt:
@@ -17,6 +18,9 @@ addons:
     - gcc-5
     - binutils
     - libc6
+    - libc6-amd64
+    - libc6-dev
+    - libc6-dbg
 
 script:
   # Link gcc-6 and g++-6 to their standard commands
