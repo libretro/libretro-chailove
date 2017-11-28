@@ -7,7 +7,13 @@
 namespace Types {
 	namespace System {
 	struct windowConfig {
+		/**
+		 * @brief The width of the screen.
+		 */
 		int width = 800;
+		/**
+		 * @brief The height of the screen.
+		 */
 		int height = 600;
 		int bbp = 32;
 		std::string title = "ChaiLove";
