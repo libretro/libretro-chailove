@@ -1,7 +1,6 @@
 TARGET_NAME := chailove
 
 include Makefile.libretro
-include Makefile.common
 
 ifeq ($(STATIC_LINKING),1)
 	FLAGS += -DSTATIC_LINKING
