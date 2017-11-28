@@ -5,6 +5,10 @@ compiler: g++
 
 before_install:
   - sudo apt-get -qq update
+  - sudo apt-get install g++-7 binutils-2.26
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
+  - export PATH=/usr/lib/binutils-2.26/bin:${PATH}
 
 addons:
   apt:
@@ -13,15 +17,18 @@ addons:
     packages:
     - cmake
     - time
-    - g++-5
-    - gcc-5
+    - g++-7
+    - gcc-7
     - binutils
     - libc6
+    - libc6-amd64
+    - libc6-dev
+    - libc6-dbg
 
 script:
   # Link gcc-6 and g++-6 to their standard commands
-  - sudo ln -sf /usr/bin/gcc-5 /usr/local/bin/gcc
-  - sudo ln -sf /usr/bin/g++-5 /usr/local/bin/g++
+  #- sudo ln -sf /usr/bin/gcc-7 /usr/local/bin/gcc
+  #- sudo ln -sf /usr/bin/g++-7 /usr/local/bin/g++
   # Check versions of gcc and g++
   - gcc --version
   - g++ --version
