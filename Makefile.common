@@ -39,7 +39,7 @@ SOURCES_C += $(wildcard \
 	vendor/physfs/src/*.c \
 )
 ifeq ($(platform), osx)
-	FLAGS += -DPHYSFS_PLATFORM_MACOSX
+	FLAGS += -D__MACH__ -D__APPLE__
 endif
 
 # SDL_tty
