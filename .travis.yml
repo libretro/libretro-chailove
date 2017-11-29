@@ -43,6 +43,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make platform=osx -j2 ; fi
   - make test
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make unit ; fi
 
 cache:
     apt: true
