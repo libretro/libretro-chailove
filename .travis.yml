@@ -1,14 +1,23 @@
-sudo: required
 language: cpp
-dist: trusty
 compiler: g++
 
+matrix:
+  allow_failures:
+    - os: osx
+      osx_image: xcode8.2
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+    - os: osx
+      osx_image: xcode8.2
+
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install g++-7 binutils-2.26
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
-  - export PATH=/usr/lib/binutils-2.26/bin:${PATH}
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo apt-get -qq update ; fi
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo apt-get install g++-7 binutils-2.26 ; fi
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 90 ; fi
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90 ; fi
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then export PATH=/usr/lib/binutils-2.26/bin:${PATH} ; fi
 
 addons:
   apt:
@@ -26,15 +35,13 @@ addons:
     - libc6-dbg
 
 script:
-  # Link gcc-6 and g++-6 to their standard commands
-  #- sudo ln -sf /usr/bin/gcc-7 /usr/local/bin/gcc
-  #- sudo ln -sf /usr/bin/g++-7 /usr/local/bin/g++
   # Check versions of gcc and g++
-  - gcc --version
-  - g++ --version
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then gcc --version ; fi
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then g++ --version ; fi
   # Run through the make commands
   - ./configure
-  - make
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make platform=osx -j2 ; fi
   - make test
 
 cache:
