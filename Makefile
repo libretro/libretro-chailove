@@ -30,7 +30,7 @@ test: all
 	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n    make unit\n\n"
 
 vendor/noarch/noarch: dependencies
-	cd vendor/noarch && make
+	$(MAKE) -C vendor/noarch
 
 unit: vendor/noarch/noarch all
 	vendor/noarch/noarch $(CORE_DIR)/chailove_libretro.so test/unittests/main.chai
