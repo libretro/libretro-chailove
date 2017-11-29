@@ -27,7 +27,13 @@ dependencies:
 	git submodule update --init --recursive
 
 test: all
-	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n"
+	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n    make unit\n\n"
+
+vendor/noarch/noarch: dependencies
+	cd vendor/noarch && make
+
+unit: vendor/noarch/noarch
+	vendor/noarch/noarch $(CORE_DIR)/chailove_libretro.so test/unittests/main.chai
 
 examples: all
 	retroarch -L $(TARGET) examples/benchmark/main.chai

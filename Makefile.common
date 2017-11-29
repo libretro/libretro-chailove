@@ -150,12 +150,6 @@ OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 # Build all the dependencies, and the core.
 all: | dependencies	$(TARGET)
 
-vendor/noarch/noarch: dependencies
-	cd vendor/noarch && make
-
-unit: vendor/noarch/noarch
-	vendor/noarch/noarch $(CORE_DIR)/chailove_libretro.so test/unit.chai
-
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
 else

@@ -1,0 +1,10 @@
+var files = filesystem.getDirectoryItems("/")
+
+var foundUnitChai = false
+for (file : files) {
+	if (file == "assert.chai") {
+		foundUnitChai = true
+	}
+}
+
+assert(foundUnitChai, "filesystem.getDirectoryItems()")

@@ -1,0 +1,24 @@
+var text = "Hello World! Hello World! Hello World!"
+var compressed = math.compress(text)
+assert_not_equal(text, compressed, "math.compress()")
+
+var decompressed = math.decompress(compressed)
+assert_equal(decompressed, text, "math.decompress()")
+
+var num = math.random()
+assert(num >= 0 && num <= 1, "math.random()")
+
+num = math.random(10)
+assert(num >= 0 && num <= 10, "math.random(10)")
+
+num = math.random(10, 100)
+assert(num >= 10 && num <= 100, "math.random(10, 100)")
+
+math.setRandomSeed(10)
+assert(true, "math.setRandomSeed(10)")
+
+num = math.getRandomSeed()
+assert_equal(num, 10, "math.getRandomSeed()")
+
+math.setRandomSeed(15, 100)
+assert_not_equal(math.getRandomSeed(), 10, "math.setRandomSeed(10, 100)")

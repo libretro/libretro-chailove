@@ -1,0 +1,17 @@
+def assert_equal(actual, expected, message) {
+	if (actual == expected) {
+		print(" ✓ " + message)
+	}
+	else {
+		print(" ✗ " + message)
+		print("\t" + to_string(actual) + " != " + to_string(expected) + "\n")
+	}
+}
+
+def assert_not_equal(actual, expected, message) {
+	assert_equal(actual != expected, true, message)
+}
+
+def assert(value, message) {
+	assert_equal(value, true, message)
+}
