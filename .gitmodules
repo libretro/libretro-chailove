@@ -31,3 +31,6 @@
 [submodule "vendor/libretro-deps"]
 	path = vendor/libretro-deps
 	url = https://github.com/libretro/libretro-deps.git
+[submodule "vendor/noarch"]
+	path = vendor/noarch
+	url = https://github.com/RobLoach/noarch.git
