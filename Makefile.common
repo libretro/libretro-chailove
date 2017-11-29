@@ -39,9 +39,9 @@ SOURCES_C += $(wildcard \
 	vendor/physfs/src/*.c \
 )
 ifeq ($(platform), osx)
-	LDFLAGS += -mmacosx-version-min=10.2
+#	LDFLAGS += -mmacosx-version-min=10.2
 	LDFLAGS += -framework Carbon -framework IOKit
-	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
+#	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
 	FLAGS += -D__MACH__ -D__APPLE__
 endif
 
