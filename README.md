@@ -11,12 +11,18 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 
 ## Usage
 
-ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird), run RetroArch and...
+ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play the sample game [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)...
 
 1. Run [RetroArch](http://retroarch.com/)
-2. Download the ChaiLove core through RetroArch at *Online Updater* → *Core Updator* → *ChaiLove*
-3. Download *Floppy Bird* through RetroArch at *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
-4. Launch the game over through *Load Content* → *Downloads* → *Floppy Bird.chailove*
+2. *Online Updater* → *Core Updator* → *ChaiLove*
+3. *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
+4. *Load Content* → *Downloads* → *Floppy Bird.chailove*
+
+You can also run ChaiLove through the command line by using:
+
+```
+retroarch -L chailove_libretro.so path/to/FloppyBird.chailove
+```
 
 ## API
 
@@ -58,10 +64,18 @@ make
 To compile and run the testing framework, use:
 
 ```
-make examples
+retroarch -L chailove_libretro.so test/main.chai
+```
+
+You can run the unit tests, by executing:
+
+```
+make unit
 ```
 
 ### Documentation
+
+Visit the [ChaiLove API documentation](https://robloach.github.io/ChaiLove/). Build it by using:
 
 ```
 make docs
@@ -72,7 +86,7 @@ make docs
 There are a few flags you can enable to change how Chai is compiled and used.
 
 - `HAVE_CHAISCRIPT=0` Remove the scripting environment for fast compilation
-- `HAVE_TESTS=1` Enables [`test/Test.cpp`](Test.cpp) for testing
+- `HAVE_TESTS=1` Enables [`test/Test.cpp`](Test.cpp) for native testing
 
 ```
 make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
