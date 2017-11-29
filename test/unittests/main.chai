@@ -1,3 +1,5 @@
+global failure = ""
+
 def load() {
 	print("\n================================\n")
 	print("ChaiLove: Unit Testing Framework\n")
@@ -7,4 +9,10 @@ def load() {
 	filesystem.load("math.chai")
 
 	print("\n================================\n")
+
+	if (failure != "") {
+		throw(failure)
+	}
+
+	event.quit()
 }

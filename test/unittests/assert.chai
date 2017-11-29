@@ -4,7 +4,8 @@ def assert_equal(actual, expected, message) {
 	}
 	else {
 		print(" ✗ " + message)
-		print("\t" + to_string(actual) + " != " + to_string(expected) + "\n")
+		print("\n\t" + to_string(actual) + " != " + to_string(expected) + "\n")
+		failure = "Failed on " + message + " when asserting that " + to_string(actual) + " equals " + to_string(expected)
 	}
 }
 

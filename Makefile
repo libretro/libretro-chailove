@@ -32,7 +32,7 @@ test: all
 vendor/noarch/noarch: dependencies
 	cd vendor/noarch && make
 
-unit: vendor/noarch/noarch
+unit: vendor/noarch/noarch all
 	vendor/noarch/noarch $(CORE_DIR)/chailove_libretro.so test/unittests/main.chai
 
 examples: all
