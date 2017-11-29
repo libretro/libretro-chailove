@@ -53,7 +53,19 @@ retroarch -L chailove_libretro.so main.chai
 
 ## Development
 
-Building ChaiLove takes some time, so have patience. Use the following command to compile the core:
+Behind ChaiLove, there's the documentation, compiling it, along with testing.
+
+### Documentation
+
+Visit the [ChaiLove API documentation](https://robloach.github.io/ChaiLove/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
+
+```
+make docs
+```
+
+### Compiling
+
+Use the following command to compile the core:
 
 ```
 make
@@ -71,23 +83,4 @@ You can run the unit tests, by executing:
 
 ```
 make unit
-```
-
-### Documentation
-
-Visit the [ChaiLove API documentation](https://robloach.github.io/ChaiLove/). Build it by using:
-
-```
-make docs
-```
-
-### Flags
-
-There are a few flags you can enable to change how Chai is compiled and used.
-
-- `HAVE_CHAISCRIPT=0` Remove the scripting environment for fast compilation
-- `HAVE_TESTS=1` Enables [`test/Test.cpp`](Test.cpp) for native testing
-
-```
-make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 ```
