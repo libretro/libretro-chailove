@@ -40,6 +40,7 @@ SOURCES_C += $(wildcard \
 )
 ifeq ($(platform), osx)
 	FLAGS += -D__MACH__ -D__APPLE__
+	FLAGS += -framework Carbon -framework IOKit
 endif
 
 # SDL_tty
