@@ -1,26 +1,25 @@
-#ifndef CHAILOVE_IMAGE_H
-#define CHAILOVE_IMAGE_H
+#ifndef SRC_MODULES_IMAGE_H_
+#define SRC_MODULES_IMAGE_H_
 
 #include "../Types/Graphics/Image.h"
 #include <string>
 
-using Types::Graphics::Image;
-
 namespace Modules {
 
-	/**
-	 * @brief Provides an interface to decode encoded image data.
-	 */
-	class image {
+/**
+ * @brief Provides an interface to decode encoded image data.
+ */
+class image {
 	public:
-		bool load();
-		bool unload();
+	bool load();
+	bool unload();
 
-		/**
-		 * @brief Creates a new ImageData object.
-		 */
-		Image* newImageData(const std::string& filename);
-	};
-}
+	/**
+	 * @brief Creates a new ImageData object.
+	 */
+	::Types::Graphics::Image* newImageData(const std::string& filename);
+};
 
-#endif
+}  // namespace Modules
+
+#endif  // SRC_MODULES_IMAGE_H_

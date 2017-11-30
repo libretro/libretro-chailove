@@ -1,9 +1,8 @@
-#include <string>
-#include <iostream>
-#include "SDL.h"
-
-#include "libretro.h"
 #include "ChaiLove.h"
+#include <libretro.h>
+#include <SDL.h>
+#include <iostream>
+#include <string>
 
 ChaiLove* ChaiLove::m_instance = NULL;
 retro_input_state_t ChaiLove::input_state_cb = NULL;
@@ -149,7 +148,8 @@ void ChaiLove::draw() {
 
 		// Flip the buffer.
 		if (SDL_Flip(screen) == -1) {
-			std::cout << "[ChaiLove] Failed to swap the buffers: " << SDL_GetError() << std::endl;
+			std::string out("[ChaiLove] Failed to swap the buffers: ");
+			std::cout << out << SDL_GetError() << std::endl;
 		}
 	}
 }

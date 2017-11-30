@@ -1,18 +1,19 @@
-#ifndef CHAILOVE_EVENT_H
-#define CHAILOVE_EVENT_H
+#ifndef SRC_MODULES_EVENT_H_
+#define SRC_MODULES_EVENT_H_
 
 namespace Modules {
-	/**
-	 * @brief Manages events, like keypresses.
-	 */
-	class event {
+/**
+ * @brief Manages events, like keypresses.
+ */
+class event {
 	public:
-		/**
-		 * @brief Exits ChaiLove.
-		 */
-		void quit();
-		bool quitstatus = false;
-	};
-}
+	/**
+	 * @brief Exits ChaiLove.
+	 */
+	void quit();
+	bool quitstatus = false;
+};
 
-#endif
+}  // namespace Modules
+
+#endif  // SRC_MODULES_EVENT_H_

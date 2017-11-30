@@ -1,23 +1,24 @@
-#ifndef CHAILOVE_FONT_H
-#define CHAILOVE_FONT_H
+#ifndef SRC_MODULES_FONT_H_
+#define SRC_MODULES_FONT_H_
 
 #include "../Types/Graphics/Font.h"
 
 namespace Modules {
-	/**
-	 * @brief Allows you to work with fonts.
-	 */
-	class font {
+/**
+ * @brief Allows you to work with fonts.
+ */
+class font {
 	public:
-		bool load();
+	bool load();
 
-		/**
-		 * @brief Retrieves whether or not all sub-systems have been loaded.
-		 */
-		bool isOpen();
+	/**
+	 * @brief Retrieves whether or not all sub-systems have been loaded.
+	 */
+	bool isOpen();
 
-		bool unload();
-	};
-}
+	bool unload();
+};
 
-#endif
+}  // namespace Modules
+
+#endif  // SRC_MODULES_FONT_H_

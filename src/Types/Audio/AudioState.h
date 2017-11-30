@@ -1,14 +1,16 @@
-#ifndef CHAILOVE_UTILITY_AUDIOSTATE_H
-#define CHAILOVE_UTILITY_AUDIOSTATE_H
+#ifndef SRC_TYPES_AUDIO_AUDIOSTATE_H_
+#define SRC_TYPES_AUDIO_AUDIOSTATE_H_
 
 namespace Types {
-	namespace Audio {
-		enum AudioState {
-			Stopped = 0,
-			Paused,
-			Playing
-		};
-	}
-}
+namespace Audio {
 
-#endif
+enum AudioState {
+	Stopped = 0,
+	Paused,
+	Playing
+};
+
+}  // namespace Audio
+}  // namespace Types
+
+#endif  // SRC_TYPES_AUDIO_AUDIOSTATE_H_

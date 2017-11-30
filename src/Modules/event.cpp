@@ -1,7 +1,9 @@
 #include "event.h"
 
 namespace Modules {
-	void event::quit() {
-		quitstatus = true;
-	}
+
+void event::quit() {
+	quitstatus = true;
 }
+
+}  // namespace Modules
