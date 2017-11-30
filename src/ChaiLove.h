@@ -3,25 +3,7 @@
  *
  * This is the API documentation for [ChaiLove](https://github.com/RobLoach/ChaiLove). For more information about ChaiLove itself, see the [ChaiLove homepage](https://github.com/RobLoach/ChaiLove).
  *
- * ## Modules
- *
- * - \link Modules::audio audio \endlink
- * - \link Modules::event event \endlink
- * - \link Modules::filesystem filesystem \endlink
- * - \link Modules::font font \endlink
- * - \link Modules::graphics graphics \endlink
- * - \link Modules::image image \endlink
- * - \link Modules::joystick joystick \endlink
- * - \link Modules::keyboard keyboard \endlink
- * - \link Modules::script script \endlink
- * - \link Modules::math math \endlink
- * - \link Modules::mouse mouse \endlink
- * - \link Modules::timer timer \endlink
- * - \link Modules::window window \endlink
- *
- * ## Example
- *
- * The below `main.chai` is a simple hello world example:
+ * When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen.
  *
  * @code
  * global logo
@@ -35,16 +17,35 @@
  * 	y = 10.0f
  * }
  *
+ * def update(dt) {
+ * 	x += dt * 60.0f
+ * 	y += dt * 30.0f
+ * }
+ *
  * def draw() {
  *     graphics.print("Hello World!", 100, 100)
  *     graphics.draw(logo, x, y)
  * }
- *
- * def update(delta) {
- * 	x += delta * 60.0f
- * 	y += delta * 30.0f
- * }
  * @endcode
+ *
+ * ## Modules
+ *
+ * - \link Modules::audio audio \endlink Provides an interface to output sound to the user's speakers.
+ * - \link Modules::event event \endlink Manages events, like keypresses.
+ * - \link Modules::filesystem filesystem \endlink Provides an interface to the user's filesystem.
+ * - \link Modules::font font \endlink Allows you to work with fonts.
+ * - \link Modules::graphics graphics \endlink Drawing of shapes and images, management of screen geometry.	
+ * - \link Modules::image image \endlink Provides an interface to decode encoded image data.
+ * - \link Modules::joystick joystick \endlink Provides an interface to connected joysticks.
+ * - \link Modules::keyboard keyboard \endlink Provides an interface to the user's keyboard.
+ * - \link Modules::math math \endlink Provides system-independent mathematical functions.
+ * - \link Modules::mouse mouse \endlink Provides an interface to the user's mouse.	
+ * - \link Modules::sound sound \endlink This module is responsible for decoding sound files.	
+ * - \link Modules::script script \endlink This module is responsible for interacting with the script.
+ * - \link Modules::system system \endlink Provides access to information about the user's system.
+ * - \link Modules::timer timer \endlink Provides high-resolution timing functionality.	
+ * - \link Modules::window window \endlink Provides an interface for the program's window.	
+ *
  */
 
  #ifndef CHAILOVE_GAME_H

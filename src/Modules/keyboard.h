@@ -13,14 +13,17 @@ namespace Modules {
 	public:
 		Uint8* keys;
 		bool load();
+
 		/**
 		 * @brief Checks whether a certain key is down.
 		 */
 		bool isDown(const std::string& key);
+
 		/**
 		 * @brief Checks whether a certain key is down.
 		 */
 		bool isDown(int key);
+
 		/**
 		 * @brief Enables or disables key repeat for love.keypressed.
 		 */
@@ -31,6 +34,7 @@ namespace Modules {
 		 * @brief Retrieve a scancode from the given key.
 		 */
 		int getScancodeFromKey(const std::string& key);
+
 		/**
 		 * @brief Retrieve a key from the given scancode.
 		 */

@@ -65,6 +65,7 @@ namespace Modules {
 		 * @brief Draws a point.
 		 */
 		void point(Point* p);
+
 		//void points(std::vector<Point*>);
 		//void points(std::vector<Point>);
 
@@ -141,11 +142,16 @@ namespace Modules {
 		 * @param The font to set as the active font.
 		 */
 		void setFont(Font* font);
+
 		void setFont();
 		Font* getFont();
 
 		/**
 		 * @brief Prints the given text to the screen.
+		 *
+		 * @param text The text to draw.
+		 * @param x The position to draw the object (x-axis).
+		 * @param y The position to draw the object (y-axis).
 		 */
 		void print(const std::string& text, int x, int y);
 
@@ -153,14 +159,17 @@ namespace Modules {
 		 * @brief Sets the active drawing color to the given color.
 		 */
 		void setColor(int red, int green, int blue, int alpha);
+
 		/**
 		 * @brief Sets the active drawing color to the given color.
 		 */
 		void setColor(int red, int green, int blue);
+
 		/**
 		 * @brief Sets the background color to the given color.
 		 */
 		void setBackgroundColor(int red, int green, int blue, int alpha);
+
 		/**
 		 * @brief Sets the background color to the given color.
 		 */
@@ -170,6 +179,7 @@ namespace Modules {
 		 * @brief Retrieve the width of the screen.
 		 */
 		int getWidth();
+
 		/**
 		 * @brief Retrieve the height of the screen.
 		 */
@@ -179,10 +189,12 @@ namespace Modules {
 		 * @brief Draws a circle.
 		 */
 		void circle(const std::string& drawmode, int x, int y, int radius);
+
 		/**
 		 * @brief Draws an ellipse.
 		 */
 		void ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
+
 		/**
 		 * @brief Draws an arc.
 		 */
