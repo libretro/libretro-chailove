@@ -41,6 +41,9 @@ docs: dependencies
 docs-deploy: docs
 	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=gh-pages
 
+cpplint: dependencies
+	vendor/styleguide/cpplint/cpplint.py --counting=detailed src/*.* src/*/*.* src/*/*/*.*
+
 noscript: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
