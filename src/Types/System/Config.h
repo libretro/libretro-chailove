@@ -36,6 +36,7 @@ namespace Types {
 		 * @brief The machine name of the project.
 		 */
 		std::string identity = "chailove";
+
 		/**
 		 * @brief The ChaiLove version the game was made on.
 		 */
@@ -45,6 +46,7 @@ namespace Types {
 		 * @brief The window configuration.
 		 */
 		windowConfig window;
+
 		/**
 		 * @brief Enable or disable modules.
 		 */

@@ -34,3 +34,6 @@
 [submodule "vendor/styleguide"]
 	path = vendor/styleguide
 	url = https://github.com/google/styleguide.git
+[submodule "vendor/noarch"]
+	path = vendor/noarch
+	url = https://github.com/RobLoach/noarch.git

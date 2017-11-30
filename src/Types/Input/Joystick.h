@@ -16,6 +16,8 @@ namespace Types {
 		Joystick();
 		/**
 		 * @brief Gets the name of the joystick.
+		 *
+		 * @return string The name of the Joystick.
 		 */
 		std::string getName();
 		bool isOpen();
@@ -24,10 +26,18 @@ namespace Types {
 
 		/**
 		 * @brief Checks if a button on the Joystick is pressed.
+		 *
+		 * @param button The index of the button to be checked
+		 *
+		 * @return bool Whether or not the given button is down.
 		 */
 		bool isDown(int button);
 		/**
 		 * @brief Checks if a button on the Joystick is pressed.
+		 *
+		 * @param button The button to be checked
+		 *
+		 * @return bool Whether or not the given button is down.
 		 */
 		bool isDown(const std::string& button);
 

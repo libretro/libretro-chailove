@@ -7,6 +7,7 @@
 using Types::Graphics::Image;
 
 namespace Modules {
+
 	/**
 	 * @brief Provides an interface to decode encoded image data.
 	 */
@@ -14,6 +15,7 @@ namespace Modules {
 	public:
 		bool load();
 		bool unload();
+
 		/**
 		 * @brief Creates a new ImageData object.
 		 */
