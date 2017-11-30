@@ -1,34 +1,36 @@
-#ifndef CHAILOVE_UTILITY_IMAGE_H
-#define CHAILOVE_UTILITY_IMAGE_H
+#ifndef SRC_TYPES_GRAPHICS_IMAGE_H_
+#define SRC_TYPES_GRAPHICS_IMAGE_H_
 
 #include <SDL.h>
 #include <string>
 
 namespace Types {
-	namespace Graphics {
-	/**
-	 * @brief Drawable image type.
-	 */
-	class Image {
+namespace Graphics {
+
+/**
+ * @brief Drawable image type.
+ */
+class Image {
 	public:
-		SDL_Surface* surface;
-		Image(SDL_RWops* rw);
-		Image(const std::string& filename);
-		~Image();
-		bool loaded();
-		bool loadFromRW(SDL_RWops* rw);
-		bool destroy();
+	SDL_Surface* surface;
+	Image(SDL_RWops* rw);
+	Image(const std::string& filename);
+	~Image();
+	bool loaded();
+	bool loadFromRW(SDL_RWops* rw);
+	bool destroy();
 
-		/**
-		 * @brief Gets the width of the Texture.
-		 */
-		int getWidth();
-		/**
-		 * @brief Gets the height of the Texture.
-		 */
-		int getHeight();
-	};
-}
-}
+	/**
+	 * @brief Gets the width of the Texture.
+	 */
+	int getWidth();
+	/**
+	 * @brief Gets the height of the Texture.
+	 */
+	int getHeight();
+};
 
-#endif
+}  // namespace Graphics
+}  // namespace Types
+
+#endif  // SRC_TYPES_GRAPHICS_IMAGE_H_

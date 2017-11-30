@@ -1,62 +1,65 @@
-#ifndef CHAILOVE_UTILITY_CONFIG_H
-#define CHAILOVE_UTILITY_CONFIG_H
+#ifndef SRC_TYPES_SYSTEM_CONFIG_H_
+#define SRC_TYPES_SYSTEM_CONFIG_H_
 
 #include <string>
 #include <map>
 
 namespace Types {
-	namespace System {
-	struct windowConfig {
-		/**
-		 * @brief The width of the screen.
-		 */
-		int width = 800;
-		/**
-		 * @brief The height of the screen.
-		 */
-		int height = 600;
-		int bbp = 32;
-		std::string title = "ChaiLove";
-		bool asyncblit = true;
-		bool hwsurface = true;
-		bool doublebuffering = true;
-	};
+namespace System {
 
-	struct moduleConfig {
-		bool sound = true;
-	};
+struct windowConfig {
+	/**
+	 * @brief The width of the screen.
+	 */
+	int width = 800;
+	/**
+	 * @brief The height of the screen.
+	 */
+	int height = 600;
+	int bbp = 32;
+	std::string title = "ChaiLove";
+	bool asyncblit = true;
+	bool hwsurface = true;
+	bool doublebuffering = true;
+};
+
+struct moduleConfig {
+	bool sound = true;
+};
+
+/**
+ * @brief The configuration object for ChaiLove.
+ */
+class Config {
+	public:
+	Config();
+	/**
+	 * @brief The machine name of the project.
+	 */
+	std::string identity = "chailove";
 
 	/**
-	 * @brief The configuration object for ChaiLove.
+	 * @brief The ChaiLove version the game was made on.
 	 */
-	class Config {
-	public:
-		Config();
-		/**
-		 * @brief The machine name of the project.
-		 */
-		std::string identity = "chailove";
+	std::string version;
 
-		/**
-		 * @brief The ChaiLove version the game was made on.
-		 */
-		std::string version;
+	/**
+	 * @brief The window configuration.
+	 */
+	windowConfig window;
 
-		/**
-		 * @brief The window configuration.
-		 */
-		windowConfig window;
+	/**
+	 * @brief Enable or disable modules.
+	 */
+	moduleConfig modules;
 
-		/**
-		 * @brief Enable or disable modules.
-		 */
-		moduleConfig modules;
+	/**
+	 * @brief Generic map of boolean configuration options.
+	 */
+	std::map<std::string, bool> options;
+};
 
-		/**
-		 * @brief Generic map of boolean configuration options.
-		 */
-		std::map<std::string, bool> options;
-	};
-}
-}
-#endif
+}  // namespace System
+}  // namespace Types
+
+#endif  // SRC_TYPES_SYSTEM_CONFIG_H_
