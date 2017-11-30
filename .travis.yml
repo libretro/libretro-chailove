@@ -33,16 +33,10 @@ addons:
     - python
 
 script:
-  # Check versions of gcc and g++
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then gcc --version ; fi
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then g++ --version ; fi
-  # Run through the make commands
   - ./configure
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make platform=osx -j2 ; fi
-  - make test
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make cpplint ; fi
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make unit ; fi
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make test ; fi
 
 cache:
     apt: true

@@ -294,7 +294,7 @@ script::script(const std::string& file) {
 		hasUpdate = false;
 	}
 	try {
-		chaiconf = chai.eval<std::function<void(const Config&)> >("conf");
+		chaiconf = chai.eval<std::function<void(Config&)> >("conf");
 	}
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] conf(t) " << e.what() << std::endl;
@@ -373,7 +373,7 @@ script::script(const std::string& file) {
 	#endif
 }
 
-void script::conf(const Config& t) {
+void script::conf(Config& t) {
 	#ifdef __HAVE_CHAISCRIPT__
 	if (hasconf) {
 		try {

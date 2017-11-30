@@ -24,22 +24,22 @@ clean:
 	rm -f $(TARGET) $(OBJECTS)
 
 dependencies:
-	git submodule update --init --recursive
+	@git submodule update --init --recursive
 
-test: all
-	@echo "Execute the following to run tests:\n\n    retroarch -L $(TARGET) test/main.chai\n    make unit\n\n"
+test: unittest cpplint
+	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
 vendor/noarch/noarch: dependencies
-	$(MAKE) -C vendor/noarch
+	@$(MAKE) -C vendor/noarch
 
-unit: vendor/noarch/noarch all
-	vendor/noarch/noarch $(CORE_DIR)/chailove_libretro.so test/unittests/main.chai
+unittest: vendor/noarch/noarch all
+	@vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/unittests/main.chai
 
 examples: all
-	retroarch -L $(TARGET) examples/benchmark/main.chai
+	@retroarch -L $(TARGET) examples/benchmark/main.chai
 
 test-script: all
-	retroarch -L $(TARGET) test/main.chai
+	@retroarch -L $(TARGET) test/main.chai
 
 docs: dependencies
 	doxygen docs/Doxyfile
@@ -48,7 +48,14 @@ docs-deploy: docs
 	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=gh-pages
 
 cpplint: dependencies
-	vendor/styleguide/cpplint/cpplint.py --linelength=120 --counting=detailed src/*.h src/*.cpp src/*/*.h src/*/*.cpp src/*/*/*.h src/*/*/*.cpp
+	@vendor/styleguide/cpplint/cpplint.py \
+		--linelength=120 \
+		--quiet \
+		--counting=detailed \
+		--filter=-build/include,-legal/copyright,-runtime/int,-runtime-readability/braces,\
+	-runtime/threadsafe_fn,-build/namespaces,-runtime/explicit,-whitespace/tab,\
+	-readability/casting,-whitespace/line_length,-runtime/references \
+		src/*.h src/*.cpp src/*/*.h src/*/*.cpp src/*/*/*.h src/*/*/*.cpp
 
 noscript: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1

@@ -8,3 +8,19 @@ for (file : files) {
 }
 
 assert(foundUnitChai, "filesystem.getDirectoryItems()")
+
+
+
+var contents = filesystem.read("main.chai")
+var needle = "Unit Testing Framework"
+var found = contents.find(needle)
+assert(found > 50, "filesystem.read()")
+
+assert(filesystem.exists("math.chai"), "filesystem.exists('math.chai')")
+assert(!filesystem.exists("notexist.chai"), "filesystem.exists('notexist.chai')")
+
+assert(filesystem.getSize("filesystem.chai") > 10, "filesystem.getSize()")
+assert_equal(filesystem.getSize("notexist.chai"), -1, "filesystem.getSize('notexist.chai')")
+
+assert(filesystem.isFile("filesystem.chai"), "filesystem.isFile()")
+assert(!filesystem.isFile("notexist.chai"), "filesystem.isFile('notexist.chai')")
