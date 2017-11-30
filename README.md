@@ -11,12 +11,18 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 
 ## Usage
 
-ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird), run RetroArch and...
+ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play the sample game [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)...
 
 1. Run [RetroArch](http://retroarch.com/)
-2. Download the ChaiLove core through RetroArch at *Online Updater* → *Core Updator* → *ChaiLove*
-3. Download *Floppy Bird* through RetroArch at *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
-4. Launch the game over through *Load Content* → *Downloads* → *Floppy Bird.chailove*
+2. *Online Updater* → *Core Updator* → *ChaiLove*
+3. *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
+4. *Load Content* → *Downloads* → *Floppy Bird.chailove*
+
+You can also run ChaiLove through the command line by using:
+
+```
+retroarch -L chailove_libretro.so path/to/FloppyBird.chailove
+```
 
 ## API
 
@@ -47,7 +53,19 @@ retroarch -L chailove_libretro.so main.chai
 
 ## Development
 
-Building ChaiLove takes some time, so have patience. Use the following command to compile the core:
+Behind ChaiLove, there's the documentation, compiling it, along with testing.
+
+### Documentation
+
+Visit the [ChaiLove API documentation](https://robloach.github.io/ChaiLove/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
+
+```
+make docs
+```
+
+### Compiling
+
+Use the following command to compile the core:
 
 ```
 make
@@ -58,22 +76,11 @@ make
 To compile and run the testing framework, use:
 
 ```
-make examples
+retroarch -L chailove_libretro.so test/main.chai
 ```
 
-### Documentation
+You can run the unit tests, by executing:
 
 ```
-make docs
-```
-
-### Flags
-
-There are a few flags you can enable to change how Chai is compiled and used.
-
-- `HAVE_CHAISCRIPT=0` Remove the scripting environment for fast compilation
-- `HAVE_TESTS=1` Enables [`test/Test.cpp`](Test.cpp) for testing
-
-```
-make HAVE_CHAISCRIPT=0 HAVE_TESTS=1
+make unit
 ```
