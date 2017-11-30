@@ -276,98 +276,98 @@ script::script(const std::string& file) {
 		chaiload = chai.eval<std::function<void()> >("load");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping load() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] load() " << e.what() << std::endl;
 		hasload = false;
 	}
 	try {
 		chaireset = chai.eval<std::function<void()> >("reset");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping reset() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] reset() " << e.what() << std::endl;
 		hasreset = false;
 	}
 	try {
 		chaiupdate = chai.eval<std::function<void(float)> >("update");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping update(delta) " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] update(delta) " << e.what() << std::endl;
 		hasUpdate = false;
 	}
 	try {
 		chaiconf = chai.eval<std::function<void(const Config&)> >("conf");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping conf(t) " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] conf(t) " << e.what() << std::endl;
 		hasconf = false;
 	}
 	try {
 		chaidraw = chai.eval<std::function<void()> >("draw");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping draw() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] draw() " << e.what() << std::endl;
 		hasDraw = false;
 	}
 	try {
 		chaijoystickpressed = chai.eval<std::function<void(int, const std::string&)> >("joystickpressed");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping joystickpressed() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] joystickpressed() " << e.what() << std::endl;
 		hasjoystickpressed = false;
 	}
 	try {
 		chaijoystickreleased = chai.eval<std::function<void(int, const std::string&)> >("joystickreleased");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping joystickreleased() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] joystickreleased() " << e.what() << std::endl;
 		hasjoystickreleased = false;
 	}
 	try {
 		chaimousepressed = chai.eval<std::function<void(int, int, int)> >("mousepressed");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping mousepressed() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] mousepressed() " << e.what() << std::endl;
 		hasmousepressed = false;
 	}
 	try {
 		chaimousereleased = chai.eval<std::function<void(int, int, int)> >("mousereleased");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping mousereleased() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] mousereleased() " << e.what() << std::endl;
 		hasmousereleased = false;
 	}
 	try {
 		chaimousemove = chai.eval<std::function<void(int, int)> >("mousemove");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping mousemove() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] mousemove() " << e.what() << std::endl;
 		hasmousemove = false;
 	}
 	try {
 		chaikeypressed = chai.eval<std::function<void(const std::string&, int)> >("keypressed");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping keypressed() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] keypressed() " << e.what() << std::endl;
 		haskeypressed = false;
 	}
 	try {
 		chaikeyreleased = chai.eval<std::function<void(const std::string&, int)> >("keyreleased");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping keyreleased() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] keyreleased() " << e.what() << std::endl;
 		haskeyreleased = false;
 	}
 	try {
 		chailoadstate = chai.eval<std::function<bool(std::string)> >("loadstate");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping loadstate() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] loadstate() " << e.what() << std::endl;
 		hasloadstate = false;
 	}
 	try {
 		chaisavestate = chai.eval<std::function<std::string()> >("savestate");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] Skipping savestate() " << e.what() << std::endl;
+		std::cout << "[ChaiLove] [script] savestate() " << e.what() << std::endl;
 		hassavestate = false;
 	}
 	#endif
