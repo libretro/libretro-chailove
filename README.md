@@ -82,5 +82,5 @@ retroarch -L chailove_libretro.so test/main.chai
 You can run the unit tests, by executing:
 
 ```
-make unit
+make unittest
 ```

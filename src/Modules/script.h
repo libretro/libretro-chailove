@@ -19,6 +19,7 @@ namespace Modules {
 class script {
 	public:
 	script(const std::string& file);
+
 	/**
 	 * @brief Modify some configuration options.
 	 *
@@ -33,7 +34,8 @@ class script {
 	 * }
 	 * @endcode
 	 */
-	void conf(const ::Types::System::Config& t);
+	void conf(::Types::System::Config& t);
+
 	/**
 	 * @brief This function is called exactly once at the beginning of the game.
 	 *
@@ -54,6 +56,7 @@ class script {
 	 * @endcode
 	 */
 	void load();
+
 	/**
 	 * @brief Callback function used to update the state of the game every frame.
 	 *
@@ -78,6 +81,7 @@ class script {
 	 * @endcode
 	 */
 	void update(float delta);
+
 	/**
 	 * @brief Callback function used to draw on the screen every frame.
 	 *
@@ -98,27 +102,33 @@ class script {
 	 * @endcode
 	 */
 	void draw();
+
 	/**
 	 * @brief Called when the game is requested to be reset.
 	 */
 	void reset();
 	bool loadModule(const std::string& moduleName);
+
 	/**
 	 * @brief Called when a joystick button is pressed.
 	 */
 	void joystickpressed(int joystick, const std::string& button);
+
 	/**
 	 * @brief Called when a joystick button is released.
 	 */
 	void joystickreleased(int joystick, const std::string& button);
+
 	/**
 	 * @brief Called when a mouse button is pressed.
 	 */
 	void mousepressed(int x, int y, int button);
+
 	/**
 	 * @brief Called when a mouse button is released.
 	 */
 	void mousereleased(int x, int y, int button);
+
 	/**
 	 * @brief Called when the mouse is moved.
 	 */
@@ -140,6 +150,7 @@ class script {
 	 * @return A JSON array representing the current state.
 	 */
 	std::string savestate();
+
 	/**
 	 * @brief Called when requested to load a state.
 	 *
@@ -150,7 +161,7 @@ class script {
 	#ifdef __HAVE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
 	std::function<void()> chaiload;
-	std::function<void(const ::Types::System::Config&)> chaiconf;
+	std::function<void(::Types::System::Config&)> chaiconf;
 	std::function<void(float)> chaiupdate;
 	std::function<void()> chaidraw;
 	std::function<void()> chaireset;
