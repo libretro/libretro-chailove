@@ -1,5 +1,5 @@
 # ChaiLove
-[![Build Status](https://travis-ci.org/RobLoach/ChaiLove.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiLove) [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
+[![Build Status](https://travis-ci.org/RobLoach/ChaiLove.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiLove) [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove) [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)[https://robloach.github.io/ChaiLove/]
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
