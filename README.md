@@ -36,8 +36,8 @@ def load() {
 }
 
 def draw() {
-    graphics.print("Hello World!", 400, 300)
-    graphics.draw(logo, 100, 100)
+	graphics.print("Hello World!", 400, 300)
+	graphics.draw(logo, 100, 100)
 }
 
 def update(delta) {

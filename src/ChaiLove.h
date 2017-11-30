@@ -34,17 +34,17 @@
  * - \link Modules::event event \endlink Manages events, like keypresses.
  * - \link Modules::filesystem filesystem \endlink Provides an interface to the user's filesystem.
  * - \link Modules::font font \endlink Allows you to work with fonts.
- * - \link Modules::graphics graphics \endlink Drawing of shapes and images, management of screen geometry.	
+ * - \link Modules::graphics graphics \endlink Drawing of shapes and images, management of screen geometry.
  * - \link Modules::image image \endlink Provides an interface to decode encoded image data.
  * - \link Modules::joystick joystick \endlink Provides an interface to connected joysticks.
  * - \link Modules::keyboard keyboard \endlink Provides an interface to the user's keyboard.
  * - \link Modules::math math \endlink Provides system-independent mathematical functions.
- * - \link Modules::mouse mouse \endlink Provides an interface to the user's mouse.	
- * - \link Modules::sound sound \endlink This module is responsible for decoding sound files.	
+ * - \link Modules::mouse mouse \endlink Provides an interface to the user's mouse.
+ * - \link Modules::sound sound \endlink This module is responsible for decoding sound files.
  * - \link Modules::script script \endlink This module is responsible for interacting with the script.
  * - \link Modules::system system \endlink Provides access to information about the user's system.
- * - \link Modules::timer timer \endlink Provides high-resolution timing functionality.	
- * - \link Modules::window window \endlink Provides an interface for the program's window.	
+ * - \link Modules::timer timer \endlink Provides high-resolution timing functionality.
+ * - \link Modules::window window \endlink Provides an interface for the program's window.
  *
  */
 
@@ -52,9 +52,9 @@
 #define CHAILOVE_GAME_H
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 9
+#define CHAILOVE_VERSION_MINOR 10
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.9.0"
+#define CHAILOVE_VERSION_STRING "0.10.0"
 
 #include "SDL.h"
 #include "libretro.h"
