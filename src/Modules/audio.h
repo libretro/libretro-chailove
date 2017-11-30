@@ -10,8 +10,7 @@ namespace Modules {
  * @brief Provides an interface to output sound to the user's speakers.
  */
 class audio {
-public:
-
+	public:
 	/**
 	 * @brief Plays the specified sound.
 	 */
@@ -24,7 +23,7 @@ public:
 
 	void mixer_render(int16_t *buffer);
 
-	int AUDIO_FRAMES = 735; // 44100 / 60
+	int AUDIO_FRAMES = 735;  // 44100 / 60
 	int WAV_HEADER_SIZE = 44;
 	float m_volume = 1.0f;
 
@@ -45,4 +44,4 @@ public:
 
 }  // namespace Modules
 
-#endif  // namespace SRC_MODULES_AUDIO_H_
+#endif  // SRC_MODULES_AUDIO_H_

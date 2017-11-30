@@ -30,6 +30,7 @@ addons:
     - libc6-amd64
     - libc6-dev
     - libc6-dbg
+    - python
 
 script:
   # Check versions of gcc and g++
@@ -40,6 +41,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make platform=osx -j2 ; fi
   - make test
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make cpplint ; fi
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make unit ; fi
 
 cache:

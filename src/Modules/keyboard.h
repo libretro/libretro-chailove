@@ -10,7 +10,7 @@ namespace Modules {
  * @brief Provides an interface to the user's keyboard.
  */
 class keyboard {
-public:
+	public:
 	Uint8* keys;
 	bool load();
 

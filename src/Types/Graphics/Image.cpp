@@ -37,16 +37,14 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 	SDL_Surface* optimizedImage = NULL;
 	if (game->config.options["alphablending"]) {
 		optimizedImage = SDL_DisplayFormatAlpha(surface);
-	}
-	else {
+	} else {
 		Uint32 colorkey = SDL_MapRGBA(surface->format, 0, 0, 0, 0xFF);
 		SDL_SetColorKey(surface, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
 		optimizedImage = SDL_DisplayFormat(surface);
 	}
 	if (!optimizedImage) {
 		std::cout << "SDL_DisplayFormat failed to optimize the image." << std::endl;
-	}
-	else {
+	} else {
 		SDL_FreeSurface(surface);
 		surface = optimizedImage;
 	}

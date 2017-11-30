@@ -11,7 +11,7 @@ namespace Modules {
  * @brief Provides an interface to the user's mouse.
  */
 class mouse {
-public:
+	public:
 	bool load();
 	/**
 	 * @brief Sets the current visibility of the cursor.

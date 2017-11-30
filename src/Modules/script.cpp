@@ -265,8 +265,7 @@ script::script(const std::string& file) {
 	std::string extension(p.extension());
 	if (extension == "chailove" || file.empty() || extension == "chaigame") {
 		loadModule("main.chai");
-	}
-	else {
+	} else {
 		// Otherwise, load the actual file.
 		std::string filename(p.filename());
 		loadModule(filename);
@@ -295,7 +294,7 @@ script::script(const std::string& file) {
 		hasUpdate = false;
 	}
 	try {
-		chaiconf = chai.eval<std::function<void(Config&)> >("conf");
+		chaiconf = chai.eval<std::function<void(const Config&)> >("conf");
 	}
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] Skipping conf(t) " << e.what() << std::endl;
@@ -440,8 +439,7 @@ void script::draw() {
 			std::cout << "[ChaiLove] [script] Failed to call draw(): " << e.what() << std::endl;
 			hasDraw = false;
 		}
-	}
-	else {
+	} else {
 		ChaiLove::getInstance()->graphics.print("ChaiLove: def draw() not found.", 100, 100);
 	}
 	#endif

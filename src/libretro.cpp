@@ -39,16 +39,14 @@ void retro_set_input_state(retro_input_state_t cb) {
 	ChaiLove::input_state_cb = cb;
 }
 
-static void emit_audio(void)
-{
+static void emit_audio(void) {
 	ChaiLove* app = ChaiLove::getInstance();
 	app->audio.mixer_render(audio_buffer);
 	audio_batch_cb(audio_buffer, (44100 / 60));
 }
 
-static void audio_set_state(bool enable)
-{
-   (void)enable;
+static void audio_set_state(bool enable) {
+	(void)enable;
 }
 
 // these 2 funtions have to be implemented for Libretro SDL port
@@ -212,7 +210,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 	info->geometry.base_height  = height;
 	info->geometry.max_width    = width;
 	info->geometry.max_height   = width;
-	info->geometry.aspect_ratio = (float)width / (float)height;
+	info->geometry.aspect_ratio = static_cast<float>(width) / static_cast<float>(height);
 
 	info->timing.fps = 60.0;
 	info->timing.sample_rate = 44100.0;
@@ -282,7 +280,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 	(void)code;
 }
 
-void texture_init(){
+void texture_init() {
 	ChaiLove* app = ChaiLove::getInstance();
 	if (app->videoBuffer) {
 		memset(app->videoBuffer, 0, sizeof(app->videoBuffer));
@@ -335,8 +333,7 @@ unsigned retro_get_region(void) {
 	return RETRO_REGION_NTSC;
 }
 
-unsigned retro_api_version(void)
-{
+unsigned retro_api_version(void) {
 	return RETRO_API_VERSION;
 }
 
@@ -368,16 +365,14 @@ void retro_init(void) {
 	if (environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		// If save directory is defined use it, otherwise use system directory
 		retro_save_directory = *save_dir ? save_dir : retro_system_directory;
-	}
-	else {
+	} else {
 		// make retro_save_directory the same in case RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY is not implemented by the frontend
 		retro_save_directory = retro_system_directory;
 	}
 	/*
 	if (retro_system_directory == NULL) {
 		std::cout << "[ChaiLove] " << RETRO_DIR << std::endl;
-	}
-	else {
+	} else {
 		std::cout << "[ChaiLove] " << RETRO_DIR << retro_system_directory << std::endl;
 	}
 	*/

@@ -21,8 +21,7 @@ namespace Modules {
  * @brief The primary purpose of the graphics module is to draw to the screen.
  */
 class graphics {
-public:
-
+	public:
 	graphics();
 	bool load();
 
@@ -66,8 +65,8 @@ public:
 	 */
 	void point(Point* p);
 
-	//void points(std::vector<Point*>);
-	//void points(std::vector<Point>);
+	// void points(std::vector<Point*>);
+	// void points(std::vector<Point>);
 
 	/**
 	 * @brief Draws a line.

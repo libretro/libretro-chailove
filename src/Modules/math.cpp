@@ -10,13 +10,13 @@
 namespace Modules {
 
 bool math::load() {
-	setRandomSeed((int)time(0));
+	setRandomSeed(static_cast<int>(time(0)));
 	return true;
 }
 
 double math::random() {
 	int num = rand();
-	return (double)num / (double)(RAND_MAX);
+	return static_cast<double>(num) / static_cast<double>(RAND_MAX);
 }
 
 int math::random(int max) {
@@ -118,15 +118,13 @@ std::string math::decompress(const std::string& str) {
             outstring.append(outbuffer,
                              zs.total_out - outstring.size());
         }
-
     } while (ret == Z_OK);
 
     inflateEnd(&zs);
 
-    if (ret != Z_STREAM_END) {          // an error occurred that was not EOF
+    if (ret != Z_STREAM_END) {
         std::ostringstream oss;
-        oss << "Exception during zlib decompression: (" << ret << ") "
-            << zs.msg;
+        oss << "Exception during zlib decompression: (" << ret << ") " << zs.msg;
         throw(std::runtime_error(oss.str()));
     }
 

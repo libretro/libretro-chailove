@@ -7,7 +7,7 @@ namespace Modules {
  * @brief Provides high-resolution timing functionality.
  */
 class timer {
-public:
+	public:
 	timer();
 	void step(float delta);
 	/**
@@ -27,4 +27,4 @@ public:
 
 }  // namespace Modules
 
-#endif  // namespace SRC_MODULES_TIMER_H_
+#endif  // SRC_MODULES_TIMER_H_

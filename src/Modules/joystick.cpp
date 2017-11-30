@@ -18,12 +18,12 @@ Joystick* joystick::getJoysticks() {
 }
 
 void joystick::load() {
-	// TODO: Switch joystick callbacks from libretro to SDL.
+	// TODO(RobLoach): Switch joystick callbacks from libretro to SDL.
 
 	// Initialize the joystick system.
-	//SDL_JoystickEventState(SDL_ENABLE);
+	// SDL_JoystickEventState(SDL_ENABLE);
 
-	//numJoysticks = SDL_NumJoysticks();
+	// numJoysticks = SDL_NumJoysticks();
 	numJoysticks = 4;
 
 	// Create the joystick handlers.
@@ -62,7 +62,7 @@ bool joystick::isDown(int index, const std::string& button) {
 }
 
 void joystick::update() {
-	//SDL_JoystickUpdate();
+	// SDL_JoystickUpdate();
 	int i, u;
 	int16_t state;
 
@@ -80,8 +80,7 @@ void joystick::update() {
 				std::string name = getButtonName(u);
 				if (state == 1) {
 					ChaiLove::getInstance()->script->joystickpressed(i, name);
-				}
-				else if (state == 0) {
+				} else if (state == 0) {
 					ChaiLove::getInstance()->script->joystickreleased(i, name);
 				}
 			}

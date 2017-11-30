@@ -52,23 +52,17 @@ bool mouse::isDown(const std::string& button) {
 int mouse::getButtonKey(const std::string& button) {
 	if (button == "left") {
 		return RETRO_DEVICE_ID_MOUSE_LEFT;
-	}
-	else if (button == "right") {
+	} else if (button == "right") {
 		return RETRO_DEVICE_ID_MOUSE_RIGHT;
-	}
-	else if (button == "middle") {
+	} else if (button == "middle") {
 		return RETRO_DEVICE_ID_MOUSE_MIDDLE;
-	}
-	else if (button == "wheelup") {
+	} else if (button == "wheelup") {
 		return RETRO_DEVICE_ID_MOUSE_WHEELUP;
-	}
-	else if (button == "wheeldown") {
+	} else if (button == "wheeldown") {
 		return RETRO_DEVICE_ID_MOUSE_WHEELDOWN;
-	}
-	else if (button == "horizwheelup") {
+	} else if (button == "horizwheelup") {
 		return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELUP;
-	}
-	else if (button == "horizwheeldown") {
+	} else if (button == "horizwheeldown") {
 		return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELDOWN;
 	}
 	return -1;
@@ -103,8 +97,7 @@ void mouse::moveEvent(SDL_MouseMotionEvent event) {
 void mouse::buttonEvent(SDL_MouseButtonEvent event) {
 	if (event.state == SDL_PRESSED) {
 		ChaiLove::getInstance()->script->mousepressed(m_x, m_y, event.button);
-	}
-	else if (event.state == SDL_RELEASED) {
+	} else if (event.state == SDL_RELEASED) {
 		ChaiLove::getInstance()->script->mousereleased(m_x, m_y, event.button);
 	}
 	buttonState[event.button] = event.state;

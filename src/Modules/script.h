@@ -8,7 +8,7 @@
 #include <chaiscript/chaiscript.hpp>
 
 // TODO(RobLoach): Fix Chai loading with the Standard Library.
-//#include <chaiscript/chaiscript_stdlib.hpp>
+// #include <chaiscript/chaiscript_stdlib.hpp>
 #endif
 
 namespace Modules {
@@ -150,7 +150,7 @@ class script {
 	#ifdef __HAVE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
 	std::function<void()> chaiload;
-	std::function<void(::Types::System::Config&)> chaiconf;
+	std::function<void(const ::Types::System::Config&)> chaiconf;
 	std::function<void(float)> chaiupdate;
 	std::function<void()> chaidraw;
 	std::function<void()> chaireset;

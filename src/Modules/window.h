@@ -11,7 +11,7 @@ namespace Modules {
  */
 class window {
 	public:
-	bool load(Types::System::Config& config);
+	bool load(const Types::System::Config& config);
 	bool unload();
 
 	/**

@@ -6,8 +6,6 @@
 #include "../ChaiLove.h"
 #include <iostream>
 
-using namespace filesystem;
-
 namespace Modules {
 
 /**
@@ -26,9 +24,9 @@ bool filesystem::init(const std::string& file) {
 	}
 
 	// Find the parent and extension of the given file.
-	path p(file.c_str());
+	::filesystem::path p(file.c_str());
 	std::string extension(p.extension());
-	path parent(p.parent_path());
+	::filesystem::path parent(p.parent_path());
 	std::string parentPath(parent.str());
 
 	// Allow loading from an Archive.
@@ -61,7 +59,7 @@ int filesystem::getSize(const std::string& file) {
 		size = getSize(openfile);
 		PHYSFS_close(openfile);
 	}
-	return (int)size;
+	return static_cast<int>(size);
 }
 
 PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
@@ -77,8 +75,7 @@ PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
 			std::cout << "[ChaiLove] [filesystem] Could not get size of file " << physErr << std::endl;
 			return -1;
 		}
-	}
-	else {
+	} else {
 		std::cout << "[ChaiLove] [filesystem] The file is not currently open." << std::endl;
 	}
 	return size;
@@ -142,13 +139,11 @@ char* filesystem::readChar(const std::string& filename) {
 			}
 			std::cout << "[ChaiLove] [filesystem] File System error while reading from file " << filename << physErr << std::endl;
 			output = NULL;
-		}
-		else {
+		} else {
 			// Make sure there is a null terminating character at the end of the string.
 			output[file_size] = '\0';
 		}
-	}
-	else {
+	} else {
 		std::string physErr = PHYSFS_getLastError();
 		std::cout << "[ChaiLove] [filesystem] Error getting filesize of " << filename << physErr << std::endl;
 	}
@@ -196,8 +191,7 @@ std::vector<std::string> filesystem::getDirectoryItems(const std::string& dir) {
 			result.push_back(thefile);
 		}
 		PHYSFS_freeList(rc);
-	}
-	else {
+	} else {
 		std::cout << "[ChaiLove] [filesystem] Error enumerating files from " << dir << std::endl;
 	}
 

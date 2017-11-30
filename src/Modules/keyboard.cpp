@@ -8,7 +8,7 @@
 namespace Modules {
 
 bool keyboard::isDown(int key) {
-	return (bool)keys[key];
+	return static_cast<bool>(keys[key]);
 }
 
 bool keyboard::isDown(const std::string& key) {

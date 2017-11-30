@@ -10,7 +10,7 @@ using std::string;
 
 namespace Modules {
 
-bool window::load(Config& config) {
+bool window::load(const Config& config) {
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Initialize SDL.
@@ -28,8 +28,7 @@ bool window::load(Config& config) {
 	Uint32 flags;
 	if (config.window.hwsurface) {
 		flags = SDL_HWSURFACE;
-	}
-	else {
+	} else {
 		flags = SDL_SWSURFACE;
 	}
 	if (config.window.asyncblit) {
@@ -55,7 +54,6 @@ bool window::load(Config& config) {
 
 	// Set the title.
 	setTitle(config.window.title);
-
 	return true;
 }
 

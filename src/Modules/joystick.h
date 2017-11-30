@@ -8,11 +8,12 @@
 using Types::Input::Joystick;
 
 namespace Modules {
+
 /**
  * @brief Provides an interface to connected joysticks.
  */
 class joystick {
-public:
+	public:
 	void load();
 	void update();
 
