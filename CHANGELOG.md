@@ -4,7 +4,7 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
 ### Added
 - Mac support
 - Unit testing
@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Coding standards
 
-## [0.9.0] - 2017-11-25
+## 0.9.0 - 2017-11-25
 ### Added
 - Namespace update
 - Documentation
