@@ -31,3 +31,6 @@
 [submodule "vendor/libretro-deps"]
 	path = vendor/libretro-deps
 	url = https://github.com/libretro/libretro-deps.git
+[submodule "vendor/styleguide"]
+	path = vendor/styleguide
+	url = https://github.com/google/styleguide.git
