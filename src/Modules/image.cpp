@@ -15,6 +15,7 @@ namespace Modules {
 
 	bool image::load() {
 		return true;
+		// TODO: Remove this, as we're using STB Image.
 		/*int flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int initted = IMG_Init(flags);
 		if(flags != (initted & flags)) {

@@ -13,9 +13,10 @@
  * - \link Modules::image image \endlink
  * - \link Modules::joystick joystick \endlink
  * - \link Modules::keyboard keyboard \endlink
- * - \link Modules::script script \endlink
  * - \link Modules::math math \endlink
  * - \link Modules::mouse mouse \endlink
+ * - \link Modules::script script \endlink
+ * - \link Modules::system system \endlink
  * - \link Modules::timer timer \endlink
  * - \link Modules::window window \endlink
  *
