@@ -1,0 +1,18 @@
+global failure = ""
+
+def load() {
+	print("\n================================\n")
+	print("ChaiLove: Unit Testing Framework\n")
+
+	filesystem.load("assert.chai")
+	filesystem.load("filesystem.chai")
+	filesystem.load("math.chai")
+
+	print("\n================================\n")
+
+	if (failure != "") {
+		throw(failure)
+	}
+
+	event.quit()
+}
