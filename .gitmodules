@@ -37,3 +37,6 @@
 [submodule "vendor/noarch"]
 	path = vendor/noarch
 	url = https://github.com/RobLoach/noarch.git
+[submodule "vendor/ChaiScript_Extras"]
+	path = vendor/ChaiScript_Extras
+	url = https://github.com/ChaiScript/ChaiScript_Extras.git
