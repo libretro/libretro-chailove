@@ -130,10 +130,9 @@ FLAGS += -Ivendor/stb
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -Ivendor/chaiscript/include
-	FLAGS += -Ivendor/RobLoachChaiScript_Extras/include
+	FLAGS += -Ivendor/ChaiScript_Extras/include
 	FLAGS += -D__HAVE_CHAISCRIPT__
 	FLAGS += -DCHAISCRIPT_NO_THREADS -DCHAISCRIPT_NO_THREADS_WARNING -DCHAISCRIPT_NO_DYNLOAD
-	FLAGS += -DCHAISCRIPT_EXTRAS_MATH_DISABLE_ISINF -DCHAISCRIPT_EXTRAS_MATH_DISABLE_ISNAN
 endif
 
 # SDL
