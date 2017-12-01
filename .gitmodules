@@ -22,9 +22,6 @@
 [submodule "vendor/Snippets"]
 	path = vendor/Snippets
 	url = https://github.com/DanielGibson/Snippets.git
-[submodule "vendor/RobLoachChaiScript_Extras"]
-	path = vendor/RobLoachChaiScript_Extras
-	url = https://github.com/RobLoach/ChaiScript_Extras.git
 [submodule "vendor/zlib"]
 	path = vendor/zlib
 	url = https://github.com/madler/zlib.git
