@@ -9,10 +9,12 @@ var num = math.random()
 assert(num >= 0 && num <= 1, "math.random()")
 
 num = math.random(10)
-assert(num >= 0 && num <= 10, "math.random(10)")
+assert(isgreaterequal(num, 0.0), "math.random(10)")
+assert(islessequal(num, 10.0), "math.random(10)")
 
 num = math.random(10, 100)
-assert(num >= 10 && num <= 100, "math.random(10, 100)")
+assert(isgreaterequal(num, 10.0), "math.random(10, 100)")
+assert(islessequal(num, 100.0), "math.random(10, 100)")
 
 math.setRandomSeed(10)
 assert(true, "math.setRandomSeed(10)")

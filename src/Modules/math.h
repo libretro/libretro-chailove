@@ -2,6 +2,7 @@
 #define SRC_MODULES_MATH_H_
 
 #include <string>
+#include <random>
 
 namespace Modules {
 /**
@@ -65,6 +66,10 @@ class math {
 	 */
 	const float e = 2.718281828459045f;
 	int m_seed;
+
+	std::uniform_real_distribution<double> m_distribution;
+	std::random_device m_rd;
+	std::default_random_engine m_generator;
 };
 
 }  // namespace Modules

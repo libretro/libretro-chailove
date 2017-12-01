@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cstring>
 #include <string>
+#include <random>
 #include <sstream>
 #include <iostream>
 #include "zlib.h"
@@ -10,35 +11,27 @@
 namespace Modules {
 
 bool math::load() {
-	setRandomSeed(static_cast<int>(time(0)));
+    m_distribution = std::uniform_real_distribution<double>(0.0, 1.0);
+    m_generator = std::default_random_engine(m_rd());
 	return true;
 }
 
 double math::random() {
-	int num = rand();
-	return static_cast<double>(num) / static_cast<double>(RAND_MAX);
+	return m_distribution(m_generator);
 }
 
 int math::random(int max) {
-	int num = rand();
-	return num % max + 1;
+    double rand = random();
+    return static_cast<int>(rand * static_cast<double>(max));
 }
 
 int math::random(int min, int max) {
-	int num = rand();
-    if (min > max) {
-        min ^= max;
-        max ^= min;
-        min ^= max;
-    }
-    num = num % (max-min+1);
-    num += min;
-    return num;
+    return random(max - min) + min;
 }
 
 void math::setRandomSeed(int seed) {
 	m_seed = seed;
-	srand(seed);
+	// srand(seed);
 }
 
 void math::setRandomSeed(int low, int high) {
