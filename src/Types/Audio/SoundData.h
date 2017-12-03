@@ -61,6 +61,16 @@ class SoundData {
 	 */
 	bool isPlaying();
 
+	/**
+	 * @brief Resumes playing the given Source.
+	 */
+	bool resume();
+
+	/**
+	 * @brief Pauses the given Source.
+	 */
+	bool pause();
+
 	int WAV_HEADER_SIZE = 44;
 
 	/**

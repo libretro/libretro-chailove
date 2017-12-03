@@ -95,6 +95,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&SoundData::setLooping), "setLooping");
 	chai.add(fun(&SoundData::stop), "stop");
 	chai.add(fun(&SoundData::play), "play");
+	chai.add(fun(&SoundData::resume), "resume");
+	chai.add(fun(&SoundData::pause), "pause");
 
 	// Add Font.
 	chai.add(user_type<Font>(), "Font");
