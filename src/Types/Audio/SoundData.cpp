@@ -45,6 +45,22 @@ bool SoundData::play() {
 	return false;
 }
 
+bool SoundData::resume() {
+	if (isLoaded()) {
+		state = Playing;
+		return true;
+	}
+	return false;
+}
+
+bool SoundData::pause() {
+	if (isLoaded()) {
+		state = Paused;
+		return true;
+	}
+	return false;
+}
+
 bool SoundData::stop() {
 	state = Stopped;
 	if (isLoaded()) {
