@@ -18,3 +18,7 @@ def load() {
 
 	event.quit()
 }
+
+def draw() {
+
+}

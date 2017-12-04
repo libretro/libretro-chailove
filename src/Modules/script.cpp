@@ -249,11 +249,10 @@ script::script(const std::string& file) {
 	chai.add(mathlib);
 	chai.add(fun(&math::pi), "pi");
 	chai.add(fun(&math::e), "e");
-	chai.add(fun<double, math>(&math::random), "random");
-	chai.add(fun<int, math, int>(&math::random), "random");
-	chai.add(fun<int, math, int, int>(&math::random), "random");
+	chai.add(fun<float, math>(&math::random), "random");
+	chai.add(fun<float, math, float>(&math::random), "random");
+	chai.add(fun<float, math, float, float>(&math::random), "random");
 	chai.add(fun<void, math, int>(&math::setRandomSeed), "setRandomSeed");
-	chai.add(fun<void, math, int, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun(&math::getRandomSeed), "getRandomSeed");
 	chai.add(fun<std::string, math, const std::string&>(&math::compress), "compress");
 	chai.add(fun<std::string, math, const std::string&, int>(&math::compress), "compress");

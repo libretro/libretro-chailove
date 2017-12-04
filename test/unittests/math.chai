@@ -19,6 +19,3 @@ assert(true, "math.setRandomSeed(10)")
 
 num = math.getRandomSeed()
 assert_equal(num, 10, "math.getRandomSeed()")
-
-math.setRandomSeed(15, 100)
-assert_not_equal(math.getRandomSeed(), 10, "math.setRandomSeed(10, 100)")
