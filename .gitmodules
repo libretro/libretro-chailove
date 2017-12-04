@@ -37,3 +37,6 @@
 [submodule "vendor/ChaiScript_Extras"]
 	path = vendor/ChaiScript_Extras
 	url = https://github.com/ChaiScript/ChaiScript_Extras.git
+[submodule "vendor/random"]
+	path = vendor/random
+	url = https://github.com/effolkronium/random.git

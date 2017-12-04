@@ -12,24 +12,21 @@ class math {
 	bool load();
 	/**
 	 * @brief Get uniformly distributed pseudo-random number, between the given numbers.
+	 *
+	 * @param min (0.0f) The minimum value.
+	 * @param max (1.0f) The max value.
+	 *
+	 * @return a number between the two given min and max values.
 	 */
-	int random(int min, int max);
-	/**
-	 * @brief Get uniformly distributed pseudo-random number, from 0 to the given max value.
-	 */
-	int random(int max);
-	/**
-	 * @brief Get uniformly distributed pseudo-random number, between 0 and 1.
-	 */
-	double random();
+	float random(float min, float max);
+	float random(float max);
+	float random();
+
 	/**
 	 * @brief Sets the seed of the random number generator.
 	 */
 	void setRandomSeed(int seed);
-	/**
-	 * @brief Sets the seed of the random number generator.
-	 */
-	void setRandomSeed(int low, int high);
+
 	/**
 	 * @brief Gets the seed of the random number generator.
 	 */
@@ -57,14 +54,17 @@ class math {
 	std::string decompress(const std::string& str);
 
 	/**
-	 * @brief Pi
-	 */
-	const float pi = 3.14159265358979323846f;
-	/**
-	 * @brief e
+	 *
+	 @brief e
 	 */
 	const float e = 2.718281828459045f;
-	int m_seed;
+
+	/**
+	 * @brief pi
+	 */
+	const float pi = 3.14159265358979323846f;
+
+	int m_seed = 0;
 };
 
 }  // namespace Modules

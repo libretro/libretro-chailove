@@ -5,44 +5,32 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "effolkronium/random.hpp"
 #include "zlib.h"
+
+using Random = effolkronium::random_static;
 
 namespace Modules {
 
 bool math::load() {
-	setRandomSeed(static_cast<int>(time(0)));
 	return true;
 }
 
-double math::random() {
-	int num = rand();
-	return static_cast<double>(num) / static_cast<double>(RAND_MAX);
+float math::random() {
+    return random(0.0f, 1.0f);
 }
 
-int math::random(int max) {
-	int num = rand();
-	return num % max + 1;
+float math::random(float max) {
+    return random(0.0f, max);
 }
 
-int math::random(int min, int max) {
-	int num = rand();
-    if (min > max) {
-        min ^= max;
-        max ^= min;
-        min ^= max;
-    }
-    num = num % (max-min+1);
-    num += min;
-    return num;
+float math::random(float min, float max) {
+    return Random::get(min, max);
 }
 
 void math::setRandomSeed(int seed) {
-	m_seed = seed;
-	srand(seed);
-}
-
-void math::setRandomSeed(int low, int high) {
-	setRandomSeed(low + high);
+	Random::seed(seed);
+    m_seed = seed;
 }
 
 int math::getRandomSeed() {

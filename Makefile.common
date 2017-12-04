@@ -10,6 +10,9 @@ SOURCES_CXX += $(wildcard \
 	test/*.cpp \
 )
 
+# random
+FLAGS += -Ivendor/random/include
+
 # filesystem
 FLAGS += -Ivendor/filesystem
 
