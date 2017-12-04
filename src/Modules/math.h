@@ -12,17 +12,14 @@ class math {
 	bool load();
 	/**
 	 * @brief Get uniformly distributed pseudo-random number, between the given numbers.
+	 *
+	 * @param min (0.0f) The minimum value.
+	 * @param max (1.0f) The max value.
+	 *
+	 * @return a number between the two given min and max values.
 	 */
 	float random(float min, float max);
-
-	/**
-	 * @brief Gets a random number from 0 to the max given.
-	 */
 	float random(float max);
-
-	/**
-	 * @brief Gets a random number between 0 and 1.
-	 */
 	float random();
 
 	/**
@@ -61,6 +58,10 @@ class math {
 	 @brief e
 	 */
 	const float e = 2.718281828459045f;
+
+	/**
+	 * @brief pi
+	 */
 	const float pi = 3.14159265358979323846f;
 
 	int m_seed = 0;
