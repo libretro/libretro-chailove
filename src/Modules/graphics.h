@@ -143,6 +143,10 @@ class graphics {
 	void setFont(Font* font);
 
 	void setFont();
+
+	/**
+	 * @brief Retrieve th currently active font.
+	 */
 	Font* getFont();
 
 	/**

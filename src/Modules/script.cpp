@@ -152,6 +152,7 @@ script::script(const std::string& file) {
 	chai.add(fun<Font*, graphics>(&graphics::newFont), "newFont");
 	chai.add(fun<void, graphics, Font*>(&graphics::setFont), "setFont");
 	chai.add(fun<void, graphics>(&graphics::setFont), "setFont");
+	chai.add(fun<Font*, graphics>(&graphics::getFont), "getFont");
 	chai.add(fun<void, graphics, int, int, int, int>(&graphics::setColor), "setColor");
 	chai.add(fun<void, graphics, int, int, int>(&graphics::setColor), "setColor");
 	chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
