@@ -29,6 +29,8 @@ bool graphics::load() {
 		std::cout << "[ChaiLove] Enabling alpha blending failed" << std::endl;
 	}
 
+	// Set the default font.
+	graphics::setFont();
 	return true;
 }
 

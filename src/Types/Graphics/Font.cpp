@@ -107,7 +107,7 @@ int Font::getWidth(const std::string& text) {
 		return FNT_GetTextWidth(ttyFont, text.c_str());
 	}
 
-	return 0;
+	return text.length() * 12;
 }
 
 void Font::print(const std::string& text, int x, int y, int r, int g, int b, int a) {
