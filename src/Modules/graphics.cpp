@@ -30,7 +30,7 @@ bool graphics::load() {
 	}
 
 	// Set the default font.
-	graphics::setFont()
+	graphics::setFont();
 	return true;
 }
 
