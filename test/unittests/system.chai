@@ -1,0 +1,8 @@
+var os = love.system.getOS()
+assert_equal(os, "libretro", "love.system.getOS()")
+
+var version = love.system.getVersionString()
+assert_equal(version[1], '.', "love.system.getVersionString()")
+
+var versionNumber = love.system.getVersion()
+assert_equal(versionNumber[0], 0, "love.system.getVersion()")

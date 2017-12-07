@@ -3,9 +3,7 @@
 namespace Modules {
 
 timer::timer() {
-	m_delta = 0;
-	m_deltaCounter = 0;
-	m_frameCounter = 0;
+	// Nothing.
 }
 
 float timer::getDelta() {

@@ -5,10 +5,14 @@ def load() {
 	print("ChaiLove: Unit Testing Framework\n")
 
 	filesystem.load("assert.chai")
+	filesystem.load("audio.chai")
 	filesystem.load("filesystem.chai")
+	filesystem.load("font.chai")
 	filesystem.load("math.chai")
 	filesystem.load("keyboard.chai")
 	filesystem.load("timer.chai")
+	filesystem.load("system.chai")
+	filesystem.load("window.chai")
 
 	print("\n================================\n")
 

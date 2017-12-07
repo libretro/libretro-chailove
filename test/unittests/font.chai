@@ -1,0 +1,1 @@
+assert(font.isOpen(), "love.font.isOpen()")

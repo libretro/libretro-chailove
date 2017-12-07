@@ -1,10 +1,3 @@
-var text = "Hello World! Hello World! Hello World!"
-var compressed = math.compress(text)
-assert_not_equal(text, compressed, "math.compress()")
-
-var decompressed = math.decompress(compressed)
-assert_equal(decompressed, text, "math.decompress()")
-
 var num = math.random()
 assert(num >= 0 && num <= 1, "math.random()")
 
@@ -14,8 +7,20 @@ assert(num >= 0 && num <= 10, "math.random(10)")
 num = math.random(10, 100)
 assert(num >= 10 && num <= 100, "math.random(10, 100)")
 
+math.setRandomSeed(50, 100)
+assert(true, "math.setRandomSeed(50, 100)")
+
 math.setRandomSeed(10)
 assert(true, "math.setRandomSeed(10)")
+assert_equal(love.math.getRandomSeed(), 10, "math.getRandomSeed()")
 
-num = math.getRandomSeed()
-assert_equal(num, 10, "math.getRandomSeed()")
+var text = "Hello World! Hello World! Hello World!"
+var compressed = math.compress(text)
+assert_not_equal(text, compressed, "math.compress()")
+
+var decompressed = math.decompress(compressed)
+assert_equal(decompressed, text, "math.decompress()")
+
+assert(love.math.pi > 3.0f, "math.pi")
+assert(love.math.pi < 4.0f, "math.pi")
+assert(love.math.e > 2.0f, "math.e")

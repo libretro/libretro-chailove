@@ -12,8 +12,7 @@ bool keyboard::isDown(int key) {
 }
 
 bool keyboard::isDown(const std::string& key) {
-	int keycode = getScancodeFromKey(key);
-	return isDown(keycode);
+	return isDown(getScancodeFromKey(key));
 }
 
 void keyboard::setKeyRepeat(int delay, int interval) {
@@ -33,6 +32,9 @@ bool keyboard::load() {
 		}
 	}
 
+	// Set the initial set of keys.
+	keys = SDL_GetKeyState(NULL);
+
 	return true;
 }
 
@@ -50,15 +52,16 @@ bool keyboard::update() {
 	return true;
 }
 
-void keyboard::eventKeyDown(int key) {
+void keyboard::eventKeyPressed(SDLKey key) {
 	std::string name = getKeyFromScancode(key);
 	ChaiLove* app = ChaiLove::getInstance();
-	app->script->keypressed(name, key);
+	app->script->keypressed(name, static_cast<int>(key));
 }
-void keyboard::eventKeyUp(int key) {
+
+void keyboard::eventKeyReleased(SDLKey key) {
 	std::string name = getKeyFromScancode(key);
 	ChaiLove* app = ChaiLove::getInstance();
-	app->script->keyreleased(name, key);
+	app->script->keyreleased(name, static_cast<int>(key));
 }
 
 }  // namespace Modules

@@ -19,10 +19,10 @@ class timer {
 	 * @brief Returns the current frames per second.
 	 */
 	int getFPS();
-	float m_delta;
-	float m_deltaCounter;
-	int m_frameCounter;
-	int m_fps;
+	float m_delta = 0.0f;
+	float m_deltaCounter = 0.0f;
+	int m_frameCounter = 0;
+	int m_fps = 0;
 };
 
 }  // namespace Modules
