@@ -1,0 +1,4 @@
+assert_equal(love.window.getTitle(), "ChaiLove", "love.window.getTitle()")
+
+love.window.setTitle("ChaiLove Unit Testing")
+assert_equal(love.window.getTitle(), "ChaiLove Unit Testing", "love.window.getTitle()")

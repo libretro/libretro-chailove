@@ -11,7 +11,7 @@ namespace Modules {
  */
 class keyboard {
 	public:
-	Uint8* keys;
+	Uint8* keys = NULL;
 	bool load();
 
 	/**
@@ -42,8 +42,8 @@ class keyboard {
 
 	std::map<std::string, int> keyCodes;
 
-	void eventKeyDown(int key);
-	void eventKeyUp(int key);
+	void eventKeyPressed(SDLKey key);
+	void eventKeyReleased(SDLKey key);
 };
 
 }  // namespace Modules

@@ -1,3 +1,4 @@
+// Filesystem
 var files = filesystem.getDirectoryItems("/")
 
 var foundUnitChai = false
@@ -8,8 +9,6 @@ for (file : files) {
 }
 
 assert(foundUnitChai, "filesystem.getDirectoryItems()")
-
-
 
 var contents = filesystem.read("main.chai")
 var needle = "Unit Testing Framework"
@@ -24,3 +23,8 @@ assert_equal(filesystem.getSize("notexist.chai"), -1, "filesystem.getSize('notex
 
 assert(filesystem.isFile("filesystem.chai"), "filesystem.isFile()")
 assert(!filesystem.isFile("notexist.chai"), "filesystem.isFile('notexist.chai')")
+
+assert_not(love.filesystem.isDirectory("keyboard.chai"), "love.filesystem.isDirectory()")
+
+var theLines = love.filesystem.lines("filesystem.chai")
+assert_equal(theLines[0], "// Filesystem", "love.filesystem.lines()")

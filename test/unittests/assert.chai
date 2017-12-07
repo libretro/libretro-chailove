@@ -9,6 +9,10 @@ def assert_equal(actual, expected, message) {
 	}
 }
 
+def assert_not(value, message) {
+	assert(!value, message)
+}
+
 def assert_not_equal(actual, expected, message) {
 	assert_equal(actual != expected, true, message)
 }

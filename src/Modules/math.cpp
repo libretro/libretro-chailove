@@ -28,6 +28,10 @@ float math::random(float min, float max) {
     return Random::get(min, max);
 }
 
+void math::setRandomSeed(int min, int max) {
+    setRandomSeed(random(min, max));
+}
+
 void math::setRandomSeed(int seed) {
 	Random::seed(seed);
     m_seed = seed;
