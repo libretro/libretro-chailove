@@ -8,6 +8,7 @@ def load() {
 	filesystem.load("audio.chai")
 	filesystem.load("filesystem.chai")
 	filesystem.load("font.chai")
+	filesystem.load("graphics.chai")
 	filesystem.load("math.chai")
 	filesystem.load("keyboard.chai")
 	filesystem.load("timer.chai")

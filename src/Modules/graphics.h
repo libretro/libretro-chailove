@@ -199,6 +199,24 @@ class graphics {
 	void ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
 
 	/**
+	 * @brief Draws an image with the given angle, zoom, and origin.
+	 *
+	 * @param image The image to draw on the screen.
+	 * @param x (0) The position to draw the object (x-axis).
+	 * @param y (0) The position to draw the object (y-axis).
+	 * @param r (0) Orientation (radians).
+	 * @param sx (1) Scale factor (x-axis).
+	 * @param sy (sx) Scale factor (y-axis).
+	 * @param ox (0) Origin offset (x-axis).
+	 * @param oy (0) Origin offset (y-axis).
+	 */
+	void draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy);
+	void draw(Image* image, int x, int y, float r, float sx, float sy, float ox);
+	void draw(Image* image, int x, int y, float r, float sx, float sy);
+	void draw(Image* image, int x, int y, float r, float sx);
+	void draw(Image* image, int x, int y, float r);
+
+	/**
 	 * @brief Draws an arc.
 	 */
 	void arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);

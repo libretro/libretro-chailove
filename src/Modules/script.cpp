@@ -178,7 +178,14 @@ script::script(const std::string& file) {
 	chai.add(fun<void, graphics, int, int, int>(&graphics::setColor), "setColor");
 	chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 	chai.add(fun<void, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
+
 	chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
+	chai.add(fun<void, graphics, Image*, int, int, float, float, float, float, float>(&graphics::draw), "draw");
+	chai.add(fun<void, graphics, Image*, int, int, float, float, float, float>(&graphics::draw), "draw");
+	chai.add(fun<void, graphics, Image*, int, int, float, float, float>(&graphics::draw), "draw");
+	chai.add(fun<void, graphics, Image*, int, int, float, float>(&graphics::draw), "draw");
+	chai.add(fun<void, graphics, Image*, int, int, float>(&graphics::draw), "draw");
+
 	chai.add(fun<void, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
 	chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
 	chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");
@@ -271,6 +278,8 @@ script::script(const std::string& file) {
 	chai.add(mathlib);
 	chai.add(fun(&math::pi), "pi");
 	chai.add(fun(&math::e), "e");
+	chai.add(fun(&math::rad), "rad");
+	chai.add(fun(&math::degrees), "degrees");
 	chai.add(fun<float, math>(&math::random), "random");
 	chai.add(fun<float, math, float>(&math::random), "random");
 	chai.add(fun<float, math, float, float>(&math::random), "random");

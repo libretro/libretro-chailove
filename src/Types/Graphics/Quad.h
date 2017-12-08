@@ -15,7 +15,7 @@ class Quad {
 	Quad();
 	Quad(int x, int y, int width, int height, int sw, int sh);
 	Quad(int x, int y, int width, int height);
-	SDL_Rect* toRect();
+	SDL_Rect toRect();
 };
 
 }  // namespace Graphics

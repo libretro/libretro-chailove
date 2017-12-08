@@ -42,8 +42,9 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 		SDL_SetColorKey(surface, SDL_SRCCOLORKEY | SDL_RLEACCEL, colorkey);
 		optimizedImage = SDL_DisplayFormat(surface);
 	}
+
 	if (!optimizedImage) {
-		std::cout << "SDL_DisplayFormat failed to optimize the image." << std::endl;
+		std::cout << "[ChaiLove] [graphics] SDL_DisplayFormat failed to optimize the image." << std::endl;
 	} else {
 		SDL_FreeSurface(surface);
 		surface = optimizedImage;

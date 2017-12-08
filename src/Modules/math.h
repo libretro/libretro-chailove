@@ -37,6 +37,16 @@ class math {
 	 */
 	int getRandomSeed();
 
+	/**
+	 * @brief Converts from degrees to radians.
+	 */
+	float rad(float degrees);
+
+	/**
+	 * @brief Converts from radians to degrees.
+	 */
+	float degrees(float rad);
+
 	std::string compress(const std::string& str);
 
 	/**

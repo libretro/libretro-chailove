@@ -123,4 +123,13 @@ std::string math::decompress(const std::string& str) {
     return outstring;
 }
 
+float math::rad(float degress) {
+    return degress * pi / 180.0f;
+}
+
+
+float math::degrees(float rad) {
+    return rad * 180.0f / pi;
+}
+
 }  // namespace Modules

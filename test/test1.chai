@@ -1,9 +1,35 @@
 global keyPressed = "a";
 global keyReleased = "b";
+global logo
+global angle = 0.0f
+global scale = 1.0f
+
+def load() {
+	logo = love.image.newImageData("assets/graphics_draw.png")
+	graphics.setBackgroundColor(50, 50, 100)
+}
+
+def update(dt) {
+	angle = angle - dt * 180.0f
+
+	if (keyPressed == "up") {
+		scale = scale + dt * 1.0f
+	}
+	else if (keyPressed == "down") {
+		scale = scale - dt * 1.0f
+	}
+}
 
 def draw() {
 	graphics.print("Key Pressed: " + keyPressed, 5, 20)
 	graphics.print("Key Released: " + keyReleased, 5, 100)
+
+	graphics.setColor(255, 0, 0)
+	//love.graphics.draw(logo, graphics.getWidth() / 2, graphics.getHeight() / 2, math.rad(angle), 2, 2, 64/2, 64/2)
+	love.graphics.point(graphics.getWidth() / 2.0f, graphics.getHeight() / 2.0f)
+	love.graphics.draw(logo, graphics.getWidth() / 2.0f, graphics.getHeight() / 2.0f, math.rad(angle), scale, scale, logo.getWidth() / 2.0f, logo.getHeight() / 2.0f)
+	love.graphics.point(graphics.getWidth() / 2.0f, graphics.getHeight() / 2.0f)
+	//love.graphics.point(graphics.getWidth() / 2
 }
 
 def keypressed(key, scancode) {
