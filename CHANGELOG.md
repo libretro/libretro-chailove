@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - xxxx-xx-xx
 ### Added
-- Introduced `love` namespace
-  - You can now call `love.graphics.draw()`
+- `love` namespace
+  - Example: `love.graphics.draw()`
+- Rotation and scaling for `love.graphics.draw()`
 
 ### Changed
-- ChaiScript_Extras is now using its original source, as the upstream GCC issue is fixed
+- ChaiScript_Extras now using original source, upstream GCC issue fixed
 - Updated libretro-common
 - Updated random
 - Updated sdl-libretro

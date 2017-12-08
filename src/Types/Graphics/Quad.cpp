@@ -17,12 +17,12 @@ Quad::Quad() {
 	// Nothing.
 }
 
-SDL_Rect* Quad::toRect() {
-	SDL_Rect* rect = new SDL_Rect();
-	rect->x = x;
-	rect->y = y;
-	rect->w = width;
-	rect->h = height;
+SDL_Rect Quad::toRect() {
+	SDL_Rect rect;
+	rect.x = x;
+	rect.y = y;
+	rect.w = width;
+	rect.h = height;
 	return rect;
 }
 

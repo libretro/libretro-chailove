@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_gfxBlitFunc.h>
+#include <SDL_rotozoom.h>
 
 #include "../ChaiLove.h"
 #include "../Types/Graphics/Image.h"
@@ -81,21 +82,60 @@ void graphics::line(int x1, int y1, int x2, int y2) {
 
 void graphics::draw(Image* image, int x, int y) {
 	if (image && image->loaded()) {
-		SDL_Rect* dstrect = new SDL_Rect();
-		dstrect->x = x;
-		dstrect->y = y;
-		SDL_BlitSurface(image->surface, NULL, getScreen(), dstrect);
+		SDL_Rect dstrect;
+		dstrect.x = x;
+		dstrect.y = y;
+		SDL_BlitSurface(image->surface, NULL, getScreen(), &dstrect);
 	}
 }
 
 void graphics::draw(Image* image, Quad quad, int x, int y) {
 	if (image && image->loaded()) {
-		SDL_Rect* dest = new SDL_Rect();
-		dest->x = x;
-		dest->y = y;
-		dest->w = x + quad.width;
-		dest->h = y + quad.height;
-		SDL_BlitSurface(image->surface, quad.toRect(), getScreen(), dest);
+		SDL_Rect dest;
+		dest.x = x;
+		dest.y = y;
+		dest.w = x + quad.width;
+		dest.h = y + quad.height;
+		SDL_Rect src = quad.toRect();
+		SDL_BlitSurface(image->surface, &src, getScreen(), &dest);
+	}
+}
+
+void graphics::draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy) {
+	if (image && image->loaded()) {
+		ChaiLove* app = ChaiLove::getInstance();
+		int smooth = app->config.options["alphablending"];
+		float angle = app->math.degrees(r);
+		SDL_Surface* tempSurface = rotozoomSurfaceXY(image->surface, angle, sx, sy, smooth);
+		if (tempSurface) {
+			float aspectX = ox / image->getWidth();
+			float aspectY = oy / image->getHeight();
+			SDL_Rect dstrect;
+			dstrect.x = x - aspectX * tempSurface->w;
+			dstrect.y = y - aspectY * tempSurface->h;
+			SDL_BlitSurface(tempSurface, NULL, getScreen(), &dstrect);
+			SDL_FreeSurface(tempSurface);
+		}
+	}
+}
+
+void graphics::draw(Image* image, int x, int y, float r, float sx, float sy, float ox) {
+	draw(image, x, y, r, sx, sy, ox, 0.0f);
+}
+
+void graphics::draw(Image* image, int x, int y, float r, float sx, float sy) {
+	draw(image, x, y, r, sx, sy, 0.0f, 0.0f);
+}
+
+void graphics::draw(Image* image, int x, int y, float r, float sx) {
+	draw(image, x, y, r, sx, sx, 0.0f, 0.0f);
+}
+
+void graphics::draw(Image* image, int x, int y, float r) {
+	if (r == 0.0f) {
+		draw(image, x, y);
+	} else {
+		draw(image, x, y, r, 1.0f, 1.0f, 0.0f, 0.0f);
 	}
 }
 

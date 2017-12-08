@@ -1,0 +1,2 @@
+assert_equal(love.graphics.getWidth(), 800, "love.graphics.getWidth()")
+assert_equal(love.graphics.getHeight(), 600, "love.graphics.getHeight()")

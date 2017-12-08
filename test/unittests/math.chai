@@ -21,6 +21,5 @@ assert_not_equal(text, compressed, "math.compress()")
 var decompressed = math.decompress(compressed)
 assert_equal(decompressed, text, "math.decompress()")
 
-assert(love.math.pi > 3.0f, "math.pi")
-assert(love.math.pi < 4.0f, "math.pi")
+assert(love.math.pi > 3.0f && love.math.pi < 4.0f, "math.pi")
 assert(love.math.e > 2.0f, "math.e")
