@@ -8,11 +8,13 @@
 #include "../ChaiLove.h"
 #include "../Types/Graphics/Image.h"
 #include "../Types/Graphics/Font.h"
+#include "../Types/Graphics/Color.h"
 
 using Types::Graphics::Image;
 using Types::Graphics::Quad;
 using Types::Graphics::Font;
 using Types::Graphics::Point;
+using Types::Graphics::Color;
 
 namespace Modules {
 
@@ -163,6 +165,15 @@ void graphics::setColor(int red, int green, int blue, int alpha) {
 }
 void graphics::setColor(int red, int green, int blue) {
 	setColor(red, green, blue, 255);
+}
+
+Color graphics::getBackgroundColor() {
+	Color c;
+	c.r = backR;
+	c.g = backG;
+	c.b = backB;
+	c.a = backA;
+	return c;
 }
 void graphics::setBackgroundColor(int red, int green, int blue) {
 	setBackgroundColor(red, green, blue, 255);

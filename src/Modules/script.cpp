@@ -12,6 +12,7 @@ using Types::Graphics::Point;
 using Types::Graphics::Image;
 using Types::Graphics::Font;
 using Types::Graphics::Point;
+using Types::Graphics::Color;
 using Types::System::Config;
 using Types::Input::Joystick;
 using Types::System::windowConfig;
@@ -101,6 +102,16 @@ script::script(const std::string& file) {
 	chai.add(constructor<Point()>(), "Point");
 	chai.add(constructor<Point(float)>(), "Point");
 	chai.add(constructor<Point(float, float)>(), "Point");
+
+	// Color Object.
+	chai.add(user_type<Color>(), "Color");
+	chai.add(fun(&Color::r), "r");
+	chai.add(fun(&Color::g), "g");
+	chai.add(fun(&Color::b), "b");
+	chai.add(fun(&Color::a), "a");
+	chai.add(constructor<Color()>(), "Color");
+	chai.add(constructor<Color(int, int, int)>(), "Color");
+	chai.add(constructor<Color(int, int, int, int)>(), "Color");
 
 	// Image Object.
 	chai.add(user_type<Image>(), "Image");

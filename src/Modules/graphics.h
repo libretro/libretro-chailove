@@ -9,11 +9,13 @@
 #include "../Types/Graphics/Quad.h"
 #include "../Types/Graphics/Font.h"
 #include "../Types/Graphics/Point.h"
+#include "../Types/Graphics/Color.h"
 
 using Types::Graphics::Image;
 using Types::Graphics::Quad;
 using Types::Graphics::Font;
 using Types::Graphics::Point;
+using Types::Graphics::Color;
 
 namespace Modules {
 
@@ -167,6 +169,11 @@ class graphics {
 	 * @brief Sets the active drawing color to the given color.
 	 */
 	void setColor(int red, int green, int blue);
+
+	/**
+	 * @brief Retrieves the active background color.
+	 */
+	Color getBackgroundColor();
 
 	/**
 	 * @brief Sets the background color to the given color.
