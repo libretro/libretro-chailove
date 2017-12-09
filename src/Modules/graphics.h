@@ -186,6 +186,16 @@ class graphics {
 	void setBackgroundColor(int red, int green, int blue);
 
 	/**
+	 * @brief Sets the default scaling filters used with images, and fonts.
+	 */
+	void setDefaultFilter(const std::string& filter);
+
+	/**
+	 * @brief Returns the default scaling filters used with images and fonts.
+	 */
+	std::string getDefaultFilter();
+
+	/**
 	 * @brief Retrieve the width of the screen.
 	 */
 	int getWidth();
@@ -233,6 +243,8 @@ class graphics {
 	SDL_Surface* getScreen();
 	Font* activeFont;
 	Font defaultFont;
+
+	int m_smooth = 0;
 };
 
 }  // namespace Modules

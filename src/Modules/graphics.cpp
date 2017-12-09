@@ -106,9 +106,8 @@ void graphics::draw(Image* image, Quad quad, int x, int y) {
 void graphics::draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy) {
 	if (image && image->loaded()) {
 		ChaiLove* app = ChaiLove::getInstance();
-		int smooth = app->config.options["alphablending"];
 		float angle = app->math.degrees(r);
-		SDL_Surface* tempSurface = rotozoomSurfaceXY(image->surface, angle, sx, sy, smooth);
+		SDL_Surface* tempSurface = rotozoomSurfaceXY(image->surface, angle, sx, sy, m_smooth);
 		if (tempSurface) {
 			float aspectX = ox / image->getWidth();
 			float aspectY = oy / image->getHeight();
@@ -184,6 +183,32 @@ void graphics::setBackgroundColor(int red, int green, int blue, int alpha) {
 	backB = blue;
 	backA = alpha;
 }
+
+/**
+ * @brief Sets the default scaling filters used with images, and fonts.
+ */
+void graphics::setDefaultFilter(const std::string& filter) {
+	if (filter == "linear") {
+		m_smooth = 0;
+	}
+	else if (filter == "nearest") {
+		m_smooth = 1;
+	}
+}
+
+/**
+ * @brief Returns the default scaling filters used with images and fonts.
+ */
+std::string graphics::getDefaultFilter() {
+	switch (m_smooth) {
+		case 0:
+			return "linear";
+		case 1:
+			return "nearest";
+	}
+}
+
+
 int graphics::getWidth() {
 	return getScreen()->w;
 }

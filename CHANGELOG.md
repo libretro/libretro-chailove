@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `love` namespace
   - Example: `love.graphics.draw()`
-- Rotation and scaling for `love.graphics.draw()`
+- `love.graphics.draw()` rotation and scaling
+- `love.graphics.setDefaultFilter()`
 
 ### Changed
 - ChaiScript_Extras now using original source, upstream GCC issue fixed
