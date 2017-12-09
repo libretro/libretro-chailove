@@ -189,10 +189,10 @@ void graphics::setBackgroundColor(int red, int green, int blue, int alpha) {
  */
 void graphics::setDefaultFilter(const std::string& filter) {
 	if (filter == "linear") {
-		m_smooth = 0;
+		m_smooth = 1;
 	}
 	else if (filter == "nearest") {
-		m_smooth = 1;
+		m_smooth = 0;
 	}
 }
 

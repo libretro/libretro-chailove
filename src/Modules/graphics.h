@@ -244,7 +244,7 @@ class graphics {
 	Font* activeFont;
 	Font defaultFont;
 
-	int m_smooth = 0;
+	int m_smooth = 1;
 };
 
 }  // namespace Modules
