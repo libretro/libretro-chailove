@@ -68,6 +68,7 @@
 #include "Modules/sound.h"
 #include "Modules/font.h"
 #include "Modules/timer.h"
+#include "Modules/nuklear.h"
 #include "Modules/audio.h"
 #include "Modules/joystick.h"
 #include "Modules/mouse.h"
@@ -106,6 +107,7 @@ class ChaiLove {
 	Modules::math math;
 	Modules::window window;
 	Modules::event event;
+	Modules::nuklear nuklear;
 
 	void quit(void);
 	bool load(const std::string& file);

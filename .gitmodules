@@ -40,3 +40,6 @@
 [submodule "vendor/random"]
 	path = vendor/random
 	url = https://github.com/effolkronium/random.git
+[submodule "vendor/nuklear_sdl_12"]
+	path = vendor/nuklear_sdl_12
+	url = https://github.com/RobLoach/nuklear_sdl_12.git

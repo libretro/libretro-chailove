@@ -21,6 +21,7 @@ ChaiLove* ChaiLove::getInstance() {
 
 void ChaiLove::quit(void) {
 	// Quit all the subsystems.
+	nuklear.unload();
 	joystick.unload();
 	font.unload();
 	image.unload();
@@ -73,6 +74,8 @@ bool ChaiLove::load(const std::string& file) {
 	test.load();
 	#endif
 
+	nuklear.load();
+
 	return true;
 }
 
@@ -84,6 +87,7 @@ bool ChaiLove::update() {
 	sound.update();
 
 	// Poll all SDL events.
+	nuklear.inputBegin();
 	while (SDL_PollEvent(&sdlEvent)) {
 		switch (sdlEvent.type) {
 			case SDL_QUIT:
@@ -106,7 +110,9 @@ bool ChaiLove::update() {
 				keyboard.eventKeyReleased(sdlEvent.key.keysym.sym);
 				break;
 		}
+        nuklear.inputHandleEvent(&sdlEvent);
 	}
+	nuklear.inputEnd();
 
 	// Update some of the sub-systems.
 	joystick.update();
@@ -145,6 +151,8 @@ void ChaiLove::draw() {
 		#ifdef __HAVE_TESTS__
 		test.draw();
 		#endif
+
+		nuklear.draw();
 
 		// Flip the buffer.
 		if (SDL_Flip(screen) == -1) {
