@@ -127,6 +127,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&SoundData::play), "play");
 	chai.add(fun(&SoundData::resume), "resume");
 	chai.add(fun(&SoundData::pause), "pause");
+	chai.add(fun(&SoundData::setVolume), "setVolume");
+	chai.add(fun(&SoundData::getVolume), "getVolume");
 
 	// Font.
 	chai.add(user_type<Font>(), "Font");

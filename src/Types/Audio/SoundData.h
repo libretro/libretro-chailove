@@ -51,10 +51,20 @@ class SoundData {
 	snd_SoundData sndta;
 	unsigned bps = 0;
 	bool loop = false;
-	float volume = 1.0f;
+	float m_volume = 1.0f;
 	float pitch = 1.0f;
 	AudioState state = Stopped;
 	bool isLoaded();
+
+	/**
+	 * @brief Gets the current volume of the Source.
+	 */
+	float getVolume();
+
+	/**
+	 * @brief Sets the current volume of the Source.
+	 */
+	void setVolume(float volume);
 
 	/**
 	 * @brief Returns whether the Source is playing.

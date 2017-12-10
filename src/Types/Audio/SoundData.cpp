@@ -29,6 +29,19 @@ SoundData::~SoundData() {
 	unload();
 }
 
+float SoundData::getVolume() {
+	return m_volume;
+}
+
+void SoundData::setVolume(float volume) {
+	if (volume > 1.0f) {
+		volume = 1.0f;
+	} else if (volume < 0.0f) {
+		volume = 0.0f;
+	}
+	m_volume = volume;
+}
+
 void SoundData::unload() {
 	if (isLoaded()) {
 		PHYSFS_close(sndta.fp);
