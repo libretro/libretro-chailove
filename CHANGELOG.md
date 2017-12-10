@@ -4,7 +4,7 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - xxxx-xx-xx
+## [0.11.0] - 2017-12-09
 ### Added
 - `love` namespace
   - Example: `love.graphics.draw()`
@@ -13,10 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `love.graphics.getDefaultFilter()`
 
 ### Changed
-- ChaiScript_Extras now using original source, upstream GCC issue fixed
-- Updated libretro-common
-- Updated random
-- Updated sdl-libretro
+- [ChaiScript_Extras](https://github.com/ChaiScript/ChaiScript_Extras) now using original source as upstream issue is fixed
+- Updated [libretro-common](http://github.com/libretro/libretro-common)
+- Updated [random](https://github.com/libretro/sdl-libretro)
+- Updated [sdl-libretro](https://github.com/libretro/sdl-libretro)
 
 ### Fixed
 - `keyreleased()` callback parameter types

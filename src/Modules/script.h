@@ -47,11 +47,11 @@ class script {
 	 * global hamster
 	 *
 	 * def load() {
-	 *   hamster = graphics.newImage("hamster.png")
+	 *   hamster = love.graphics.newImage("hamster.png")
 	 * }
 	 *
 	 * def draw() {
-	 *   graphics.draw(hamster, 100, 100)
+	 *   love.graphics.draw(hamster, 100, 100)
 	 * }
 	 * @endcode
 	 */
@@ -71,10 +71,10 @@ class script {
 	 * var rate = 3
 	 *
 	 * def update(dt) {
-	 *   if (keyboard.isDown("down")) {
+	 *   if (love.keyboard.isDown("down")) {
 	 *     position -= dt * rate
 	 *   }
-	 *   if (keyboard.isDown("up")) {
+	 *   if (love.keyboard.isDown("up")) {
 	 *     position += dt * rate
 	 *   }
 	 * }
@@ -93,11 +93,11 @@ class script {
 	 * global hamster
 	 *
 	 * dev load() {
-	 *   hamster = graphics.newImage("hamster.png")
+	 *   hamster = love.graphics.newImage("hamster.png")
 	 * }
 	 *
 	 * def love.draw() {
-	 *   graphics.draw(hamster, 100, 100)
+	 *   love.graphics.draw(hamster, 100, 100)
 	 * }
 	 * @endcode
 	 */

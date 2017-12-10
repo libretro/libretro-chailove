@@ -34,6 +34,8 @@ class joystick {
 	 */
 	bool isOpen(int index);
 
+	void clearCache();
+
 	/**
 	 * @brief Closes a joystick.
 	 */
@@ -54,6 +56,18 @@ class joystick {
 	std::string getButtonName(int key);
 	int16_t joystick_cache[4][14];
 
+	/**
+	 * @brief Retrieve the given joystick.
+	 *
+	 * ### Example
+	 * @code
+	 * love.joystick[0].isDown("left")
+	 * @endcode
+	 *
+	 * @param player The number of which player's joystick you would like to retrieve.
+	 *
+	 * @return The joystick of the given player number.
+	 */
 	Joystick& operator[](int i);
 };
 

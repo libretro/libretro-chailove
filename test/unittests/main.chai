@@ -10,6 +10,7 @@ def load() {
 	filesystem.load("font.chai")
 	filesystem.load("graphics.chai")
 	filesystem.load("math.chai")
+	filesystem.load("joystick.chai")
 	filesystem.load("keyboard.chai")
 	filesystem.load("timer.chai")
 	filesystem.load("system.chai")
@@ -25,5 +26,6 @@ def load() {
 }
 
 def draw() {
-
+	love.graphics.print("ChaiLove: Unit Testing Framework", 100, 100)
+	love.graphics.print("Report: " + failure, 100, 200)
 }

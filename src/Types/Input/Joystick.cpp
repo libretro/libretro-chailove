@@ -27,13 +27,14 @@ bool Joystick::isOpen() {
 	return true;
 }
 
-bool Joystick::open(int i) {
-	index = i;
+Joystick::Joystick() {
 	name = "RetroPad";
-	return true;
+	index = 0;
 }
 
-Joystick::Joystick() {
+Joystick::Joystick(int i) {
+	index = i;
+	name = "RetroPad";
 }
 
 bool Joystick::isDown(int button) {

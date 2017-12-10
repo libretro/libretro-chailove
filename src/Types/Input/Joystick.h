@@ -12,6 +12,7 @@ namespace Input {
 class Joystick {
 	public:
 	Joystick();
+	Joystick(int index);
 
 	/**
 	 * @brief Gets the name of the joystick.
@@ -21,7 +22,6 @@ class Joystick {
 	std::string getName();
 	bool isOpen();
 	void close();
-	bool open(int index);
 
 	/**
 	 * @brief Checks if a button on the Joystick is pressed.
