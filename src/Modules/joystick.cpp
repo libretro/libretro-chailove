@@ -28,9 +28,7 @@ void joystick::load() {
 
 	// Create the joystick handlers.
 	joysticks = new Joystick[numJoysticks];
-	for (int i = 0; i < numJoysticks; i++) {
-		joysticks[i].open(i);
-	}
+	clearCache();
 }
 
 void joystick::unload() {
@@ -67,7 +65,7 @@ void joystick::update() {
 	int16_t state;
 
 	// Loop through each joystick.
-	for (i = 0; i < 4; i++) {
+	for (i = 0; i < numJoysticks; i++) {
 		// Loop through each button.
 		for (u = 0; u < 14; u++) {
 			// Retrieve the state of the button.
@@ -84,6 +82,16 @@ void joystick::update() {
 					ChaiLove::getInstance()->script->joystickreleased(i, name);
 				}
 			}
+		}
+	}
+}
+
+void joystick::clearCache() {
+	// Clear the cached.
+	for (int i = 0; i < numJoysticks; i++) {
+		// Loop through each button.
+		for (int u = 0; u < 14; u++) {
+			joystick_cache[i][u] = 0;
 		}
 	}
 }

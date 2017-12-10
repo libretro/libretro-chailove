@@ -34,6 +34,8 @@ class joystick {
 	 */
 	bool isOpen(int index);
 
+	void clearCache();
+
 	/**
 	 * @brief Closes a joystick.
 	 */

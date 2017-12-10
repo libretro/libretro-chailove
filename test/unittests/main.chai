@@ -26,5 +26,6 @@ def load() {
 }
 
 def draw() {
-
+	love.graphics.print("ChaiLove: Unit Testing Framework", 100, 100)
+	love.graphics.print("Report: " + failure, 100, 200)
 }
