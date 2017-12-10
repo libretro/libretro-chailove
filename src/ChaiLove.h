@@ -67,6 +67,7 @@
 #include "Modules/system.h"
 #include "Modules/sound.h"
 #include "Modules/font.h"
+#include "Modules/lua.h"
 #include "Modules/timer.h"
 #include "Modules/audio.h"
 #include "Modules/joystick.h"
@@ -106,6 +107,7 @@ class ChaiLove {
 	Modules::math math;
 	Modules::window window;
 	Modules::event event;
+	Modules::lua lua;
 
 	void quit(void);
 	bool load(const std::string& file);

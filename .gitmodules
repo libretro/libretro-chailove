@@ -40,3 +40,9 @@
 [submodule "vendor/random"]
 	path = vendor/random
 	url = https://github.com/effolkronium/random.git
+[submodule "vendor/sol2"]
+	path = vendor/sol2
+	url = https://github.com/ThePhD/sol2.git
+[submodule "vendor/lua"]
+	path = vendor/lua
+	url = https://github.com/lua/lua.git

@@ -73,6 +73,8 @@ bool ChaiLove::load(const std::string& file) {
 	test.load();
 	#endif
 
+	lua.load();
+
 	return true;
 }
 

@@ -55,6 +55,58 @@ SOURCES_C += $(wildcard \
 	vendor/SDL_tty/src/SDL_fnt.c \
 )
 
+# Lua
+FLAGS += -Ivendor/libretro-deps/lua/src
+FLAGS += -DWANT_JIT=0 -DLUA_COMPAT_5_2
+SOURCES_C += \
+	vendor/libretro-deps/lua/src/lapi.c \
+	vendor/libretro-deps/lua/src/lauxlib.c \
+	vendor/libretro-deps/lua/src/lbaselib.c \
+	vendor/libretro-deps/lua/src/lcode.c \
+	vendor/libretro-deps/lua/src/ldblib.c \
+	vendor/libretro-deps/lua/src/ldebug.c \
+	vendor/libretro-deps/lua/src/ldo.c \
+	vendor/libretro-deps/lua/src/ldump.c \
+	vendor/libretro-deps/lua/src/lfunc.c \
+	vendor/libretro-deps/lua/src/lgc.c \
+	vendor/libretro-deps/lua/src/linit.c \
+	vendor/libretro-deps/lua/src/liolib.c \
+	vendor/libretro-deps/lua/src/llex.c \
+	vendor/libretro-deps/lua/src/lmathlib.c \
+	vendor/libretro-deps/lua/src/lmem.c \
+	vendor/libretro-deps/lua/src/lobject.c \
+	vendor/libretro-deps/lua/src/lopcodes.c \
+	vendor/libretro-deps/lua/src/loslib.c \
+	vendor/libretro-deps/lua/src/lparser.c \
+	vendor/libretro-deps/lua/src/lstate.c \
+	vendor/libretro-deps/lua/src/lstring.c \
+	vendor/libretro-deps/lua/src/lstrlib.c \
+	vendor/libretro-deps/lua/src/ltable.c \
+	vendor/libretro-deps/lua/src/ltablib.c \
+	vendor/libretro-deps/lua/src/ltm.c \
+	vendor/libretro-deps/lua/src/lua.c \
+	vendor/libretro-deps/lua/src/luac.c \
+	vendor/libretro-deps/lua/src/lundump.c \
+	vendor/libretro-deps/lua/src/lvm.c \
+	vendor/libretro-deps/lua/src/lzio.c \
+	vendor/libretro-deps/lua/src/print.c
+ifeq ($(platform), unix)
+	FLAGS += -DLUA_USE_LINUX
+	FLAGS += -DLUA_USE_DLOPEN
+	FLAGS += -ldl
+	FLAGS += -lreadline
+endif
+ifeq ($(platform), osx)
+	FLAGS += -DLUA_USE_MACOSX
+endif
+ifeq ($(platform), win)
+	FLAGS += -DLUA_USE_WIN
+endif
+
+# Sol2
+FLAGS += -Ivendor/sol2
+FLAGS += -DSOL_USING_CXX_LUA
+
 # SDL_gfx
 FLAGS += -Ivendor/sdl-libretro/tests/SDL_gfx-2.0.26
 SOURCES_C += $(wildcard \
