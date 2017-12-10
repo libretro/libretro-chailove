@@ -67,8 +67,8 @@ void audio::mixer_render(int16_t *buffer) {
 				left = rawsamples16[j * 2 + 0];
 				right = rawsamples16[j * 2 +  1];
 			}
-			buffer[j * 2 + 0] += left  * currentSound->volume * m_volume;
-			buffer[j * 2 + 1] += right * currentSound->volume * m_volume;
+			buffer[j * 2 + 0] += left  * currentSound->getVolume() * m_volume;
+			buffer[j * 2 + 1] += right * currentSound->getVolume() * m_volume;
 		}
 
 		if (end) {
