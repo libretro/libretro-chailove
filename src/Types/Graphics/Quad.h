@@ -31,7 +31,7 @@ class Quad {
 	 */
 	int height;
 
-	int sw
+	int sw;
 	int sh;
 	Quad();
 	Quad(int x, int y, int width, int height, int sw, int sh);
