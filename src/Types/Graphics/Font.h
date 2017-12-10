@@ -29,14 +29,17 @@ class Font {
 	TTF_Font* ttfFont = NULL;
 	TTY_Font* ttyFont = NULL;
 	int ttyFontWidth, ttyFontHeight;
+
 	/**
 	 * @brief Determines the vertical size the given text needs.
 	 */
 	int getHeight(const std::string& text);
+
 	/**
 	 * @brief Determines the vertical size a line of text needs.
 	 */
 	int getHeight();
+
 	/**
 	 * @brief Determines the horizontal size a line of text needs.
 	 */

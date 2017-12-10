@@ -11,7 +11,28 @@ namespace Graphics {
  */
 class Quad {
 	public:
-	int x, y, width, height, sw, sh;
+	/**
+	 * @brief The x coordinate.
+	 */
+	int x;
+
+	/**
+	 * @brief The y coordinate.
+	 */
+	int y;
+
+	/**
+	 * @brief The width of the Quad.
+	 */
+	int width;
+
+	/**
+	 * @brief The height of the Quad.
+	 */
+	int height;
+
+	int sw
+	int sh;
 	Quad();
 	Quad(int x, int y, int width, int height, int sw, int sh);
 	Quad(int x, int y, int width, int height);
