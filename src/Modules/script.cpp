@@ -178,6 +178,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&graphics::circle), "circle");
 	chai.add(fun(&graphics::line), "line");
 	chai.add(fun(&graphics::newQuad), "newQuad");
+	chai.add(fun(&graphics::setDefaultFilter), "setDefaultFilter");
+	chai.add(fun(&graphics::getDefaultFilter), "getDefaultFilter");
 	chai.add(fun<Font*, graphics, const std::string&, int>(&graphics::newFont), "newFont");
 	chai.add(fun<Font*, graphics, const std::string&>(&graphics::newFont), "newFont");
 	chai.add(fun<Font*, graphics, const std::string&, int, int, const std::string&>(&graphics::newFont), "newFont");
