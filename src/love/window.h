@@ -1,10 +1,10 @@
-#ifndef SRC_MODULES_WINDOW_H_
-#define SRC_MODULES_WINDOW_H_
+#ifndef SRC_LOVE_WINDOW_H_
+#define SRC_LOVE_WINDOW_H_
 
 #include <string>
 #include "../Types/System/Config.h"
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief Provides an interface for modifying and retrieving information about the program's window.
@@ -25,6 +25,6 @@ class window {
 	void setTitle(std::string title);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_WINDOW_H_
+#endif  // SRC_LOVE_WINDOW_H_

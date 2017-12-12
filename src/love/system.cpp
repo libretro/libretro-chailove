@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace Modules {
+namespace love {
 
 std::string system::getOS() {
 	// TODO(RobLoach): Resolve the actual current OS.
@@ -22,4 +22,4 @@ std::string system::getVersionString() {
 	return CHAILOVE_VERSION_STRING;
 }
 
-}  // namespace Modules
+}  // namespace love

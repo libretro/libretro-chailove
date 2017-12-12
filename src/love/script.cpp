@@ -19,7 +19,7 @@ using Types::System::windowConfig;
 using Types::System::moduleConfig;
 using Types::Audio::SoundData;
 
-namespace Modules {
+namespace love {
 
 bool script::loadModule(const std::string& moduleName) {
 	#ifdef __HAVE_CHAISCRIPT__
@@ -644,4 +644,4 @@ std::string script::replaceString(std::string subject, const std::string& search
 	return subject;
 }
 
-}  // namespace Modules
+}  // namespace love

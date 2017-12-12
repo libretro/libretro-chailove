@@ -1,10 +1,10 @@
-#ifndef SRC_MODULES_SYSTEM_H_
-#define SRC_MODULES_SYSTEM_H_
+#ifndef SRC_LOVE_SYSTEM_H_
+#define SRC_LOVE_SYSTEM_H_
 
 #include <vector>
 #include <string>
 
-namespace Modules {
+namespace love {
 /**
  * @brief Provides access to information about the user's system.
  */
@@ -26,6 +26,6 @@ class system {
 	std::string getVersionString();
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_SYSTEM_H_
+#endif  // SRC_LOVE_SYSTEM_H_

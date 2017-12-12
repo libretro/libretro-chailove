@@ -5,7 +5,7 @@
 #include "font.h"
 #include "../Types/Graphics/Font.h"
 
-namespace Modules {
+namespace love {
 
 bool font::load() {
 	int result = TTF_Init();
@@ -30,4 +30,4 @@ bool font::isOpen() {
 	return TTF_WasInit();
 }
 
-}  // namespace Modules
+}  // namespace love

@@ -9,7 +9,7 @@
 using Types::Audio::SoundData;
 using Types::Audio::AudioState::Stopped;
 
-namespace Modules {
+namespace love {
 
 void audio::play(SoundData* soundData) {
 	if (soundData) {
@@ -83,4 +83,4 @@ void audio::mixer_render(int16_t *buffer) {
 	}
 }
 
-}  // namespace Modules
+}  // namespace love

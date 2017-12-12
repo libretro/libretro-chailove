@@ -1,12 +1,12 @@
-#ifndef SRC_MODULES_FILESYSTEM_H_
-#define SRC_MODULES_FILESYSTEM_H_
+#ifndef SRC_LOVE_FILESYSTEM_H_
+#define SRC_LOVE_FILESYSTEM_H_
 
 #include <string>
 #include <vector>
 #include "SDL.h"
 #include "physfs.h"
 
-namespace Modules {
+namespace love {
 /**
  * @brief Provides an interface to the user's filesystem.
  */
@@ -85,6 +85,6 @@ class filesystem {
 	std::vector<std::string> lines(const std::string& filename, const std::string& delimiter);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_FILESYSTEM_H_
+#endif  // SRC_LOVE_FILESYSTEM_H_

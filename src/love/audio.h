@@ -1,10 +1,10 @@
-#ifndef SRC_MODULES_AUDIO_H_
-#define SRC_MODULES_AUDIO_H_
+#ifndef SRC_LOVE_AUDIO_H_
+#define SRC_LOVE_AUDIO_H_
 
 #include "../Types/Audio/SoundData.h"
 #include "sound.h"
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief Provides an interface to output sound to the user's speakers.
@@ -42,6 +42,6 @@ class audio {
 	void setVolume(float volume);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_AUDIO_H_
+#endif  // SRC_LOVE_AUDIO_H_

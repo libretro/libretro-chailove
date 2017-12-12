@@ -1,11 +1,11 @@
-#ifndef SRC_MODULES_KEYBOARD_H_
-#define SRC_MODULES_KEYBOARD_H_
+#ifndef SRC_LOVE_KEYBOARD_H_
+#define SRC_LOVE_KEYBOARD_H_
 
 #include <string>
 #include <map>
 #include "SDL.h"
 
-namespace Modules {
+namespace love {
 /**
  * @brief Provides an interface to the user's keyboard.
  */
@@ -46,6 +46,6 @@ class keyboard {
 	void eventKeyReleased(SDLKey key);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_KEYBOARD_H_
+#endif  // SRC_LOVE_KEYBOARD_H_

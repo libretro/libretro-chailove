@@ -30,21 +30,21 @@
  *
  * ## Modules
  *
- * - \link Modules::audio audio \endlink Provides an interface to output sound to the user's speakers.
- * - \link Modules::event event \endlink Manages events, like keypresses.
- * - \link Modules::filesystem filesystem \endlink Provides an interface to the user's filesystem.
- * - \link Modules::font font \endlink Allows you to work with fonts.
- * - \link Modules::graphics graphics \endlink Drawing of shapes and images, management of screen geometry.
- * - \link Modules::image image \endlink Provides an interface to decode encoded image data.
- * - \link Modules::joystick joystick \endlink Provides an interface to connected joysticks.
- * - \link Modules::keyboard keyboard \endlink Provides an interface to the user's keyboard.
- * - \link Modules::math math \endlink Provides system-independent mathematical functions.
- * - \link Modules::mouse mouse \endlink Provides an interface to the user's mouse.
- * - \link Modules::sound sound \endlink This module is responsible for decoding sound files.
- * - \link Modules::script script \endlink This module is responsible for interacting with the script.
- * - \link Modules::system system \endlink Provides access to information about the user's system.
- * - \link Modules::timer timer \endlink Provides high-resolution timing functionality.
- * - \link Modules::window window \endlink Provides an interface for the program's window.
+ * - \link love::audio audio \endlink Provides an interface to output sound to the user's speakers.
+ * - \link love::event event \endlink Manages events, like keypresses.
+ * - \link love::filesystem filesystem \endlink Provides an interface to the user's filesystem.
+ * - \link love::font font \endlink Allows you to work with fonts.
+ * - \link love::graphics graphics \endlink Drawing of shapes and images, management of screen geometry.
+ * - \link love::image image \endlink Provides an interface to decode encoded image data.
+ * - \link love::joystick joystick \endlink Provides an interface to connected joysticks.
+ * - \link love::keyboard keyboard \endlink Provides an interface to the user's keyboard.
+ * - \link love::math math \endlink Provides system-independent mathematical functions.
+ * - \link love::mouse mouse \endlink Provides an interface to the user's mouse.
+ * - \link love::sound sound \endlink This module is responsible for decoding sound files.
+ * - \link love::script script \endlink This module is responsible for interacting with the script.
+ * - \link love::system system \endlink Provides access to information about the user's system.
+ * - \link love::timer timer \endlink Provides high-resolution timing functionality.
+ * - \link love::window window \endlink Provides an interface for the program's window.
  *
  */
 
@@ -58,22 +58,22 @@
 
 #include "SDL.h"
 #include "libretro.h"
-#include "Modules/keyboard.h"
+#include "love/keyboard.h"
 #include "Types/System/Config.h"
-#include "Modules/script.h"
-#include "Modules/filesystem.h"
-#include "Modules/graphics.h"
-#include "Modules/image.h"
-#include "Modules/system.h"
-#include "Modules/sound.h"
-#include "Modules/font.h"
-#include "Modules/timer.h"
-#include "Modules/audio.h"
-#include "Modules/joystick.h"
-#include "Modules/mouse.h"
-#include "Modules/window.h"
-#include "Modules/math.h"
-#include "Modules/event.h"
+#include "love/script.h"
+#include "love/filesystem.h"
+#include "love/graphics.h"
+#include "love/image.h"
+#include "love/system.h"
+#include "love/sound.h"
+#include "love/font.h"
+#include "love/timer.h"
+#include "love/audio.h"
+#include "love/joystick.h"
+#include "love/mouse.h"
+#include "love/window.h"
+#include "love/math.h"
+#include "love/event.h"
 
 #ifdef __HAVE_TESTS__
 #include "test/Test.h"
@@ -91,21 +91,21 @@ class ChaiLove {
 	static retro_input_poll_t input_poll_cb;
 
 	Config config;
-	Modules::keyboard keyboard;
-	Modules::script* script;
-	Modules::filesystem filesystem;
-	Modules::graphics graphics;
-	Modules::image image;
-	Modules::system system;
-	Modules::sound sound;
-	Modules::font font;
-	Modules::timer timer;
-	Modules::audio audio;
-	Modules::joystick joystick;
-	Modules::mouse mouse;
-	Modules::math math;
-	Modules::window window;
-	Modules::event event;
+	love::keyboard keyboard;
+	love::script* script;
+	love::filesystem filesystem;
+	love::graphics graphics;
+	love::image image;
+	love::system system;
+	love::sound sound;
+	love::font font;
+	love::timer timer;
+	love::audio audio;
+	love::joystick joystick;
+	love::mouse mouse;
+	love::math math;
+	love::window window;
+	love::event event;
 
 	void quit(void);
 	bool load(const std::string& file);

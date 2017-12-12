@@ -1,10 +1,10 @@
-#ifndef SRC_MODULES_SOUND_H_
-#define SRC_MODULES_SOUND_H_
+#ifndef SRC_LOVE_SOUND_H_
+#define SRC_LOVE_SOUND_H_
 
 #include "../Types/Audio/SoundData.h"
 #include <vector>
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief This module is responsible for decoding sound files. It can't play the sounds, see love.audio for that.
@@ -24,6 +24,6 @@ class sound {
 	std::vector<Types::Audio::SoundData*> sounds;
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_SOUND_H_
+#endif  // SRC_LOVE_SOUND_H_

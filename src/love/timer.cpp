@@ -1,6 +1,6 @@
 #include "timer.h"
 
-namespace Modules {
+namespace love {
 
 timer::timer() {
 	// Nothing.
@@ -26,4 +26,4 @@ int timer::getFPS() {
 	return m_fps;
 }
 
-}  // namespace Modules
+}  // namespace love

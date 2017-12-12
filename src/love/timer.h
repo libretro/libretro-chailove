@@ -1,7 +1,7 @@
-#ifndef SRC_MODULES_TIMER_H_
-#define SRC_MODULES_TIMER_H_
+#ifndef SRC_LOVE_TIMER_H_
+#define SRC_LOVE_TIMER_H_
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief Provides high-resolution timing functionality.
@@ -25,6 +25,6 @@ class timer {
 	int m_fps = 0;
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_TIMER_H_
+#endif  // SRC_LOVE_TIMER_H_

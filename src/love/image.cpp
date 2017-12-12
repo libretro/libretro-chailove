@@ -4,7 +4,7 @@
 
 using Types::Graphics::Image;
 
-namespace Modules {
+namespace love {
 Image* image::newImageData(const std::string& filename) {
 	Image* image = new Image(filename);
 	if (image->loaded()) {
@@ -36,4 +36,4 @@ bool image::unload() {
 	return true;
 }
 
-}  // namespace Modules
+}  // namespace love

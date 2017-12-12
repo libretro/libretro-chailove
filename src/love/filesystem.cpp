@@ -6,7 +6,7 @@
 #include "../ChaiLove.h"
 #include <iostream>
 
-namespace Modules {
+namespace love {
 
 /**
  * Initialize the file system.
@@ -236,4 +236,4 @@ std::vector<std::string> filesystem::lines(const std::string& filename, const st
 
 	return strings;
 }
-}  // namespace Modules
+}  // namespace love
