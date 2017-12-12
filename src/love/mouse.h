@@ -1,11 +1,11 @@
-#ifndef SRC_MODULES_MOUSE_H_
-#define SRC_MODULES_MOUSE_H_
+#ifndef SRC_LOVE_MOUSE_H_
+#define SRC_LOVE_MOUSE_H_
 
 #include <SDL.h>
 #include <string>
 #include "../Types/Graphics/Point.h"
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief Provides an interface to the user's mouse.
@@ -61,6 +61,6 @@ class mouse {
 	void buttonEvent(SDL_MouseButtonEvent event);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_MOUSE_H_
+#endif  // SRC_LOVE_MOUSE_H_

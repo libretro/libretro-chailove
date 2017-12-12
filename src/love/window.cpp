@@ -8,7 +8,7 @@ using ::ChaiLove;
 using Types::System::Config;
 using std::string;
 
-namespace Modules {
+namespace love {
 
 bool window::load(const Config& config) {
 	ChaiLove* app = ChaiLove::getInstance();
@@ -72,4 +72,4 @@ void window::setTitle(string title) {
 	SDL_WM_SetCaption(title.c_str(), 0);
 }
 
-}  // namespace Modules
+}  // namespace love

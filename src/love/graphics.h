@@ -1,5 +1,5 @@
-#ifndef SRC_MODULES_GRAPHICS_H_
-#define SRC_MODULES_GRAPHICS_H_
+#ifndef SRC_LOVE_GRAPHICS_H_
+#define SRC_LOVE_GRAPHICS_H_
 
 #include <vector>
 
@@ -17,7 +17,7 @@ using Types::Graphics::Font;
 using Types::Graphics::Point;
 using Types::Graphics::Color;
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief The primary purpose of the graphics module is to draw to the screen.
@@ -247,6 +247,6 @@ class graphics {
 	int m_smooth = 1;
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_GRAPHICS_H_
+#endif  // SRC_LOVE_GRAPHICS_H_

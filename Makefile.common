@@ -1,7 +1,7 @@
 # ChaiLove
 SOURCES_CXX += $(wildcard \
 	src/*.cpp \
-	src/Modules/*.cpp \
+	src/love/*.cpp \
 	src/Types/*.cpp \
 	src/Types/Audio/*.cpp \
 	src/Types/Graphics/*.cpp \

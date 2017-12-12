@@ -1,5 +1,5 @@
-#ifndef SRC_MODULES_JOYSTICK_H_
-#define SRC_MODULES_JOYSTICK_H_
+#ifndef SRC_LOVE_JOYSTICK_H_
+#define SRC_LOVE_JOYSTICK_H_
 
 #include "../Types/Input/Joystick.h"
 #include "SDL.h"
@@ -7,7 +7,7 @@
 
 using Types::Input::Joystick;
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief Provides an interface to connected joysticks.
@@ -71,6 +71,6 @@ class joystick {
 	Joystick& operator[](int i);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_JOYSTICK_H_
+#endif  // SRC_LOVE_JOYSTICK_H_

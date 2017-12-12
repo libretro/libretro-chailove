@@ -5,7 +5,7 @@
 #include "../ChaiLove.h"
 #include "../Types/Audio/SoundData.h"
 
-namespace Modules {
+namespace love {
 
 bool sound::load() {
 	return true;
@@ -26,4 +26,4 @@ void sound::unload() {
 	return ::ChaiLove::getInstance()->audio.newSource(filename);
 }
 
-}  // namespace Modules
+}  // namespace love

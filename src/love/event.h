@@ -1,7 +1,7 @@
-#ifndef SRC_MODULES_EVENT_H_
-#define SRC_MODULES_EVENT_H_
+#ifndef SRC_LOVE_EVENT_H_
+#define SRC_LOVE_EVENT_H_
 
-namespace Modules {
+namespace love {
 /**
  * @brief Manages events, like keypresses.
  */
@@ -14,6 +14,6 @@ class event {
 	bool quitstatus = false;
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_EVENT_H_
+#endif  // SRC_LOVE_EVENT_H_

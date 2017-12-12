@@ -9,7 +9,7 @@
 using Types::Graphics::Point;
 using ::ChaiLove;
 
-namespace Modules {
+namespace love {
 
 bool mouse::load() {
 	setVisible(false);
@@ -107,4 +107,4 @@ Point mouse::getPosition() {
 	return Point(m_x, m_y);
 }
 
-}  // namespace Modules
+}  // namespace love

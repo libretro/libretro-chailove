@@ -1,9 +1,9 @@
-#ifndef SRC_MODULES_FONT_H_
-#define SRC_MODULES_FONT_H_
+#ifndef SRC_LOVE_FONT_H_
+#define SRC_LOVE_FONT_H_
 
 #include "../Types/Graphics/Font.h"
 
-namespace Modules {
+namespace love {
 /**
  * @brief Allows you to work with fonts.
  */
@@ -19,6 +19,6 @@ class font {
 	bool unload();
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_FONT_H_
+#endif  // SRC_LOVE_FONT_H_

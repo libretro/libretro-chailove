@@ -11,7 +11,7 @@
 using Types::Input::Joystick;
 using ::ChaiLove;
 
-namespace Modules {
+namespace love {
 
 Joystick* joystick::getJoysticks() {
 	return joysticks;
@@ -194,4 +194,4 @@ int joystick::getButtonKey(const std::string& name) {
 	return -1;
 }
 
-}  // namespace Modules
+}  // namespace love

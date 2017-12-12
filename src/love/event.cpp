@@ -1,9 +1,9 @@
 #include "event.h"
 
-namespace Modules {
+namespace love {
 
 void event::quit() {
 	quitstatus = true;
 }
 
-}  // namespace Modules
+}  // namespace love

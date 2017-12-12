@@ -10,7 +10,7 @@
 
 using Random = effolkronium::random_static;
 
-namespace Modules {
+namespace love {
 
 bool math::load() {
 	return true;
@@ -132,4 +132,4 @@ float math::degrees(float rad) {
     return rad * 180.0f / pi;
 }
 
-}  // namespace Modules
+}  // namespace love

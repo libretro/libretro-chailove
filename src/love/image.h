@@ -1,10 +1,10 @@
-#ifndef SRC_MODULES_IMAGE_H_
-#define SRC_MODULES_IMAGE_H_
+#ifndef SRC_LOVE_IMAGE_H_
+#define SRC_LOVE_IMAGE_H_
 
 #include "../Types/Graphics/Image.h"
 #include <string>
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief Provides an interface to decode encoded image data.
@@ -20,6 +20,6 @@ class image {
 	::Types::Graphics::Image* newImageData(const std::string& filename);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_IMAGE_H_
+#endif  // SRC_LOVE_IMAGE_H_

@@ -5,7 +5,7 @@
 #include "../ChaiLove.h"
 #include "SDL.h"
 
-namespace Modules {
+namespace love {
 
 bool keyboard::isDown(int key) {
 	return static_cast<bool>(keys[key]);
@@ -64,4 +64,4 @@ void keyboard::eventKeyReleased(SDLKey key) {
 	app->script->keyreleased(name, static_cast<int>(key));
 }
 
-}  // namespace Modules
+}  // namespace love

@@ -1,9 +1,9 @@
-#ifndef SRC_MODULES_MATH_H_
-#define SRC_MODULES_MATH_H_
+#ifndef SRC_LOVE_MATH_H_
+#define SRC_LOVE_MATH_H_
 
 #include <string>
 
-namespace Modules {
+namespace love {
 /**
  * @brief Provides system-independent mathematical functions.
  */
@@ -82,6 +82,6 @@ class math {
 	int m_seed = 0;
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_MATH_H_
+#endif  // SRC_LOVE_MATH_H_

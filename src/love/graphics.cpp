@@ -16,7 +16,7 @@ using Types::Graphics::Font;
 using Types::Graphics::Point;
 using Types::Graphics::Color;
 
-namespace Modules {
+namespace love {
 
 graphics::graphics() {
 	setFont();
@@ -267,4 +267,4 @@ Font* graphics::getFont() {
 	return activeFont;
 }
 
-}  // namespace Modules
+}  // namespace love

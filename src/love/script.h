@@ -1,5 +1,5 @@
-#ifndef SRC_MODULES_SCRIPT_H_
-#define SRC_MODULES_SCRIPT_H_
+#ifndef SRC_LOVE_SCRIPT_H_
+#define SRC_LOVE_SCRIPT_H_
 
 #include <string>
 #include "../Types/System/Config.h"
@@ -11,7 +11,7 @@
 // #include <chaiscript/chaiscript_stdlib.hpp>
 #endif
 
-namespace Modules {
+namespace love {
 
 /**
  * @brief Global functions and events that are called.
@@ -193,6 +193,6 @@ class script {
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
 };
 
-}  // namespace Modules
+}  // namespace love
 
-#endif  // SRC_MODULES_SCRIPT_H_
+#endif  // SRC_LOVE_SCRIPT_H_
