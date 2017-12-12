@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `SoundData.getVolume()`
 - `SoundData.setVolume()`
 
+### Changed
+- Updated C++ namespace from `Modules` to `love`
+
 ## 0.11.1 - 2017-12-10
 ### Fixed
 - Version number
