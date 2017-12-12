@@ -33,13 +33,14 @@ float SoundData::getVolume() {
 	return m_volume;
 }
 
-void SoundData::setVolume(float volume) {
+SoundData& SoundData::setVolume(float volume) {
 	if (volume > 1.0f) {
 		volume = 1.0f;
 	} else if (volume < 0.0f) {
 		volume = 0.0f;
 	}
 	m_volume = volume;
+	return *this;
 }
 
 void SoundData::unload() {
@@ -94,8 +95,9 @@ bool SoundData::isLooping() {
 	return loop;
 }
 
-void SoundData::setLooping(bool looping) {
+SoundData& SoundData::setLooping(bool looping) {
 	loop = looping;
+	return *this;
 }
 
 }  // namespace Audio

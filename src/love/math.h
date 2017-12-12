@@ -25,12 +25,12 @@ class math {
 	/**
 	 * @brief Sets the random seed to a random seed between the given min and max values.
 	 */
-	void setRandomSeed(int min, int max);
+	math& setRandomSeed(int min, int max);
 
 	/**
 	 * @brief Sets the seed of the random number generator.
 	 */
-	void setRandomSeed(int seed);
+	math& setRandomSeed(int seed);
 
 	/**
 	 * @brief Gets the seed of the random number generator.

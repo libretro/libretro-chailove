@@ -30,10 +30,12 @@ float audio::getVolume() {
 	return m_volume;
 }
 
-void audio::setVolume(float volume) {
+audio& audio::setVolume(float volume) {
 	if (volume >= 0.0f && volume <= 1.0f) {
 		m_volume = volume;
 	}
+
+	return *this;
 }
 
 void audio::mixer_render(int16_t *buffer) {

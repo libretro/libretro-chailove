@@ -16,7 +16,8 @@ class mouse {
 	/**
 	 * @brief Sets the current visibility of the cursor.
 	 */
-	void setVisible(bool enable);
+	mouse& setVisible(bool enable);
+
 	/**
 	 * @brief Checks if the cursor is visible.
 	 */
@@ -25,11 +26,11 @@ class mouse {
 	/**
 	 * @brief Sets the current X position of the mouse.
 	 */
-	void setX(int x);
+	mouse& setX(int x);
 	/**
 	 * @brief Sets the current Y position of the mouse.
 	 */
-	void setY(int y);
+	mouse& setY(int y);
 	/**
 	 * @brief Returns the current x-position of the mouse.
 	 */

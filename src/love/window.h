@@ -22,7 +22,7 @@ class window {
 	/**
 	 * @brief Sets the window title.
 	 */
-	void setTitle(std::string title);
+	window& setTitle(std::string title);
 };
 
 }  // namespace love

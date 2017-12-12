@@ -4,6 +4,7 @@
 global testNames = [
 	"graphics_print",
 	"graphics_draw",
+	"graphics_point",
 	"mouse_getPosition",
 	"graphics_print_font",
 	"filesystem_getDirectoryItems"

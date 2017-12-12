@@ -20,18 +20,21 @@ bool mouse::isVisible() {
 	return SDL_ShowCursor(SDL_QUERY) == SDL_ENABLE;
 }
 
-void mouse::setVisible(bool enable) {
+mouse& mouse::setVisible(bool enable) {
 	SDL_ShowCursor(enable ? SDL_ENABLE : SDL_DISABLE);
+	return *this;
 }
 
-void mouse::setX(int x) {
+mouse& mouse::setX(int x) {
 	m_x = x;
 	SDL_WarpMouse(m_x, m_y);
+	return *this;
 }
 
-void mouse::setY(int y) {
+mouse& mouse::setY(int y) {
 	m_y = y;
 	SDL_WarpMouse(m_x, m_y);
+	return *this;
 }
 
 int mouse::getX() {

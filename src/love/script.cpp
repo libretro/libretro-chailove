@@ -18,6 +18,7 @@ using Types::Input::Joystick;
 using Types::System::windowConfig;
 using Types::System::moduleConfig;
 using Types::Audio::SoundData;
+using love::graphics;
 
 namespace love {
 
@@ -167,8 +168,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&graphics::rectangle), "rectangle");
 	chai.add(fun(&graphics::newImage), "newImage");
 	chai.add(fun(&graphics::print), "print");
-	chai.add(fun<void, graphics, int, int>(&graphics::point), "point");
-	chai.add(fun<void, graphics, Point*>(&graphics::point), "point");
+	chai.add(fun<love::graphics&, graphics, int, int>(&graphics::point), "point");
+	chai.add(fun<love::graphics&, graphics, Point*>(&graphics::point), "point");
 	// chai.add(bootstrap::standard_library::vector_type<std::vector<Point*>>("VectorPointPointer"));
 	// chai.add(bootstrap::standard_library::vector_type<std::vector<Point>>("VectorPoint"));
 	// chai.add(fun<void, graphics, std::vector<Point*>>(&graphics::points), "points");
@@ -186,25 +187,25 @@ script::script(const std::string& file) {
 	chai.add(fun<Font*, graphics, const std::string&>(&graphics::newFont), "newFont");
 	chai.add(fun<Font*, graphics, const std::string&, int, int, const std::string&>(&graphics::newFont), "newFont");
 	chai.add(fun<Font*, graphics>(&graphics::newFont), "newFont");
-	chai.add(fun<void, graphics, Font*>(&graphics::setFont), "setFont");
-	chai.add(fun<void, graphics>(&graphics::setFont), "setFont");
+	chai.add(fun<love::graphics&, graphics, Font*>(&graphics::setFont), "setFont");
+	chai.add(fun<love::graphics&, graphics>(&graphics::setFont), "setFont");
 	chai.add(fun<Font*, graphics>(&graphics::getFont), "getFont");
-	chai.add(fun<void, graphics, int, int, int, int>(&graphics::setColor), "setColor");
-	chai.add(fun<void, graphics, int, int, int>(&graphics::setColor), "setColor");
-	chai.add(fun<void, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
-	chai.add(fun<void, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
+	chai.add(fun<love::graphics&, graphics, int, int, int, int>(&graphics::setColor), "setColor");
+	chai.add(fun<love::graphics&, graphics, int, int, int>(&graphics::setColor), "setColor");
+	chai.add(fun<love::graphics&, graphics, int, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
+	chai.add(fun<love::graphics&, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 
-	chai.add(fun<void, graphics, Image*, int, int>(&graphics::draw), "draw");
-	chai.add(fun<void, graphics, Image*, int, int, float, float, float, float, float>(&graphics::draw), "draw");
-	chai.add(fun<void, graphics, Image*, int, int, float, float, float, float>(&graphics::draw), "draw");
-	chai.add(fun<void, graphics, Image*, int, int, float, float, float>(&graphics::draw), "draw");
-	chai.add(fun<void, graphics, Image*, int, int, float, float>(&graphics::draw), "draw");
-	chai.add(fun<void, graphics, Image*, int, int, float>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*, int, int>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*, int, int, float, float, float, float, float>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*, int, int, float, float, float, float>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*, int, int, float, float, float>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*, int, int, float, float>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*, int, int, float>(&graphics::draw), "draw");
 
-	chai.add(fun<void, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
-	chai.add(fun<void, graphics, int, int, int, int>(&graphics::clear), "clear");
-	chai.add(fun<void, graphics, int, int, int>(&graphics::clear), "clear");
-	chai.add(fun<void, graphics>(&graphics::clear), "clear");
+	chai.add(fun<love::graphics&, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, int, int, int, int>(&graphics::clear), "clear");
+	chai.add(fun<love::graphics&, graphics, int, int, int>(&graphics::clear), "clear");
+	chai.add(fun<love::graphics&, graphics>(&graphics::clear), "clear");
 	chai.add_global(var(std::ref(app->graphics)), "graphics");
 
 	// Font
@@ -298,8 +299,8 @@ script::script(const std::string& file) {
 	chai.add(fun<float, math>(&math::random), "random");
 	chai.add(fun<float, math, float>(&math::random), "random");
 	chai.add(fun<float, math, float, float>(&math::random), "random");
-	chai.add(fun<void, math, int, int>(&math::setRandomSeed), "setRandomSeed");
-	chai.add(fun<void, math, int>(&math::setRandomSeed), "setRandomSeed");
+	chai.add(fun<love::math&, math, int, int>(&math::setRandomSeed), "setRandomSeed");
+	chai.add(fun<love::math&, math, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun(&math::getRandomSeed), "getRandomSeed");
 	chai.add(fun<std::string, math, const std::string&>(&math::compress), "compress");
 	chai.add(fun<std::string, math, const std::string&, int>(&math::compress), "compress");
