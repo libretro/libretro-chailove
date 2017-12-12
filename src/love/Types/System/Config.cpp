@@ -1,5 +1,5 @@
 #include "Config.h"
-#include "../../ChaiLove.h"
+#include "../../../ChaiLove.h"
 
 namespace love {
 namespace Types {

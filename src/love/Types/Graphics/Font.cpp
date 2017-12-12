@@ -4,7 +4,7 @@
 #include "SDL_ttf.h"
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
-#include "../../ChaiLove.h"
+#include "../../../ChaiLove.h"
 #include "Image.h"
 #include <iostream>
 

@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <string>
-#include "../../ChaiLove.h"
+#include "../../../ChaiLove.h"
 
 
 namespace love {
