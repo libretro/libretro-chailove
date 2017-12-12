@@ -4,10 +4,11 @@
 #include "SDL_ttf.h"
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
-#include "../../ChaiLove.h"
+#include "../../../ChaiLove.h"
 #include "Image.h"
 #include <iostream>
 
+namespace love {
 namespace Types {
 namespace Graphics {
 
@@ -149,3 +150,4 @@ void Font::print(const std::string& text, int x, int y, int r, int g, int b, int
 
 }  // namespace Graphics
 }  // namespace Types
+}  // namespace love

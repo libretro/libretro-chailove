@@ -1,10 +1,11 @@
 #include "SoundData.h"
 #include <string>
 
-#include "../../ChaiLove.h"
+#include "../../../ChaiLove.h"
 #include "AudioState.h"
 #include "physfs.h"
 
+namespace love {
 namespace Types {
 namespace Audio {
 
@@ -102,3 +103,4 @@ SoundData& SoundData::setLooping(bool looping) {
 
 }  // namespace Audio
 }  // namespace Types
+}  // namespace love

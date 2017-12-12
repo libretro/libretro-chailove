@@ -1,10 +1,11 @@
 #include "image.h"
 #include <string>
-#include "../Types/Graphics/Image.h"
+#include "Types/Graphics/Image.h"
 
-using Types::Graphics::Image;
+using love::Types::Graphics::Image;
 
 namespace love {
+
 Image* image::newImageData(const std::string& filename) {
 	Image* image = new Image(filename);
 	if (image->loaded()) {

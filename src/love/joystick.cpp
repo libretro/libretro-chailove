@@ -3,12 +3,12 @@
 #include <string>
 #include <vector>
 #include <libretro.h>
-#include "../Types/Input/Joystick.h"
+#include "Types/Input/Joystick.h"
 #include "../ChaiLove.h"
 
 #include <iostream>
 
-using Types::Input::Joystick;
+using love::Types::Input::Joystick;
 using ::ChaiLove;
 
 namespace love {

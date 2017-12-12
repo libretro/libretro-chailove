@@ -1,11 +1,11 @@
 #ifndef SRC_LOVE_JOYSTICK_H_
 #define SRC_LOVE_JOYSTICK_H_
 
-#include "../Types/Input/Joystick.h"
+#include "Types/Input/Joystick.h"
 #include "SDL.h"
 #include <string>
 
-using Types::Input::Joystick;
+using love::Types::Input::Joystick;
 
 namespace love {
 

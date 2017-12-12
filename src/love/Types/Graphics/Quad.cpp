@@ -1,6 +1,7 @@
 #include "Quad.h"
 #include "SDL.h"
 
+namespace love {
 namespace Types {
 namespace Graphics {
 
@@ -28,3 +29,4 @@ SDL_Rect Quad::toRect() {
 
 }  // namespace Graphics
 }  // namespace Types
+}  // namespace love

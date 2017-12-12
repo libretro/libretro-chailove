@@ -1,9 +1,10 @@
-#ifndef SRC_TYPES_SYSTEM_CONFIG_H_
-#define SRC_TYPES_SYSTEM_CONFIG_H_
+#ifndef SRC_LOVE_TYPES_SYSTEM_CONFIG_H_
+#define SRC_LOVE_TYPES_SYSTEM_CONFIG_H_
 
 #include <string>
 #include <map>
 
+namespace love {
 namespace Types {
 namespace System {
 
@@ -61,5 +62,6 @@ class Config {
 
 }  // namespace System
 }  // namespace Types
+}  // namespace love
 
-#endif  // SRC_TYPES_SYSTEM_CONFIG_H_
+#endif  // SRC_LOVE_TYPES_SYSTEM_CONFIG_H_

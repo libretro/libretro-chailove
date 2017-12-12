@@ -2,7 +2,7 @@
 #define SRC_LOVE_SCRIPT_H_
 
 #include <string>
-#include "../Types/System/Config.h"
+#include "Types/System/Config.h"
 
 #ifdef __HAVE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
@@ -10,6 +10,8 @@
 // TODO(RobLoach): Fix Chai loading with the Standard Library.
 // #include <chaiscript/chaiscript_stdlib.hpp>
 #endif
+
+using love::Types::System::Config;
 
 namespace love {
 
@@ -34,7 +36,7 @@ class script {
 	 * }
 	 * @endcode
 	 */
-	void conf(::Types::System::Config& t);
+	void conf(Config& t);
 
 	/**
 	 * @brief This function is called exactly once at the beginning of the game.
@@ -161,7 +163,7 @@ class script {
 	#ifdef __HAVE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
 	std::function<void()> chaiload;
-	std::function<void(::Types::System::Config&)> chaiconf;
+	std::function<void(Config&)> chaiconf;
 	std::function<void(float)> chaiupdate;
 	std::function<void()> chaidraw;
 	std::function<void()> chaireset;

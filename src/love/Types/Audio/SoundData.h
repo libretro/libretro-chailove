@@ -1,10 +1,11 @@
-#ifndef SRC_TYPES_AUDIO_SOUNDDATA_H_
-#define SRC_TYPES_AUDIO_SOUNDDATA_H_
+#ifndef SRC_LOVE_TYPES_AUDIO_SOUNDDATA_H_
+#define SRC_LOVE_TYPES_AUDIO_SOUNDDATA_H_
 
 #include <string>
 #include "AudioState.h"
 #include "physfs.h"
 
+namespace love {
 namespace Types {
 namespace Audio {
 
@@ -96,5 +97,6 @@ class SoundData {
 
 }  // namespace Audio
 }  // namespace Types
+}  // namespace love
 
-#endif  // SRC_TYPES_AUDIO_SOUNDDATA_H_
+#endif  // SRC_LOVE_TYPES_AUDIO_SOUNDDATA_H_

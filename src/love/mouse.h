@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 #include <string>
-#include "../Types/Graphics/Point.h"
+#include "Types/Graphics/Point.h"
 
 namespace love {
 

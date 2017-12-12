@@ -1,8 +1,10 @@
 #ifndef SRC_LOVE_AUDIO_H_
 #define SRC_LOVE_AUDIO_H_
 
-#include "../Types/Audio/SoundData.h"
+#include "Types/Audio/SoundData.h"
 #include "sound.h"
+
+using love::Types::Audio::SoundData;
 
 namespace love {
 
@@ -14,12 +16,12 @@ class audio {
 	/**
 	 * @brief Plays the specified sound.
 	 */
-	void play(::Types::Audio::SoundData* soundData);
+	void play(SoundData* soundData);
 
 	/**
 	 * @brief Creates a new audio source from a file.
 	 */
-	::Types::Audio::SoundData* newSource(const std::string& filename);
+	SoundData* newSource(const std::string& filename);
 
 	void mixer_render(int16_t *buffer);
 

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     ```
     graphics.love.point(100,100).point(50, 200)
     ```
+- Moved `Types` namespace to `love::Types`
 
 ## 0.11.1 - 2017-12-10
 ### Fixed

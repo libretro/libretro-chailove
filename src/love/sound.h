@@ -1,7 +1,7 @@
 #ifndef SRC_LOVE_SOUND_H_
 #define SRC_LOVE_SOUND_H_
 
-#include "../Types/Audio/SoundData.h"
+#include "Types/Audio/SoundData.h"
 #include <vector>
 
 namespace love {

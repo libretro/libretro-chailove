@@ -1,8 +1,9 @@
-#ifndef SRC_TYPES_GRAPHICS_COLOR_H_
-#define SRC_TYPES_GRAPHICS_COLOR_H_
+#ifndef SRC_LOVE_TYPES_GRAPHICS_COLOR_H_
+#define SRC_LOVE_TYPES_GRAPHICS_COLOR_H_
 
 #include "SDL.h"
 
+namespace love {
 namespace Types {
 namespace Graphics {
 
@@ -63,5 +64,6 @@ struct Color {
 
 }  // namespace Graphics
 }  // namespace Types
+}  // namespace love
 
-#endif  // SRC_TYPES_GRAPHICS_COLOR_H_
+#endif  // SRC_LOVE_TYPES_GRAPHICS_COLOR_H_

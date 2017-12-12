@@ -1,8 +1,9 @@
-#ifndef SRC_TYPES_GRAPHICS_QUAD_H_
-#define SRC_TYPES_GRAPHICS_QUAD_H_
+#ifndef SRC_LOVE_TYPES_GRAPHICS_QUAD_H_
+#define SRC_LOVE_TYPES_GRAPHICS_QUAD_H_
 
 #include "SDL.h"
 
+namespace love {
 namespace Types {
 namespace Graphics {
 
@@ -41,5 +42,6 @@ class Quad {
 
 }  // namespace Graphics
 }  // namespace Types
+}  // namespace love
 
-#endif  // SRC_TYPES_GRAPHICS_QUAD_H_
+#endif  // SRC_LOVE_TYPES_GRAPHICS_QUAD_H_

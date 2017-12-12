@@ -2,11 +2,11 @@
 
 #include <SDL.h>
 #include <libretro.h>
-#include "../Types/Graphics/Point.h"
+#include "Types/Graphics/Point.h"
 #include "../ChaiLove.h"
 #include <string>
 
-using Types::Graphics::Point;
+using love::Types::Graphics::Point;
 using ::ChaiLove;
 
 namespace love {

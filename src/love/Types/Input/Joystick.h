@@ -1,8 +1,9 @@
-#ifndef SRC_TYPES_INPUT_JOYSTICK_H_
-#define SRC_TYPES_INPUT_JOYSTICK_H_
+#ifndef SRC_LOVE_TYPES_INPUT_JOYSTICK_H_
+#define SRC_LOVE_TYPES_INPUT_JOYSTICK_H_
 
 #include <string>
 
+namespace love {
 namespace Types {
 namespace Input {
 
@@ -49,5 +50,6 @@ class Joystick {
 
 }  // namespace Input
 }  // namespace Types
+}  // namespace love
 
-#endif  // SRC_TYPES_INPUT_JOYSTICK_H_
+#endif  // SRC_LOVE_TYPES_INPUT_JOYSTICK_H_

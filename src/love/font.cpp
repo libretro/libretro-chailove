@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include "font.h"
-#include "../Types/Graphics/Font.h"
+#include "Types/Graphics/Font.h"
 
 namespace love {
 
