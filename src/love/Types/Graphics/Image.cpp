@@ -8,6 +8,7 @@
 #include "../../ChaiLove.h"
 
 
+namespace love {
 namespace Types {
 namespace Graphics {
 
@@ -85,3 +86,4 @@ int Image::getHeight() {
 
 }  // namespace Graphics
 }  // namespace Types
+}  // namespace love

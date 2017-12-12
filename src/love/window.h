@@ -2,7 +2,7 @@
 #define SRC_LOVE_WINDOW_H_
 
 #include <string>
-#include "../Types/System/Config.h"
+#include "Types/System/Config.h"
 
 namespace love {
 

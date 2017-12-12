@@ -3,6 +3,7 @@
 #include "../../ChaiLove.h"
 #include <string>
 
+namespace love {
 namespace Types {
 namespace Input {
 
@@ -52,3 +53,4 @@ void Joystick::close() {
 
 }  // namespace Input
 }  // namespace Types
+}  // namespace love

@@ -1,13 +1,13 @@
 #include "audio.h"
 #include <string>
-#include "../Types/Audio/SoundData.h"
-#include "../Types/Audio/AudioState.h"
+#include "Types/Audio/SoundData.h"
+#include "Types/Audio/AudioState.h"
 #include "../ChaiLove.h"
 #include "sound.h"
 #include <physfs.h>
 
-using Types::Audio::SoundData;
-using Types::Audio::AudioState::Stopped;
+using love::Types::Audio::SoundData;
+using love::Types::Audio::AudioState::Stopped;
 
 namespace love {
 

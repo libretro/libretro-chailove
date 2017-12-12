@@ -8,16 +8,16 @@ using namespace chaiscript;
 #endif
 
 using ::ChaiLove;
-using Types::Graphics::Point;
-using Types::Graphics::Image;
-using Types::Graphics::Font;
-using Types::Graphics::Point;
-using Types::Graphics::Color;
-using Types::System::Config;
-using Types::Input::Joystick;
-using Types::System::windowConfig;
-using Types::System::moduleConfig;
-using Types::Audio::SoundData;
+using love::Types::Graphics::Point;
+using love::Types::Graphics::Image;
+using love::Types::Graphics::Font;
+using love::Types::Graphics::Point;
+using love::Types::Graphics::Color;
+using love::Types::System::Config;
+using love::Types::Input::Joystick;
+using love::Types::System::windowConfig;
+using love::Types::System::moduleConfig;
+using love::Types::Audio::SoundData;
 using love::graphics;
 
 namespace love {

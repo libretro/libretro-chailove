@@ -2,10 +2,10 @@
 #include <string>
 #include "../ChaiLove.h"
 #include "SDL.h"
-#include "../Types/System/Config.h"
+#include "Types/System/Config.h"
 
 using ::ChaiLove;
-using Types::System::Config;
+using love::Types::System::Config;
 using std::string;
 
 namespace love {

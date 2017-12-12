@@ -11,7 +11,7 @@
 #include "Test.h"
 #include "../src/ChaiLove.h"
 
-using Types::System::Config;
+using love::Types::System::Config;
 
 void Test::conf(Config& t) {
 	t.window.width = 1080;

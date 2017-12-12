@@ -2,11 +2,7 @@
 SOURCES_CXX += $(wildcard \
 	src/*.cpp \
 	src/love/*.cpp \
-	src/Types/*.cpp \
-	src/Types/Audio/*.cpp \
-	src/Types/Graphics/*.cpp \
-	src/Types/Input/*.cpp \
-	src/Types/System/*.cpp \
+	src/love/*/*.cpp \
 	test/*.cpp \
 )
 

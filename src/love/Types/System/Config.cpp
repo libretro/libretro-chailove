@@ -1,6 +1,7 @@
 #include "Config.h"
 #include "../../ChaiLove.h"
 
+namespace love {
 namespace Types {
 namespace System {
 
@@ -12,3 +13,4 @@ Config::Config() {
 
 }  // namespace System
 }  // namespace Types
+}  // namespace love

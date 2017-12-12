@@ -59,7 +59,7 @@
 #include "SDL.h"
 #include "libretro.h"
 #include "love/keyboard.h"
-#include "Types/System/Config.h"
+#include "love/Types/System/Config.h"
 #include "love/script.h"
 #include "love/filesystem.h"
 #include "love/graphics.h"
@@ -79,7 +79,7 @@
 #include "test/Test.h"
 #endif
 
-using Types::System::Config;
+using love::Types::System::Config;
 
 class ChaiLove {
 	public:

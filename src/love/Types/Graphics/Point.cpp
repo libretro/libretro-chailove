@@ -1,5 +1,6 @@
-#include "Color.h"
+#include "Point.h"
 
+namespace love {
 namespace Types {
 namespace Graphics {
 // Nothing.

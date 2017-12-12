@@ -3,15 +3,15 @@
 #ifndef CHAILOVE_TEST_TEST_H
 #define CHAILOVE_TEST_TEST_H
 
-#include "../src/Types/Graphics/Image.h"
-#include "../src/Types/Graphics/Font.h"
-#include "../src/Types/System/Config.h"
-#include "../src/Types/Audio/SoundData.h"
+#include "../src/love/Types/Graphics/Image.h"
+#include "../src/love/Types/Graphics/Font.h"
+#include "../src/love/Types/System/Config.h"
+#include "../src/love/Types/Audio/SoundData.h"
 
-using Types::Graphics::Image;
-using Types::Graphics::Font;
-using Types::System::Config;
-using Types::Audio::SoundData;
+using love::Types::Graphics::Image;
+using love::Types::Graphics::Font;
+using love::Types::System::Config;
+using love::Types::Audio::SoundData;
 using ::ChaiLove;
 
 class Test {

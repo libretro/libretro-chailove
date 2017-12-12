@@ -1,9 +1,10 @@
-#ifndef SRC_TYPES_GRAPHICS_IMAGE_H_
-#define SRC_TYPES_GRAPHICS_IMAGE_H_
+#ifndef SRC_LOVE_TYPES_GRAPHICS_IMAGE_H_
+#define SRC_LOVE_TYPES_GRAPHICS_IMAGE_H_
 
 #include <SDL.h>
 #include <string>
 
+namespace love {
 namespace Types {
 namespace Graphics {
 
@@ -32,5 +33,6 @@ class Image {
 
 }  // namespace Graphics
 }  // namespace Types
+}  // namespace love
 
-#endif  // SRC_TYPES_GRAPHICS_IMAGE_H_
+#endif  // SRC_LOVE_TYPES_GRAPHICS_IMAGE_H_

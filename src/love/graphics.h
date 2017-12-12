@@ -5,17 +5,17 @@
 
 #include "SDL.h"
 #include "SDL_gfxPrimitives.h"
-#include "../Types/Graphics/Image.h"
-#include "../Types/Graphics/Quad.h"
-#include "../Types/Graphics/Font.h"
-#include "../Types/Graphics/Point.h"
-#include "../Types/Graphics/Color.h"
+#include "Types/Graphics/Image.h"
+#include "Types/Graphics/Quad.h"
+#include "Types/Graphics/Font.h"
+#include "Types/Graphics/Point.h"
+#include "Types/Graphics/Color.h"
 
-using Types::Graphics::Image;
-using Types::Graphics::Quad;
-using Types::Graphics::Font;
-using Types::Graphics::Point;
-using Types::Graphics::Color;
+using love::Types::Graphics::Image;
+using love::Types::Graphics::Quad;
+using love::Types::Graphics::Font;
+using love::Types::Graphics::Point;
+using love::Types::Graphics::Color;
 
 namespace love {
 

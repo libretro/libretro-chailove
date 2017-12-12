@@ -1,6 +1,7 @@
-#ifndef SRC_TYPES_GRAPHICS_POINT_H_
-#define SRC_TYPES_GRAPHICS_POINT_H_
+#ifndef SRC_LOVE_TYPES_GRAPHICS_POINT_H_
+#define SRC_LOVE_TYPES_GRAPHICS_POINT_H_
 
+namespace love {
 namespace Types {
 namespace Graphics {
 
@@ -32,5 +33,6 @@ struct Point {
 
 }  // namespace Graphics
 }  // namespace Types
+}  // namespace love
 
-#endif  // SRC_TYPES_GRAPHICS_POINT_H_
+#endif  // SRC_LOVE_TYPES_GRAPHICS_POINT_H_
