@@ -40,32 +40,32 @@ class graphics {
 	 * love.graphics.rectangle("fill", 100, 100, 50, 50)
 	 * @endcode
 	 */
-	void rectangle(const std::string& drawmode, int x, int y, int width, int height);
+	graphics& rectangle(const std::string& drawmode, int x, int y, int width, int height);
 
 	/**
 	 * @brief Clears the screen to the set background color.
 	 */
-	void clear();
+	graphics& clear();
 
 	/**
 	 * @brief Clears the screen to the given background color.
 	 */
-	void clear(int r, int g, int b, int a);
+	graphics& clear(int r, int g, int b, int a);
 
 	/**
 	 * @brief Clears the screen to the given background color.
 	 */
-	void clear(int r, int g, int b);
+	graphics& clear(int r, int g, int b);
 
 	/**
 	 * @brief Draws a point.
 	 */
-	void point(int x, int y);
+	graphics& point(int x, int y);
 
 	/**
 	 * @brief Draws a point.
 	 */
-	void point(Point* p);
+	graphics& point(Point* p);
 
 	// void points(std::vector<Point*>);
 	// void points(std::vector<Point>);
@@ -73,7 +73,7 @@ class graphics {
 	/**
 	 * @brief Draws a line.
 	 */
-	void line(int x1, int y1, int x2, int y2);
+	graphics& line(int x1, int y1, int x2, int y2);
 
 
 	/**
@@ -83,12 +83,12 @@ class graphics {
 	 * @param x The position to draw the object (x-axis).
 	 * @param y The position to draw the object (y-axis).
 	 */
-	void draw(Image* image, int x, int y);
+	graphics& draw(Image* image, int x, int y);
 
 	/**
 	 * @brief Draws an image on screen, using the given Quad as a source.
 	 */
-	void draw(Image* image, Quad quad, int x, int y);
+	graphics& draw(Image* image, Quad quad, int x, int y);
 
 	/**
 	 * @brief Creates a new Quad.
@@ -142,9 +142,9 @@ class graphics {
 	 *
 	 * @param The font to set as the active font.
 	 */
-	void setFont(Font* font);
+	graphics& setFont(Font* font);
 
-	void setFont();
+	graphics& setFont();
 
 	/**
 	 * @brief Retrieve th currently active font.
@@ -158,17 +158,17 @@ class graphics {
 	 * @param x The position to draw the object (x-axis).
 	 * @param y The position to draw the object (y-axis).
 	 */
-	void print(const std::string& text, int x, int y);
+	graphics& print(const std::string& text, int x, int y);
 
 	/**
 	 * @brief Sets the active drawing color to the given color.
 	 */
-	void setColor(int red, int green, int blue, int alpha);
+	graphics& setColor(int red, int green, int blue, int alpha);
 
 	/**
 	 * @brief Sets the active drawing color to the given color.
 	 */
-	void setColor(int red, int green, int blue);
+	graphics& setColor(int red, int green, int blue);
 
 	/**
 	 * @brief Retrieves the active background color.
@@ -178,17 +178,17 @@ class graphics {
 	/**
 	 * @brief Sets the background color to the given color.
 	 */
-	void setBackgroundColor(int red, int green, int blue, int alpha);
+	graphics& setBackgroundColor(int red, int green, int blue, int alpha);
 
 	/**
 	 * @brief Sets the background color to the given color.
 	 */
-	void setBackgroundColor(int red, int green, int blue);
+	graphics& setBackgroundColor(int red, int green, int blue);
 
 	/**
 	 * @brief Sets the default scaling filters used with images, and fonts.
 	 */
-	void setDefaultFilter(const std::string& filter);
+	graphics& setDefaultFilter(const std::string& filter);
 
 	/**
 	 * @brief Returns the default scaling filters used with images and fonts.
@@ -208,12 +208,12 @@ class graphics {
 	/**
 	 * @brief Draws a circle.
 	 */
-	void circle(const std::string& drawmode, int x, int y, int radius);
+	graphics& circle(const std::string& drawmode, int x, int y, int radius);
 
 	/**
 	 * @brief Draws an ellipse.
 	 */
-	void ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
+	graphics& ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
 
 	/**
 	 * @brief Draws an image with the given angle, zoom, and origin.
@@ -227,16 +227,16 @@ class graphics {
 	 * @param ox (0) Origin offset (x-axis).
 	 * @param oy (0) Origin offset (y-axis).
 	 */
-	void draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy);
-	void draw(Image* image, int x, int y, float r, float sx, float sy, float ox);
-	void draw(Image* image, int x, int y, float r, float sx, float sy);
-	void draw(Image* image, int x, int y, float r, float sx);
-	void draw(Image* image, int x, int y, float r);
+	graphics& draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy);
+	graphics& draw(Image* image, int x, int y, float r, float sx, float sy, float ox);
+	graphics& draw(Image* image, int x, int y, float r, float sx, float sy);
+	graphics& draw(Image* image, int x, int y, float r, float sx);
+	graphics& draw(Image* image, int x, int y, float r);
 
 	/**
 	 * @brief Draws an arc.
 	 */
-	void arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
+	graphics& arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
 
 	Uint8 r = 255, g = 255, b = 255, a = 255;
 	Uint8 backR = 0, backG = 0, backB = 0, backA = 255;

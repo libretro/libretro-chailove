@@ -28,13 +28,14 @@ float math::random(float min, float max) {
     return Random::get(min, max);
 }
 
-void math::setRandomSeed(int min, int max) {
-    setRandomSeed(random(min, max));
+math& math::setRandomSeed(int min, int max) {
+    return setRandomSeed(random(min, max));
 }
 
-void math::setRandomSeed(int seed) {
+math& math::setRandomSeed(int seed) {
 	Random::seed(seed);
     m_seed = seed;
+    return *this;
 }
 
 int math::getRandomSeed() {

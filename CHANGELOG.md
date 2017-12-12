@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Updated C++ namespace from `Modules` to `love`
+- [Method chaining](https://en.wikipedia.org/wiki/Method_chaining) for all `set*` functions
+    ```
+    graphics.love.point(100,100).point(50, 200)
+    ```
 
 ## 0.11.1 - 2017-12-10
 ### Fixed

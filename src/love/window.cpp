@@ -68,8 +68,9 @@ string window::getTitle() {
 	return std::string(titleChar);
 }
 
-void window::setTitle(string title) {
+window& window::setTitle(string title) {
 	SDL_WM_SetCaption(title.c_str(), 0);
+	return *this;
 }
 
 }  // namespace love

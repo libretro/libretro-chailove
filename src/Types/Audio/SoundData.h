@@ -64,7 +64,7 @@ class SoundData {
 	/**
 	 * @brief Sets the current volume of the Source.
 	 */
-	void setVolume(float volume);
+	SoundData& setVolume(float volume);
 
 	/**
 	 * @brief Returns whether the Source is playing.
@@ -91,7 +91,7 @@ class SoundData {
 	/**
 	 * @brief Set whether the Source should loop.
 	 */
-	void setLooping(bool loop);
+	SoundData& setLooping(bool loop);
 };
 
 }  // namespace Audio

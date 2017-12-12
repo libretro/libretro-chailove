@@ -39,7 +39,7 @@ class audio {
 	 *
 	 * @param volume 1.0f is max and 0.0f is off.
 	 */
-	void setVolume(float volume);
+	audio& setVolume(float volume);
 };
 
 }  // namespace love
