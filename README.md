@@ -32,12 +32,12 @@ The [ChaiLove API](https://robloach.github.io/ChaiLove/) is roughly inspired by 
 global logo
 
 def load() {
-	logo = graphics.newImage("logo.png")
+	logo = love.graphics.newImage("logo.png")
 }
 
 def draw() {
-	graphics.print("Hello World!", 400, 300)
-	graphics.draw(logo, 100, 100)
+	love.graphics.print("Hello World!", 400, 300)
+	love.graphics.draw(logo, 100, 100)
 }
 
 def update(delta) {
