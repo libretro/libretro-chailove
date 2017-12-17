@@ -18,6 +18,10 @@ class image {
 
 	/**
 	 * @brief Creates a new ImageData object.
+	 *
+	 * @param filename The filename of the image file.
+	 *
+	 * @return The new ImageData object.
 	 */
 	Image* newImageData(const std::string& filename);
 };

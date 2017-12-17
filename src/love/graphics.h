@@ -187,11 +187,18 @@ class graphics {
 
 	/**
 	 * @brief Sets the default scaling filters used with images, and fonts.
+	 *
+	 * @param filter The filter mode to apply when rotating or scaling graphics. This can be either "linear" (default), or "nearest".
+	 *
+	 * @see love.graphics.getDefaultFilter
+	 * @see https://love2d.org/wiki/FilterMode
 	 */
 	graphics& setDefaultFilter(const std::string& filter);
 
 	/**
 	 * @brief Returns the default scaling filters used with images and fonts.
+	 *
+	 * @see love.graphics.setDefaultFilter
 	 */
 	std::string getDefaultFilter();
 
@@ -207,11 +214,15 @@ class graphics {
 
 	/**
 	 * @brief Draws a circle.
+	 *
+	 * @param drawmode How to draw the circle. Can be "fill" or "line".
 	 */
 	graphics& circle(const std::string& drawmode, int x, int y, int radius);
 
 	/**
 	 * @brief Draws an ellipse.
+	 *
+	 * @param drawmode How to draw the ellipse. Can be "fill" or "line".
 	 */
 	graphics& ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
 
@@ -235,6 +246,8 @@ class graphics {
 
 	/**
 	 * @brief Draws an arc.
+	 *
+	 * @param drawmode How to draw the arc. Can be "fill" or "line".
 	 */
 	graphics& arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
 

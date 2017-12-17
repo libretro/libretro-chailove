@@ -20,8 +20,8 @@ bool mouse::isVisible() {
 	return SDL_ShowCursor(SDL_QUERY) == SDL_ENABLE;
 }
 
-mouse& mouse::setVisible(bool enable) {
-	SDL_ShowCursor(enable ? SDL_ENABLE : SDL_DISABLE);
+mouse& mouse::setVisible(bool visible) {
+	SDL_ShowCursor(visible ? SDL_ENABLE : SDL_DISABLE);
 	return *this;
 }
 
@@ -53,15 +53,15 @@ bool mouse::isDown(const std::string& button) {
 }
 
 int mouse::getButtonKey(const std::string& button) {
-	if (button == "left") {
+	if (button == "left" || button == "l") {
 		return RETRO_DEVICE_ID_MOUSE_LEFT;
-	} else if (button == "right") {
+	} else if (button == "right" || button == "r") {
 		return RETRO_DEVICE_ID_MOUSE_RIGHT;
-	} else if (button == "middle") {
+	} else if (button == "middle" || button == "m") {
 		return RETRO_DEVICE_ID_MOUSE_MIDDLE;
-	} else if (button == "wheelup") {
+	} else if (button == "wheelup" || button == "wu") {
 		return RETRO_DEVICE_ID_MOUSE_WHEELUP;
-	} else if (button == "wheeldown") {
+	} else if (button == "wheeldown" || button == "wd") {
 		return RETRO_DEVICE_ID_MOUSE_WHEELDOWN;
 	} else if (button == "horizwheelup") {
 		return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELUP;

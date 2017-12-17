@@ -59,9 +59,10 @@ class joystick {
 	/**
 	 * @brief Retrieve the given joystick.
 	 *
-	 * ### Example
 	 * @code
-	 * love.joystick[0].isDown("left")
+	 * if (love.joystick[0].isDown("left")) {
+	 *   love.graphics.print("Joystick is pushed LEFT", 100, 100)
+	 * }
 	 * @endcode
 	 *
 	 * @param player The number of which player's joystick you would like to retrieve.

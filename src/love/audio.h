@@ -15,11 +15,15 @@ class audio {
 	public:
 	/**
 	 * @brief Plays the specified sound.
+	 *
+	 * @param soundData The sound to play.
 	 */
 	void play(SoundData* soundData);
 
 	/**
 	 * @brief Creates a new audio source from a file.
+	 *
+	 * @param filename The .wav file to load.
 	 */
 	SoundData* newSource(const std::string& filename);
 

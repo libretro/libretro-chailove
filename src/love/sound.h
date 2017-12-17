@@ -18,6 +18,10 @@ class sound {
 
 	/**
 	 * @brief Creates a new SoundData.
+	 *
+	 * @param filename The file name of the file to load.
+	 *
+	 * @return A new SoundData object.
 	 */
     Types::Audio::SoundData* newSoundData(const std::string& filename);
 

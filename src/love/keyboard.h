@@ -16,18 +16,31 @@ class keyboard {
 
 	/**
 	 * @brief Checks whether a certain key is down.
+	 *
+	 * @param key The key to check.
+	 *
+	 * @return True if the key is down, false if not.
 	 */
 	bool isDown(const std::string& key);
 
 	/**
 	 * @brief Checks whether a certain key is down.
+	 *
+	 * @param key The key scancode to check.
+	 *
+	 * @return True if the key is down, false if not.
 	 */
 	bool isDown(int key);
 
 	/**
 	 * @brief Enables or disables key repeat for love.keypressed.
+	 *
+	 * @param delay Specifies how long the key must be pressed before it begins repeating.
+	 * @param interval Once the key is repeating, it is repeated by the given interval.
+	 *
+	 * @return The keyboard module.
 	 */
-	void setKeyRepeat(int delay = 400, int interval = 30);
+	keyboard& setKeyRepeat(int delay = 400, int interval = 30);
 	bool update();
 
 	/**

@@ -15,8 +15,10 @@ class mouse {
 	bool load();
 	/**
 	 * @brief Sets the current visibility of the cursor.
+	 *
+	 * @param visible True to set the cursor to visible, false to hide the cursor.
 	 */
-	mouse& setVisible(bool enable);
+	mouse& setVisible(bool visible);
 
 	/**
 	 * @brief Checks if the cursor is visible.
@@ -46,12 +48,22 @@ class mouse {
 
 	/**
 	 * @brief Checks whether a certain button is down.
+	 *
+	 * @param button The index of a button to check. 1 is the primary mouse button, 2 is the secondary mouse button and 3 is the middle button. Further buttons are mouse dependant.
+	 *
+	 * @return True if the specified button is down.
 	 */
 	bool isDown(int button);
+
 	/**
 	 * @brief Checks whether a certain button is down.
+	 *
+	 * @param button The mouse button to check. "left", "middle", "right", etc.
+	 *
+	 * @return True if the specified button is down.
 	 */
 	bool isDown(const std::string& button);
+
 	int getButtonKey(const std::string& button);
 	std::string getButtonName(int button);
 
