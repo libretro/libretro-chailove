@@ -10,13 +10,18 @@ class timer {
 	public:
 	timer();
 	void step(float delta);
+
 	/**
 	 * @brief Returns the time between the last two frames.
+	 *
+	 * @return The time passed (in seconds).
 	 */
 	float getDelta();
 
 	/**
 	 * @brief Returns the current frames per second.
+	 *
+	 * @return The current FPS.
 	 */
 	int getFPS();
 	float m_delta = 0.0f;
