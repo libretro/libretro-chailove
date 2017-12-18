@@ -113,36 +113,59 @@ class script {
 
 	/**
 	 * @brief Called when a joystick button is pressed.
+	 *
+	 * @param joystick The joystick number.
+	 * @param button The name of which button was released.
 	 */
 	void joystickpressed(int joystick, const std::string& button);
 
 	/**
 	 * @brief Called when a joystick button is released.
+	 *
+	 * @param joystick The joystick number.
+	 * @param button The name of which button was released.
 	 */
 	void joystickreleased(int joystick, const std::string& button);
 
 	/**
 	 * @brief Called when a mouse button is pressed.
+	 *
+	 * @param x The mouse position on the x-axis.
+	 * @param y The mouse position on the y-axis.
+	 * @param button The mouse button index of which was pressed.
 	 */
 	void mousepressed(int x, int y, int button);
 
 	/**
 	 * @brief Called when a mouse button is released.
+	 *
+	 * @param x The mouse position on the x-axis.
+	 * @param y The mouse position on the y-axis.
+	 * @param button The mouse button index of which was released.
 	 */
 	void mousereleased(int x, int y, int button);
 
 	/**
 	 * @brief Called when the mouse is moved.
+	 *
+	 * @param x The mouse position on the x-axis.
+	 * @param y The mouse position on the y-axis.
 	 */
-	void mousemove(int x, int y);
+	void mousemoved(int x, int y);
 
 	/**
 	 * @brief Called when a key on the keyboard has been pressed.
+	 *
+	 * @param key The name of the key that was pressed.
+	 * @param scancode The scancode of the key that was pressed.
 	 */
 	void keypressed(const std::string& key, int scancode);
 
 	/**
 	 * @brief Called when a key on the keyboard is released.
+	 *
+	 * @param key The name of the key that was released.
+	 * @param scancode The scancode of the key that was released.
 	 */
 	void keyreleased(const std::string& key, int scancode);
 
@@ -157,6 +180,8 @@ class script {
 	 * @brief Called when requested to load a state.
 	 *
 	 * @param data A JSON array representing the state to load.
+	 *
+	 * @return True if loading the state succeeded.
 	 */
 	bool loadstate(const std::string& data);
 
@@ -173,7 +198,7 @@ class script {
 	std::function<void(int, const std::string&)> chaijoystickreleased;
 	std::function<void(int, int, int)> chaimousepressed;
 	std::function<void(int, int, int)> chaimousereleased;
-	std::function<void(int, int)> chaimousemove;
+	std::function<void(int, int)> chaimousemoved;
 	std::function<void(const std::string&, int)> chaikeypressed;
 	std::function<void(const std::string&, int)> chaikeyreleased;
 	bool hasUpdate = true;
@@ -182,7 +207,7 @@ class script {
 	bool hasjoystickreleased = true;
 	bool hasmousepressed = true;
 	bool hasmousereleased = true;
-	bool hasmousemove = true;
+	bool hasmousemoved = true;
 	bool haskeypressed = true;
 	bool haskeyreleased = true;
 	bool hasloadstate = true;

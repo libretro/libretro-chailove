@@ -27,6 +27,8 @@ class math {
 	 *
 	 * @param min The lower 32 bits of the seed value.
 	 * @param high The higher 32 bits of the seed value.
+	 *
+	 * @return The math module, to allow for method chaining.
 	 */
 	math& setRandomSeed(int min, int max);
 
@@ -34,6 +36,8 @@ class math {
 	 * @brief Sets the seed of the random number generator.
 	 *
 	 * @param seed The integer number with which you want to seed the randomization.
+	 *
+	 * @return The math module, to allow for method chaining.
 	 */
 	math& setRandomSeed(int seed);
 

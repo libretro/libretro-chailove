@@ -386,11 +386,11 @@ script::script(const std::string& file) {
 		hasmousereleased = false;
 	}
 	try {
-		chaimousemove = chai.eval<std::function<void(int, int)> >("mousemove");
+		chaimousemoved = chai.eval<std::function<void(int, int)> >("mousemoved");
 	}
 	catch (const std::exception& e) {
-		std::cout << "[ChaiLove] [script] mousemove() " << e.what() << std::endl;
-		hasmousemove = false;
+		std::cout << "[ChaiLove] [script] mousemoved() " << e.what() << std::endl;
+		hasmousemoved = false;
 	}
 	try {
 		chaikeypressed = chai.eval<std::function<void(const std::string&, int)> >("keypressed");
@@ -551,15 +551,15 @@ void script::mousereleased(int x, int y, int button) {
 	#endif
 }
 
-void script::mousemove(int x, int y) {
+void script::mousemoved(int x, int y) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasmousemove) {
+	if (hasmousemoved) {
 		try {
-			chaimousemove(x, y);
+			chaimousemoved(x, y);
 		}
 		catch (const std::exception& e) {
-			std::cout << "[ChaiLove] [script] Failed to call mousemove(): " << e.what() << std::endl;
-			hasmousemove = false;
+			std::cout << "[ChaiLove] [script] Failed to call mousemoved(): " << e.what() << std::endl;
+			hasmousemoved = false;
 		}
 	}
 	#endif

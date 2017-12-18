@@ -94,7 +94,7 @@ std::string mouse::getButtonName(int button) {
 void mouse::moveEvent(SDL_MouseMotionEvent event) {
 	m_x = event.x;
 	m_y = event.y;
-	ChaiLove::getInstance()->script->mousemove(m_x, m_y);
+	ChaiLove::getInstance()->script->mousemoves(m_x, m_y);
 }
 
 void mouse::buttonEvent(SDL_MouseButtonEvent event) {

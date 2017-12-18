@@ -17,30 +17,52 @@ class mouse {
 	 * @brief Sets the current visibility of the cursor.
 	 *
 	 * @param visible True to set the cursor to visible, false to hide the cursor.
+	 *
+	 * @see love.mouse.getVisible
 	 */
 	mouse& setVisible(bool visible);
 
 	/**
 	 * @brief Checks if the cursor is visible.
+	 *
+	 * @return True if the cursor to visible, false if the cursor is hidden.
+	 *
+	 * @see love.mouse.setVisible
 	 */
 	bool isVisible();
 
 	/**
 	 * @brief Sets the current X position of the mouse.
+	 *
+	 * @param x The new position of the mouse along the x-axis.
+	 *
+	 * @return The mouse module.
 	 */
 	mouse& setX(int x);
+
 	/**
 	 * @brief Sets the current Y position of the mouse.
+	 *
+	 * @param y The new position of the mouse along the y-axis.
+	 *
+	 * @return The mouse module.
 	 */
 	mouse& setY(int y);
+
 	/**
 	 * @brief Returns the current x-position of the mouse.
+	 *
+	 * @return The position of the mouse along the x-axis.
 	 */
 	int getX();
+
 	/**
 	 * @brief Returns the current y-position of the mouse.
+	 *
+	 * @return The position of the mouse along the y-axis.
 	 */
 	int getY();
+
 	/**
 	 * @brief Returns the current position of the mouse.
 	 */
