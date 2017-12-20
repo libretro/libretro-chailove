@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.13.0 - Unreleased
 ### Added
 - Documentation
+- `math.random()` for float and double numbers
 
 ### Fixed
 - Renamed `mousemove()` callback to `mousemoved()`
