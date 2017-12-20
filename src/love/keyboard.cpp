@@ -15,10 +15,12 @@ bool keyboard::isDown(const std::string& key) {
 	return isDown(getScancodeFromKey(key));
 }
 
-void keyboard::setKeyRepeat(int delay, int interval) {
+keyboard& keyboard::setKeyRepeat(int delay, int interval) {
 	if (SDL_EnableKeyRepeat(delay, interval) == -1) {
 		std::cout << "[ChaiLove] Error setting KeyRepeat." << std::endl;
 	}
+
+	return *this;
 }
 
 bool keyboard::load() {

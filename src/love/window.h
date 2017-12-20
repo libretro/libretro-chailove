@@ -16,11 +16,19 @@ class window {
 
 	/**
 	 * @brief Gets the window title.
+	 *
+	 * @return The current window title.
+	 *
+	 * @see love.window.setTitle
 	 */
 	std::string getTitle();
 
 	/**
 	 * @brief Sets the window title.
+	 *
+	 * @param title The new window title.
+	 *
+	 * @see love.window.getTitle
 	 */
 	window& setTitle(std::string title);
 };
