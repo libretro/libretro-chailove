@@ -21,6 +21,10 @@ class math {
 	float random(float min, float max);
 	float random(float max);
 	float random();
+	int random(int min, int max);
+	int random(int max);
+	double random(double min, double max);
+	double random(double max);
 
 	/**
 	 * @brief Sets the random seed to a random seed between the given min and max values.

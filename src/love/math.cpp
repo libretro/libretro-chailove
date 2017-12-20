@@ -25,8 +25,24 @@ float math::random(float max) {
 }
 
 float math::random(float min, float max) {
-    return Random::get(min, max);
+    return Random::get<float>(min, max);
 }
+
+int math::random(int max) {
+    return random(0, max);
+}
+
+int math::random(int min, int max) {
+    return Random::get<int>(min, max);
+}
+double math::random(double max) {
+    return random(0.0, max);
+}
+
+double math::random(double min, double max) {
+    return Random::get<double>(min, max);
+}
+
 
 math& math::setRandomSeed(int min, int max) {
     return setRandomSeed(random(min, max));

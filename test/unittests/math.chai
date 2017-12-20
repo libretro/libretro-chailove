@@ -4,8 +4,21 @@ assert(num >= 0 && num <= 1, "math.random()")
 num = math.random(10)
 assert(num >= 0 && num <= 10, "math.random(10)")
 
+num = math.random(10.0)
+assert(num >= 0 && num <= 10, "math.random(10)")
+
+num = math.random(10.0f)
+assert(num >= 0 && num <= 10, "math.random(10)")
+
 num = math.random(10, 100)
 assert(num >= 10 && num <= 100, "math.random(10, 100)")
+
+
+num = math.random(10.0, 100.0)
+assert(num >= 10.0 && num <= 100.0, "math.random(10.0, 100.0)")
+
+num = math.random(10.0f, 100.0f)
+assert(num >= 10.0f && num <= 100.0f, "math.random(10.0, 100.0)")
 
 math.setRandomSeed(50, 100)
 assert(true, "math.setRandomSeed(50, 100)")
