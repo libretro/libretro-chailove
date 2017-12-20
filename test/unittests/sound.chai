@@ -7,3 +7,5 @@ assert_not(theSound.isLooping(), "SoundData.getLooping()")
 theSound.setVolume(0.5f).setLooping(true)
 assert_equal(theSound.getVolume(), 0.5f, "SoundData.setVolume()")
 assert(theSound.isLooping(), "SoundData.getLooping()")
+
+assert_not(theSound.isPlaying(), "SoundData.isPlaying()")

@@ -4,4 +4,4 @@ assert_equal(scancode, 97, "keyboard.getScancodeFromKey()")
 var key = love.keyboard.getKeyFromScancode(97)
 assert_equal(key, "a", "keyboard.getKeyFromScancode()")
 
-assert_not(love.keyboard.isDown("7"), "love.keyboard.isDown()")
+assert_not(love.keyboard.isDown("7"), "love.keyboard.isDown('7')")

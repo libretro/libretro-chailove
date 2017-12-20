@@ -223,9 +223,9 @@ graphics& graphics::setDefaultFilter(const std::string& filter) {
 std::string graphics::getDefaultFilter() {
 	switch (m_smooth) {
 		case 0:
-			return "linear";
-		case 1:
 			return "nearest";
+		case 1:
+			return "linear";
 	}
 }
 

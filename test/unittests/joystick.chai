@@ -1,2 +1,4 @@
 assert_not(love.joystick.isDown(0, "right"), "love.joystick.isDown()")
 assert_not(love.joystick[0].isDown("right"), "love.joystick[]")
+
+assert_equal(love.joystick.getJoystickCount(), 4, "love.joystick.getJoystickCount()")

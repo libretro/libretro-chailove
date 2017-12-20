@@ -1,2 +1,10 @@
 assert_equal(love.graphics.getWidth(), 800, "love.graphics.getWidth()")
 assert_equal(love.graphics.getHeight(), 600, "love.graphics.getHeight()")
+
+love.graphics.clear()
+love.graphics.clear(233, 200, 100)
+love.graphics.clear(233, 200, 100, 200)
+
+assert_equal(love.graphics.getDefaultFilter(), "linear", "love.graphics.getDefaultFilter()")
+love.graphics.setDefaultFilter("nearest")
+assert_equal(love.graphics.getDefaultFilter(), "nearest", "love.graphics.setDefaultFilter()")

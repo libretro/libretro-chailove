@@ -26,5 +26,7 @@ assert(!filesystem.isFile("notexist.chai"), "filesystem.isFile('notexist.chai')"
 
 assert_not(love.filesystem.isDirectory("keyboard.chai"), "love.filesystem.isDirectory()")
 
+assert_equal(love.filesystem.getDirectoryItems("assets").size(), 1, "love.filesystem.getDirectoryItems()")
+
 var theLines = love.filesystem.lines("filesystem.chai")
 assert_equal(theLines[0], "// Filesystem", "love.filesystem.lines()")

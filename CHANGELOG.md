@@ -4,13 +4,14 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.13.0 - Unreleased
+## 0.13.0 - 2017-12-20
 ### Added
 - Documentation
-- `math.random()` for float and double numbers
+- `math.random()` for int, float and double numbers
 
 ### Fixed
 - Renamed `mousemove()` callback to `mousemoved()`
+- `love.graphics.setDefaultFilter()` flags
 
 ## 0.12.0 - 2017-12-13
 ### Added
