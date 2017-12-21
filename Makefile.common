@@ -1,3 +1,26 @@
+CXXFLAGS += -fpermissive -std=c++14
+CFLAGS += -std=gnu99
+
+LIBRETRO_COMM_DIR := $(CORE_DIR)/vendor/libretro-common
+INCFLAGS      := -I$(CORE_DIR)
+COREDEFINES   := -D__LIBRETRO__
+
+ifneq (,$(findstring msvc2003,$(platform)))
+INCFLAGS += -I$(LIBRETRO_COMM_DIR)/include/compat/msvc
+endif
+
+ifneq (,$(findstring msvc,$(platform)))
+COREDEFINES += -DINLINE=_inline
+else
+COREDEFINES += -DINLINE=inline
+endif
+
+ifeq ($(PSS_STYLE),2)
+COREDEFINES += -DPSS_STYLE=2
+else
+COREDEFINES += -DPSS_STYLE=1
+endif
+
 # ChaiLove
 SOURCES_CXX += $(wildcard \
 	src/*.cpp \
@@ -10,13 +33,13 @@ SOURCES_CXX += $(wildcard \
 )
 
 # random
-FLAGS += -Ivendor/random/include
+INCFLAGS += -Ivendor/random/include
 
 # filesystem
-FLAGS += -Ivendor/filesystem
+INCFLAGS += -Ivendor/filesystem
 
 # libretro-common
-FLAGS += -Ivendor/libretro-common/include
+INCFLAGS += -Ivendor/libretro-common/include
 
 # zlib
 SOURCES_C += \
@@ -29,13 +52,13 @@ SOURCES_C += \
 	vendor/zlib/inflate.c \
 	vendor/zlib/infback.c \
 	vendor/zlib/inffast.c
-FLAGS += -Ivendor/zlib
-FLAGS += -DWANT_ZLIB
+INCFLAGS += -Ivendor/zlib
+COREDEFINES += -DWANT_ZLIB
 
 # PhysFS
-FLAGS += -Ivendor/physfs/src
-FLAGS += -Ivendor/physfs/extras
-FLAGS += -DPHYSFS_NO_CDROM_SUPPORT=1
+INCFLAGS += -Ivendor/physfs/src
+INCFLAGS += -Ivendor/physfs/extras
+COREDEFINES += -DPHYSFS_NO_CDROM_SUPPORT=1
 SOURCES_C += $(wildcard \
 	vendor/physfs/extras/physfsrwops.c \
 	vendor/physfs/src/*.c \
@@ -43,27 +66,27 @@ SOURCES_C += $(wildcard \
 ifeq ($(platform), osx)
 #	LDFLAGS += -mmacosx-version-min=10.2
 	LDFLAGS += -framework Carbon -framework IOKit
-#	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
-	FLAGS += -D__MACH__ -D__APPLE__
+#	PLATFORM_DEFINES += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
+	PLATFORM_DEFINES += -D__MACH__ -D__APPLE__
 endif
 
 # SDL_tty
-FLAGS += -Ivendor/SDL_tty/include
+INCFLAGS += -Ivendor/SDL_tty/include
 SOURCES_C += $(wildcard \
 	vendor/SDL_tty/src/SDL_tty.c \
 	vendor/SDL_tty/src/SDL_fnt.c \
 )
 
 # SDL_gfx
-FLAGS += -Ivendor/sdl-libretro/tests/SDL_gfx-2.0.26
+INCFLAGS += -Ivendor/sdl-libretro/tests/SDL_gfx-2.0.26
 SOURCES_C += $(wildcard \
 	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/*.c \
 )
 
 # FreeType
 # See https://github.com/emscripten-ports/FreeType/blob/master/builds/amiga/makefile
-FLAGS += -Ivendor/libretro-deps/freetype/include
-FLAGS += -DFT2_BUILD_LIBRARY \
+INCFLAGS += -Ivendor/libretro-deps/freetype/include
+COREDEFINES += -DFT2_BUILD_LIBRARY \
 	-DFT_USE_AUTOFIT \
 	-DFT_USE_RASTER \
 	-DFT_USE_SMOOTH \
@@ -120,21 +143,21 @@ SOURCES_C += \
 	vendor/libretro-deps/freetype/src/lzw/ftlzw.c
 
 # SDL_ttf
-FLAGS += -Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
+INCFLAGS += -Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
 SOURCES_C += vendor/sdl-libretro/tests/SDL_ttf-2.0.11/SDL_ttf.c
 
 # SDL_stbimage
-FLAGS += -Ivendor/Snippets
+INCFLAGS += -Ivendor/Snippets
 
 # STB
-FLAGS += -Ivendor/stb
+INCFLAGS += -Ivendor/stb
 
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
-	FLAGS += -Ivendor/chaiscript/include
-	FLAGS += -Ivendor/ChaiScript_Extras/include
-	FLAGS += -D__HAVE_CHAISCRIPT__
-	FLAGS += -DCHAISCRIPT_NO_THREADS -DCHAISCRIPT_NO_THREADS_WARNING -DCHAISCRIPT_NO_DYNLOAD
+	INCFLAGS += -Ivendor/chaiscript/include
+	INCFLAGS += -Ivendor/ChaiScript_Extras/include
+	COREDEFINES += -D__HAVE_CHAISCRIPT__
+	COREDEFINES += -DCHAISCRIPT_NO_THREADS -DCHAISCRIPT_NO_THREADS_WARNING -DCHAISCRIPT_NO_DYNLOAD
 endif
 
 # SDL
@@ -143,13 +166,11 @@ ifeq ($(platform), win)
 else
 	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/dummy/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/thread/generic/*.c ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/loadso/dummy/*.c)
 endif
-FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
-FLAGS += -Ivendor/sdl-libretro/include
-
-OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
+COREDEFINES += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
+INCFLAGS += -Ivendor/sdl-libretro/include
 
 # Build all the dependencies, and the core.
-all: | dependencies	$(TARGET)
+#all: | dependencies	$(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -162,5 +183,5 @@ LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
 WARNINGS :=
 
 ifneq ($(HAVE_TESTS),)
-	FLAGS += -D__HAVE_TESTS__
+	COREDEFINES += -D__HAVE_TESTS__
 endif
