@@ -4,7 +4,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_gfxBlitFunc.h>
 #include <SDL_rotozoom.h>
-
+#include <iostream>
 #include "../ChaiLove.h"
 #include "Types/Graphics/Image.h"
 #include "Types/Graphics/Font.h"
