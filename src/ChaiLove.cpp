@@ -27,7 +27,7 @@ void ChaiLove::quit(void) {
 	sound.unload();
 	filesystem.unload();
 	window.unload();
-	std::cout << "[ChaiLove] Unloaded all systems" << std::endl;
+	std::cout << "[ChaiLove] Unloaded ChaiLove" << std::endl;
 }
 
 bool ChaiLove::load(const std::string& file) {
