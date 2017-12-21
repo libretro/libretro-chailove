@@ -6,22 +6,20 @@ ifeq ($(STATIC_LINKING),1)
 	FLAGS += -DSTATIC_LINKING
 endif
 
-FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES) $(WARNINGS) $(fpic)
+#FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES) $(WARNINGS) $(fpic)
 
-CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
-CFLAGS += $(FLAGS) -std=gnu99
 
-$(TARGET): $(OBJECTS) | dependencies
-	$(CXX) -o $@ $^ $(LDFLAGS)
+#$(TARGET): $(OBJECTS) | dependencies
+#	$(CXX) -o $@ $^ $(LDFLAGS)
 
-%.o: %.cpp | dependencies
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
+#%.o: %.cpp | dependencies
+#	$(CXX) -c -o $@ $< $(CXXFLAGS) $(INCFLAGS)
 
-%.o: %.c | dependencies
-	$(CC) -c -o $@ $< $(CFLAGS)
+#%.o: %.c | dependencies
+#	$(CC) -c $(OBJOUT)$@ $< $(CFLAGS) $(INCFLAGS)
 
-clean:
-	rm -f $(TARGET) $(OBJECTS)
+#clean:
+#	rm -f $(TARGET) $(OBJECTS)
 
 dependencies:
 	@git submodule update --init --recursive
