@@ -8,7 +8,7 @@ endif
 
 FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES) $(WARNINGS) $(fpic)
 
-CXXFLAGS += $(FLAGS) -fpermissive -std=c++14
+CXXFLAGS += $(FLAGS) -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
 $(TARGET): $(OBJECTS) | dependencies
