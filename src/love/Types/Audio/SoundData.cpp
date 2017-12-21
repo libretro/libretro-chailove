@@ -1,5 +1,6 @@
 #include "SoundData.h"
 #include <string>
+#include <iostream>
 
 #include "../../../ChaiLove.h"
 #include "AudioState.h"

@@ -1,5 +1,6 @@
 #include "window.h"
 #include <string>
+#include <iostream>
 #include "../ChaiLove.h"
 #include "SDL.h"
 #include "Types/System/Config.h"
