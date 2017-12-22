@@ -24,13 +24,28 @@ clean:
 	rm -f $(TARGET) $(OBJECTS)
 	git clean -xdf
 	rm -rf vendor
-	git reset --hard HEAD
 	git submodule update --init --recursive
 	git submodule foreach --recursive git clean -xfd
 	git submodule foreach --recursive git reset --hard HEAD
 
-dependencies:
+ifneq (,$(findstring ios,$(platform)))
+freetype: submodules
+	cd vendor/freetype2 && ./configure --prefix=$DESTROOT \
+		--host=arm-apple-darwin \
+		--enable-static=yes \
+		--enable-shared=no \
+		CC="$ARM_CC" AR="$ARM_AR" \
+		LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS" && make
+else
+freetype: submodules
+	@echo "No need to build Freetype"
+endif
+
+submodules:
 	@git submodule update --init --recursive
+
+dependencies: freetype
+	@echo "Dependencies: Built All"
 
 test: unittest cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
