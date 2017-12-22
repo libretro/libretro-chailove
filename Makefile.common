@@ -149,7 +149,7 @@ FLAGS += -Ivendor/sdl-libretro/include
 OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 
 # Build all the dependencies, and the core.
-all: | clean-ios dependencies	$(TARGET)
+all: | dependencies $(TARGET)
 
 ifeq ($(DEBUG), 0)
    FLAGS += -O3 -ffast-math -fomit-frame-pointer
@@ -163,13 +163,4 @@ WARNINGS :=
 
 ifneq ($(HAVE_TESTS),)
 	FLAGS += -D__HAVE_TESTS__
-endif
-
-ifneq (,$(findstring ios,$(platform)))
-clean-ios:
-	$(MAKE) platform=ios clean
-	$(MAKE) clean
-else
-clean-ios:
-	@echo "Not cleaning"
 endif

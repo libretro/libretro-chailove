@@ -22,6 +22,7 @@ $(TARGET): $(OBJECTS) | dependencies
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+	git clean -xdf
 
 dependencies:
 	@git submodule update --init --recursive
