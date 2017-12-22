@@ -40,3 +40,7 @@
 [submodule "vendor/random"]
 	path = vendor/random
 	url = https://github.com/effolkronium/random.git
+[submodule "vendor/freetype2"]
+	path = vendor/freetype2
+	url = https://git.savannah.gnu.org/git/freetype/freetype2.git
+	ignore = dirty
