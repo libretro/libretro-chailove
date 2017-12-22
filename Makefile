@@ -23,7 +23,11 @@ $(TARGET): $(OBJECTS) | dependencies
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 	git clean -xdf
+	rm -rf vendor
+	git reset --hard HEAD
+	git submodule update --init --recursive
 	git submodule foreach --recursive git clean -xfd
+	git submodule foreach --recursive git reset --hard HEAD
 
 dependencies:
 	@git submodule update --init --recursive
