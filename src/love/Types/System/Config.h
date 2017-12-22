@@ -8,6 +8,9 @@ namespace love {
 namespace Types {
 namespace System {
 
+/**
+ * @brief Configuration for how the application is set up.
+ */
 struct windowConfig {
 	/**
 	 * @brief The width of the screen.
@@ -18,13 +21,22 @@ struct windowConfig {
 	 */
 	int height = 600;
 	int bbp = 32;
+	/**
+	 * @brief The name of the application. Defaults to "ChaiLove".
+	 */
 	std::string title = "ChaiLove";
 	bool asyncblit = true;
 	bool hwsurface = true;
 	bool doublebuffering = true;
 };
 
+/**
+ * @brief Allows enabling or disiabling modules during initialization.
+ */
 struct moduleConfig {
+	/**
+	 * @brief Enable or disable the sound module.
+	 */
 	bool sound = true;
 };
 

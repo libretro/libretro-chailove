@@ -282,13 +282,6 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 	(void)code;
 }
 
-void texture_init() {
-	ChaiLove* app = ChaiLove::getInstance();
-	if (app->videoBuffer) {
-		memset(app->videoBuffer, 0, sizeof(app->videoBuffer));
-	}
-}
-
 void frame_time_cb(retro_usec_t usec) {
 	float delta = usec / 1000000.0;
 	ChaiLove* app = ChaiLove::getInstance();

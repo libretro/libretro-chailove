@@ -82,13 +82,16 @@ class math {
 	std::string decompress(const std::string& str);
 
 	/**
+	 * @brief e
 	 *
-	 @brief e
+	 * @see https://en.wikipedia.org/wiki/E_(mathematical_constant)
 	 */
 	const float e = 2.718281828459045f;
 
 	/**
 	 * @brief pi
+	 *
+	 * @see https://en.wikipedia.org/wiki/Pi
 	 */
 	const float pi = 3.14159265358979323846f;
 

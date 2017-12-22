@@ -64,11 +64,15 @@ class SoundData {
 
 	/**
 	 * @brief Sets the current volume of the Source.
+	 *
+	 * @return The SoundData object iself, to allow for method chaining.
 	 */
 	SoundData& setVolume(float volume);
 
 	/**
 	 * @brief Returns whether the Source is playing.
+	 *
+	 * @return True if the sound is playing.
 	 */
 	bool isPlaying();
 

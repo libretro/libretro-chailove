@@ -172,7 +172,7 @@ class script {
 	/**
 	 * @brief Called when requested to save the current state.
 	 *
-	 * @return A JSON array representing the current state.
+	 * @return string A JSON array representing the current state.
 	 */
 	std::string savestate();
 
@@ -181,7 +181,7 @@ class script {
 	 *
 	 * @param data A JSON array representing the state to load.
 	 *
-	 * @return True if loading the state succeeded.
+	 * @return bool True if loading the state succeeded.
 	 */
 	bool loadstate(const std::string& data);
 
