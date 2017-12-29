@@ -7,6 +7,11 @@ global sprites = []
 global img
 global music
 
+def conf(t) {
+	t.window.width = 720
+	t.window.height = 680
+}
+
 def load() {
 	graphics.setBackgroundColor(54, 172, 248)
 

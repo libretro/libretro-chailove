@@ -1,7 +1,7 @@
 # ChaiLove
 [![Build Status](https://travis-ci.org/RobLoach/ChaiLove.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiLove) [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove) [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://robloach.github.io/ChaiLove)
 
-Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
+Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com). It's free, open-source, and works on Windows, Mac OS X, Linux, and ARM.
 
 ![ChaiLove Benchmark Screenshot](examples/benchmark/screenshot.png)
 
@@ -84,3 +84,12 @@ You can run the unit tests, by executing:
 ```
 make unittest
 ```
+
+## Authors
+
+The following individuals contributed to ChaiLove:
+
+- [@RobLoach](http://github.com/robloach)
+- [sdl-libretro](https://github.com/r-type/sdl-libretro) by [@r-type](https://github.com/r-type)
+- [Logo](docs/chailove.png) by [@baxysquare](https://github.com/baxysquare)
+
