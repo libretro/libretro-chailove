@@ -19,6 +19,8 @@ class system {
 	 * @brief Retreves the running ChaiLove version information.
 	 *
 	 * @return A vector, with the major being the first element, minor being the second, and patch being the third.
+	 *
+	 * @see love.system.getVersionString
 	 */
 	std::vector<int> getVersion();
 
@@ -26,6 +28,8 @@ class system {
 	 * @brief Retreves the running ChaiLove version, as a string.
 	 *
 	 * @return A string representing ChaiLove's version. Example: 1.3.2
+	 *
+	 * @see love.system.getVersion
 	 */
 	std::string getVersionString();
 };

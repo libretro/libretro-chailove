@@ -45,11 +45,15 @@ class keyboard {
 
 	/**
 	 * @brief Retrieve a scancode from the given key.
+	 *
+	 * @see love.keyboard.getKeyFromScancode
 	 */
 	int getScancodeFromKey(const std::string& key);
 
 	/**
 	 * @brief Retrieve a key from the given scancode.
+	 *
+	 * @see love.keyboard.getScancodeFromKey
 	 */
 	std::string getKeyFromScancode(int scancode);
 

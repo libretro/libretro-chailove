@@ -33,6 +33,8 @@ class math {
 	 * @param high The higher 32 bits of the seed value.
 	 *
 	 * @return The math module, to allow for method chaining.
+	 *
+	 * @see love.math.getRandomSeed
 	 */
 	math& setRandomSeed(int min, int max);
 
@@ -42,21 +44,29 @@ class math {
 	 * @param seed The integer number with which you want to seed the randomization.
 	 *
 	 * @return The math module, to allow for method chaining.
+	 *
+	 * @see love.math.getRandomSeed
 	 */
 	math& setRandomSeed(int seed);
 
 	/**
 	 * @brief Gets the seed of the random number generator.
+	 *
+	 * @see love.math.setRandomSeed
 	 */
 	int getRandomSeed();
 
 	/**
 	 * @brief Converts from degrees to radians.
+	 *
+	 * @see love.math.degrees
 	 */
 	float rad(float degrees);
 
 	/**
 	 * @brief Converts from radians to degrees.
+	 *
+	 * @see love.math.rad
 	 */
 	float degrees(float rad);
 
@@ -69,6 +79,8 @@ class math {
 	 * @param level (-1) The level of compression to use, between 0 and 9. -1 indicates the default level.
 	 *
 	 * @return Compressed data in the form of a string.
+	 *
+	 * @see love.math.decompress
 	 */
 	std::string compress(const std::string& str, int level);
 
@@ -78,6 +90,8 @@ class math {
 	 * @param str A string containing data previously compressed with math.compress().
 	 *
 	 * @return A string containing the raw decompressed data.
+	 *
+	 * @see love.math.compress
 	 */
 	std::string decompress(const std::string& str);
 

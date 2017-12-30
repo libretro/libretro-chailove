@@ -27,9 +27,13 @@ SDL_Surface* graphics::getScreen() {
 }
 
 bool graphics::load() {
+	ChaiLove* app = ChaiLove::getInstance();
+
 	// Enable alpha blending.
-	if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
-		std::cout << "[ChaiLove] Enabling alpha blending failed" << std::endl;
+	if (app->config.options["alphablending"]) {
+		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
+			std::cout << "[ChaiLove] Enabling alpha blending failed" << std::endl;
+		}
 	}
 
 	// Set the default font.
@@ -45,21 +49,22 @@ graphics& graphics::clear(int r, int g, int b, int a) {
 	SDL_Surface* screen = getScreen();
 	Uint32 color = SDL_MapRGBA(screen->format, r, g, b, a);
 	SDL_FillRect(screen, NULL, color);
-
 	return *this;
 }
 
 graphics& graphics::clear(int r, int g, int b) {
 	return clear(r, g, b, 255);
 }
+
 graphics& graphics::point(int x, int y) {
 	pixelRGBA(getScreen(), x, y, r, g, b, a);
-
 	return *this;
 }
+
 graphics& graphics::point(Point* p) {
 	return point(p->x, p->y);
 }
+
 /*
 TODO: Fix graphics.points(Vector<Points>)
 void graphics::points(std::vector<Point*> points) {
@@ -84,9 +89,9 @@ graphics& graphics::rectangle(const std::string& drawmode, int x, int y, int wid
 
 	return *this;
 }
+
 graphics& graphics::line(int x1, int y1, int x2, int y2) {
 	lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
-
 	return *this;
 }
 
@@ -168,7 +173,6 @@ Quad graphics::newQuad(int x, int y, int width, int height, int sw, int sh) {
 
 graphics& graphics::print(const std::string& text, int x, int y) {
 	activeFont->print(text, x, y, r, g, b, a);
-
 	return *this;
 }
 
@@ -177,7 +181,6 @@ graphics& graphics::setColor(int red, int green, int blue, int alpha) {
 	g = green;
 	b = blue;
 	a = alpha;
-
 	return *this;
 }
 graphics& graphics::setColor(int red, int green, int blue) {
@@ -285,13 +288,11 @@ Font* graphics::newFont(const std::string& filename) {
 
 graphics& graphics::setFont(Font* font) {
 	activeFont = font;
-
 	return *this;
 }
 
 graphics& graphics::setFont() {
 	activeFont = &defaultFont;
-
 	return *this;
 }
 

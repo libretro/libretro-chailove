@@ -31,10 +31,12 @@ float audio::getVolume() {
 }
 
 audio& audio::setVolume(float volume) {
-	if (volume >= 0.0f && volume <= 1.0f) {
-		m_volume = volume;
+	if (volume < 0.0f) {
+		volume = 0.0f;
+	} else if (volume > 1.0f) {
+		volume = 1.0f;
 	}
-
+	m_volume = volume;
 	return *this;
 }
 

@@ -98,7 +98,7 @@ class script {
 	 *   hamster = love.graphics.newImage("hamster.png")
 	 * }
 	 *
-	 * def love.draw() {
+	 * def draw() {
 	 *   love.graphics.draw(hamster, 100, 100)
 	 * }
 	 * @endcode
@@ -107,8 +107,27 @@ class script {
 
 	/**
 	 * @brief Called when the game is requested to be reset.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global textX = 10
+	 *
+	 * dev update(dt) {
+	 *   textX += dt * 20
+	 * }
+	 *
+	 * def draw() {
+	 *   love.graphics.print("Hello World", textX, 100)
+	 * }
+	 *
+	 * def reset() {
+	 *   textX = 10
+	 * }
+	 * @endcode
 	 */
 	void reset();
+
 	bool loadModule(const std::string& moduleName);
 
 	/**
@@ -116,6 +135,20 @@ class script {
 	 *
 	 * @param joystick The joystick number.
 	 * @param button The name of which button was released.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global buttonPressed = ""
+	 *
+	 * def draw() {
+	 *   love.graphics.print("Button Pressed: " + buttonPressed, 100, 100)
+	 * }
+	 *
+	 * def joystickpressed(joy, button) {
+	 *   buttonPressed = button
+	 * }
+	 * @endcode
 	 */
 	void joystickpressed(int joystick, const std::string& button);
 
@@ -124,6 +157,20 @@ class script {
 	 *
 	 * @param joystick The joystick number.
 	 * @param button The name of which button was released.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global buttonReleased = ""
+	 *
+	 * def draw() {
+	 *   love.graphics.print("Button Released: " + buttonReleased, 100, 100)
+	 * }
+	 *
+	 * def joystickreleased(joy, button) {
+	 *   buttonReleased = button
+	 * }
+	 * @endcode
 	 */
 	void joystickreleased(int joystick, const std::string& button);
 
