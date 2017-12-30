@@ -106,20 +106,13 @@ class graphics {
 
 	Font* newFont();
 
-	/**
-	 * @brief Creates a new TrueType font, with a default size of 12.
-	 *
-	 * @param filename The path to the TrueType font.
-	 *
-	 * @return The created TrueType font.
-	 */
 	Font* newFont(const std::string& filename);
 
 	/**
 	 * @brief Creates a new TrueType font, with the given font size.
 	 *
-	 * @param filename The path to the TrueType font.
-	 * @param size The size of the font to create.
+	 * @param filename The path to the TrueType .ttf font.
+	 * @param size (12) The size of the font to create.
 	 *
 	 * @return The created TrueType font.
 	 */
@@ -157,6 +150,10 @@ class graphics {
 	 * @param text The text to draw.
 	 * @param x The position to draw the object (x-axis).
 	 * @param y The position to draw the object (y-axis).
+	 *
+	 * @code
+	 * love.graphics.print("Hello World", 100, 100)
+	 * @endcode
 	 */
 	graphics& print(const std::string& text, int x, int y);
 
@@ -172,17 +169,23 @@ class graphics {
 
 	/**
 	 * @brief Retrieves the active background color.
+	 *
+	 * @see love.graphics.setBackgroundColor
 	 */
 	Color getBackgroundColor();
 
 	/**
 	 * @brief Sets the background color to the given color.
+	 *
+	 * @param red The r value.
+	 * @param green The g value.
+	 * @param blue The b value.
+	 * @param alpha (255) The a value.
+	 *
+	 * @see love.graphics.getBackgroundColor
 	 */
 	graphics& setBackgroundColor(int red, int green, int blue, int alpha);
 
-	/**
-	 * @brief Sets the background color to the given color.
-	 */
 	graphics& setBackgroundColor(int red, int green, int blue);
 
 	/**

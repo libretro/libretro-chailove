@@ -200,9 +200,10 @@ void retro_get_system_info(struct retro_system_info *info) {
 }
 
 void retro_get_system_av_info(struct retro_system_av_info *info) {
-	ChaiLove* app = ChaiLove::getInstance();
 	unsigned int width = 640;
 	unsigned int height = 480;
+
+	ChaiLove* app = ChaiLove::getInstance();
 	if (app != NULL) {
 		width = app->config.window.width;
 		height = app->config.window.height;

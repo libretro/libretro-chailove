@@ -46,6 +46,8 @@ class mouse {
 	 * @param y The new position of the mouse along the y-axis.
 	 *
 	 * @return The mouse module.
+	 *
+	 * @see love.mouse.getY
 	 */
 	mouse& setY(int y);
 
@@ -53,6 +55,8 @@ class mouse {
 	 * @brief Returns the current x-position of the mouse.
 	 *
 	 * @return The position of the mouse along the x-axis.
+	 *
+	 * @see love.mouse.setX
 	 */
 	int getX();
 
@@ -60,6 +64,8 @@ class mouse {
 	 * @brief Returns the current y-position of the mouse.
 	 *
 	 * @return The position of the mouse along the y-axis.
+	 *
+	 * @see love.mouse.setY
 	 */
 	int getY();
 

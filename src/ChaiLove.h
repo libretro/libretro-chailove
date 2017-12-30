@@ -45,7 +45,6 @@
  * - \link love::system system \endlink Provides access to information about the user's system.
  * - \link love::timer timer \endlink Provides high-resolution timing functionality.
  * - \link love::window window \endlink Provides an interface for the program's window.
- *
  */
 
 #ifndef SRC_CHAILOVE_H_
