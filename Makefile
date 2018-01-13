@@ -35,7 +35,7 @@ freetype: submodules
 		--enable-static=yes \
 		--enable-shared=no \
 		CC="$ARM_CC" AR="$ARM_AR" \
-		LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS" && make
+		LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS"
 else
 freetype: submodules
 	@echo "No need to build Freetype"
