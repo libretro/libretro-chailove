@@ -30,7 +30,7 @@ clean:
 
 ifneq (,$(findstring ios,$(platform)))
 freetype: submodules
-	cd vendor/freetype2 && ./configure --prefix=$DESTROOT \
+	cd vendor/freetype2 && ./autogen.sh && ./configure --prefix=$DESTROOT \
 		--host=arm-apple-darwin \
 		--enable-static=yes \
 		--enable-shared=no \
