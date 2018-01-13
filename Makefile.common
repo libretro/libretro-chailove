@@ -15,25 +15,25 @@ FLAGS += -Ivendor
 FLAGS += -Ivendor/filesystem
 
 # libretro-common
-FLAGS += -Ivendor/libretro-common/include
+FLAGS += -I../RetroArch/libretro-common/include
 SOURCES_C += $(wildcard \
-	vendor/libretro-common/lists/*.c \
-	vendor/libretro-common/features/*.c \
-	vendor/libretro-common/file/file_path.c \
-	vendor/libretro-common/file/retro_dirent.c \
-	vendor/libretro-common/file/config_file.c \
-	vendor/libretro-common/file/config_file_userdata.c \
-	vendor/libretro-common/memmap/memalign.c \
-	vendor/libretro-common/streams/file_stream.c \
-	vendor/libretro-common/formats/wav/*.c \
-	vendor/libretro-common/audio/audio_mix.c \
-	vendor/libretro-common/audio/audio_mixer.c \
-	vendor/libretro-common/audio/resampler/*.c \
-	vendor/libretro-common/audio/resampler/drivers/*.c \
-	vendor/libretro-common/audio/conversion/*.c \
-	vendor/libretro-common/compat/*.c \
-	vendor/libretro-common/hash/*.c \
-	src/file_path_special.c \
+	../RetroArch/libretro-common/lists/*.c \
+	../RetroArch/libretro-common/features/*.c \
+	../RetroArch/libretro-common/file/file_path.c \
+	../RetroArch/libretro-common/file/retro_dirent.c \
+	../RetroArch/libretro-common/file/config_file.c \
+	../RetroArch/libretro-common/file/config_file_userdata.c \
+	../RetroArch/libretro-common/memmap/memalign.c \
+	../RetroArch/libretro-common/streams/file_stream.c \
+	../RetroArch/libretro-common/formats/wav/*.c \
+	../RetroArch/libretro-common/audio/audio_mix.c \
+	../RetroArch/libretro-common/audio/audio_mixer.c \
+	../RetroArch/libretro-common/audio/resampler/*.c \
+	../RetroArch/libretro-common/audio/resampler/drivers/*.c \
+	../RetroArch/libretro-common/audio/conversion/*.c \
+	../RetroArch/libretro-common/compat/*.c \
+	../RetroArch/libretro-common/hash/*.c \
+	../RetroArch/libretro-common/vfs/*.c \
 )
 
 #	vendor/libretro-common/file/*.c \
