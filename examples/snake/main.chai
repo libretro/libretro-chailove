@@ -22,8 +22,12 @@ def conf(config) {
 	config.window.height = HEIGHT * gridScale
 }
 
-def init() {
+/**
+ * ChaiLove Callback; Reset the game.
+ */
+def reset() {
 	S = []
+	LEN = 5
 	for (var i = 0; i < LEN; ++i) {
 		S.push_back([WIDTH / 2, HEIGHT / 2])
 	}
@@ -32,10 +36,13 @@ def init() {
 	T = [math.random(WIDTH - 2), math.random(HEIGHT - 2)]
 }
 
+/**
+ * ChaiLove Callback; Initialize the game.
+ */
 def load() {
 	graphics.setBackgroundColor(133, 188, 22)
 
-	init()
+	reset()
 }
 
 def update(dt) {
@@ -93,12 +100,12 @@ def update(dt) {
 	head = S.back()
 
 	if (head[0] < 0 || head[0] == WIDTH || head[1] < 0 || head[1] == HEIGHT) {
-		init()
+		reset()
 	}
 
 	for (var i = 0; i < S.size() - 1; ++i) {
 		if (head[0] == S[i][0] && head[1] == S[i][1] && dir > 0) {
-			init()
+			reset()
 		}
 	}
 
