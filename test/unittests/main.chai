@@ -23,7 +23,7 @@ def load() {
 		throw(failure)
 	}
 
-	event.quit()
+	love.event.quit()
 }
 
 def draw() {

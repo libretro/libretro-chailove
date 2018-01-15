@@ -5,7 +5,7 @@ SOURCES_CXX += $(wildcard \
 	src/love/Types/Audio/*.cpp \
 	src/love/Types/Graphics/*.cpp \
 	src/love/Types/Input/*.cpp \
-	src/love/Types/System/*.cpp \
+	src/love/Types/Config/*.cpp \
 	test/*.cpp \
 )
 

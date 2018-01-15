@@ -13,10 +13,9 @@ using love::Types::Graphics::Image;
 using love::Types::Graphics::Font;
 using love::Types::Graphics::Point;
 using love::Types::Graphics::Color;
-using love::Types::System::Config;
 using love::Types::Input::Joystick;
-using love::Types::System::windowConfig;
-using love::Types::System::moduleConfig;
+using love::Types::Config::WindowConfig;
+using love::Types::Config::ModuleConfig;
 using love::Types::Audio::SoundData;
 using love::graphics;
 
@@ -141,22 +140,22 @@ script::script(const std::string& file) {
 	chai.add(fun<int, Font, const std::string&>(&Font::getWidth), "getWidth");
 
 	// Config
-	chai.add(user_type<windowConfig>(), "windowConfig");
-	chai.add(fun(&windowConfig::width), "width");
-	chai.add(fun(&windowConfig::height), "height");
-	chai.add(fun(&windowConfig::bbp), "bbp");
-	chai.add(fun(&windowConfig::title), "title");
-	chai.add(fun(&windowConfig::asyncblit), "asyncblit");
-	chai.add(fun(&windowConfig::hwsurface), "hwsurface");
-	chai.add(fun(&windowConfig::doublebuffering), "doublebuffering");
-	chai.add(user_type<moduleConfig>(), "moduleConfig");
-	chai.add(fun(&moduleConfig::sound), "sound");
-	chai.add(user_type<Config>(), "Config");
-	chai.add(fun(&Config::identity), "identity");
-	chai.add(fun(&Config::version), "version");
-	chai.add(fun(&Config::window), "window");
-	chai.add(fun(&Config::modules), "modules");
-	chai.add(fun(&Config::options), "options");
+	chai.add(user_type<WindowConfig>(), "WindowConfig");
+	chai.add(fun(&WindowConfig::width), "width");
+	chai.add(fun(&WindowConfig::height), "height");
+	chai.add(fun(&WindowConfig::bbp), "bbp");
+	chai.add(fun(&WindowConfig::title), "title");
+	chai.add(fun(&WindowConfig::asyncblit), "asyncblit");
+	chai.add(fun(&WindowConfig::hwsurface), "hwsurface");
+	chai.add(fun(&WindowConfig::doublebuffering), "doublebuffering");
+	chai.add(user_type<ModuleConfig>(), "ModuleConfig");
+	chai.add(fun(&ModuleConfig::sound), "sound");
+	chai.add(user_type<config>(), "Config");
+	chai.add(fun(&config::identity), "identity");
+	chai.add(fun(&config::version), "version");
+	chai.add(fun(&config::window), "window");
+	chai.add(fun(&config::modules), "modules");
+	chai.add(fun(&config::options), "options");
 
 	// Joystick
 	chai.add(user_type<Joystick>(), "Joystick");
@@ -335,7 +334,7 @@ script::script(const std::string& file) {
 		hasUpdate = false;
 	}
 	try {
-		chaiconf = chai.eval<std::function<void(Config&)> >("conf");
+		chaiconf = chai.eval<std::function<void(config&)> >("conf");
 	}
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] conf(t) " << e.what() << std::endl;
@@ -414,7 +413,7 @@ script::script(const std::string& file) {
 	#endif
 }
 
-void script::conf(Config& t) {
+void script::conf(config& t) {
 	#ifdef __HAVE_CHAISCRIPT__
 	if (hasconf) {
 		try {

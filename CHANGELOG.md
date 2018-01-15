@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Removed global objects, use `love` namespace instead
   - Before: `graphics.draw()`
   - After: `love.graphics.draw()`
+- Cleaned up global `love.config`
 
 ## 0.13.0 - 2017-12-20
 ### Added

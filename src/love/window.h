@@ -2,7 +2,7 @@
 #define SRC_LOVE_WINDOW_H_
 
 #include <string>
-#include "Types/System/Config.h"
+#include "config.h"
 
 namespace love {
 
@@ -11,7 +11,7 @@ namespace love {
  */
 class window {
 	public:
-	bool load(const Types::System::Config& config);
+	bool load(const config& conf);
 	bool unload();
 
 	/**

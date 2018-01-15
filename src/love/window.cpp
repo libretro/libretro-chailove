@@ -3,15 +3,14 @@
 #include <iostream>
 #include "../ChaiLove.h"
 #include "SDL.h"
-#include "Types/System/Config.h"
+#include "config.h"
 
 using ::ChaiLove;
-using love::Types::System::Config;
 using std::string;
 
 namespace love {
 
-bool window::load(const Config& config) {
+bool window::load(const config& conf) {
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Initialize SDL.
@@ -27,18 +26,18 @@ bool window::load(const Config& config) {
 
 	// Build the Screen.
 	Uint32 flags;
-	if (config.window.hwsurface) {
+	if (conf.window.hwsurface) {
 		flags = SDL_HWSURFACE;
 	} else {
 		flags = SDL_SWSURFACE;
 	}
-	if (config.window.asyncblit) {
+	if (conf.window.asyncblit) {
 		flags |= SDL_ASYNCBLIT;
 	}
-	if (config.window.doublebuffering) {
+	if (conf.window.doublebuffering) {
 		flags |= SDL_DOUBLEBUF;
 	}
-	app->screen = SDL_SetVideoMode(config.window.width, config.window.height, config.window.bbp, flags);
+	app->screen = SDL_SetVideoMode(conf.window.width, conf.window.height, conf.window.bbp, flags);
 	if (app->screen == NULL) {
 		const char* errorChar = SDL_GetError();
 		std::string errString("");
@@ -54,7 +53,7 @@ bool window::load(const Config& config) {
 	app->videoBuffer = (unsigned int *)app->screen->pixels;
 
 	// Set the title.
-	setTitle(config.window.title);
+	setTitle(conf.window.title);
 	return true;
 }
 
