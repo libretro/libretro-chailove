@@ -13,13 +13,13 @@ global dir
 global t = 0.0f
 global T
 
-def conf(config) {
+def conf(t) {
 	WIDTH = 32
 	HEIGHT = 32
 	LEN = 5
 	gridScale = 10
-	config.window.width  = WIDTH * gridScale
-	config.window.height = HEIGHT * gridScale
+	t.window.width  = WIDTH * gridScale
+	t.window.height = HEIGHT * gridScale
 }
 
 /**
@@ -33,14 +33,14 @@ def reset() {
 	}
 	dir = 0
 	t = 0
-	T = [math.random(WIDTH - 2), math.random(HEIGHT - 2)]
+	T = [love.math.random(WIDTH - 2), love.math.random(HEIGHT - 2)]
 }
 
 /**
  * ChaiLove Callback; Initialize the game.
  */
 def load() {
-	graphics.setBackgroundColor(133, 188, 22)
+	love.graphics.setBackgroundColor(133, 188, 22)
 
 	reset()
 }
@@ -48,22 +48,22 @@ def load() {
 def update(dt) {
 	t = t + dt
 
-	if (joystick[0].isDown("up")) {
+	if (love.joystick[0].isDown("up")) {
 		if (dir != 2) {
 			dir = 1
 		}
 	}
-	if (joystick[0].isDown("down")) {
+	if (love.joystick[0].isDown("down")) {
 		if (dir != 1) {
 			dir = 2
 		}
 	}
-	if (joystick[0].isDown("left")) {
+	if (love.joystick[0].isDown("left")) {
 		if (dir != 4) {
 			dir = 3
 		}
 	}
-	if (joystick[0].isDown("right")) {
+	if (love.joystick[0].isDown("right")) {
 		if (dir != 3) {
 			dir = 4
 		}
@@ -110,7 +110,7 @@ def update(dt) {
 	}
 
 	if (head[0] == T[0] && head[1] == T[1]) {
-		T = [math.random(WIDTH - 2), math.random(HEIGHT - 2)]
+		T = [love.math.random(WIDTH - 2), love.math.random(HEIGHT - 2)]
 	}
 	else if (dir > 0) {
 		var newS = []
@@ -122,20 +122,20 @@ def update(dt) {
 }
 
 def draw() {
-	graphics.setColor(134, 201, 0)
+	love.graphics.setColor(134, 201, 0)
 	for (var y = 0; y < HEIGHT; ++y) {
 		for (var x = 0; x < WIDTH; ++x) {
-			graphics.rectangle("fill", x*gridScale, y*gridScale, gridScale - 2, gridScale - 2)
+			love.graphics.rectangle("fill", x*gridScale, y*gridScale, gridScale - 2, gridScale - 2)
 		}
 	}
 
-	graphics.setColor(216, 6, 0)
+	love.graphics.setColor(216, 6, 0)
 	for (var i = 0; i < S.size(); ++i) {
-		graphics.rectangle("fill", S[i][0]*gridScale, S[i][1]*gridScale, gridScale - 2, gridScale - 2)
+		love.graphics.rectangle("fill", S[i][0]*gridScale, S[i][1]*gridScale, gridScale - 2, gridScale - 2)
 	}
 
-	graphics.setColor(2, 116, 132)
-	graphics.rectangle("fill", T[0]*gridScale, T[1]*gridScale, gridScale - 2, gridScale - 2)
+	love.graphics.setColor(2, 116, 132)
+	love.graphics.rectangle("fill", T[0]*gridScale, T[1]*gridScale, gridScale - 2, gridScale - 2)
 }
 
 

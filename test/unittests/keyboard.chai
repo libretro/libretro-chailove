@@ -1,4 +1,4 @@
-var scancode = keyboard.getScancodeFromKey("a")
+var scancode = love.keyboard.getScancodeFromKey("a")
 assert_equal(scancode, 97, "keyboard.getScancodeFromKey()")
 
 var key = love.keyboard.getKeyFromScancode(97)

@@ -71,8 +71,10 @@ script::script(const std::string& file) {
 	chai.register_namespace([](chaiscript::Namespace& love) {
 		ChaiLove* app = ChaiLove::getInstance();
 		love["audio"] = var(std::ref(app->audio));
+		love["config"] = var(std::ref(app->config));
 		love["event"] = var(std::ref(app->event));
 		love["filesystem"] = var(std::ref(app->filesystem));
+		love["font"] = var(std::ref(app->font));
 		love["graphics"] = var(std::ref(app->graphics));
 		love["image"] = var(std::ref(app->image));
 		love["joystick"] = var(std::ref(app->joystick));
@@ -155,7 +157,6 @@ script::script(const std::string& file) {
 	chai.add(fun(&Config::window), "window");
 	chai.add(fun(&Config::modules), "modules");
 	chai.add(fun(&Config::options), "options");
-	chai.add_global(var(std::ref(app->config)), "config");
 
 	// Joystick
 	chai.add(user_type<Joystick>(), "Joystick");
@@ -206,26 +207,21 @@ script::script(const std::string& file) {
 	chai.add(fun<love::graphics&, graphics, int, int, int, int>(&graphics::clear), "clear");
 	chai.add(fun<love::graphics&, graphics, int, int, int>(&graphics::clear), "clear");
 	chai.add(fun<love::graphics&, graphics>(&graphics::clear), "clear");
-	chai.add_global(var(std::ref(app->graphics)), "graphics");
 
 	// Font
 	chai.add(fun(&font::isOpen), "isOpen");
-	chai.add_global(var(std::ref(app->font)), "font");
 
 	// Keyboard
 	chai.add(fun<bool, keyboard, const std::string&>(&keyboard::isDown), "isDown");
 	chai.add(fun(&keyboard::setKeyRepeat), "setKeyRepeat");
 	chai.add(fun(&keyboard::getKeyFromScancode), "getKeyFromScancode");
 	chai.add(fun(&keyboard::getScancodeFromKey), "getScancodeFromKey");
-	chai.add_global(var(std::ref(app->keyboard)), "keyboard");
 
 	// Event
 	chai.add(fun(&event::quit), "quit");
-	chai.add_global(var(std::ref(app->event)), "event");
 
 	// Image
 	chai.add(fun(&image::newImageData), "newImageData");
-	chai.add_global(var(std::ref(app->image)), "image");
 
 	// Filesystem
 	chai.add(fun(&filesystem::unmount), "unmount");
@@ -239,13 +235,11 @@ script::script(const std::string& file) {
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun(&filesystem::load), "load");
-	chai.add_global(var(std::ref(app->filesystem)), "filesystem");
 
 	// System
 	chai.add(fun(&system::getOS), "getOS");
 	chai.add(fun(&system::getVersion), "getVersion");
 	chai.add(fun(&system::getVersionString), "getVersionString");
-	chai.add_global(var(std::ref(app->system)), "system");
 
 	// Mouse
 	chai.add(fun(&mouse::setVisible), "setVisible");
@@ -257,29 +251,24 @@ script::script(const std::string& file) {
 	chai.add(fun(&mouse::getPosition), "getPosition");
 	chai.add(fun<bool, mouse, const std::string&>(&mouse::isDown), "isDown");
 	chai.add(fun<bool, mouse, int>(&mouse::isDown), "isDown");
-	chai.add_global(var(std::ref(app->mouse)), "mouse");
 
 	// Sound
 	chai.add(fun<SoundData*, sound, const std::string&>(&sound::newSoundData), "newSoundData");
-	chai.add_global(var(std::ref(app->sound)), "sound");
 
 	// Audio
 	chai.add(fun(&audio::play), "play");
 	chai.add(fun<SoundData*, audio, const std::string&>(&audio::newSource), "newSource");
 	chai.add(fun(&audio::getVolume), "getVolume");
 	chai.add(fun(&audio::setVolume), "setVolume");
-	chai.add_global(var(std::ref(app->audio)), "audio");
 
 	// Window
 	chai.add(fun(&window::setTitle), "setTitle");
 	chai.add(fun(&window::getTitle), "getTitle");
-	chai.add_global(var(std::ref(app->window)), "window");
 
 	// Timer
 	chai.add(fun(&timer::getDelta), "getDelta");
 	chai.add(fun(&timer::getFPS), "getFPS");
 	chai.add(fun(&timer::step), "step");
-	chai.add_global(var(std::ref(app->timer)), "timer");
 
 	// Joystick
 	chai.add(fun(&joystick::getJoysticks), "getJoysticks");
@@ -287,7 +276,6 @@ script::script(const std::string& file) {
 	chai.add(fun<bool, joystick, int, const std::string&>(&joystick::isDown), "isDown");
 	chai.add(fun<bool, joystick, int, int>(&joystick::isDown), "isDown");
 	chai.add(fun(&joystick::operator[]), "[]");
-	chai.add_global(var(std::ref(app->joystick)), "joystick");
 
 	// Math
 	auto mathlib = chaiscript::extras::math::bootstrap();
@@ -309,7 +297,6 @@ script::script(const std::string& file) {
 	chai.add(fun<std::string, math, const std::string&>(&math::compress), "compress");
 	chai.add(fun<std::string, math, const std::string&, int>(&math::compress), "compress");
 	chai.add(fun(&math::decompress), "decompress");
-	chai.add_global(var(std::ref(app->math)), "math");
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");

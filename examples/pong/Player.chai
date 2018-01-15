@@ -17,22 +17,22 @@ class Player {
   }
 
   def draw() {
-    graphics.setColor(170, 130, 57);
-    graphics.rectangle("fill", this.x, this.y, this.width, this.height);
-    graphics.setColor(102, 153, 153);
-    graphics.print(to_string(this.score), this.x, 50);
+    love.graphics.setColor(170, 130, 57);
+    love.graphics.rectangle("fill", this.x, this.y, this.width, this.height);
+    love.graphics.setColor(102, 153, 153);
+    love.graphics.print(to_string(this.score), this.x, 50);
   }
 
   def update(delta) {
-    if (joystick.isDown(0, "up")) {
+    if (love.joystick.isDown(0, "up")) {
       this.y -= 300.0f * delta
     }
-    else if (joystick.isDown(0, "down")) {
+    else if (love.joystick.isDown(0, "down")) {
       this.y += 300.0f * delta
     }
 
-    if (this.y + this.height > graphics.getHeight()) {
-        this.y = graphics.getHeight() - this.height;
+    if (this.y + this.height > love.graphics.getHeight()) {
+        this.y = love.graphics.getHeight() - this.height;
     }
     else if (this.y < 0) {
         this.y = 0;
