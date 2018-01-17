@@ -41,8 +41,8 @@
  * - \link love::keyboard keyboard \endlink Provides an interface to the user's keyboard.
  * - \link love::math math \endlink Provides system-independent mathematical functions.
  * - \link love::mouse mouse \endlink Provides an interface to the user's mouse.
- * - \link love::sound sound \endlink This module is responsible for decoding sound files.
  * - \link love::script script \endlink This module is responsible for interacting with the script.
+ * - \link love::sound sound \endlink This module is responsible for decoding sound files.
  * - \link love::system system \endlink Provides access to information about the user's system.
  * - \link love::timer timer \endlink Provides high-resolution timing functionality.
  * - \link love::window window \endlink Provides an interface for the program's window.

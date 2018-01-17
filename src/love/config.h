@@ -41,6 +41,10 @@ class config {
 
 	/**
 	 * @brief Generic map of boolean configuration options.
+	 *
+	 * Available options:
+	 * - "alphablending": true
+	 * - "highquality": true
 	 */
 	std::map<std::string, bool> options;
 };
