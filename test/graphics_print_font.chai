@@ -8,27 +8,27 @@ class graphics_print_font {
 	}
 
 	def load() {
-		this.ttffont = graphics.newFont("assets/Raleway-Regular.ttf", 40)
-		this.pngfont = graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
+		this.ttffont = love.graphics.newFont("assets/Raleway-Regular.ttf", 40)
+		this.pngfont = love.graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 	}
 
 	def draw() {
 		// Default font.
-		graphics.setFont();
+		love.graphics.setFont();
 		var text = "Default Font"
-		graphics.setColor(10, 230, 0)
-		graphics.print(text, 100, 100)
+		love.graphics.setColor(10, 230, 0)
+		love.graphics.print(text, 100, 100)
 
-		graphics.setFont(this.ttffont)
+		love.graphics.setFont(this.ttffont)
 		text = "Raleway-Regular.ttf"
-		graphics.setColor(255, 200, 0)
-		graphics.print(text, 100, 200)
+		love.graphics.setColor(255, 200, 0)
+		love.graphics.print(text, 100, 200)
 
-		graphics.setFont(this.pngfont)
+		love.graphics.setFont(this.pngfont)
 		text = "Commodore 64"
 		var width = this.pngfont.getWidth(text)
 		var height = this.pngfont.getHeight()
-		graphics.print(text, graphics.getWidth() / 2.0f - width / 2.0f, graphics.getHeight() - height)
+		love.graphics.print(text, love.graphics.getWidth() / 2.0f - width / 2.0f, love.graphics.getHeight() - height)
 	}
 
 	def update(delta) {}

@@ -11,7 +11,6 @@ global testNames = [
 ]
 global tests = []
 global currenttest = 0
-global defaultFont
 
 def conf(t) {
 	t.window.width = 460
@@ -21,7 +20,7 @@ def conf(t) {
 def load() {
 	// Index the test cases.
 	for (name : testNames) {
-		filesystem.load(name + ".chai");
+		love.filesystem.load(name + ".chai");
 		tests.push_back(eval(name + "()"));
 	}
 
@@ -29,18 +28,16 @@ def load() {
 	for (test : tests) {
 		test.load();
 	}
-
-	// Engage the default fault.
-	defaultFont = graphics.newFont()
 }
 
 def draw() {
 	tests[currenttest].draw();
 
-	graphics.setFont(defaultFont)
-	graphics.setColor(255, 255, 255)
-	graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
-	graphics.print("FPS " + to_string(timer.getFPS()), 5, 20);
+	// Use the default font.
+	love.graphics.setFont()
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
+	love.graphics.print("FPS " + to_string(love.timer.getFPS()), 5, 20);
 }
 
 def update(delta) {

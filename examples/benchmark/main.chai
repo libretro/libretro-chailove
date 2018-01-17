@@ -13,16 +13,24 @@ def conf(t) {
 }
 
 def load() {
-	graphics.setBackgroundColor(54, 172, 248)
+	love.graphics.setBackgroundColor(54, 172, 248)
 
 	// Add the first sprite.
-	img = graphics.newImage("sprite.png")
+	img = love.graphics.newImage("sprite.png")
 	sprites.push_back(Sprite())
 
 	// Load the music.
-	music = audio.newSource("music.wav")
+	music = love.audio.newSource("music.wav")
 	music.setLooping(true)
 	music.play()
+}
+
+/**
+ * ChaiLove Callback; Restart the content.
+ */
+def reset() {
+	sprites.clear()
+	sprites.push_back(Sprite())
 }
 
 def update(delta) {
@@ -32,10 +40,10 @@ def update(delta) {
 	}
 
 	// Allow increasing the amount of sprites.
-	if (joystick[0].isDown("up")) {
+	if (love.joystick[0].isDown("up")) {
 		sprites.push_back(Sprite())
 	}
-	if (joystick[0].isDown("down") && sprites.size() > 1) {
+	if (love.joystick[0].isDown("down") && sprites.size() > 1) {
 		sprites.pop_back()
 	}
 }
@@ -47,10 +55,10 @@ def draw() {
 	}
 
 	// Write the text on the screen.
-	graphics.setColor(255, 255, 255)
-	graphics.print("Sprites: " + to_string(sprites.size()), 5, 5)
-	graphics.print("Press up/down", 5, 20)
-	graphics.print("FPS: " + to_string(timer.getFPS()), 5, 35)
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.print("Sprites: " + to_string(sprites.size()), 5, 5)
+	love.graphics.print("Press up/down", 5, 20)
+	love.graphics.print("FPS: " + to_string(love.timer.getFPS()), 5, 35)
 }
 
 def mousepressed(x, y, button) {
@@ -64,31 +72,31 @@ class Sprite {
 	var yspeed
 
 	def Sprite() {
-		this.x = math.random(graphics.getWidth()) * 1.0f
-		this.y = math.random(graphics.getHeight()) * 1.0f
-		this.xspeed = math.random(10) * 50.0f
-		this.yspeed = math.random(10) * 50.0f
+		this.x = love.math.random(love.graphics.getWidth()) * 1.0f
+		this.y = love.math.random(love.graphics.getHeight()) * 1.0f
+		this.xspeed = love.math.random(10) * 50.0f
+		this.yspeed = love.math.random(10) * 50.0f
 	}
 
 	def draw() {
-		graphics.draw(img, this.x, this.y)
+		love.graphics.draw(img, this.x, this.y)
 	}
 
 	def update(delta) {
 		this.x += this.xspeed * delta
 		this.y += this.yspeed * delta
 
-		if (this.x + img.getWidth() > graphics.getWidth()) {
+		if (this.x + img.getWidth() > love.graphics.getWidth()) {
 			this.xspeed = this.xspeed * -1.0f
-			this.x = graphics.getWidth() - img.getWidth()
+			this.x = love.graphics.getWidth() - img.getWidth()
 		}
 		if (this.x < 0) {
 			this.xspeed = this.xspeed * -1.0f
 			this.x = 0
 		}
-		if (this.y + img.getHeight() > graphics.getHeight()) {
+		if (this.y + img.getHeight() > love.graphics.getHeight()) {
 			this.yspeed = this.yspeed * -1.0f
-			this.y = graphics.getHeight() - img.getHeight()
+			this.y = love.graphics.getHeight() - img.getHeight()
 		}
 		if (this.y < 0) {
 			this.yspeed = this.yspeed * -1.0f

@@ -12,15 +12,15 @@ def conf(t) {
 }
 
 def load() {
-  graphics.setBackgroundColor(0, 51, 51);
-  pongSound = sound.newSoundData("pong.wav")
+  love.graphics.setBackgroundColor(0, 51, 51);
+  pongSound = love.sound.newSoundData("pong.wav")
 
   ballReset()
 
-  filesystem.load("Player.chai")
+  love.filesystem.load("Player.chai")
   players = [
-    Player(false, 80.0f, graphics.getHeight() / 2.0f),
-    Player(true, graphics.getWidth() - 80.0f, graphics.getHeight() / 2.0f)
+    Player(false, 80.0f, love.graphics.getHeight() / 2.0f),
+    Player(true, love.graphics.getWidth() - 80.0f, love.graphics.getHeight() / 2.0f)
   ]
 
 }
@@ -29,8 +29,8 @@ def draw() {
   for (var i = 0; i < 2; ++i) {
     players[i].draw()
   }
-  graphics.setColor(170, 68, 57);
-  graphics.circle("fill", ball["x"], ball["y"], ball["radius"]);
+  love.graphics.setColor(170, 68, 57);
+  love.graphics.circle("fill", ball["x"], ball["y"], ball["radius"]);
 }
 
 def update(delta) {
@@ -44,7 +44,7 @@ def update(delta) {
     }
   }
   else if (ball["yspeed"] > 0) {
-    if (ball["y"] > graphics.getHeight()) {
+    if (ball["y"] > love.graphics.getHeight()) {
         ball["yspeed"] *= -1;
     }
   }
@@ -52,7 +52,7 @@ def update(delta) {
     players[1].score += 1
     ballReset()
   }
-  else if (ball["x"] > graphics.getWidth()) {
+  else if (ball["x"] > love.graphics.getWidth()) {
     players[0].score += 1
     ballReset()
   }
@@ -74,8 +74,8 @@ def update(delta) {
 
 def ballReset() {
   ball = [
-    "x": graphics.getWidth() / 2.0f,
-    "y": graphics.getHeight() / 2.0f,
+    "x": love.graphics.getWidth() / 2.0f,
+    "y": love.graphics.getHeight() / 2.0f,
     "xspeed": 200.0f,
     "yspeed": 100.0f,
     "radius": 5
@@ -110,6 +110,6 @@ def ballCollide(player) {
   }
 
   // Make a sound.
-  audio.play(pongSound)
+  love.audio.play(pongSound)
   return true
 }

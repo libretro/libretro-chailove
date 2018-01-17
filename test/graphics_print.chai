@@ -9,12 +9,12 @@ class graphics_print {
 
 	def load() {
 		this.x = 100;
-		this.y = graphics.getHeight() / 2.0f - 30;
+		this.y = love.graphics.getHeight() / 2.0f - 30;
 	}
 
 	def draw() {
-		graphics.setColor(0, 255, 0)
-		graphics.print("Press left/right to switch tests", this.x, this.y);
+		love.graphics.setColor(0, 255, 0)
+		love.graphics.print("Press left/right to switch tests", this.x, this.y);
 	}
 
 	def update(delta) {

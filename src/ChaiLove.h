@@ -31,6 +31,7 @@
  * ## Modules
  *
  * - \link love::audio audio \endlink Provides an interface to output sound to the user's speakers.
+ * - \link love::config config \endlink Global ChaiLove configuration.
  * - \link love::event event \endlink Manages events, like keypresses.
  * - \link love::filesystem filesystem \endlink Provides an interface to the user's filesystem.
  * - \link love::font font \endlink Allows you to work with fonts.
@@ -40,8 +41,8 @@
  * - \link love::keyboard keyboard \endlink Provides an interface to the user's keyboard.
  * - \link love::math math \endlink Provides system-independent mathematical functions.
  * - \link love::mouse mouse \endlink Provides an interface to the user's mouse.
- * - \link love::sound sound \endlink This module is responsible for decoding sound files.
  * - \link love::script script \endlink This module is responsible for interacting with the script.
+ * - \link love::sound sound \endlink This module is responsible for decoding sound files.
  * - \link love::system system \endlink Provides access to information about the user's system.
  * - \link love::timer timer \endlink Provides high-resolution timing functionality.
  * - \link love::window window \endlink Provides an interface for the program's window.
@@ -51,14 +52,14 @@
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 13
+#define CHAILOVE_VERSION_MINOR 14
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.13.0"
+#define CHAILOVE_VERSION_STRING "0.14.0"
 
 #include "SDL.h"
 #include "libretro.h"
 #include "love/keyboard.h"
-#include "love/Types/System/Config.h"
+#include "love/config.h"
 #include "love/script.h"
 #include "love/filesystem.h"
 #include "love/graphics.h"
@@ -78,8 +79,6 @@
 #include "test/Test.h"
 #endif
 
-using love::Types::System::Config;
-
 class ChaiLove {
 	public:
 	static ChaiLove* getInstance();
@@ -89,7 +88,7 @@ class ChaiLove {
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
 
-	Config config;
+	love::config config;
 	love::keyboard keyboard;
 	love::script* script;
 	love::filesystem filesystem;

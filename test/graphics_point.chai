@@ -11,7 +11,7 @@ class graphics_point {
 
 	def draw() {
 		//graphics.setColor(0, 255, 0)
-		graphics.point(100, 200).point(200, 300)
+		love.graphics.point(100, 200).point(200, 300)
 	}
 
 	def update(delta) {

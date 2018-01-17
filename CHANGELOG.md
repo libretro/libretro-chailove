@@ -4,6 +4,13 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.14.0 - 2018-xx-xx - Unreleased
+### Changed
+- Removed global objects, use `love` namespace instead
+  - Before: `graphics.draw()`
+  - After: `love.graphics.draw()`
+- Cleaned up global `love.config`
+
 ## 0.13.0 - 2017-12-20
 ### Added
 - Documentation

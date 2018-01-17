@@ -10,14 +10,14 @@ class filesystem_getDirectoryItems {
 
 	def load() {
 		this.x = 100;
-		this.y = graphics.getHeight() / 3.0f;
-		this.files = filesystem.getDirectoryItems("/")
+		this.y = love.graphics.getHeight() / 3.0f;
+		this.files = love.filesystem.getDirectoryItems("/")
 	}
 
 	def draw() {
 		var y = this.y
 		for (file : this.files) {
-			graphics.print("- " + file, this.x, y)
+			love.graphics.print("- " + file, this.x, y)
 			y += 10
 		}
 	}
