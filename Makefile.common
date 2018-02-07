@@ -48,16 +48,16 @@ ifeq ($(platform), osx)
 endif
 
 # SDL_tty
-FLAGS += -Ivendor/SDL_tty/include
-SOURCES_C += $(wildcard \
-	vendor/SDL_tty/src/SDL_tty.c \
-	vendor/SDL_tty/src/SDL_fnt.c \
-)
+#FLAGS += -Ivendor/SDL_tty/include
+#SOURCES_C += $(wildcard \
+#	vendor/SDL_tty/src/SDL_tty.c \
+#	vendor/SDL_tty/src/SDL_fnt.c \
+#)
 
-# SDL_gfx
-FLAGS += -Ivendor/sdl-libretro/tests/SDL_gfx-2.0.26
+# SDL2_gfx
+FLAGS += -Ivendor/sdl2-libretro/libretro-tests/LIBS/SDL2_gfx-1.0.3
 SOURCES_C += $(wildcard \
-	vendor/sdl-libretro/tests/SDL_gfx-2.0.26/*.c \
+	vendor/sdl2-libretro/libretro-tests/LIBS/SDL2_gfx-1.0.3/*.c \
 )
 
 # FreeType2
@@ -119,9 +119,9 @@ SOURCES_C += \
 	vendor/freetype2/src/bzip2/ftbzip2.c \
 	vendor/freetype2/src/lzw/ftlzw.c
 
-# SDL_ttf
-FLAGS += -Ivendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
-SOURCES_C += vendor/sdl-libretro/tests/SDL_ttf-2.0.11/SDL_ttf.c
+# SDL2_ttf
+FLAGS += -Ivendor/sdl2-libretro/libretro-tests/LIBS/SDL2_ttf-2.0.14
+SOURCES_C += vendor/sdl2-libretro/libretro-tests/LIBS/SDL2_ttf-2.0.14/SDL_ttf.c
 
 # SDL_stbimage
 FLAGS += -Ivendor/Snippets
@@ -138,13 +138,62 @@ ifeq ($(HAVE_CHAISCRIPT),)
 endif
 
 # SDL
-ifeq ($(platform), win)
-	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c  ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/dummy/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/thread/win32/SDL_sysmutex.c ./vendor/sdl-libretro/src/thread/win32/SDL_syssem.c ./vendor/sdl-libretro/src/thread/win32/SDL_systhread.c ./vendor/sdl-libretro/src/thread/generic/SDL_syscond.c ./vendor/sdl-libretro/src/loadso/dummy/*.c)
-else
-	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/dummy/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/thread/generic/*.c ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/loadso/dummy/*.c)
+SOURCES_C = $(wildcard \
+	vendor/sdl2-libretro/src/*.c \
+	vendor/sdl2-libretro/src/atomic/SDL_atomic.o \
+	vendor/sdl2-libretro/src/atomic/SDL_spinlock.o \
+	vendor/sdl2-libretro/src/audio/*.c \
+	vendor/sdl2-libretro/src/audio/dummy_libretro/*.c \
+	vendor/sdl2-libretro/src/cpuinfo/*.c \
+	vendor/sdl2-libretro/src/events/*.c \
+	vendor/sdl2-libretro/src/file/*.c \
+	vendor/sdl2-libretro/src/haptic/*.c \
+	vendor/sdl2-libretro/src/haptic/dummy/*.c \
+	vendor/sdl2-libretro/src/joystick/*.c \
+	vendor/sdl2-libretro/src/joystick/dummy_libretro/*.c \
+	vendor/sdl2-libretro/src/loadso/dummy/*.c \
+	vendor/sdl2-libretro/src/power/*.c \
+	vendor/sdl2-libretro/src/filesystem/dummy/*.c \
+	vendor/sdl2-libretro/src/render/*.c \
+	vendor/sdl2-libretro/src/render/software/*.c \
+	vendor/sdl2-libretro/src/stdlib/*.c \
+	vendor/sdl2-libretro/src/thread/*.c \
+	vendor/sdl2-libretro/src/timer/*.c \
+	vendor/sdl2-libretro/src/video/*.c \
+	vendor/sdl2-libretro/src/video/dummy_libretro/*.c \
+)
+
+ifeq ($(SDL_PREFIX), win)
+	SOURCES_C += $(wildcard \
+		vendor/sdl2-libretro/src/timer/windows/*.c \
+		vendor/sdl2-libretro/src/core/windows/SDL_windows.c \
+		vendor/sdl2-libretro/src/thread/generic/SDL_systls.c \
+		vendor/sdl2-libretro/src/thread/windows/SDL_syssem.c \
+		vendor/sdl2-libretro/src/thread/windows/SDL_systhread.c \
+		vendor/sdl2-libretro/src/thread/windows/SDL_sysmutex.c \
+		vendor/sdl2-libretro/src/thread/generic/SDL_syscond.c \
+	)
+else ifeq ($(SDL_PREFIX), lin)
+	SOURCES_C += $(wildcard \
+		vendor/sdl2-libretro/src/timer/dummy_libretro/*.c \
+		vendor/sdl2-libretro/src/thread/generic/SDL_systls.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_syssem.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_systhread.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_sysmutex.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_syscond.c \
+	)
+else ifeq ($(SDL_PREFIX), wiiu)
+	SOURCES_C += $(wildcard \
+		vendor/sdl2-libretro/src/timer/dummy_libretro/*.c \
+		vendor/sdl2-libretro/src/thread/generic/SDvendor/sdl2-libretro/L_systls.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_syssem.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_systhread.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_sysmutex.c \
+		vendor/sdl2-libretro/src/thread/pthread/SDL_syscond.c \
+	)
 endif
 FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
-FLAGS += -Ivendor/sdl-libretro/include
+FLAGS += -Ivendor/sdl2-libretro/include
 
 OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 

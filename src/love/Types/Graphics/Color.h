@@ -57,7 +57,7 @@ struct Color {
 		c.r = r;
 		c.g = g;
 		c.b = b;
-		c.unused = a;
+		c.a = a;
 		return c;
 	}
 };

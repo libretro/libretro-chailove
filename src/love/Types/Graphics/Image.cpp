@@ -33,8 +33,12 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 		return false;
 	}
 
+	SDL_Surface *optimized = SDL_ConvertSurfaceFormat(surface, SDL_GetWindowPixelFormat(ChaiLove::getInstance()->window.window), 0);
+    SDL_FreeSurface(surface);
+    surface = optimized;
+
 	// Optimize the image to the display format.
-	ChaiLove* game = ChaiLove::getInstance();
+	/*ChaiLove* game = ChaiLove::getInstance();
 	SDL_Surface* optimizedImage = NULL;
 	if (game->config.options["alphablending"]) {
 		optimizedImage = SDL_DisplayFormatAlpha(surface);
@@ -49,7 +53,7 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 	} else {
 		SDL_FreeSurface(surface);
 		surface = optimizedImage;
-	}
+	}*/
 	return true;
 }
 

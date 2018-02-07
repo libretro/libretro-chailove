@@ -69,6 +69,8 @@ class mouse {
 	 */
 	int getY();
 
+	mouse& set(int x, int y);
+
 	/**
 	 * @brief Returns the current position of the mouse.
 	 */

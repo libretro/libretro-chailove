@@ -114,8 +114,9 @@ class ChaiLove {
 	bool loadstate(const std::string& data);
 
 	uint32_t *videoBuffer;
-	SDL_Surface* screen;
+	SDL_Surface* screen = NULL;
 	SDL_Event sdlEvent;
+	SDL_Renderer* renderer = NULL;
 
 	#ifdef __HAVE_TESTS__
 	Test test;

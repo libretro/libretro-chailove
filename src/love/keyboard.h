@@ -59,8 +59,8 @@ class keyboard {
 
 	std::map<std::string, int> keyCodes;
 
-	void eventKeyPressed(SDLKey key);
-	void eventKeyReleased(SDLKey key);
+	void eventKeyPressed(SDL_Keycode key);
+	void eventKeyReleased(SDL_Keycode key);
 };
 
 }  // namespace love
