@@ -140,8 +140,8 @@ endif
 # SDL
 SOURCES_C = $(wildcard \
 	vendor/sdl2-libretro/src/*.c \
-	vendor/sdl2-libretro/src/atomic/SDL_atomic.o \
-	vendor/sdl2-libretro/src/atomic/SDL_spinlock.o \
+	vendor/sdl2-libretro/src/atomic/SDL_atomic.c \
+	vendor/sdl2-libretro/src/atomic/SDL_spinlock.c \
 	vendor/sdl2-libretro/src/audio/*.c \
 	vendor/sdl2-libretro/src/audio/dummy_libretro/*.c \
 	vendor/sdl2-libretro/src/cpuinfo/*.c \
