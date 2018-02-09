@@ -11,15 +11,15 @@
  * global y
  *
  * def load() {
- * 	love.graphics.setBackgroundColor(54, 172, 248)
- * 	logo = love.graphics.newImage("logo.png")
- * 	x = 10.0f
- * 	y = 10.0f
+ *     love.graphics.setBackgroundColor(54, 172, 248)
+ *     logo = love.graphics.newImage("logo.png")
+ *     x = 10.0f
+ *     y = 10.0f
  * }
  *
  * def update(dt) {
- * 	x += dt * 60.0f
- * 	y += dt * 30.0f
+ *     x += dt * 60.0f
+ *     y += dt * 30.0f
  * }
  *
  * def draw() {
