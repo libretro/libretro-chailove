@@ -9,7 +9,7 @@
 	url = https://github.com/ChaiScript/ChaiScript.git
 [submodule "vendor/physfs"]
 	path = vendor/physfs
-	url = https://github.com/RobLoach/physfs.git
+	url = https://github.com/Didstopia/physfs.git
 	ignore = dirty
 [submodule "vendor/filesystem"]
 	path = vendor/filesystem
