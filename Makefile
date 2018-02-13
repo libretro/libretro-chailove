@@ -85,7 +85,7 @@ tests: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 test-native: tests
-	retroarch -L $(TARGET) test/main.chai
+	retroarch -L $(TARGET) test/native/main.chai
 
 PREFIX := /usr
 INSTALLDIR := $(PREFIX)/lib/libretro

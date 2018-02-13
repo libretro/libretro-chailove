@@ -1,0 +1,3 @@
+def draw() {
+	love.graphics.print("See NativeTests.cpp for the test cases", 5, 5)
+}

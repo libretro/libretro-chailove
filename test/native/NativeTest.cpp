@@ -8,18 +8,18 @@
 
 #ifdef __HAVE_TESTS__
 
-#include "Main.h"
+#include "NativeTest.h"
 #include "../../src/ChaiLove.h"
 
 using love::config;
 
-void Main::conf(config& t) {
+void NativeTest::conf(config& t) {
 	t.window.width = 1080;
 	t.window.height = 768;
 }
 
-bool Main::load() {
-	app = ChaiLove::getInstance();
+bool NativeTest::load() {
+	ChaiLove* app = ChaiLove::getInstance();
 	app->filesystem.mount("test", "/");
 	secondfont = app->graphics.newFont("assets/Raleway-Regular.ttf", 60);
 	thefont = app->graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
@@ -28,13 +28,15 @@ bool Main::load() {
 	jump = app->sound.newSoundData("assets/jump.wav");
 }
 
-void Main::update(float delta) {
+void NativeTest::update(float delta) {
+	ChaiLove* app = ChaiLove::getInstance();
 	if (app->joystick.isDown(0, 0) && !jump->isPlaying()) {
 		app->audio.play(jump);
 	}
 }
 
-void Main::draw() {
+void NativeTest::draw() {
+	ChaiLove* app = ChaiLove::getInstance();
 	app->graphics.setColor(77, 182, 172);
 	app->graphics.ellipse("fill", 0, 768, 200, 180);
 

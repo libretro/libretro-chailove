@@ -76,7 +76,7 @@
 #include "love/event.h"
 
 #ifdef __HAVE_TESTS__
-#include "../test/native/Main.h"
+#include "../test/native/NativeTest.h"
 #endif
 
 class ChaiLove {
@@ -118,7 +118,7 @@ class ChaiLove {
 	SDL_Event sdlEvent;
 
 	#ifdef __HAVE_TESTS__
-	Main test;
+	NativeTest test;
 	#endif
 };
 
