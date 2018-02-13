@@ -11,9 +11,9 @@
 #include "Main.h"
 #include "../../src/ChaiLove.h"
 
-using love::Types::System::Config;
+using love::config;
 
-void Main::conf(Config& t) {
+void Main::conf(config& t) {
 	t.window.width = 1080;
 	t.window.height = 768;
 }
