@@ -17,16 +17,23 @@ def load() {
 	love.filesystem.load("system.chai")
 	love.filesystem.load("window.chai")
 
-	print("\n================================\n")
-
 	if (failure != "") {
+		print("\n" + failure + "\n")
 		throw(failure)
 	}
+	else {
+		print("\nUnit tests passed")
+	}
 
-	love.event.quit()
+	print("\n================================\n")
 }
 
 def draw() {
 	love.graphics.print("ChaiLove: Unit Testing Framework", 100, 100)
-	love.graphics.print("Report: " + failure, 100, 200)
+	if (failure == "") {
+		love.graphics.print("Tests Passed", 100, 200)
+	}
+	else {
+		love.graphics.print("Report: " + failure, 100, 200)
+	}
 }
