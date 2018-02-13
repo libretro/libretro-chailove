@@ -6,7 +6,7 @@ SOURCES_CXX += $(wildcard \
 	src/love/Types/Graphics/*.cpp \
 	src/love/Types/Input/*.cpp \
 	src/love/Types/Config/*.cpp \
-	test/*.cpp \
+	test/native/*.cpp \
 )
 
 # random
