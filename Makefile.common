@@ -20,6 +20,7 @@ FLAGS += -Ivendor/libretro-common/include
 
 # zlib
 SOURCES_C += \
+	vendor/zlib/zutil.c \
 	vendor/zlib/adler32.c \
 	vendor/zlib/crc32.c \
 	vendor/zlib/compress.c \
@@ -32,8 +33,7 @@ SOURCES_C += \
 	vendor/zlib/inffast.c \
 	vendor/zlib/inftrees.c \
 	vendor/zlib/inflate.c \
-	vendor/zlib/trees.c \
-	vendor/zlib/zutil.c
+	vendor/zlib/trees.c
 FLAGS += -Ivendor/zlib
 FLAGS += -DWANT_ZLIB
 
