@@ -10,6 +10,8 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 ## Games
 
 - [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)
+- [Nyan Cat](https://github.com/RobLoach/ChaiLove-NyanCat)
+- [Game of Life](https://github.com/RobLoach/ChaiLove-GameOfLife)
 
 ## Usage
 
