@@ -1,7 +1,7 @@
 /**
  * \mainpage ChaiLove API
  *
- * This is the API documentation for [ChaiLove](https://github.com/RobLoach/ChaiLove). For more information about ChaiLove itself, see the [ChaiLove homepage](https://github.com/RobLoach/ChaiLove).
+ * This is the API documentation for [ChaiLove](https://github.com/libretro/libretro-chailove). For more information about ChaiLove itself, see the [ChaiLove homepage](https://github.com/libretro/libretro-chailove).
  *
  * When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen.
  *

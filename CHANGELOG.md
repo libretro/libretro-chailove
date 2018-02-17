@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.14.1 - Unreleased
 ### Changed
+- Moved source to libretro organization:
+  - http://github.com/libretro/libretro-chailove
 - Updated documentation
 - Updated dependencies
 - Fixed native test
