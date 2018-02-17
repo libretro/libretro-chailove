@@ -4,6 +4,11 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.14.1 - Unreleased
+### Changed
+- Moved source to libretro organization:
+  - http://github.com/libretro/libretro-chailove
+
 ## 0.14.0 - 2018-01-16
 ### Changed
 - Removed global objects, use `love` namespace instead

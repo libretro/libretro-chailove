@@ -1,6 +1,6 @@
 # LICENSE
 
-[ChaiLove](http://github.com/RobLoach/ChaiLove) is released under the MIT License:
+[ChaiLove](http://github.com/libretro/libretro-chailove) is released under the MIT License:
 
 > Copyright (C) 2017+ [Rob Loach](http://robloach.net)
 >
