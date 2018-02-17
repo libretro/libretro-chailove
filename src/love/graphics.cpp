@@ -230,6 +230,8 @@ std::string graphics::getDefaultFilter() {
 		case 1:
 			return "linear";
 	}
+
+	return "nearest";
 }
 
 

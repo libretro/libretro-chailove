@@ -10,6 +10,7 @@
 [submodule "vendor/physfs"]
 	path = vendor/physfs
 	url = https://github.com/RobLoach/physfs.git
+	ignore = dirty
 [submodule "vendor/filesystem"]
 	path = vendor/filesystem
 	url = https://github.com/wjakob/filesystem.git

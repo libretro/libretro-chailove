@@ -11,15 +11,15 @@
  * global y
  *
  * def load() {
- * 	love.graphics.setBackgroundColor(54, 172, 248)
- * 	logo = love.graphics.newImage("logo.png")
- * 	x = 10.0f
- * 	y = 10.0f
+ *     love.graphics.setBackgroundColor(54, 172, 248)
+ *     logo = love.graphics.newImage("logo.png")
+ *     x = 10.0f
+ *     y = 10.0f
  * }
  *
  * def update(dt) {
- * 	x += dt * 60.0f
- * 	y += dt * 30.0f
+ *     x += dt * 60.0f
+ *     y += dt * 30.0f
  * }
  *
  * def draw() {
@@ -53,8 +53,8 @@
 
 #define CHAILOVE_VERSION_MAJOR 0
 #define CHAILOVE_VERSION_MINOR 14
-#define CHAILOVE_VERSION_PATCH 1
-#define CHAILOVE_VERSION_STRING "0.14.1"
+#define CHAILOVE_VERSION_PATCH 2
+#define CHAILOVE_VERSION_STRING "0.14.2"
 
 #include "SDL.h"
 #include "libretro.h"
@@ -76,7 +76,7 @@
 #include "love/event.h"
 
 #ifdef __HAVE_TESTS__
-#include "test/Test.h"
+#include "../test/native/NativeTest.h"
 #endif
 
 class ChaiLove {
@@ -118,7 +118,7 @@ class ChaiLove {
 	SDL_Event sdlEvent;
 
 	#ifdef __HAVE_TESTS__
-	Test test;
+	NativeTest test;
 	#endif
 };
 

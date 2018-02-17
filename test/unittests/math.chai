@@ -13,7 +13,6 @@ assert(num >= 0 && num <= 10, "math.random(10)")
 num = love.math.random(10, 100)
 assert(num >= 10 && num <= 100, "math.random(10, 100)")
 
-
 num = love.math.random(10.0, 100.0)
 assert(num >= 10.0 && num <= 100.0, "math.random(10.0, 100.0)")
 

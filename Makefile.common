@@ -6,7 +6,7 @@ SOURCES_CXX += $(wildcard \
 	src/love/Types/Graphics/*.cpp \
 	src/love/Types/Input/*.cpp \
 	src/love/Types/Config/*.cpp \
-	test/*.cpp \
+	test/native/*.cpp \
 )
 
 # random
@@ -20,15 +20,20 @@ FLAGS += -Ivendor/libretro-common/include
 
 # zlib
 SOURCES_C += \
-	vendor/zlib/crc32.c \
-	vendor/zlib/deflate.c \
-	vendor/zlib/trees.c \
-	vendor/zlib/inftrees.c \
-	vendor/zlib/adler32.c \
 	vendor/zlib/zutil.c \
-	vendor/zlib/inflate.c \
+	vendor/zlib/adler32.c \
+	vendor/zlib/crc32.c \
+	vendor/zlib/compress.c \
+	vendor/zlib/deflate.c \
+	vendor/zlib/gzclose.c \
+	vendor/zlib/gzlib.c \
+	vendor/zlib/gzread.c \
+	vendor/zlib/gzwrite.c \
 	vendor/zlib/infback.c \
-	vendor/zlib/inffast.c
+	vendor/zlib/inffast.c \
+	vendor/zlib/inftrees.c \
+	vendor/zlib/inflate.c \
+	vendor/zlib/trees.c
 FLAGS += -Ivendor/zlib
 FLAGS += -DWANT_ZLIB
 

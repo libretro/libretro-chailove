@@ -81,11 +81,11 @@ cpplint: dependencies
 	-readability/casting,-whitespace/line_length,-runtime/references \
 		src/*.h src/*.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
 
-noscript: dependencies
+tests: dependencies
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
-test-noscript: noscript
-	retroarch -L $(TARGET) test/main.chai
+test-native: tests
+	retroarch -L $(TARGET) test/native/main.chai
 
 PREFIX := /usr
 INSTALLDIR := $(PREFIX)/lib/libretro

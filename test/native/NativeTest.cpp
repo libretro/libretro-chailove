@@ -3,23 +3,23 @@
  *
  * Tests some of the usage of ChaiLove without the need of scripts.
  *
- * Usage: make test-noscript
+ * Usage: make test-native
  */
 
 #ifdef __HAVE_TESTS__
 
-#include "Test.h"
-#include "../src/ChaiLove.h"
+#include "NativeTest.h"
+#include "../../src/ChaiLove.h"
 
-using love::Types::System::Config;
+using love::config;
 
-void Test::conf(Config& t) {
+void NativeTest::conf(config& t) {
 	t.window.width = 1080;
 	t.window.height = 768;
 }
 
-bool Test::load() {
-	app = ChaiLove::getInstance();
+bool NativeTest::load() {
+	ChaiLove* app = ChaiLove::getInstance();
 	app->filesystem.mount("test", "/");
 	secondfont = app->graphics.newFont("assets/Raleway-Regular.ttf", 60);
 	thefont = app->graphics.newFont("assets/c64_16x16.png", 16, 16, "\x7f !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
@@ -28,13 +28,15 @@ bool Test::load() {
 	jump = app->sound.newSoundData("assets/jump.wav");
 }
 
-void Test::update(float delta) {
+void NativeTest::update(float delta) {
+	ChaiLove* app = ChaiLove::getInstance();
 	if (app->joystick.isDown(0, 0) && !jump->isPlaying()) {
 		app->audio.play(jump);
 	}
 }
 
-void Test::draw() {
+void NativeTest::draw() {
+	ChaiLove* app = ChaiLove::getInstance();
 	app->graphics.setColor(77, 182, 172);
 	app->graphics.ellipse("fill", 0, 768, 200, 180);
 
