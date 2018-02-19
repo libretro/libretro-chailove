@@ -69,7 +69,7 @@ docs-start: docs
 	php -S localhost:9999 -t docs/html
 
 docs-deploy: docs
-	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=gh-pages
+	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=docs
 
 cpplint: dependencies
 	@vendor/styleguide/cpplint/cpplint.py \
