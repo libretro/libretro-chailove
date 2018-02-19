@@ -1,7 +1,7 @@
 # ChaiLove
 [![Build Status](https://travis-ci.org/libretro/libretro-chailove.svg?branch=master)](https://travis-ci.org/libretro/libretro-chailove)
 [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
-[![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://robloach.github.io/ChaiLove)
+[![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://rawgit.com/libretro/libretro-chailove/docs/)
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com). It's free, open-source, and works on Windows, Mac OS X, Linux, and ARM.
 
@@ -30,7 +30,7 @@ retroarch -L chailove_libretro.so path/to/FloppyBird.chailove
 
 ## API
 
-The [ChaiLove API](https://libretro.github.io/libretro-chailove/) is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a [simple Hello World example](examples/simple/main.chai):
+The [ChaiLove API](https://rawgit.com/libretro/libretro-chailove/docs/) is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a [simple Hello World example](examples/simple/main.chai):
 
 ``` lua
 global logo
@@ -61,7 +61,7 @@ Behind ChaiLove, there's the documentation, compiling it, along with testing.
 
 ### Documentation
 
-Visit the [ChaiLove API documentation](https://libretro.github.io/libretro-chailove/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
+Visit the [ChaiLove API documentation](https://rawgit.com/libretro/libretro-chailove/docs/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
 
 ```
 make docs
