@@ -45,3 +45,6 @@
 	path = vendor/freetype2
 	url = https://git.savannah.gnu.org/git/freetype/freetype2.git
 	ignore = dirty
+[submodule "vendor/sdl2-libretro"]
+	path = vendor/sdl2-libretro
+	url = https://github.com/r-type/sdl2-libretro.git

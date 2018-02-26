@@ -27,13 +27,13 @@ mouse& mouse::setVisible(bool visible) {
 
 mouse& mouse::setX(int x) {
 	m_x = x;
-	SDL_WarpMouse(m_x, m_y);
+	SDL_WarpMouseInWindow(ChaiLove::getInstance()->window.window, m_x, m_y);
 	return *this;
 }
 
 mouse& mouse::setY(int y) {
 	m_y = y;
-	SDL_WarpMouse(m_x, m_y);
+	SDL_WarpMouseInWindow(ChaiLove::getInstance()->window.window, m_x, m_y);
 	return *this;
 }
 
@@ -108,6 +108,13 @@ void mouse::buttonEvent(SDL_MouseButtonEvent event) {
 
 Point mouse::getPosition() {
 	return Point(m_x, m_y);
+}
+
+mouse& mouse::set(int x, int y) {
+	m_x = x;
+	m_y = y;
+	SDL_WarpMouseInWindow(ChaiLove::getInstance()->window.window, x, y);
+	return *this;
 }
 
 }  // namespace love

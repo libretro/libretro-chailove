@@ -1,9 +1,9 @@
 #include "Font.h"
 #include "SDL.h"
 #include <string>
-#include "SDL_ttf.h"
-#include <SDL_gfxPrimitives.h>
-#include <SDL_fnt.h>
+//#include "SDL2_ttf.h"
+#include "SDL2_gfxPrimitives.h"
+//#include <SDL_fnt.h>
 #include "../../../ChaiLove.h"
 #include "Image.h"
 #include <iostream>
@@ -17,7 +17,7 @@ Font::Font() {
 }
 
 Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-	m_image = new Image(filename);
+	/*m_image = new Image(filename);
 	if (m_image->loaded()) {
 		TTY_Font* newFont = FNT_Create(m_image->surface, glyphWidth, glyphHeight, letters.c_str());
 		if (newFont == NULL) {
@@ -28,11 +28,11 @@ Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const s
 		ttyFont = newFont;
 		ttyFontWidth = glyphWidth;
 		ttyFontHeight = glyphHeight;
-	}
+	}*/
 }
 
 Font::Font(const std::string& filename, int ptsize) {
-	SDL_RWops* rwops = ChaiLove::getInstance()->filesystem.openRW(filename);
+	/*SDL_RWops* rwops = ChaiLove::getInstance()->filesystem.openRW(filename);
 	if (rwops) {
 		TTF_Font* newFont = TTF_OpenFontRW(rwops, 1, ptsize);
 		if (!newFont) {
@@ -46,7 +46,7 @@ Font::Font(const std::string& filename, int ptsize) {
 		}
 
 		ttfFont = newFont;
-	}
+	}*/
 }
 
 Font::~Font() {
@@ -54,11 +54,12 @@ Font::~Font() {
 }
 
 bool Font::loaded() {
-	return ttfFont != NULL || ttyFont != NULL;
+	return true;
+	//return ttfFont != NULL || ttyFont != NULL;
 }
 
 bool Font::destroy() {
-	if (ttfFont != NULL) {
+	/*if (ttfFont != NULL) {
 		TTF_CloseFont(ttfFont);
 		ttfFont = NULL;
 	}
@@ -70,34 +71,34 @@ bool Font::destroy() {
 	if (m_image != NULL) {
 		delete m_image;
 		m_image = NULL;
-	}
+	}*/
 	return true;
 }
 
 int Font::getHeight(const std::string& text) {
-	if (ttfFont != NULL) {
+	/*if (ttfFont != NULL) {
 		return TTF_FontHeight(ttfFont);
 	}
 	if (ttyFont != NULL) {
 		return FNT_GetTextHeight(ttyFont, text.c_str());
-	}
+	}*/
 
 	return 12;
 }
 
 int Font::getHeight() {
-	if (ttfFont != NULL) {
+	/*if (ttfFont != NULL) {
 		return TTF_FontHeight(ttfFont);
 	}
 	if (ttyFont != NULL) {
 		return ttyFontHeight;
-	}
+	}*/
 
 	return 12;
 }
 
 int Font::getWidth(const std::string& text) {
-	if (ttfFont != NULL) {
+	/*if (ttfFont != NULL) {
 		int w;
 		if (TTF_SizeText(ttfFont, text.c_str(), &w, NULL) == 0) {
 			return w;
@@ -106,13 +107,13 @@ int Font::getWidth(const std::string& text) {
 
 	if (ttyFont != NULL) {
 		return FNT_GetTextWidth(ttyFont, text.c_str());
-	}
+	}*/
 
 	return text.length() * 12;
 }
 
 void Font::print(const std::string& text, int x, int y, int r, int g, int b, int a) {
-	SDL_Surface* screen = ChaiLove::getInstance()->screen;
+	/*SDL_Surface* screen = ChaiLove::getInstance()->screen;
 
 	// Attempt to render the TTF Font.
 	if (ttfFont != NULL) {
@@ -146,6 +147,7 @@ void Font::print(const std::string& text, int x, int y, int r, int g, int b, int
 
 	// Fall back to SDL_gfx primitives.
 	stringRGBA(screen, x, y, text.c_str(), r, g, b, a);
+	*/
 }
 
 }  // namespace Graphics

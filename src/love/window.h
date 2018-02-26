@@ -3,6 +3,7 @@
 
 #include <string>
 #include "config.h"
+#include "SDL.h"
 
 namespace love {
 
@@ -31,6 +32,7 @@ class window {
 	 * @see love.window.getTitle
 	 */
 	window& setTitle(std::string title);
+	SDL_Window* window = NULL;
 };
 
 }  // namespace love

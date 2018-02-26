@@ -147,10 +147,7 @@ void ChaiLove::draw() {
 		#endif
 
 		// Flip the buffer.
-		if (SDL_Flip(screen) == -1) {
-			std::string out("[ChaiLove] Failed to swap the buffers: ");
-			std::cout << out << SDL_GetError() << std::endl;
-		}
+		SDL_RenderPresent(renderer);
 	}
 }
 
