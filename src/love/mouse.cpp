@@ -41,9 +41,9 @@ int mouse::getButtonKey(const std::string& button) {
 		return RETRO_DEVICE_ID_MOUSE_WHEELUP;
 	} else if (button == "wheeldown" || button == "wd") {
 		return RETRO_DEVICE_ID_MOUSE_WHEELDOWN;
-	} else if (button == "horizwheelup") {
+	} else if (button == "hwu") {
 		return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELUP;
-	} else if (button == "horizwheeldown") {
+	} else if (button == "hwd") {
 		return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELDOWN;
 	} else if (button == "x1") {
 		return RETRO_DEVICE_ID_MOUSE_BUTTON_4;
@@ -56,19 +56,19 @@ int mouse::getButtonKey(const std::string& button) {
 std::string mouse::getButtonName(int button) {
 	switch (button) {
 		case RETRO_DEVICE_ID_MOUSE_LEFT:
-			return "left";
+			return "l";
 		case RETRO_DEVICE_ID_MOUSE_RIGHT:
-			return "right";
+			return "r";
 		case RETRO_DEVICE_ID_MOUSE_MIDDLE:
-			return "middle";
+			return "m";
 		case RETRO_DEVICE_ID_MOUSE_WHEELUP:
-			return "wheelup";
+			return "wd";
 		case RETRO_DEVICE_ID_MOUSE_WHEELDOWN:
-			return "wheeldown";
+			return "wu";
 		case RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELUP:
-			return "horizwheelup";
+			return "hwu";
 		case RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELDOWN:
-			return "horizwheeldown";
+			return "hwd";
 		case RETRO_DEVICE_ID_MOUSE_BUTTON_4:
 			return "x1";
 		case RETRO_DEVICE_ID_MOUSE_BUTTON_5:
@@ -96,9 +96,9 @@ void mouse::update() {
 		if (state != buttonState[i]) {
 			buttonState[i] = state;
 			if (buttonState[i] == 0) {
-				mousereleased(m_x, m_y, i);
+				mousereleased(m_x, m_y, getButtonName(i));
 			} else {
-				mousepressed(m_x, m_y, i);
+				mousepressed(m_x, m_y, getButtonName(i));
 			}
 		}
 	}
@@ -108,11 +108,11 @@ void mouse::mousemoved(int x, int y, int dx, int dy) {
 	ChaiLove::getInstance()->script->mousemoved(x, y, dx, dy);
 }
 
-void mouse::mousepressed(int x, int y, int button) {
+void mouse::mousepressed(int x, int y, const std::string& button) {
 	ChaiLove::getInstance()->script->mousepressed(x, y, button);
 }
 
-void mouse::mousereleased(int x, int y, int button) {
+void mouse::mousereleased(int x, int y, const std::string& button) {
 	ChaiLove::getInstance()->script->mousereleased(x, y, button);
 }
 

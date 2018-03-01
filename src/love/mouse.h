@@ -64,8 +64,8 @@ class mouse {
 	int16_t buttonState[RETRO_DEVICE_ID_MOUSE_BUTTON_5];
 
 	void mousemoved(int x, int y, int dx, int dy);
-	void mousepressed(int x, int y, int button);
-	void mousereleased(int x, int y, int button);
+	void mousepressed(int x, int y, const std::string& button);
+	void mousereleased(int x, int y, const std::string& button);
 };
 
 }  // namespace love

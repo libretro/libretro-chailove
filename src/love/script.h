@@ -177,18 +177,18 @@ class script {
 	 *
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
-	 * @param button The mouse button index of which was pressed.
+	 * @param button The mouse button name of which was pressed.
 	 */
-	void mousepressed(int x, int y, int button);
+	void mousepressed(int x, int y, const std::string& button);
 
 	/**
 	 * @brief Called when a mouse button is released.
 	 *
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
-	 * @param button The mouse button index of which was released.
+	 * @param button The mouse button name of which was released.
 	 */
-	void mousereleased(int x, int y, int button);
+	void mousereleased(int x, int y, const std::string& button);
 
 	/**
 	 * @brief Called when the mouse is moved.
@@ -243,8 +243,8 @@ class script {
 	std::function<std::string()> chaisavestate;
 	std::function<void(int, const std::string&)> chaijoystickpressed;
 	std::function<void(int, const std::string&)> chaijoystickreleased;
-	std::function<void(int, int, int)> chaimousepressed;
-	std::function<void(int, int, int)> chaimousereleased;
+	std::function<void(int, int, const std::string&)> chaimousepressed;
+	std::function<void(int, int, const std::string&)> chaimousereleased;
 	std::function<void(int, int, int, int)> chaimousemoved;
 	std::function<void(const std::string&, int)> chaikeypressed;
 	std::function<void(const std::string&, int)> chaikeyreleased;

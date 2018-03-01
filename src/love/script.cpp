@@ -359,14 +359,14 @@ script::script(const std::string& file) {
 		hasjoystickreleased = false;
 	}
 	try {
-		chaimousepressed = chai.eval<std::function<void(int, int, int)> >("mousepressed");
+		chaimousepressed = chai.eval<std::function<void(int, int, const std::string&)> >("mousepressed");
 	}
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] mousepressed() " << e.what() << std::endl;
 		hasmousepressed = false;
 	}
 	try {
-		chaimousereleased = chai.eval<std::function<void(int, int, int)> >("mousereleased");
+		chaimousereleased = chai.eval<std::function<void(int, int, const std::string&)> >("mousereleased");
 	}
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] mousereleased() " << e.what() << std::endl;
@@ -510,7 +510,7 @@ void script::joystickreleased(int joystick, const std::string& button) {
 	#endif
 }
 
-void script::mousepressed(int x, int y, int button) {
+void script::mousepressed(int x, int y, const std::string& button) {
 	#ifdef __HAVE_CHAISCRIPT__
 	if (hasmousepressed) {
 		try {
@@ -524,7 +524,7 @@ void script::mousepressed(int x, int y, int button) {
 	#endif
 }
 
-void script::mousereleased(int x, int y, int button) {
+void script::mousereleased(int x, int y, const std::string& button) {
 	#ifdef __HAVE_CHAISCRIPT__
 	if (hasmousereleased) {
 		try {

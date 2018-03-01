@@ -10,6 +10,7 @@ def load() {
 	love.filesystem.load("font.chai")
 	love.filesystem.load("graphics.chai")
 	love.filesystem.load("math.chai")
+	love.filesystem.load("mouse.chai")
 	love.filesystem.load("joystick.chai")
 	love.filesystem.load("keyboard.chai")
 	love.filesystem.load("timer.chai")
