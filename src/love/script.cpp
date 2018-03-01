@@ -242,10 +242,6 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getVersionString), "getVersionString");
 
 	// Mouse
-	chai.add(fun(&mouse::setVisible), "setVisible");
-	chai.add(fun(&mouse::isVisible), "isVisible");
-	chai.add(fun(&mouse::setX), "setX");
-	chai.add(fun(&mouse::setY), "setY");
 	chai.add(fun(&mouse::getX), "getX");
 	chai.add(fun(&mouse::getY), "getY");
 	chai.add(fun(&mouse::getPosition), "getPosition");
@@ -377,7 +373,7 @@ script::script(const std::string& file) {
 		hasmousereleased = false;
 	}
 	try {
-		chaimousemoved = chai.eval<std::function<void(int, int)> >("mousemoved");
+		chaimousemoved = chai.eval<std::function<void(int, int, int, int)> >("mousemoved");
 	}
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] mousemoved() " << e.what() << std::endl;
@@ -542,11 +538,11 @@ void script::mousereleased(int x, int y, int button) {
 	#endif
 }
 
-void script::mousemoved(int x, int y) {
+void script::mousemoved(int x, int y, int dx, int dy) {
 	#ifdef __HAVE_CHAISCRIPT__
 	if (hasmousemoved) {
 		try {
-			chaimousemoved(x, y);
+			chaimousemoved(x, y, dx, dy);
 		}
 		catch (const std::exception& e) {
 			std::cout << "[ChaiLove] [script] Failed to call mousemoved(): " << e.what() << std::endl;

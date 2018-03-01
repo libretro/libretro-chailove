@@ -1,10 +1,10 @@
 #include "mouse.h"
 
-#include <SDL.h>
-#include <libretro.h>
+#include <string>
+
+#include "libretro.h"
 #include "Types/Graphics/Point.h"
 #include "../ChaiLove.h"
-#include <string>
 
 using love::Types::Graphics::Point;
 using ::ChaiLove;
@@ -12,29 +12,7 @@ using ::ChaiLove;
 namespace love {
 
 bool mouse::load() {
-	setVisible(false);
 	return true;
-}
-
-bool mouse::isVisible() {
-	return SDL_ShowCursor(SDL_QUERY) == SDL_ENABLE;
-}
-
-mouse& mouse::setVisible(bool visible) {
-	SDL_ShowCursor(visible ? SDL_ENABLE : SDL_DISABLE);
-	return *this;
-}
-
-mouse& mouse::setX(int x) {
-	m_x = x;
-	SDL_WarpMouse(m_x, m_y);
-	return *this;
-}
-
-mouse& mouse::setY(int y) {
-	m_y = y;
-	SDL_WarpMouse(m_x, m_y);
-	return *this;
 }
 
 int mouse::getX() {
@@ -46,7 +24,7 @@ int mouse::getY() {
 }
 
 bool mouse::isDown(int button) {
-	return buttonState[button] == true;
+	return buttonState[button] != 0;
 }
 bool mouse::isDown(const std::string& button) {
 	return isDown(getButtonKey(button));
@@ -67,6 +45,10 @@ int mouse::getButtonKey(const std::string& button) {
 		return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELUP;
 	} else if (button == "horizwheeldown") {
 		return RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELDOWN;
+	} else if (button == "x1") {
+		return RETRO_DEVICE_ID_MOUSE_BUTTON_4;
+	} else if (button == "x2") {
+		return RETRO_DEVICE_ID_MOUSE_BUTTON_5;
 	}
 	return -1;
 }
@@ -87,23 +69,51 @@ std::string mouse::getButtonName(int button) {
 			return "horizwheelup";
 		case RETRO_DEVICE_ID_MOUSE_HORIZ_WHEELDOWN:
 			return "horizwheeldown";
+		case RETRO_DEVICE_ID_MOUSE_BUTTON_4:
+			return "x1";
+		case RETRO_DEVICE_ID_MOUSE_BUTTON_5:
+			return "x2";
 	}
 	return "unknown";
 }
 
-void mouse::moveEvent(SDL_MouseMotionEvent event) {
-	m_x = event.x;
-	m_y = event.y;
-	ChaiLove::getInstance()->script->mousemoved(m_x, m_y);
+void mouse::update() {
+	int16_t state, dx, dy;
+
+	// Update the x/y coordinates.
+	dx = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X);
+	dy = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y);
+	if (dx != 0 || dy != 0) {
+		m_x = m_x + dx;
+		m_y = m_y + dy;
+		mousemoved(m_x, m_y, dx, dy);
+	}
+
+	// Update all buttons.
+	for (int i = RETRO_DEVICE_ID_MOUSE_LEFT; i <= RETRO_DEVICE_ID_MOUSE_BUTTON_5; i++) {
+		state = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, i);
+
+		if (state != buttonState[i]) {
+			buttonState[i] = state;
+			if (buttonState[i] == 0) {
+				mousereleased(m_x, m_y, i);
+			} else {
+				mousepressed(m_x, m_y, i);
+			}
+		}
+	}
 }
 
-void mouse::buttonEvent(SDL_MouseButtonEvent event) {
-	if (event.state == SDL_PRESSED) {
-		ChaiLove::getInstance()->script->mousepressed(m_x, m_y, event.button);
-	} else if (event.state == SDL_RELEASED) {
-		ChaiLove::getInstance()->script->mousereleased(m_x, m_y, event.button);
-	}
-	buttonState[event.button] = event.state;
+void mouse::mousemoved(int x, int y, int dx, int dy) {
+	ChaiLove::getInstance()->script->mousemoved(x, y, dx, dy);
+}
+
+void mouse::mousepressed(int x, int y, int button) {
+	ChaiLove::getInstance()->script->mousepressed(x, y, button);
+}
+
+void mouse::mousereleased(int x, int y, int button) {
+	ChaiLove::getInstance()->script->mousereleased(x, y, button);
 }
 
 Point mouse::getPosition() {

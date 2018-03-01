@@ -195,8 +195,10 @@ class script {
 	 *
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
+	 * @param dx The amount moved along the x-axis since the last time love.mousemoved was called.
+	 * @param dy The amount moved along the y-axis since the last time love.mousemoved was called.
 	 */
-	void mousemoved(int x, int y);
+	void mousemoved(int x, int y, int dx, int dy);
 
 	/**
 	 * @brief Called when a key on the keyboard has been pressed.
@@ -243,7 +245,7 @@ class script {
 	std::function<void(int, const std::string&)> chaijoystickreleased;
 	std::function<void(int, int, int)> chaimousepressed;
 	std::function<void(int, int, int)> chaimousereleased;
-	std::function<void(int, int)> chaimousemoved;
+	std::function<void(int, int, int, int)> chaimousemoved;
 	std::function<void(const std::string&, int)> chaikeypressed;
 	std::function<void(const std::string&, int)> chaikeyreleased;
 	bool hasUpdate = true;
