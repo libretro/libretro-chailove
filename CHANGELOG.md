@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.14.3 - Unreleased
 ### Changed
 - Updated the input description names
+- Switch Keyboard input from SDL API to libretro API
+
+### Added
+- `love.keyboard.isScancodeDown()`
 
 ## 0.14.2 - 2018-02-17
 ### Changed

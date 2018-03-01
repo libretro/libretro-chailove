@@ -99,12 +99,6 @@ bool ChaiLove::update() {
 			case SDL_MOUSEBUTTONUP:
 				mouse.buttonEvent(sdlEvent.button);
 				break;
-			case SDL_KEYDOWN:
-				keyboard.eventKeyPressed(sdlEvent.key.keysym.sym);
-				break;
-			case SDL_KEYUP:
-				keyboard.eventKeyReleased(sdlEvent.key.keysym.sym);
-				break;
 		}
 	}
 
