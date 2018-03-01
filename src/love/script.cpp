@@ -212,7 +212,8 @@ script::script(const std::string& file) {
 
 	// Keyboard
 	chai.add(fun<bool, keyboard, const std::string&>(&keyboard::isDown), "isDown");
-	chai.add(fun(&keyboard::setKeyRepeat), "setKeyRepeat");
+	chai.add(fun<bool, keyboard, int>(&keyboard::isDown), "isDown");
+	chai.add(fun(&keyboard::isScancodeDown), "isScancodeDown");
 	chai.add(fun(&keyboard::getKeyFromScancode), "getKeyFromScancode");
 	chai.add(fun(&keyboard::getScancodeFromKey), "getScancodeFromKey");
 

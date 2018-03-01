@@ -3,7 +3,8 @@
 
 #include <string>
 #include <map>
-#include "SDL.h"
+
+#include "libretro.h"
 
 namespace love {
 /**
@@ -11,7 +12,6 @@ namespace love {
  */
 class keyboard {
 	public:
-	Uint8* keys = NULL;
 	bool load();
 
 	/**
@@ -26,21 +26,21 @@ class keyboard {
 	/**
 	 * @brief Checks whether a certain key is down.
 	 *
-	 * @param key The key scancode to check.
+	 * @param scancode The key scancode to check.
 	 *
 	 * @return True if the key is down, false if not.
 	 */
-	bool isDown(int key);
+	bool isDown(int scancode);
 
 	/**
-	 * @brief Enables or disables key repeat for love.keypressed.
+	 * @brief Checks whether a certain key is down.
 	 *
-	 * @param delay Specifies how long the key must be pressed before it begins repeating.
-	 * @param interval Once the key is repeating, it is repeated by the given interval.
+	 * @param scancode The key scancode to check.
 	 *
-	 * @return The keyboard module.
+	 * @return True if the key is down, false if not.
 	 */
-	keyboard& setKeyRepeat(int delay = 400, int interval = 30);
+	bool isScancodeDown(int scancode);
+
 	bool update();
 
 	/**
@@ -57,10 +57,12 @@ class keyboard {
 	 */
 	std::string getKeyFromScancode(int scancode);
 
-	std::map<std::string, int> keyCodes;
+	std::map<std::string, int> keyToScancode;
+	std::string scancodeToKey[RETROK_LAST] = {};
+	int16_t keys[RETROK_LAST] = {};
 
-	void eventKeyPressed(SDLKey key);
-	void eventKeyReleased(SDLKey key);
+	void eventKeyPressed(int key);
+	void eventKeyReleased(int key);
 };
 
 }  // namespace love

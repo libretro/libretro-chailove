@@ -60,7 +60,9 @@ bool ChaiLove::load(const std::string& file) {
 
 	graphics.load();
 	image.load();
+	std::cout << "Keyboard::load()";
 	keyboard.load();
+	std::cout << "Keyboard::update()";
 	joystick.load();
 	math.load();
 	mouse.load();
@@ -98,12 +100,6 @@ bool ChaiLove::update() {
 				break;
 			case SDL_MOUSEBUTTONUP:
 				mouse.buttonEvent(sdlEvent.button);
-				break;
-			case SDL_KEYDOWN:
-				keyboard.eventKeyPressed(sdlEvent.key.keysym.sym);
-				break;
-			case SDL_KEYUP:
-				keyboard.eventKeyReleased(sdlEvent.key.keysym.sym);
 				break;
 		}
 	}
