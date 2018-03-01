@@ -13,7 +13,7 @@ bool keyboard::isDown(int scancode) {
 
 bool keyboard::isScancodeDown(int scancode) {
 	if (scancode > 0 && scancode < RETROK_LAST) {
-		return static_cast<bool>(keys[scancode]);
+		return keys[scancode] != 0;
 	}
 
 	return false;
@@ -24,16 +24,14 @@ bool keyboard::isDown(const std::string& key) {
 }
 
 bool keyboard::load() {
-	std::cout << "Keyboard::load()" << std::endl;
-	// Initialize the scancode to key mappings.
+	// Initialize the scancode to key mappings with empty strings.
 	int i;
 	for (i = 0; i < RETROK_LAST; i++) {
 		scancodeToKey[i] = "";
 	}
 
-	std::cout << "Keyboard::unknwon()" << std::endl;
+	// Initialize the key mappings.
 	scancodeToKey[RETROK_UNKNOWN] = "unknown";
-	std::cout << "Keyboard::unknown done()" << std::endl;
 	scancodeToKey[RETROK_FIRST] = "first";
 	scancodeToKey[RETROK_BACKSPACE] = "backspace";
 	scancodeToKey[RETROK_TAB] = "tab";
@@ -174,7 +172,6 @@ bool keyboard::load() {
 	scancodeToKey[RETROK_POWER] = "power";
 	scancodeToKey[RETROK_EURO] = "currencyunit";
 	scancodeToKey[RETROK_UNDO] = "undo";
-	std::cout << "Keyboard::init done" << std::endl;
 
 	// Initialize the key to scancode mappings.
 	for (i = 0; i < RETROK_LAST; i++) {
@@ -182,17 +179,7 @@ bool keyboard::load() {
 			keyToScancode.insert(std::pair<std::string, int> (scancodeToKey[i], i));
 		}
 	}
-	std::cout << "Keyboard::lasttdsd done" << std::endl;
 
-	// Update the key states without issueing an event.
-	int16_t state;
-	for (int i = 0; i < RETROK_LAST; i++) {
-		std::cout << "Keybarods #" << i << std::endl;
-		// Get updated state for each key.
-		// TODO
-		//keys[i] = ChaiLove::input_state_cb(0, RETRO_DEVICE_KEYBOARD, 0, i);
-	}
-	std::cout << "Keyboard::load() complete" << std::endl;
 	return true;
 }
 
@@ -205,12 +192,11 @@ std::string keyboard::getKeyFromScancode(int scancode) {
 }
 
 bool keyboard::update() {
-	std::cout << "Keyboard::update()" << std::endl;
 	// Go through all keys.
 	int16_t state;
 	for (int i = 0; i < RETROK_LAST; i++) {
 		// Get updated state for each key.
-		//state = ChaiLove::input_state_cb(0, RETRO_DEVICE_KEYBOARD, 0, i);
+		state = ChaiLove::input_state_cb(0, RETRO_DEVICE_KEYBOARD, 0, i);
 
 		// If the state is different, then issue a keyPressed, or keyReleased.
 		if (keys[i] != state) {
@@ -218,13 +204,11 @@ bool keyboard::update() {
 
 			if (state == 1) {
 				eventKeyPressed(i);
-			}
-			else {
+			} else {
 				eventKeyReleased(i);
 			}
 		}
 	}
-	std::cout << "Keyboard::update() complete" << std::endl;
 	return true;
 }
 

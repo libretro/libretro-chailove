@@ -60,9 +60,7 @@ bool ChaiLove::load(const std::string& file) {
 
 	graphics.load();
 	image.load();
-	std::cout << "Keyboard::load()";
 	keyboard.load();
-	std::cout << "Keyboard::update()";
 	joystick.load();
 	math.load();
 	mouse.load();

@@ -59,7 +59,7 @@ class keyboard {
 
 	std::map<std::string, int> keyToScancode;
 	std::string scancodeToKey[RETROK_LAST] = {};
-	int16_t keys[RETROK_LAST] = {};
+	short int keys[RETROK_LAST] = {};
 
 	void eventKeyPressed(int key);
 	void eventKeyReleased(int key);

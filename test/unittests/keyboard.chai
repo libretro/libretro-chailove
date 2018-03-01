@@ -1,7 +1,9 @@
 var scancode = love.keyboard.getScancodeFromKey("a")
-assert_equal(scancode, 97, "keyboard.getScancodeFromKey()")
+assert_equal(scancode, 97, "love.keyboard.getScancodeFromKey()")
 
 var key = love.keyboard.getKeyFromScancode(97)
-assert_equal(key, "a", "keyboard.getKeyFromScancode()")
+assert_equal(key, "a", "love.keyboard.getKeyFromScancode()")
 
 assert_not(love.keyboard.isDown("7"), "love.keyboard.isDown('7')")
+assert_not(love.keyboard.isDown(97), "love.keyboard.isDown(97)")
+assert_not(love.keyboard.isScancodeDown(97), "love.keyboard.isScancodeDown(97)")
