@@ -513,10 +513,10 @@ ifeq ($(DEBUG), 1)
 			CXXFLAGS += -MDd
 		endif
 
-		CFLAGS += -Od -Zi -DDEBUG -D_DEBUG
+		CFLAGS += -Od -Zi -DDEBUG -D_DEBUG -DZLIB_DEBUG
 		CXXFLAGS += -Od -Zi -DDEBUG -D_DEBUG
 	else
-		CFLAGS += -O0 -g -DDEBUG
+		CFLAGS += -O0 -g -DDEBUG -DZLIB_DEBUG
 		CXXFLAGS += -O0 -g -DDEBUG
 	endif
 else
