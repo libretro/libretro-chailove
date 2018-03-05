@@ -41,7 +41,7 @@
  * - \link love::keyboard keyboard \endlink Provides an interface to the user's keyboard.
  * - \link love::math math \endlink Provides system-independent mathematical functions.
  * - \link love::mouse mouse \endlink Provides an interface to the user's mouse.
- * - \link love::script script \endlink This module is responsible for interacting with the script.
+ * - \link love::script script \endlink This module is responsible for callback events.
  * - \link love::sound sound \endlink This module is responsible for decoding sound files.
  * - \link love::system system \endlink Provides access to information about the user's system.
  * - \link love::timer timer \endlink Provides high-resolution timing functionality.
@@ -52,9 +52,9 @@
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 14
-#define CHAILOVE_VERSION_PATCH 2
-#define CHAILOVE_VERSION_STRING "0.14.2"
+#define CHAILOVE_VERSION_MINOR 15
+#define CHAILOVE_VERSION_PATCH 0
+#define CHAILOVE_VERSION_STRING "0.15.0"
 
 #include "SDL.h"
 #include "libretro.h"

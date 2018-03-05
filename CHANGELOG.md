@@ -4,6 +4,16 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.15.0 - 2017-03-04
+### Changed
+- Updated the input description names
+- Switch Keyboard/Mouse input from SDL API to libretro API
+- `love.mousepressed()` and `love.mousereleased()` now pass the button name rather than its index
+
+### Added
+- `love.keyboard.isScancodeDown()`
+- `love.mouse` `x1` and `x2` buttons
+
 ## 0.14.2 - 2018-02-17
 ### Changed
 - Moved source to libretro organization:

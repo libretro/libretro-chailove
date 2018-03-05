@@ -90,25 +90,11 @@ bool ChaiLove::update() {
 				event.quit();
 				return !event.quitstatus;
 				break;
-			case SDL_MOUSEMOTION:
-				mouse.moveEvent(sdlEvent.motion);
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				mouse.buttonEvent(sdlEvent.button);
-				break;
-			case SDL_MOUSEBUTTONUP:
-				mouse.buttonEvent(sdlEvent.button);
-				break;
-			case SDL_KEYDOWN:
-				keyboard.eventKeyPressed(sdlEvent.key.keysym.sym);
-				break;
-			case SDL_KEYUP:
-				keyboard.eventKeyReleased(sdlEvent.key.keysym.sym);
-				break;
 		}
 	}
 
 	// Update some of the sub-systems.
+	mouse.update();
 	joystick.update();
 	keyboard.update();
 

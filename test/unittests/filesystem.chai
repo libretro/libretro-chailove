@@ -8,25 +8,25 @@ for (file : files) {
 	}
 }
 
-assert(foundUnitChai, "filesystem.getDirectoryItems()")
+assert(foundUnitChai, "love.filesystem.getDirectoryItems()")
 
 var contents = love.filesystem.read("main.chai")
 var needle = "Unit Testing Framework"
 var found = contents.find(needle)
-assert(found > 50, "filesystem.read()")
+assert(found > 50, "love.filesystem.read()")
 
-assert(love.filesystem.exists("math.chai"), "filesystem.exists('math.chai')")
-assert(!love.filesystem.exists("notexist.chai"), "filesystem.exists('notexist.chai')")
+assert(love.filesystem.exists("math.chai"), "love.filesystem.exists('math.chai')")
+assert(!love.filesystem.exists("notexist.chai"), "love.filesystem.exists('notexist.chai')")
 
-assert(love.filesystem.getSize("filesystem.chai") > 10, "filesystem.getSize()")
-assert_equal(love.filesystem.getSize("notexist.chai"), -1, "filesystem.getSize('notexist.chai')")
+assert(love.filesystem.getSize("filesystem.chai") > 10, "love.filesystem.getSize()")
+assert_equal(love.filesystem.getSize("notexist.chai"), -1, "love.filesystem.getSize('notexist.chai')")
 
-assert(love.filesystem.isFile("filesystem.chai"), "filesystem.isFile()")
-assert(!love.filesystem.isFile("notexist.chai"), "filesystem.isFile('notexist.chai')")
+assert(love.filesystem.isFile("filesystem.chai"), "love.filesystem.isFile()")
+assert(!love.filesystem.isFile("notexist.chai"), "love.filesystem.isFile('notexist.chai')")
 
 assert_not(love.filesystem.isDirectory("keyboard.chai"), "love.filesystem.isDirectory()")
 
-assert_equal(love.filesystem.getDirectoryItems("assets").size(), 1, "love.filesystem.getDirectoryItems()")
+assert_equal(love.filesystem.getDirectoryItems("assets").size(), 2, "love.filesystem.getDirectoryItems()")
 
 var theLines = love.filesystem.lines("filesystem.chai")
 assert_equal(theLines[0], "// Filesystem", "love.filesystem.lines()")

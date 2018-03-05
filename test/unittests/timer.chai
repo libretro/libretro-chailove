@@ -1,5 +1,5 @@
 var delta = love.timer.getDelta()
-assert(delta >= 0, "timer.getDelta()")
+assert(delta >= 0, "love.timer.getDelta()")
 
 var fps = love.timer.getFPS()
-assert(fps >= 0, "love.timer.getFPS()")
+assert(fps >= 0, "love.love.timer.getFPS()")
