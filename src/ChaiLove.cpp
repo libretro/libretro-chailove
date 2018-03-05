@@ -93,7 +93,7 @@ bool ChaiLove::update() {
 		}
 	}
 
-	// Update some of the sub-systems.
+	// Update the input systems.
 	mouse.update();
 	joystick.update();
 	keyboard.update();

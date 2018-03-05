@@ -46,15 +46,33 @@
  * - \link love::system system \endlink Provides access to information about the user's system.
  * - \link love::timer timer \endlink Provides high-resolution timing functionality.
  * - \link love::window window \endlink Provides an interface for the program's window.
+ *
+ * ## Callbacks
+ *
+ * - \link love::script::conf conf(t) \endlink Global configuration callback.
+ * - \link love::script::load load() \endlink This function is called exactly once at the beginning of the game.
+ * - \link love::script::update update(dt) \endlink Callback function used to update the state of the game every frame.
+ * - \link love::script::draw draw() \endlink Callback function used to draw on the screen every frame.
+ * - \link love::script::reset reset() \endlink Callback function used when the frontend requests to reset the game.
+ * - \link love::script::joystickpressed joystickpressed(joy, button) \endlink Called when a joystick button is pressed.
+ * - \link love::script::joystickreleased joystickreleased(joy, button) \endlink Called when a joystick button is released.
+ * - \link love::script::mousepressed mousepressed(x, y, button) \endlink Called when a mouse button is pressed.
+ * - \link love::script::mousereleased mousereleased(x, y, button) \endlink Called when a mouse button is released.
+ * - \link love::script::mousemoved mousemoved(x, y, dx, dy) \endlink Callback function triggered when the mouse is moved.
+ * - \link love::script::keypressed keypressed(key, scancode) \endlink Callback function triggered when a key is pressed.
+ * - \link love::script::keyreleased keyreleased(key, scancode) \endlink Callback function triggered when a key is released.
+ * - \link love::script::savestate savestate() \endlink Callback function triggered to export JSON serialized data of the game state.
+ * - \link love::script::loadstate loadstate(jsonData) \endlink Callback function triggered to load the given JSON serialized data.
+ *
  */
 
 #ifndef SRC_CHAILOVE_H_
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 15
-#define CHAILOVE_VERSION_PATCH 1
-#define CHAILOVE_VERSION_STRING "0.15.1"
+#define CHAILOVE_VERSION_MINOR 16
+#define CHAILOVE_VERSION_PATCH 0
+#define CHAILOVE_VERSION_STRING "0.16.0"
 
 #include "SDL.h"
 #include "libretro.h"
