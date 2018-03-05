@@ -72,23 +72,13 @@ class graphics {
 
 	/**
 	 * @brief Draws a line.
+	 *
+	 * @param x1 The position of first point on the x-axis.
+	 * @param y1 The position of first point on the y-axis.
+	 * @param x2 The position of second point on the x-axis.
+	 * @param y2 The position of second point on the y-axis.
 	 */
 	graphics& line(int x1, int y1, int x2, int y2);
-
-
-	/**
-	 * @brief Draws an image on screen.
-	 *
-	 * @param image The image to draw on the screen.
-	 * @param x The position to draw the object (x-axis).
-	 * @param y The position to draw the object (y-axis).
-	 */
-	graphics& draw(Image* image, int x, int y);
-
-	/**
-	 * @brief Draws an image on screen, using the given Quad as a source.
-	 */
-	graphics& draw(Image* image, Quad quad, int x, int y);
 
 	/**
 	 * @brief Creates a new Quad.
@@ -246,6 +236,19 @@ class graphics {
 	graphics& draw(Image* image, int x, int y, float r, float sx, float sy);
 	graphics& draw(Image* image, int x, int y, float r, float sx);
 	graphics& draw(Image* image, int x, int y, float r);
+	graphics& draw(Image* image, int x, int y);
+	graphics& draw(Image* image);
+
+	/**
+	 * @brief Draws an image on screen, using the given Quad as a source.
+	 *
+	 * @param image The image to draw on the screen.
+	 * @param quad The source quad of the image.
+	 * @param x (0) The position to draw the object (x-axis).
+	 * @param y (0) The position to draw the object (y-axis).
+	 */
+	graphics& draw(Image* image, Quad quad, int x, int y);
+	graphics& draw(Image* image, Quad quad);
 
 	/**
 	 * @brief Draws an arc.

@@ -196,6 +196,7 @@ script::script(const std::string& file) {
 	chai.add(fun<love::graphics&, graphics, int, int, int>(&graphics::setBackgroundColor), "setBackgroundColor");
 
 	chai.add(fun<love::graphics&, graphics, Image*, int, int>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*>(&graphics::draw), "draw");
 	chai.add(fun<love::graphics&, graphics, Image*, int, int, float, float, float, float, float>(&graphics::draw), "draw");
 	chai.add(fun<love::graphics&, graphics, Image*, int, int, float, float, float, float>(&graphics::draw), "draw");
 	chai.add(fun<love::graphics&, graphics, Image*, int, int, float, float, float>(&graphics::draw), "draw");
@@ -203,6 +204,8 @@ script::script(const std::string& file) {
 	chai.add(fun<love::graphics&, graphics, Image*, int, int, float>(&graphics::draw), "draw");
 
 	chai.add(fun<love::graphics&, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Image*, Quad>(&graphics::draw), "draw");
+
 	chai.add(fun<love::graphics&, graphics, int, int, int, int>(&graphics::clear), "clear");
 	chai.add(fun<love::graphics&, graphics, int, int, int>(&graphics::clear), "clear");
 	chai.add(fun<love::graphics&, graphics>(&graphics::clear), "clear");

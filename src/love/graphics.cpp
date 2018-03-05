@@ -95,6 +95,10 @@ graphics& graphics::line(int x1, int y1, int x2, int y2) {
 	return *this;
 }
 
+graphics& graphics::draw(Image* image) {
+	return draw(image);
+}
+
 graphics& graphics::draw(Image* image, int x, int y) {
 	if (image && image->loaded()) {
 		SDL_Rect dstrect;
@@ -104,6 +108,10 @@ graphics& graphics::draw(Image* image, int x, int y) {
 	}
 
 	return *this;
+}
+
+graphics& graphics::draw(Image* image, Quad quad) {
+	return draw(image, quad, 0, 0);
 }
 
 graphics& graphics::draw(Image* image, Quad quad, int x, int y) {

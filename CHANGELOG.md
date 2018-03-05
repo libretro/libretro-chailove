@@ -4,6 +4,15 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.16.0 - 2018-03-05
+### Fixed
+- Fix undefined zlib symbols in debug build
+  - By [@fetzerch](https://github.com/fetzerch) in [#200](https://github.com/libretro/libretro-chailove/pull/200)
+
+### Changed
+- Added `love.graphics.draw(Image)` and `love.graphics.draw(Image, Quad)` with default position of 0,0
+- Update documentation
+
 ## 0.15.1 - 2017-03-05
 ### Changed
 - Update dependencies
