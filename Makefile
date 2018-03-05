@@ -11,7 +11,7 @@ FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES)
 CXXFLAGS += $(FLAGS) -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-#
+# Ignore failed builds, and re-try to attribute for dependency chains.
 $(TARGET): $(OBJECTS) | dependencies
 	-$(CXX) -o $@ $^ $(LDFLAGS) || $(CXX) -o $@ $^ $(LDFLAGS)
 
