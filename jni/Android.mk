@@ -9,7 +9,7 @@ ifneq ($(GIT_VERSION)," unknown")
 	LOCAL_CXXFLAGS += -DGIT_VERSION=\"$(GIT_VERSION)\"
 endif
 
-CORE_DIR = ../..
+CORE_DIR = ..
 JIT=
 DESMUME_JIT=0
 
