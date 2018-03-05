@@ -13,13 +13,13 @@ CFLAGS += $(FLAGS) -std=gnu99
 
 #
 $(TARGET): $(OBJECTS) | dependencies
-	@$(CXX) -o $@ $^ $(LDFLAGS) || $(CXX) -o $@ $^ $(LDFLAGS)
+	-$(CXX) -o $@ $^ $(LDFLAGS) || $(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp | dependencies
-	@$(CXX) -c -o $@ $< $(CXXFLAGS) || $(CXX) -c -o $@ $< $(CXXFLAGS)
+	-$(CXX) -c -o $@ $< $(CXXFLAGS) || $(CXX) -c -o $@ $< $(CXXFLAGS)
 
 %.o: %.c | dependencies
-	@$(CC) -c -o $@ $< $(CFLAGS) || $(CC) -c -o $@ $< $(CFLAGS)
+	-$(CC) -c -o $@ $< $(CFLAGS) || $(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
