@@ -4,9 +4,10 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.15.1 - Unreleased
+## 0.15.1 - 2017-03-05
 ### Changed
-- Updated Makefile dependency chain to be safer
+- Update dependencies
+- Updated dependency chain in Makefile to be safe
 
 ## 0.15.0 - 2017-03-04
 ### Changed
