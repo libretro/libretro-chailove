@@ -1,0 +1,24 @@
+var list = List()
+
+list.push_back(3)
+list.push_back("A")
+
+assert_equal(list.front(), 3, "List.front()")
+assert_equal(list.back(), "A", "List.back()")
+
+assert_equal(list.size(), 2, "List.size()")
+
+list.resize(0);
+assert_equal(list.size(), 0, "List.resize()");
+
+var finalListItem = "This will loop through all items, and assign the last"
+list.push_back("first")
+list.push_back("second")
+list.push_back("third")
+for (listItem : list) {
+	finalListItem = listItem
+}
+assert_equal(finalListItem, "third", "List.for()")
+
+list.pop_front()
+assert_equal(list.front(), "second", "List.pop_front()")

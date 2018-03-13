@@ -10,6 +10,7 @@ def load() {
 	love.filesystem.load("font")
 	love.filesystem.load("graphics")
 	love.filesystem.load("image")
+	love.filesystem.load("list")
 	love.filesystem.load("math")
 	love.filesystem.load("mouse")
 	love.filesystem.load("joystick")

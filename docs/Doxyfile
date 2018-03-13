@@ -361,7 +361,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = src examples # README.md
+INPUT                  = src examples test # README.md
 #USE_MDFILE_AS_MAINPAGE = README.md
 
 # If the value of the INPUT tag contains directories, you can use the

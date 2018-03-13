@@ -66,6 +66,11 @@ script::script(const std::string& file) {
 	chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
 	chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
 
+	// List
+	auto listModule = std::make_shared<chaiscript::Module>();
+	chaiscript::bootstrap::standard_library::list_type<std::list<chaiscript::Boxed_Value> >("List", *listModule);
+	chai.add(listModule);
+
 	// Add the "love" namespace.
 	chai.register_namespace([](chaiscript::Namespace& love) {
 		ChaiLove* app = ChaiLove::getInstance();
