@@ -18,7 +18,7 @@ bool console::load() {
 
 void console::keypressed(std::string key, int scancode) {
 	// Test scancode and key input.
-	std::cout << "Key: " << key << std::endl << "Cod: " << scancode << std::endl << m_togglescancode;
+	// std::cout << "Key: " << key << std::endl << "Cod: " << scancode << std::endl << m_togglescancode;
 
 	// Toggle the console.
 	if (scancode == m_togglescancode) {
