@@ -232,6 +232,9 @@ class script {
 	 */
 	bool loadstate(const std::string& data);
 
+	chaiscript::Boxed_Value eval(const std::string& code, const std::string& filename);
+	std::string evalString(const std::string& code, const std::string& filename);
+
 	#ifdef __HAVE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
 	std::function<void()> chaiload;

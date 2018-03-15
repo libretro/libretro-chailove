@@ -215,13 +215,22 @@ bool keyboard::update() {
 void keyboard::eventKeyPressed(int scancode) {
 	std::string key = getKeyFromScancode(scancode);
 	ChaiLove* app = ChaiLove::getInstance();
-	app->script->keypressed(key, scancode);
+
+	// Trigger the keypress in the in-game console and the game.
+	app->console.keypressed(key, scancode);
+	if (!app->console.isEnabled()) {
+		app->script->keypressed(key, scancode);
+	}
 }
 
 void keyboard::eventKeyReleased(int scancode) {
 	std::string key = getKeyFromScancode(scancode);
 	ChaiLove* app = ChaiLove::getInstance();
-	app->script->keyreleased(key, scancode);
+
+	// Only trigger the event in the game if the console is not being used.
+	if (!app->console.isEnabled()) {
+		app->script->keyreleased(key, scancode);
+	}
 }
 
 }  // namespace love

@@ -92,6 +92,7 @@
 #include "love/window.h"
 #include "love/math.h"
 #include "love/event.h"
+#include "love/console.h"
 
 #ifdef __HAVE_TESTS__
 #include "../test/native/NativeTest.h"
@@ -107,6 +108,7 @@ class ChaiLove {
 	static retro_input_poll_t input_poll_cb;
 
 	love::config config;
+	love::console console;
 	love::keyboard keyboard;
 	love::script* script;
 	love::filesystem filesystem;

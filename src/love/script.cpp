@@ -47,13 +47,22 @@ bool script::loadModule(const std::string& moduleName) {
 		return false;
 	}
 
-	// Replace possible problematic tabs, and evaluate the script.
-	contents = replaceString(contents, "\t", "  ");
-	chai.eval(contents, Exception_Handler(), filename);
+	eval(contents, filename);
 	return true;
 
 	#endif
 	return false;
+}
+
+chaiscript::Boxed_Value script::eval(const std::string& code, const std::string& filename) {
+	// Replace possible problematic tabs, and evaluate the script.
+	std::string contents = replaceString(code, "\t", "  ");
+	return chai.eval(contents, Exception_Handler(), filename);
+}
+std::string script::evalString(const std::string& code, const std::string& filename) {
+	// Replace possible problematic tabs, and evaluate the script.
+	std::string contents = replaceString(code, "\t", "  ");
+	return chai.eval<std::string>(contents, Exception_Handler(), filename);
 }
 
 script::script(const std::string& file) {
@@ -76,6 +85,7 @@ script::script(const std::string& file) {
 		ChaiLove* app = ChaiLove::getInstance();
 		love["audio"] = var(std::ref(app->audio));
 		love["config"] = var(std::ref(app->config));
+		love["console"] = var(std::ref(app->console));
 		love["event"] = var(std::ref(app->event));
 		love["filesystem"] = var(std::ref(app->filesystem));
 		love["font"] = var(std::ref(app->font));
@@ -161,6 +171,11 @@ script::script(const std::string& file) {
 	chai.add(fun(&config::window), "window");
 	chai.add(fun(&config::modules), "modules");
 	chai.add(fun(&config::options), "options");
+
+	// Console
+	chai.add(fun(&console::isEnabled), "isEnabled");
+	chai.add(fun(&console::setEnabled), "setEnabled");
+	chai.add(fun(&console::toggle), "toggle");
 
 	// Joystick
 	chai.add(user_type<Joystick>(), "Joystick");

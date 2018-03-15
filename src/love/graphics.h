@@ -158,6 +158,11 @@ class graphics {
 	graphics& setColor(int red, int green, int blue);
 
 	/**
+	 * @brief Gets the current color.
+	 */
+	Color getColor();
+
+	/**
 	 * @brief Retrieves the active background color.
 	 *
 	 * @see love.graphics.setBackgroundColor

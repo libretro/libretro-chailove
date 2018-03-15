@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.16.2 - Unreleased
 ### Added
 - `love.system.getOS()` now returns actual operating system name
+- `love.console` an in-game console toggled with the tilde key
 
 ## 0.16.1 - 2018-03-12
 ### Added
