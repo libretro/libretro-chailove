@@ -10,11 +10,11 @@ namespace love {
 /**
  * @brief In-game console for ChaiLove.
  *
- * Enable the console by pressing the tilde key on your keyboard. It will
- * execute ChaiScript. For example, open the console with \`, and type
- * `love.system.getOS()`.
+ * To enable the console, you must trigger: `love.console.setEnabled(true)` or toggle the console in `love.conf`.
  *
- * To enable the console, you must trigger: love.console.setEnabled(true)
+ * Once enabled, display the console by pressing the tilde key on your keyboard. Running commands will execute ChaiScript. For example, try running `love.system.getOS()`.
+ *
+ * @see love.config
  */
 class console {
 	public:

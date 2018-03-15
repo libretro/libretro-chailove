@@ -31,8 +31,11 @@ class script {
 	 * def conf(t) {
 	 *   t.window.width = 1024
 	 *   t.window.height = 768
+	 *   t.console = false
 	 * }
 	 * @endcode
+	 *
+	 * @see love.config
 	 */
 	void conf(config& t);
 

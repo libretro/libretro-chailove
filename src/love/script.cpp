@@ -171,6 +171,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&config::window), "window");
 	chai.add(fun(&config::modules), "modules");
 	chai.add(fun(&config::options), "options");
+	chai.add(fun(&config::console), "console");
 
 	// Console
 	chai.add(fun(&console::isEnabled), "isEnabled");
