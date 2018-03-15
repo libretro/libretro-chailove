@@ -10,27 +10,38 @@ using love::Types::Graphics::Font;
 
 namespace love {
 
-bool console::load() {
+bool console::load(const config& conf) {
 	// Use ` for the toggling key.
 	m_togglescancode = 96;
-	m_enabled = false;
+	m_enabled = conf.console;
+	m_shown = false;
+}
+
+bool console::isShown() {
+	return m_shown;
 }
 
 void console::keypressed(std::string key, int scancode) {
 	// Test scancode and key input.
 	// std::cout << "Key: " << key << std::endl << "Cod: " << scancode << std::endl << m_togglescancode;
 
-	// Toggle the console.
-	if (scancode == m_togglescancode) {
-		toggle();
-		return;
-	}
-
-	// Act on the key press only if the console is enabled.
+	// Only use the console if it is available.
 	if (!isEnabled()) {
 		return;
 	}
 
+	// Toggle the console.
+	if (scancode == m_togglescancode) {
+		m_shown = !m_shown;
+		return;
+	}
+
+	// Don't act on key presses if the console is not shown.
+	if (!isShown()) {
+		return;
+	}
+
+	// Interpret a key press as ascii character entry.
 	ChaiLove* app = ChaiLove::getInstance();
 	bool shiftDown = app->keyboard.isDown("shift") || app->keyboard.isDown("lshift") || app->keyboard.isDown("rshift");
 	if (key.size() == 1) {
@@ -155,7 +166,7 @@ void console::keypressed(std::string key, int scancode) {
 }
 
 void console::draw() {
-	if (!m_enabled) {
+	if (!isShown()) {
 		return;
 	}
 
@@ -194,10 +205,6 @@ void console::execute(const std::string& entry) {
 
 bool console::isEnabled() {
 	return m_enabled;
-}
-
-bool console::toggle() {
-	return setEnabled(!isEnabled());
 }
 
 bool console::setEnabled(bool enabled) {

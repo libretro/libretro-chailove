@@ -218,7 +218,7 @@ void keyboard::eventKeyPressed(int scancode) {
 
 	// Trigger the keypress in the in-game console and the game.
 	app->console.keypressed(key, scancode);
-	if (!app->console.isEnabled()) {
+	if (!app->console.isShown()) {
 		app->script->keypressed(key, scancode);
 	}
 }
@@ -228,7 +228,7 @@ void keyboard::eventKeyReleased(int scancode) {
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Only trigger the event in the game if the console is not being used.
-	if (!app->console.isEnabled()) {
+	if (!app->console.isShown()) {
 		app->script->keyreleased(key, scancode);
 	}
 }

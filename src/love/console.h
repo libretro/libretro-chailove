@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "config.h"
 
 namespace love {
 
@@ -12,14 +13,17 @@ namespace love {
  * Enable the console by pressing the tilde key on your keyboard. It will
  * execute ChaiScript. For example, open the console with \`, and type
  * `love.system.getOS()`.
+ *
+ * To enable the console, you must trigger: love.console.setEnabled(true)
  */
 class console {
 	public:
 	std::vector<std::string> m_log;
 	std::string m_input = std::string("");
 	bool m_enabled = false;
+	bool m_shown = false;
 	int m_togglescancode;
-	bool load();
+	bool load(const config& conf);
 
 	void keypressed(std::string key, int scancode);
 	void draw();
@@ -35,11 +39,9 @@ class console {
 	bool setEnabled(bool enabled);
 
 	/**
-	 * @brief Toggles the console on or off.
-	 *
-	 * @return True if the console is toggle on, false otherwise.
+	 * @brief Checks whether or not the console is being displayed.
 	 */
-	bool toggle();
+	bool isShown();
 
 	void execute(const std::string& entry);
 };

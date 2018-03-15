@@ -175,7 +175,7 @@ script::script(const std::string& file) {
 	// Console
 	chai.add(fun(&console::isEnabled), "isEnabled");
 	chai.add(fun(&console::setEnabled), "setEnabled");
-	chai.add(fun(&console::toggle), "toggle");
+	chai.add(fun(&console::isShown), "isShown");
 
 	// Joystick
 	chai.add(user_type<Joystick>(), "Joystick");

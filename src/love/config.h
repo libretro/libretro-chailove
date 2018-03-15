@@ -47,6 +47,15 @@ class config {
 	 * - "highquality": true
 	 */
 	std::map<std::string, bool> options;
+
+	/**
+	 * @brief Toggles the in-game console.
+	 *
+	 * Set t.console = true to allow use of the in-game console.
+	 *
+	 * @see `love.console`
+	 */
+	bool console = false;
 };
 
 }  // namespace love

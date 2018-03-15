@@ -1,5 +1,4 @@
 love.console.setEnabled(true)
 assert_equal(love.console.isEnabled(), true, "love.console.setEnabled()")
 
-love.console.toggle()
-assert_equal(love.console.isEnabled(), false, "love.console.toggle()")
+assert_equal(love.console.isShown(), false, "love.console.isShown()")

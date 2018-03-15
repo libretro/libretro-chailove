@@ -58,7 +58,7 @@ bool ChaiLove::load(const std::string& file) {
 		sound.load();
 	}
 
-	console.load();
+	console.load(config);
 	graphics.load();
 	image.load();
 	keyboard.load();
