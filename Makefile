@@ -41,13 +41,13 @@ test: unittest cpplint
 vendor/noarch/noarch: vendor/libretro-common/include/libretro.h
 	@$(MAKE) -C vendor/noarch
 
-unittest: vendor/noarch/noarch $(TARGET)
+unittest: vendor/noarch/noarch all
 	vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/unittests/main.chai
 
-examples: $(TARGET)
+examples: all
 	@retroarch -L $(TARGET) examples/benchmark/main.chai
 
-test-script: $(TARGET)
+test-script: all
 	@retroarch -L $(TARGET) test/main.chai
 
 docs: dependencies
@@ -77,6 +77,6 @@ test-native: tests
 
 PREFIX := /usr
 INSTALLDIR := $(PREFIX)/lib/libretro
-install: $(TARGET)
+install: all
 	mkdir -p $(DESTDIR)$(INSTALLDIR)
 	cp $(TARGET) $(DESTDIR)$(INSTALLDIR)
