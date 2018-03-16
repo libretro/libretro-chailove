@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Enable the console with `love.console.setEnabled(true)`
 - `love.graphics.getColor()` to retrieve the active painting color
 
+### Fixed
+- Cleaned the Makefile dependency chain
+
 ## 0.16.1 - 2018-03-12
 ### Added
 - `List()` for linked list
