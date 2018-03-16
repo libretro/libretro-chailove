@@ -11,15 +11,18 @@ FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES)
 CXXFLAGS += $(FLAGS) -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-# Ignore failed builds, and re-try to attribute for dependency chains.
+# Ignore first attempt builds, and re-try for a cleaner dependency chain.
+all: $(TARGET)
+	$(MAKE) $(TARGET)
+
 $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
-	$(CXX) -o $@ $^ $(LDFLAGS)
+	-$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp | vendor/libretro-common/include/libretro.h
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
+	-$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 %.o: %.c | vendor/libretro-common/include/libretro.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+	-$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
