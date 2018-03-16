@@ -12,14 +12,14 @@ CXXFLAGS += $(FLAGS) -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
 # Ignore failed builds, and re-try to attribute for dependency chains.
-$(TARGET): $(OBJECTS) | dependencies
-	-$(CXX) -o $@ $^ $(LDFLAGS) || $(CXX) -o $@ $^ $(LDFLAGS)
+$(TARGET): $(OBJECTS) | vendor
+	-$(CXX) -o $@ $^ $(LDFLAGS)
 
-%.o: %.cpp | dependencies
-	-$(CXX) -c -o $@ $< $(CXXFLAGS) || $(CXX) -c -o $@ $< $(CXXFLAGS)
+%.o: %.cpp
+	-$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-%.o: %.c | dependencies
-	-$(CC) -c -o $@ $< $(CFLAGS) || $(CC) -c -o $@ $< $(CFLAGS)
+%.o: %.c
+	-$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
@@ -29,38 +29,22 @@ clean:
 	git submodule foreach --recursive git clean -xfd
 	git submodule foreach --recursive git reset --hard HEAD
 
-ifneq (,$(findstring ios,$(platform)))
-freetype: submodules
-	cd vendor/freetype2 && ./autogen.sh && ./configure --prefix=$DESTROOT \
-		--host=arm-apple-darwin \
-		--enable-static=yes \
-		--enable-shared=no \
-		CC="$ARM_CC" AR="$ARM_AR" \
-		LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS"
-else
-freetype: submodules
-	@echo "No need to build Freetype"
-endif
-
-submodules:
+vendor:
 	@git submodule update --init --recursive
-
-dependencies: freetype
-	@echo "Dependencies: Built All"
 
 test: unittest cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
-vendor/noarch/noarch: dependencies
+vendor/noarch/noarch: vendor
 	@$(MAKE) -C vendor/noarch
 
-unittest: vendor/noarch/noarch all
-	@vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/unittests/main.chai
+unittest: vendor/noarch/noarch $(TARGET)
+	vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/unittests/main.chai
 
-examples: all
+examples: $(TARGET)
 	@retroarch -L $(TARGET) examples/benchmark/main.chai
 
-test-script: all
+test-script: $(TARGET)
 	@retroarch -L $(TARGET) test/main.chai
 
 docs: dependencies
@@ -72,7 +56,7 @@ docs-start: docs
 docs-deploy: docs
 	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=docs
 
-cpplint: dependencies
+cpplint: vendor
 	@vendor/styleguide/cpplint/cpplint.py \
 		--linelength=120 \
 		--quiet \
@@ -82,7 +66,7 @@ cpplint: dependencies
 	-readability/casting,-whitespace/line_length,-runtime/references \
 		src/*.h src/*.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
 
-tests: dependencies
+tests: vendor
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 test-native: tests
@@ -90,6 +74,6 @@ test-native: tests
 
 PREFIX := /usr
 INSTALLDIR := $(PREFIX)/lib/libretro
-install: all
+install: $(TARGET)
 	mkdir -p $(DESTDIR)$(INSTALLDIR)
 	cp $(TARGET) $(DESTDIR)$(INSTALLDIR)
