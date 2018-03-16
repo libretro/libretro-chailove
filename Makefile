@@ -12,13 +12,13 @@ CXXFLAGS += $(FLAGS) -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
 # Ignore failed builds, and re-try to attribute for dependency chains.
-$(TARGET): $(OBJECTS) | submodules
+$(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
 	-$(CXX) -o $@ $^ $(LDFLAGS)
 
-%.o: %.cpp | submodules
+%.o: %.cpp | vendor/libretro-common/include/libretro.h
 	-$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-%.o: %.c | submodules
+%.o: %.c | vendor/libretro-common/include/libretro.h
 	-$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
@@ -29,15 +29,13 @@ clean:
 	git submodule foreach --recursive git clean -xfd
 	git submodule foreach --recursive git reset --hard HEAD
 
-submodules: vendor/libretro-common/include/libretro.h
-
 vendor/libretro-common/include/libretro.h:
 	@git submodule update --init --recursive
 
 test: unittest cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
-vendor/noarch/noarch: vendor
+vendor/noarch/noarch: vendor/libretro-common/include/libretro.h
 	@$(MAKE) -C vendor/noarch
 
 unittest: vendor/noarch/noarch $(TARGET)
