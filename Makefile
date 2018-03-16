@@ -12,7 +12,7 @@ CXXFLAGS += $(FLAGS) -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
 # Ignore failed builds, and re-try to attribute for dependency chains.
-$(TARGET): $(OBJECTS) | vendor
+$(TARGET): $(OBJECTS) | submodules
 	-$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
@@ -29,7 +29,9 @@ clean:
 	git submodule foreach --recursive git clean -xfd
 	git submodule foreach --recursive git reset --hard HEAD
 
-vendor:
+submodules: vendor/libretro-common/include/libretro.h
+
+vendor/libretro-common/include/libretro.h:
 	@git submodule update --init --recursive
 
 test: unittest cpplint
