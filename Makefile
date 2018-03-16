@@ -15,10 +15,10 @@ CFLAGS += $(FLAGS) -std=gnu99
 $(TARGET): $(OBJECTS) | submodules
 	-$(CXX) -o $@ $^ $(LDFLAGS)
 
-%.o: %.cpp
+%.o: %.cpp | submodules
 	-$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-%.o: %.c
+%.o: %.c | submodules
 	-$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
