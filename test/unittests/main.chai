@@ -1,7 +1,7 @@
 global failure = ""
 
 def conf(t) {
-	t.console = true;
+	t.console = true
 }
 def load() {
 	print("\n================================\n")
