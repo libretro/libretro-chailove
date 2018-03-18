@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `love.console` an in-game console toggled with the tilde key
   - Enable the console with `love.console.setEnabled(true)`
 - `love.graphics.getColor()` to retrieve the active painting color
+- `love.system.message()` to display OSD messages
 
 ### Fixed
 - Cleaned the Makefile dependency chain

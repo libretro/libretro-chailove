@@ -264,6 +264,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getOS), "getOS");
 	chai.add(fun(&system::getVersion), "getVersion");
 	chai.add(fun(&system::getVersionString), "getVersionString");
+	chai.add(fun<void, system, const std::string&, int>(&system::message), "message");
+	chai.add(fun<void, system, const std::string&>(&system::message), "message");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");

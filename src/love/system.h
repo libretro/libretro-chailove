@@ -34,6 +34,15 @@ class system {
 	 * @see love.system.getVersion
 	 */
 	std::string getVersionString();
+
+	/**
+	 * @brief Display a message for a certain amount of frames.
+	 *
+	 * @param msg The message text to be displayed.
+	 * @param frames (3000) The amount of frames to display the message.
+	 */
+	void message(const std::string& msg, int frames);
+	void message(const std::string& msg);
 };
 
 }  // namespace love
