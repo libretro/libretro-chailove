@@ -4,6 +4,7 @@
 #include "../ChaiLove.h"
 #include "SDL.h"
 #include "config.h"
+#include "libretro.h"
 
 using ::ChaiLove;
 using std::string;
