@@ -191,8 +191,13 @@ graphics& graphics::setColor(int red, int green, int blue, int alpha) {
 	a = alpha;
 	return *this;
 }
+
 graphics& graphics::setColor(int red, int green, int blue) {
 	return setColor(red, green, blue, 255);
+}
+
+Color graphics::getColor() {
+	return Color(r, g, b, a);
 }
 
 Color graphics::getBackgroundColor() {

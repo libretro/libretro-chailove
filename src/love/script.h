@@ -31,8 +31,11 @@ class script {
 	 * def conf(t) {
 	 *   t.window.width = 1024
 	 *   t.window.height = 768
+	 *   t.console = false
 	 * }
 	 * @endcode
+	 *
+	 * @see love.config
 	 */
 	void conf(config& t);
 
@@ -231,6 +234,9 @@ class script {
 	 * @return bool True if loading the state succeeded.
 	 */
 	bool loadstate(const std::string& data);
+
+	chaiscript::Boxed_Value eval(const std::string& code, const std::string& filename);
+	std::string evalString(const std::string& code, const std::string& filename);
 
 	#ifdef __HAVE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;

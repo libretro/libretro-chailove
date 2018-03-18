@@ -15,7 +15,6 @@ static bool use_audio_cb;
 int16_t audio_buffer[2 * (44100 / 60)];
 
 static retro_video_refresh_t video_cb;
-static retro_environment_t environ_cb;
 retro_audio_sample_t audio_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
 // static retro_input_poll_t input_poll_cb;
@@ -68,7 +67,7 @@ short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index
 
 void retro_set_environment(retro_environment_t cb) {
 	bool no_rom = false;
-	environ_cb = cb;
+	ChaiLove::environ_cb = cb;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
 	// Set the Variables.
@@ -91,7 +90,7 @@ static void update_variables(void) {
 	// Alpha Blending
 	var.key = "chailove_alphablending";
 	var.value = NULL;
-	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
 		std::string varvalue(var.value);
 		if (varvalue == "disabled") {
 			game->config.options["alphablending"] = false;
@@ -101,7 +100,7 @@ static void update_variables(void) {
 	// High Quality
 	var.key = "chailove_highquality";
 	var.value = NULL;
-	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
 		std::string varvalue(var.value);
 		if (varvalue == "disabled") {
 			game->config.options["highquality"] = false;
@@ -181,7 +180,7 @@ void init_descriptors() {
 		{ 0 },
 	};
 
-	environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, desc);
+	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, desc);
 }
 #ifdef __cplusplus
 }
@@ -298,11 +297,11 @@ bool retro_load_game(const struct retro_game_info *info) {
 
 	// Set the frame rate callback.
 	struct retro_frame_time_callback frame_cb = { frame_time_cb, 1000000 / 60 };
-	environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
+	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
 
 	// Make the audio callback.
 	struct retro_audio_callback audio_cb = { emit_audio, audio_set_state };
-	use_audio_cb = environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
+	use_audio_cb = ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
 	// Load the game.
 	std::string full(info ? info->path : "main.chai");
@@ -344,21 +343,21 @@ size_t retro_get_memory_size(unsigned id) {
 void retro_init(void) {
 	const char *system_dir = NULL;
 
-	if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
 		// if defined, use the system directory
 		retro_system_directory = system_dir;
 	}
 
 	const char *content_dir = NULL;
 
-	if (environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir) && content_dir) {
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir) && content_dir) {
 		// if defined, use the system directory
 		retro_content_directory = content_dir;
 	}
 
 	const char *save_dir = NULL;
 
-	if (environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		// If save directory is defined use it, otherwise use system directory
 		retro_save_directory = *save_dir ? save_dir : retro_system_directory;
 	} else {
@@ -374,7 +373,7 @@ void retro_init(void) {
 	*/
 
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
-	if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
+	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
 		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
 		exit(0);
 	}
@@ -407,7 +406,7 @@ void retro_run(void) {
 
 		// Update the game.
 		if (!app->update()) {
-			environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
+			ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 			return;
 		}
 

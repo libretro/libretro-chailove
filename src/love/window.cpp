@@ -4,6 +4,7 @@
 #include "../ChaiLove.h"
 #include "SDL.h"
 #include "config.h"
+#include "libretro.h"
 
 using ::ChaiLove;
 using std::string;
@@ -71,6 +72,17 @@ string window::getTitle() {
 window& window::setTitle(string title) {
 	SDL_WM_SetCaption(title.c_str(), 0);
 	return *this;
+}
+
+void window::showMessageBox(const std::string& msg, int frames) {
+	retro_message retroMessage;
+	retroMessage.msg = msg.c_str();
+	retroMessage.frames = frames;
+	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &retroMessage);
+}
+
+void window::showMessageBox(const std::string& msg) {
+	showMessageBox(msg, 4000);
 }
 
 }  // namespace love

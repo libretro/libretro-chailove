@@ -5,12 +5,13 @@
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com). It's free, open-source, and works on Windows, Mac OS X, Linux, and ARM.
 
-![ChaiLove Benchmark Screenshot](examples/benchmark/screenshot.png)
+![Floppy Bird Screenshot](docs/screenshot.png)
 
 ## Games
 
 - [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)
 - [Nyan Cat](https://github.com/RobLoach/ChaiLove-NyanCat)
+- [Snake](examples/snake/Snake.chai)
 - [Game of Life](https://github.com/RobLoach/ChaiLove-GameOfLife)
 
 ## Usage

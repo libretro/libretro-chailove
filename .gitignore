@@ -2,3 +2,5 @@
 *.so
 *.state*
 node_modules
+*.srm.*
+*.srm1.*

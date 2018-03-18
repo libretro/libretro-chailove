@@ -14,6 +14,17 @@ namespace love {
 
 /**
  * @brief The configuration object for ChaiLove.
+ *
+ * This is set through the `conf` callback:
+ *
+ * @code
+ * def conf(t) {
+ *   t.identity = "mygame"
+ *   t.window.width = 1024
+ *   t.window.height = 768
+ *   t.console = false
+ * }
+ * @endcode
  */
 class config {
 	public:
@@ -47,6 +58,15 @@ class config {
 	 * - "highquality": true
 	 */
 	std::map<std::string, bool> options;
+
+	/**
+	 * @brief Attach the in-game console.
+	 *
+	 * When `t.console = true`, will allow use of the in-game console. Use the tilde key to show.
+	 *
+	 * @see love.console
+	 */
+	bool console = false;
 };
 
 }  // namespace love

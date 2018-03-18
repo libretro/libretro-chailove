@@ -11,15 +11,18 @@ FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES)
 CXXFLAGS += $(FLAGS) -std=c++14
 CFLAGS += $(FLAGS) -std=gnu99
 
-# Ignore failed builds, and re-try to attribute for dependency chains.
-$(TARGET): $(OBJECTS) | dependencies
-	-$(CXX) -o $@ $^ $(LDFLAGS) || $(CXX) -o $@ $^ $(LDFLAGS)
+# Ignore first attempt builds, and re-try for a cleaner dependency chain.
+all: $(TARGET)
+	$(MAKE) $(TARGET)
 
-%.o: %.cpp | dependencies
-	-$(CXX) -c -o $@ $< $(CXXFLAGS) || $(CXX) -c -o $@ $< $(CXXFLAGS)
+$(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
+	-$(CXX) -o $@ $^ $(LDFLAGS)
 
-%.o: %.c | dependencies
-	-$(CC) -c -o $@ $< $(CFLAGS) || $(CC) -c -o $@ $< $(CFLAGS)
+%.o: %.cpp | vendor/libretro-common/include/libretro.h
+	-$(CXX) -c -o $@ $< $(CXXFLAGS)
+
+%.o: %.c | vendor/libretro-common/include/libretro.h
+	-$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
@@ -29,33 +32,17 @@ clean:
 	git submodule foreach --recursive git clean -xfd
 	git submodule foreach --recursive git reset --hard HEAD
 
-ifneq (,$(findstring ios,$(platform)))
-freetype: submodules
-	cd vendor/freetype2 && ./autogen.sh && ./configure --prefix=$DESTROOT \
-		--host=arm-apple-darwin \
-		--enable-static=yes \
-		--enable-shared=no \
-		CC="$ARM_CC" AR="$ARM_AR" \
-		LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS"
-else
-freetype: submodules
-	@echo "No need to build Freetype"
-endif
-
-submodules:
+vendor/libretro-common/include/libretro.h:
 	@git submodule update --init --recursive
-
-dependencies: freetype
-	@echo "Dependencies: Built All"
 
 test: unittest cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
-vendor/noarch/noarch: dependencies
+vendor/noarch/noarch: vendor/libretro-common/include/libretro.h
 	@$(MAKE) -C vendor/noarch
 
 unittest: vendor/noarch/noarch all
-	@vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/unittests/main.chai
+	vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/unittests/main.chai
 
 examples: all
 	@retroarch -L $(TARGET) examples/benchmark/main.chai
@@ -72,7 +59,7 @@ docs-start: docs
 docs-deploy: docs
 	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=docs
 
-cpplint: dependencies
+cpplint: vendor/libretro-common/include/libretro.h
 	@vendor/styleguide/cpplint/cpplint.py \
 		--linelength=120 \
 		--quiet \
@@ -82,7 +69,7 @@ cpplint: dependencies
 	-readability/casting,-whitespace/line_length,-runtime/references \
 		src/*.h src/*.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
 
-tests: dependencies
+tests: vendor/libretro-common/include/libretro.h
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 test-native: tests

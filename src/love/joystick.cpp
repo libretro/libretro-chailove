@@ -60,6 +60,9 @@ bool joystick::isDown(int index, const std::string& button) {
 }
 
 void joystick::update() {
+	if (ChaiLove::getInstance()->console.isShown()) {
+		return;
+	}
 	// SDL_JoystickUpdate();
 	int i, u;
 	int16_t state;

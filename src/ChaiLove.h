@@ -32,6 +32,7 @@
  *
  * - \link love::audio audio \endlink Provides an interface to output sound to the user's speakers.
  * - \link love::config config \endlink Global ChaiLove configuration.
+ * - \link love::console config \endlink The in-game debugging console.
  * - \link love::event event \endlink Manages events, like keypresses.
  * - \link love::filesystem filesystem \endlink Provides an interface to the user's filesystem.
  * - \link love::font font \endlink Allows you to work with fonts.
@@ -70,9 +71,9 @@
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 16
+#define CHAILOVE_VERSION_MINOR 17
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.16.0"
+#define CHAILOVE_VERSION_STRING "0.17.0"
 
 #include "SDL.h"
 #include "libretro.h"
@@ -92,6 +93,7 @@
 #include "love/window.h"
 #include "love/math.h"
 #include "love/event.h"
+#include "love/console.h"
 
 #ifdef __HAVE_TESTS__
 #include "../test/native/NativeTest.h"
@@ -105,8 +107,10 @@ class ChaiLove {
 
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
+	static retro_environment_t environ_cb;
 
 	love::config config;
+	love::console console;
 	love::keyboard keyboard;
 	love::script* script;
 	love::filesystem filesystem;

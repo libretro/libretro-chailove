@@ -12,6 +12,8 @@ class system {
 	public:
 	/**
 	 * @brief Gets the current operating system.
+	 *
+	 * @return The current operating system. "OS X", "Windows", "Linux", "Android" or "iOS".
 	 */
 	std::string getOS();
 
