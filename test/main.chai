@@ -30,7 +30,7 @@ def load() {
 		test.load();
 	}
 
-	love.system.message("Hello World!")
+	love.window.showMessageBox("Hello World!")
 }
 
 def draw() {

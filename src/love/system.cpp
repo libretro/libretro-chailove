@@ -53,15 +53,4 @@ std::string system::getVersionString() {
 	return CHAILOVE_VERSION_STRING;
 }
 
-void system::message(const std::string& msg, int frames) {
-	retro_message retroMessage;
-	retroMessage.msg = msg.c_str();
-	retroMessage.frames = frames;
-	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &retroMessage);
-}
-
-void system::message(const std::string& msg) {
-	message(msg, 3000);
-}
-
 }  // namespace love
