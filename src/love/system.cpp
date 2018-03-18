@@ -2,7 +2,6 @@
 #include "../ChaiLove.h"
 
 #include <string>
-#include "libretro.h"
 
 namespace love {
 
