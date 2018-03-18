@@ -36,7 +36,7 @@ script:
   - ./configure
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make platform=osx -j2 ; fi
-  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then make test ; fi
+  - make test
 
 cache:
     apt: true
