@@ -32,7 +32,7 @@
  *
  * - \link love::audio audio \endlink Provides an interface to output sound to the user's speakers.
  * - \link love::config config \endlink Global ChaiLove configuration.
- * - \link love::console config \endlink The in-game debugging console.
+ * - \link love::console console \endlink The in-game debugging console.
  * - \link love::event event \endlink Manages events, like keypresses.
  * - \link love::filesystem filesystem \endlink Provides an interface to the user's filesystem.
  * - \link love::font font \endlink Allows you to work with fonts.
