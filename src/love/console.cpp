@@ -15,6 +15,7 @@ bool console::load(const config& conf) {
 	m_togglescancode = 96;
 	m_enabled = conf.console;
 	m_shown = false;
+	return true;
 }
 
 bool console::isShown() {
