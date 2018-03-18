@@ -7,6 +7,7 @@
 ChaiLove* ChaiLove::m_instance = NULL;
 retro_input_state_t ChaiLove::input_state_cb = NULL;
 retro_input_poll_t ChaiLove::input_poll_cb = NULL;
+retro_environment_t ChaiLove::environ_cb = NULL;
 
 void ChaiLove::destroy() {
 	m_instance = NULL;

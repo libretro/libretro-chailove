@@ -29,6 +29,8 @@ def load() {
 	for (test : tests) {
 		test.load();
 	}
+
+	love.window.showMessageBox("Hello World!")
 }
 
 def draw() {

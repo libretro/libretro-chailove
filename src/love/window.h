@@ -31,6 +31,15 @@ class window {
 	 * @see love.window.getTitle
 	 */
 	window& setTitle(std::string title);
+
+	/**
+	 * @brief Display a simple message for a certain amount of frames.
+	 *
+	 * @param msg The message text to be displayed.
+	 * @param frames (4000) The amount of frames to display the message.
+	 */
+	void showMessageBox(const std::string& msg, int frames);
+	void showMessageBox(const std::string& msg);
 };
 
 }  // namespace love
