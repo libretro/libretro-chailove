@@ -59,7 +59,7 @@ docs-start: docs
 docs-deploy: docs
 	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=docs
 
-cpplint: vendor
+cpplint: vendor/libretro-common/include/libretro.h
 	@vendor/styleguide/cpplint/cpplint.py \
 		--linelength=120 \
 		--quiet \
@@ -69,7 +69,7 @@ cpplint: vendor
 	-readability/casting,-whitespace/line_length,-runtime/references \
 		src/*.h src/*.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
 
-tests: vendor
+tests: vendor/libretro-common/include/libretro.h
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 test-native: tests
