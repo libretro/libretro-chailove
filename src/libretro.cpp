@@ -400,7 +400,7 @@ void retro_reset(void) {
 
 void retro_run(void) {
 	ChaiLove* app = ChaiLove::getInstance();
-	if (!app->event.quitstatus) {
+	if (!app->event.m_quitstatus) {
 		// Poll all the inputs.
 		ChaiLove::input_poll_cb();
 

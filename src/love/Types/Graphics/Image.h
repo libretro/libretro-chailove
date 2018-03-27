@@ -25,6 +25,7 @@ class Image {
 	 * @brief Gets the width of the Texture.
 	 */
 	int getWidth();
+
 	/**
 	 * @brief Gets the height of the Texture.
 	 */

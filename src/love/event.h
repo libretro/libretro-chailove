@@ -11,7 +11,7 @@ class event {
 	 * @brief Exits ChaiLove.
 	 */
 	void quit();
-	bool quitstatus = false;
+	bool m_quitstatus = false;
 };
 
 }  // namespace love

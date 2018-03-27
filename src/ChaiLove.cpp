@@ -79,7 +79,7 @@ bool ChaiLove::load(const std::string& file) {
 }
 
 bool ChaiLove::update() {
-	if (event.quitstatus) {
+	if (event.m_quitstatus) {
 		return false;
 	}
 
@@ -90,7 +90,7 @@ bool ChaiLove::update() {
 		switch (sdlEvent.type) {
 			case SDL_QUIT:
 				event.quit();
-				return !event.quitstatus;
+				return !event.m_quitstatus;
 				break;
 		}
 	}
@@ -107,7 +107,7 @@ bool ChaiLove::update() {
 	test.update(timer.getDelta());
 	#endif
 
-	return !event.quitstatus;
+	return !event.m_quitstatus;
 }
 
 /**
