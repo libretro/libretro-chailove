@@ -123,7 +123,7 @@ void ChaiLove::reset() {
  * Render the ChaiLove.
  */
 void ChaiLove::draw() {
-	if (!event.quitstatus) {
+	if (!event.m_quitstatus) {
 		// Clear the screen.
 		graphics.clear();
 
