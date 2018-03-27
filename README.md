@@ -5,7 +5,7 @@
 
 Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com). It's free, open-source, and works on Windows, Mac OS X, Linux, and ARM.
 
-![Floppy Bird Screenshot](docs/screenshot.png)
+[![Floppy Bird Gameplay](docs/screenshot.png)](https://www.youtube.com/watch?v=RLVwTh6qDFI&hd=1)
 
 ## Games
 
@@ -13,20 +13,22 @@ Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libret
 - [Nyan Cat](https://github.com/RobLoach/ChaiLove-NyanCat)
 - [Snake](examples/snake/Snake.chai)
 - [Game of Life](https://github.com/RobLoach/ChaiLove-GameOfLife)
+- [... and more](https://github.com/topics/chailove)
 
 ## Usage
 
-ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play the sample game [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)...
+ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird) is a [free game you can download and play](https://www.youtube.com/watch?v=RLVwTh6qDFI)...
 
 1. Run [RetroArch](http://retroarch.com/)
 2. *Online Updater* → *Core Updator* → *ChaiLove*
 3. *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
 4. *Load Content* → *Downloads* → *Floppy Bird.chailove*
 
-You can also run ChaiLove through the command line by using:
+Alternatively, you can run the ChaiLove core through RetroArch via the command line:
 
 ```
-retroarch -L chailove_libretro.so path/to/FloppyBird.chailove
+wget https://buildbot.libretro.com/assets/cores/ChaiLove/Floppy%20Bird.chailove
+retroarch -L chailove_libretro.so Floppy\ Bird.chailove
 ```
 
 ## API
@@ -60,14 +62,6 @@ retroarch -L chailove_libretro.so main.chai
 
 Behind ChaiLove, there's the documentation, compiling it, along with testing.
 
-### Documentation
-
-Visit the [ChaiLove API documentation](https://rawgit.com/libretro/libretro-chailove/docs/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
-
-```
-make docs
-```
-
 ### Compiling
 
 Use the following command to compile the core:
@@ -78,16 +72,24 @@ make
 
 ### Testing
 
-To compile and run the testing framework, use:
+Run the automated tests by executing:
+
+```
+make test
+```
+
+Run the usability tests with:
 
 ```
 retroarch -L chailove_libretro.so test/main.chai
 ```
 
-You can run the unit tests, by executing:
+### Documentation
+
+Visit the [ChaiLove API documentation](https://rawgit.com/libretro/libretro-chailove/docs/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
 
 ```
-make test
+make docs
 ```
 
 ## Authors

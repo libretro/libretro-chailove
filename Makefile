@@ -50,7 +50,7 @@ examples: all
 test-script: all
 	@retroarch -L $(TARGET) test/main.chai
 
-docs: dependencies
+docs: vendor/libretro-common/include/libretro.h
 	doxygen docs/Doxyfile
 
 docs-start: docs
