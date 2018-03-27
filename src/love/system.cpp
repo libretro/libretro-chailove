@@ -4,6 +4,9 @@
 #include <string>
 
 namespace love {
+bool system::load() {
+	return true;
+}
 
 std::string system::getOS() {
 	// TODO(RobLoach): Replace Macros with something more complex?

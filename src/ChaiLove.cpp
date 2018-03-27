@@ -119,6 +119,8 @@ void ChaiLove::reset() {
 	script->reset();
 }
 
+retro_log_printf_t ChaiLove::log_cb = ChaiLove::fallback_log;
+
 /**
  * Render the ChaiLove.
  */

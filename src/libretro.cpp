@@ -1,5 +1,6 @@
 #include <string>
 #include <stdio.h>
+#include <stdarg.h>
 #include <stdlib.h>
 #include <sstream>
 #include <iostream>
@@ -13,6 +14,8 @@ const char *retro_content_directory;
 // char retro_system_conf[512];
 static bool use_audio_cb;
 int16_t audio_buffer[2 * (44100 / 60)];
+
+static struct retro_log_callback logging;
 
 static retro_video_refresh_t video_cb;
 retro_audio_sample_t audio_cb;
@@ -66,11 +69,13 @@ short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index
 #endif
 
 void retro_set_environment(retro_environment_t cb) {
-	bool no_rom = false;
 	ChaiLove::environ_cb = cb;
+
+	// Supports No Game.
+	bool no_rom = false;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
-	// Set the Variables.
+	// Environment Options.
 	struct retro_variable variables[] = {
 		{
 			"chailove_alphablending", "Alpha Blending; enabled|disabled",
@@ -81,6 +86,12 @@ void retro_set_environment(retro_environment_t cb) {
 		{ NULL, NULL },
 	};
 	cb(RETRO_ENVIRONMENT_SET_VARIABLES, variables);
+
+	// Log Callback
+	if (cb(RETRO_ENVIRONMENT_GET_LOG_INTERFACE, &logging)) {
+		ChaiLove::log_cb = logging.log;
+	}
+	ChaiLove::log_cb(RETRO_LOG_INFO, "SET THE LOGGER!.\n");
 }
 
 static void update_variables(void) {
@@ -377,6 +388,9 @@ void retro_init(void) {
 		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
 		exit(0);
 	}
+
+	// Load the system.
+	ChaiLove::getInstance()->system.load();
 }
 
 void retro_deinit(void) {
