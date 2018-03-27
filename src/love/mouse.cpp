@@ -24,7 +24,7 @@ int mouse::getY() {
 }
 
 bool mouse::isDown(int button) {
-	return buttonState[button] != 0;
+	return m_buttonState[button] != 0;
 }
 bool mouse::isDown(const std::string& button) {
 	return isDown(getButtonKey(button));
@@ -93,9 +93,9 @@ void mouse::update() {
 	for (int i = RETRO_DEVICE_ID_MOUSE_LEFT; i <= RETRO_DEVICE_ID_MOUSE_BUTTON_5; i++) {
 		state = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, i);
 
-		if (state != buttonState[i]) {
-			buttonState[i] = state;
-			if (buttonState[i] == 0) {
+		if (state != m_buttonState[i]) {
+			m_buttonState[i] = state;
+			if (m_buttonState[i] == 0) {
 				mousereleased(m_x, m_y, getButtonName(i));
 			} else {
 				mousepressed(m_x, m_y, getButtonName(i));

@@ -61,7 +61,7 @@ class mouse {
 	std::string getButtonName(int button);
 
 	int16_t m_x, m_y;
-	int16_t buttonState[RETRO_DEVICE_ID_MOUSE_BUTTON_5];
+	int16_t m_buttonState[RETRO_DEVICE_ID_MOUSE_BUTTON_5];
 
 	void mousemoved(int x, int y, int dx, int dy);
 	void mousepressed(int x, int y, const std::string& button);

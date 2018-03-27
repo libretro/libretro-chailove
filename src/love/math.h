@@ -16,7 +16,7 @@ class math {
 	 * @param min (0.0f) The minimum value.
 	 * @param max (1.0f) The max value.
 	 *
-	 * @return a number between the two given min and max values.
+	 * @return A number between the two given min and max values.
 	 */
 	float random(float min, float max);
 	float random(float max);
@@ -70,8 +70,6 @@ class math {
 	 */
 	float degrees(float rad);
 
-	std::string compress(const std::string& str);
-
 	/**
 	 * @brief Compresses a string or data using a specific compression level.
 	 *
@@ -83,6 +81,7 @@ class math {
 	 * @see love.math.decompress
 	 */
 	std::string compress(const std::string& str, int level);
+	std::string compress(const std::string& str);
 
 	/**
 	 * @brief Decompresses a compressed string.

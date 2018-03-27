@@ -15,7 +15,6 @@ bool sound::load() {
 }
 
 bool sound::update() {
-	// Nothing.
 	return true;
 }
 
