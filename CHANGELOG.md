@@ -5,10 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 0.17.1 - Unreleased
-### Added
+### Fixed
+- Documentation
 
-
-## 0.17.0 - Unreleased
+## 0.17.0 - 2018-03-18
 ### Added
 - `love.system.getOS()` now returns actual operating system name
 - `love.console` an in-game console toggled with the tilde key
