@@ -10,6 +10,8 @@ namespace love {
  */
 class system {
 	public:
+	bool load();
+
 	/**
 	 * @brief Gets the current operating system.
 	 *

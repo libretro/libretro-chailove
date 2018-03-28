@@ -72,8 +72,8 @@
 
 #define CHAILOVE_VERSION_MAJOR 0
 #define CHAILOVE_VERSION_MINOR 17
-#define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.17.0"
+#define CHAILOVE_VERSION_PATCH 1
+#define CHAILOVE_VERSION_STRING "0.17.1"
 
 #include "SDL.h"
 #include "libretro.h"
@@ -108,6 +108,15 @@ class ChaiLove {
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
 	static retro_environment_t environ_cb;
+	static retro_log_printf_t log_cb;
+
+	static void fallback_log(enum retro_log_level level, const char *fmt, ...) {
+		(void)level;
+		va_list va;
+		va_start(va, fmt);
+		vfprintf(stderr, fmt, va);
+		va_end(va);
+	}
 
 	love::config config;
 	love::console console;
