@@ -110,8 +110,7 @@ class ChaiLove {
 	static retro_environment_t environ_cb;
 	static retro_log_printf_t log_cb;
 
-	static void fallback_log(enum retro_log_level level, const char *fmt, ...)
-	{
+	static void fallback_log(enum retro_log_level level, const char *fmt, ...) {
 		(void)level;
 		va_list va;
 		va_start(va, fmt);
