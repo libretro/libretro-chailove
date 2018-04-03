@@ -11,6 +11,14 @@
  * Linked List
  *
  * Provides a linked list data structure.
+ *
+ * @code
+ * var list = List()
+ * list.push_back(3)
+ * for (listItem : list) {
+ *   print("Item: " + to_string(listItem))
+ * }
+ * @endcode
  */
 class List {
 	public:

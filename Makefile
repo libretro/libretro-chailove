@@ -50,11 +50,16 @@ examples: all
 test-script: all
 	@retroarch -L $(TARGET) test/main.chai
 
-docs: vendor/libretro-common/include/libretro.h
+docs: vendor/libretro-common/include/libretro.h docs/html
+
+docs/html: docs-clean
 	doxygen docs/Doxyfile
 
-docs-start: docs
+docs-start: docs/html
 	php -S localhost:9999 -t docs/html
+
+docs-clean:
+	rm -rf docs/html
 
 docs-deploy: docs
 	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=docs
