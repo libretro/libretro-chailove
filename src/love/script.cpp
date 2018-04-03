@@ -121,6 +121,16 @@ script::script(const std::string& file) {
 	chai.add(constructor<Point(float)>(), "Point");
 	chai.add(constructor<Point(float, float)>(), "Point");
 
+	// FileInfo Object.
+	chai.add(user_type<FileInfo>(), "FileInfo");
+	chai.add(fun(&FileInfo::type), "type");
+	chai.add(fun(&FileInfo::size), "size");
+	chai.add(fun(&FileInfo::modtime), "modtime");
+	chai.add(constructor<FileInfo()>(), "FileInfo");
+	chai.add(constructor<FileInfo(const std::string&)>(), "FileInfo");
+	chai.add(constructor<FileInfo(const std::string&, int)>(), "FileInfo");
+	chai.add(constructor<FileInfo(const std::string&, int, int)>(), "FileInfo");
+
 	// Color Object.
 	chai.add(user_type<Color>(), "Color");
 	chai.add(fun(&Color::r), "r");
@@ -253,8 +263,10 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::unmount), "unmount");
 	chai.add(fun(&filesystem::read), "read");
 	chai.add(fun(&filesystem::isDirectory), "isDirectory");
+	chai.add(fun(&filesystem::isSymlink), "isSymlink");
 	chai.add(fun(&filesystem::isFile), "isFile");
 	chai.add(fun(&filesystem::exists), "exists");
+	chai.add(fun(&filesystem::getInfo), "getInfo");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 	chai.add(fun(&filesystem::mount), "mount");
 	chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
