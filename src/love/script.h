@@ -29,9 +29,15 @@ class script {
 	 *
 	 * @code
 	 * def conf(t) {
+	 *   // Attach a development console, toggle with `.
+	 *   t.console = false
+	 *
+	 *   // The ChaiLove version this game was made for.
+	 *   t.version = "0.18.0"
+	 *
+	 *   // The width and height of the game.
 	 *   t.window.width = 1024
 	 *   t.window.height = 768
-	 *   t.console = false
 	 * }
 	 * @endcode
 	 *

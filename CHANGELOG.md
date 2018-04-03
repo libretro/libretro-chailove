@@ -7,11 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.18.0 - Unreleased
 ### Added
 - [Semantic Versioning](https://semver.org/) checks
-  - Use `t.version = 0.18.0` in `def load(t) {}` to specify which ChaiLove version you're targeting
+  - Use `t.version = "0.18.0"` in `conf(t)` to specify which ChaiLove version you're targeting
 
 ### Fixed
 - Documentation
-
 
 ## 0.17.0 - 2018-03-18
 ### Added
