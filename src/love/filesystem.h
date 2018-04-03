@@ -12,12 +12,12 @@ using love::Types::FileSystem::FileInfo;
 
 namespace love {
 /**
- * @brief Provides an interface to the user's filesystem.
+ * Provides an interface to the user's filesystem.
  */
 class filesystem {
 	public:
 	/**
-	 * @brief Loads and runs a .chai file.
+	 * Loads and runs a .chai file.
 	 *
 	 * @param file The name (and path) of the file.
 	 *
@@ -31,7 +31,7 @@ class filesystem {
 	char* readChar(const std::string& filename);
 
 	/**
-	 * @brief Read the contents of a file.
+	 * Read the contents of a file.
 	 *
 	 * @param file The name (and path) of the file.
 	 *
@@ -40,29 +40,29 @@ class filesystem {
 	std::string read(const std::string& filename);
 
 	/**
-	 * @brief Check whether a file or directory exists.
+	 * Check whether a file or directory exists.
 	 */
 	bool exists(const std::string& file);
 
 	/**
-	 * @brief Get the size in bytes of a file.
+	 * Get the size in bytes of a file.
 	 */
 	int getSize(const std::string& file);
 
 	/**
-	 * @brief Gets information about the specified file or directory.
+	 * Gets information about the specified file or directory.
 	 *
 	 * @return A FileInfo object representing information about the path.
 	 */
 	FileInfo getInfo(const std::string& path);
 
 	/**
-	 * @brief Unmounts a zip file or folder previously mounted with filesystem::unmount.
+	 * Unmounts a zip file or folder previously mounted with filesystem::unmount.
 	 */
 	bool unmount(const std::string& archive);
 
 	/**
-	 * @brief Mounts a zip file or folder in the game's save directory for reading.
+	 * Mounts a zip file or folder in the game's save directory for reading.
 	 */
 	bool mount(const std::string& archive, const std::string& mountpoint);
 
@@ -70,32 +70,32 @@ class filesystem {
 	PHYSFS_file* openFile(const std::string& filename);
 
 	/**
-	 * @brief Returns all files and subdirectories in the directory.
+	 * Returns all files and subdirectories in the directory.
 	 */
 	std::vector<std::string> getDirectoryItems(const std::string& dir);
 
 	/**
-	 * @brief Check whether something is a directory.
+	 * Check whether something is a directory.
 	 */
 	bool isDirectory(const std::string& filename);
 
 	/**
-	 * @brief Checks whether something is a file.
+	 * Checks whether something is a file.
 	 */
 	bool isFile(const std::string& filename);
 
 	/**
-	 * @brief Checks whether something is a symlink.
+	 * Checks whether something is a symlink.
 	 */
 	bool isSymlink(const std::string& filename);
 
 	/**
-	 * @brief Iterate over the lines in a file.
+	 * Iterate over the lines in a file.
 	 */
 	std::vector<std::string> lines(const std::string& filename);
 
 	/**
-	 * @brief Iterate over the lines in a file, with the given delimiter.
+	 * Iterate over the lines in a file, with the given delimiter.
 	 */
 	std::vector<std::string> lines(const std::string& filename, const std::string& delimiter);
 };

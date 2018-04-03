@@ -20,7 +20,7 @@ using love::Types::Graphics::Color;
 namespace love {
 
 /**
- * @brief The primary purpose of the graphics module is to draw to the screen.
+ * The primary purpose of the graphics module is to draw to the screen.
  */
 class graphics {
 	public:
@@ -28,7 +28,7 @@ class graphics {
 	bool load();
 
 	/**
-	 * @brief Draws a rectangle.
+	 * Draws a rectangle.
 	 *
 	 * @param drawmode How to draw the rectangle. Can be "fill" or "line".
 	 * @param x The position of top-left corner along the x-axis.
@@ -43,27 +43,27 @@ class graphics {
 	graphics& rectangle(const std::string& drawmode, int x, int y, int width, int height);
 
 	/**
-	 * @brief Clears the screen to the set background color.
+	 * Clears the screen to the set background color.
 	 */
 	graphics& clear();
 
 	/**
-	 * @brief Clears the screen to the given background color.
+	 * Clears the screen to the given background color.
 	 */
 	graphics& clear(int r, int g, int b, int a);
 
 	/**
-	 * @brief Clears the screen to the given background color.
+	 * Clears the screen to the given background color.
 	 */
 	graphics& clear(int r, int g, int b);
 
 	/**
-	 * @brief Draws a point.
+	 * Draws a point.
 	 */
 	graphics& point(int x, int y);
 
 	/**
-	 * @brief Draws a point.
+	 * Draws a point.
 	 */
 	graphics& point(Point* p);
 
@@ -71,7 +71,7 @@ class graphics {
 	// void points(std::vector<Point>);
 
 	/**
-	 * @brief Draws a line.
+	 * Draws a line.
 	 *
 	 * @param x1 The position of first point on the x-axis.
 	 * @param y1 The position of first point on the y-axis.
@@ -81,12 +81,12 @@ class graphics {
 	graphics& line(int x1, int y1, int x2, int y2);
 
 	/**
-	 * @brief Creates a new Quad.
+	 * Creates a new Quad.
 	 */
 	Quad newQuad(int x, int y, int width, int height, int sw, int sh);
 
 	/**
-	 * @brief Creates a new Image from a given filepath.
+	 * Creates a new Image from a given filepath.
 	 *
 	 * @param filename The filepath to the image file.
 	 *
@@ -99,7 +99,7 @@ class graphics {
 	Font* newFont(const std::string& filename);
 
 	/**
-	 * @brief Creates a new TrueType font, with the given font size.
+	 * Creates a new TrueType font, with the given font size.
 	 *
 	 * @param filename The path to the TrueType .ttf font.
 	 * @param size (12) The size of the font to create.
@@ -109,7 +109,7 @@ class graphics {
 	Font* newFont(const std::string& filename, int size);
 
 	/**
-	 * @brief Creates a new BMFont with the given spec.
+	 * Creates a new BMFont with the given spec.
 	 *
 	 * @param filename The path to the font image.
 	 * @param glyphWidth The width of each character.
@@ -121,7 +121,7 @@ class graphics {
 	Font* newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters);
 
 	/**
-	 * @brief Set an already-loaded Font as the current font.
+	 * Set an already-loaded Font as the current font.
 	 *
 	 * @param The font to set as the active font.
 	 */
@@ -130,12 +130,12 @@ class graphics {
 	graphics& setFont();
 
 	/**
-	 * @brief Retrieve th currently active font.
+	 * Retrieve th currently active font.
 	 */
 	Font* getFont();
 
 	/**
-	 * @brief Prints the given text to the screen.
+	 * Prints the given text to the screen.
 	 *
 	 * @param text The text to draw.
 	 * @param x The position to draw the object (x-axis).
@@ -148,29 +148,29 @@ class graphics {
 	graphics& print(const std::string& text, int x, int y);
 
 	/**
-	 * @brief Sets the active drawing color to the given color.
+	 * Sets the active drawing color to the given color.
 	 */
 	graphics& setColor(int red, int green, int blue, int alpha);
 
 	/**
-	 * @brief Sets the active drawing color to the given color.
+	 * Sets the active drawing color to the given color.
 	 */
 	graphics& setColor(int red, int green, int blue);
 
 	/**
-	 * @brief Gets the current color.
+	 * Gets the current color.
 	 */
 	Color getColor();
 
 	/**
-	 * @brief Retrieves the active background color.
+	 * Retrieves the active background color.
 	 *
 	 * @see love.graphics.setBackgroundColor
 	 */
 	Color getBackgroundColor();
 
 	/**
-	 * @brief Sets the background color to the given color.
+	 * Sets the background color to the given color.
 	 *
 	 * @param red The r value.
 	 * @param green The g value.
@@ -184,7 +184,7 @@ class graphics {
 	graphics& setBackgroundColor(int red, int green, int blue);
 
 	/**
-	 * @brief Sets the default scaling filters used with images, and fonts.
+	 * Sets the default scaling filters used with images, and fonts.
 	 *
 	 * @param filter The filter mode to apply when rotating or scaling graphics. This can be either "linear" (default), or "nearest".
 	 *
@@ -194,24 +194,24 @@ class graphics {
 	graphics& setDefaultFilter(const std::string& filter);
 
 	/**
-	 * @brief Returns the default scaling filters used with images and fonts.
+	 * Returns the default scaling filters used with images and fonts.
 	 *
 	 * @see love.graphics.setDefaultFilter
 	 */
 	std::string getDefaultFilter();
 
 	/**
-	 * @brief Retrieve the width of the screen.
+	 * Retrieve the width of the screen.
 	 */
 	int getWidth();
 
 	/**
-	 * @brief Retrieve the height of the screen.
+	 * Retrieve the height of the screen.
 	 */
 	int getHeight();
 
 	/**
-	 * @brief Gets the width and height of the window.
+	 * Gets the width and height of the window.
 	 *
 	 * @see love.graphics.getWidth
 	 * @see love.graphics.getHeight
@@ -221,21 +221,21 @@ class graphics {
 	Point getDimensions();
 
 	/**
-	 * @brief Draws a circle.
+	 * Draws a circle.
 	 *
 	 * @param drawmode How to draw the circle. Can be "fill" or "line".
 	 */
 	graphics& circle(const std::string& drawmode, int x, int y, int radius);
 
 	/**
-	 * @brief Draws an ellipse.
+	 * Draws an ellipse.
 	 *
 	 * @param drawmode How to draw the ellipse. Can be "fill" or "line".
 	 */
 	graphics& ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
 
 	/**
-	 * @brief Draws an image with the given angle, zoom, and origin.
+	 * Draws an image with the given angle, zoom, and origin.
 	 *
 	 * @param image The image to draw on the screen.
 	 * @param x (0) The position to draw the object (x-axis).
@@ -255,7 +255,7 @@ class graphics {
 	graphics& draw(Image* image);
 
 	/**
-	 * @brief Draws an image on screen, using the given Quad as a source.
+	 * Draws an image on screen, using the given Quad as a source.
 	 *
 	 * @param image The image to draw on the screen.
 	 * @param quad The source quad of the image.
@@ -266,7 +266,7 @@ class graphics {
 	graphics& draw(Image* image, Quad quad);
 
 	/**
-	 * @brief Draws an arc.
+	 * Draws an arc.
 	 *
 	 * @param drawmode How to draw the arc. Can be "fill" or "line".
 	 */

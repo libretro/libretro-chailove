@@ -5,12 +5,12 @@
 
 namespace love {
 /**
- * @brief Provides functionality for creating and transforming data.
+ * Provides functionality for creating and transforming data.
  */
 class data {
 	public:
 	/**
-	 * @brief Compresses a string or data using a specific compression level.
+	 * Compresses a string or data using a specific compression level.
 	 *
 	 * @param str The raw (un-compressed) string to compress.
 	 * @param level (-1) The level of compression to use, between 0 and 9. -1 indicates the default level.
@@ -23,7 +23,7 @@ class data {
 	std::string compress(const std::string& str);
 
 	/**
-	 * @brief Decompresses a compressed string.
+	 * Decompresses a compressed string.
 	 *
 	 * @param str A string containing data previously compressed with math.compress().
 	 *

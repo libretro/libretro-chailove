@@ -9,7 +9,7 @@ namespace Types {
 namespace Graphics {
 
 /**
- * @brief Drawable image type.
+ * Drawable image type.
  */
 class Image {
 	public:
@@ -22,12 +22,12 @@ class Image {
 	bool destroy();
 
 	/**
-	 * @brief Gets the width of the Texture.
+	 * Gets the width of the Texture.
 	 */
 	int getWidth();
 
 	/**
-	 * @brief Gets the height of the Texture.
+	 * Gets the height of the Texture.
 	 */
 	int getHeight();
 };

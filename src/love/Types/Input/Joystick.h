@@ -8,7 +8,7 @@ namespace Types {
 namespace Input {
 
 /**
- * @brief Represents a physical joystick.
+ * Represents a physical joystick.
  */
 class Joystick {
 	public:
@@ -16,7 +16,7 @@ class Joystick {
 	Joystick(int index);
 
 	/**
-	 * @brief Gets the name of the joystick.
+	 * Gets the name of the joystick.
 	 *
 	 * @return string The name of the Joystick.
 	 */
@@ -25,7 +25,7 @@ class Joystick {
 	void close();
 
 	/**
-	 * @brief Checks if a button on the Joystick is pressed.
+	 * Checks if a button on the Joystick is pressed.
 	 *
 	 * @param button The index of the button to be checked
 	 *
@@ -34,7 +34,7 @@ class Joystick {
 	bool isDown(int button);
 
 	/**
-	 * @brief Checks if a button on the Joystick is pressed.
+	 * Checks if a button on the Joystick is pressed.
 	 *
 	 * @param button The button to be checked
 	 *

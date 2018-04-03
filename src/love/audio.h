@@ -9,19 +9,19 @@ using love::Types::Audio::SoundData;
 namespace love {
 
 /**
- * @brief Provides an interface to output sound to the user's speakers.
+ * Provides an interface to output sound to the user's speakers.
  */
 class audio {
 	public:
 	/**
-	 * @brief Plays the specified sound.
+	 * Plays the specified sound.
 	 *
 	 * @param soundData The sound to play.
 	 */
 	void play(SoundData* soundData);
 
 	/**
-	 * @brief Creates a new audio source from a file.
+	 * Creates a new audio source from a file.
 	 *
 	 * @param filename The .wav file to load.
 	 */
@@ -34,14 +34,14 @@ class audio {
 	float m_volume = 1.0f;
 
 	/**
-	 * @brief Returns the master volume.
+	 * Returns the master volume.
 	 *
 	 * @return The current master volume between 0.0f and 1.0f.
 	 */
 	float getVolume();
 
 	/**
-	 * @brief Set the master volume.
+	 * Set the master volume.
 	 *
 	 * @param volume 1.0f is max and 0.0f is off.
 	 */

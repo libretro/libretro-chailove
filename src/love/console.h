@@ -8,7 +8,7 @@
 namespace love {
 
 /**
- * @brief In-game console for ChaiLove.
+ * In-game console for ChaiLove.
  *
  * To enable the console, you must trigger: `love.console.setEnabled(true)` or toggle the console in `love.conf`.
  *
@@ -29,17 +29,17 @@ class console {
 	void draw();
 
 	/**
-	 * @brief Checks to see if the console is enabled.
+	 * Checks to see if the console is enabled.
 	 */
 	bool isEnabled();
 
 	/**
-	 * @brief Enable or disable the console.
+	 * Enable or disable the console.
 	 */
 	bool setEnabled(bool enabled);
 
 	/**
-	 * @brief Checks whether or not the console is being displayed.
+	 * Checks whether or not the console is being displayed.
 	 */
 	bool isShown();
 

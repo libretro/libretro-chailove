@@ -221,7 +221,7 @@ graphics& graphics::setBackgroundColor(int red, int green, int blue, int alpha) 
 }
 
 /**
- * @brief Sets the default scaling filters used with images, and fonts.
+ * Sets the default scaling filters used with images, and fonts.
  */
 graphics& graphics::setDefaultFilter(const std::string& filter) {
 	if (filter == "linear") {
@@ -234,7 +234,7 @@ graphics& graphics::setDefaultFilter(const std::string& filter) {
 }
 
 /**
- * @brief Returns the default scaling filters used with images and fonts.
+ * Returns the default scaling filters used with images and fonts.
  */
 std::string graphics::getDefaultFilter() {
 	switch (m_smooth) {

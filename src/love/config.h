@@ -13,7 +13,7 @@ using love::Types::Config::WindowConfig;
 namespace love {
 
 /**
- * @brief The configuration object for ChaiLove.
+ * The configuration object for ChaiLove.
  *
  * This is set through the `conf` callback:
  *
@@ -31,27 +31,27 @@ class config {
 	config();
 
 	/**
-	 * @brief The machine name of the project.
+	 * The machine name of the project.
 	 */
 	std::string identity = "chailove";
 
 	/**
-	 * @brief The ChaiLove version the game was made on.
+	 * The ChaiLove version the game was made on.
 	 */
 	std::string version;
 
 	/**
-	 * @brief The window configuration.
+	 * The window configuration.
 	 */
 	WindowConfig window;
 
 	/**
-	 * @brief Enable or disable modules.
+	 * Enable or disable modules.
 	 */
 	ModuleConfig modules;
 
 	/**
-	 * @brief Generic map of boolean configuration options.
+	 * Generic map of boolean configuration options.
 	 *
 	 * Available options:
 	 * - "alphablending": true
@@ -60,7 +60,7 @@ class config {
 	std::map<std::string, bool> options;
 
 	/**
-	 * @brief Attach the in-game console.
+	 * Attach the in-game console.
 	 *
 	 * When `t.console = true`, will allow use of the in-game console. Use the tilde key to show.
 	 *

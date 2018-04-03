@@ -6,7 +6,7 @@ namespace Types {
 namespace Graphics {
 
 /**
- * @brief An x and y coordinate.
+ * An x and y coordinate.
  */
 struct Point {
 	Point() : x(0), y(0) {
@@ -21,12 +21,12 @@ struct Point {
 		// Nothing.
 	}
 	/**
-	 * @brief The x coordinate.
+	 * The x coordinate.
 	 */
 	float x;
 
 	/**
-	 * @brief The y coordinate.
+	 * The y coordinate.
 	 */
 	float y;
 };

@@ -4,7 +4,7 @@
 namespace love {
 
 /**
- * @brief Provides high-resolution timing functionality.
+ * Provides high-resolution timing functionality.
  */
 class timer {
 	public:
@@ -12,14 +12,14 @@ class timer {
 	void step(float delta);
 
 	/**
-	 * @brief Returns the time between the last two frames.
+	 * Returns the time between the last two frames.
 	 *
 	 * @return The time passed (in seconds).
 	 */
 	float getDelta();
 
 	/**
-	 * @brief Returns the current frames per second.
+	 * Returns the current frames per second.
 	 *
 	 * @return The current FPS.
 	 */

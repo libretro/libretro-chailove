@@ -8,27 +8,27 @@ namespace Types {
 namespace Graphics {
 
 /**
- * @brief An x, y, width, height, source width and source height.
+ * An x, y, width, height, source width and source height.
  */
 class Quad {
 	public:
 	/**
-	 * @brief The x coordinate.
+	 * The x coordinate.
 	 */
 	int x;
 
 	/**
-	 * @brief The y coordinate.
+	 * The y coordinate.
 	 */
 	int y;
 
 	/**
-	 * @brief The width of the Quad.
+	 * The width of the Quad.
 	 */
 	int width;
 
 	/**
-	 * @brief The height of the Quad.
+	 * The height of the Quad.
 	 */
 	int height;
 

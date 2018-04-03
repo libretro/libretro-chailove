@@ -12,7 +12,7 @@ namespace Types {
 namespace Graphics {
 
 /**
- * @brief Defines the shape of characters that can be drawn onto the screen.
+ * Defines the shape of characters that can be drawn onto the screen.
  */
 class Font {
 	public:
@@ -22,7 +22,7 @@ class Font {
 	~Font();
 
 	/**
-	 * @brief Retrieves whether or not the font is loaded.
+	 * Retrieves whether or not the font is loaded.
 	 */
 	bool loaded();
 	bool destroy();
@@ -32,17 +32,17 @@ class Font {
 	int ttyFontWidth, ttyFontHeight;
 
 	/**
-	 * @brief Determines the vertical size the given text needs.
+	 * Determines the vertical size the given text needs.
 	 */
 	int getHeight(const std::string& text);
 
 	/**
-	 * @brief Determines the vertical size a line of text needs.
+	 * Determines the vertical size a line of text needs.
 	 */
 	int getHeight();
 
 	/**
-	 * @brief Determines the horizontal size a line of text needs.
+	 * Determines the horizontal size a line of text needs.
 	 */
 	int getWidth(const std::string& text);
 
