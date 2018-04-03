@@ -45,3 +45,6 @@
 	path = vendor/freetype2
 	url = https://git.savannah.gnu.org/git/freetype/freetype2.git
 	ignore = dirty
+[submodule "vendor/semver"]
+	path = vendor/semver
+	url = https://github.com/h2non/semver.c.git
