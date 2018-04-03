@@ -4,9 +4,10 @@
  * [ChaiLove](https://github.com/libretro/libretro-chailove) is a framework for making 2D games in the [ChaiScript scripting language](http://chaiscript.com/). ChaiLove is totally free, and can be used in anything from friendly open-source hobby projects, to evil, closed-source commercial ones.
  *
  * Some interesting places to go from here:
+ * - \link gettingstarted Getting Started \endlink
  * - \link ::love love \endlink (the module)
  * - \link love::script Callbacks \endlink All the callbacks that are executed.
- * - [`chailove` topic on GitHub](https://github.com/topics/chailove)
+ * - \link games Games \endlink
  * - [Examples](https://git.io/vxPmn)
  * - [Building ChaiLove](https://github.com/libretro/libretro-chailove#development)
  *

@@ -1,16 +1,8 @@
-/**
- * ChaiLove API Documentation
- *
- * This file is used to add various API docs for classes.
- */
-
 #ifndef SRC_CHAILOVEDOCS_H_
 #define SRC_CHAILOVEDOCS_H_
 
 /**
- * Linked List
- *
- * Provides a linked list data structure.
+ * Provides a Linked List data structure.
  *
  * @code
  * var list = List()
