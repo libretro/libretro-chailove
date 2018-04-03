@@ -243,7 +243,7 @@ bool retro_serialize(void *data, size_t size) {
 	}
 
 	// Compress the JSON state data.
-	state = app->math.compress(state);
+	state = app->data.compress(state);
 
 	// Save the information to the state data.
 	std::copy(state.begin(), state.end(), reinterpret_cast<char*>(data));
@@ -266,7 +266,7 @@ bool retro_unserialize(const void *data, size_t size) {
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Decompress the state data.
-	loadData = app->math.decompress(loadData);
+	loadData = app->data.decompress(loadData);
 
 	// Finally, load the string.
 	return app->loadstate(loadData);
