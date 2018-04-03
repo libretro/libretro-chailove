@@ -37,7 +37,7 @@ assert_equal(love.filesystem.getDirectoryItems("assets").size(), 2, "love.filesy
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")
-assert_equal(theLines[0], "// Filesystem", "love.filesystem.lines()")
+assert_equal(theLines[0], "// getDirectoryItems()", "love.filesystem.lines()")
 
 // getInfo()
 var fileInfo = love.filesystem.getInfo("keyboard.chai")
