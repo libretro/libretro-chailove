@@ -8,7 +8,7 @@
 #define SRC_CHAILOVEDOCS_H_
 
 /**
- * @brief Linked List
+ * Linked List
  *
  * Provides a linked list data structure.
  */
@@ -20,32 +20,32 @@ class List {
 	List();
 
 	/**
-	 * @brief Insert element at beginning.
+	 * Insert element at beginning.
 	 */
 	void push_front(void* val);
 
 	/**
-	 * @brief Add element at the end.
+	 * Add element at the end.
 	 */
 	void push_back(void* val);
 
 	/**
-	 * @brief Retrieves the size of the list.
+	 * Retrieves the size of the list.
 	 */
 	void size();
 
 	/**
-	 * @brief Change size.
+	 * Change size.
 	 */
 	void resize(int size);
 
 	/**
-	 * @brief Delete first element.
+	 * Delete first element.
 	 */
 	void pop_front();
 
 	/**
-	 * @brief Delete last element.
+	 * Delete last element.
 	 */
 	void pop_back();
 };

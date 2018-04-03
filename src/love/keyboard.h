@@ -8,14 +8,14 @@
 
 namespace love {
 /**
- * @brief Provides an interface to the user's keyboard.
+ * Provides an interface to the user's keyboard.
  */
 class keyboard {
 	public:
 	bool load();
 
 	/**
-	 * @brief Checks whether a certain key is down.
+	 * Checks whether a certain key is down.
 	 *
 	 * @param key The key to check.
 	 *
@@ -24,7 +24,7 @@ class keyboard {
 	bool isDown(const std::string& key);
 
 	/**
-	 * @brief Checks whether a certain key is down.
+	 * Checks whether a certain key is down.
 	 *
 	 * @param scancode The key scancode to check.
 	 *
@@ -33,7 +33,7 @@ class keyboard {
 	bool isDown(int scancode);
 
 	/**
-	 * @brief Checks whether a certain key is down.
+	 * Checks whether a certain key is down.
 	 *
 	 * @param scancode The key scancode to check.
 	 *
@@ -44,14 +44,14 @@ class keyboard {
 	bool update();
 
 	/**
-	 * @brief Retrieve a scancode from the given key.
+	 * Retrieve a scancode from the given key.
 	 *
 	 * @see love.keyboard.getKeyFromScancode
 	 */
 	int getScancodeFromKey(const std::string& key);
 
 	/**
-	 * @brief Retrieve a key from the given scancode.
+	 * Retrieve a key from the given scancode.
 	 *
 	 * @see love.keyboard.getScancodeFromKey
 	 */

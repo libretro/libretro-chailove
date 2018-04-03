@@ -6,11 +6,11 @@ namespace Types {
 namespace Config {
 
 /**
- * @brief Allows enabling or disiabling modules during initialization.
+ * Allows enabling or disiabling modules during initialization.
  */
 struct ModuleConfig {
 	/**
-	 * @brief Enable or disable the sound module.
+	 * Enable or disable the sound module.
 	 */
 	bool sound = true;
 };

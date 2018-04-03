@@ -6,7 +6,7 @@
 #include "config.h"
 
 /**
- * @brief When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen. The follow are modules available through ChaiLove, below will provide more information about the callbacks available.
+ * When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen. The follow are modules available through ChaiLove, below will provide more information about the callbacks available.
  *
  * More interactive games will override additional callbacks in order to handle input from the user, and other aspects of a full-featured game.
  *
@@ -56,19 +56,19 @@
  */
 namespace love {
 /**
- * @brief Provides access to information about the user's system.
+ * Provides access to information about the user's system.
  */
 class system {
 	public:
 	/**
-	 * @brief Gets the current operating system.
+	 * Gets the current operating system.
 	 *
 	 * @return The current operating system. "OS X", "Windows", "Linux", "Android" or "iOS".
 	 */
 	std::string getOS();
 
 	/**
-	 * @brief Retreves the running ChaiLove version information.
+	 * Retreves the running ChaiLove version information.
 	 *
 	 * @return A vector, with the major being the first element, minor being the second, and patch being the third.
 	 *
@@ -77,7 +77,7 @@ class system {
 	std::vector<int> getVersion();
 
 	/**
-	 * @brief Retreves the running ChaiLove version, as a string.
+	 * Retreves the running ChaiLove version, as a string.
 	 *
 	 * @return A string representing ChaiLove's version. Example: 1.3.2
 	 *

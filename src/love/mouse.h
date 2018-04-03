@@ -8,14 +8,14 @@
 namespace love {
 
 /**
- * @brief Provides an interface to the user's mouse.
+ * Provides an interface to the user's mouse.
  */
 class mouse {
 	public:
 	bool load();
 
 	/**
-	 * @brief Returns the current x-position of the mouse.
+	 * Returns the current x-position of the mouse.
 	 *
 	 * @return The position of the mouse along the x-axis.
 	 *
@@ -24,7 +24,7 @@ class mouse {
 	int getX();
 
 	/**
-	 * @brief Returns the current y-position of the mouse.
+	 * Returns the current y-position of the mouse.
 	 *
 	 * @return The position of the mouse along the y-axis.
 	 *
@@ -33,12 +33,12 @@ class mouse {
 	int getY();
 
 	/**
-	 * @brief Returns the current position of the mouse.
+	 * Returns the current position of the mouse.
 	 */
 	Types::Graphics::Point getPosition();
 
 	/**
-	 * @brief Checks whether a certain button is down.
+	 * Checks whether a certain button is down.
 	 *
 	 * @param button The index of a button to check. 1 is the primary mouse button, 2 is the secondary mouse button and 3 is the middle button. Further buttons are mouse dependant.
 	 *
@@ -47,7 +47,7 @@ class mouse {
 	bool isDown(int button);
 
 	/**
-	 * @brief Checks whether a certain button is down.
+	 * Checks whether a certain button is down.
 	 *
 	 * @param button The mouse button to check. "left", "middle", "right", etc.
 	 *

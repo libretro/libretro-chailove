@@ -10,7 +10,7 @@ using love::Types::Graphics::Point;
 namespace love {
 
 /**
- * @brief Provides an interface for modifying and retrieving information about the program's window.
+ * Provides an interface for modifying and retrieving information about the program's window.
  */
 class window {
 	public:
@@ -18,7 +18,7 @@ class window {
 	bool unload();
 
 	/**
-	 * @brief Gets the window title.
+	 * Gets the window title.
 	 *
 	 * @return The current window title.
 	 *
@@ -27,7 +27,7 @@ class window {
 	std::string getTitle();
 
 	/**
-	 * @brief Sets the window title.
+	 * Sets the window title.
 	 *
 	 * @param title The new window title.
 	 *
@@ -36,7 +36,7 @@ class window {
 	window& setTitle(std::string title);
 
 	/**
-	 * @brief Display a simple message for a certain amount of frames.
+	 * Display a simple message for a certain amount of frames.
 	 *
 	 * @param msg The message text to be displayed.
 	 * @param frames (4000) The amount of frames to display the message.

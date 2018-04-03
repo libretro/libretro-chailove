@@ -5,14 +5,14 @@
 
 namespace love {
 /**
- * @brief Allows you to work with fonts.
+ * Allows you to work with fonts.
  */
 class font {
 	public:
 	bool load();
 
 	/**
-	 * @brief Retrieves whether or not all sub-systems have been loaded.
+	 * Retrieves whether or not all sub-systems have been loaded.
 	 */
 	bool isOpen();
 

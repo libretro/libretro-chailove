@@ -8,47 +8,47 @@ namespace Types {
 namespace Graphics {
 
 /**
- * @brief A color, holding red, green, blue and alpha values.
+ * A color, holding red, green, blue and alpha values.
  */
 struct Color {
 	/**
-	 * @brief Create a color with the value of 0, 0, 0, 0.
+	 * Create a color with the value of 0, 0, 0, 0.
 	 */
 	Color() : r(0), g(0), b(0), a(0) {
 		// Nothing.
 	}
 
 	/**
-	 * @brief Create a new color.
+	 * Create a new color.
 	 */
 	Color(int rValue, int gValue, int bValue, int aValue) : r(rValue), g(gValue), b(bValue), a(aValue) {
 		// Nothing.
 	}
 
 	/**
-	 * @brief Create a new color.
+	 * Create a new color.
 	 */
 	Color(int rValue, int gValue, int bValue) : r(rValue), g(gValue), b(bValue) {
 		// Nothing.
 	}
 
 	/**
-	 * @brief The amount of red.
+	 * The amount of red.
 	 */
 	int r;
 
 	/**
-	 * @brief The amount of green.
+	 * The amount of green.
 	 */
 	int g;
 
 	/**
-	 * @brief The amount of blue.
+	 * The amount of blue.
 	 */
 	int b;
 
 	/**
-	 * @brief The amount of alpha.
+	 * The amount of alpha.
 	 */
 	int a;
 

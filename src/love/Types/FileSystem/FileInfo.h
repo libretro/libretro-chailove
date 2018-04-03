@@ -8,11 +8,11 @@ namespace Types {
 namespace FileSystem {
 
 /**
- * @brief Information about a file.
+ * Information about a file.
  */
 struct FileInfo {
 	/**
-	 * @brief Creates a basic FileInfo object, with no values set.
+	 * Creates a basic FileInfo object, with no values set.
 	 */
 	FileInfo() : type(""), size(-1), modtime(-1) {
 		// Nothing.
@@ -31,17 +31,17 @@ struct FileInfo {
 	}
 
 	/**
-	 * @brief The type of the object at the path (file, directory, symlink, empty, etc.).
+	 * The type of the object at the path (file, directory, symlink, empty, etc.).
 	 */
 	std::string type;
 
 	/**
-	 * @brief The size in bytes of the file, or -1 if it can't be determined.
+	 * The size in bytes of the file, or -1 if it can't be determined.
 	 */
 	int size;
 
 	/**
-	 * @brief The file's last modification time in seconds since the unix epoch, or nil if it can't be determined.
+	 * The file's last modification time in seconds since the unix epoch, or nil if it can't be determined.
 	 */
 	int modtime;
 };
