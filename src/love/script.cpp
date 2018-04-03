@@ -200,6 +200,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&graphics::ellipse), "ellipse");
 	chai.add(fun(&graphics::getWidth), "getWidth");
 	chai.add(fun(&graphics::getHeight), "getHeight");
+	chai.add(fun(&graphics::getDimensions), "getDimensions");
 	chai.add(fun(&graphics::circle), "circle");
 	chai.add(fun(&graphics::line), "line");
 	chai.add(fun(&graphics::newQuad), "newQuad");

@@ -1,10 +1,20 @@
-assert_equal(love.graphics.getWidth(), 800, "love.graphics.getWidth()")
-assert_equal(love.graphics.getHeight(), 600, "love.graphics.getHeight()")
+// getWidth() and getHeight()
+var graphicWidth = love.graphics.getWidth()
+var graphicHeight = love.graphics.getHeight()
+assert_equal(graphicWidth, 640, "love.graphics.getWidth()")
+assert_equal(graphicHeight, 500, "love.graphics.getHeight()")
 
+// getDimensions()
+var graphicSize = love.graphics.getDimensions()
+assert_equal(graphicSize.x, graphicWidth, "love.graphics.getDimensions().x")
+assert_equal(graphicSize.y, graphicHeight, "love.graphics.getDimensions().y")
+
+// clear()
 love.graphics.clear()
 love.graphics.clear(233, 200, 100)
 love.graphics.clear(233, 200, 100, 200)
 
+// getDefaultFilter() and setDefaultFilter()
 assert_equal(love.graphics.getDefaultFilter(), "linear", "love.graphics.getDefaultFilter()")
 love.graphics.setDefaultFilter("nearest")
 assert_equal(love.graphics.getDefaultFilter(), "nearest", "love.graphics.setDefaultFilter()")

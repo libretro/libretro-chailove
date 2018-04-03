@@ -2,6 +2,8 @@ global failure = ""
 
 def conf(t) {
 	t.console = true
+	t.window.width = 640
+	t.window.height = 500
 }
 def load() {
 	print("\n================================\n")

@@ -211,6 +211,16 @@ class graphics {
 	int getHeight();
 
 	/**
+	 * @brief Gets the width and height of the window.
+	 *
+	 * @see love.graphics.getWidth
+	 * @see love.graphics.getHeight
+	 *
+	 * @return A Point refering the x and y size of the window.
+	 */
+	Point getDimensions();
+
+	/**
 	 * @brief Draws a circle.
 	 *
 	 * @param drawmode How to draw the circle. Can be "fill" or "line".
