@@ -1,3 +1,6 @@
+/**
+ * @brief A simple example of using ChiaLove.
+ */
 global logo
 global x
 global y

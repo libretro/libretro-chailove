@@ -14,7 +14,7 @@ namespace love {
 class audio {
 	public:
 	/**
-	 * @brief Plays the specified sound.
+	 * Plays the specified sound.
 	 *
 	 * @param soundData The sound to play.
 	 */

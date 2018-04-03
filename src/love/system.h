@@ -6,7 +6,7 @@
 #include "config.h"
 
 /**
- * @brief When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen.
+ * @brief When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen. The follow are modules available through ChaiLove, below will provide more information about the callbacks available.
  *
  * More interactive games will override additional callbacks in order to handle input from the user, and other aspects of a full-featured game.
  *
