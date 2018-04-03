@@ -5,6 +5,75 @@
 #include <string>
 #include "config.h"
 
+/**
+ * When beginning to write games using LÖVE, the most important parts of the API are the callbacks: love.load to do one-time setup of your game, love.update which is used to manage your game's state frame-to-frame, and love.draw which is used to render the game state onto the screen.
+ *
+ * More interactive games will override additional callbacks in order to handle input from the user, and other aspects of a full-featured game.
+ *
+ * LÖVE provides default placeholders for these callbacks, which you can override inside your own code by creating your own function with the same name as the callback:
+ *
+ * @code
+ * global x = 20
+ * global y = 20
+ * global w = 60
+ * global h = 20
+ *
+ * // ChaiLove callback; Load the game.
+ * def load() {
+ *    // Do something when the game loads.
+ * }
+ *
+ * // ChaiLove callback; Update the game state.
+ * def update(dt) {
+ *     // Increase the size of the rectangle every frame.
+ *     w = w + 1
+ *     h = h + 1
+ * }
+ *
+ * // ChaiLove callback; Draw the game.
+ * def draw() {
+ *     love.graphics.setColor(0, 100, 100)
+ *     love.graphics.rectangle("fill", x, y, w, h)
+ * }
+ * @endcode
+ *
+ * ## Modules
+ *
+ * - \link love::audio love.audio \endlink Provides an interface to output sound to the user's speakers.
+ * - \link love::config love.config \endlink Global ChaiLove configuration.
+ * - \link love::console love.console \endlink The in-game debugging console.
+ * - \link love::event love.event \endlink Manages events, like keypresses.
+ * - \link love::filesystem love.filesystem \endlink Provides an interface to the user's filesystem.
+ * - \link love::font love.font \endlink Allows you to work with fonts.
+ * - \link love::graphics love.graphics \endlink Drawing of shapes and images, management of screen geometry.
+ * - \link love::image love.image \endlink Provides an interface to decode encoded image data.
+ * - \link love::joystick love.joystick \endlink Provides an interface to connected joysticks.
+ * - \link love::keyboard love.keyboard \endlink Provides an interface to the user's keyboard.
+ * - \link love::math love.math \endlink Provides system-independent mathematical functions.
+ * - \link love::mouse love.mouse \endlink Provides an interface to the user's mouse.
+ * - \link love::script love.script \endlink This module is responsible for callback events.
+ * - \link love::sound love.sound \endlink This module is responsible for decoding sound files.
+ * - \link love::system love.system \endlink Provides access to information about the user's system.
+ * - \link love::timer love.timer \endlink Provides high-resolution timing functionality.
+ * - \link love::window love.window \endlink Provides an interface for the program's window.
+ *
+ * ## Callbacks
+ *
+ * - \link love::script::conf conf(t) \endlink Global configuration callback.
+ * - \link love::script::load load() \endlink This function is called exactly once at the beginning of the game.
+ * - \link love::script::update update(dt) \endlink Callback function used to update the state of the game every frame.
+ * - \link love::script::draw draw() \endlink Callback function used to draw on the screen every frame.
+ * - \link love::script::reset reset() \endlink Callback function used when the frontend requests to reset the game.
+ * - \link love::script::joystickpressed joystickpressed(joy, button) \endlink Called when a joystick button is pressed.
+ * - \link love::script::joystickreleased joystickreleased(joy, button) \endlink Called when a joystick button is released.
+ * - \link love::script::mousepressed mousepressed(x, y, button) \endlink Called when a mouse button is pressed.
+ * - \link love::script::mousereleased mousereleased(x, y, button) \endlink Called when a mouse button is released.
+ * - \link love::script::mousemoved mousemoved(x, y, dx, dy) \endlink Callback function triggered when the mouse is moved.
+ * - \link love::script::keypressed keypressed(key, scancode) \endlink Callback function triggered when a key is pressed.
+ * - \link love::script::keyreleased keyreleased(key, scancode) \endlink Callback function triggered when a key is released.
+ * - \link love::script::savestate savestate() \endlink Callback function triggered to export JSON serialized data of the game state.
+ * - \link love::script::loadstate loadstate(jsonData) \endlink Callback function triggered to load the given JSON serialized data.
+ */
 namespace love {
 /**
  * @brief Provides access to information about the user's system.
