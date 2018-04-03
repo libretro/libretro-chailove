@@ -1,3 +1,6 @@
+/**
+ * Assert whether the given value is the same as the expected.
+ */
 def assert_equal(actual, expected, message) {
 	if (actual == expected) {
 		print(" ✓ " + message)
@@ -9,19 +12,30 @@ def assert_equal(actual, expected, message) {
 	}
 }
 
+/**
+ * Assert if the given value isn't truthy.
+ */
 def assert_not(value, message) {
 	assert(!value, message)
 }
 
+/**
+ * Assert that the given value doesn't match the expected.
+ */
 def assert_not_equal(actual, expected, message) {
 	assert_equal(actual != expected, true, message)
 }
 
+/**
+ * Make an assert on the given value.
+ */
 def assert(value, message) {
 	assert_equal(value, true, message)
 }
 
-
+/**
+ * Assert that the given value is greater than the expected value.
+ */
 def assert_greater(actual, expected, message) {
 	if (actual > expected) {
 		print(" ✓ " + message)
