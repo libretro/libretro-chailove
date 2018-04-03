@@ -14,7 +14,7 @@
 namespace love {
 
 /**
- * Global functions and events that are called.
+ * This module provides all the global functions and events that are called.
  */
 class script {
 	public:
