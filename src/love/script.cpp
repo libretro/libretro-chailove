@@ -86,6 +86,7 @@ script::script(const std::string& file) {
 		love["audio"] = var(std::ref(app->audio));
 		love["config"] = var(std::ref(app->config));
 		love["console"] = var(std::ref(app->console));
+		love["data"] = var(std::ref(app->data));
 		love["event"] = var(std::ref(app->event));
 		love["filesystem"] = var(std::ref(app->filesystem));
 		love["font"] = var(std::ref(app->font));
@@ -119,6 +120,16 @@ script::script(const std::string& file) {
 	chai.add(constructor<Point()>(), "Point");
 	chai.add(constructor<Point(float)>(), "Point");
 	chai.add(constructor<Point(float, float)>(), "Point");
+
+	// FileInfo Object.
+	chai.add(user_type<FileInfo>(), "FileInfo");
+	chai.add(fun(&FileInfo::type), "type");
+	chai.add(fun(&FileInfo::size), "size");
+	chai.add(fun(&FileInfo::modtime), "modtime");
+	chai.add(constructor<FileInfo()>(), "FileInfo");
+	chai.add(constructor<FileInfo(const std::string&)>(), "FileInfo");
+	chai.add(constructor<FileInfo(const std::string&, int)>(), "FileInfo");
+	chai.add(constructor<FileInfo(const std::string&, int, int)>(), "FileInfo");
 
 	// Color Object.
 	chai.add(user_type<Color>(), "Color");
@@ -199,6 +210,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&graphics::ellipse), "ellipse");
 	chai.add(fun(&graphics::getWidth), "getWidth");
 	chai.add(fun(&graphics::getHeight), "getHeight");
+	chai.add(fun(&graphics::getDimensions), "getDimensions");
 	chai.add(fun(&graphics::circle), "circle");
 	chai.add(fun(&graphics::line), "line");
 	chai.add(fun(&graphics::newQuad), "newQuad");
@@ -251,8 +263,10 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::unmount), "unmount");
 	chai.add(fun(&filesystem::read), "read");
 	chai.add(fun(&filesystem::isDirectory), "isDirectory");
+	chai.add(fun(&filesystem::isSymlink), "isSymlink");
 	chai.add(fun(&filesystem::isFile), "isFile");
 	chai.add(fun(&filesystem::exists), "exists");
+	chai.add(fun(&filesystem::getInfo), "getInfo");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 	chai.add(fun(&filesystem::mount), "mount");
 	chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
@@ -316,9 +330,11 @@ script::script(const std::string& file) {
 	chai.add(fun<love::math&, math, int, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun<love::math&, math, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun(&math::getRandomSeed), "getRandomSeed");
-	chai.add(fun<std::string, math, const std::string&>(&math::compress), "compress");
-	chai.add(fun<std::string, math, const std::string&, int>(&math::compress), "compress");
-	chai.add(fun(&math::decompress), "decompress");
+
+	// Data
+	chai.add(fun<std::string, data, const std::string&>(&data::compress), "compress");
+	chai.add(fun<std::string, data, const std::string&, int>(&data::compress), "compress");
+	chai.add(fun(&data::decompress), "decompress");
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");

@@ -4,6 +4,18 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.18.0 - Unreleased
+### Added
+- [Semantic Versioning](https://semver.org/) checks
+  - Use `t.version = "0.18.0"` in `conf(t)` to specify which ChaiLove version you're targeting
+- `love.graphics.getDimensions()`
+- `love.filesystem.getInfo()`
+- `love.filesystem.isSymlink()`
+
+### Updated
+- `love.math.compress()` is now `love.data.compress()`
+- Documentation
+
 ## 0.17.0 - 2018-03-18
 ### Added
 - `love.system.getOS()` now returns actual operating system name

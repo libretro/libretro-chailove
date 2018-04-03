@@ -7,7 +7,7 @@
 namespace love {
 
 /**
- * @brief This module is responsible for decoding sound files. It can't play the sounds, see love.audio for that.
+ * This module is responsible for decoding sound files. It can't play the sounds, see love.audio for that.
  */
 class sound {
 	public:
@@ -17,7 +17,7 @@ class sound {
 	bool update();
 
 	/**
-	 * @brief Creates a new SoundData.
+	 * Creates a new SoundData.
 	 *
 	 * @param filename The file name of the file to load.
 	 *

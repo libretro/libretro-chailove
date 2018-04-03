@@ -5,18 +5,19 @@
 
 namespace love {
 /**
- * @brief Provides system-independent mathematical functions.
+ * Provides system-independent mathematical functions.
  */
 class math {
 	public:
 	bool load();
+
 	/**
-	 * @brief Get uniformly distributed pseudo-random number, between the given numbers.
+	 * Get uniformly distributed pseudo-random number, between the given numbers.
 	 *
 	 * @param min (0.0f) The minimum value.
 	 * @param max (1.0f) The max value.
 	 *
-	 * @return a number between the two given min and max values.
+	 * @return A number between the two given min and max values.
 	 */
 	float random(float min, float max);
 	float random(float max);
@@ -27,7 +28,7 @@ class math {
 	double random(double max);
 
 	/**
-	 * @brief Sets the random seed to a random seed between the given min and max values.
+	 * Sets the random seed to a random seed between the given min and max values.
 	 *
 	 * @param min The lower 32 bits of the seed value.
 	 * @param high The higher 32 bits of the seed value.
@@ -39,7 +40,7 @@ class math {
 	math& setRandomSeed(int min, int max);
 
 	/**
-	 * @brief Sets the seed of the random number generator.
+	 * Sets the seed of the random number generator.
 	 *
 	 * @param seed The integer number with which you want to seed the randomization.
 	 *
@@ -50,60 +51,35 @@ class math {
 	math& setRandomSeed(int seed);
 
 	/**
-	 * @brief Gets the seed of the random number generator.
+	 * Gets the seed of the random number generator.
 	 *
 	 * @see love.math.setRandomSeed
 	 */
 	int getRandomSeed();
 
 	/**
-	 * @brief Converts from degrees to radians.
+	 * Converts from degrees to radians.
 	 *
 	 * @see love.math.degrees
 	 */
 	float rad(float degrees);
 
 	/**
-	 * @brief Converts from radians to degrees.
+	 * Converts from radians to degrees.
 	 *
 	 * @see love.math.rad
 	 */
 	float degrees(float rad);
 
-	std::string compress(const std::string& str);
-
 	/**
-	 * @brief Compresses a string or data using a specific compression level.
-	 *
-	 * @param str The raw (un-compressed) string to compress.
-	 * @param level (-1) The level of compression to use, between 0 and 9. -1 indicates the default level.
-	 *
-	 * @return Compressed data in the form of a string.
-	 *
-	 * @see love.math.decompress
-	 */
-	std::string compress(const std::string& str, int level);
-
-	/**
-	 * @brief Decompresses a compressed string.
-	 *
-	 * @param str A string containing data previously compressed with math.compress().
-	 *
-	 * @return A string containing the raw decompressed data.
-	 *
-	 * @see love.math.compress
-	 */
-	std::string decompress(const std::string& str);
-
-	/**
-	 * @brief e
+	 * e
 	 *
 	 * @see https://en.wikipedia.org/wiki/E_(mathematical_constant)
 	 */
 	const float e = 2.718281828459045f;
 
 	/**
-	 * @brief pi
+	 * pi
 	 *
 	 * @see https://en.wikipedia.org/wiki/Pi
 	 */

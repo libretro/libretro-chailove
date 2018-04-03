@@ -10,7 +10,7 @@ using love::Types::Input::Joystick;
 namespace love {
 
 /**
- * @brief Provides an interface to connected joysticks.
+ * Provides an interface to connected joysticks.
  */
 class joystick {
 	public:
@@ -18,37 +18,37 @@ class joystick {
 	void update();
 
 	/**
-	 * @brief Gets a list of connected Joysticks.
+	 * Gets a list of connected Joysticks.
 	 */
 	Joystick* getJoysticks();
 	Joystick* joysticks;
 
 	/**
-	 * @brief Gets the number of connected joysticks.
+	 * Gets the number of connected joysticks.
 	 */
 	int getJoystickCount();
 	int numJoysticks = 0;
 
 	/**
-	 * @brief Checks if the joystick is open.
+	 * Checks if the joystick is open.
 	 */
 	bool isOpen(int index);
 
 	void clearCache();
 
 	/**
-	 * @brief Closes a joystick.
+	 * Closes a joystick.
 	 */
 	void close(int index);
 
 	void unload();
 	/**
-	 * @brief Checks if a button number is pressed on a joystick.
+	 * Checks if a button number is pressed on a joystick.
 	 */
 	bool isDown(int index, int button);
 
 	/**
-	 * @brief Checks if a button is pressed on a joystick.
+	 * Checks if a button is pressed on a joystick.
 	 */
 	bool isDown(int index, const std::string& button);
 
@@ -57,7 +57,7 @@ class joystick {
 	int16_t joystick_cache[4][14];
 
 	/**
-	 * @brief Retrieve the given joystick.
+	 * Retrieve the given joystick.
 	 *
 	 * @code
 	 * if (love.joystick[0].isDown("left")) {

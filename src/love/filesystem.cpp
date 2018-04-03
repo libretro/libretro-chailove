@@ -1,10 +1,14 @@
 #include <string>
+#include <iostream>
+
 #include "physfs.h"
 #include "filesystem.h"
-#include <physfsrwops.h>
-#include <filesystem/path.h>
+#include "physfsrwops.h"
+#include "filesystem/path.h"
 #include "../ChaiLove.h"
-#include <iostream>
+#include "Types/FileSystem/FileInfo.h"
+
+using love::Types::FileSystem::FileInfo;
 
 namespace love {
 
@@ -214,6 +218,14 @@ bool filesystem::isFile(const std::string& filename) {
 	return stat.filetype == PHYSFS_FILETYPE_REGULAR;
 }
 
+bool filesystem::isSymlink(const std::string& filename) {
+	PHYSFS_Stat stat;
+	if (PHYSFS_stat(filename.c_str(), &stat) == 0) {
+		return false;
+	}
+	return stat.filetype == PHYSFS_FILETYPE_SYMLINK;
+}
+
 std::vector<std::string> filesystem::lines(const std::string& filename) {
 	return lines(filename, "\n");
 }
@@ -236,4 +248,31 @@ std::vector<std::string> filesystem::lines(const std::string& filename, const st
 
 	return strings;
 }
+
+FileInfo filesystem::getInfo(const std::string& path) {
+	FileInfo fileInfo;
+	PHYSFS_Stat stat;
+	if (PHYSFS_stat(path.c_str(), &stat) == 0) {
+		return fileInfo;
+	}
+	switch(stat.filetype) {
+		case PHYSFS_FILETYPE_REGULAR:
+			fileInfo.type = "file";
+			break;
+		case PHYSFS_FILETYPE_DIRECTORY:
+			fileInfo.type = "directory";
+			break;
+		case PHYSFS_FILETYPE_SYMLINK:
+			fileInfo.type = "symlink";
+			break;
+		default:
+			fileInfo.type = "other";
+			break;
+	}
+
+	fileInfo.modtime = stat.modtime;
+	fileInfo.size = stat.filesize;
+	return fileInfo;
+}
+
 }  // namespace love

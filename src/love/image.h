@@ -9,7 +9,7 @@ using love::Types::Graphics::Image;
 namespace love {
 
 /**
- * @brief Provides an interface to decode encoded image data.
+ * Provides an interface to decode encoded image data.
  */
 class image {
 	public:
@@ -17,7 +17,7 @@ class image {
 	bool unload();
 
 	/**
-	 * @brief Creates a new ImageData object.
+	 * Creates a new ImageData object.
 	 *
 	 * @param filename The filename of the image file.
 	 *

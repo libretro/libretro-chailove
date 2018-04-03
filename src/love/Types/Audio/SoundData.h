@@ -31,7 +31,7 @@ typedef struct {
 } snd_SoundData;
 
 /**
- * @brief Contains audio samples that you can playback.
+ * Contains audio samples that you can playback.
  */
 class SoundData {
 	public:
@@ -39,12 +39,12 @@ class SoundData {
 	~SoundData();
 
 	/**
-	 * @brief Plays a source.
+	 * Plays a source.
 	 */
 	bool play();
 
 	/**
-	 * @brief Stops an audio source.
+	 * Stops an audio source.
 	 */
 	bool stop();
 
@@ -58,43 +58,43 @@ class SoundData {
 	bool isLoaded();
 
 	/**
-	 * @brief Gets the current volume of the Source.
+	 * Gets the current volume of the Source.
 	 */
 	float getVolume();
 
 	/**
-	 * @brief Sets the current volume of the Source.
+	 * Sets the current volume of the Source.
 	 *
 	 * @return The SoundData object iself, to allow for method chaining.
 	 */
 	SoundData& setVolume(float volume);
 
 	/**
-	 * @brief Returns whether the Source is playing.
+	 * Returns whether the Source is playing.
 	 *
 	 * @return True if the sound is playing.
 	 */
 	bool isPlaying();
 
 	/**
-	 * @brief Resumes playing the given Source.
+	 * Resumes playing the given Source.
 	 */
 	bool resume();
 
 	/**
-	 * @brief Pauses the given Source.
+	 * Pauses the given Source.
 	 */
 	bool pause();
 
 	int WAV_HEADER_SIZE = 44;
 
 	/**
-	 * @brief Returns whether the Source will loop.
+	 * Returns whether the Source will loop.
 	 */
 	bool isLooping();
 
 	/**
-	 * @brief Set whether the Source should loop.
+	 * Set whether the Source should loop.
 	 */
 	SoundData& setLooping(bool loop);
 };

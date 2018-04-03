@@ -1,12 +1,13 @@
+/**
+ * This is an example of using ChaiLove in a simple example.
+ */
 global logo
-global x
-global y
+global x = 10.0f
+global y = 10.0f
 
 def load() {
 	love.graphics.setBackgroundColor(54, 172, 248)
 	logo = love.graphics.newImage("logo.png")
-	x = 10.0f
-	y = 10.0f
 }
 
 def draw() {

@@ -48,6 +48,7 @@ def conf(t) {
 	gridScale = 10
 	t.window.width  = WIDTH * gridScale
 	t.window.height = HEIGHT * gridScale
+	t.version = "0.18.0"
 }
 
 /**

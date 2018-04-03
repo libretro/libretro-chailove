@@ -243,7 +243,7 @@ bool retro_serialize(void *data, size_t size) {
 	}
 
 	// Compress the JSON state data.
-	state = app->math.compress(state);
+	state = app->data.compress(state);
 
 	// Save the information to the state data.
 	std::copy(state.begin(), state.end(), reinterpret_cast<char*>(data));
@@ -266,7 +266,7 @@ bool retro_unserialize(const void *data, size_t size) {
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Decompress the state data.
-	loadData = app->math.decompress(loadData);
+	loadData = app->data.decompress(loadData);
 
 	// Finally, load the string.
 	return app->loadstate(loadData);
@@ -283,7 +283,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 
 void frame_time_cb(retro_usec_t usec) {
-	float delta = usec / 1000000.0;
+	float delta = (float)usec / 1000000.0f;
 	ChaiLove* app = ChaiLove::getInstance();
 	app->timer.step(delta);
 }
@@ -400,7 +400,7 @@ void retro_reset(void) {
 
 void retro_run(void) {
 	ChaiLove* app = ChaiLove::getInstance();
-	if (!app->event.quitstatus) {
+	if (!app->event.m_quitstatus) {
 		// Poll all the inputs.
 		ChaiLove::input_poll_cb();
 

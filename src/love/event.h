@@ -3,15 +3,15 @@
 
 namespace love {
 /**
- * @brief Manages events, like keypresses.
+ * Manages events, like keypresses.
  */
 class event {
 	public:
 	/**
-	 * @brief Exits ChaiLove.
+	 * Exits ChaiLove.
 	 */
 	void quit();
-	bool quitstatus = false;
+	bool m_quitstatus = false;
 };
 
 }  // namespace love

@@ -5,8 +5,10 @@
 #include "SDL.h"
 #include "config.h"
 #include "libretro.h"
+#include "Types/Graphics/Point.h"
 
 using ::ChaiLove;
+using love::Types::Graphics::Point;
 using std::string;
 
 namespace love {
@@ -82,7 +84,7 @@ void window::showMessageBox(const std::string& msg, int frames) {
 }
 
 void window::showMessageBox(const std::string& msg) {
-	showMessageBox(msg, 4000);
+	showMessageBox(msg, 3500);
 }
 
 }  // namespace love

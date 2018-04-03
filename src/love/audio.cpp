@@ -4,7 +4,7 @@
 #include "Types/Audio/AudioState.h"
 #include "../ChaiLove.h"
 #include "sound.h"
-#include <physfs.h>
+#include "physfs.h"
 
 using love::Types::Audio::SoundData;
 using love::Types::Audio::AudioState::Stopped;

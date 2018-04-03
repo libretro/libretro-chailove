@@ -6,7 +6,7 @@ Provides a few examples of usage of ChaiLove. To run them, execute:
 
 ## Examples
 
-- Benchmark
-- Pong
-- Simple
-- Snake
+- [Benchmark](benchmark)
+- [Pong](pong)
+- [Simple](simple)
+- [Snake](snake)

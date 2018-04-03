@@ -3,11 +3,16 @@ SOURCES_CXX += $(wildcard \
 	src/*.cpp \
 	src/love/*.cpp \
 	src/love/Types/Audio/*.cpp \
+	src/love/Types/FileSystem/*.cpp \
 	src/love/Types/Graphics/*.cpp \
 	src/love/Types/Input/*.cpp \
 	src/love/Types/Config/*.cpp \
 	test/native/*.cpp \
 )
+
+# semver
+FLAGS += -Ivendor/semver
+SOURCES_C += vendor/semver/semver.c
 
 # random
 FLAGS += -Ivendor/random/include

@@ -1,7 +1,10 @@
+// getTitle()
 assert_equal(love.window.getTitle(), "ChaiLove", "love.window.getTitle()")
 
+// setTitle()
 love.window.setTitle("ChaiLove Unit Testing")
 assert_equal(love.window.getTitle(), "ChaiLove Unit Testing", "love.window.setTitle()")
 
+// showMessageBox()
 love.window.showMessageBox("Hello World!")
 assert(true, "love.window.showMessageBox()")

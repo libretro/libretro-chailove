@@ -2,6 +2,8 @@ global failure = ""
 
 def conf(t) {
 	t.console = true
+	t.window.width = 640
+	t.window.height = 500
 }
 def load() {
 	print("\n================================\n")
@@ -10,6 +12,7 @@ def load() {
 	love.filesystem.load("assert")
 	love.filesystem.load("audio")
 	love.filesystem.load("console")
+	love.filesystem.load("data")
 	love.filesystem.load("filesystem")
 	love.filesystem.load("font")
 	love.filesystem.load("graphics")

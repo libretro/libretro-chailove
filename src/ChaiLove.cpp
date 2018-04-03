@@ -45,6 +45,7 @@ bool ChaiLove::load(const std::string& file) {
 	// Initialize the scripting system.
 	script = new love::script(file);
 	script->conf(config);
+	system.load(config);
 
 	// Testing.
 	#ifdef __HAVE_TESTS__
@@ -79,7 +80,7 @@ bool ChaiLove::load(const std::string& file) {
 }
 
 bool ChaiLove::update() {
-	if (event.quitstatus) {
+	if (event.m_quitstatus) {
 		return false;
 	}
 
@@ -90,7 +91,7 @@ bool ChaiLove::update() {
 		switch (sdlEvent.type) {
 			case SDL_QUIT:
 				event.quit();
-				return !event.quitstatus;
+				return !event.m_quitstatus;
 				break;
 		}
 	}
@@ -107,7 +108,7 @@ bool ChaiLove::update() {
 	test.update(timer.getDelta());
 	#endif
 
-	return !event.quitstatus;
+	return !event.m_quitstatus;
 }
 
 /**
@@ -123,7 +124,7 @@ void ChaiLove::reset() {
  * Render the ChaiLove.
  */
 void ChaiLove::draw() {
-	if (!event.quitstatus) {
+	if (!event.m_quitstatus) {
 		// Clear the screen.
 		graphics.clear();
 

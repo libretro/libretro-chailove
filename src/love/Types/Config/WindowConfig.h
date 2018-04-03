@@ -8,26 +8,26 @@ namespace Types {
 namespace Config {
 
 /**
- * @brief Configuration for how the application is set up.
+ * Configuration for how the application is set up.
  */
 struct WindowConfig {
 	/**
-	 * @brief The width of the screen.
+	 * The width of the screen.
 	 */
 	int width = 800;
 
 	/**
-	 * @brief The height of the screen.
+	 * The height of the screen.
 	 */
 	int height = 600;
 
 	/**
-	 * @brief The number of bits used to represent each pixel in a surface.
+	 * The number of bits used to represent each pixel in a surface.
 	 */
 	int bbp = 32;
 
 	/**
-	 * @brief The name of the application. Defaults to "ChaiLove".
+	 * The name of the application. Defaults to "ChaiLove".
 	 */
 	std::string title = "ChaiLove";
 	bool asyncblit = true;

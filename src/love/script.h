@@ -14,14 +14,33 @@
 namespace love {
 
 /**
- * @brief Global functions and events that are called.
+ * This module provides all the global functions and events that are called.
+ *
+ * The following `main.chai` is an example of some of these callbacks being used in unison.
+ *
+ * @code
+ * global logo
+ *
+ * def load() {
+ *   logo = love.graphics.newImage("logo.png")
+ * }
+ *
+ * def draw() {
+ *   love.graphics.print("Hello World!", 400, 300)
+ *   love.graphics.draw(logo, 100, 100)
+ * }
+ *
+ * def update(dt) {
+ *   // Change something on the screen.
+ * }
+ * @endcode
  */
 class script {
 	public:
 	script(const std::string& file);
 
 	/**
-	 * @brief Modify some configuration options.
+	 * Modify some configuration options.
 	 *
 	 * @param t The config object to modify.
 	 *
@@ -29,9 +48,15 @@ class script {
 	 *
 	 * @code
 	 * def conf(t) {
+	 *   // Attach a development console, toggle with `.
+	 *   t.console = false
+	 *
+	 *   // The ChaiLove version this game was made for.
+	 *   t.version = "0.18.0"
+	 *
+	 *   // The width and height of the game.
 	 *   t.window.width = 1024
 	 *   t.window.height = 768
-	 *   t.console = false
 	 * }
 	 * @endcode
 	 *
@@ -40,7 +65,7 @@ class script {
 	void conf(config& t);
 
 	/**
-	 * @brief This function is called exactly once at the beginning of the game.
+	 * This function is called exactly once at the beginning of the game.
 	 *
 	 * ### Example
 	 *
@@ -61,7 +86,7 @@ class script {
 	void load();
 
 	/**
-	 * @brief Callback function used to update the state of the game every frame.
+	 * Callback function used to update the state of the game every frame.
 	 *
 	 * @param delta Time since the last update in seconds.
 	 *
@@ -86,7 +111,7 @@ class script {
 	void update(float delta);
 
 	/**
-	 * @brief Callback function used to draw on the screen every frame.
+	 * Callback function used to draw on the screen every frame.
 	 *
 	 * ### Example
 	 *
@@ -107,7 +132,7 @@ class script {
 	void draw();
 
 	/**
-	 * @brief Called when the game is requested to be reset.
+	 * Called when the game is requested to be reset.
 	 *
 	 * ### Example
 	 *
@@ -132,7 +157,7 @@ class script {
 	bool loadModule(const std::string& moduleName);
 
 	/**
-	 * @brief Called when a joystick button is pressed.
+	 * Called when a joystick button is pressed.
 	 *
 	 * @param joystick The joystick number.
 	 * @param button The name of which button was released.
@@ -154,7 +179,7 @@ class script {
 	void joystickpressed(int joystick, const std::string& button);
 
 	/**
-	 * @brief Called when a joystick button is released.
+	 * Called when a joystick button is released.
 	 *
 	 * @param joystick The joystick number.
 	 * @param button The name of which button was released.
@@ -176,7 +201,7 @@ class script {
 	void joystickreleased(int joystick, const std::string& button);
 
 	/**
-	 * @brief Called when a mouse button is pressed.
+	 * Called when a mouse button is pressed.
 	 *
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
@@ -185,7 +210,7 @@ class script {
 	void mousepressed(int x, int y, const std::string& button);
 
 	/**
-	 * @brief Called when a mouse button is released.
+	 * Called when a mouse button is released.
 	 *
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
@@ -194,7 +219,7 @@ class script {
 	void mousereleased(int x, int y, const std::string& button);
 
 	/**
-	 * @brief Called when the mouse is moved.
+	 * Called when the mouse is moved.
 	 *
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
@@ -204,7 +229,7 @@ class script {
 	void mousemoved(int x, int y, int dx, int dy);
 
 	/**
-	 * @brief Called when a key on the keyboard has been pressed.
+	 * Called when a key on the keyboard has been pressed.
 	 *
 	 * @param key The name of the key that was pressed.
 	 * @param scancode The scancode of the key that was pressed.
@@ -212,7 +237,7 @@ class script {
 	void keypressed(const std::string& key, int scancode);
 
 	/**
-	 * @brief Called when a key on the keyboard is released.
+	 * Called when a key on the keyboard is released.
 	 *
 	 * @param key The name of the key that was released.
 	 * @param scancode The scancode of the key that was released.
@@ -220,14 +245,14 @@ class script {
 	void keyreleased(const std::string& key, int scancode);
 
 	/**
-	 * @brief Called when requested to save the current state.
+	 * Called when requested to save the current state.
 	 *
 	 * @return string A JSON array representing the current state.
 	 */
 	std::string savestate();
 
 	/**
-	 * @brief Called when requested to load a state.
+	 * Called when requested to load a state.
 	 *
 	 * @param data A JSON array representing the state to load.
 	 *
