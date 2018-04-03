@@ -45,6 +45,7 @@ bool ChaiLove::load(const std::string& file) {
 	// Initialize the scripting system.
 	script = new love::script(file);
 	script->conf(config);
+	system.load(config);
 
 	// Testing.
 	#ifdef __HAVE_TESTS__

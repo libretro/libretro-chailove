@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "config.h"
 
 namespace love {
 /**
@@ -34,6 +35,8 @@ class system {
 	 * @see love.system.getVersion
 	 */
 	std::string getVersionString();
+
+	bool load(config& t);
 };
 
 }  // namespace love
