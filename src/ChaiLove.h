@@ -4,24 +4,12 @@
  * [ChaiLove](https://github.com/libretro/libretro-chailove) is a framework for making 2D games in the [ChaiScript scripting language](http://chaiscript.com/). ChaiLove is totally free, and can be used in anything from friendly open-source hobby projects, to evil, closed-source commercial ones.
  *
  * Some interesting places to go from here:
+ * - \link gettingstarted Getting Started \endlink
  * - \link ::love love \endlink (the module)
- * - \link love::audio audio \endlink Provides an interface to output sound to the user's speakers.
- * - \link love::config config \endlink Global ChaiLove configuration.
- * - \link love::console config \endlink The in-game debugging console.
- * - \link love::event event \endlink Manages events, like keypresses.
- * - \link love::filesystem filesystem \endlink Provides an interface to the user's filesystem.
- * - \link love::font font \endlink Allows you to work with fonts.
- * - \link love::graphics graphics \endlink Drawing of shapes and images, management of screen geometry.
- * - \link love::image image \endlink Provides an interface to decode encoded image data.
- * - \link love::joystick joystick \endlink Provides an interface to connected joysticks.
- * - \link love::keyboard keyboard \endlink Provides an interface to the user's keyboard.
- * - \link love::math math \endlink Provides system-independent mathematical functions.
- * - \link love::mouse mouse \endlink Provides an interface to the user's mouse.
- * - \link love::script script \endlink This module is responsible for callback events.
- * - \link love::sound sound \endlink This module is responsible for decoding sound files.
- * - \link love::system system \endlink Provides access to information about the user's system.
- * - \link love::timer timer \endlink Provides high-resolution timing functionality.
- * - \link love::window window \endlink Provides an interface for the program's window.
+ * - \link love::script Callbacks \endlink All the callbacks that are executed.
+ * - \link games Games \endlink
+ * - [Examples](https://git.io/vxPmn)
+ * - [Building ChaiLove](https://github.com/libretro/libretro-chailove#development)
  *
  * ## ChaiScript
  *
@@ -32,13 +20,15 @@
  *
  * ## Hello World
  *
- * This is the full source for 'hello world' in ChaiLove, using a `main.chai` file. Running this code will cause an 640 by 480 window to appear, and display white text on a black background.
+ * This is the full source for "hello world" in ChaiLove, using a `main.chai` file. Running this code will cause an 640 by 480 window to appear, and display white text on a black background.
  *
  * @code
  * def draw() {
  *     love.graphics.print("Hello World!", 200, 250)
  * }
  * @endcode
+ *
+ * To run the above, execute it with `retroarch -L chailove_libretro.so main.chai` .
  */
 
 #ifndef SRC_CHAILOVE_H_

@@ -14,7 +14,26 @@
 namespace love {
 
 /**
- * Global functions and events that are called.
+ * This module provides all the global functions and events that are called.
+ *
+ * The following `main.chai` is an example of some of these callbacks being used in unison.
+ *
+ * @code
+ * global logo
+ *
+ * def load() {
+ *   logo = love.graphics.newImage("logo.png")
+ * }
+ *
+ * def draw() {
+ *   love.graphics.print("Hello World!", 400, 300)
+ *   love.graphics.draw(logo, 100, 100)
+ * }
+ *
+ * def update(dt) {
+ *   // Change something on the screen.
+ * }
+ * @endcode
  */
 class script {
 	public:
