@@ -2,6 +2,8 @@
 #include "../ChaiLove.h"
 
 #include <string>
+#include <iostream>
+#include "semver.h"
 
 namespace love {
 
@@ -50,6 +52,43 @@ std::vector<int> system::getVersion() {
 
 std::string system::getVersionString() {
 	return CHAILOVE_VERSION_STRING;
+}
+
+bool system::load(config& t) {
+	semver_t current = {};
+	semver_t compare = {};
+
+    if (semver_parse(getVersionString().c_str(), &current)
+		|| semver_parse(t.version.c_str(), &compare)) {
+		std::cout << "[ChaiLove] [system] Error - Invalid version string: " << t.version << std::endl;
+		return false;
+    }
+    std::cout << "[ChaiLove] [system] Version desired: " << t.version << std::endl;
+
+    int resolution = semver_compare(compare, current);
+    if (resolution == 0) {
+		std::cout << "[ChaiLove] [system] Version " << t.version << " == " << getVersionString() << std::endl;
+    } else if (resolution == -1) {
+		std::cout << "[ChaiLove] [system] Version " << t.version << " < " << getVersionString() << std::endl;
+    } else {
+		std::cout << "[ChaiLove] [system] Version " << t.version << " > " << getVersionString() << std::endl;
+    }
+
+    resolution = semver_satisfies(compare, current, "~");
+    if (resolution == 1) {
+    	std::cout << "[ChaiLove] [system] Version " << t.version << " ~= " << getVersionString() << std::endl;
+    } else {
+    	std::cout << "[ChaiLove] [system] Version " << t.version << " !~= " << getVersionString() << std::endl;
+    }
+
+    resolution = semver_satisfies(compare, current, "^");
+    if (resolution == 1) {
+    	std::cout << "[ChaiLove] [system] Version " << t.version << " ^= " << getVersionString() << std::endl;
+    } else {
+    	std::cout << "[ChaiLove] [system] Version " << t.version << " !^= " << getVersionString() << std::endl;
+    }
+
+    return true;
 }
 
 }  // namespace love

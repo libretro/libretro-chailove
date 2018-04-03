@@ -9,6 +9,10 @@ SOURCES_CXX += $(wildcard \
 	test/native/*.cpp \
 )
 
+# semver
+FLAGS += -Ivendor/semver
+SOURCES_C += vendor/semver/semver.c
+
 # random
 FLAGS += -Ivendor/random/include
 
