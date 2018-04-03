@@ -1,4 +1,4 @@
-#include "math.h"
+#include "data.h"
 #include <cstdlib>
 #include <ctime>
 #include <cstring>
@@ -6,6 +6,8 @@
 #include <sstream>
 #include <iostream>
 #include "zlib.h"
+
+namespace love {
 
 std::string data::compress(const std::string& str) {
 	return compress(str, Z_BEST_SPEED);
@@ -88,3 +90,5 @@ std::string data::decompress(const std::string& str) {
 
     return outstring;
 }
+
+}  // namespace love

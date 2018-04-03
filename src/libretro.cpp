@@ -283,7 +283,7 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 
 void frame_time_cb(retro_usec_t usec) {
-	float delta = usec / 1000000.0;
+	float delta = (float)usec / 1000000.0f;
 	ChaiLove* app = ChaiLove::getInstance();
 	app->timer.step(delta);
 }

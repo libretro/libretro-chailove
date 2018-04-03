@@ -5,11 +5,10 @@
 
 namespace love {
 /**
- * @brief Provides access to information about the user's system.
+ * @brief Provides functionality for creating and transforming data.
  */
 class data {
 	public:
-
 	/**
 	 * @brief Compresses a string or data using a specific compression level.
 	 *

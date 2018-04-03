@@ -1,10 +1,4 @@
 #include "math.h"
-#include <cstdlib>
-#include <ctime>
-#include <cstring>
-#include <string>
-#include <sstream>
-#include <iostream>
 #include "effolkronium/random.hpp"
 
 using Random = effolkronium::random_static;
@@ -41,7 +35,6 @@ double math::random(double max) {
 double math::random(double min, double max) {
     return Random::get<double>(min, max);
 }
-
 
 math& math::setRandomSeed(int min, int max) {
     return setRandomSeed(random(min, max));

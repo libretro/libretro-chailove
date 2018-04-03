@@ -10,6 +10,7 @@ namespace love {
 class math {
 	public:
 	bool load();
+
 	/**
 	 * @brief Get uniformly distributed pseudo-random number, between the given numbers.
 	 *
