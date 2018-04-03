@@ -30,3 +30,9 @@ assert_equal(love.filesystem.getDirectoryItems("assets").size(), 2, "love.filesy
 
 var theLines = love.filesystem.lines("filesystem.chai")
 assert_equal(theLines[0], "// Filesystem", "love.filesystem.lines()")
+
+assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlink()")
+
+var fileInfo = love.filesystem.getInfo("keyboard.chai")
+assert_equal(fileInfo.type, "file", "love.filesystem.getInfo().type")
+assert_greater(fileInfo.size, 5, "love.filesystem.getInfo().size")

@@ -3,8 +3,12 @@
 
 #include <string>
 #include <vector>
+
 #include "SDL.h"
 #include "physfs.h"
+#include "Types/FileSystem/FileInfo.h"
+
+using love::Types::FileSystem::FileInfo;
 
 namespace love {
 /**
@@ -45,6 +49,12 @@ class filesystem {
 	 */
 	int getSize(const std::string& file);
 
+	/**
+	 * @brief Gets information about the specified file or directory.
+	 *
+	 * @return A FileInfo object representing information about the path.
+	 */
+	FileInfo getInfo(const std::string& path);
 
 	/**
 	 * @brief Unmounts a zip file or folder previously mounted with filesystem::unmount.
@@ -73,6 +83,11 @@ class filesystem {
 	 * @brief Checks whether something is a file.
 	 */
 	bool isFile(const std::string& filename);
+
+	/**
+	 * @brief Checks whether something is a symlink.
+	 */
+	bool isSymlink(const std::string& filename);
 
 	/**
 	 * @brief Iterate over the lines in a file.

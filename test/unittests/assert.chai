@@ -20,3 +20,15 @@ def assert_not_equal(actual, expected, message) {
 def assert(value, message) {
 	assert_equal(value, true, message)
 }
+
+
+def assert_greater(actual, expected, message) {
+	if (actual > expected) {
+		print(" ✓ " + message)
+	}
+	else {
+		print(" ✗ " + message)
+		print("\n\t" + to_string(actual) + " !> " + to_string(expected) + "\n")
+		failure = "Failed on " + message + " when asserting that " + to_string(actual) + " is greater than " + to_string(expected)
+	}
+}
