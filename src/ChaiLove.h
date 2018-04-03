@@ -7,7 +7,7 @@
  *
  * Never used ChaiScript before? It's a really cool language! This manual won't teach you ChaiScript, but fortunately there are other good resources for that.
  *
- * - [ChaiScript Cheatsheet](http://github.com/ChaiScript/ChaiScript/blob/develop/cheatsheet.md)
+ * - [ChaiScript Cheatsheet](https://git.io/vxPqI)
  * - [ChaiScript Documentation](http://chaiscript.com/docs.html)
  *
  * ## Hello World
