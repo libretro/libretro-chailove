@@ -255,6 +255,10 @@ int graphics::getHeight() {
 	return getScreen()->h;
 }
 
+Point graphics::getDimensions() {
+	return Point(getWidth(), getHeight());
+}
+
 graphics& graphics::circle(const std::string& drawmode, int x, int y, int radius) {
 	if (drawmode == "line") {
 		circleRGBA(getScreen(), x, y, radius, r, g, b, a);

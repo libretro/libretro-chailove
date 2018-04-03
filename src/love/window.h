@@ -3,6 +3,9 @@
 
 #include <string>
 #include "config.h"
+#include "Types/Graphics/Point.h"
+
+using love::Types::Graphics::Point;
 
 namespace love {
 

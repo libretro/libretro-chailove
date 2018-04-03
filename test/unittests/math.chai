@@ -26,12 +26,5 @@ love.math.setRandomSeed(10)
 assert(true, "love.math.setRandomSeed(10)")
 assert_equal(love.math.getRandomSeed(), 10, "love.math.getRandomSeed()")
 
-var text = "Hello World! Hello World! Hello World!"
-var compressed = love.math.compress(text)
-assert_not_equal(text, compressed, "love.math.compress()")
-
-var decompressed = love.math.decompress(compressed)
-assert_equal(decompressed, text, "love.math.decompress()")
-
 assert(love.math.pi > 3.0f && love.math.pi < 4.0f, "love.math.pi")
 assert(love.math.e > 2.0f, "love.math.e")

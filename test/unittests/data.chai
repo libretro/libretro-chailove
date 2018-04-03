@@ -1,0 +1,6 @@
+var text = "Hello World! Hello World! Hello World!"
+var compressed = love.data.compress(text)
+assert_not_equal(text, compressed, "love.data.compress()")
+
+var decompressed = love.data.decompress(compressed)
+assert_equal(decompressed, text, "love.data.decompress()")

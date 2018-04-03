@@ -10,6 +10,7 @@ namespace love {
 class math {
 	public:
 	bool load();
+
 	/**
 	 * @brief Get uniformly distributed pseudo-random number, between the given numbers.
 	 *
@@ -69,30 +70,6 @@ class math {
 	 * @see love.math.rad
 	 */
 	float degrees(float rad);
-
-	/**
-	 * @brief Compresses a string or data using a specific compression level.
-	 *
-	 * @param str The raw (un-compressed) string to compress.
-	 * @param level (-1) The level of compression to use, between 0 and 9. -1 indicates the default level.
-	 *
-	 * @return Compressed data in the form of a string.
-	 *
-	 * @see love.math.decompress
-	 */
-	std::string compress(const std::string& str, int level);
-	std::string compress(const std::string& str);
-
-	/**
-	 * @brief Decompresses a compressed string.
-	 *
-	 * @param str A string containing data previously compressed with math.compress().
-	 *
-	 * @return A string containing the raw decompressed data.
-	 *
-	 * @see love.math.compress
-	 */
-	std::string decompress(const std::string& str);
 
 	/**
 	 * @brief e

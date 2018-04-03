@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - [Semantic Versioning](https://semver.org/) checks
   - Use `t.version = "0.18.0"` in `conf(t)` to specify which ChaiLove version you're targeting
+- `love.graphics.getDimensions()`
+
+### Updated
+- `love.math.compress()` is now `love.data.compress()`
 
 ### Fixed
 - Documentation

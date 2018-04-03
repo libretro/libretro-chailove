@@ -79,6 +79,7 @@
 #include "libretro.h"
 #include "love/keyboard.h"
 #include "love/config.h"
+#include "love/data.h"
 #include "love/script.h"
 #include "love/filesystem.h"
 #include "love/graphics.h"
@@ -113,6 +114,7 @@ class ChaiLove {
 	love::console console;
 	love::keyboard keyboard;
 	love::script* script;
+	love::data data;
 	love::filesystem filesystem;
 	love::graphics graphics;
 	love::image image;
