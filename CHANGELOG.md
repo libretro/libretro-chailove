@@ -14,8 +14,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Updated
 - `love.math.compress()` is now `love.data.compress()`
-
-### Fixed
 - Documentation
 
 ## 0.17.0 - 2018-03-18
