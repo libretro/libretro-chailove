@@ -10,6 +10,7 @@ def load() {
 	love.filesystem.load("assert")
 	love.filesystem.load("audio")
 	love.filesystem.load("console")
+	love.filesystem.load("data")
 	love.filesystem.load("filesystem")
 	love.filesystem.load("font")
 	love.filesystem.load("graphics")

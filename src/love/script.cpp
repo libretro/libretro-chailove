@@ -86,6 +86,7 @@ script::script(const std::string& file) {
 		love["audio"] = var(std::ref(app->audio));
 		love["config"] = var(std::ref(app->config));
 		love["console"] = var(std::ref(app->console));
+		love["data"] = var(std::ref(app->data));
 		love["event"] = var(std::ref(app->event));
 		love["filesystem"] = var(std::ref(app->filesystem));
 		love["font"] = var(std::ref(app->font));
@@ -316,9 +317,11 @@ script::script(const std::string& file) {
 	chai.add(fun<love::math&, math, int, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun<love::math&, math, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun(&math::getRandomSeed), "getRandomSeed");
-	chai.add(fun<std::string, math, const std::string&>(&math::compress), "compress");
-	chai.add(fun<std::string, math, const std::string&, int>(&math::compress), "compress");
-	chai.add(fun(&math::decompress), "decompress");
+
+	// Data
+	chai.add(fun<std::string, data, const std::string&>(&data::compress), "compress");
+	chai.add(fun<std::string, data, const std::string&, int>(&data::compress), "compress");
+	chai.add(fun(&data::decompress), "decompress");
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");
