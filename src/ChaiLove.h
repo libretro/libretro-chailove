@@ -1,30 +1,22 @@
 /**
  * \mainpage ChaiLove API
  *
- * This is the API documentation for [ChaiLove](https://github.com/libretro/libretro-chailove). For more information about ChaiLove itself, see the [ChaiLove homepage](https://github.com/libretro/libretro-chailove).
+ * [ChaiLove](https://github.com/libretro/libretro-chailove) is a framework for making 2D games in the [ChaiScript scripting language](http://chaiscript.com/). ChaiLove is totally free, and can be used in anything from friendly open-source hobby projects, to evil, closed-source commercial ones.
  *
- * When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen.
+ * ## ChaiScript
+ *
+ * Never used ChaiScript before? It's a really cool language! This manual won't teach you ChaiScript, but fortunately there are other good resources for that.
+ *
+ * - [ChaiScript Cheatsheet](https://github.com/ChaiScript/ChaiScript/blob/develop/cheatsheet.md)
+ * - [ChaiScript Documentation](http://chaiscript.com/docs.html)
+ *
+ * ## Hello World
+ *
+ * This is the full source for 'hello world' in LÖVE. Running this code will cause an 800 by 600 window to appear, and display white text on a black background.
  *
  * @code
- * global logo
- * global x
- * global y
- *
- * def load() {
- *     love.graphics.setBackgroundColor(54, 172, 248)
- *     logo = love.graphics.newImage("logo.png")
- *     x = 10.0f
- *     y = 10.0f
- * }
- *
- * def update(dt) {
- *     x += dt * 60.0f
- *     y += dt * 30.0f
- * }
- *
  * def draw() {
- *     love.graphics.print("Hello World!", 100, 100)
- *     love.graphics.draw(logo, x, y)
+ *     love.graphics.print("Hello World!", 200, 250)
  * }
  * @endcode
  *
