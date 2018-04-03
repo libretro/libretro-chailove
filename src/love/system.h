@@ -6,11 +6,11 @@
 #include "config.h"
 
 /**
- * When beginning to write games using LÖVE, the most important parts of the API are the callbacks: love.load to do one-time setup of your game, love.update which is used to manage your game's state frame-to-frame, and love.draw which is used to render the game state onto the screen.
+ * @brief When beginning to write games using ChaiLove, the most important parts of the API are the callbacks: `load` to do one-time setup of your game, `update` which is used to manage your game's state frame-to-frame, and `draw` which is used to render the game state onto the screen.
  *
  * More interactive games will override additional callbacks in order to handle input from the user, and other aspects of a full-featured game.
  *
- * LÖVE provides default placeholders for these callbacks, which you can override inside your own code by creating your own function with the same name as the callback:
+ * ChaiLove provides default placeholders for these callbacks, which you can override inside your own code by creating your own function with the same name as the callback:
  *
  * @code
  * global x = 20
@@ -36,26 +36,6 @@
  *     love.graphics.rectangle("fill", x, y, w, h)
  * }
  * @endcode
- *
- * ## Modules
- *
- * - \link love::audio love.audio \endlink Provides an interface to output sound to the user's speakers.
- * - \link love::config love.config \endlink Global ChaiLove configuration.
- * - \link love::console love.console \endlink The in-game debugging console.
- * - \link love::event love.event \endlink Manages events, like keypresses.
- * - \link love::filesystem love.filesystem \endlink Provides an interface to the user's filesystem.
- * - \link love::font love.font \endlink Allows you to work with fonts.
- * - \link love::graphics love.graphics \endlink Drawing of shapes and images, management of screen geometry.
- * - \link love::image love.image \endlink Provides an interface to decode encoded image data.
- * - \link love::joystick love.joystick \endlink Provides an interface to connected joysticks.
- * - \link love::keyboard love.keyboard \endlink Provides an interface to the user's keyboard.
- * - \link love::math love.math \endlink Provides system-independent mathematical functions.
- * - \link love::mouse love.mouse \endlink Provides an interface to the user's mouse.
- * - \link love::script love.script \endlink This module is responsible for callback events.
- * - \link love::sound love.sound \endlink This module is responsible for decoding sound files.
- * - \link love::system love.system \endlink Provides access to information about the user's system.
- * - \link love::timer love.timer \endlink Provides high-resolution timing functionality.
- * - \link love::window love.window \endlink Provides an interface for the program's window.
  *
  * ## Callbacks
  *
