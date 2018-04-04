@@ -73,6 +73,9 @@ def load() {
 	reset()
 }
 
+/**
+ * ChaiLove Callback; Update the game state.
+ */
 def update(dt) {
 	t = t + dt
 
@@ -149,6 +152,9 @@ def update(dt) {
 	}
 }
 
+/**
+ * ChaiLove Callback; Render the game.
+ */
 def draw() {
 	// Display the background grid.
 	love.graphics.setColor(134, 201, 0)
@@ -169,6 +175,9 @@ def draw() {
 	love.graphics.rectangle("fill", T[0]*gridScale, T[1]*gridScale, gridScale - 2, gridScale - 2)
 }
 
+/**
+ * ChaiLove Callback; Load the game state from a given JSON string.
+ */
 def loadstate(data) {
 	var info = from_json(data)
 	LEN = info["number"]
@@ -177,6 +186,9 @@ def loadstate(data) {
 	return true
 }
 
+/**
+ * ChaiLove Callback; Save the game state to a JSON string.
+ */
 def savestate() {
 	// Construct the JSON data.
 	var data = ["number": LEN]
