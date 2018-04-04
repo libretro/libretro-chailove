@@ -92,6 +92,10 @@ Visit the [ChaiLove API documentation](https://rawgit.com/libretro/libretro-chai
 make docs
 ```
 
+### Workflow
+
+ChaiLove uses [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) where new features are merged to `dev`, and then a periodic release is made to the `master` branch. Releases use [Semantic Versioning](https://semver.org) to ensure version compatibility.
+
 ## Authors
 
 The following individuals contributed to ChaiLove:
