@@ -19,10 +19,12 @@ namespace love {
  *
  * @code
  * def conf(t) {
- *   t.identity = "mygame"
- *   t.window.width = 1024
- *   t.window.height = 768
- *   t.console = false
+ *   t.version = "0.18.0"       // Version of ChaiLove
+ *   t.identity = "mygame"      // Machine name of your game
+ *   t.window.title = "My Game" // Human-readable name
+ *   t.window.width = 1024      // Game width
+ *   t.window.height = 768      // Game height
+ *   t.console = false          // Developer console
  * }
  * @endcode
  */
@@ -42,6 +44,13 @@ class config {
 
 	/**
 	 * The window configuration.
+	 *
+	 * @code
+	 * t.title = "My Game"
+	 * t.window.width = 1024
+	 * t.window.height = 768
+	 * t.window.bbp = 32
+	 * @endcode
 	 */
 	WindowConfig window;
 
@@ -62,7 +71,7 @@ class config {
 	/**
 	 * Attach the in-game console.
 	 *
-	 * When `t.console = true`, will allow use of the in-game console. Use the tilde key to show.
+	 * When `t.console = true`, will allow use of the in-game console. Use the tilde key to display.
 	 *
 	 * @see love.console
 	 */

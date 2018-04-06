@@ -269,6 +269,8 @@ class graphics {
 	 * Draws an arc.
 	 *
 	 * @param drawmode How to draw the arc. Can be "fill" or "line".
+	 * @param x The position to draw the object (x-axis).
+	 * @param y The position to draw the object (y-axis).
 	 */
 	graphics& arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2);
 

@@ -9,6 +9,8 @@ namespace FileSystem {
 
 /**
  * Information about a file.
+ *
+ * @see love.filesystem.getInfo
  */
 struct FileInfo {
 	/**
@@ -18,14 +20,23 @@ struct FileInfo {
 		// Nothing.
 	}
 
+	/**
+	 * Creates a basic FileInfo object, with the given type.
+	 */
 	FileInfo(const std::string& theType) : type(theType), size(-1), modtime(-1) {
 		// Nothing.
 	}
 
+	/**
+	 * Creates a basic FileInfo object, with the type and size.
+	 */
 	FileInfo(const std::string& theType, int theSize) : type(theType), size(theSize), modtime(-1) {
 		// Nothing.
 	}
 
+	/**
+	 * Creates a basic FileInfo object, with the type, size and modtime.
+	 */
 	FileInfo(const std::string& theType, int theSize, int theModtime) : type(theType), size(theSize), modtime(theModtime) {
 		// Nothing.
 	}
@@ -41,7 +52,7 @@ struct FileInfo {
 	int size;
 
 	/**
-	 * The file's last modification time in seconds since the unix epoch, or nil if it can't be determined.
+	 * The file's last modification time in seconds since the unix epoch, or -1 if it can't be determined.
 	 */
 	int modtime;
 };
