@@ -19,7 +19,7 @@ namespace love {
  *
  * @code
  * def conf(t) {
- *   t.version = "0.18.0"       // Version of ChaiLove
+ *   t.version = "0.18.1"       // Version of ChaiLove
  *   t.identity = "mygame"      // Machine name of your game
  *   t.window.title = "My Game" // Human-readable name
  *   t.window.width = 1024      // Game width
@@ -34,6 +34,14 @@ class config {
 
 	/**
 	 * The machine name of the project.
+     *
+     * This should represent a machine name of your game.
+     *
+     * ## Example
+     *
+     * @code
+     * t.identity = "mygame"
+     * @endcode
 	 */
 	std::string identity = "chailove";
 
@@ -45,8 +53,10 @@ class config {
 	/**
 	 * The window configuration.
 	 *
+     * ## Example
+     *
 	 * @code
-	 * t.title = "My Game"
+	 * t.window.title = "My Game"
 	 * t.window.width = 1024
 	 * t.window.height = 768
 	 * t.window.bbp = 32
@@ -56,15 +66,24 @@ class config {
 
 	/**
 	 * Enable or disable modules.
+     *
+     * ## Example
+     *
+     * @code
+     * t.modules.sound = false
+     * @endcode
 	 */
 	ModuleConfig modules;
 
 	/**
 	 * Generic map of boolean configuration options.
 	 *
-	 * Available options:
-	 * - "alphablending": true
-	 * - "highquality": true
+	 * ## Example
+     *
+     * @code
+	 * t.options["alphablending"] = true
+	 * t.options["highquality"] = true
+     * @endcode
 	 */
 	std::map<std::string, bool> options;
 
@@ -72,6 +91,12 @@ class config {
 	 * Attach the in-game console.
 	 *
 	 * When `t.console = true`, will allow use of the in-game console. Use the tilde key to display.
+     *
+     * ## Example
+     *
+     * @code
+     * t.console = true
+     * @endcode
 	 *
 	 * @see love.console
 	 */
