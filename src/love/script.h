@@ -206,6 +206,24 @@ class script {
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
 	 * @param button The mouse button name of which was pressed.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global buttonPressed = "None"
+	 * global mousex = 0
+	 * global mousey = 0
+	 *
+	 * def draw() {
+	 *   love.graphics.print("Mouse Button Pressed: " + buttonPressed, mousex, mousey)
+	 * }
+	 *
+	 * def mousepressed(x, y, button) {
+	 *   buttonPressed = button
+	 *   mousex = x
+	 *   mousey = y
+	 * }
+	 * @endcode
 	 */
 	void mousepressed(int x, int y, const std::string& button);
 
@@ -215,6 +233,24 @@ class script {
 	 * @param x The mouse position on the x-axis.
 	 * @param y The mouse position on the y-axis.
 	 * @param button The mouse button name of which was released.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global buttonReleased = "None"
+	 * global mousex = 0
+	 * global mousey = 0
+	 *
+	 * def draw() {
+	 *   love.graphics.print("Mouse Button Released: " + buttonReleased, mousex, mousey)
+	 * }
+	 *
+	 * def mousereleased(x, y, button) {
+	 *   buttonReleased = button
+	 *   mousex = x
+	 *   mousey = y
+	 * }
+	 * @endcode
 	 */
 	void mousereleased(int x, int y, const std::string& button);
 
@@ -225,6 +261,23 @@ class script {
 	 * @param y The mouse position on the y-axis.
 	 * @param dx The amount moved along the x-axis since the last time love.mousemoved was called.
 	 * @param dy The amount moved along the y-axis since the last time love.mousemoved was called.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global mousex = 0
+	 * global mousey = 0
+	 *
+	 * def draw() {
+	 *   love.graphics.setColor(255, 255, 255)
+	 *   love.graphics.point(mousex, mousey)
+	 * }
+	 *
+	 * def mousemoved(x, y, dx, dy) {
+	 *   mousex = x
+	 *   mousey = y
+	 * }
+	 * @endcode
 	 */
 	void mousemoved(int x, int y, int dx, int dy);
 

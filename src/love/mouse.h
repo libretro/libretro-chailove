@@ -18,8 +18,6 @@ class mouse {
 	 * Returns the current x-position of the mouse.
 	 *
 	 * @return The position of the mouse along the x-axis.
-	 *
-	 * @see love.mouse.setX
 	 */
 	int getX();
 
@@ -27,8 +25,6 @@ class mouse {
 	 * Returns the current y-position of the mouse.
 	 *
 	 * @return The position of the mouse along the y-axis.
-	 *
-	 * @see love.mouse.setY
 	 */
 	int getY();
 

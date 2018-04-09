@@ -46,13 +46,21 @@ class filesystem {
 
 	/**
 	 * Get the size in bytes of a file.
+	 *
+	 * @param The file to get the size of.
+	 *
+	 * @return The size of the given file.
 	 */
 	int getSize(const std::string& file);
 
 	/**
 	 * Gets information about the specified file or directory.
 	 *
+	 * @param path The path of the file to get information for.
+	 *
 	 * @return A FileInfo object representing information about the path.
+	 *
+	 * @see love::Types::FileSystem::FileInfo
 	 */
 	FileInfo getInfo(const std::string& path);
 
@@ -90,14 +98,15 @@ class filesystem {
 	bool isSymlink(const std::string& filename);
 
 	/**
-	 * Iterate over the lines in a file.
-	 */
-	std::vector<std::string> lines(const std::string& filename);
-
-	/**
 	 * Iterate over the lines in a file, with the given delimiter.
+	 *
+	 * @param filename The file to load the lines from.
+	 * @param delimiter ("\n") A string of characters representing what would be considered a new line.
+	 *
+	 * @return A vector array of strings representing all the lines in the given file.
 	 */
 	std::vector<std::string> lines(const std::string& filename, const std::string& delimiter);
+	std::vector<std::string> lines(const std::string& filename);
 };
 
 }  // namespace love

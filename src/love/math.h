@@ -72,14 +72,14 @@ class math {
 	float degrees(float rad);
 
 	/**
-	 * e
+	 * Mathematic constant: e
 	 *
 	 * @see https://en.wikipedia.org/wiki/E_(mathematical_constant)
 	 */
 	const float e = 2.718281828459045f;
 
 	/**
-	 * pi
+	 * Mathematics constant: Pi
 	 *
 	 * @see https://en.wikipedia.org/wiki/Pi
 	 */

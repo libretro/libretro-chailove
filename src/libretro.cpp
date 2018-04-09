@@ -6,19 +6,14 @@
 #include "libretro.h"
 #include "ChaiLove.h"
 
-char RETRO_DIR[512];
 const char *retro_save_directory;
 const char *retro_system_directory;
 const char *retro_content_directory;
-// char retro_system_conf[512];
 static bool use_audio_cb;
 int16_t audio_buffer[2 * (44100 / 60)];
-
 static retro_video_refresh_t video_cb;
 retro_audio_sample_t audio_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
-// static retro_input_poll_t input_poll_cb;
-// retro_input_state_t input_state_cb;
 
 void retro_set_video_refresh(retro_video_refresh_t cb) {
 	video_cb = cb;
@@ -50,14 +45,19 @@ static void audio_set_state(bool enable) {
 	(void)enable;
 }
 
-// these 2 funtions have to be implemented for Libretro SDL port
 #ifdef __cplusplus
 extern "C" {
 #endif
+/**
+ * libretro-sdl callback; Send through the audio.
+ */
 void libretro_audio_cb(int16_t left, int16_t right) {
 	audio_cb(left, right);
 }
 
+/**
+ * libretro-sdl callback; Send through the input state.
+ */
 short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
 	return ChaiLove::input_state_cb(port, device, index, id);
 }
@@ -65,6 +65,9 @@ short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index
 }
 #endif
 
+/**
+ * libretro callback; Sets up the environment based on the system variables.
+ */
 void retro_set_environment(retro_environment_t cb) {
 	bool no_rom = false;
 	ChaiLove::environ_cb = cb;
@@ -83,6 +86,9 @@ void retro_set_environment(retro_environment_t cb) {
 	cb(RETRO_ENVIRONMENT_SET_VARIABLES, variables);
 }
 
+/**
+ * libretro callback; Updates the system variables.
+ */
 static void update_variables(void) {
 	ChaiLove* game = ChaiLove::getInstance();
 	struct retro_variable var = {0};
@@ -111,6 +117,9 @@ static void update_variables(void) {
 #ifdef __cplusplus
 extern "C" {
 #endif
+/**
+ * libretro callback; Load the labels for the input buttons.
+ */
 void init_descriptors() {
 	struct retro_input_descriptor desc[] = {
 		{ 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT, "D-Pad Left" },
@@ -186,18 +195,34 @@ void init_descriptors() {
 }
 #endif
 
+/**
+ * libretro callback; Retrieve information about the core.
+ */
 void retro_get_system_info(struct retro_system_info *info) {
 	memset(info, 0, sizeof(*info));
+
+	// The name of the core.
 	info->library_name = "ChaiLove";
 #ifndef GIT_VERSION
 #define GIT_VERSION ""
 #endif
+
+	// The ChaiLove version.
 	info->library_version  = CHAILOVE_VERSION_STRING GIT_VERSION;
+
+	// When loading a game, request the full path to the game.
 	info->need_fullpath = true;
+
+	// File extensions that are used.
 	info->valid_extensions = "chai|chailove";
+
+	// Do not extract .zip files.
 	info->block_extract = true;
 }
 
+/**
+ * libretro callback; Set the audio/video settings.
+ */
 void retro_get_system_av_info(struct retro_system_av_info *info) {
 	unsigned int width = 640;
 	unsigned int height = 480;
@@ -224,7 +249,7 @@ void retro_set_controller_port_device(unsigned port, unsigned device) {
 }
 
 /**
- * Return the amount of bytes required to save a state.
+ * libretro callback; Return the amount of bytes required to save a state.
  */
 size_t retro_serialize_size(void) {
 	// Save states will be 10 kilobytes.
@@ -232,7 +257,7 @@ size_t retro_serialize_size(void) {
 }
 
 /**
- * Serialize the current state to save a slot.
+ * libretro callback; Serialize the current state to save a slot.
  */
 bool retro_serialize(void *data, size_t size) {
 	// Ask ChaiLove for save data.
@@ -251,7 +276,7 @@ bool retro_serialize(void *data, size_t size) {
 }
 
 /**
- * Unserialize the given data and load the state.
+ * libretro callback; Unserialize the given data and load the state.
  */
 bool retro_unserialize(const void *data, size_t size) {
 	// Create a string stream from the data.
@@ -272,22 +297,34 @@ bool retro_unserialize(const void *data, size_t size) {
 	return app->loadstate(loadData);
 }
 
+/**
+ * libretro callback; Reset the enabled cheats.
+ */
 void retro_cheat_reset(void) {
 	// Nothing.
 }
 
+/**
+ * libretro callback; Set the given cheat.
+ */
 void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 	(void)index;
 	(void)enabled;
 	(void)code;
 }
 
+/**
+ * libretro callback; Step the core forwards a step.
+ */
 void frame_time_cb(retro_usec_t usec) {
 	float delta = (float)usec / 1000000.0f;
 	ChaiLove* app = ChaiLove::getInstance();
 	app->timer.step(delta);
 }
 
+/**
+ * libretro callback; Load the given game.
+ */
 bool retro_load_game(const struct retro_game_info *info) {
 	// Update the core options.
 	update_variables();
@@ -308,6 +345,9 @@ bool retro_load_game(const struct retro_game_info *info) {
 	return ChaiLove::getInstance()->load(full);
 }
 
+/**
+ * libretro callback; Loads the given special game.
+ */
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
 	init_descriptors();
 	(void)game_type;
@@ -316,6 +356,9 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 	return false;
 }
 
+/**
+ * libretro callback; Unload the current game.
+ */
 void retro_unload_game(void) {
 	std::cout << "[ChaiLove] retro_unload_game()" << std::endl;
 
@@ -324,54 +367,61 @@ void retro_unload_game(void) {
 	app->event.quit();
 }
 
+/**
+ * libretro callback; Retrieve the active region.
+ */
 unsigned retro_get_region(void) {
 	return RETRO_REGION_NTSC;
 }
 
+/**
+ * libretro callback; Get the libretro API version.
+ */
 unsigned retro_api_version(void) {
 	return RETRO_API_VERSION;
 }
 
+/**
+ * libretro callback; Get the given memory ID.
+ */
 void *retro_get_memory_data(unsigned id) {
 	return NULL;
 }
 
+/**
+ * libretro callback; Get the size of the given memory ID.
+ */
 size_t retro_get_memory_size(unsigned id) {
 	return 0;
 }
 
+/**
+ * libretro callback; Initialize the core.
+ */
 void retro_init(void) {
 	const char *system_dir = NULL;
 
+	// System Directory
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
-		// if defined, use the system directory
 		retro_system_directory = system_dir;
 	}
 
+	// Content Directory
 	const char *content_dir = NULL;
-
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir) && content_dir) {
-		// if defined, use the system directory
 		retro_content_directory = content_dir;
 	}
 
+	// Save Directory
 	const char *save_dir = NULL;
-
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		// If save directory is defined use it, otherwise use system directory
 		retro_save_directory = *save_dir ? save_dir : retro_system_directory;
 	} else {
-		// make retro_save_directory the same in case RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY is not implemented by the frontend
 		retro_save_directory = retro_system_directory;
 	}
-	/*
-	if (retro_system_directory == NULL) {
-		std::cout << "[ChaiLove] " << RETRO_DIR << std::endl;
-	} else {
-		std::cout << "[ChaiLove] " << RETRO_DIR << retro_system_directory << std::endl;
-	}
-	*/
 
+	// Pixel Format
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
 		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
@@ -379,6 +429,9 @@ void retro_init(void) {
 	}
 }
 
+/**
+ * libretro callback; Deinitialize the core.
+ */
 void retro_deinit(void) {
 	std::cout << "[ChaiLove] retro_deinit()" << std::endl;
 	ChaiLove* app = ChaiLove::getInstance();
@@ -389,7 +442,7 @@ void retro_deinit(void) {
 }
 
 /**
- * The frontend requested to reset the game.
+ * libretro callback; The frontend requested to reset the game.
  */
 void retro_reset(void) {
 	ChaiLove* app = ChaiLove::getInstance();
@@ -398,6 +451,9 @@ void retro_reset(void) {
 	}
 }
 
+/**
+ * libretro callback; Run a game loop in the core.
+ */
 void retro_run(void) {
 	ChaiLove* app = ChaiLove::getInstance();
 	if (!app->event.m_quitstatus) {

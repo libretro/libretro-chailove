@@ -19,6 +19,9 @@ def conf(t) {
 }
 
 def load() {
+	// Set the background to grey, so that we can see screen size.
+	love.graphics.setBackgroundColor(50, 50, 50)
+
 	// Index the test cases.
 	for (name : testNames) {
 		love.filesystem.load(name + ".chai");
