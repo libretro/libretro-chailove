@@ -69,7 +69,6 @@ def reset() {
  */
 def load() {
 	love.graphics.setBackgroundColor(133, 188, 22)
-
 	reset()
 }
 

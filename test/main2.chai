@@ -1,3 +1,11 @@
+/**
+ * Main Test 2
+ *
+ * An alternative test with a different file name.
+ *
+ * retroarch -L chailove_libretro.so test/main2.chai
+ */
+
 global keyPressed = "a";
 global keyReleased = "b";
 global logo

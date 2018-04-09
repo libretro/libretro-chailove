@@ -5,12 +5,19 @@ global players = []
 global pongSound
 global ball
 
+/**
+ * ChaiLove callback; Configure the application.
+ */
 def conf(t) {
   t.window.width = 640
   t.window.height = 480
   //t.modules.sound = false
+  t.console = true
 }
 
+/**
+ * ChaiLove callback; Load the application.
+ */
 def load() {
   love.graphics.setBackgroundColor(0, 51, 51);
   pongSound = love.sound.newSoundData("pong.wav")
@@ -25,6 +32,9 @@ def load() {
 
 }
 
+/**
+ * ChaiLove callback; Draw the game state.
+ */
 def draw() {
   for (var i = 0; i < 2; ++i) {
     players[i].draw()
@@ -33,6 +43,9 @@ def draw() {
   love.graphics.circle("fill", ball["x"], ball["y"], ball["radius"]);
 }
 
+/**
+ * ChaiLove callback; Update the game state.
+ */
 def update(delta) {
   for (var i = 0; i < 2; ++i) {
     players[i].update(delta)
@@ -72,6 +85,9 @@ def update(delta) {
   ball["y"] += ball["yspeed"] * delta
 }
 
+/**
+ * Reset the ball.
+ */
 def ballReset() {
   ball = [
     "x": love.graphics.getWidth() / 2.0f,
@@ -82,6 +98,9 @@ def ballReset() {
   ]
 }
 
+/**
+ * Check the ball collision.
+ */
 def ballCollide(player) {
   if (ball["y"] + ball["radius"] <= player.y) {
     return false

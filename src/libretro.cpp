@@ -220,6 +220,9 @@ void retro_get_system_info(struct retro_system_info *info) {
 	info->block_extract = true;
 }
 
+/**
+ * libretro callback; Set the audio/video settings.
+ */
 void retro_get_system_av_info(struct retro_system_av_info *info) {
 	unsigned int width = 640;
 	unsigned int height = 480;
@@ -294,6 +297,9 @@ bool retro_unserialize(const void *data, size_t size) {
 	return app->loadstate(loadData);
 }
 
+/**
+ * libretro callback; Reset the enabled cheats.
+ */
 void retro_cheat_reset(void) {
 	// Nothing.
 }
@@ -339,6 +345,9 @@ bool retro_load_game(const struct retro_game_info *info) {
 	return ChaiLove::getInstance()->load(full);
 }
 
+/**
+ * libretro callback; Loads the given special game.
+ */
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
 	init_descriptors();
 	(void)game_type;
@@ -347,6 +356,9 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
 	return false;
 }
 
+/**
+ * libretro callback; Unload the current game.
+ */
 void retro_unload_game(void) {
 	std::cout << "[ChaiLove] retro_unload_game()" << std::endl;
 
@@ -355,18 +367,30 @@ void retro_unload_game(void) {
 	app->event.quit();
 }
 
+/**
+ * libretro callback; Retrieve the active region.
+ */
 unsigned retro_get_region(void) {
 	return RETRO_REGION_NTSC;
 }
 
+/**
+ * libretro callback; Get the libretro API version.
+ */
 unsigned retro_api_version(void) {
 	return RETRO_API_VERSION;
 }
 
+/**
+ * libretro callback; Get the given memory ID.
+ */
 void *retro_get_memory_data(unsigned id) {
 	return NULL;
 }
 
+/**
+ * libretro callback; Get the size of the given memory ID.
+ */
 size_t retro_get_memory_size(unsigned id) {
 	return 0;
 }

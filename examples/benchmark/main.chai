@@ -3,17 +3,24 @@
  */
 
 // The Sprites and the image to load.
-global sprites = []
+global sprites = List()
 global img
 global music
 
+/**
+ * ChaiLove callback; Configure the application.
+ */
 def conf(t) {
 	t.window.width = 720
 	t.window.height = 680
 	t.console = true
 }
 
+/**
+ * ChaiLove callback; Load the application.
+ */
 def load() {
+	sprites
 	love.graphics.setBackgroundColor(54, 172, 248)
 
 	// Add the first sprite.
@@ -34,6 +41,9 @@ def reset() {
 	sprites.push_back(Sprite())
 }
 
+/**
+ * ChaiLove callback; Update the game state.
+ */
 def update(delta) {
 	// Update all the sprites.
 	for (sprite : sprites) {
@@ -49,6 +59,9 @@ def update(delta) {
 	}
 }
 
+/**
+ * ChaiLove callback; Draw the game state.
+ */
 def draw() {
 	// Draw all the sprites.
 	for (sprite : sprites) {
@@ -62,10 +75,16 @@ def draw() {
 	love.graphics.print("FPS: " + to_string(love.timer.getFPS()), 5, 35)
 }
 
+/**
+ * ChaiLove callback; Mouse button pressed.
+ */
 def mousepressed(x, y, button) {
 	sprites.push_back(Sprite())
 }
 
+/**
+ * A sprite to display on the screen.
+ */
 class Sprite {
 	var x
 	var y
