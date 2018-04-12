@@ -12,7 +12,7 @@ branches:
 skip_tags: true
 skip_non_tags: false
 
-image: Visual Studio 2017
+image: Visual Studio 2015
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -21,6 +21,7 @@ init:
 # scripts that run after cloning repository
 install:
   - git submodule update --init
+  - cmd: set PATH=%PATH%;C:\MinGW\bin
 
 build_script:
   - minw32-make
