@@ -23,4 +23,4 @@ install:
   - git submodule update --init
 
 build_script:
-  - make
+  - minw32-make
