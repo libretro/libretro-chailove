@@ -3,10 +3,7 @@
 #---------------------------------#
 
 # version format
-version: 1.0.{build}
-
-# you can use {branch} name in version format too
-# version: 1.0.{build}-{branch}
+version: '{build}'
 
 branches:
   except:
@@ -15,7 +12,7 @@ branches:
 skip_tags: true
 skip_non_tags: false
 max_jobs: 1
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -24,66 +21,9 @@ init:
 # clone directory
 clone_folder: c:\projects\chailove
 
-# this is how to allow failing jobs in the matrix
-matrix:
-  fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
-  allow_failures:
-    - platform: x86
-      configuration: Debug
-    - platform: x64
-      configuration: Release
-
-# exclude configuration from the matrix. Works similarly to 'allow_failures' but build not even being started for excluded combination.
-  exclude:
-    - platform: x86
-      configuration: Debug
-
-
 # scripts that run after cloning repository
 install:
   - git submodule update --init
 
-#---------------------------------#
-#       build configuration       #
-#---------------------------------#
-
-# build platform, i.e. x86, x64, Any CPU. This setting is optional.
-platform: Any CPU
-
-# to add several platforms to build matrix:
-#platform:
-#  - x86
-#  - Any CPU
-
-# build Configuration, i.e. Debug, Release, etc.
-configuration: Release
-
-# to add several configurations to build matrix:
-#configuration:
-#  - Debug
-#  - Release
-
-build:
-  parallel: false                  # enable MSBuild parallel builds
-
-  # MSBuild verbosity level
-  verbosity: quiet|minimal|normal|detailed
-
-# scripts to run before build
-before_build:
-
-# scripts to run *after* solution is built and *before* automatic packaging occurs (web apps, NuGet packages, Azure Cloud Services)
-before_package:
-
-# scripts to run after build
-after_build:
-
-# to run your custom scripts instead of automatic MSBuild
 build_script:
-
-# to disable automatic builds
-#build: off
-
-#---------------------------------#
-#       tests configuration       #
-#---------------------------------#
+  - cmake --use-stderr --target all
