@@ -21,15 +21,16 @@ environment:
 init:
   - git config --global core.autocrlf input
 
-cache:
-  - vendor
-
 # scripts that run after cloning repository
 install:
   - git submodule update --init --recursive
+  - copy c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\mingw32-make.exe c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\make.exe
   - cmd: set PATH=%PATH%;c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
   - path
-  - copy c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\mingw32-make.exe c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\make.exe
+
+before_build:
+  - make --version
+  - gcc --version
 
 build_script:
   - make
