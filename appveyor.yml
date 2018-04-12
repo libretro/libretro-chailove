@@ -65,7 +65,6 @@ configuration: Release
 
 build:
   parallel: false                  # enable MSBuild parallel builds
-  project: MyTestAzureCS.sln      # path to Visual Studio solution or project
 
   # MSBuild verbosity level
   verbosity: quiet|minimal|normal|detailed
