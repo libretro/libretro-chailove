@@ -12,7 +12,10 @@ branches:
 skip_tags: true
 skip_non_tags: false
 
-image: Visual Studio 2015
+image: Visual Studio 2017
+
+environment:
+  CC: c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\gcc.exe
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -23,10 +26,10 @@ cache:
 
 # scripts that run after cloning repository
 install:
-  - git submodule update --init
-  - cmd: set PATH=%PATH%;C:\MinGW\bin
+  - git submodule update --init --recursive
+  - cmd: set PATH=%PATH%;c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
   - path
-  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
+  - copy c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\mingw32-make.exe c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\make.exe
 
 build_script:
   - make
