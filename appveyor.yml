@@ -25,6 +25,8 @@ cache:
 install:
   - git submodule update --init
   - cmd: set PATH=%PATH%;C:\MinGW\bin
+  - path
+  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
 
 build_script:
-  - minw32-make
+  - make
