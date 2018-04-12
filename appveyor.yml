@@ -18,9 +18,6 @@ image: Visual Studio 2017
 init:
   - git config --global core.autocrlf input
 
-# clone directory
-clone_folder: c:\projects\chailove
-
 # scripts that run after cloning repository
 install:
   - git submodule update --init
