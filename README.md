@@ -1,5 +1,6 @@
 # ChaiLove
-[![Build Status](https://travis-ci.org/libretro/libretro-chailove.svg?branch=master)](https://travis-ci.org/libretro/libretro-chailove)
+[![Travis](https://travis-ci.org/libretro/libretro-chailove.svg?branch=master)](https://travis-ci.org/libretro/libretro-chailove)
+[![Appveyor](https://ci.appveyor.com/api/projects/status/es2wh45kcu76n6a9/branch/master?svg=true)](https://ci.appveyor.com/project/RobLoach/libretro-chailove/branch/master)
 [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://rawgit.com/libretro/libretro-chailove/docs/)
 
