@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Android build
   - By [@webgeek1234](https://github.com/webgeek1234)
+- `love.data.hash()` to retrieve MD5 hashes from content
 
 ## 0.18.1 - 2018-04-09
 ### Added

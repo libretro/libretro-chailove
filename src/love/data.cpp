@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include "zlib.h"
+#include "md5.h"
 
 namespace love {
 
@@ -89,6 +90,16 @@ std::string data::decompress(const std::string& str) {
     }
 
     return outstring;
+}
+
+std::string data::hash(const std::string& hashFunction, const std::string& data) {
+    if (hashFunction == "md5") {
+        MD5 md5;
+        return md5(data);
+    }
+
+    std::cout << "[ChaiLove] Error: Hash function not found: " << hashFunction << "." << std::endl;
+    return "";
 }
 
 }  // namespace love

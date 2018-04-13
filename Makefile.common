@@ -139,6 +139,10 @@ FLAGS += -I$(CORE_DIR)/vendor/Snippets
 # STB
 FLAGS += -I$(CORE_DIR)/vendor/stb
 
+# Hash Library
+FLAGS += -I$(CORE_DIR)/vendor/hash-library
+SOURCES_CXX += $(CORE_DIR)/vendor/hash-library/md5.cpp
+
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -I$(CORE_DIR)/vendor/chaiscript/include
