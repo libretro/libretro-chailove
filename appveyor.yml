@@ -1,0 +1,42 @@
+# ChaiLove Appveyor Configuration
+# https://ci.appveyor.com/project/RobLoach/libretro-chailove
+version: '{build}'
+
+# Don't build the Documentation
+branches:
+  except:
+    - docs
+
+skip_tags: true
+skip_non_tags: false
+
+image: Visual Studio 2017
+
+environment:
+  CC: gcc.exe
+  TARGET: chailove_libretro.dll
+  platform: win
+  system_platform: win
+
+init:
+  - git config --global core.autocrlf input
+
+install:
+  - git submodule update --init --recursive
+  - copy c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\mingw32-make.exe c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\make.exe
+  - cmd: set PATH=%PATH%;c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
+  - path
+
+before_build:
+  - make --version
+  - gcc --version
+
+build_script:
+  - make
+
+# TODO: Add automated testing
+#before_test:
+#  - make vendor/noarch/noarch
+#
+#test_script:
+#  - make unittest
