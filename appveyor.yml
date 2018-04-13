@@ -1,10 +1,8 @@
-#---------------------------------#
-#      general configuration      #
-#---------------------------------#
-
-# version format
+# ChaiLove Appveyor Configuration
+# https://ci.appveyor.com/project/RobLoach/libretro-chailove
 version: '{build}'
 
+# Don't build the Documentation
 branches:
   except:
     - docs
@@ -20,11 +18,9 @@ environment:
   platform: win
   system_platform: win
 
-# scripts that are called at very beginning, before repo cloning
 init:
   - git config --global core.autocrlf input
 
-# scripts that run after cloning repository
 install:
   - git submodule update --init --recursive
   - copy c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\mingw32-make.exe c:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\make.exe
@@ -38,6 +34,7 @@ before_build:
 build_script:
   - make
 
+# TODO: Add automated testing
 #before_test:
 #  - make vendor/noarch/noarch
 #
