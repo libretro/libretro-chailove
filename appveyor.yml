@@ -38,8 +38,8 @@ before_build:
 build_script:
   - make
 
-before_test:
-  - make vendor/noarch/noarch
-
-test_script:
-  - make unittest
+#before_test:
+#  - make vendor/noarch/noarch
+#
+#test_script:
+#  - make unittest
