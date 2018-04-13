@@ -51,3 +51,6 @@
 [submodule "vendor/hash-library"]
 	path = vendor/hash-library
 	url = https://github.com/JusticeRage/hash-library.git
+[submodule "vendor/robloach-hash-library"]
+	path = vendor/robloach-hash-library
+	url = https://github.com/RobLoach/hash-library.git
