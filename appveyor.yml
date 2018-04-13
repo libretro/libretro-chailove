@@ -14,6 +14,9 @@ skip_non_tags: false
 
 image: Visual Studio 2017
 
+environment:
+  CC: c:\\mingw-w64\\x86_64-7.2.0-posix-seh-rt_v5-rev1\\mingw64\\bin\\gcc.exe
+
 # scripts that are called at very beginning, before repo cloning
 init:
   - git config --global core.autocrlf input
