@@ -32,6 +32,18 @@ class data {
 	 * @see love.data.compress
 	 */
 	std::string decompress(const std::string& str);
+
+	/**
+	 * Compute the message digest of specified string with specified algorithm.
+	 *
+	 * @param hashFunction Hash algorithm to use (md5).
+	 * @param data String to hash.
+	 *
+	 * @todo Add sha1, sha256, sha512, etc.
+	 *
+	 * @return Raw message digest string.
+	 */
+	std::string hash(const std::string& hashFunction, const std::string& data);
 };
 
 }  // namespace love

@@ -4,3 +4,6 @@ assert_not_equal(text, compressed, "love.data.compress()")
 
 var decompressed = love.data.decompress(compressed)
 assert_equal(decompressed, text, "love.data.decompress()")
+
+var md5Hash = love.data.hash("md5", "Hello World")
+assert_equal(md5Hash, "b10a8db164e0754105b7a99be72e3fe5", "love.data.hash('md5')")

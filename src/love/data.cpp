@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include "zlib.h"
+#include "utils/md5.h"
 
 namespace love {
 
@@ -89,6 +90,32 @@ std::string data::decompress(const std::string& str) {
     }
 
     return outstring;
+}
+
+std::string data::hash(const std::string& hashFunction, const std::string& data) {
+    if (hashFunction == "md5") {
+        const char* input = data.c_str();
+        unsigned char digest[16];
+
+        // Calculate the MD5 hash using libretro-common.
+        MD5_CTX context;
+        MD5_Init(&context);
+        MD5_Update(&context, input, strlen(input));
+        MD5_Final(digest, &context);
+
+        // Construct the MD5 hash string.
+        char md5string[33];
+        for (int i = 0; i < 16; ++i) {
+            snprintf(&md5string[i * 2], sizeof(&md5string[i * 2]), "%02x", (unsigned int)digest[i]);
+        }
+
+        // Output the hash.
+        std::string output(md5string);
+        return output;
+    }
+
+    std::cout << "[ChaiLove] Error: Hash function not found: " << hashFunction << "." << std::endl;
+    return "";
 }
 
 }  // namespace love
