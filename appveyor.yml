@@ -16,6 +16,9 @@ image: Visual Studio 2017
 
 environment:
   CC: gcc.exe
+  TARGET: chailove_libretro.dll
+  platform: win
+  system_platform: win
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -33,10 +36,10 @@ before_build:
   - gcc --version
 
 build_script:
-  - platform=win system_platform=win TARGET=chailove_libretro.dll make
+  - make
 
 before_test:
-  - platform=win system_platform=win TARGET=chailove_libretro.dll make vendor/noarch/noarch
+  - make vendor/noarch/noarch
 
 test_script:
-  - platform=win system_platform=win TARGET=chailove_libretro.dll make unittest
+  - make unittest
