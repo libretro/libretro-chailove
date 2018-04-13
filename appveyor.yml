@@ -38,5 +38,5 @@ build_script:
 before_test:
   - platform=win system_platform=win TARGET=chailove_libretro.dll make vendor/noarch/noarch
 
-test:
+test_script:
   - platform=win system_platform=win TARGET=chailove_libretro.dll make unittest
