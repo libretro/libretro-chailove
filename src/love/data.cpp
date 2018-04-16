@@ -7,6 +7,7 @@
 #include <iostream>
 #include "zlib.h"
 #include "utils/md5.h"
+#include "TinySHA1.hpp"
 
 namespace love {
 
@@ -120,7 +121,7 @@ std::string data::hash(const std::string& hashFunction, const std::string& data)
 		uint32_t digest[5];
 		s.getDigest(digest);
 		char tmp[48];
-		snprintf(tmp, 45, "%08x %08x %08x %08x %08x", digest[0], digest[1], digest[2], digest[3], digest[4]);
+		snprintf(tmp, sizeof(tmp), "%08x%08x%08x%08x%08x", digest[0], digest[1], digest[2], digest[3], digest[4]);
 		return std::string(tmp);
 	}
 
