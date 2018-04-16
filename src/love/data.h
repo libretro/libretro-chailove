@@ -36,10 +36,10 @@ class data {
 	/**
 	 * Compute the message digest of specified string with specified algorithm.
 	 *
-	 * @param hashFunction Hash algorithm to use (md5).
+	 * @param hashFunction Hash algorithm to use (md5, sha1).
 	 * @param data String to hash.
 	 *
-	 * @todo Add sha1, sha256, sha512, etc.
+	 * @todo Add sha256, sha512, etc.
 	 *
 	 * @return Raw message digest string.
 	 */
