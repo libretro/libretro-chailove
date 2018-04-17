@@ -1,10 +1,10 @@
-# ChaiLove
+# ChaiLove :heart:
 [![Travis](https://travis-ci.org/libretro/libretro-chailove.svg?branch=master)](https://travis-ci.org/libretro/libretro-chailove)
 [![Appveyor](https://ci.appveyor.com/api/projects/status/es2wh45kcu76n6a9/branch/master?svg=true)](https://ci.appveyor.com/project/RobLoach/libretro-chailove/branch/master)
 [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://rawgit.com/libretro/libretro-chailove/docs/)
 
-Framework to make 2D games with [ChaiScript](http://chaiscript.com/) and [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com). It's free, open-source, and works on Windows, Mac OS X, Linux, and ARM.
+ChaiLove is an awesome framework you can use to make 2D games in [ChaiScript](http://chaiscript.com/). It's free, open-source, and works on Windows, Mac OS X, Linux, and ARM through [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
 [![Floppy Bird Gameplay](docs/screenshot.png)](https://www.youtube.com/watch?v=RLVwTh6qDFI&hd=1)
 
