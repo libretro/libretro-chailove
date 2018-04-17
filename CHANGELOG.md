@@ -4,6 +4,10 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.19.1 - Development Branch
+
+- `love.data.hash()` `sha1` support
+
 ## 0.19.0 - 2018-04-13
 ### Added
 - Android build

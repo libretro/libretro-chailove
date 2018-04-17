@@ -48,3 +48,6 @@
 [submodule "vendor/semver"]
 	path = vendor/semver
 	url = https://github.com/h2non/semver.c.git
+[submodule "vendor/TinySHA1"]
+	path = vendor/TinySHA1
+	url = https://github.com/mohaps/TinySHA1.git
