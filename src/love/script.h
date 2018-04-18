@@ -154,6 +154,8 @@ class script {
 	 */
 	void reset();
 
+	bool mainLoaded = false;
+
 	bool loadModule(const std::string& moduleName);
 
 	/**

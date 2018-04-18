@@ -40,10 +40,18 @@ bool ChaiLove::load(const std::string& file) {
 	std::cout << "[ChaiLove] ChaiLove " << version.c_str() << std::endl;
 
 	// Initalize the file system.
-	filesystem.init(file);
+	bool loaded = filesystem.init(file);
+	if (!loaded) {
+		std::cout << "[ChaiLove] [filesystem] Error loading " << file << std::endl;
+		return false;
+	}
 
 	// Initialize the scripting system.
 	script = new love::script(file);
+	if (!script->mainLoaded) {
+		std::cout << "[ChaiLove] [script] Error loading " << file << std::endl;
+		return false;
+	}
 	script->conf(config);
 	system.load(config);
 
@@ -77,6 +85,51 @@ bool ChaiLove::load(const std::string& file) {
 	#endif
 
 	return true;
+}
+
+std::string ChaiLove::demo() {
+	// Provides a demo screen that's presented when the core is loaded without content.
+	std::string output = R"DEMO(
+		global x = 200.0f
+		global y = 0.0f
+		global defaultFont
+		global text = "ChaiLove " + love.system.getVersionString() + " - No Game!"
+		global speed = 20.0f
+
+		def load() {
+			defaultFont = love.graphics.getFont()
+			x = love.graphics.getWidth() / 2.0f - defaultFont.getWidth(text) / 2.0f
+			y = love.graphics.getHeight() / 2.0f
+		}
+
+		def conf(t) {
+			t.window.width = 640
+			t.window.height = 480
+			t.console = true
+		}
+
+		def draw() {
+			love.graphics.setBackgroundColor(122, 179, 222)
+
+			// Draw a little circle.
+			love.graphics.setColor(192, 219, 157)
+			love.graphics.circle("fill", 120, 70, 50)
+			love.graphics.setColor(0, 0, 0)
+			love.graphics.circle("line", 120, 70, 50)
+
+			// Draw the text.
+			love.graphics.setColor(255, 255, 255)
+			love.graphics.print(text, x, y)
+		}
+
+		def update(dt) {
+			y = y - speed * dt
+			if (y + defaultFont.getHeight(text) < 0.0f) {
+				y = love.graphics.getHeight()
+			}
+		}
+	)DEMO";
+	return output;
 }
 
 bool ChaiLove::update() {

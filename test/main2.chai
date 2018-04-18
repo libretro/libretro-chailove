@@ -34,9 +34,9 @@ def draw() {
 
 	love.graphics.setColor(255, 0, 0)
 	//love.graphics.draw(logo, graphics.getWidth() / 2, graphics.getHeight() / 2, math.rad(angle), 2, 2, 64/2, 64/2)
-	love.graphics.point(graphics.getWidth() / 2.0f, graphics.getHeight() / 2.0f)
-	love.graphics.draw(logo, graphics.getWidth() / 2.0f, graphics.getHeight() / 2.0f, math.rad(angle), scale, scale, logo.getWidth() / 2.0f, logo.getHeight() / 2.0f)
-	love.graphics.point(graphics.getWidth() / 2.0f, graphics.getHeight() / 2.0f)
+	love.graphics.point(love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f)
+	love.graphics.draw(logo, love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f, love.math.rad(angle), scale, scale, logo.getWidth() / 2.0f, logo.getHeight() / 2.0f)
+	love.graphics.point(love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f)
 	//love.graphics.point(graphics.getWidth() / 2
 }
 

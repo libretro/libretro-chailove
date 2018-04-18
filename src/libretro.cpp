@@ -69,8 +69,11 @@ short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index
  * libretro callback; Sets up the environment based on the system variables.
  */
 void retro_set_environment(retro_environment_t cb) {
-	bool no_rom = false;
+	// Set the environment callback.
 	ChaiLove::environ_cb = cb;
+
+	// The core supports having no game.
+	bool no_rom = true;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
 	// Set the Variables.
@@ -340,9 +343,12 @@ bool retro_load_game(const struct retro_game_info *info) {
 	struct retro_audio_callback audio_cb = { emit_audio, audio_set_state };
 	use_audio_cb = ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
-	// Load the game.
-	std::string full(info ? info->path : "main.chai");
-	return ChaiLove::getInstance()->load(full);
+	// Find the game path.
+	std::string gamePath(info ? info->path : "");
+	if (gamePath == ".") {
+		gamePath = "main.chai";
+	}
+	return ChaiLove::getInstance()->load(gamePath);
 }
 
 /**
