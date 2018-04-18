@@ -16,6 +16,7 @@ def conf(t) {
 	t.window.width = 460
 	t.window.height = 320
 	t.console = true
+	t.version = "0.19.1"
 }
 
 def load() {

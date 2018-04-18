@@ -5,8 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 0.19.1 - Development Branch
-
+### Added
 - `love.data.hash()` `sha1` support
+- Display a warning when there's a version mismatch
 
 ## 0.19.0 - 2018-04-13
 ### Added

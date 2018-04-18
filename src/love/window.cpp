@@ -84,7 +84,7 @@ void window::showMessageBox(const std::string& msg, int frames) {
 }
 
 void window::showMessageBox(const std::string& msg) {
-	showMessageBox(msg, 3500);
+	showMessageBox(msg, 2800);
 }
 
 }  // namespace love

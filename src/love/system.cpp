@@ -55,40 +55,54 @@ std::string system::getVersionString() {
 }
 
 bool system::load(config& t) {
-	semver_t current = {};
-	semver_t compare = {};
+	// Load the semantic version string.
+	semver_t chailoveVersion = {};
+	semver_t coreVersion = {};
+	bool showWarning = false;
 
-    if (semver_parse(getVersionString().c_str(), &current)
-		|| semver_parse(t.version.c_str(), &compare)) {
-		std::cout << "[ChaiLove] [system] Error - Invalid version string: " << t.version << std::endl;
-		return false;
-    }
-    std::cout << "[ChaiLove] [system] Version desired: " << t.version << std::endl;
+	if (semver_parse(getVersionString().c_str(), &chailoveVersion)
+		|| semver_parse(t.version.c_str(), &coreVersion)) {
+		std::cout << "[ChaiLove] [system] Error: Invalid t.version string " << t.version << std::endl;
+		return true;
+	}
+	std::cout << "[ChaiLove] [system] Version current:  " << getVersionString() << std::endl;
+	std::cout << "[ChaiLove] [system] Version targeted: " << t.version << std::endl;
 
-    int resolution = semver_compare(compare, current);
-    if (resolution == 0) {
-		std::cout << "[ChaiLove] [system] Version " << t.version << " == " << getVersionString() << std::endl;
-    } else if (resolution == -1) {
-		std::cout << "[ChaiLove] [system] Version " << t.version << " < " << getVersionString() << std::endl;
-    } else {
-		std::cout << "[ChaiLove] [system] Version " << t.version << " > " << getVersionString() << std::endl;
-    }
+	// Compare the version to the version of ChaiLove.
+	int resolution = semver_compare(coreVersion, chailoveVersion);
+	if (resolution == 0) {
+		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " == " << t.version << std::endl;
+	} else if (resolution == -1) {
+		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " > " << t.version << std::endl;
+	} else {
+		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " < " << t.version << std::endl;
+	}
 
-    resolution = semver_satisfies(compare, current, "~");
-    if (resolution == 1) {
-    	std::cout << "[ChaiLove] [system] Version " << t.version << " ~= " << getVersionString() << std::endl;
-    } else {
-    	std::cout << "[ChaiLove] [system] Version " << t.version << " !~= " << getVersionString() << std::endl;
-    }
+	// Check the ~= satisfaction
+	resolution = semver_satisfies(chailoveVersion, coreVersion, "~");
+	if (resolution == 1) {
+		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " ~= " << t.version << std::endl;
+	} else {
+		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " !~= " << t.version << std::endl;
+	}
 
-    resolution = semver_satisfies(compare, current, "^");
-    if (resolution == 1) {
-    	std::cout << "[ChaiLove] [system] Version " << t.version << " ^= " << getVersionString() << std::endl;
-    } else {
-    	std::cout << "[ChaiLove] [system] Version " << t.version << " !^= " << getVersionString() << std::endl;
-    }
+	// Check the ^= satisfaction
+	resolution = semver_satisfies(chailoveVersion, coreVersion, "^");
+	if (resolution == 1) {
+		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " ^= " << t.version << std::endl;
+	} else {
+		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " !^= " << t.version << std::endl;
+		showWarning = true;
+	}
 
-    return true;
+	// Display a warning in the On-Screen Display.
+	if (showWarning) {
+		std::string message = "Warning: Expected ChaiLove " + t.version + ", running " + getVersionString();
+		std::cout << "[ChaiLove] [system] " << warning << std::endl;
+		ChaiLove::getInstance()->window.showMessageBox(message);
+	}
+
+	return true;
 }
 
 }  // namespace love
