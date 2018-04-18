@@ -98,7 +98,7 @@ bool system::load(config& t) {
 	// Display a warning in the On-Screen Display.
 	if (showWarning) {
 		std::string message = "Warning: Expected ChaiLove " + t.version + ", running " + getVersionString();
-		std::cout << "[ChaiLove] [system] " << warning << std::endl;
+		std::cout << "[ChaiLove] [system] " << message << std::endl;
 		ChaiLove::getInstance()->window.showMessageBox(message);
 	}
 
