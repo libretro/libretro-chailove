@@ -92,6 +92,7 @@ class ChaiLove {
 	love::math math;
 	love::window window;
 	love::event event;
+	std::string demo();
 
 	void quit(void);
 	bool load(const std::string& file);

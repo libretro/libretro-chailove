@@ -22,7 +22,7 @@ bool filesystem::init(const std::string& file) {
 		return false;
 	}
 
-	// Check if we are simply running the ChaiLove.
+	// Check if we are simply running ChaiLove.
 	if (file.empty()) {
 		return mount(".", "/");
 	}
