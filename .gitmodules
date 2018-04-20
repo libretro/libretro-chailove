@@ -54,3 +54,6 @@
 [submodule "vendor/tinyxml2"]
 	path = vendor/tinyxml2
 	url = https://github.com/leethomason/tinyxml2.git
+[submodule "vendor/tmxparser"]
+	path = vendor/tmxparser
+	url = https://github.com/sainteos/tmxparser.git
