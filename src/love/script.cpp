@@ -18,6 +18,9 @@ using love::Types::Config::WindowConfig;
 using love::Types::Config::ModuleConfig;
 using love::Types::Audio::SoundData;
 using love::graphics;
+using Tmx::Map;
+
+#include "TmxMap.h"
 
 namespace love {
 
@@ -98,6 +101,7 @@ script::script(const std::string& file) {
 		love["mouse"] = var(std::ref(app->mouse));
 		love["sound"] = var(std::ref(app->sound));
 		love["system"] = var(std::ref(app->system));
+		love["tiled"] = var(std::ref(app->tiled));
 		love["timer"] = var(std::ref(app->timer));
 		love["window"] = var(std::ref(app->window));
 	},
@@ -336,6 +340,12 @@ script::script(const std::string& file) {
 	chai.add(fun<std::string, data, const std::string&, int>(&data::compress), "compress");
 	chai.add(fun(&data::decompress), "decompress");
 	chai.add(fun(&data::hash), "hash");
+
+	// Tiled
+	chai.add(fun(&tiled::newMap), "newMap");
+	// Tiled: Map
+	chai.add(user_type<Map>(), "Map");
+	chai.add(fun(&Map::GetVersion), "GetVersion");
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");

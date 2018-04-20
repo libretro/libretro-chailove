@@ -5,5 +5,5 @@ def load() {
 }
 
 def draw() {
-	love.graphics.print("fasd", 100, 100)
+	love.graphics.print("Version: " + to_string(map.GetVersion()), 100, 100)
 }

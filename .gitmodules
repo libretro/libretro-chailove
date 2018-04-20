@@ -57,3 +57,4 @@
 [submodule "vendor/tmxparser"]
 	path = vendor/tmxparser
 	url = https://github.com/sainteos/tmxparser.git
+	ignore = dirty
