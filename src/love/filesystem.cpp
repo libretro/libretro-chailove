@@ -173,7 +173,7 @@ bool filesystem::unmount(const std::string& archive) {
 }
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
-	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " to " << mountpoint << std::endl;
+	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
 	int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
 	return returnValue != 0;
 }
