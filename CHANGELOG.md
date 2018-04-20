@@ -6,8 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.19.1 - Development Branch
 ### Added
+- No Game demo when ChaiLove is loaded without content
+- Version mismatch warning when content's ChaiLove version doesn't match core's
 - `love.data.hash()` `sha1` support
-- Display a warning when there's a version mismatch
 
 ## 0.19.0 - 2018-04-13
 ### Added
