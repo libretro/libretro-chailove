@@ -84,7 +84,6 @@ FLAGS += -DFT2_BUILD_LIBRARY \
 	-DFT_USE_CFF \
 	-DFT_USE_OTV \
 	-DFT_USE_GXV
-
 SOURCES_C += \
 	$(CORE_DIR)/vendor/freetype2/src/base/ftbase.c \
 	$(CORE_DIR)/vendor/freetype2/src/base/ftinit.c \
@@ -145,6 +144,10 @@ SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
 
 # TinySHA1
 FLAGS += -I$(CORE_DIR)/vendor/TinySHA1
+
+# TinyXML2
+FLAGS += -I$(CORE_DIR)/vendor/TinySHA2
+SOURCES_CXX += $(CORE_DIR)/vendor/tinyxml2/tinyxml2.cpp
 
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
