@@ -51,3 +51,6 @@
 [submodule "vendor/TinySHA1"]
 	path = vendor/TinySHA1
 	url = https://github.com/mohaps/TinySHA1.git
+[submodule "vendor/tinyxml2"]
+	path = vendor/tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git
