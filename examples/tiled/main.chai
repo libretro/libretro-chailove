@@ -1,0 +1,9 @@
+global map
+
+def load() {
+	map = love.tiled.newMap("map/map.tmx")
+}
+
+def draw() {
+	love.graphics.print("fasd", 100, 100)
+}

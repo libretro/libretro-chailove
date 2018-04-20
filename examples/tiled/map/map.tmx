@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" nextobjectid="6">
+ <properties>
+  <property name="BigInteger" type="int" value="999999999"/>
+  <property name="EmptyProperty" value=""/>
+  <property name="FalseProperty" type="bool" value="false"/>
+  <property name="FileProperty" type="file" value="torches.png"/>
+  <property name="FloatProperty" type="float" value="0.12"/>
+  <property name="IntProperty" type="int" value="1234"/>
+  <property name="NegativeFloatProperty" type="float" value="-0.12"/>
+  <property name="NegativeIntProperty" type="int" value="-1234"/>
+  <property name="StringProperty" value="A string value"/>
+  <property name="TrueProperty" type="bool" value="true"/>
+  <property name="YellowProperty" type="color" value="#ffffff00"/>
+ </properties>
+ <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="48" columns="8">
+  <image source="tmw_desert_spacing.png" trans="ffffff" width="265" height="199"/>
+  <tile id="0">
+   <properties>
+    <property name="Property A" value="Hello World"/>
+    <property name="Property B" value="666"/>
+   </properties>
+   <objectgroup draworder="index">
+    <object id="0" x="21.625" y="31.9375">
+     <polygon points="0,0 0.0625,-10.1875 10.3125,-10.25 10.375,-15.875 -5.5625,-16 -5.9375,-0.125"/>
+    </object>
+    <object id="0" x="17.5" y="3.875" width="6" height="5.9375">
+     <ellipse/>
+    </object>
+    <object id="0" x="3.375" y="8.9375">
+     <polyline points="0,0 2.5625,-2.1875 7.8125,3.9375 3.5,12.875 0.5,11.375"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="1">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="15.75" width="32.3125" height="6.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="2">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.25" y="16">
+     <polygon points="0,0 16.125,0.125 16.3125,16.3125 10.4375,16.125 10.375,5.8125 0.125,5.8125"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="8">
+   <objectgroup draworder="index">
+    <object id="0" x="16.125" y="-0.25" width="5.375" height="32.25"/>
+   </objectgroup>
+  </tile>
+  <tile id="10">
+   <objectgroup draworder="index">
+    <object id="0" x="10.0625" y="-0.375" width="6.125" height="32.5"/>
+   </objectgroup>
+  </tile>
+  <tile id="16">
+   <objectgroup draworder="index">
+    <object id="0" x="16" y="-0.1875">
+     <polygon points="0,0 5.75,0.0625 5.375,10.5625 15.75,10.5625 15.8125,17.125 -0.125,16.8125"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="17">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.125" y="10" width="32.0625" height="6.9375"/>
+   </objectgroup>
+  </tile>
+  <tile id="18">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.5625" y="10.5625">
+     <polygon points="0,0 10.5,0.125 10.5625,-10.75 16.625,-10.75 16.625,6.5 0.125,6.4375"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="19">
+   <objectgroup draworder="index">
+    <object id="0" x="15.75" y="31.6875">
+     <polygon points="0.5,0.375 0.3125,-15.4375 16.125,-15.5 16.125,-21.6875 -5.6875,-21.75 -5.75,0.4375"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="20">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.0625" y="9.9375">
+     <polygon points="0,0 22.125,-0.0625 22,22.0625 16.0625,22.0625 16.25,5.8125 -0.0625,5.8125"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="27">
+   <objectgroup draworder="index">
+    <object id="0" x="10.25" y="-0.1875">
+     <polygon points="0,0 5.625,-0.0625 5.875,16.375 21.8125,16.25 21.8125,21.9375 -0.1875,21.9375"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="28">
+   <objectgroup draworder="index">
+    <object id="0" x="16" y="-0.125">
+     <polygon points="0,0 5.8125,0 5.9375,22 -16,22.0625 -16.0625,16 0.0625,16.4375"/>
+    </object>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <tileset firstgid="49" name="torches" tilewidth="32" tileheight="32" tilecount="3" columns="3">
+  <image source="torches.png" width="96" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index">
+    <object id="0" x="14" y="16.875" width="3.875" height="8"/>
+   </objectgroup>
+   <animation>
+    <frame tileid="0" duration="200"/>
+    <frame tileid="1" duration="200"/>
+    <frame tileid="2" duration="200"/>
+    <frame tileid="1" duration="200"/>
+   </animation>
+  </tile>
+ </tileset>
+ <group name="Testing Group Layer" offsetx="11" offsety="2">
+  <layer name="Testing Child Tile Layer" width="10" height="10">
+   <data encoding="base64" compression="zlib">
+   eJxjYBgFgwkAAAGQAAE=
+  </data>
+  </layer>
+  <objectgroup name="Testing Child Object Group"/>
+  <imagelayer name="Testing Child Image Layer"/>
+  <group name="Testing Child Group Layer">
+   <layer name="Testing Child Child Layer" width="10" height="10">
+    <data encoding="base64" compression="zlib">
+   eJxjYBgFgwkAAAGQAAE=
+  </data>
+   </layer>
+  </group>
+ </group>
+ <layer name="Testing Name 1" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJzTY2BokGNgYFBgYDgAokfxwGIAR7UNCw==
+  </data>
+ </layer>
+ <layer name="Testing Name 2" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAMSAKxFBBLE1CnCMRKQKxMQJ0mEGsBsfYA2zVQAAArdgJl
+  </data>
+ </layer>
+ <layer name="Testing Name 3" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAdiACxKBHqZIBYlgzzRzIAAH0YAGM=
+  </data>
+ </layer>
+ <layer name="Testing Name 4" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgkGcgDgwmdYxAzATEzATUcQIxFxBzE1AnCMRCQCxMJfeRqw4APA8BkQ==
+  </data>
+ </layer>
+ <layer name="Testing Name 5" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwkAAAGQAAE=
+  </data>
+ </layer>
+ <layer name="Testing Torches" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMDIlQMwrwA2LCEKQGAE+oAJQ=
+  </data>
+ </layer>
+ <objectgroup name="Polygon Testing">
+  <object id="1" x="93" y="49">
+   <polygon points="0,0 51,6 9,56"/>
+  </object>
+  <object id="2" x="114" y="176">
+   <polygon points="0,0 51,-24 60,33"/>
+  </object>
+  <object id="3" x="228" y="88">
+   <polyline points="0,0 54,95 -3,183 -131,201"/>
+  </object>
+  <object id="4" type="ObjectType" gid="30" x="99" y="254" width="32" height="32"/>
+  <object id="5" x="98.2266" y="104.578" width="89.5469" height="18.8438">
+   <text wrap="1" color="#008000">Hello World</text>
+  </object>
+ </objectgroup>
+</map>
