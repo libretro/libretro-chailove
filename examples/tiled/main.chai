@@ -5,5 +5,6 @@ def load() {
 }
 
 def draw() {
-	love.graphics.print("Version: " + to_string(map.GetVersion()), 100, 100)
+	love.graphics.print("Width: " + to_string(map.GetWidth()), 100, 100)
+	love.graphics.print("Height: " + to_string(map.GetHeight()), 100, 200)
 }

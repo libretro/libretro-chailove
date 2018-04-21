@@ -1,15 +1,10 @@
-#ifndef SRC_LOVE_CONFIG_H_
-#define SRC_LOVE_CONFIG_H_
+#ifndef SRC_LOVE_TILED_H_
+#define SRC_LOVE_TILED_H_
 
 #include <map>
 #include <string>
 
 #include "TmxMap.h"
-
-#include "Types/Config/ModuleConfig.h"
-#include "Types/Config/WindowConfig.h"
-
-using love::Types::Config::ModuleConfig;
 
 namespace love {
 
@@ -25,4 +20,4 @@ class tiled {
 
 }  // namespace love
 
-#endif  // SRC_LOVE_CONFIG_H_
+#endif  // SRC_LOVE_TILED_H_

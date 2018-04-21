@@ -1,8 +1,10 @@
 #include <iostream>
 
-#include "timer.h"
+#include "tiled.h"
+#include "../ChaiLove.h"
 
 #include "TmxMap.h"
+using ::ChaiLove;
 
 namespace love {
 
@@ -10,7 +12,7 @@ tiled::tiled() {
 	// Nothing.
 }
 
-Tmx::Map* tiled::NewMap(const std::string filename) {
+Tmx::Map* tiled::newMap(const std::string& filename) {
 	ChaiLove* app = ChaiLove::getInstance();
 	std::string contents = app->filesystem.read(filename);
 	if (contents.empty()) {

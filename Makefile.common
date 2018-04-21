@@ -38,7 +38,8 @@ SOURCES_C += \
 	$(CORE_DIR)/vendor/zlib/inffast.c \
 	$(CORE_DIR)/vendor/zlib/inftrees.c \
 	$(CORE_DIR)/vendor/zlib/inflate.c \
-	$(CORE_DIR)/vendor/zlib/trees.c
+	$(CORE_DIR)/vendor/zlib/trees.c \
+	$(CORE_DIR)/vendor/zlib/uncompr.c
 FLAGS += -I$(CORE_DIR)/vendor/zlib
 FLAGS += -DWANT_ZLIB
 
@@ -150,7 +151,7 @@ FLAGS += -I$(CORE_DIR)/vendor/tinyxml2
 SOURCES_CXX += $(CORE_DIR)/vendor/tinyxml2/tinyxml2.cpp
 
 # TmxParser
-FLAGS += -I$(CORE_DIR)/vendor/tmxparser
+FLAGS += -I$(CORE_DIR)/vendor/tmxparser/src
 SOURCES_CXX += $(wildcard \
 	$(CORE_DIR)/vendor/tmxparser/src/*.cpp \
 	$(CORE_DIR)/vendor/tmxparser/src/base64/*.cpp \
