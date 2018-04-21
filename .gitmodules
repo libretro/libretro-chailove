@@ -58,3 +58,6 @@
 	path = vendor/tmxparser
 	url = https://github.com/sainteos/tmxparser.git
 	ignore = dirty
+[submodule "vendor/ChaiScript_Extras_TmxParser"]
+	path = vendor/ChaiScript_Extras_TmxParser
+	url = https://github.com/RobLoach/ChaiScript_Extras_TmxParser.git
