@@ -157,6 +157,9 @@ SOURCES_CXX += $(wildcard \
 	$(CORE_DIR)/vendor/tmxparser/src/base64/*.cpp \
 )
 
+# ChaiScript_Extras_TmxParser
+FLAGS += -I$(CORE_DIR)/vendor/ChaiScript_Extras_TmxParser/include
+
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -I$(CORE_DIR)/vendor/chaiscript/include

@@ -5,6 +5,7 @@
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
 using namespace chaiscript;
+#include "chaiscript/extras/tmxparser.hpp"
 #endif
 
 using ::ChaiLove;
@@ -18,9 +19,6 @@ using love::Types::Config::WindowConfig;
 using love::Types::Config::ModuleConfig;
 using love::Types::Audio::SoundData;
 using love::graphics;
-using Tmx::Map;
-
-#include "TmxMap.h"
 
 namespace love {
 
@@ -343,16 +341,8 @@ script::script(const std::string& file) {
 
 	// Tiled
 	chai.add(fun(&tiled::newMap), "newMap");
-	// Tiled: Map
-	chai.add(user_type<Map>(), "TiledMap");
-	chai.add(fun(&Map::GetVersion), "GetVersion");
-	chai.add(fun(&Map::GetFilename), "GetFilename");
-	chai.add(fun(&Map::GetFilepath), "GetFilepath");
-	chai.add(fun(&Map::GetWidth), "GetWidth");
-	chai.add(fun(&Map::GetHeight), "GetHeight");
-	chai.add(fun(&Map::GetTileWidth), "GetTileWidth");
-	chai.add(fun(&Map::GetTileHeight), "GetTileHeight");
-	chai.add(fun(&Map::GetNumLayers), "GetNumLayers");
+	auto tmxlib = chaiscript::extras::tmxparser::bootstrap();
+	chai.add(tmxlib);
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");
