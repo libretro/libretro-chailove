@@ -51,6 +51,7 @@
 #include "love/system.h"
 #include "love/sound.h"
 #include "love/font.h"
+#include "love/map.h"
 #include "love/timer.h"
 #include "love/audio.h"
 #include "love/joystick.h"
@@ -85,6 +86,7 @@ class ChaiLove {
 	love::system system;
 	love::sound sound;
 	love::font font;
+	love::map map;
 	love::timer timer;
 	love::audio audio;
 	love::joystick joystick;

@@ -30,6 +30,10 @@ class Image {
 	 * Gets the height of the Texture.
 	 */
 	int getHeight();
+
+	std::string getSource();
+
+	std::string source;
 };
 
 }  // namespace Graphics

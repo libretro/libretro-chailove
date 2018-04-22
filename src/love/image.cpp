@@ -6,14 +6,6 @@ using love::Types::Graphics::Image;
 
 namespace love {
 
-Image* image::newImageData(const std::string& filename) {
-	Image* image = new Image(filename);
-	if (image->loaded()) {
-		return image;
-	}
-	return NULL;
-}
-
 bool image::load() {
 	return true;
 	// TODO(RobLoach): Remove this, as we're using STB Image.

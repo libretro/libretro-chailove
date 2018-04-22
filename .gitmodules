@@ -51,3 +51,13 @@
 [submodule "vendor/TinySHA1"]
 	path = vendor/TinySHA1
 	url = https://github.com/mohaps/TinySHA1.git
+[submodule "vendor/tinyxml2"]
+	path = vendor/tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git
+[submodule "vendor/tmxparser"]
+	path = vendor/tmxparser
+	url = https://github.com/sainteos/tmxparser.git
+	ignore = dirty
+[submodule "vendor/ChaiScript_Extras_TmxParser"]
+	path = vendor/ChaiScript_Extras_TmxParser
+	url = https://github.com/RobLoach/ChaiScript_Extras_TmxParser.git

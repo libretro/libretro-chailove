@@ -6,7 +6,7 @@ for (file : files) {
 		foundUnitChai = true
 	}
 }
-assert(foundUnitChai, "love.filesystem.getDirectoryItems()")
+assert_equal(foundUnitChai, true, "love.filesystem.getDirectoryItems()")
 
 // read()
 var contents = love.filesystem.read("main.chai")
@@ -33,7 +33,7 @@ assert_not(love.filesystem.isDirectory("keyboard.chai"), "love.filesystem.isDire
 assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlink()")
 
 // getDirectoryItems()
-assert_equal(love.filesystem.getDirectoryItems("assets").size(), 2, "love.filesystem.getDirectoryItems()")
+assert_equal(love.filesystem.getDirectoryItems("assets").size(), 3, "love.filesystem.getDirectoryItems()")
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")

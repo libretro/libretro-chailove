@@ -9,12 +9,14 @@
 #include "Types/Graphics/Image.h"
 #include "Types/Graphics/Font.h"
 #include "Types/Graphics/Color.h"
+#include "Types/Graphics/Map.h"
 
 using love::Types::Graphics::Image;
 using love::Types::Graphics::Quad;
 using love::Types::Graphics::Font;
 using love::Types::Graphics::Point;
 using love::Types::Graphics::Color;
+using love::Types::Graphics::Map;
 
 namespace love {
 
@@ -92,6 +94,17 @@ graphics& graphics::rectangle(const std::string& drawmode, int x, int y, int wid
 
 graphics& graphics::line(int x1, int y1, int x2, int y2) {
 	lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
+	return *this;
+}
+
+graphics& graphics::draw(Map* map) {
+	return draw(map, 0, 0);
+}
+
+graphics& graphics::draw(Map* map, int x, int y) {
+	if (map) {
+		map->draw(x, y);
+	}
 	return *this;
 }
 

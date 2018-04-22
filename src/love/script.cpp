@@ -5,6 +5,7 @@
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
 using namespace chaiscript;
+#include "chaiscript/extras/tmxparser.hpp"
 #endif
 
 using ::ChaiLove;
@@ -12,6 +13,7 @@ using love::Types::Graphics::Point;
 using love::Types::Graphics::Image;
 using love::Types::Graphics::Font;
 using love::Types::Graphics::Point;
+using love::Types::Graphics::Map;
 using love::Types::Graphics::Color;
 using love::Types::Input::Joystick;
 using love::Types::Config::WindowConfig;
@@ -98,6 +100,7 @@ script::script(const std::string& file) {
 		love["mouse"] = var(std::ref(app->mouse));
 		love["sound"] = var(std::ref(app->sound));
 		love["system"] = var(std::ref(app->system));
+		love["map"] = var(std::ref(app->map));
 		love["timer"] = var(std::ref(app->timer));
 		love["window"] = var(std::ref(app->window));
 	},
@@ -239,6 +242,9 @@ script::script(const std::string& file) {
 	chai.add(fun<love::graphics&, graphics, Image*, Quad, int, int>(&graphics::draw), "draw");
 	chai.add(fun<love::graphics&, graphics, Image*, Quad>(&graphics::draw), "draw");
 
+	chai.add(fun<love::graphics&, graphics, Map*, int, int>(&graphics::draw), "draw");
+	chai.add(fun<love::graphics&, graphics, Map*>(&graphics::draw), "draw");
+
 	chai.add(fun<love::graphics&, graphics, int, int, int, int>(&graphics::clear), "clear");
 	chai.add(fun<love::graphics&, graphics, int, int, int>(&graphics::clear), "clear");
 	chai.add(fun<love::graphics&, graphics>(&graphics::clear), "clear");
@@ -255,9 +261,6 @@ script::script(const std::string& file) {
 
 	// Event
 	chai.add(fun(&event::quit), "quit");
-
-	// Image
-	chai.add(fun(&image::newImageData), "newImageData");
 
 	// Filesystem
 	chai.add(fun(&filesystem::unmount), "unmount");
@@ -336,6 +339,15 @@ script::script(const std::string& file) {
 	chai.add(fun<std::string, data, const std::string&, int>(&data::compress), "compress");
 	chai.add(fun(&data::decompress), "decompress");
 	chai.add(fun(&data::hash), "hash");
+
+	// Map
+	chai.add(user_type<Map>(), "LoveMap");
+	chai.add(fun(&Map::getWidth), "getWidth");
+	chai.add(fun(&Map::getHeight), "getHeight");
+	chai.add(fun(&Map::draw), "draw");
+	chai.add(fun(&map::newMap), "newMap");
+	auto tmxlib = chaiscript::extras::tmxparser::bootstrap();
+	chai.add(tmxlib);
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");

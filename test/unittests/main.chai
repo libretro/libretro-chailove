@@ -16,7 +16,6 @@ def load() {
 	love.filesystem.load("filesystem")
 	love.filesystem.load("font")
 	love.filesystem.load("graphics")
-	love.filesystem.load("image")
 	love.filesystem.load("list")
 	love.filesystem.load("math")
 	love.filesystem.load("mouse")
@@ -26,6 +25,7 @@ def load() {
 	love.filesystem.load("sound")
 	love.filesystem.load("system")
 	love.filesystem.load("window")
+	love.filesystem.load("map")
 
 	if (failure != "") {
 		print("\n" + failure + "\n")

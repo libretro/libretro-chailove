@@ -10,12 +10,14 @@
 #include "Types/Graphics/Font.h"
 #include "Types/Graphics/Point.h"
 #include "Types/Graphics/Color.h"
+#include "Types/Graphics/Map.h"
 
 using love::Types::Graphics::Image;
 using love::Types::Graphics::Quad;
 using love::Types::Graphics::Font;
 using love::Types::Graphics::Point;
 using love::Types::Graphics::Color;
+using love::Types::Graphics::Map;
 
 namespace love {
 
@@ -253,6 +255,16 @@ class graphics {
 	graphics& draw(Image* image, int x, int y, float r);
 	graphics& draw(Image* image, int x, int y);
 	graphics& draw(Image* image);
+
+	/**
+	 * Draws a map at the given x and y coordinates.
+	 *
+	 * @param map The map to draw on the screen.
+	 * @param x (0) The position to draw the map (x-axis).
+	 * @param y (0) The position to draw the map (y-axis).
+	 */
+	graphics& draw(Map* map, int x, int y);
+	graphics& draw(Map* map);
 
 	/**
 	 * Draws an image on screen, using the given Quad as a source.
