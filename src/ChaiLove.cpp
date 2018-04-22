@@ -81,42 +81,60 @@ bool ChaiLove::load(const std::string& file) {
 std::string ChaiLove::demo() {
 	// Provides a demo screen that's presented when the core is loaded without content.
 	std::string output = R"DEMO(
-		global x = 200.0f
-		global y = 0.0f
 		global defaultFont
-		global text = "ChaiLove " + love.system.getVersionString() + " - No Game!"
-		global speed = 20.0f
+		global text = "ChaiLove - No Game!"
+		global x = 50.0f
+		global y = 50.0f
+		global radius = 20.0f
+		global xSpeed = 35.0f
+		global ySpeed = 35.0f
 
 		def load() {
 			defaultFont = love.graphics.getFont()
-			x = love.graphics.getWidth() / 2.0f - defaultFont.getWidth(text) / 2.0f
+			x = love.graphics.getWidth() / 2.0f
 			y = love.graphics.getHeight() / 2.0f
 		}
 
 		def conf(t) {
-			t.window.width = 640
-			t.window.height = 480
+			t.window.width = 320
+			t.window.height = 240
 			t.console = true
 		}
 
 		def draw() {
-			love.graphics.setBackgroundColor(122, 179, 222)
+			love.graphics.setBackgroundColor(0, 138, 255)
 
 			// Draw a little circle.
-			love.graphics.setColor(192, 219, 157)
-			love.graphics.circle("fill", 120, 70, 50)
+			love.graphics.setColor(230, 88, 160)
+			love.graphics.circle("fill", x, y, radius)
 			love.graphics.setColor(0, 0, 0)
-			love.graphics.circle("line", 120, 70, 50)
+			love.graphics.circle("line", x, y, radius)
 
 			// Draw the text.
 			love.graphics.setColor(255, 255, 255)
-			love.graphics.print(text, x, y)
+			love.graphics.print(text, 10, love.graphics.getHeight() / 2.0f - 100)
+			var ver = love.system.getVersionString()
+			love.graphics.print(ver, love.graphics.getWidth() - defaultFont.getWidth(ver), love.graphics.getHeight() - defaultFont.getHeight(ver) * 2.0f)
 		}
 
 		def update(dt) {
-			y = y - speed * dt
-			if (y + defaultFont.getHeight(text) < 0.0f) {
-				y = love.graphics.getHeight()
+			x = x + xSpeed * dt
+			y = y + ySpeed * dt
+			if (x + radius > love.graphics.getWidth()) {
+				x = love.graphics.getWidth() - radius
+				xSpeed = xSpeed * -1
+			}
+			if (x - radius < 0) {
+				x = radius
+				xSpeed = abs(xSpeed)
+			}
+			if (y + radius > love.graphics.getHeight()) {
+				y = love.graphics.getHeight() - radius
+				ySpeed = ySpeed * -1
+			}
+			if (y - radius < 0) {
+				y = radius
+				ySpeed = abs(ySpeed)
 			}
 		}
 	)DEMO";
