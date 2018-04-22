@@ -14,10 +14,6 @@ bool sound::load() {
 	return true;
 }
 
-bool sound::update() {
-	return true;
-}
-
 void sound::unload() {
 	// Unload all sounds.
 	for (std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {

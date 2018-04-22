@@ -8,10 +8,10 @@ namespace love {
 class event {
 	public:
 	/**
-	 * Exits ChaiLove.
+	 * Exits the ChaiLove application.
 	 */
 	void quit();
-	bool m_quitstatus = false;
+	bool m_shouldclose = false;
 };
 
 }  // namespace love

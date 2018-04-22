@@ -7,7 +7,6 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Graphics/*.cpp \
 	$(CORE_DIR)/src/love/Types/Input/*.cpp \
 	$(CORE_DIR)/src/love/Types/Config/*.cpp \
-	$(CORE_DIR)/test/native/*.cpp \
 )
 
 # semver
@@ -168,7 +167,3 @@ OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
 
 WARNINGS :=
-
-ifneq ($(HAVE_TESTS),)
-	FLAGS += -D__HAVE_TESTS__
-endif

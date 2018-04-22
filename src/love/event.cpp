@@ -3,7 +3,7 @@
 namespace love {
 
 void event::quit() {
-	m_quitstatus = true;
+	m_shouldclose = true;
 }
 
 }  // namespace love

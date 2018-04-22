@@ -55,11 +55,6 @@ bool ChaiLove::load(const std::string& file) {
 	script->conf(config);
 	system.load(config);
 
-	// Testing.
-	#ifdef __HAVE_TESTS__
-	test.conf(config);
-	#endif
-
 	// Load up the window dimensions.
 	window.load(config);
 
@@ -79,10 +74,6 @@ bool ChaiLove::load(const std::string& file) {
 
 	// Now that all subsystems are loaded, start the script.
 	script->load();
-
-	#ifdef __HAVE_TESTS__
-	test.load();
-	#endif
 
 	return true;
 }
@@ -133,18 +124,15 @@ std::string ChaiLove::demo() {
 }
 
 bool ChaiLove::update() {
-	if (event.m_quitstatus) {
-		return false;
-	}
-
-	sound.update();
+	// Poll all the inputs.
+	ChaiLove::input_poll_cb();
 
 	// Poll all SDL events.
 	while (SDL_PollEvent(&sdlEvent)) {
 		switch (sdlEvent.type) {
 			case SDL_QUIT:
 				event.quit();
-				return !event.m_quitstatus;
+				return !event.m_shouldclose;
 				break;
 		}
 	}
@@ -157,11 +145,7 @@ bool ChaiLove::update() {
 	// Step forward the timer, and update the game.
 	script->update(timer.getDelta());
 
-	#ifdef __HAVE_TESTS__
-	test.update(timer.getDelta());
-	#endif
-
-	return !event.m_quitstatus;
+	return !event.m_shouldclose;
 }
 
 /**
@@ -183,10 +167,6 @@ void ChaiLove::draw() {
 
 		// Render the game.
 		script->draw();
-
-		#ifdef __HAVE_TESTS__
-		test.draw();
-		#endif
 
 		// Render the in-game console.
 		console.draw();

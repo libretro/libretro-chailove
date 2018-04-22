@@ -10,7 +10,7 @@ const char *retro_save_directory;
 const char *retro_system_directory;
 const char *retro_content_directory;
 static bool use_audio_cb;
-int16_t audio_buffer[2 * (44100 / 60)];
+int16_t audio_buffer[1470]; // 2 * (44100 / 60)
 static retro_video_refresh_t video_cb;
 retro_audio_sample_t audio_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
@@ -38,7 +38,7 @@ void retro_set_input_state(retro_input_state_t cb) {
 static void emit_audio(void) {
 	ChaiLove* app = ChaiLove::getInstance();
 	app->audio.mixer_render(audio_buffer);
-	audio_batch_cb(audio_buffer, (44100 / 60));
+	audio_batch_cb(audio_buffer, 735); // 44100 / 60
 }
 
 static void audio_set_state(bool enable) {
@@ -90,7 +90,7 @@ void retro_set_environment(retro_environment_t cb) {
 }
 
 /**
- * libretro callback; Updates the system variables.
+ * libretro callback; Updates the core option variables.
  */
 static void update_variables(void) {
 	ChaiLove* game = ChaiLove::getInstance();
@@ -462,20 +462,19 @@ void retro_reset(void) {
  */
 void retro_run(void) {
 	ChaiLove* app = ChaiLove::getInstance();
-	if (!app->event.m_quitstatus) {
-		// Poll all the inputs.
-		ChaiLove::input_poll_cb();
-
-		// Update the game.
-		if (!app->update()) {
-			ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
-			return;
-		}
-
-		// Render the game.
-		app->draw();
-
-		// Copy the video buffer to the screen.
-		video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
+	if (app->event.m_shouldclose) {
+		return;
 	}
+
+	// Update the game.
+	if (!app->update()) {
+		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
+		return;
+	}
+
+	// Render the game.
+	app->draw();
+
+	// Copy the video buffer to the screen.
+	video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
 }

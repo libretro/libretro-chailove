@@ -60,10 +60,6 @@
 #include "love/event.h"
 #include "love/console.h"
 
-#ifdef __HAVE_TESTS__
-#include "../test/native/NativeTest.h"
-#endif
-
 class ChaiLove {
 	public:
 	static ChaiLove* getInstance();
@@ -105,10 +101,6 @@ class ChaiLove {
 	uint32_t *videoBuffer;
 	SDL_Surface* screen;
 	SDL_Event sdlEvent;
-
-	#ifdef __HAVE_TESTS__
-	NativeTest test;
-	#endif
 };
 
 #endif  // SRC_CHAILOVE_H_

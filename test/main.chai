@@ -6,8 +6,7 @@ global testNames = [
 	"graphics_draw",
 	"graphics_point",
 	"mouse_getPosition",
-	"graphics_print_font",
-	"filesystem_getDirectoryItems"
+	"graphics_print_font"
 ]
 global tests = []
 global currenttest = 0

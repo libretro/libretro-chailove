@@ -24,7 +24,7 @@ namespace love {
  *   t.window.title = "My Game" // Human-readable name
  *   t.window.width = 1024      // Game width
  *   t.window.height = 768      // Game height
- *   t.console = false          // Developer console
+ *   t.console = false          // Developer console, toggle with tilde
  * }
  * @endcode
  */
