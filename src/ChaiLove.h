@@ -100,7 +100,6 @@ class ChaiLove {
 
 	uint32_t *videoBuffer;
 	SDL_Surface* screen;
-	SDL_Event sdlEvent;
 };
 
 #endif  // SRC_CHAILOVE_H_

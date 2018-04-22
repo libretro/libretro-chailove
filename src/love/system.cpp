@@ -2,10 +2,16 @@
 #include "../ChaiLove.h"
 
 #include <string>
+#include <cstring>
 #include <iostream>
 #include "semver.h"
+#include "libretro.h"
 
 namespace love {
+
+system::system() {
+	m_username = "";
+}
 
 std::string system::getOS() {
 	// TODO(RobLoach): Replace Macros with something more complex?
@@ -103,6 +109,17 @@ bool system::load(config& t) {
 	}
 
 	return true;
+}
+
+std::string system::getUsername() {
+	if (!m_usernameInitialized) {
+		m_usernameInitialized = true;
+		const char *username = NULL;
+		if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_USERNAME, &username) && username) {
+			m_username = std::string(username);
+		}
+	}
+	return m_username;
 }
 
 }  // namespace love

@@ -124,18 +124,8 @@ std::string ChaiLove::demo() {
 }
 
 bool ChaiLove::update() {
-	// Poll all the inputs.
-	ChaiLove::input_poll_cb();
-
-	// Poll all SDL events.
-	while (SDL_PollEvent(&sdlEvent)) {
-		switch (sdlEvent.type) {
-			case SDL_QUIT:
-				event.quit();
-				return !event.m_shouldclose;
-				break;
-		}
-	}
+	// Update and poll all the events.
+	event.update();
 
 	// Update the input systems.
 	mouse.update();
@@ -145,7 +135,7 @@ bool ChaiLove::update() {
 	// Step forward the timer, and update the game.
 	script->update(timer.getDelta());
 
-	return !event.m_shouldclose;
+	return event.m_shouldclose;
 }
 
 /**
@@ -161,21 +151,23 @@ void ChaiLove::reset() {
  * Render the ChaiLove.
  */
 void ChaiLove::draw() {
-	if (!event.m_shouldclose) {
-		// Clear the screen.
-		graphics.clear();
+	if (event.m_shouldclose) {
+		return;
+	}
 
-		// Render the game.
-		script->draw();
+	// Clear the screen.
+	graphics.clear();
 
-		// Render the in-game console.
-		console.draw();
+	// Render the game.
+	script->draw();
 
-		// Flip the buffer.
-		if (SDL_Flip(screen) == -1) {
-			std::string out("[ChaiLove] Failed to swap the buffers: ");
-			std::cout << out << SDL_GetError() << std::endl;
-		}
+	// Render the in-game console.
+	console.draw();
+
+	// Flip the buffer.
+	if (SDL_Flip(screen) == -1) {
+		std::string out("[ChaiLove] Failed to swap the buffers: ");
+		std::cout << out << SDL_GetError() << std::endl;
 	}
 }
 

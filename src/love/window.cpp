@@ -9,7 +9,6 @@
 
 using ::ChaiLove;
 using love::Types::Graphics::Point;
-using std::string;
 
 namespace love {
 
@@ -65,13 +64,14 @@ bool window::unload() {
 	return true;
 }
 
-string window::getTitle() {
+std::string window::getTitle() {
 	char* titleChar;
 	SDL_WM_GetCaption(&titleChar, NULL);
 	return std::string(titleChar);
 }
 
-window& window::setTitle(string title) {
+window& window::setTitle(const std::string& title) {
+	ChaiLove::getInstance()->config.window.title = title;
 	SDL_WM_SetCaption(title.c_str(), 0);
 	return *this;
 }

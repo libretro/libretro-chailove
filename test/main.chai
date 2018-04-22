@@ -44,6 +44,8 @@ def draw() {
 	love.graphics.setColor(255, 255, 255)
 	love.graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
 	love.graphics.print("FPS " + to_string(love.timer.getFPS()), 5, 20);
+
+	love.graphics.print("Username: " + love.system.getUsername(), 5, 35)
 }
 
 def update(delta) {
