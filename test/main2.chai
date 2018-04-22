@@ -13,7 +13,7 @@ global angle = 0.0f
 global scale = 1.0f
 
 def load() {
-	logo = love.image.newImageData("assets/graphics_draw.png")
+	logo = love.graphics.newImage("assets/graphics_draw.png")
 	love.graphics.setBackgroundColor(50, 50, 100)
 }
 

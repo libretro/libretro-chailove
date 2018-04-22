@@ -29,7 +29,7 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 		if (errorChar != NULL) {
 			errString = errorChar;
 		}
-		std::cout << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
+		std::cout << "[ChaiLove] [Image] STBIMG_Load_RW failed to load data: " << errString << std::endl;
 		return false;
 	}
 
@@ -45,7 +45,7 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 	}
 
 	if (!optimizedImage) {
-		std::cout << "[ChaiLove] [graphics] SDL_DisplayFormat failed to optimize the image." << std::endl;
+		std::cout << "[ChaiLove] [Image] SDL_DisplayFormat failed to optimize the image." << std::endl;
 	} else {
 		SDL_FreeSurface(surface);
 		surface = optimizedImage;
@@ -66,6 +66,7 @@ Image::~Image() {
 }
 
 Image::Image(const std::string& filename) {
+	source = filename;
 	SDL_RWops* image = ChaiLove::getInstance()->filesystem.openRW(filename);
 	loadFromRW(image);
 }
@@ -82,6 +83,9 @@ int Image::getHeight() {
 		return surface->h;
 	}
 	return 0;
+}
+std::string Image::getSource() {
+	return source;
 }
 
 }  // namespace Graphics

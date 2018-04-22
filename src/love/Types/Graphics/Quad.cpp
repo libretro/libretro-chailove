@@ -1,3 +1,5 @@
+#include <string>
+
 #include "Quad.h"
 #include "SDL.h"
 
@@ -25,6 +27,10 @@ SDL_Rect Quad::toRect() {
 	rect.w = width;
 	rect.h = height;
 	return rect;
+}
+
+std::string Quad::toString() {
+	return "{" + std::to_string(x) + "," + std::to_string(y) + "," + std::to_string(width) + "," + std::to_string(height) + "}";
 }
 
 }  // namespace Graphics

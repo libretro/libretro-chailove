@@ -1,0 +1,3 @@
+var theMap = love.map.newMap("assets/map/map.tsx")
+
+assert_equal(theMap.getWidth(), 320, "Map.getWidth()")

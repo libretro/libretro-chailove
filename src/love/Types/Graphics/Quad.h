@@ -1,6 +1,8 @@
 #ifndef SRC_LOVE_TYPES_GRAPHICS_QUAD_H_
 #define SRC_LOVE_TYPES_GRAPHICS_QUAD_H_
 
+#include <string>
+
 #include "SDL.h"
 
 namespace love {
@@ -38,6 +40,8 @@ class Quad {
 	Quad(int x, int y, int width, int height, int sw, int sh);
 	Quad(int x, int y, int width, int height);
 	SDL_Rect toRect();
+
+	std::string toString();
 };
 
 }  // namespace Graphics
