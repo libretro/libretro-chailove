@@ -463,7 +463,7 @@ void retro_run(void) {
 	}
 
 	// Update the game.
-	if (app->update()) {
+	if (!app->update()) {
 		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 		return;
 	}

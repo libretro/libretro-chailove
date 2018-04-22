@@ -135,7 +135,7 @@ bool ChaiLove::update() {
 	// Step forward the timer, and update the game.
 	script->update(timer.getDelta());
 
-	return event.m_shouldclose;
+	return !event.m_shouldclose;
 }
 
 /**
