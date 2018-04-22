@@ -82,7 +82,7 @@ std::string ChaiLove::demo() {
 	// Provides a demo screen that's presented when the core is loaded without content.
 	std::string output = R"DEMO(
 		global defaultFont
-		global text = "ChaiLove - No Game!"
+		global text = "ChaiLove - No Game"
 		global x = 50.0f
 		global y = 50.0f
 		global radius = 20.0f
