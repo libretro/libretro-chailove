@@ -355,11 +355,7 @@ bool retro_load_game(const struct retro_game_info *info) {
  * libretro callback; Loads the given special game.
  */
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
-	init_descriptors();
-	(void)game_type;
-	(void)info;
-	(void)num_info;
-	return false;
+	return retro_load_game(info);
 }
 
 /**

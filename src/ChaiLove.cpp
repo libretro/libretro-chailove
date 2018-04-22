@@ -161,7 +161,7 @@ void ChaiLove::reset() {
  * Render the ChaiLove.
  */
 void ChaiLove::draw() {
-	if (!event.m_quitstatus) {
+	if (!event.m_shouldclose) {
 		// Clear the screen.
 		graphics.clear();
 
