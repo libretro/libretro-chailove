@@ -10,14 +10,25 @@ retro_input_poll_t ChaiLove::input_poll_cb = NULL;
 retro_environment_t ChaiLove::environ_cb = NULL;
 
 void ChaiLove::destroy() {
-	m_instance = NULL;
+	if (hasInstance()) {
+		delete m_instance;
+		m_instance = NULL;
+	}
 }
 
 ChaiLove* ChaiLove::getInstance() {
-	if (!m_instance) {
+	if (!hasInstance()) {
 		m_instance = new ChaiLove;
 	}
 	return m_instance;
+}
+
+bool ChaiLove::hasInstance() {
+	return m_instance != NULL;
+}
+
+ChaiLove::~ChaiLove() {
+	quit();
 }
 
 void ChaiLove::quit(void) {
@@ -40,17 +51,20 @@ bool ChaiLove::load(const std::string& file) {
 	std::cout << "[ChaiLove] ChaiLove " << version.c_str() << std::endl;
 
 	// Initalize the file system.
-	filesystem.init(file);
+	bool loaded = filesystem.init(file);
+	if (!loaded) {
+		std::cout << "[ChaiLove] [filesystem] Error loading " << file << std::endl;
+		return false;
+	}
 
 	// Initialize the scripting system.
 	script = new love::script(file);
+	if (!script->mainLoaded) {
+		std::cout << "[ChaiLove] [script] Error loading " << file << std::endl;
+		return false;
+	}
 	script->conf(config);
 	system.load(config);
-
-	// Testing.
-	#ifdef __HAVE_TESTS__
-	test.conf(config);
-	#endif
 
 	// Load up the window dimensions.
 	window.load(config);
@@ -72,29 +86,75 @@ bool ChaiLove::load(const std::string& file) {
 	// Now that all subsystems are loaded, start the script.
 	script->load();
 
-	#ifdef __HAVE_TESTS__
-	test.load();
-	#endif
-
 	return true;
 }
 
-bool ChaiLove::update() {
-	if (event.m_quitstatus) {
-		return false;
-	}
+std::string ChaiLove::demo() {
+	// Provides a demo screen that's presented when the core is loaded without content.
+	std::string output = R"DEMO(
+		global defaultFont
+		global text = "ChaiLove - No Game"
+		global x = 50.0f
+		global y = 50.0f
+		global radius = 20.0f
+		global xSpeed = 35.0f
+		global ySpeed = 35.0f
 
-	sound.update();
-
-	// Poll all SDL events.
-	while (SDL_PollEvent(&sdlEvent)) {
-		switch (sdlEvent.type) {
-			case SDL_QUIT:
-				event.quit();
-				return !event.m_quitstatus;
-				break;
+		def load() {
+			defaultFont = love.graphics.getFont()
+			x = love.graphics.getWidth() / 2.0f
+			y = love.graphics.getHeight() / 2.0f
 		}
-	}
+
+		def conf(t) {
+			t.window.width = 320
+			t.window.height = 240
+			t.console = true
+		}
+
+		def draw() {
+			love.graphics.setBackgroundColor(0, 138, 255)
+
+			// Draw a little circle.
+			love.graphics.setColor(230, 88, 160)
+			love.graphics.circle("fill", x, y, radius)
+			love.graphics.setColor(0, 0, 0)
+			love.graphics.circle("line", x, y, radius)
+
+			// Draw the text.
+			love.graphics.setColor(255, 255, 255)
+			love.graphics.print(text, 10, love.graphics.getHeight() / 2.0f - 100)
+			var ver = love.system.getVersionString()
+			love.graphics.print(ver, love.graphics.getWidth() - defaultFont.getWidth(ver), love.graphics.getHeight() - defaultFont.getHeight(ver) * 2.0f)
+		}
+
+		def update(dt) {
+			x = x + xSpeed * dt
+			y = y + ySpeed * dt
+			if (x + radius > love.graphics.getWidth()) {
+				x = love.graphics.getWidth() - radius
+				xSpeed = xSpeed * -1
+			}
+			if (x - radius < 0) {
+				x = radius
+				xSpeed = abs(xSpeed)
+			}
+			if (y + radius > love.graphics.getHeight()) {
+				y = love.graphics.getHeight() - radius
+				ySpeed = ySpeed * -1
+			}
+			if (y - radius < 0) {
+				y = radius
+				ySpeed = abs(ySpeed)
+			}
+		}
+	)DEMO";
+	return output;
+}
+
+void ChaiLove::update() {
+	// Update and poll all the events.
+	event.update();
 
 	// Update the input systems.
 	mouse.update();
@@ -103,12 +163,6 @@ bool ChaiLove::update() {
 
 	// Step forward the timer, and update the game.
 	script->update(timer.getDelta());
-
-	#ifdef __HAVE_TESTS__
-	test.update(timer.getDelta());
-	#endif
-
-	return !event.m_quitstatus;
 }
 
 /**
@@ -124,25 +178,23 @@ void ChaiLove::reset() {
  * Render the ChaiLove.
  */
 void ChaiLove::draw() {
-	if (!event.m_quitstatus) {
-		// Clear the screen.
-		graphics.clear();
+	if (event.m_shouldclose) {
+		return;
+	}
 
-		// Render the game.
-		script->draw();
+	// Clear the screen.
+	graphics.clear();
 
-		#ifdef __HAVE_TESTS__
-		test.draw();
-		#endif
+	// Render the game.
+	script->draw();
 
-		// Render the in-game console.
-		console.draw();
+	// Render the in-game console.
+	console.draw();
 
-		// Flip the buffer.
-		if (SDL_Flip(screen) == -1) {
-			std::string out("[ChaiLove] Failed to swap the buffers: ");
-			std::cout << out << SDL_GetError() << std::endl;
-		}
+	// Flip the buffer.
+	if (SDL_Flip(screen) == -1) {
+		std::string out("[ChaiLove] Failed to swap the buffers: ");
+		std::cout << out << SDL_GetError() << std::endl;
 	}
 }
 

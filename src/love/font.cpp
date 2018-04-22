@@ -7,6 +7,10 @@
 
 namespace love {
 
+font::~font() {
+	unload();
+}
+
 bool font::load() {
 	int result = TTF_Init();
 	if(result == -1) {
@@ -22,7 +26,9 @@ bool font::load() {
 }
 
 bool font::unload() {
-	TTF_Quit();
+	if (isOpen()) {
+		TTF_Quit();
+	}
 	return true;
 }
 

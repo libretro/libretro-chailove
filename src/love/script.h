@@ -52,7 +52,7 @@ class script {
 	 *   t.console = false
 	 *
 	 *   // The ChaiLove version this game was made for.
-	 *   t.version = "0.19.0"
+	 *   t.version = "0.20.0"
 	 *
 	 *   // The width and height of the game.
 	 *   t.window.width = 1024
@@ -153,6 +153,8 @@ class script {
 	 * @endcode
 	 */
 	void reset();
+
+	bool mainLoaded = false;
 
 	bool loadModule(const std::string& moduleName);
 

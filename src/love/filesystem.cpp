@@ -22,7 +22,7 @@ bool filesystem::init(const std::string& file) {
 		return false;
 	}
 
-	// Check if we are simply running the ChaiLove.
+	// Check if we are simply running ChaiLove.
 	if (file.empty()) {
 		return mount(".", "/");
 	}
@@ -173,7 +173,7 @@ bool filesystem::unmount(const std::string& archive) {
 }
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
-	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " to " << mountpoint << std::endl;
+	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
 	int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
 	return returnValue != 0;
 }

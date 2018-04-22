@@ -7,7 +7,6 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Graphics/*.cpp \
 	$(CORE_DIR)/src/love/Types/Input/*.cpp \
 	$(CORE_DIR)/src/love/Types/Config/*.cpp \
-	$(CORE_DIR)/test/native/*.cpp \
 )
 
 # semver
@@ -143,6 +142,9 @@ FLAGS += -I$(CORE_DIR)/vendor/stb
 FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
 SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
 
+# TinySHA1
+FLAGS += -I$(CORE_DIR)/vendor/TinySHA1
+
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -I$(CORE_DIR)/vendor/chaiscript/include
@@ -165,7 +167,3 @@ OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
 LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
 
 WARNINGS :=
-
-ifneq ($(HAVE_TESTS),)
-	FLAGS += -D__HAVE_TESTS__
-endif

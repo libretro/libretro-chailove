@@ -35,9 +35,9 @@
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 19
+#define CHAILOVE_VERSION_MINOR 20
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.19.0"
+#define CHAILOVE_VERSION_STRING "0.20.0"
 
 #include "SDL.h"
 #include "libretro.h"
@@ -60,15 +60,12 @@
 #include "love/event.h"
 #include "love/console.h"
 
-#ifdef __HAVE_TESTS__
-#include "../test/native/NativeTest.h"
-#endif
-
 class ChaiLove {
 	public:
 	static ChaiLove* getInstance();
 	static ChaiLove* m_instance;
 	static void destroy();
+	static bool hasInstance();
 
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
@@ -92,10 +89,12 @@ class ChaiLove {
 	love::math math;
 	love::window window;
 	love::event event;
+	std::string demo();
 
+	~ChaiLove();
 	void quit(void);
 	bool load(const std::string& file);
-	bool update();
+	void update();
 	void draw();
 	void reset();
 	std::string savestate();
@@ -103,11 +102,6 @@ class ChaiLove {
 
 	uint32_t *videoBuffer;
 	SDL_Surface* screen;
-	SDL_Event sdlEvent;
-
-	#ifdef __HAVE_TESTS__
-	NativeTest test;
-	#endif
 };
 
 #endif  // SRC_CHAILOVE_H_

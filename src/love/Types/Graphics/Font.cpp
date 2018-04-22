@@ -67,10 +67,12 @@ bool Font::destroy() {
 		FNT_Free(ttyFont);
 		ttyFont = NULL;
 	}
+
 	if (m_image != NULL) {
 		delete m_image;
 		m_image = NULL;
 	}
+
 	return true;
 }
 

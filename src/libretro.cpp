@@ -36,9 +36,10 @@ void retro_set_input_state(retro_input_state_t cb) {
 }
 
 static void emit_audio(void) {
-	ChaiLove* app = ChaiLove::getInstance();
-	app->audio.mixer_render(audio_buffer);
-	audio_batch_cb(audio_buffer, (44100 / 60));
+	if (ChaiLove::hasInstance()) {
+		ChaiLove::getInstance()->audio.mixer_render(audio_buffer);
+		audio_batch_cb(audio_buffer, 44100 / 60);
+	}
 }
 
 static void audio_set_state(bool enable) {
@@ -69,8 +70,11 @@ short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index
  * libretro callback; Sets up the environment based on the system variables.
  */
 void retro_set_environment(retro_environment_t cb) {
-	bool no_rom = false;
+	// Set the environment callback.
 	ChaiLove::environ_cb = cb;
+
+	// The core supports having no game.
+	bool no_rom = true;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
 	// Set the Variables.
@@ -87,7 +91,7 @@ void retro_set_environment(retro_environment_t cb) {
 }
 
 /**
- * libretro callback; Updates the system variables.
+ * libretro callback; Updates the core option variables.
  */
 static void update_variables(void) {
 	ChaiLove* game = ChaiLove::getInstance();
@@ -224,6 +228,9 @@ void retro_get_system_info(struct retro_system_info *info) {
  * libretro callback; Set the audio/video settings.
  */
 void retro_get_system_av_info(struct retro_system_av_info *info) {
+	if (!ChaiLove::hasInstance()) {
+		return;
+	}
 	unsigned int width = 640;
 	unsigned int height = 480;
 
@@ -260,6 +267,10 @@ size_t retro_serialize_size(void) {
  * libretro callback; Serialize the current state to save a slot.
  */
 bool retro_serialize(void *data, size_t size) {
+	if (!ChaiLove::hasInstance()) {
+		return false;
+	}
+
 	// Ask ChaiLove for save data.
 	ChaiLove* app = ChaiLove::getInstance();
 	std::string state = app->savestate();
@@ -279,6 +290,10 @@ bool retro_serialize(void *data, size_t size) {
  * libretro callback; Unserialize the given data and load the state.
  */
 bool retro_unserialize(const void *data, size_t size) {
+	if (!ChaiLove::hasInstance()) {
+		return false;
+	}
+
 	// Create a string stream from the data.
 	std::stringstream ss(std::string(
 		reinterpret_cast<const char*>(data),
@@ -317,9 +332,10 @@ void retro_cheat_set(unsigned index, bool enabled, const char *code) {
  * libretro callback; Step the core forwards a step.
  */
 void frame_time_cb(retro_usec_t usec) {
-	float delta = (float)usec / 1000000.0f;
-	ChaiLove* app = ChaiLove::getInstance();
-	app->timer.step(delta);
+	if (ChaiLove::hasInstance()) {
+		float delta = (float)usec / 1000000.0f;
+		ChaiLove::getInstance()->timer.step(delta);
+	}
 }
 
 /**
@@ -340,20 +356,19 @@ bool retro_load_game(const struct retro_game_info *info) {
 	struct retro_audio_callback audio_cb = { emit_audio, audio_set_state };
 	use_audio_cb = ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
-	// Load the game.
-	std::string full(info ? info->path : "main.chai");
-	return ChaiLove::getInstance()->load(full);
+	// Find the game path.
+	std::string gamePath(info ? info->path : "");
+	if (gamePath == ".") {
+		gamePath = "main.chai";
+	}
+	return ChaiLove::getInstance()->load(gamePath);
 }
 
 /**
  * libretro callback; Loads the given special game.
  */
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
-	init_descriptors();
-	(void)game_type;
-	(void)info;
-	(void)num_info;
-	return false;
+	return retro_load_game(info);
 }
 
 /**
@@ -363,8 +378,9 @@ void retro_unload_game(void) {
 	std::cout << "[ChaiLove] retro_unload_game()" << std::endl;
 
 	// Invoke the quit event.
-	ChaiLove* app = ChaiLove::getInstance();
-	app->event.quit();
+	if (ChaiLove::hasInstance()) {
+		ChaiLove::getInstance()->event.m_shouldclose = true;
+	}
 }
 
 /**
@@ -425,8 +441,9 @@ void retro_init(void) {
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
 		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
-		exit(0);
 	}
+
+	ChaiLove::getInstance();
 }
 
 /**
@@ -434,20 +451,15 @@ void retro_init(void) {
  */
 void retro_deinit(void) {
 	std::cout << "[ChaiLove] retro_deinit()" << std::endl;
-	ChaiLove* app = ChaiLove::getInstance();
-	if (app) {
-		app->event.quit();
-		app->quit();
-	}
+	ChaiLove::destroy();
 }
 
 /**
  * libretro callback; The frontend requested to reset the game.
  */
 void retro_reset(void) {
-	ChaiLove* app = ChaiLove::getInstance();
-	if (app) {
-		app->reset();
+	if (ChaiLove::hasInstance()) {
+		ChaiLove::getInstance()->reset();
 	}
 }
 
@@ -455,21 +467,23 @@ void retro_reset(void) {
  * libretro callback; Run a game loop in the core.
  */
 void retro_run(void) {
-	ChaiLove* app = ChaiLove::getInstance();
-	if (!app->event.m_quitstatus) {
-		// Poll all the inputs.
-		ChaiLove::input_poll_cb();
-
-		// Update the game.
-		if (!app->update()) {
-			ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
-			return;
-		}
-
-		// Render the game.
-		app->draw();
-
-		// Copy the video buffer to the screen.
-		video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
+	if (!ChaiLove::hasInstance()) {
+		return;
 	}
+
+	ChaiLove* app = ChaiLove::getInstance();
+	if (app->event.m_shouldclose) {
+		ChaiLove::destroy();
+		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
+		return;
+	}
+
+	// Update the game.
+	app->update();
+
+	// Render the game.
+	app->draw();
+
+	// Copy the video buffer to the screen.
+	video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
 }

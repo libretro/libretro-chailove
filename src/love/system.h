@@ -58,6 +58,8 @@ namespace love {
  */
 class system {
 	public:
+	system();
+
 	/**
 	 * Gets the current operating system.
 	 *
@@ -82,6 +84,16 @@ class system {
 	 * @see love.system.getVersion
 	 */
 	std::string getVersionString();
+
+	/**
+	 * Gets the current user's name, if available. When not available, will return an empty string.
+	 *
+	 * @return The username of the current user, or an empty string otherwise.
+	 */
+	std::string getUsername();
+
+	std::string m_username;
+	bool m_usernameInitialized = false;
 
 	bool load(config& t);
 };

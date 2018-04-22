@@ -19,7 +19,14 @@ class filesystem {
 	/**
 	 * Loads and runs a .chai file.
 	 *
-	 * @param file The name (and path) of the file.
+	 * @param file The name (and path) of the file. Having the .chai extension at the end is optional.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * love.filesystem.load("myscript.chai")
+	 * love.filesystem.load("myotherscript")
+	 * @endcode
 	 *
 	 * @return Whether or not the file was loaded and ran properly.
 	 */
@@ -66,11 +73,15 @@ class filesystem {
 
 	/**
 	 * Unmounts a zip file or folder previously mounted with filesystem::unmount.
+	 *
+	 * @return bool True, when unmounting was a success.
 	 */
 	bool unmount(const std::string& archive);
 
 	/**
 	 * Mounts a zip file or folder in the game's save directory for reading.
+	 *
+	 * @return bool True, when mounting was a success.
 	 */
 	bool mount(const std::string& archive, const std::string& mountpoint);
 

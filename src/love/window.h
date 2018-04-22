@@ -33,7 +33,7 @@ class window {
 	 *
 	 * @see love.window.getTitle
 	 */
-	window& setTitle(std::string title);
+	window& setTitle(const std::string& title);
 
 	/**
 	 * Display a simple message for a certain amount of frames.

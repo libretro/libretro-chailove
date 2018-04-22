@@ -7,3 +7,6 @@ assert_equal(decompressed, text, "love.data.decompress()")
 
 var md5Hash = love.data.hash("md5", "Hello World")
 assert_equal(md5Hash, "b10a8db164e0754105b7a99be72e3fe5", "love.data.hash('md5')")
+
+var sha1Hash = love.data.hash("sha1", "Hello World")
+assert_equal(sha1Hash, "0a4d55a8d778e5022fab701977c5d840bbc486d0", "love.data.hash('sha1')")

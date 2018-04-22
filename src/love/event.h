@@ -1,6 +1,8 @@
 #ifndef SRC_LOVE_EVENT_H_
 #define SRC_LOVE_EVENT_H_
 
+#include <SDL.h>
+
 namespace love {
 /**
  * Manages events, like keypresses.
@@ -8,10 +10,16 @@ namespace love {
 class event {
 	public:
 	/**
-	 * Exits ChaiLove.
+	 * Exits the ChaiLove application.
 	 */
 	void quit();
-	bool m_quitstatus = false;
+	void update();
+
+	bool m_shouldclose = false;
+
+
+	private:
+	SDL_Event sdlEvent;
 };
 
 }  // namespace love

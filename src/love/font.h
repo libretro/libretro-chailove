@@ -9,6 +9,7 @@ namespace love {
  */
 class font {
 	public:
+	~font();
 	bool load();
 
 	/**
