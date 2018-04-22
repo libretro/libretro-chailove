@@ -65,6 +65,7 @@ class ChaiLove {
 	static ChaiLove* getInstance();
 	static ChaiLove* m_instance;
 	static void destroy();
+	static bool hasInstance();
 
 	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
@@ -90,9 +91,10 @@ class ChaiLove {
 	love::event event;
 	std::string demo();
 
+	~ChaiLove();
 	void quit(void);
 	bool load(const std::string& file);
-	bool update();
+	void update();
 	void draw();
 	void reset();
 	std::string savestate();

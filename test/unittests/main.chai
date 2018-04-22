@@ -46,4 +46,5 @@ def draw() {
 	else {
 		love.graphics.print("Report: " + failure, 100, 200)
 	}
+	love.event.quit()
 }

@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <iostream>
 #include "sound.h"
 #include "SDL.h"
 #include "../ChaiLove.h"
@@ -14,11 +15,18 @@ bool sound::load() {
 	return true;
 }
 
+sound::~sound() {
+	unload();
+}
+
 void sound::unload() {
 	// Unload all sounds.
 	for (std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {
-		sounds[i]->unload();
+		if (sounds[i] != NULL) {
+			sounds[i]->unload();
+		}
 	}
+	sounds.clear();
 }
 
 SoundData* sound::newSoundData(const std::string& filename) {

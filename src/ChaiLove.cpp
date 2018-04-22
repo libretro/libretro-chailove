@@ -10,14 +10,25 @@ retro_input_poll_t ChaiLove::input_poll_cb = NULL;
 retro_environment_t ChaiLove::environ_cb = NULL;
 
 void ChaiLove::destroy() {
-	m_instance = NULL;
+	if (hasInstance()) {
+		delete m_instance;
+		m_instance = NULL;
+	}
 }
 
 ChaiLove* ChaiLove::getInstance() {
-	if (!m_instance) {
+	if (!hasInstance()) {
 		m_instance = new ChaiLove;
 	}
 	return m_instance;
+}
+
+bool ChaiLove::hasInstance() {
+	return m_instance != NULL;
+}
+
+ChaiLove::~ChaiLove() {
+	quit();
 }
 
 void ChaiLove::quit(void) {
@@ -141,7 +152,7 @@ std::string ChaiLove::demo() {
 	return output;
 }
 
-bool ChaiLove::update() {
+void ChaiLove::update() {
 	// Update and poll all the events.
 	event.update();
 
@@ -152,8 +163,6 @@ bool ChaiLove::update() {
 
 	// Step forward the timer, and update the game.
 	script->update(timer.getDelta());
-
-	return !event.m_shouldclose;
 }
 
 /**

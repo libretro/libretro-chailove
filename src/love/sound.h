@@ -14,6 +14,7 @@ class sound {
 	bool load();
 	bool hasAudio();
 	void unload();
+	~sound();
 
 	/**
 	 * Creates a new SoundData.
