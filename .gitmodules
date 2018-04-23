@@ -52,3 +52,6 @@
 [submodule "vendor/TinySHA1"]
 	path = vendor/TinySHA1
 	url = https://github.com/mohaps/TinySHA1.git
+[submodule "vendor/criptych-physfs"]
+	path = vendor/criptych-physfs
+	url = https://github.com/criptych/physfs.git
