@@ -171,7 +171,9 @@ void ChaiLove::update() {
 	keyboard.update();
 
 	// Step forward the timer, and update the game.
-	script->update(timer.getDelta());
+	if (script != NULL) {
+		script->update(timer.getDelta());
+	}
 }
 
 /**
@@ -180,7 +182,9 @@ void ChaiLove::update() {
 void ChaiLove::reset() {
 	// Tell the script that we are to reset the game.
 	std::cout << "[ChaiLove] Reset" << std::endl;
-	script->reset();
+	if (script != NULL) {
+		script->reset();
+	}
 }
 
 /**
@@ -195,7 +199,9 @@ void ChaiLove::draw() {
 	graphics.clear();
 
 	// Render the game.
-	script->draw();
+	if (script != NULL) {
+		script->draw();
+	}
 
 	// Render the in-game console.
 	console.draw();
@@ -211,12 +217,18 @@ void ChaiLove::draw() {
  * Tell the script to return a string representing the game data.
  */
 std::string ChaiLove::savestate() {
-	return script->savestate();
+	if (script != NULL) {
+		return script->savestate();
+	}
+	return "";
 }
 
 /**
  * Ask the script to load the given string.
  */
 bool ChaiLove::loadstate(const std::string& data) {
-	return script->loadstate(data);
+	if (script != NULL) {
+		return script->loadstate(data);
+	}
+	return false;
 }
