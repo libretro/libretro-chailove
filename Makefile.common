@@ -24,21 +24,22 @@ FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
 
 # zlib
 SOURCES_C += \
-	$(CORE_DIR)/vendor/zlib/zutil.c \
-	$(CORE_DIR)/vendor/zlib/adler32.c \
-	$(CORE_DIR)/vendor/zlib/crc32.c \
-	$(CORE_DIR)/vendor/zlib/compress.c \
-	$(CORE_DIR)/vendor/zlib/deflate.c \
-	$(CORE_DIR)/vendor/zlib/gzclose.c \
-	$(CORE_DIR)/vendor/zlib/gzlib.c \
-	$(CORE_DIR)/vendor/zlib/gzread.c \
-	$(CORE_DIR)/vendor/zlib/gzwrite.c \
-	$(CORE_DIR)/vendor/zlib/infback.c \
-	$(CORE_DIR)/vendor/zlib/inffast.c \
-	$(CORE_DIR)/vendor/zlib/inftrees.c \
-	$(CORE_DIR)/vendor/zlib/inflate.c \
-	$(CORE_DIR)/vendor/zlib/trees.c
-FLAGS += -I$(CORE_DIR)/vendor/zlib
+	$(CORE_DIR)/vendor/libretro-deps/libz/zutil.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/adler32.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/crc32.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/compress.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/deflate.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/gzclose.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/gzlib.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/gzread.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/gzwrite.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/infback.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/inffast.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/inftrees.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/inflate.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/trees.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/uncompr.c
+FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/libz
 FLAGS += -DWANT_ZLIB
 
 # PhysFS
