@@ -10,14 +10,19 @@ retro_input_poll_t ChaiLove::input_poll_cb = NULL;
 retro_environment_t ChaiLove::environ_cb = NULL;
 
 void ChaiLove::destroy() {
+	std::cout << "[ChaiLove] Attempting to destroy ChaiLove" << std::endl;
 	if (hasInstance()) {
+		std::cout << "[ChaiLove] Destroying ChaiLove" << std::endl;
+		m_instance->quit();
 		delete m_instance;
 		m_instance = NULL;
 	}
+	std::cout << "[ChaiLove] Destroyed ChaiLove" << std::endl;
 }
 
 ChaiLove* ChaiLove::getInstance() {
 	if (!hasInstance()) {
+		std::cout << "[ChaiLove] Initializing ChaiLove" << std::endl;
 		m_instance = new ChaiLove;
 	}
 	return m_instance;
@@ -32,14 +37,18 @@ ChaiLove::~ChaiLove() {
 }
 
 void ChaiLove::quit(void) {
-	// Quit all the subsystems.
+	event.m_shouldclose = true;
+	// Destroy all the subsystems.
+	if (script) {
+		delete script;
+		script = NULL;
+	}
 	joystick.unload();
 	font.unload();
 	image.unload();
 	sound.unload();
 	filesystem.unload();
 	window.unload();
-	std::cout << "[ChaiLove] Unloaded ChaiLove" << std::endl;
 }
 
 bool ChaiLove::load(const std::string& file) {

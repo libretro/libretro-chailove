@@ -23,14 +23,15 @@ graphics::graphics() {
 }
 
 SDL_Surface* graphics::getScreen() {
-	return ChaiLove::getInstance()->screen;
+	if (ChaiLove::hasInstance()) {
+		return ChaiLove::getInstance()->screen;
+	}
+	return NULL;
 }
 
 bool graphics::load() {
-	ChaiLove* app = ChaiLove::getInstance();
-
 	// Enable alpha blending.
-	if (app->config.options["alphablending"]) {
+	if (ChaiLove::getInstance()->config.options["alphablending"]) {
 		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
 			std::cout << "[ChaiLove] Enabling alpha blending failed" << std::endl;
 		}

@@ -23,6 +23,7 @@ namespace love {
  * The primary purpose of the graphics module is to draw to the screen.
  */
 class graphics {
+
 	public:
 	graphics();
 	bool load();
