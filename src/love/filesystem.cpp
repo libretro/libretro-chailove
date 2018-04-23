@@ -18,7 +18,7 @@ namespace love {
 bool filesystem::init(const std::string& file) {
 	// Initialize PhysFS
 	if (PHYSFS_init(NULL) == 0) {
-		std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << PHYSFS_getLastError() << std::endl;
+		std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
 		return false;
 	}
 
@@ -71,12 +71,7 @@ PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
 	if (file) {
 		size = PHYSFS_fileLength(file);
 		if (size < 0) {
-			const char* errorChar = PHYSFS_getLastError();
-			std::string physErr("");
-			if (errorChar != NULL) {
-				physErr = errorChar;
-			}
-			std::cout << "[ChaiLove] [filesystem] Could not get size of file " << physErr << std::endl;
+			std::cout << "[ChaiLove] [filesystem] Could not get size of file " << getLastError() << std::endl;
 			return -1;
 		}
 	} else {
@@ -93,19 +88,13 @@ bool filesystem::unload() {
 SDL_RWops* filesystem::openRW(const std::string& filename) {
 	SDL_RWops* rw = PHYSFSRWOPS_openRead(filename.c_str());
 	if (rw == NULL) {
-		const char* errorChar = PHYSFS_getLastError();
-		std::string physErr("");
-		if (errorChar != NULL) {
-			physErr = errorChar;
-		}
-
-		errorChar = SDL_GetError();
+		const char* errorChar = SDL_GetError();
 		std::string sdlErr("");
 		if (errorChar != NULL) {
 			sdlErr = errorChar;
 		}
 
-		std::cout << "[ChaiLove] [filesystem] Error loading file " << filename << physErr << sdlErr << std::endl;
+		std::cout << "[ChaiLove] [filesystem] Error loading file " << filename << getLastError() << sdlErr << std::endl;
 	}
 	return rw;
 }
@@ -113,12 +102,7 @@ SDL_RWops* filesystem::openRW(const std::string& filename) {
 PHYSFS_file* filesystem::openFile(const std::string& filename) {
 	PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 	if (myfile == NULL) {
-		const char* errorChar = PHYSFS_getLastError();
-		std::string physErr("");
-		if (errorChar != NULL) {
-			physErr = errorChar;
-		}
-		std::cout << "[ChaiLove] [filesystem] Error opening file " << filename << physErr << std::endl;
+		std::cout << "[ChaiLove] [filesystem] Error opening file " << filename << getLastError() << std::endl;
 		return NULL;
 	}
 	return myfile;
@@ -136,20 +120,14 @@ char* filesystem::readChar(const std::string& filename) {
 		output = new char[file_size + 1];
 		int length_read = PHYSFS_readBytes(myfile, output, file_size);
 		if (length_read != file_size) {
-			const char* errorChar = PHYSFS_getLastError();
-			std::string physErr("");
-			if (errorChar != NULL) {
-				physErr = errorChar;
-			}
-			std::cout << "[ChaiLove] [filesystem] File System error while reading from file " << filename << physErr << std::endl;
+			std::cout << "[ChaiLove] [filesystem] File System error while reading from file " << filename << getLastError() << std::endl;
 			output = NULL;
 		} else {
 			// Make sure there is a null terminating character at the end of the string.
 			output[file_size] = '\0';
 		}
 	} else {
-		std::string physErr = PHYSFS_getLastError();
-		std::cout << "[ChaiLove] [filesystem] Error getting filesize of " << filename << physErr << std::endl;
+		std::cout << "[ChaiLove] [filesystem] Error getting filesize of " << filename << getLastError() << std::endl;
 	}
 
 	PHYSFS_close(myfile);
@@ -273,6 +251,14 @@ FileInfo filesystem::getInfo(const std::string& path) {
 	fileInfo.modtime = stat.modtime;
 	fileInfo.size = stat.filesize;
 	return fileInfo;
+}
+
+std::string filesystem::getLastError() {
+	const char* charErr = PHYSFS_getErrorByCode(PHYSFS_getLastErrorCode());
+	if (charErr) {
+		return std::string(charErr);
+	}
+	return "";
 }
 
 }  // namespace love

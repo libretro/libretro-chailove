@@ -118,6 +118,8 @@ class filesystem {
 	 */
 	std::vector<std::string> lines(const std::string& filename, const std::string& delimiter);
 	std::vector<std::string> lines(const std::string& filename);
+
+	std::string getLastError();
 };
 
 }  // namespace love
