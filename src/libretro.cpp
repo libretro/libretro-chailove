@@ -478,7 +478,7 @@ void retro_run(void) {
 
 	ChaiLove* app = ChaiLove::getInstance();
 	if (app->event.m_shouldclose) {
-		//ChaiLove::destroy();
+		// ChaiLove::destroy();
 		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 		return;
 	}
