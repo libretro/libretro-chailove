@@ -35,7 +35,7 @@ clean:
 vendor/libretro-common/include/libretro.h:
 	@git submodule update --init --recursive
 
-test: unittest cpplint
+test: unittest unittest-chailove cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
 vendor/noarch/noarch: vendor/libretro-common/include/libretro.h
@@ -43,6 +43,9 @@ vendor/noarch/noarch: vendor/libretro-common/include/libretro.h
 
 unittest: vendor/noarch/noarch all
 	vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/unittests/main.chai
+
+unittest-chailove: vendor/noarch/noarch all
+	vendor/noarch/noarch $(CORE_DIR)/$(TARGET) test/test.chailove
 
 examples: all
 	@retroarch -L $(TARGET) examples/benchmark/main.chai
