@@ -50,6 +50,10 @@ def draw() {
 
 def update(delta) {
 	tests[currenttest].update(delta)
+
+	if (love.keyboard.isDown("q")) {
+		love.event.quit()
+	}
 }
 
 def joystickpressed(joystick, button) {

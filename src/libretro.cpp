@@ -472,14 +472,14 @@ void retro_reset(void) {
  * libretro callback; Run a game loop in the core.
  */
 void retro_run(void) {
+	// Ensure there is a game running.
 	if (!ChaiLove::hasInstance()) {
 		return;
 	}
 
+	// Check if the game should be closed.
 	ChaiLove* app = ChaiLove::getInstance();
 	if (app->event.m_shouldclose) {
-		// ChaiLove::destroy();
-		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 		return;
 	}
 
@@ -491,4 +491,9 @@ void retro_run(void) {
 
 	// Copy the video buffer to the screen.
 	video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
+
+	// See if the game requested to close itself.
+	if (app->event.m_shouldclose) {
+		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
+	}
 }
