@@ -49,12 +49,13 @@ class graphics {
 
 	/**
 	 * Clears the screen to the given background color.
+	 *
+	 * @param r Red value.
+	 * @param g Green value.
+	 * @param b Blue value.
+	 * @param a (255) Alpha value.
 	 */
 	graphics& clear(int r, int g, int b, int a);
-
-	/**
-	 * Clears the screen to the given background color.
-	 */
 	graphics& clear(int r, int g, int b);
 
 	/**

@@ -10,16 +10,20 @@ void event::quit() {
 }
 
 void event::update() {
-	// Poll all the inputs.
-	ChaiLove::input_poll_cb();
+	if (ChaiLove::hasInstance()) {
+		// Poll all the inputs.
+		ChaiLove::input_poll_cb();
 
-	// Poll all SDL events.
-	while (SDL_PollEvent(&sdlEvent)) {
-		switch (sdlEvent.type) {
-			case SDL_QUIT:
-				quit();
-				break;
+		// TODO(RobLoach): Is polling the SDL events required?
+		/*
+		while (SDL_PollEvent(&sdlEvent)) {
+			switch (sdlEvent.type) {
+				case SDL_QUIT:
+					quit();
+					break;
+			}
 		}
+		*/
 	}
 }
 

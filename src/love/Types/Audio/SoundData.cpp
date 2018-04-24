@@ -19,7 +19,7 @@ SoundData::SoundData(const std::string& filename) {
 
 	int result = PHYSFS_readBytes(file, &sndta.head, sizeof(uint8_t) * WAV_HEADER_SIZE);
 	if (result < 0) {
-		std::cout << "[ChaiLove] Failed to load SoundData " << filename << PHYSFS_getLastError() << std::endl;
+		std::cout << "[ChaiLove] Failed to load SoundData " << filename << app->filesystem.getLastError() << std::endl;
 		return;
 	}
 
@@ -86,7 +86,7 @@ bool SoundData::stop() {
 }
 
 bool SoundData::isLoaded() {
-	return sndta.fp != NULL;
+	return sndta.fp != NULL && ChaiLove::hasInstance();
 }
 
 bool SoundData::isPlaying() {

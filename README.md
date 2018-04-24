@@ -8,7 +8,7 @@ ChaiLove is an awesome framework you can use to make 2D games in [ChaiScript](ht
 
 [![Floppy Bird Gameplay](docs/screenshot.png)](https://www.youtube.com/watch?v=RLVwTh6qDFI&hd=1)
 
-## Games
+## Gallery
 
 - [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)
 - [Nyan Cat](https://github.com/RobLoach/ChaiLove-NyanCat)
@@ -38,6 +38,7 @@ The [ChaiLove API](https://rawgit.com/libretro/libretro-chailove/docs/) is rough
 
 ``` lua
 global logo
+global x = 10.0f
 
 def load() {
 	logo = love.graphics.newImage("logo.png")
@@ -45,11 +46,11 @@ def load() {
 
 def draw() {
 	love.graphics.print("Hello World!", 400, 300)
-	love.graphics.draw(logo, 100, 100)
+	love.graphics.draw(logo, x, 100)
 }
 
-def update(delta) {
-	// Change something on the screen.
+def update(dt) {
+	x = x + 20.0f * dt
 }
 ```
 
