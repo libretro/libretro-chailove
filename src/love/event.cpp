@@ -14,7 +14,8 @@ void event::update() {
 		// Poll all the inputs.
 		ChaiLove::input_poll_cb();
 
-		// Poll all SDL events.
+		// TODO: Is polling the SDL events required?
+		/*
 		while (SDL_PollEvent(&sdlEvent)) {
 			switch (sdlEvent.type) {
 				case SDL_QUIT:
@@ -22,6 +23,7 @@ void event::update() {
 					break;
 			}
 		}
+		*/
 	}
 }
 

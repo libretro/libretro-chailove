@@ -16,10 +16,12 @@ namespace love {
  * Initialize the file system.
  */
 bool filesystem::init(const std::string& file) {
-	// Initialize PhysFS
-	if (PHYSFS_init(NULL) == 0) {
-		std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
-		return false;
+	if (PHYSFS_isInit() == 0) {
+		// Initialize PhysFS
+		if (PHYSFS_init(NULL) == 0) {
+			std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
+			return false;
+		}
 	}
 
 	// Check if we are simply running ChaiLove.
@@ -81,7 +83,9 @@ PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
 }
 
 bool filesystem::unload() {
-	PHYSFS_deinit();
+	if (PHYSFS_isInit() != 0) {
+		PHYSFS_deinit();
+	}
 	return true;
 }
 
