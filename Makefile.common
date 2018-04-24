@@ -53,7 +53,7 @@ ifeq ($(platform), osx)
 #	LDFLAGS += -mmacosx-version-min=10.2
 	LDFLAGS += -framework Carbon -framework IOKit
 #	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
-	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE -DPHYSFS_PLATFORM_POSIX
+	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_OS2
 endif
 
 # SDL_tty
