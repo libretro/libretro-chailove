@@ -55,4 +55,3 @@
 [submodule "vendor/criptych-physfs"]
 	path = vendor/criptych-physfs
 	url = https://github.com/criptych/physfs.git
-	ignore = dirty

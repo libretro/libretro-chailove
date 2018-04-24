@@ -42,12 +42,12 @@ FLAGS += -I$(CORE_DIR)/vendor/zlib
 FLAGS += -DWANT_ZLIB
 
 # PhysFS
-FLAGS += -I$(CORE_DIR)/vendor/criptych-physfs/src
-FLAGS += -I$(CORE_DIR)/vendor/criptych-physfs/extras
+FLAGS += -I$(CORE_DIR)/vendor/physfs/src
+FLAGS += -I$(CORE_DIR)/vendor/physfs/extras
 FLAGS += -DPHYSFS_NO_CDROM_SUPPORT=1
 SOURCES_C += $(wildcard \
-	$(CORE_DIR)/vendor/criptych-physfs/extras/physfsrwops.c \
-	$(CORE_DIR)/vendor/criptych-physfs/src/*.c \
+	$(CORE_DIR)/vendor/physfs/extras/physfsrwops.c \
+	$(CORE_DIR)/vendor/physfs/src/*.c \
 )
 ifeq ($(platform), osx)
 #	LDFLAGS += -mmacosx-version-min=10.2
