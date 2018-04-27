@@ -71,7 +71,7 @@ SOURCES_C += $(wildcard \
 
 # FreeType2
 # See https://github.com/emscripten-ports/FreeType/blob/master/builds/amiga/makefile
-FLAGS += -I$(CORE_DIR)/vendor/freetype2/include
+FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/freetype/include
 FLAGS += -DFT2_BUILD_LIBRARY \
 	-DFT_USE_AUTOFIT \
 	-DFT_USE_RASTER \
@@ -85,48 +85,48 @@ FLAGS += -DFT2_BUILD_LIBRARY \
 	-DFT_USE_GXV
 
 SOURCES_C += \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftbase.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftinit.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftsystem.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftdebug.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftbbox.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftbdf.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftstroke.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftbitmap.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftcid.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftfntfmt.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftfstype.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftgasp.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftglyph.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftgxval.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftlcdfil.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftmm.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftotval.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftpatent.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftpfr.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftsynth.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/fttype1.c \
-	$(CORE_DIR)/vendor/freetype2/src/base/ftwinfnt.c \
-	$(CORE_DIR)/vendor/freetype2/src/autofit/autofit.c \
-	$(CORE_DIR)/vendor/freetype2/src/pshinter/pshinter.c \
-	$(CORE_DIR)/vendor/freetype2/src/psaux/psaux.c \
-	$(CORE_DIR)/vendor/freetype2/src/psnames/psnames.c \
-	$(CORE_DIR)/vendor/freetype2/src/raster/raster.c \
-	$(CORE_DIR)/vendor/freetype2/src/smooth/smooth.c \
-	$(CORE_DIR)/vendor/freetype2/src/cache/ftcache.c \
-	$(CORE_DIR)/vendor/freetype2/src/bdf/bdf.c \
-	$(CORE_DIR)/vendor/freetype2/src/cff/cff.c \
-	$(CORE_DIR)/vendor/freetype2/src/pcf/pcf.c \
-	$(CORE_DIR)/vendor/freetype2/src/winfonts/winfnt.c \
-	$(CORE_DIR)/vendor/freetype2/src/sfnt/sfnt.c \
-	$(CORE_DIR)/vendor/freetype2/src/pfr/pfr.c \
-	$(CORE_DIR)/vendor/freetype2/src/truetype/truetype.c \
-	$(CORE_DIR)/vendor/freetype2/src/type1/type1.c \
-	$(CORE_DIR)/vendor/freetype2/src/type42/type42.c \
-	$(CORE_DIR)/vendor/freetype2/src/cid/type1cid.c \
-	$(CORE_DIR)/vendor/freetype2/src/gzip/ftgzip.c \
-	$(CORE_DIR)/vendor/freetype2/src/bzip2/ftbzip2.c \
-	$(CORE_DIR)/vendor/freetype2/src/lzw/ftlzw.c
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftbase.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftinit.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftsystem.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftdebug.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftbbox.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftbdf.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftstroke.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftbitmap.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftcid.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftfntfmt.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftfstype.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftgasp.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftglyph.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftgxval.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftlcdfil.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftmm.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftotval.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftpatent.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftpfr.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftsynth.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/fttype1.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/base/ftwinfnt.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/autofit/autofit.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/pshinter/pshinter.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/psaux/psaux.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/psnames/psnames.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/raster/raster.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/smooth/smooth.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/cache/ftcache.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/bdf/bdf.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/cff/cff.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/pcf/pcf.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/winfonts/winfnt.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/sfnt/sfnt.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/pfr/pfr.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/truetype/truetype.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/type1/type1.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/type42/type42.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/cid/type1cid.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/gzip/ftgzip.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/bzip2/ftbzip2.c \
+	$(CORE_DIR)/vendor/libretro-deps/freetype/src/lzw/ftlzw.c
 
 # SDL_ttf
 FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
