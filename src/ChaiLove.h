@@ -23,8 +23,20 @@
  * This is the full source for "hello world" in ChaiLove, using a `main.chai` file. Running this code will cause an 640 by 480 window to appear, and display white text on a black background.
  *
  * @code
+ * global logo
+ * global x = 10.0f
+ *
+ * def load() {
+ * 	 logo = love.graphics.newImage("logo.png")
+ * }
+ *
  * def draw() {
- *     love.graphics.print("Hello World!", 200, 250)
+ *   love.graphics.print("Hello World!", 400, 300)
+ *   love.graphics.draw(logo, x, 100)
+ * }
+ *
+ * def update(dt) {
+ *   x = x + 20.0f * dt
  * }
  * @endcode
  *
