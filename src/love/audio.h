@@ -24,7 +24,9 @@ class audio {
 	 * Creates a new audio source from a file.
 	 *
 	 * @param filename The .wav file to load.
+	 * @param type ("static") The type of audio source to load ("static", "stream"). Optional.
 	 */
+	SoundData* newSource(const std::string& filename, const std::string& type);
 	SoundData* newSource(const std::string& filename);
 
 	void mixer_render(int16_t *buffer);

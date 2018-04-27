@@ -292,6 +292,7 @@ script::script(const std::string& file) {
 
 	// Audio
 	chai.add(fun(&audio::play), "play");
+	chai.add(fun<SoundData*, audio, const std::string&, const std::string&>(&audio::newSource), "newSource");
 	chai.add(fun<SoundData*, audio, const std::string&>(&audio::newSource), "newSource");
 	chai.add(fun(&audio::getVolume), "getVolume");
 	chai.add(fun(&audio::setVolume), "setVolume");
