@@ -39,6 +39,7 @@ SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-deps/libz/inflate.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/trees.c
 FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/libz
+FLAGS += -I$(CORE_DIR)/vendor/libretro-common/compat
 FLAGS += -DWANT_ZLIB
 
 # PhysFS
