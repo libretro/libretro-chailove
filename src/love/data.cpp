@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include "zlib.h"
+#include "compat/zlib.h"
 #include "utils/md5.h"
 #include "TinySHA1.hpp"
 
