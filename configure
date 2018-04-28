@@ -1,3 +1,8 @@
 #!/bin/sh
 
+# ChaiLove configure
+# This ./configure file is set up to allow use of the standard make build practices.
+#
+# Here be dragons.
+
 PACKAGE_NAME=libretro-chailove
