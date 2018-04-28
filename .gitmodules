@@ -24,9 +24,6 @@
 [submodule "vendor/Snippets"]
 	path = vendor/Snippets
 	url = https://github.com/DanielGibson/Snippets.git
-[submodule "vendor/zlib"]
-	path = vendor/zlib
-	url = https://github.com/madler/zlib.git
 [submodule "vendor/libretro-deps"]
 	path = vendor/libretro-deps
 	url = https://github.com/libretro/libretro-deps.git
