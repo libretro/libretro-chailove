@@ -102,7 +102,7 @@ class graphics {
 	/**
 	 * Creates a new TrueType font, with the given font size.
 	 *
-	 * @param filename The path to the TrueType .ttf font.
+	 * @param filename (font) The path to the TrueType .ttf font. When not provided, will return the default font.
 	 * @param size (12) The size of the font to create.
 	 *
 	 * @return The created TrueType font.
@@ -124,10 +124,9 @@ class graphics {
 	/**
 	 * Set an already-loaded Font as the current font.
 	 *
-	 * @param The font to set as the active font.
+	 * @param (font) The font to set as the active font. When not provided will set the default font.
 	 */
 	graphics& setFont(Font* font);
-
 	graphics& setFont();
 
 	/**
@@ -225,6 +224,9 @@ class graphics {
 	 * Draws a circle.
 	 *
 	 * @param drawmode How to draw the circle. Can be "fill" or "line".
+	 * @param x The position of the center along x-axis.
+	 * @param y The position of the center along y-axis.
+	 * @param radius The radius of the circle.
 	 */
 	graphics& circle(const std::string& drawmode, int x, int y, int radius);
 
@@ -232,6 +234,10 @@ class graphics {
 	 * Draws an ellipse.
 	 *
 	 * @param drawmode How to draw the ellipse. Can be "fill" or "line".
+	 * @param x The position of the center along x-axis.
+	 * @param y The position of the center along y-axis.
+	 * @param radiusx The radius of the ellipse along the x-axis (half the ellipse's width).
+	 * @param radiusy The radius of the ellipse along the y-axis (half the ellipse's height).
 	 */
 	graphics& ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy);
 
