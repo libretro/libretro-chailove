@@ -66,7 +66,7 @@ Behind ChaiLove, there's the documentation, compiling it, along with testing.
 
 ### Compiling
 
-Use the following command to compile the core:
+Use the following command to compile the core, with at least `g++ >=5.2`:
 
 ```
 make
