@@ -46,3 +46,6 @@
 [submodule "vendor/TinySHA1"]
 	path = vendor/TinySHA1
 	url = https://github.com/mohaps/TinySHA1.git
+[submodule "vendor/process"]
+	path = vendor/process
+	url = https://github.com/sheredom/process.h.git
