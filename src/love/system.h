@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include "config.h"
-#include "Types/System/Process.h"
 
 /**
  * This covers all the modules available through ChaiLove.
@@ -54,13 +53,13 @@
  * - \link love::script::loadstate loadstate(jsonData) \endlink Callback function triggered to load the given JSON serialized data.
  */
 namespace love {
+
 /**
  * Provides access to information about the user's system.
  */
 class system {
 	public:
 	system();
-	~system();
 
 	/**
 	 * Gets the current operating system.
@@ -94,9 +93,12 @@ class system {
 	 */
 	std::string getUsername();
 
-	std::list<Process*> m_processes;
-
-	bool execute(const std::string& command);
+	/**
+	 * Execute an operating system shell command. This is like the C system() function.
+	 *
+	 * @return True or False depending on whether or not the command started properly.
+	 */
+	std::string execute(const std::string& command);
 
 	std::string m_username;
 	bool m_usernameInitialized = false;

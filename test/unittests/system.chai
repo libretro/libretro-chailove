@@ -10,4 +10,9 @@ assert_equal(versionNumber[0], 0, "love.system.getVersion()")
 var username = love.system.getUsername()
 assert(true, "love.system.getUsername() == '" + username + "'")
 
-love.system.execute("uname")
+if (love.system.getOS() == "Linux") {
+	var result = love.system.execute("lutris")
+	assert(result, "love.system.execute('uname') ---")
+
+
+}

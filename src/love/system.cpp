@@ -2,26 +2,18 @@
 #include "../ChaiLove.h"
 
 #include <string>
-#include <cstring>
+#include <cstdlib>
 #include <iostream>
+#include <cstdio>
+#include <array>
+#include <vector>
 #include "semver.h"
-#include "libretro.h"]
-#include "Types/System/Process.h"
+#include "libretro.h"
 
 namespace love {
 
-using ::love::Types::System::Process;
-
 system::system() {
 	m_username = "";
-}
-
-system::~system() {
-	// Clear out the active processes.
-	for (size_t i = 0; i < m_processes.size(); i++) {
-		delete m_processes[i];
-	}
-	m_processes.clear();
 }
 
 std::string system::getOS() {
@@ -133,8 +125,33 @@ std::string system::getUsername() {
 	return m_username;
 }
 
-bool system::execute(const std::string& command) {
-	m_processes.push_back(new Process(command));
+std::string system::execute(const std::string& command) {
+	/*Process* process = new Process(command);
+	m_processes.push_back(process);
+	return process->success();*/
+
+
+/*
+    std::array<char, 128> buffer;
+    std::string result;
+    std::shared_ptr<FILE> pipe(popen(command.c_str(), "r"), pclose);
+    if (!pipe) {
+    	throw std::runtime_error("popen() failed!");
+    }
+    while (!feof(pipe.get())) {
+        if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
+            result += buffer.data();
+    }
+    return result;*/
+	std::cout << "[ChaiLove] [system] Executing " << command << std::endl;
+	int result = std::system(command.c_str());
+	if (result == -1) {
+		std::cout << "[ChaiLove] [system] Failed " << command << std::endl;
+	}
+	std::cout << "[ChaiLove] [system] Finished " << command << std::endl;
+
+
+
 }
 
 }  // namespace love

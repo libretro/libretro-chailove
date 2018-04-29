@@ -10,10 +10,10 @@ SOURCES_CXX := $(wildcard \
 )
 
 # process.h
-FLAGS := -I$(CORE_DIR)/vendor/process
+FLAGS += -I$(CORE_DIR)/vendor/process
 
 # semver
-FLAGS := -I$(CORE_DIR)/vendor/semver
+FLAGS += -I$(CORE_DIR)/vendor/semver
 SOURCES_C := $(CORE_DIR)/vendor/semver/semver.c
 
 # random
