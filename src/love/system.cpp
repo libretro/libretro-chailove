@@ -2,8 +2,10 @@
 #include "../ChaiLove.h"
 
 #include <string>
-#include <cstring>
+#include <cstdlib>
 #include <iostream>
+#include <cstdio>
+#include <vector>
 #include "semver.h"
 #include "libretro.h"
 
@@ -120,6 +122,17 @@ std::string system::getUsername() {
 		}
 	}
 	return m_username;
+}
+
+bool system::execute(const std::string& command) {
+	std::cout << "[ChaiLove] [system] Executing " << command << std::endl;
+	int result = std::system(command.c_str());
+	if (result != 0) {
+		std::cout << "[ChaiLove] [system] Failed to execute " << command << std::endl;
+		return false;
+	}
+	std::cout << "[ChaiLove] [system] Finished " << command << std::endl;
+	return true;
 }
 
 }  // namespace love
