@@ -11,6 +11,6 @@ var username = love.system.getUsername()
 assert(true, "love.system.getUsername() == '" + username + "'")
 
 if (love.system.getOS() == "Linux") {
-	var result = love.system.execute("unadfsafme")
-	assert(result, "love.system.execute('uname') ---")
+	var result = love.system.execute("uname")
+	assert(result, "love.system.execute('uname')")
 }
