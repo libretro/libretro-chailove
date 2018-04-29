@@ -98,7 +98,7 @@ class system {
 	 *
 	 * @return True or False depending on whether or not the command started properly.
 	 */
-	std::string execute(const std::string& command);
+	bool execute(const std::string& command);
 
 	std::string m_username;
 	bool m_usernameInitialized = false;

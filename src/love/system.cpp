@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <cstdio>
-#include <array>
 #include <vector>
 #include "semver.h"
 #include "libretro.h"
@@ -125,33 +124,15 @@ std::string system::getUsername() {
 	return m_username;
 }
 
-std::string system::execute(const std::string& command) {
-	/*Process* process = new Process(command);
-	m_processes.push_back(process);
-	return process->success();*/
-
-
-/*
-    std::array<char, 128> buffer;
-    std::string result;
-    std::shared_ptr<FILE> pipe(popen(command.c_str(), "r"), pclose);
-    if (!pipe) {
-    	throw std::runtime_error("popen() failed!");
-    }
-    while (!feof(pipe.get())) {
-        if (fgets(buffer.data(), 128, pipe.get()) != nullptr)
-            result += buffer.data();
-    }
-    return result;*/
+bool system::execute(const std::string& command) {
 	std::cout << "[ChaiLove] [system] Executing " << command << std::endl;
 	int result = std::system(command.c_str());
 	if (result == -1) {
 		std::cout << "[ChaiLove] [system] Failed " << command << std::endl;
+		return false;
 	}
 	std::cout << "[ChaiLove] [system] Finished " << command << std::endl;
-
-
-
+	return true;
 }
 
 }  // namespace love
