@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "config.h"
+#include "Types/System/Process.h"
 
 /**
  * This covers all the modules available through ChaiLove.
@@ -59,6 +60,7 @@ namespace love {
 class system {
 	public:
 	system();
+	~system();
 
 	/**
 	 * Gets the current operating system.
@@ -91,6 +93,10 @@ class system {
 	 * @return The username of the current user, or an empty string otherwise.
 	 */
 	std::string getUsername();
+
+	std::list<Process*> m_processes;
+
+	bool execute(const std::string& command);
 
 	std::string m_username;
 	bool m_usernameInitialized = false;

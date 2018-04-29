@@ -278,6 +278,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getVersion), "getVersion");
 	chai.add(fun(&system::getVersionString), "getVersionString");
 	chai.add(fun(&system::getUsername), "getUsername");
+	chai.add(fun(&system::execute), "execute");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");

@@ -5,12 +5,23 @@
 #include <cstring>
 #include <iostream>
 #include "semver.h"
-#include "libretro.h"
+#include "libretro.h"]
+#include "Types/System/Process.h"
 
 namespace love {
 
+using ::love::Types::System::Process;
+
 system::system() {
 	m_username = "";
+}
+
+system::~system() {
+	// Clear out the active processes.
+	for (size_t i = 0; i < m_processes.size(); i++) {
+		delete m_processes[i];
+	}
+	m_processes.clear();
 }
 
 std::string system::getOS() {
@@ -120,6 +131,10 @@ std::string system::getUsername() {
 		}
 	}
 	return m_username;
+}
+
+bool system::execute(const std::string& command) {
+	m_processes.push_back(new Process(command));
 }
 
 }  // namespace love

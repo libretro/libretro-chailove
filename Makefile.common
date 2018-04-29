@@ -9,6 +9,9 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Config/*.cpp \
 )
 
+# process.h
+FLAGS := -I$(CORE_DIR)/vendor/process
+
 # semver
 FLAGS := -I$(CORE_DIR)/vendor/semver
 SOURCES_C := $(CORE_DIR)/vendor/semver/semver.c
