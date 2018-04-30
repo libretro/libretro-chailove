@@ -23,7 +23,7 @@ class sound {
 	 *
 	 * @return A new SoundData object.
 	 */
-    Types::Audio::SoundData* newSoundData(const std::string& filename);
+	Types::Audio::SoundData* newSoundData(const std::string& filename);
 
 	std::vector<Types::Audio::SoundData*> sounds;
 };

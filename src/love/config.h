@@ -34,14 +34,14 @@ class config {
 
 	/**
 	 * The machine name of the project.
-     *
-     * This should represent a machine name of your game.
-     *
-     * ## Example
-     *
-     * @code
-     * t.identity = "mygame"
-     * @endcode
+	 *
+	 * This should represent a machine name of your game.
+	 *
+	 * ## Example
+	 *
+	 * @code
+	 * t.identity = "mygame"
+	 * @endcode
 	 */
 	std::string identity = "chailove";
 
@@ -53,8 +53,8 @@ class config {
 	/**
 	 * The window configuration.
 	 *
-     * ## Example
-     *
+	 * ## Example
+	 *
 	 * @code
 	 * t.window.title = "My Game"
 	 * t.window.width = 1024
@@ -66,12 +66,12 @@ class config {
 
 	/**
 	 * Enable or disable modules.
-     *
-     * ## Example
-     *
-     * @code
-     * t.modules.sound = false
-     * @endcode
+	 *
+	 * ## Example
+	 *
+	 * @code
+	 * t.modules.sound = false
+	 * @endcode
 	 */
 	ModuleConfig modules;
 
@@ -79,11 +79,11 @@ class config {
 	 * Generic map of boolean configuration options.
 	 *
 	 * ## Example
-     *
-     * @code
+	 *
+	 * @code
 	 * t.options["alphablending"] = true
 	 * t.options["highquality"] = true
-     * @endcode
+	 * @endcode
 	 */
 	std::map<std::string, bool> options;
 
@@ -91,12 +91,12 @@ class config {
 	 * Attach the in-game console.
 	 *
 	 * When `t.console = true`, will allow use of the in-game console. Use the tilde key to display.
-     *
-     * ## Example
-     *
-     * @code
-     * t.console = true
-     * @endcode
+	 *
+	 * ## Example
+	 *
+	 * @code
+	 * t.console = true
+	 * @endcode
 	 *
 	 * @see love.console
 	 */
