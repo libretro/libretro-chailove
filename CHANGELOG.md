@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Updated
 - Documentation
+- Switched to [libretro-deps](https://github.com/libretro/libretro-deps) for freetype and zlib
 
 ## 0.20.1 - 2018-04-24
 ### Fixed
