@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `love.system.execute()` to execute a operating system shell command
 - `love.audio.newSource()` now has an optional `type` parameter
 - `love.joystick` comes with a cleaner API
+- `quit()` callback
 
 ## 0.20.1 - 2018-04-24
 ### Bug Fixes
