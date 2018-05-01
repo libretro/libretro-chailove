@@ -23,7 +23,7 @@ bool Image::loaded() {
 bool Image::loadFromRW(SDL_RWops* rw) {
 	surface = STBIMG_Load_RW(rw, 1);
 
-	if (!surface) {
+	if (!loaded()) {
 		const char* errorChar = SDL_GetError();
 		std::string errString("");
 		if (errorChar != NULL) {
@@ -44,8 +44,8 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 		optimizedImage = SDL_DisplayFormat(surface);
 	}
 
-	if (!optimizedImage) {
-		std::cout << "[ChaiLove] [graphics] SDL_DisplayFormat failed to optimize the image." << std::endl;
+	if (optimizedImage == NULL) {
+		std::cout << "[ChaiLove] [graphics] Warning: SDL_DisplayFormat failed to optimize the image." << std::endl;
 	} else {
 		SDL_FreeSurface(surface);
 		surface = optimizedImage;
@@ -54,7 +54,7 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 }
 
 bool Image::destroy() {
-	if (surface != NULL) {
+	if (loaded()) {
 		SDL_FreeSurface(surface);
 		surface = NULL;
 	}
@@ -71,14 +71,14 @@ Image::Image(const std::string& filename) {
 }
 
 int Image::getWidth() {
-	if (surface != NULL) {
+	if (loaded()) {
 		return surface->w;
 	}
 	return 0;
 }
 
 int Image::getHeight() {
-	if (surface != NULL) {
+	if (loaded()) {
 		return surface->h;
 	}
 	return 0;

@@ -288,6 +288,15 @@ class script {
 	 *
 	 * @param key The name of the key that was pressed.
 	 * @param scancode The scancode of the key that was pressed.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * def keypressed(key, scancode) {
+	 *     print("Key Pressed: " + key)
+	 *     print("Scancode: " + to_string(scancode))
+	 * }
+	 * @endcode
 	 */
 	void keypressed(const std::string& key, int scancode);
 
@@ -296,6 +305,15 @@ class script {
 	 *
 	 * @param key The name of the key that was released.
 	 * @param scancode The scancode of the key that was released.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * def keyreleased(key, scancode) {
+	 *     print("Key Released: " + key)
+	 *     print("Scancode: " + to_string(scancode))
+	 * }
+	 * @endcode
 	 */
 	void keyreleased(const std::string& key, int scancode);
 
@@ -303,6 +321,18 @@ class script {
 	 * Called when requested to save the current state.
 	 *
 	 * @return string A JSON array representing the current state.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global score = 0
+	 *
+	 * def savestate() {
+	 *     return to_json([
+	 *         "score": score
+	 *     ])
+	 * }
+	 * @endcode
 	 */
 	std::string savestate();
 
@@ -312,8 +342,33 @@ class script {
 	 * @param data A JSON array representing the state to load.
 	 *
 	 * @return bool True if loading the state succeeded.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global score = 0
+	 *
+	 * def loadstate(data) {
+	 *     var info = from_json(data)
+	 *     score = info["score"]
+	 *     return true
+	 * }
+	 * @endcode
 	 */
 	bool loadstate(const std::string& data);
+
+	/**
+	 * Callback function triggered when the game is closed.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * def exit() {
+	 *     print("Thanks for playing. Please play again soon!")
+	 * }
+	 * @endcode
+	 */
+	void exit();
 
 	chaiscript::Boxed_Value eval(const std::string& code, const std::string& filename);
 	std::string evalString(const std::string& code, const std::string& filename);
@@ -324,6 +379,7 @@ class script {
 	std::function<void(config&)> chaiconf;
 	std::function<void(float)> chaiupdate;
 	std::function<void()> chaidraw;
+	std::function<void()> chaiexit;
 	std::function<void()> chaireset;
 	std::function<bool(std::string)> chailoadstate;
 	std::function<std::string()> chaisavestate;
@@ -343,6 +399,7 @@ class script {
 	bool hasmousemoved = true;
 	bool haskeypressed = true;
 	bool haskeyreleased = true;
+	bool hasexit = true;
 	bool hasloadstate = true;
 	bool hassavestate = true;
 	bool hasload = true;
