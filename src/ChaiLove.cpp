@@ -42,7 +42,7 @@ void ChaiLove::quit(void) {
 
 	// Disengage the scripting language.
 	if (script) {
-		script->quit();
+		script->exit();
 		delete script;
 		script = NULL;
 	}
