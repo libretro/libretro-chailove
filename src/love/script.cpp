@@ -193,7 +193,8 @@ script::script(const std::string& file) {
 	chai.add(fun<bool, Joystick, const std::string&>(&Joystick::isDown), "isDown");
 	chai.add(fun<bool, Joystick, int>(&Joystick::isDown), "isDown");
 	chai.add(fun(&Joystick::getName), "getName");
-	chai.add(fun(&Joystick::isOpen), "isOpen");
+	chai.add(fun(&Joystick::isConnected), "isConnected");
+	chai.add(fun(&Joystick::getID), "getID");
 
 	// Graphics
 	chai.add(fun(&graphics::rectangle), "rectangle");
@@ -460,6 +461,13 @@ script::script(const std::string& file) {
 		std::cout << "[ChaiLove] [script] savestate() " << e.what() << std::endl;
 		hassavestate = false;
 	}
+	try {
+		chaiexit = chai.eval<std::function<void()> >("exit");
+	}
+	catch (const std::exception& e) {
+		std::cout << "[ChaiLove] [script] exit() Warning: " << e.what() << std::endl;
+		hasexit = false;
+	}
 	#endif
 }
 
@@ -671,6 +679,20 @@ bool script::loadstate(const std::string& data) {
 
 	// If there is an error in loading the state, return false.
 	return false;
+}
+
+void script::exit() {
+	#ifdef __HAVE_CHAISCRIPT__
+	if (hasexit) {
+		try {
+			chaiexit();
+		}
+		catch (const std::exception& e) {
+			std::cout << "[ChaiLove] [script] Failed to call exit(): " << e.what() << std::endl;
+			hasexit = false;
+		}
+	}
+	#endif
 }
 
 /**

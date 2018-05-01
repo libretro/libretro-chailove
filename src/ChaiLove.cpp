@@ -37,17 +37,17 @@ ChaiLove::~ChaiLove() {
 }
 
 void ChaiLove::quit(void) {
-	if (screen != NULL) {
-		SDL_FreeSurface(screen);
-		screen = NULL;
-	}
-
+	// Enforce the should close flag.
 	event.m_shouldclose = true;
-	// Destroy all the subsystems.
+
+	// Disengage the scripting language.
 	if (script) {
+		script->exit();
 		delete script;
 		script = NULL;
 	}
+
+	// Unload all the other sub-systems.
 	joystick.unload();
 	font.unload();
 	image.unload();

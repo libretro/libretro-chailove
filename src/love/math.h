@@ -85,6 +85,7 @@ class math {
 	 */
 	const float pi = 3.14159265358979323846f;
 
+	private:
 	int m_seed = 0;
 };
 

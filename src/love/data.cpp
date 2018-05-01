@@ -95,38 +95,46 @@ std::string data::decompress(const std::string& str) {
 
 std::string data::hash(const std::string& hashFunction, const std::string& data) {
 	if (hashFunction == "md5") {
-		const char* input = data.c_str();
-		unsigned char digest[16];
-
-		// Calculate the MD5 hash using libretro-common.
-		MD5_CTX context;
-		MD5_Init(&context);
-		MD5_Update(&context, input, strlen(input));
-		MD5_Final(digest, &context);
-
-		// Construct the MD5 hash string.
-		char md5string[33];
-		for (int i = 0; i < 16; ++i) {
-			snprintf(&md5string[i * 2], sizeof(&md5string[i * 2]), "%02x", (unsigned int)digest[i]);
-		}
-
-		// Output the hash.
-		std::string output(md5string);
-		return output;
+		return hash_md5(data);
 	}
 
 	if (hashFunction == "sha1") {
-		sha1::SHA1 s;
-		s.processBytes(data.c_str(), data.size());
-		uint32_t digest[5];
-		s.getDigest(digest);
-		char tmp[48];
-		snprintf(tmp, sizeof(tmp), "%08x%08x%08x%08x%08x", digest[0], digest[1], digest[2], digest[3], digest[4]);
-		return std::string(tmp);
+		return hash_sha1(data);
 	}
 
 	std::cout << "[ChaiLove] Error: Hash function not found: " << hashFunction << "." << std::endl;
 	return "";
+}
+
+std::string data::hash_md5(const std::string& data) {
+	const char* input = data.c_str();
+	unsigned char digest[16];
+
+	// Calculate the MD5 hash using libretro-common.
+	MD5_CTX context;
+	MD5_Init(&context);
+	MD5_Update(&context, input, strlen(input));
+	MD5_Final(digest, &context);
+
+	// Construct the MD5 hash string.
+	char md5string[33];
+	for (int i = 0; i < 16; ++i) {
+		snprintf(&md5string[i * 2], sizeof(&md5string[i * 2]), "%02x", (unsigned int)digest[i]);
+	}
+
+	// Output the hash.
+	std::string output(md5string);
+	return output;
+}
+
+std::string data::hash_sha1(const std::string& data) {
+	sha1::SHA1 s;
+	s.processBytes(data.c_str(), data.size());
+	uint32_t digest[5];
+	s.getDigest(digest);
+	char tmp[48];
+	snprintf(tmp, sizeof(tmp), "%08x%08x%08x%08x%08x", digest[0], digest[1], digest[2], digest[3], digest[4]);
+	return std::string(tmp);
 }
 
 }  // namespace love

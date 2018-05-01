@@ -36,6 +36,10 @@ def load() {
 	love.window.showMessageBox("Hello World!")
 }
 
+def exit() {
+	print("Thanks for playing. Please play again soon!")
+}
+
 def draw() {
 	tests[currenttest].draw();
 

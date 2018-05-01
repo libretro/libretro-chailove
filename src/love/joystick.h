@@ -1,9 +1,11 @@
 #ifndef SRC_LOVE_JOYSTICK_H_
 #define SRC_LOVE_JOYSTICK_H_
 
+#include <string>
+#include <vector>
+
 #include "Types/Input/Joystick.h"
 #include "SDL.h"
-#include <string>
 
 using love::Types::Input::Joystick;
 
@@ -14,47 +16,48 @@ namespace love {
  */
 class joystick {
 	public:
+	~joystick();
 	void load();
 	void update();
 
 	/**
 	 * Gets a list of connected Joysticks.
+	 *
+	 * @return Gets a list of connected Joysticks.
 	 */
-	Joystick* getJoysticks();
-	Joystick* joysticks;
+	std::vector<Joystick*>& getJoysticks();
 
 	/**
 	 * Gets the number of connected joysticks.
+	 *
+	 * @return The number of connected joysticks.
 	 */
 	int getJoystickCount();
-	int numJoysticks = 0;
-
-	/**
-	 * Checks if the joystick is open.
-	 */
-	bool isOpen(int index);
-
-	void clearCache();
-
-	/**
-	 * Closes a joystick.
-	 */
-	void close(int index);
 
 	void unload();
+
 	/**
 	 * Checks if a button number is pressed on a joystick.
+	 *
+	 * @param joystick The joystick to be checked.
+	 * @param button The button to be checked.
+	 *
+	 * @return TRUE if the joystick button is pressed.
 	 */
-	bool isDown(int index, int button);
+	bool isDown(int joystick, int button);
 
 	/**
 	 * Checks if a button is pressed on a joystick.
+	 *
+	 * @param joystick The joystick to be checked.
+	 * @param button The button to be checked.
+	 *
+	 * @return TRUE if the joystick button is pressed.
 	 */
-	bool isDown(int index, const std::string& button);
+	bool isDown(int joystick, const std::string& button);
 
 	int getButtonKey(const std::string& name);
 	std::string getButtonName(int key);
-	int16_t joystick_cache[4][14];
 
 	/**
 	 * Retrieve the given joystick.
@@ -65,11 +68,14 @@ class joystick {
 	 * }
 	 * @endcode
 	 *
-	 * @param player The number of which player's joystick you would like to retrieve.
+	 * @param joystick The joystick to be retrieved.
 	 *
 	 * @return The joystick of the given player number.
 	 */
-	Joystick& operator[](int i);
+	Joystick* operator[](int joystick);
+
+	private:
+	std::vector<Joystick*> m_joysticks;
 };
 
 }  // namespace love
