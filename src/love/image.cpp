@@ -37,7 +37,7 @@ bool image::load() {
 }
 
 bool image::unload() {
-	for (std::list<Image*>::iterator it = m_images.begin(); it != m_images.end(); ++it){
+	for (std::list<Image*>::iterator it = m_images.begin(); it != m_images.end(); ++it) {
 		if (*it != NULL) {
 	    	delete *it;
 	    }
