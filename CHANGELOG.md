@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `love.audio.newSource()` now has an optional `type` parameter
 - `love.joystick` comes with a cleaner API
 - `exit()` callback, which is called when is quitting the game
+- `love.filesystem` now mounts `libretro/assets`, `libretro/system` and `libretro/saves`
 
 ## 0.20.1 - 2018-04-24
 ### Bug Fixes
