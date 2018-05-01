@@ -37,6 +37,11 @@ ChaiLove::~ChaiLove() {
 }
 
 void ChaiLove::quit(void) {
+	if (screen != NULL) {
+		SDL_FreeSurface(screen);
+		screen = NULL;
+	}
+
 	event.m_shouldclose = true;
 	// Destroy all the subsystems.
 	if (script) {
@@ -65,6 +70,8 @@ bool ChaiLove::load(const std::string& file) {
 		std::cout << "[ChaiLove] [filesystem] Error loading " << file << std::endl;
 		return false;
 	}
+
+	filesystem.mountlibretro();
 
 	// Initialize the scripting system.
 	script = new love::script(file);

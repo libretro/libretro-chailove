@@ -31,6 +31,7 @@ class filesystem {
 	 * @return Whether or not the file was loaded and ran properly.
 	 */
 	bool load(const std::string& file);
+	void mountlibretro();
 
 	bool init(const std::string& file);
 	bool unload();

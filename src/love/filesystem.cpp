@@ -50,28 +50,29 @@ bool filesystem::init(const std::string& file) {
 	return mount(parentPath.c_str(), "/");
 }
 
-bool filesystem::load(const std::string& file) {
-	// System Directory
+void filesystem::mountlibretro() {
+	// Mount some of the libretro directories.
 	const char *system_dir = NULL;
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
-		mount(system_dir, "/system");
+		mount(system_dir, "libretro/system");
 	}
-
-	// Content Directory
 	const char *content_dir = NULL;
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &content_dir) && content_dir) {
-		mount(content_dir, "/assets");
+		mount(content_dir, "libretro/assets");
 	}
-
-	// Save Directory
 	const char *save_dir = NULL;
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
-		// If save directory is defined use it, otherwise use system directory
-		mount(*save_dir ? save_dir : system_dir, "/saves");
+		save_dir = *save_dir ? save_dir : system_dir;
+		mount(save_dir, "libretro/saves");
 	} else {
-		mount(system_dir, "/saves");
+		mount(save_dir = system_dir, "libretro/saves");
 	}
 
+	// Ensure the write directory is set to the Save Directory.
+	PHYSFS_setWriteDir(save_dir);
+}
+
+bool filesystem::load(const std::string& file) {
 	return ChaiLove::getInstance()->script->loadModule(file);
 }
 
@@ -172,13 +173,21 @@ std::string filesystem::read(const std::string& filename) {
 bool filesystem::unmount(const std::string& archive) {
 	std::cout << "[filesystem] Unmounting " << archive << std::endl;
 	int returnValue = PHYSFS_unmount(archive.c_str());
-	return returnValue != 0;
+	if (returnValue == 0) {
+		std::cout << "[ChaiLove] [filesystem] Error unmounting: " << getLastError() << std::endl;
+		return false;
+	}
+	return true;
 }
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
 	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
 	int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
-	return returnValue != 0;
+	if (returnValue == 0) {
+		std::cout << "[ChaiLove] [filesystem] Error mounting: " << getLastError() << std::endl;
+		return false;
+	}
+	return true;
 }
 
 /**

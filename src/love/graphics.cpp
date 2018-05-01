@@ -180,6 +180,11 @@ Quad graphics::newQuad(int x, int y, int width, int height, int sw, int sh) {
 	return Quad(x, y, width, height, sw, sh);
 }
 
+graphics& graphics::print(const std::string& text) {
+	activeFont->print(text, 0, 0, r, g, b, a);
+	return *this;
+}
+
 graphics& graphics::print(const std::string& text, int x, int y) {
 	activeFont->print(text, x, y, r, g, b, a);
 	return *this;

@@ -198,7 +198,8 @@ script::script(const std::string& file) {
 	// Graphics
 	chai.add(fun(&graphics::rectangle), "rectangle");
 	chai.add(fun(&graphics::newImage), "newImage");
-	chai.add(fun(&graphics::print), "print");
+	chai.add(fun<love::graphics&, graphics, const std::string&, int, int>(&graphics::print), "print");
+	chai.add(fun<love::graphics&, graphics, const std::string&>(&graphics::print), "print");
 	chai.add(fun<love::graphics&, graphics, int, int>(&graphics::point), "point");
 	chai.add(fun<love::graphics&, graphics, Point*>(&graphics::point), "point");
 	// chai.add(bootstrap::standard_library::vector_type<std::vector<Point*>>("VectorPointPointer"));

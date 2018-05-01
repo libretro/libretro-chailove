@@ -138,14 +138,15 @@ class graphics {
 	 * Prints the given text to the screen.
 	 *
 	 * @param text The text to draw.
-	 * @param x The position to draw the object (x-axis).
-	 * @param y The position to draw the object (y-axis).
+	 * @param x (0) The position to draw the object (x-axis).
+	 * @param y (0) The position to draw the object (y-axis).
 	 *
 	 * @code
 	 * love.graphics.print("Hello World", 100, 100)
 	 * @endcode
 	 */
 	graphics& print(const std::string& text, int x, int y);
+	graphics& print(const std::string& text);
 
 	/**
 	 * Sets the active drawing color to the given color.
