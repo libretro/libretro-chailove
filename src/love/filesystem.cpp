@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 
+#include "libretro.h"
 #include "physfs.h"
 #include "filesystem.h"
 #include "physfsrwops.h"
@@ -50,8 +51,28 @@ bool filesystem::init(const std::string& file) {
 }
 
 bool filesystem::load(const std::string& file) {
-	ChaiLove* app = ChaiLove::getInstance();
-	return app->script->loadModule(file);
+	// System Directory
+	const char *system_dir = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
+		mount(system_dir, "/system");
+	}
+
+	// Content Directory
+	const char *content_dir = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &content_dir) && content_dir) {
+		mount(content_dir, "/assets");
+	}
+
+	// Save Directory
+	const char *save_dir = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
+		// If save directory is defined use it, otherwise use system directory
+		mount(*save_dir ? save_dir : system_dir, "/saves");
+	} else {
+		mount(system_dir, "/saves");
+	}
+
+	return ChaiLove::getInstance()->script->loadModule(file);
 }
 
 bool filesystem::exists(const std::string& file) {

@@ -63,6 +63,29 @@ std::string system::getVersionString() {
 }
 
 bool system::load(config& t) {
+	// Update core option from the libretro variables.
+	struct retro_variable var = {0};
+
+	// Alpha Blending
+	var.key = "chailove_alphablending";
+	var.value = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+		std::string varvalue(var.value);
+		if (varvalue == "disabled") {
+			t.options["alphablending"] = false;
+		}
+	}
+
+	// High Quality
+	var.key = "chailove_highquality";
+	var.value = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+		std::string varvalue(var.value);
+		if (varvalue == "disabled") {
+			t.options["highquality"] = false;
+		}
+	}
+
 	// Load the semantic version string.
 	semver_t chailoveVersion = {};
 	semver_t coreVersion = {};
