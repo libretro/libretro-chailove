@@ -18,6 +18,9 @@ environment:
   platform: win
   system_platform: win
 
+cache:
+  - vendor
+
 init:
   - git config --global core.autocrlf input
 
