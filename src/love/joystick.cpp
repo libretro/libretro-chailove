@@ -30,7 +30,7 @@ void joystick::load() {
 }
 
 void joystick::unload() {
-	for (std::vector<Joystick*>::iterator it = m_joysticks.begin(); it != m_joysticks.end(); ++it){
+	for (std::vector<Joystick*>::iterator it = m_joysticks.begin(); it != m_joysticks.end(); ++it) {
 		if (*it != NULL) {
 	    	delete *it;
 	    }
@@ -64,8 +64,7 @@ void joystick::update() {
 Joystick* joystick::operator[](int joystick) {
 	if (joystick < 0) {
 		joystick = 0;
-	}
-	else if (joystick >= getJoystickCount()) {
+	} else if (joystick >= getJoystickCount()) {
 		joystick = getJoystickCount() - 1;
 	}
 	return m_joysticks[joystick];

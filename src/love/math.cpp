@@ -1,8 +1,6 @@
 #include "math.h"
 #include "effolkronium/random.hpp"
 
-#include <iostream>
-
 using Random = effolkronium::random_static;
 
 namespace love {

@@ -148,7 +148,7 @@ std::string system::getUsername() {
 }
 
 bool system::execute(const std::string& command) {
-	std::cout << "[ChaiLove] [system] Executing " << command << std::endl;
+	std::cout << "[ChaiLove] [system] love.system.execute(\"" << command << "\")" << std::endl;
 	int result = std::system(command.c_str());
 	if (result != 0) {
 		std::cout << "[ChaiLove] [system] Failed to execute " << command << std::endl;

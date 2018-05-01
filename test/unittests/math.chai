@@ -28,5 +28,3 @@ assert_equal(love.math.getRandomSeed(), 10, "love.math.getRandomSeed()")
 
 assert(love.math.pi > 3.0f, "love.math.pi")
 assert(love.math.e > 2.0f, "love.math.e")
-
-print(to_string(love.math.e))
