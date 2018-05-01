@@ -9,8 +9,10 @@ namespace love {
 Image* image::newImageData(const std::string& filename) {
 	Image* image = new Image(filename);
 	if (image->loaded()) {
+		m_images.push_back(image);
 		return image;
 	}
+	delete image;
 	return NULL;
 }
 
@@ -33,7 +35,13 @@ bool image::load() {
 }
 
 bool image::unload() {
-	// IMG_Quit();
+	std::list<Image*>::iterator it;
+	for (it = m_images.begin(); it != m_images.end(); ++it){
+		if (*it != NULL) {
+	    	delete *it;
+	    }
+	}
+	m_images.clear();
 	return true;
 }
 
