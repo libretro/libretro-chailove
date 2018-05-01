@@ -91,7 +91,7 @@ void retro_set_environment(retro_environment_t cb) {
  * libretro callback; Updates the core option variables.
  */
 static void update_variables(void) {
-	// Done in system.load()
+	std::cout << "[ChaiLove] [libretro] update_variables()" << std::endl;
 }
 
 #ifdef __cplusplus
