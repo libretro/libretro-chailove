@@ -36,7 +36,7 @@ def load() {
 	love.window.showMessageBox("Hello World!")
 }
 
-def quit() {
+def exit() {
 	print("Thanks for playing. Please play again soon!")
 }
 
