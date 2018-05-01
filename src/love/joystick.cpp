@@ -13,97 +13,62 @@ using ::ChaiLove;
 
 namespace love {
 
-Joystick* joystick::getJoysticks() {
-	return joysticks;
+joystick::~joystick() {
+	unload();
+}
+
+std::vector<Joystick*>& joystick::getJoysticks() {
+	return m_joysticks;
 }
 
 void joystick::load() {
-	// TODO(RobLoach): Switch joystick callbacks from libretro to SDL.
-
-	// Initialize the joystick system.
-	// SDL_JoystickEventState(SDL_ENABLE);
-
-	// numJoysticks = SDL_NumJoysticks();
-	numJoysticks = 4;
-
-	// Create the joystick handlers.
-	joysticks = new Joystick[numJoysticks];
-	clearCache();
+	int numberOfJoysticks = 4;
+	for (int i = 0; i < numberOfJoysticks; i++) {
+		Joystick* joystick = new Joystick(i);
+		m_joysticks.push_back(joystick);
+	}
 }
 
 void joystick::unload() {
-	for (int i = 0; i < numJoysticks; i++) {
-		close(i);
+	for (std::vector<Joystick*>::iterator it = m_joysticks.begin(); it != m_joysticks.end(); ++it){
+		if (*it != NULL) {
+	    	delete *it;
+	    }
 	}
+	m_joysticks.clear();
 }
 
 int joystick::getJoystickCount() {
-	return numJoysticks;
+	return m_joysticks.size();
 }
 
-void joystick::close(int index) {
-	if (isOpen(index)) {
-		joysticks[index].close();
-	}
+bool joystick::isDown(int joystick, int button) {
+	return m_joysticks[joystick]->isDown(button);
 }
 
-bool joystick::isOpen(int index) {
-	return joysticks[index].isOpen();
-}
-
-bool joystick::isDown(int index, int button) {
-	return joysticks[index].isDown(button);
-}
-
-bool joystick::isDown(int index, const std::string& button) {
-	return joysticks[index].isDown(button);
+bool joystick::isDown(int joystick, const std::string& button) {
+	return m_joysticks[joystick]->isDown(button);
 }
 
 void joystick::update() {
+	// Ignore Joypad input when the console is shown.
 	if (ChaiLove::getInstance()->console.isShown()) {
 		return;
 	}
-	// SDL_JoystickUpdate();
-	int i, u;
-	int16_t state;
 
-	// Loop through each joystick.
-	for (i = 0; i < numJoysticks; i++) {
-		// Loop through each button.
-		for (u = 0; u < 14; u++) {
-			// Retrieve the state of the button.
-			state = ChaiLove::input_state_cb(i, RETRO_DEVICE_JOYPAD, 0, u);
-
-			// Check if there's a change of state.
-			if (joystick_cache[i][u] != state) {
-				joystick_cache[i][u] = state;
-
-				std::string name = getButtonName(u);
-				if (state == 1) {
-					ChaiLove::getInstance()->script->joystickpressed(i, name);
-				} else if (state == 0) {
-					ChaiLove::getInstance()->script->joystickreleased(i, name);
-				}
-			}
-		}
+	for (std::vector<Joystick*>::iterator it = m_joysticks.begin(); it != m_joysticks.end(); ++it) {
+		(*it)->update();
 	}
 }
 
-void joystick::clearCache() {
-	// Clear the cached.
-	for (int i = 0; i < numJoysticks; i++) {
-		// Loop through each button.
-		for (int u = 0; u < 14; u++) {
-			joystick_cache[i][u] = 0;
-		}
+Joystick* joystick::operator[](int joystick) {
+	if (joystick < 0) {
+		joystick = 0;
 	}
-}
-
-Joystick& joystick::operator[](int i) {
-	if (i < 0 || i >= numJoysticks) {
-		i = 0;
+	else if (joystick >= getJoystickCount()) {
+		joystick = getJoystickCount() - 1;
 	}
-	return joysticks[i];
+	return m_joysticks[joystick];
 }
 
 std::string joystick::getButtonName(int key) {

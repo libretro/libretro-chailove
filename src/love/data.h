@@ -44,6 +44,10 @@ class data {
 	 * @return Raw message digest string.
 	 */
 	std::string hash(const std::string& hashFunction, const std::string& data);
+
+	private:
+	std::string hash_md5(const std::string& data);
+	std::string hash_sha1(const std::string& data);
 };
 
 }  // namespace love

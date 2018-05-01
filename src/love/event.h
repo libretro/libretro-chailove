@@ -16,10 +16,6 @@ class event {
 	void update();
 
 	bool m_shouldclose = false;
-
-
-	private:
-	SDL_Event sdlEvent;
 };
 
 }  // namespace love

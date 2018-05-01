@@ -24,7 +24,6 @@ void sound::unload() {
 	for (std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {
 		if (sounds[i] != NULL) {
 			delete sounds[i];
-			sounds[i] = NULL;
 		}
 	}
 	sounds.clear();

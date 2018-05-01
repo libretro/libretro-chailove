@@ -54,7 +54,7 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 }
 
 bool Image::destroy() {
-	if (!surface) {
+	if (surface != NULL) {
 		SDL_FreeSurface(surface);
 		surface = NULL;
 	}

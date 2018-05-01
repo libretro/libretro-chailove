@@ -1,5 +1,7 @@
 #include "image.h"
 #include <string>
+#include <list>
+#include <iostream>
 #include "Types/Graphics/Image.h"
 
 using love::Types::Graphics::Image;
@@ -35,8 +37,7 @@ bool image::load() {
 }
 
 bool image::unload() {
-	std::list<Image*>::iterator it;
-	for (it = m_images.begin(); it != m_images.end(); ++it){
+	for (std::list<Image*>::iterator it = m_images.begin(); it != m_images.end(); ++it){
 		if (*it != NULL) {
 	    	delete *it;
 	    }

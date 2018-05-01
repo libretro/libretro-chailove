@@ -193,7 +193,8 @@ script::script(const std::string& file) {
 	chai.add(fun<bool, Joystick, const std::string&>(&Joystick::isDown), "isDown");
 	chai.add(fun<bool, Joystick, int>(&Joystick::isDown), "isDown");
 	chai.add(fun(&Joystick::getName), "getName");
-	chai.add(fun(&Joystick::isOpen), "isOpen");
+	chai.add(fun(&Joystick::isConnected), "isConnected");
+	chai.add(fun(&Joystick::getID), "getID");
 
 	// Graphics
 	chai.add(fun(&graphics::rectangle), "rectangle");
