@@ -12,11 +12,17 @@ std::string Joystick::getName() {
 }
 
 Joystick::Joystick() {
-	// Nothing.
+	clearStates();
 }
 
 Joystick::Joystick(int i) : m_index(i) {
-	// Nothing.
+	clearStates();
+}
+
+void Joystick::clearStates() {
+	for (int i = 0; i < 14; i++) {
+		m_state[i] = 0;
+	}
 }
 
 bool Joystick::isDown(int button) {

@@ -22,6 +22,8 @@ class Joystick {
 	 */
 	std::string getName();
 
+	void clearStates();
+
 	/**
 	 * Checks if a button on the Joystick is pressed.
 	 *
