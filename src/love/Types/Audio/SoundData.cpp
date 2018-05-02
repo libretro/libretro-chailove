@@ -86,7 +86,7 @@ bool SoundData::stop() {
 }
 
 bool SoundData::isLoaded() {
-	return sndta.fp != NULL && ChaiLove::hasInstance();
+	return sndta.fp != NULL;
 }
 
 bool SoundData::isPlaying() {
