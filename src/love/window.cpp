@@ -60,6 +60,14 @@ bool window::load(const config& conf) {
 }
 
 bool window::unload() {
+	// Destroy the screen.
+	ChaiLove* app = ChaiLove::getInstance();
+	if (app->screen != NULL) {
+		SDL_FreeSurface(app->screen);
+		app->screen = NULL;
+	}
+
+	// Close SDL.
 	SDL_Quit();
 	return true;
 }

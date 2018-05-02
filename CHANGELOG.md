@@ -4,38 +4,51 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.21.0 - 2018-05-02
+### Chores
+- Switched to [libretro-deps](https://github.com/libretro/libretro-deps) for freetype and zlib
+- Clean up of image and audio memory allocation
+- Updated documentation
+
+### Features
+- `love.system.execute()` to execute a operating system shell command
+- `love.audio.newSource()` now has an optional `type` parameter
+- `love.joystick` comes with a cleaner API
+- `exit()` callback, which is called when is quitting the game
+- `love.filesystem` now mounts `libretro/assets`, `libretro/system` and `libretro/saves`
+
 ## 0.20.1 - 2018-04-24
-### Fixed
+### Bug Fixes
 - Better memory usage
 - Compilation warnings
 
 ## 0.20.0 - 2018-04-22
-### Added
+### Features
 - No Game demo when ChaiLove is loaded without content
 - Version mismatch warning when content's ChaiLove version doesn't match core's
 - `love.data.hash()` `sha1` support
 - `love.system.getUsername()`
 
 ## 0.19.0 - 2018-04-13
-### Added
+### Features
 - Android build
   - By [@webgeek1234](https://github.com/webgeek1234)
 - `love.data.hash()` to retrieve MD5 hashes from content
 - Windows automated testing with [Appveyor](https://ci.appveyor.com/project/RobLoach/libretro-chailove)
 
 ## 0.18.1 - 2018-04-09
-### Added
+### Chores
 - Documentation
 
 ## 0.18.0 - 2018-04-03
-### Added
+### Features
 - [Semantic Versioning](https://semver.org/) checks
   - Use `t.version = "0.18.0"` in `conf(t)` to specify which ChaiLove version you're targeting
 - `love.graphics.getDimensions()`
 - `love.filesystem.getInfo()`
 - `love.filesystem.isSymlink()`
 
-### Updated
+### Breaking Changes
 - `love.math.compress()` is now `love.data.compress()`
 - Documentation
 

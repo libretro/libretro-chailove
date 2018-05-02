@@ -24,7 +24,11 @@ class audio {
 	 * Creates a new audio source from a file.
 	 *
 	 * @param filename The .wav file to load.
+	 * @param type ("static") The type of audio source to load ("static", "stream"). Optional.
+	 *
+	 * @return The new SoundData if it loaded correctly, NULL otherwise.
 	 */
+	SoundData* newSource(const std::string& filename, const std::string& type);
 	SoundData* newSource(const std::string& filename);
 
 	void mixer_render(int16_t *buffer);
@@ -44,6 +48,8 @@ class audio {
 	 * Set the master volume.
 	 *
 	 * @param volume 1.0f is max and 0.0f is off.
+	 *
+	 * @return The audio module, to allow method chaining.
 	 */
 	audio& setVolume(float volume);
 };

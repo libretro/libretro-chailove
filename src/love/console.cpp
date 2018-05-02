@@ -198,10 +198,10 @@ void console::execute(const std::string& entry) {
 		}
 	}
 	catch (const chaiscript::exception::eval_error &e) {
-  		m_log.push_back(e.what());
-  	} catch (const std::exception &e) {
-  		m_log.push_back(e.what());
-  	}
+		m_log.push_back(e.what());
+	} catch (const std::exception &e) {
+		m_log.push_back(e.what());
+	}
 }
 
 bool console::isEnabled() {

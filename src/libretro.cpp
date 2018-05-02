@@ -6,9 +6,6 @@
 #include "libretro.h"
 #include "ChaiLove.h"
 
-const char *retro_save_directory;
-const char *retro_system_directory;
-const char *retro_content_directory;
 static bool use_audio_cb;
 int16_t audio_buffer[2 * (44100 / 60)];
 static retro_video_refresh_t video_cb;
@@ -94,28 +91,7 @@ void retro_set_environment(retro_environment_t cb) {
  * libretro callback; Updates the core option variables.
  */
 static void update_variables(void) {
-	ChaiLove* game = ChaiLove::getInstance();
-	struct retro_variable var = {0};
-
-	// Alpha Blending
-	var.key = "chailove_alphablending";
-	var.value = NULL;
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
-		std::string varvalue(var.value);
-		if (varvalue == "disabled") {
-			game->config.options["alphablending"] = false;
-		}
-	}
-
-	// High Quality
-	var.key = "chailove_highquality";
-	var.value = NULL;
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
-		std::string varvalue(var.value);
-		if (varvalue == "disabled") {
-			game->config.options["highquality"] = false;
-		}
-	}
+	std::cout << "[ChaiLove] [libretro] update_variables()" << std::endl;
 }
 
 #ifdef __cplusplus
@@ -421,28 +397,6 @@ size_t retro_get_memory_size(unsigned id) {
  * libretro callback; Initialize the core.
  */
 void retro_init(void) {
-	const char *system_dir = NULL;
-
-	// System Directory
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
-		retro_system_directory = system_dir;
-	}
-
-	// Content Directory
-	const char *content_dir = NULL;
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir) && content_dir) {
-		retro_content_directory = content_dir;
-	}
-
-	// Save Directory
-	const char *save_dir = NULL;
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
-		// If save directory is defined use it, otherwise use system directory
-		retro_save_directory = *save_dir ? save_dir : retro_system_directory;
-	} else {
-		retro_save_directory = retro_system_directory;
-	}
-
 	// Pixel Format
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {

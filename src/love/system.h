@@ -53,6 +53,7 @@
  * - \link love::script::loadstate loadstate(jsonData) \endlink Callback function triggered to load the given JSON serialized data.
  */
 namespace love {
+
 /**
  * Provides access to information about the user's system.
  */
@@ -91,6 +92,13 @@ class system {
 	 * @return The username of the current user, or an empty string otherwise.
 	 */
 	std::string getUsername();
+
+	/**
+	 * Execute an operating system shell command. This is like the C system() function.
+	 *
+	 * @return True or False depending on whether or not the command started properly.
+	 */
+	bool execute(const std::string& command);
 
 	std::string m_username;
 	bool m_usernameInitialized = false;

@@ -169,15 +169,16 @@ graphics& graphics::draw(Image* image, int x, int y, float r) {
 }
 
 Image* graphics::newImage(const std::string& filename) {
-	Image* image = new Image(filename);
-	if (image->loaded()) {
-		return image;
-	}
-	return NULL;
+	return ChaiLove::getInstance()->image.newImageData(filename);
 }
 
 Quad graphics::newQuad(int x, int y, int width, int height, int sw, int sh) {
 	return Quad(x, y, width, height, sw, sh);
+}
+
+graphics& graphics::print(const std::string& text) {
+	activeFont->print(text, 0, 0, r, g, b, a);
+	return *this;
 }
 
 graphics& graphics::print(const std::string& text, int x, int y) {

@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 
+#include "libretro.h"
 #include "physfs.h"
 #include "filesystem.h"
 #include "physfsrwops.h"
@@ -49,9 +50,30 @@ bool filesystem::init(const std::string& file) {
 	return mount(parentPath.c_str(), "/");
 }
 
+void filesystem::mountlibretro() {
+	// Mount some of the libretro directories.
+	const char *system_dir = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
+		mount(system_dir, "libretro/system");
+	}
+	const char *content_dir = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &content_dir) && content_dir) {
+		mount(content_dir, "libretro/assets");
+	}
+	const char *save_dir = NULL;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
+		save_dir = *save_dir ? save_dir : system_dir;
+		mount(save_dir, "libretro/saves");
+	} else {
+		mount(save_dir = system_dir, "libretro/saves");
+	}
+
+	// Ensure the write directory is set to the Save Directory.
+	PHYSFS_setWriteDir(save_dir);
+}
+
 bool filesystem::load(const std::string& file) {
-	ChaiLove* app = ChaiLove::getInstance();
-	return app->script->loadModule(file);
+	return ChaiLove::getInstance()->script->loadModule(file);
 }
 
 bool filesystem::exists(const std::string& file) {
@@ -151,13 +173,21 @@ std::string filesystem::read(const std::string& filename) {
 bool filesystem::unmount(const std::string& archive) {
 	std::cout << "[filesystem] Unmounting " << archive << std::endl;
 	int returnValue = PHYSFS_unmount(archive.c_str());
-	return returnValue != 0;
+	if (returnValue == 0) {
+		std::cout << "[ChaiLove] [filesystem] Error unmounting: " << getLastError() << std::endl;
+		return false;
+	}
+	return true;
 }
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
 	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
 	int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
-	return returnValue != 0;
+	if (returnValue == 0) {
+		std::cout << "[ChaiLove] [filesystem] Error mounting: " << getLastError() << std::endl;
+		return false;
+	}
+	return true;
 }
 
 /**

@@ -67,7 +67,6 @@ std::string script::evalString(const std::string& code, const std::string& filen
 
 script::script(const std::string& file) {
 	#ifdef __HAVE_CHAISCRIPT__
-	ChaiLove* app = ChaiLove::getInstance();
 
 	// ChaiScript Standard Library Additions
 	// This adds some basic type definitions to ChaiScript.
@@ -194,12 +193,14 @@ script::script(const std::string& file) {
 	chai.add(fun<bool, Joystick, const std::string&>(&Joystick::isDown), "isDown");
 	chai.add(fun<bool, Joystick, int>(&Joystick::isDown), "isDown");
 	chai.add(fun(&Joystick::getName), "getName");
-	chai.add(fun(&Joystick::isOpen), "isOpen");
+	chai.add(fun(&Joystick::isConnected), "isConnected");
+	chai.add(fun(&Joystick::getID), "getID");
 
 	// Graphics
 	chai.add(fun(&graphics::rectangle), "rectangle");
 	chai.add(fun(&graphics::newImage), "newImage");
-	chai.add(fun(&graphics::print), "print");
+	chai.add(fun<love::graphics&, graphics, const std::string&, int, int>(&graphics::print), "print");
+	chai.add(fun<love::graphics&, graphics, const std::string&>(&graphics::print), "print");
 	chai.add(fun<love::graphics&, graphics, int, int>(&graphics::point), "point");
 	chai.add(fun<love::graphics&, graphics, Point*>(&graphics::point), "point");
 	// chai.add(bootstrap::standard_library::vector_type<std::vector<Point*>>("VectorPointPointer"));
@@ -279,6 +280,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getVersion), "getVersion");
 	chai.add(fun(&system::getVersionString), "getVersionString");
 	chai.add(fun(&system::getUsername), "getUsername");
+	chai.add(fun(&system::execute), "execute");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");
@@ -292,6 +294,7 @@ script::script(const std::string& file) {
 
 	// Audio
 	chai.add(fun(&audio::play), "play");
+	chai.add(fun<SoundData*, audio, const std::string&, const std::string&>(&audio::newSource), "newSource");
 	chai.add(fun<SoundData*, audio, const std::string&>(&audio::newSource), "newSource");
 	chai.add(fun(&audio::getVolume), "getVolume");
 	chai.add(fun(&audio::setVolume), "setVolume");
@@ -457,6 +460,13 @@ script::script(const std::string& file) {
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] savestate() " << e.what() << std::endl;
 		hassavestate = false;
+	}
+	try {
+		chaiexit = chai.eval<std::function<void()> >("exit");
+	}
+	catch (const std::exception& e) {
+		std::cout << "[ChaiLove] [script] exit() Warning: " << e.what() << std::endl;
+		hasexit = false;
 	}
 	#endif
 }
@@ -669,6 +679,20 @@ bool script::loadstate(const std::string& data) {
 
 	// If there is an error in loading the state, return false.
 	return false;
+}
+
+void script::exit() {
+	#ifdef __HAVE_CHAISCRIPT__
+	if (hasexit) {
+		try {
+			chaiexit();
+		}
+		catch (const std::exception& e) {
+			std::cout << "[ChaiLove] [script] Failed to call exit(): " << e.what() << std::endl;
+			hasexit = false;
+		}
+	}
+	#endif
 }
 
 /**

@@ -26,6 +26,10 @@ SoundData* audio::newSource(const std::string& filename) {
 	return NULL;
 }
 
+SoundData* audio::newSource(const std::string& filename, const std::string& type) {
+	return newSource(filename);
+}
+
 float audio::getVolume() {
 	return m_volume;
 }

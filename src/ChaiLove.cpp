@@ -37,12 +37,17 @@ ChaiLove::~ChaiLove() {
 }
 
 void ChaiLove::quit(void) {
+	// Enforce the should close flag.
 	event.m_shouldclose = true;
-	// Destroy all the subsystems.
+
+	// Disengage the scripting language.
 	if (script) {
+		script->exit();
 		delete script;
 		script = NULL;
 	}
+
+	// Unload all the other sub-systems.
 	joystick.unload();
 	font.unload();
 	image.unload();
@@ -65,6 +70,8 @@ bool ChaiLove::load(const std::string& file) {
 		std::cout << "[ChaiLove] [filesystem] Error loading " << file << std::endl;
 		return false;
 	}
+
+	filesystem.mountlibretro();
 
 	// Initialize the scripting system.
 	script = new love::script(file);

@@ -21,8 +21,8 @@ class Joystick {
 	 * @return string The name of the Joystick.
 	 */
 	std::string getName();
-	bool isOpen();
-	void close();
+
+	void clearStates();
 
 	/**
 	 * Checks if a button on the Joystick is pressed.
@@ -42,10 +42,23 @@ class Joystick {
 	 */
 	bool isDown(const std::string& button);
 
-	int index = 0;
-	std::string name;
-	int xaxis;
-	int yaxis;
+	void update();
+
+	/**
+	 * Gets whether the Joystick is connected.
+	 */
+	bool isConnected();
+
+	/**
+	 * Gets the joystick's unique identifier.
+	 */
+	int getID();
+
+	private:
+	int m_index = 0;
+	std::string name = "RetroPad";
+	int16_t m_state[14];
+	bool m_connected = true;
 };
 
 }  // namespace Input

@@ -23,7 +23,7 @@ void sound::unload() {
 	// Unload all sounds.
 	for (std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {
 		if (sounds[i] != NULL) {
-			sounds[i]->unload();
+			delete sounds[i];
 		}
 	}
 	sounds.clear();

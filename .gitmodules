@@ -24,9 +24,6 @@
 [submodule "vendor/Snippets"]
 	path = vendor/Snippets
 	url = https://github.com/DanielGibson/Snippets.git
-[submodule "vendor/zlib"]
-	path = vendor/zlib
-	url = https://github.com/madler/zlib.git
 [submodule "vendor/libretro-deps"]
 	path = vendor/libretro-deps
 	url = https://github.com/libretro/libretro-deps.git
@@ -43,10 +40,6 @@
 [submodule "vendor/random"]
 	path = vendor/random
 	url = https://github.com/effolkronium/random.git
-[submodule "vendor/freetype2"]
-	path = vendor/freetype2
-	url = https://git.savannah.gnu.org/git/freetype/freetype2.git
-	ignore = dirty
 [submodule "vendor/semver"]
 	path = vendor/semver
 	url = https://github.com/h2non/semver.c.git

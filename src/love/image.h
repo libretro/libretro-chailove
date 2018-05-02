@@ -3,6 +3,7 @@
 
 #include "Types/Graphics/Image.h"
 #include <string>
+#include <list>
 
 using love::Types::Graphics::Image;
 
@@ -24,6 +25,9 @@ class image {
 	 * @return The new ImageData object.
 	 */
 	Image* newImageData(const std::string& filename);
+
+	private:
+	std::list<Image*> m_images;
 };
 
 }  // namespace love
