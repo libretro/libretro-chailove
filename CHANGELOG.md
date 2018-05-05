@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 - `love.filesystem.createDirectory()` to make directories
 - `love.filesystem.write()` to write a file in the save directory
+- `Http()` to make HTTP requests
 
 ## 0.21.0 - 2018-05-02
 ### Chores
