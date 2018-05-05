@@ -264,8 +264,10 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::unmount), "unmount");
 	chai.add(fun(&filesystem::read), "read");
 	chai.add(fun(&filesystem::isDirectory), "isDirectory");
+	chai.add(fun(&filesystem::createDirectory), "createDirectory");
 	chai.add(fun(&filesystem::isSymlink), "isSymlink");
 	chai.add(fun(&filesystem::isFile), "isFile");
+	chai.add(fun(&filesystem::write), "write");
 	chai.add(fun(&filesystem::exists), "exists");
 	chai.add(fun(&filesystem::getInfo), "getInfo");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
