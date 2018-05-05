@@ -110,6 +110,27 @@ class filesystem {
 	bool isSymlink(const std::string& filename);
 
 	/**
+	 * Recursively creates a directory in the save directory.
+	 *
+	 * When called with "a/b" it creates both "a" and "a/b", if they don't exist already.
+	 *
+	 * @param name The directory to create.
+	 *
+	 * @return True if the directory was created, false if not.
+	 */
+	bool createDirectory(const std::string& name);
+
+	/**
+	 * Write data to a file in the save directory. If the file existed already, it will be completely replaced by the new contents.
+	 *
+	 * @param name The name (and path) of the file.
+	 * @param data The string data to write to the file.
+	 *
+	 * @return How many bytes to write.
+	 */
+	bool write(const std::string& name, const std::string& data);
+
+	/**
 	 * Iterate over the lines in a file, with the given delimiter.
 	 *
 	 * @param filename The file to load the lines from.

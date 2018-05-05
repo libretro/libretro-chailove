@@ -4,6 +4,11 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.22.0 - Development
+### Features
+- `love.filesystem.createDirectory()` to make directories
+- `love.filesystem.write()` to write a file in the save directory
+
 ## 0.21.0 - 2018-05-02
 ### Chores
 - Switched to [libretro-deps](https://github.com/libretro/libretro-deps) for freetype and zlib
