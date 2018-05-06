@@ -1,9 +1,0 @@
-var request = Http("http://example.com/index.html")
-while (request.process() == "pending") {
-	print("Please Wait...")
-}
-if (request.getStatus() == "failed") {
-	print("Failed: " + request.getReasonPhrase())
-}
-global response = request.getResponseString()
-assert_greater(response.find("Example Domain"), 10, "Http()")
