@@ -43,3 +43,11 @@ assert_equal(theLines[0], "// getDirectoryItems()", "love.filesystem.lines()")
 var fileInfo = love.filesystem.getInfo("keyboard.chai")
 assert_equal(fileInfo.type, "file", "love.filesystem.getInfo().type")
 assert_greater(fileInfo.size, 5, "love.filesystem.getInfo().size")
+
+// createDirectory()
+var createDirectoryReturn = love.filesystem.createDirectory("test/createDirectoryTest")
+assert(createDirectoryReturn, "love.filesystem.createDirectory()")
+
+// write()
+var writeFileReturn = love.filesystem.write("test/createDirectoryTest/test.md", "# Test\n\nHello World!");
+assert(writeFileReturn, "love.filesystem.write()")

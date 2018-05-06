@@ -287,6 +287,26 @@ FileInfo filesystem::getInfo(const std::string& path) {
 	return fileInfo;
 }
 
+bool filesystem::createDirectory(const std::string& name) {
+	int ret = PHYSFS_mkdir(name.c_str());
+	if (ret == 0) {
+		std::cout << "[ChaiLove] [filesystem] Failed to create directory: " << getLastError() << std::endl;
+		return false;
+	}
+	return true;
+}
+
+bool filesystem::write(const std::string& name, const std::string& data) {
+	PHYSFS_File* file = PHYSFS_openWrite(name.c_str());
+	if (file == NULL) {
+		std::cout << "[ChaiLove] [filesystem] Error opening file for writing: " << getLastError() << std::endl;
+		return false;
+	}
+	const char* buffer = data.c_str();
+	int bytesWritten = PHYSFS_writeBytes(file, (const void*)buffer, data.size());
+	return bytesWritten >= 0;
+}
+
 std::string filesystem::getLastError() {
 	const char* charErr = PHYSFS_getErrorByCode(PHYSFS_getLastErrorCode());
 	if (charErr) {

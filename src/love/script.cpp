@@ -5,6 +5,8 @@
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
 using namespace chaiscript;
+#define HTTP_IMPLEMENTATION
+#include "chaiscript/extras/http.hpp"
 #endif
 
 using ::ChaiLove;
@@ -78,6 +80,9 @@ script::script(const std::string& file) {
 	auto listModule = std::make_shared<chaiscript::Module>();
 	chaiscript::bootstrap::standard_library::list_type<std::list<chaiscript::Boxed_Value> >("List", *listModule);
 	chai.add(listModule);
+
+	auto httplib = chaiscript::extras::http::bootstrap();
+	chai.add(httplib);
 
 	// Add the "love" namespace.
 	chai.register_namespace([](chaiscript::Namespace& love) {
@@ -264,8 +269,10 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::unmount), "unmount");
 	chai.add(fun(&filesystem::read), "read");
 	chai.add(fun(&filesystem::isDirectory), "isDirectory");
+	chai.add(fun(&filesystem::createDirectory), "createDirectory");
 	chai.add(fun(&filesystem::isSymlink), "isSymlink");
 	chai.add(fun(&filesystem::isFile), "isFile");
+	chai.add(fun(&filesystem::write), "write");
 	chai.add(fun(&filesystem::exists), "exists");
 	chai.add(fun(&filesystem::getInfo), "getInfo");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
