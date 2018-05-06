@@ -116,7 +116,7 @@ class filesystem {
 	 *
 	 * @param name The directory to create.
 	 *
-	 * @return True if the directory was created, false if not.
+	 * @return True if the directory was created, false otherwise.
 	 */
 	bool createDirectory(const std::string& name);
 
@@ -126,7 +126,7 @@ class filesystem {
 	 * @param name The name (and path) of the file.
 	 * @param data The string data to write to the file.
 	 *
-	 * @return How many bytes to write.
+	 * @return True if the file was written, false otherwise.
 	 */
 	bool write(const std::string& name, const std::string& data);
 

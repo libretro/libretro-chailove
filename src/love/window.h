@@ -14,9 +14,6 @@ namespace love {
  */
 class window {
 	public:
-	bool load(const config& conf);
-	bool unload();
-
 	/**
 	 * Gets the window title.
 	 *
@@ -43,6 +40,9 @@ class window {
 	 */
 	void showMessageBox(const std::string& msg, int frames);
 	void showMessageBox(const std::string& msg);
+
+	bool load(const config& conf);
+	bool unload();
 };
 
 }  // namespace love

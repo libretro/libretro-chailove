@@ -39,12 +39,12 @@ class SoundData {
 	~SoundData();
 
 	/**
-	 * Plays a source.
+	 * Plays the source.
 	 */
 	bool play();
 
 	/**
-	 * Stops an audio source.
+	 * Stops the audio source.
 	 */
 	bool stop();
 
@@ -59,11 +59,15 @@ class SoundData {
 
 	/**
 	 * Gets the current volume of the Source.
+	 *
+	 * @return The volume of the source, from 0.0f to 1.0f.
 	 */
 	float getVolume();
 
 	/**
 	 * Sets the current volume of the Source.
+	 *
+	 * @param volume The volume to set the source at, from 0.0f to 1.0f.
 	 *
 	 * @return The SoundData object iself, to allow for method chaining.
 	 */
@@ -86,8 +90,6 @@ class SoundData {
 	 */
 	bool pause();
 
-	int WAV_HEADER_SIZE = 44;
-
 	/**
 	 * Returns whether the Source will loop.
 	 */
@@ -97,6 +99,8 @@ class SoundData {
 	 * Set whether the Source should loop.
 	 */
 	SoundData& setLooping(bool loop);
+
+	int WAV_HEADER_SIZE = 44;
 };
 
 }  // namespace Audio

@@ -42,7 +42,7 @@ class joystick {
 	 * @param joystick The joystick to be checked.
 	 * @param button The button to be checked.
 	 *
-	 * @return TRUE if the joystick button is pressed.
+	 * @return True if the joystick button is pressed.
 	 */
 	bool isDown(int joystick, int button);
 
@@ -52,15 +52,14 @@ class joystick {
 	 * @param joystick The joystick to be checked.
 	 * @param button The button to be checked.
 	 *
-	 * @return TRUE if the joystick button is pressed.
+	 * @return True if the joystick button is pressed.
 	 */
 	bool isDown(int joystick, const std::string& button);
 
-	int getButtonKey(const std::string& name);
-	std::string getButtonName(int key);
-
 	/**
 	 * Retrieve the given joystick.
+	 *
+	 * ## Example
 	 *
 	 * @code
 	 * if (love.joystick[0].isDown("left")) {
@@ -68,11 +67,14 @@ class joystick {
 	 * }
 	 * @endcode
 	 *
-	 * @param joystick The joystick to be retrieved.
+	 * @param joystick The joystick index to be retrieved.
 	 *
 	 * @return The joystick of the given player number.
 	 */
 	Joystick* operator[](int joystick);
+
+	int getButtonKey(const std::string& name);
+	std::string getButtonName(int key);
 
 	private:
 	std::vector<Joystick*> m_joysticks;

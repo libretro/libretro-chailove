@@ -14,6 +14,8 @@ class font {
 
 	/**
 	 * Retrieves whether or not all sub-systems have been loaded.
+	 *
+	 * @return True if the Font sub-system has been loaded.
 	 */
 	bool isOpen();
 
