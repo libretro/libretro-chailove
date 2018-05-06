@@ -46,3 +46,6 @@
 [submodule "vendor/TinySHA1"]
 	path = vendor/TinySHA1
 	url = https://github.com/mohaps/TinySHA1.git
+[submodule "vendor/ChaiScript_Extras_Http"]
+	path = vendor/ChaiScript_Extras_Http
+	url = https://github.com/RobLoach/ChaiScript_Extras_Http.git
