@@ -15,7 +15,6 @@ def load() {
 	love.filesystem.load("data")
 	love.filesystem.load("filesystem")
 	love.filesystem.load("font")
-	love.filesystem.load("http")
 	love.filesystem.load("graphics")
 	love.filesystem.load("image")
 	love.filesystem.load("list")
