@@ -19,7 +19,7 @@ namespace love {
  *
  * @code
  * def conf(t) {
- *   t.version = "0.21.0"       // Version of ChaiLove
+ *   t.version = "0.22.2"       // Version of ChaiLove
  *   t.identity = "mygame"      // Machine name of your game
  *   t.window.title = "My Game" // Human-readable name
  *   t.window.width = 1024      // Game width
