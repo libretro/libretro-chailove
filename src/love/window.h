@@ -14,7 +14,6 @@ namespace love {
  */
 class window {
 	public:
-
 	/**
 	 * Gets the window title.
 	 *
