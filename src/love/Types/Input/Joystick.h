@@ -46,11 +46,15 @@ class Joystick {
 
 	/**
 	 * Gets whether the Joystick is connected.
+	 *
+	 * @return True if the given joystick is connected.
 	 */
 	bool isConnected();
 
 	/**
 	 * Gets the joystick's unique identifier.
+	 *
+	 * @return The index number of the Joystick.
 	 */
 	int getID();
 

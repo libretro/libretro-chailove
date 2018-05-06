@@ -24,6 +24,7 @@ class timer {
 	 * @return The current FPS.
 	 */
 	int getFPS();
+
 	float m_delta = 0.0f;
 	float m_deltaCounter = 0.0f;
 	int m_frameCounter = 0;

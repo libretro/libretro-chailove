@@ -100,10 +100,10 @@ class system {
 	 */
 	bool execute(const std::string& command);
 
+	bool load(config& t);
+
 	std::string m_username;
 	bool m_usernameInitialized = false;
-
-	bool load(config& t);
 };
 
 }  // namespace love

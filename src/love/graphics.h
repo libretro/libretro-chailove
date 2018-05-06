@@ -60,6 +60,9 @@ class graphics {
 
 	/**
 	 * Draws a point.
+	 *
+	 * @param x The position on the x-axis.
+	 * @param y The position on the y-axis.
 	 */
 	graphics& point(int x, int y);
 
@@ -95,19 +98,18 @@ class graphics {
 	 */
 	Image* newImage(const std::string& filename);
 
-	Font* newFont();
-
-	Font* newFont(const std::string& filename);
 
 	/**
 	 * Creates a new TrueType font, with the given font size.
 	 *
-	 * @param filename (font) The path to the TrueType .ttf font. When not provided, will return the default font.
+	 * @param filename (default) The path to the TrueType .ttf font. When not provided, will return the default font.
 	 * @param size (12) The size of the font to create.
 	 *
 	 * @return The created TrueType font.
 	 */
 	Font* newFont(const std::string& filename, int size);
+	Font* newFont(const std::string& filename);
+	Font* newFont();
 
 	/**
 	 * Creates a new BMFont with the given spec.
@@ -150,16 +152,19 @@ class graphics {
 
 	/**
 	 * Sets the active drawing color to the given color.
+	 *
+	 * @param red The amount of red.
+	 * @param green The amount of green.
+	 * @param blue The amount of blue.
+	 * @param alpha (255) The amount of alpha.
 	 */
 	graphics& setColor(int red, int green, int blue, int alpha);
-
-	/**
-	 * Sets the active drawing color to the given color.
-	 */
 	graphics& setColor(int red, int green, int blue);
 
 	/**
 	 * Gets the current color.
+	 *
+	 * @return The active color.
 	 */
 	Color getColor();
 
@@ -181,7 +186,6 @@ class graphics {
 	 * @see love.graphics.getBackgroundColor
 	 */
 	graphics& setBackgroundColor(int red, int green, int blue, int alpha);
-
 	graphics& setBackgroundColor(int red, int green, int blue);
 
 	/**
