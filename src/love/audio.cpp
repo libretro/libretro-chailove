@@ -50,7 +50,7 @@ void audio::mixer_render(int16_t *buffer) {
 	}
 
 	ChaiLove* app = ChaiLove::getInstance();
-	// TODO: Play the audio.
+	// TODO(RobLoach): Play the audio.
 }
 
 }  // namespace love

@@ -13,17 +13,44 @@ namespace Audio {
 SoundData::SoundData(const std::string& filename) {
 	ChaiLove* app = ChaiLove::getInstance();
 	PHYSFS_file* file = app->filesystem.openFile(filename);
+	std::cout << "SOUND Loading File" << std::endl;
 	if (file == NULL) {
+		std::cout << "[ChaiLove] [SoundData] Couldn't open up file." << filename << app->filesystem.getLastError() << std::endl;
 		return;
 	}
 
-	/*
-	TODO: Load bytes.
-	int result = PHYSFS_readBytes(file, &sndta.head, sizeof(uint8_t) * WAV_HEADER_SIZE);
+	std::cout << "SOUND Getting length" << std::endl;
+	// Find the file size.
+	int size = PHYSFS_fileLength(file);
+	if (size < 0) {
+		std::cout << "[ChaiLove] [SoundData] Couldn't determine file size." << filename << app->filesystem.getLastError() << std::endl;
+		PHYSFS_close(file);
+		return;
+	}
+
+	std::cout << "SOUND seeting buffer" << std::endl;
+	PHYSFS_seek(file, 0);
+	// Read in the full buffer.
+	std::cout << "SOUND reading buffer" << std::endl;
+	void* buffer;
+	int result = PHYSFS_readBytes(file, &buffer, size);
 	if (result < 0) {
 		std::cout << "[ChaiLove] Failed to load SoundData " << filename << app->filesystem.getLastError() << std::endl;
+		PHYSFS_close(file);
 		return;
-	}*/
+	}
+	std::cout << buffer;
+
+	std::cout << "SOUND audio_mixer_oad" << std::endl;
+	m_sound = audio_mixer_load_wav(buffer, size);
+	std::cout << "SOUND phys close" << std::endl;
+	PHYSFS_close(file);
+	std::cout << "SOUND done" << std::endl;
+
+	if (!isLoaded()) {
+		std::cout << "[ChaiLove] Failed to load SoundData from a wav" << std::endl;
+		return;
+	}
 }
 
 SoundData::~SoundData() {
@@ -46,7 +73,7 @@ SoundData& SoundData::setVolume(float volume) {
 
 void SoundData::unload() {
 	if (isLoaded()) {
-		//PHYSFS_close(sndta.fp);
+		// PHYSFS_close(sndta.fp);
 
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
@@ -55,7 +82,7 @@ void SoundData::unload() {
 
 bool SoundData::play() {
 	if (isLoaded()) {
-		//PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
+		// PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
 		state = Playing;
 		return true;
 	}
@@ -81,7 +108,7 @@ bool SoundData::pause() {
 bool SoundData::stop() {
 	state = Stopped;
 	if (isLoaded()) {
-		//PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
+		// PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
 	}
 	return true;
 }
