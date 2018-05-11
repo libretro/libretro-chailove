@@ -43,7 +43,6 @@ SOURCES_C += $(wildcard \
 	$(CORE_DIR)/vendor/libretro-common/compat/compat_strcasestr.c \
 	$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
 )
-FLAGS += -DHAVE_STRL
 
 # zlib
 SOURCES_C += \
