@@ -47,7 +47,9 @@ SoundData& SoundData::setVolume(float volume) {
 void SoundData::unload() {
 	if (isLoaded()) {
 		//PHYSFS_close(sndta.fp);
-		//sndta.fp = NULL;
+
+		audio_mixer_destroy(m_sound);
+		m_sound = NULL;
 	}
 }
 
@@ -85,8 +87,7 @@ bool SoundData::stop() {
 }
 
 bool SoundData::isLoaded() {
-	return false;
-	//return sndta.fp != NULL;
+	return m_sound != NULL;
 }
 
 bool SoundData::isPlaying() {

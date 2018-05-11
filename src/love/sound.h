@@ -12,6 +12,7 @@ namespace love {
 class sound {
 	public:
 	bool load();
+	bool isLoaded();
 	bool hasAudio();
 	void unload();
 	~sound();
@@ -26,6 +27,8 @@ class sound {
 	Types::Audio::SoundData* newSoundData(const std::string& filename);
 
 	std::vector<Types::Audio::SoundData*> sounds;
+
+	bool m_loaded = false;
 };
 
 }  // namespace love

@@ -4,6 +4,7 @@
 #include <string>
 #include "AudioState.h"
 #include "physfs.h"
+#include "audio/audio_mixer.h"
 
 namespace love {
 namespace Types {
@@ -77,6 +78,8 @@ class SoundData {
 	float m_volume = 1.0f;
 	float pitch = 1.0f;
 	AudioState state = Stopped;
+
+	audio_mixer_sound_t* m_sound = NULL;
 };
 
 }  // namespace Audio

@@ -32,8 +32,6 @@ class audio {
 	SoundData* newSource(const std::string& filename);
 
 	void mixer_render(int16_t *buffer);
-
-	int AUDIO_FRAMES = 735;  // 44100 / 60
 	float m_volume = 1.0f;
 
 	/**
