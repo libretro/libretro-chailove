@@ -17,14 +17,13 @@ SoundData::SoundData(const std::string& filename) {
 		return;
 	}
 
+	/*
+	TODO: Load bytes.
 	int result = PHYSFS_readBytes(file, &sndta.head, sizeof(uint8_t) * WAV_HEADER_SIZE);
 	if (result < 0) {
 		std::cout << "[ChaiLove] Failed to load SoundData " << filename << app->filesystem.getLastError() << std::endl;
 		return;
-	}
-
-	sndta.fp = file;
-	bps = sndta.head.NumChannels * sndta.head.BitsPerSample / 8;
+	}*/
 }
 
 SoundData::~SoundData() {
@@ -47,14 +46,14 @@ SoundData& SoundData::setVolume(float volume) {
 
 void SoundData::unload() {
 	if (isLoaded()) {
-		PHYSFS_close(sndta.fp);
-		sndta.fp = NULL;
+		//PHYSFS_close(sndta.fp);
+		//sndta.fp = NULL;
 	}
 }
 
 bool SoundData::play() {
 	if (isLoaded()) {
-		PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
+		//PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
 		state = Playing;
 		return true;
 	}
@@ -80,13 +79,14 @@ bool SoundData::pause() {
 bool SoundData::stop() {
 	state = Stopped;
 	if (isLoaded()) {
-		PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
+		//PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
 	}
 	return true;
 }
 
 bool SoundData::isLoaded() {
-	return sndta.fp != NULL;
+	return false;
+	//return sndta.fp != NULL;
 }
 
 bool SoundData::isPlaying() {

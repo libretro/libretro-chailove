@@ -22,6 +22,14 @@ FLAGS += -I$(CORE_DIR)/vendor/filesystem
 # libretro-common
 FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
 
+# libretro-common audio
+SOURCES_C += \
+	$(CORE_DIR)/vendor/libretro-common/audio/audio_mix.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/audio_mixer.c \
+	$(CORE_DIR)/vendor/libretro-common/formats/wav/rwav.c \
+	$(CORE_DIR)/vendor/libretro-common/memmap/memalign.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/conversation/*.c
+
 # zlib
 SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-deps/libz/zutil.c \
