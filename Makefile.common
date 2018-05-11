@@ -28,7 +28,7 @@ SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-common/audio/audio_mixer.c \
 	$(CORE_DIR)/vendor/libretro-common/formats/wav/rwav.c \
 	$(CORE_DIR)/vendor/libretro-common/memmap/memalign.c \
-	$(CORE_DIR)/vendor/libretro-common/audio/conversation/*.c
+	$(CORE_DIR)/vendor/libretro-common/audio/conversion/*.c
 
 # zlib
 SOURCES_C += \
