@@ -36,6 +36,12 @@ SOURCES_C += $(wildcard \
 	$(CORE_DIR)/vendor/libretro-common/features/features_cpu.c \
 	$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
 	$(CORE_DIR)/vendor/libretro-common/file/file_path.c \
+	$(CORE_DIR)/vendor/libretro-common/compat/compat_strl.c \
+	$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
+	$(CORE_DIR)/vendor/libretro-common/file/config_file.c \
+	$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
+	$(CORE_DIR)/vendor/libretro-common/compat/compat_strcasestr.c \
+	$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
 )
 FLAGS += -DHAVE_STRL
 
