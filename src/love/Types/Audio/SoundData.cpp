@@ -22,7 +22,7 @@ SoundData::SoundData(const std::string& filename) {
 	std::cout << "SOUND Getting length" << std::endl;
 	// Find the file size.
 	int size = PHYSFS_fileLength(file);
-	if (size < 0) {
+	if (size <= 0) {
 		std::cout << "[ChaiLove] [SoundData] Couldn't determine file size." << filename << app->filesystem.getLastError() << std::endl;
 		PHYSFS_close(file);
 		return;

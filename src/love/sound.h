@@ -17,6 +17,9 @@ class sound {
 	void unload();
 	~sound();
 
+
+	//void convert_float_to_s16(int16_t *out, const float *in, size_t samples);
+
 	/**
 	 * Creates a new SoundData.
 	 *
