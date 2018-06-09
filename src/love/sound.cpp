@@ -13,7 +13,7 @@ using love::Types::Audio::SoundData;
 namespace love {
 
 bool sound::load() {
-	audio_mixer_init(44100 / 60);
+	audio_mixer_init(44100);
 	m_loaded = true;
 	return true;
 }

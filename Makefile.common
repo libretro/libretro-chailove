@@ -31,7 +31,9 @@ SOURCES_C += $(wildcard \
 	$(CORE_DIR)/vendor/libretro-common/audio/conversion/*.c \
 	$(CORE_DIR)/vendor/libretro-common/streams/file_stream.c \
 	$(CORE_DIR)/vendor/libretro-common/audio/resampler/audio_resampler.c \
-	$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/*.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/null_resampler.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/nearest_resampler.c \
 	$(CORE_DIR)/vendor/libretro-common/vfs/*.c \
 	$(CORE_DIR)/vendor/libretro-common/features/features_cpu.c \
 	$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
