@@ -13,6 +13,13 @@ using love::Types::Audio::SoundData;
 namespace love {
 
 bool sound::load() {
+/*
+	float samples[BUFSIZE * 2] = {0};
+	int16_t samples2[2 * BUFSIZE] = {0};
+	audio_mixer_mix(samples, BUFSIZE, 1.0, false);
+	convert_float_to_s16(samples2, samples, 2 * BUFSIZE);
+*/
+
 	audio_mixer_init(44100);
 	m_loaded = true;
 	return true;
