@@ -2,6 +2,9 @@
 #include <string>
 #include <iostream>
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "../../../ChaiLove.h"
 #include "AudioState.h"
 #include "physfs.h"
@@ -29,7 +32,7 @@ SoundData::SoundData(const std::string& filename) {
 	}
 
 	std::cout << "SOUND seeting buffer" << std::endl;
-	PHYSFS_seek(file, 0);
+	//PHYSFS_seek(file, 0);
 	// Read in the full buffer.
 	std::cout << "SOUND reading buffer" << std::endl;
 	void* buffer;
@@ -42,15 +45,43 @@ SoundData::SoundData(const std::string& filename) {
 	std::cout << buffer;
 
 	std::cout << "SOUND audio_mixer_oad" << std::endl;
-	m_sound = audio_mixer_load_wav(buffer, size);
+
+
+
+	/**
+	 * Load manually
+	 */
+	void* buffer2;
+	FILE *pFile = fopen( "test/assets/startup.wav", "rb") ;
+	if (pFile==NULL) {
+		fputs("File error", stderr);
+		exit (1);
+	}
+	buffer2 = (void*)malloc (size);
+	if (buffer == NULL) {
+		fputs ("Memory error", stderr);
+		exit (2);
+	}
+	fread(buffer2, 1, size, pFile);
+
+
+
+	m_sound = audio_mixer_load_wav(buffer2, size);
+
+
+	fclose (pFile);
+	free (buffer2);
+
 	std::cout << "SOUND phys close" << std::endl;
 	PHYSFS_close(file);
+
 	std::cout << "SOUND done" << std::endl;
 
 	if (!isLoaded()) {
 		std::cout << "[ChaiLove] Failed to load SoundData from a wav" << std::endl;
 		return;
 	}
+	std::cout << "SOUND done2" << std::endl;
 }
 
 SoundData::~SoundData() {
@@ -75,6 +106,7 @@ void SoundData::unload() {
 	if (isLoaded()) {
 		// PHYSFS_close(sndta.fp);
 
+		std::cout << "SOUND audio_mixer_destroy" << std::endl;
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
 	}

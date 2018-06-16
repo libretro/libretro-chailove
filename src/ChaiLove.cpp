@@ -87,6 +87,7 @@ bool ChaiLove::load(const std::string& file) {
 
 	// Initialize the soud, if needed.
 	if (config.modules.sound) {
+		std::cout << "SOUND.load()" << std::endl;
 		sound.load();
 	}
 
