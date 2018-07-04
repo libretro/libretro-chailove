@@ -14,6 +14,8 @@ namespace Types {
 namespace Audio {
 
 SoundData::SoundData(const std::string& filename) {
+
+	std::cout << "Sound: Loading " << filename << std::endl;
 	ChaiLove* app = ChaiLove::getInstance();
 	PHYSFS_file* file = app->filesystem.openFile(filename);
 	std::cout << "SOUND Loading File" << std::endl;
@@ -31,7 +33,7 @@ SoundData::SoundData(const std::string& filename) {
 		return;
 	}
 
-	std::cout << "SOUND seeting buffer" << std::endl;
+	std::cout << "SOUND size " << size << std::endl;
 	//PHYSFS_seek(file, 0);
 	// Read in the full buffer.
 	std::cout << "SOUND reading buffer" << std::endl;
@@ -51,6 +53,7 @@ SoundData::SoundData(const std::string& filename) {
 	/**
 	 * Load manually
 	 */
+	/*
 	void* buffer2;
 	FILE *pFile = fopen( "test/assets/startup.wav", "rb") ;
 	if (pFile==NULL) {
@@ -63,14 +66,14 @@ SoundData::SoundData(const std::string& filename) {
 		exit (2);
 	}
 	fread(buffer2, 1, size, pFile);
-
-
-
 	m_sound = audio_mixer_load_wav(buffer2, size);
-
-
 	fclose (pFile);
 	free (buffer2);
+	*/
+
+
+
+	m_sound = audio_mixer_load_wav(buffer, size);
 
 	std::cout << "SOUND phys close" << std::endl;
 	PHYSFS_close(file);

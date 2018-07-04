@@ -13,9 +13,9 @@ def load() {
 }
 
 def draw() {
-	love.graphics.print("Press a joystick button!", 5, 20)
+	//love.graphics.print("Press a joystick button!", 5, 20)
 }
 
 def joystickpressed(joystick, button) {
-	love.audio.play(beat)
+	//love.audio.play(beat)
 }
