@@ -44,6 +44,5 @@ cache:
     - vendor
 
 notifications:
-  webhooks: https://www.travisbuddy.com/
   on_success: false
   email: false
