@@ -46,7 +46,7 @@ class Font {
 	 */
 	int getWidth(const std::string& text);
 
-	Image* m_image;
+	Image* m_image = NULL;
 };
 
 }  // namespace Graphics
