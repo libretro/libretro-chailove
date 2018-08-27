@@ -24,6 +24,9 @@ $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
 %.o: %.c | vendor/libretro-common/include/libretro.h
 	-$(CC) -c -o $@ $< $(CFLAGS)
 
+%.o: %.m | vendor/libretro-common/include/libretro.h
+	-$(CC) -c -o $@ $< $(CFLAGS)
+
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 	git clean -xdf
@@ -34,6 +37,9 @@ clean:
 
 vendor/libretro-common/include/libretro.h:
 	@git submodule update --init --recursive
+
+submodules-update:
+	@git submodule update --remote
 
 test: unittest unittest-chailove cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
