@@ -35,6 +35,9 @@ clean:
 vendor/libretro-common/include/libretro.h:
 	@git submodule update --init --recursive
 
+submodules-update:
+	@git submodule update --remote
+
 test: unittest unittest-chailove cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
