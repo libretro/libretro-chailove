@@ -55,7 +55,6 @@ ifeq ($(platform), osx)
 	LDFLAGS += -framework Carbon -framework IOKit
 #	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
 	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
-	OBJECTS += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.o
 endif
 
 # SDL_tty
