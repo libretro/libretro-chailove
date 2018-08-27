@@ -28,6 +28,8 @@ class window {
 	 *
 	 * @param title The new window title.
 	 *
+	 * @return The window system, for method chaining.
+	 *
 	 * @see love.window.getTitle
 	 */
 	window& setTitle(const std::string& title);
@@ -37,9 +39,11 @@ class window {
 	 *
 	 * @param msg The message text to be displayed.
 	 * @param frames (4000) The amount of frames to display the message.
+	 *
+	 * @return The window system, for method chaining.
 	 */
-	void showMessageBox(const std::string& msg, int frames);
-	void showMessageBox(const std::string& msg);
+	window& showMessageBox(const std::string& msg, int frames);
+	window& showMessageBox(const std::string& msg);
 
 	bool load(const config& conf);
 	bool unload();

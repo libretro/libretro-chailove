@@ -17,8 +17,10 @@ class audio {
 	 * Plays the specified sound.
 	 *
 	 * @param soundData The sound to play.
+	 *
+	 * @return The audio system, to allow method chaining.
 	 */
-	void play(SoundData* soundData);
+	audio& play(SoundData* soundData);
 
 	/**
 	 * Creates a new audio source from a file.
