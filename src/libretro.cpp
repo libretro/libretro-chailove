@@ -1,6 +1,6 @@
 #include <string>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <sstream>
 #include <iostream>
 #include "libretro.h"
