@@ -289,7 +289,7 @@ class graphics {
 	Uint8 r = 255, g = 255, b = 255, a = 255;
 	Uint8 backR = 0, backG = 0, backB = 0, backA = 255;
 	SDL_Surface* getScreen();
-	Font* activeFont;
+	Font* activeFont = NULL;
 	Font defaultFont;
 
 	int m_smooth = 1;
