@@ -19,3 +19,9 @@ if (love.system.getOS() == "Linux") {
 	var result = love.system.execute("uname")
 	assert(result, "love.system.execute('uname')")
 }
+
+// setClipboardText()
+love.system.setClipboardText("Hello World!")
+
+// getClipboardText
+assert_equal(love.system.getClipboardText(), "Hello World!", "love.system.getClipboardText()")
