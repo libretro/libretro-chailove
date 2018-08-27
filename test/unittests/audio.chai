@@ -11,3 +11,6 @@ assert_not(audio_sound.is_var_null(), "love.audio.newSource()")
 // play()
 var audioplayResult = audio_sound.play()
 assert(audioplayResult, "love.audio.play()")
+
+audioplayResult = love.audio.play(audio_sound)
+assert(audioplayResult, "love.audio.play()")

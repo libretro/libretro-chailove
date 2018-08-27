@@ -18,9 +18,9 @@ class audio {
 	 *
 	 * @param soundData The sound to play.
 	 *
-	 * @return The audio system, to allow method chaining.
+	 * @return True or false, depending on whether or not the sound data successfully played.
 	 */
-	audio& play(SoundData* soundData);
+	bool play(SoundData* soundData);
 
 	/**
 	 * Creates a new audio source from a file.
