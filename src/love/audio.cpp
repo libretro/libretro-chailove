@@ -12,10 +12,10 @@ using love::Types::Audio::AudioState::Stopped;
 namespace love {
 
 bool audio::play(SoundData* soundData) {
-	if (soundData) {
-		return soundData->play();
-	}
-	return false;
+    if (soundData == NULL) {
+        return false;
+    }
+    return soundData->play();
 }
 
 SoundData* audio::newSource(const std::string& filename) {
