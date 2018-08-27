@@ -158,4 +158,12 @@ bool system::execute(const std::string& command) {
 	return true;
 }
 
+std::string system::getClipboardText() {
+	return m_clipboardtext;
+}
+
+std::string system::setClipboardText(const std::string& text) {
+	return m_clipboardtext = text;
+}
+
 }  // namespace love

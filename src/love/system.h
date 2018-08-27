@@ -100,8 +100,31 @@ class system {
 	 */
 	bool execute(const std::string& command);
 
+	/**
+	 * Gets text from the clipboard.
+	 *
+	 * Note: This is emulated, and not actually the system clipboard text.
+	 *
+	 * @return The text currently held in the clipboard.
+	 *
+	 * @see love.system.setClipboardText
+	 */
+	std::string getClipboardText();
+
+	/**
+	 * Gets text from the clipboard.
+	 *
+	 * @param text The new text to hold in the system's clipboard.
+	 *
+	 * @return The text currently held in the clipboard.
+	 *
+	 * @see love.system.getClipboardText
+	 */
+	std::string setClipboardText(const std::string& text);
+
 	bool load(config& t);
 
+	std::string m_clipboardtext;
 	std::string m_username;
 	bool m_usernameInitialized = false;
 };
