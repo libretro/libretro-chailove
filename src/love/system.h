@@ -103,7 +103,7 @@ class system {
 	/**
 	 * Gets text from the clipboard.
 	 *
-	 * Note: This is emulated, and not actually the system clipboard text.
+	 * Note: This is emulated, and not the actual system clipboard text.
 	 *
 	 * @return The text currently held in the clipboard.
 	 *
@@ -116,7 +116,7 @@ class system {
 	 *
 	 * @param text The new text to hold in the system's clipboard.
 	 *
-	 * @return The text currently held in the clipboard.
+	 * @return The system module, for method chaining.
 	 *
 	 * @see love.system.getClipboardText
 	 */
