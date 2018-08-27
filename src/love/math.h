@@ -18,6 +18,12 @@ class math {
 	 * @param max (1.0f) The max value.
 	 *
 	 * @return A number between the two given min and max values.
+	 *
+	 * @code
+	 * love.math.random(5, 10) // 5-10
+	 * love.math.random(10)    // 0-10
+	 * love.math.random()      // 0.0f-1.0f
+	 * @endcode
 	 */
 	float random(float min, float max);
 	float random(float max);

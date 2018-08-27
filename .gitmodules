@@ -2,47 +2,74 @@
 	path = vendor/sdl-libretro
 	url = https://github.com/libretro/sdl-libretro.git
 	ignore = dirty
+	branch = master
 [submodule "vendor/libretro-common"]
 	path = vendor/libretro-common
 	url = https://github.com/libretro/libretro-common.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/chaiscript"]
 	path = vendor/chaiscript
 	url = https://github.com/ChaiScript/ChaiScript.git
-[submodule "vendor/physfs"]
-	path = vendor/physfs
-	url = https://github.com/RobLoach/physfs.git
 	ignore = dirty
+	branch = develop
 [submodule "vendor/filesystem"]
 	path = vendor/filesystem
 	url = https://github.com/wjakob/filesystem.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/SDL_tty"]
 	path = vendor/SDL_tty
 	url = https://github.com/Grumbel/SDL_tty.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/stb"]
 	path = vendor/stb
 	url = https://github.com/nothings/stb.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/Snippets"]
 	path = vendor/Snippets
 	url = https://github.com/DanielGibson/Snippets.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/libretro-deps"]
 	path = vendor/libretro-deps
 	url = https://github.com/libretro/libretro-deps.git
 	ignore = dirty
+	branch = master
 [submodule "vendor/styleguide"]
 	path = vendor/styleguide
 	url = https://github.com/google/styleguide.git
+	ignore = dirty
+	branch = gh-pages
 [submodule "vendor/noarch"]
 	path = vendor/noarch
 	url = https://github.com/RobLoach/noarch.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/ChaiScript_Extras"]
 	path = vendor/ChaiScript_Extras
 	url = https://github.com/ChaiScript/ChaiScript_Extras.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/random"]
 	path = vendor/random
 	url = https://github.com/effolkronium/random.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/semver"]
 	path = vendor/semver
 	url = https://github.com/h2non/semver.c.git
+	ignore = dirty
+	branch = master
 [submodule "vendor/TinySHA1"]
 	path = vendor/TinySHA1
 	url = https://github.com/mohaps/TinySHA1.git
+	ignore = dirty
+	branch = master
+[submodule "vendor/physfs"]
+	path = vendor/physfs
+	url = https://github.com/Didstopia/physfs.git
+	branch = master
+	ignore = dirty

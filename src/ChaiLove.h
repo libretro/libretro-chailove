@@ -47,9 +47,9 @@
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 22
-#define CHAILOVE_VERSION_PATCH 2
-#define CHAILOVE_VERSION_STRING "0.22.2"
+#define CHAILOVE_VERSION_MINOR 23
+#define CHAILOVE_VERSION_PATCH 1
+#define CHAILOVE_VERSION_STRING "0.23.1"
 
 #include "SDL.h"
 #include "libretro.h"
@@ -86,7 +86,7 @@ class ChaiLove {
 	love::config config;
 	love::console console;
 	love::keyboard keyboard;
-	love::script* script;
+	love::script* script = NULL;
 	love::data data;
 	love::filesystem filesystem;
 	love::graphics graphics;
@@ -112,8 +112,8 @@ class ChaiLove {
 	std::string savestate();
 	bool loadstate(const std::string& data);
 
-	uint32_t *videoBuffer;
-	SDL_Surface* screen;
+	uint32_t *videoBuffer = NULL;
+	SDL_Surface* screen = NULL;
 };
 
 #endif  // SRC_CHAILOVE_H_

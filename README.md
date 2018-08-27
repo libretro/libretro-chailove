@@ -66,7 +66,7 @@ Behind ChaiLove, there's the documentation, compiling it, along with testing.
 
 ### Compiling
 
-Use the following command to compile the core, with at least `g++ >=5.2`:
+ChaiLove requires a C++14 compiler, and has been tested with `g++>=5.2`. To compile it, run:
 
 ```
 make
@@ -74,13 +74,13 @@ make
 
 ### Testing
 
-Run the automated tests by executing:
+The automated tests can be run with:
 
 ```
 make test
 ```
 
-Run the usability tests with:
+Run the testing suite through RetroArch with:
 
 ```
 retroarch -L chailove_libretro.so test/main.chai

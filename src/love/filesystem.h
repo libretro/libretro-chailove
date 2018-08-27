@@ -44,11 +44,25 @@ class filesystem {
 	 * @param file The name (and path) of the file.
 	 *
 	 * @return The contents of the file.
+	 *
+	 * @code
+	 * var contents = love.filesystem.read("test.txt")
+	 * print(contents)
+	 * @endcode
 	 */
 	std::string read(const std::string& filename);
 
 	/**
 	 * Check whether a file or directory exists.
+	 *
+	 * @code
+	 * if (love.filesystem.exists("test.txt")) {
+	 *   print("The test.txt file exists")
+	 * }
+	 * else {
+	 *   print("The test.txt file does not exist")
+	 * }
+	 * @endcode
 	 */
 	bool exists(const std::string& file);
 

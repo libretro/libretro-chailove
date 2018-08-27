@@ -22,6 +22,11 @@ class timer {
 	 * Returns the current frames per second.
 	 *
 	 * @return The current FPS.
+	 *
+	 * @code
+	 * var fps = love.timer.getFPS()
+	 * print("FPS: " + to_string(fps))
+	 * @endcode
 	 */
 	int getFPS();
 

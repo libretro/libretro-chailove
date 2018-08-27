@@ -76,9 +76,10 @@ SOURCES_C += $(wildcard \
 )
 ifeq ($(platform), osx)
 #	LDFLAGS += -mmacosx-version-min=10.2
-	LDFLAGS += -framework Carbon -framework IOKit
+	LDFLAGS += -framework IOKit -framework Foundation
 #	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
-	FLAGS += -D__MACH__ -D__APPLE__
+	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
+	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m
 endif
 
 # SDL_tty
@@ -187,7 +188,7 @@ endif
 FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
 FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/include
 
-OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o)
+OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(SOURCES_M:.m=.o)
 
 LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
 

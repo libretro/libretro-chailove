@@ -4,6 +4,24 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.23.1 - 2018-08-28
+### Fixes
+- Clean up of git submodules
+
+## 0.23.0 - 2018-08-27
+### Chores
+- Updated dependencies
+  - [ChaiScript 6.1.0](https://github.com/ChaiScript/ChaiScript/releases/tag/v6.1.0)
+  - PhysFS
+  - libretro-common
+  - libretro-deps
+  - noarch
+  - styleguide
+
+### Fixes
+- Fix uninitalized image pointer causing segfault
+  - By [@orbea](https://github.com/orbea) in [#263](https://github.com/libretro/libretro-chailove/pull/263)
+
 ## 0.22.2 - 2018-05-06
 ### Fixes
 - Documentation
