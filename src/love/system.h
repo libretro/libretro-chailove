@@ -120,7 +120,7 @@ class system {
 	 *
 	 * @see love.system.getClipboardText
 	 */
-	std::string setClipboardText(const std::string& text);
+	system& setClipboardText(const std::string& text);
 
 	bool load(config& t);
 

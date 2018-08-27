@@ -21,8 +21,7 @@ if (love.system.getOS() == "Linux") {
 }
 
 // setClipboardText()
-var clipboardResult = love.system.setClipboardText("Hello World!")
-assert_equal(clipboardResult, "Hello World!", "love.system.setClipboardText()")
+love.system.setClipboardText("Hello World!")
 
 // getClipboardText
-assert_equal(love.system.getClipboardText(), "Hello World!", "love.system.setClipboardText()")
+assert_equal(love.system.getClipboardText(), "Hello World!", "love.system.getClipboardText()")

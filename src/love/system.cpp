@@ -162,8 +162,9 @@ std::string system::getClipboardText() {
 	return m_clipboardtext;
 }
 
-std::string system::setClipboardText(const std::string& text) {
-	return m_clipboardtext = text;
+system& system::setClipboardText(const std::string& text) {
+	m_clipboardtext = text;
+	return *this;
 }
 
 }  // namespace love
