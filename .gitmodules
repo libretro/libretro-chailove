@@ -72,3 +72,4 @@
 	path = vendor/physfs
 	url = https://github.com/Didstopia/physfs.git
 	branch = master
+	ignore = dirty
