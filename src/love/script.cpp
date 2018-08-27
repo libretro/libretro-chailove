@@ -304,8 +304,8 @@ script::script(const std::string& file) {
 	// Window
 	chai.add(fun(&window::setTitle), "setTitle");
 	chai.add(fun(&window::getTitle), "getTitle");
-	chai.add(fun<void, window, const std::string&, int>(&window::showMessageBox), "showMessageBox");
-	chai.add(fun<void, window, const std::string&>(&window::showMessageBox), "showMessageBox");
+	chai.add(fun<love::window&, window, const std::string&, int>(&window::showMessageBox), "showMessageBox");
+	chai.add(fun<love::window&, window, const std::string&>(&window::showMessageBox), "showMessageBox");
 
 	// Timer
 	chai.add(fun(&timer::getDelta), "getDelta");
