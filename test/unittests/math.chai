@@ -1,3 +1,4 @@
+// random()
 var num = love.math.random()
 assert(num >= 0 && num <= 1, "love.math.random()")
 
@@ -19,6 +20,7 @@ assert(num >= 10.0 && num <= 100.0, "love.math.random(10.0, 100.0)")
 num = love.math.random(10.0f, 100.0f)
 assert(num >= 10.0f && num <= 100.0f, "love.math.random(10.0, 100.0)")
 
+// setRandomSeed()
 love.math.setRandomSeed(50, 100)
 assert(true, "love.math.setRandomSeed(50, 100)")
 
@@ -26,5 +28,6 @@ love.math.setRandomSeed(10)
 assert(true, "love.math.setRandomSeed(10)")
 assert_equal(love.math.getRandomSeed(), 10, "love.math.getRandomSeed()")
 
+// Constants
 assert(love.math.pi > 3.0f, "love.math.pi")
 assert(love.math.e > 2.0f, "love.math.e")

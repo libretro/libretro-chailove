@@ -1,7 +1,13 @@
+// setVolume()
 love.audio.setVolume(0.5f)
 
+// getVolume()
 assert_equal(love.audio.getVolume(), 0.5f, "love.audio.getVolume()")
 
+// newSource()
 var audio_sound = love.audio.newSource("assets/jump.wav")
+assert_not(audio_sound.is_var_null(), "love.audio.newSource()")
 
-audio_sound.play()
+// play()
+var audioplayResult = audio_sound.play()
+assert(audioplayResult, "love.audio.play()")

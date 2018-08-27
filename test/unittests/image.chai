@@ -1,4 +1,8 @@
+// newImageData()
 var theImage = love.image.newImageData("assets/chailove.png")
 
+// getWidth()
 assert_equal(theImage.getWidth(), 480, "Image.getWidth()")
+
+// getHeight()
 assert_equal(theImage.getHeight(), 480, "Image.getHeight()")

@@ -5,6 +5,7 @@ def conf(t) {
 	t.window.width = 640
 	t.window.height = 500
 }
+
 def load() {
 	print("\n================================\n")
 	print("ChaiLove: Unit Testing Framework\n")
