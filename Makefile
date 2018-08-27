@@ -13,8 +13,6 @@ CFLAGS += $(FLAGS) -std=gnu99
 
 # Ignore first attempt builds, and re-try for a cleaner dependency chain.
 all: $(TARGET)
-	# Workaround for PhysFS Apple .m source file.
-	@cp -f vendor/physfs/src/physfs_platform_apple.m vendor/physfs/src/physfs_platform_apple.c
 	$(MAKE) $(TARGET)
 
 $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
@@ -24,6 +22,9 @@ $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
 	-$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 %.o: %.c | vendor/libretro-common/include/libretro.h
+	-$(CC) -c -o $@ $< $(CFLAGS)
+
+%.o: %.m | vendor/libretro-common/include/libretro.h
 	-$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
