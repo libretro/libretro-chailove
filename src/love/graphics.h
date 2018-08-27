@@ -95,6 +95,10 @@ class graphics {
 	 * @param filename The filepath to the image file.
 	 *
 	 * @return An image object which can be drawn to the screen.
+	 *
+	 * @code
+	 * var logo = love.graphics.newImage("logo.png")
+	 * @endcode
 	 */
 	Image* newImage(const std::string& filename);
 

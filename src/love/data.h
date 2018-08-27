@@ -18,6 +18,14 @@ class data {
 	 * @return Compressed data in the form of a string.
 	 *
 	 * @see love.data.decompress
+	 *
+	 * @code
+	 * var message = "Hello World!"
+	 * var compressed = love.data.compress(message)
+	 * print(compressed)
+	 * var decompressed = love.data.decompress(compressed)
+	 * print(decompressed)
+	 * @endcode
 	 */
 	std::string compress(const std::string& str, int level);
 	std::string compress(const std::string& str);
@@ -42,6 +50,12 @@ class data {
 	 * @todo Add sha256, sha512, etc.
 	 *
 	 * @return Raw message digest string.
+	 *
+	 * @code
+	 * var message = "Hello World!"
+	 * var hash = love.data.hash("md5", message)
+	 * print(hash)
+	 * @endcode
 	 */
 	std::string hash(const std::string& hashFunction, const std::string& data);
 
