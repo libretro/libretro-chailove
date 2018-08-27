@@ -84,15 +84,17 @@ window& window::setTitle(const std::string& title) {
 	return *this;
 }
 
-void window::showMessageBox(const std::string& msg, int frames) {
+window& window::showMessageBox(const std::string& msg, int frames) {
 	retro_message retroMessage;
 	retroMessage.msg = msg.c_str();
 	retroMessage.frames = frames;
 	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &retroMessage);
+	return *this;
 }
 
-void window::showMessageBox(const std::string& msg) {
+window& window::showMessageBox(const std::string& msg) {
 	showMessageBox(msg, 2800);
+	return *this;
 }
 
 }  // namespace love
