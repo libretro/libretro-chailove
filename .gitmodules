@@ -76,3 +76,5 @@
 [submodule "vendor/didstopia-physfs"]
 	path = vendor/didstopia-physfs
 	url = https://github.com/Didstopia/physfs.git
+	ignore = dirty
+	branch = master
