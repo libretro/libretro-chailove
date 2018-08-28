@@ -17,8 +17,10 @@ class audio {
 	 * Plays the specified sound.
 	 *
 	 * @param soundData The sound to play.
+	 *
+	 * @return True or false, depending on whether or not the sound data successfully played.
 	 */
-	void play(SoundData* soundData);
+	bool play(SoundData* soundData);
 
 	/**
 	 * Creates a new audio source from a file.

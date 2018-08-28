@@ -283,6 +283,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getVersionString), "getVersionString");
 	chai.add(fun(&system::getUsername), "getUsername");
 	chai.add(fun(&system::execute), "execute");
+	chai.add(fun(&system::getClipboardText), "getClipboardText");
+	chai.add(fun(&system::setClipboardText), "setClipboardText");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");
@@ -304,8 +306,8 @@ script::script(const std::string& file) {
 	// Window
 	chai.add(fun(&window::setTitle), "setTitle");
 	chai.add(fun(&window::getTitle), "getTitle");
-	chai.add(fun<void, window, const std::string&, int>(&window::showMessageBox), "showMessageBox");
-	chai.add(fun<void, window, const std::string&>(&window::showMessageBox), "showMessageBox");
+	chai.add(fun<love::window&, window, const std::string&, int>(&window::showMessageBox), "showMessageBox");
+	chai.add(fun<love::window&, window, const std::string&>(&window::showMessageBox), "showMessageBox");
 
 	// Timer
 	chai.add(fun(&timer::getDelta), "getDelta");

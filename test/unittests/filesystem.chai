@@ -33,7 +33,8 @@ assert_not(love.filesystem.isDirectory("keyboard.chai"), "love.filesystem.isDire
 assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlink()")
 
 // getDirectoryItems()
-assert_equal(love.filesystem.getDirectoryItems("assets").size(), 2, "love.filesystem.getDirectoryItems()")
+var getDirectoriesItems = love.filesystem.getDirectoryItems("assets").size()
+assert_equal(getDirectoriesItems, 3, "love.filesystem.getDirectoryItems()")
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")
@@ -51,3 +52,16 @@ assert(createDirectoryReturn, "love.filesystem.createDirectory()")
 // write()
 var writeFileReturn = love.filesystem.write("test/createDirectoryTest/test.md", "# Test\n\nHello World!");
 assert(writeFileReturn, "love.filesystem.write()")
+
+// mount()
+// @TODO: Figure out how to have the mount() point be relative to the origin.
+var mountResult = love.filesystem.mount("test/unittests/assets/hello.zip", "hello")
+assert(mountResult, "love.filesystem.mount()")
+
+// mount() - Load
+var mountLoadResult = love.filesystem.read("hello/hello.txt")
+var mountLoadResultType = is_type(mountLoadResult, "string")
+assert(mountLoadResultType, "love.filesystem.mount() & read() == 'string'")
+if (mountLoadResultType) {
+  assert_equal(mountLoadResult.trim(), "Hello World!", "love.filesystem.mount() & read()")
+}

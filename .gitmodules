@@ -68,8 +68,8 @@
 	url = https://github.com/mohaps/TinySHA1.git
 	ignore = dirty
 	branch = master
-[submodule "vendor/physfs"]
-	path = vendor/physfs
+[submodule "vendor/didstopia-physfs"]
+	path = vendor/didstopia-physfs
 	url = https://github.com/Didstopia/physfs.git
-	branch = master
 	ignore = dirty
+	branch = master

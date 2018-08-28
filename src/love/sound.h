@@ -25,7 +25,7 @@ class sound {
 	 *
 	 * @param filename The file name of the file to load.
 	 *
-	 * @return A new SoundData object.
+	 * @return A new SoundData object, NULL if loading failed.
 	 */
 	Types::Audio::SoundData* newSoundData(const std::string& filename);
 
