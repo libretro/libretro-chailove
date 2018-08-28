@@ -36,6 +36,7 @@ SoundData::SoundData(const std::string& filename) {
 	std::cout << "SOUND size " << size << std::endl;
 	//PHYSFS_seek(file, 0);
 	// Read in the full buffer.
+	/*
 	std::cout << "SOUND reading buffer" << std::endl;
 	void* buffer;
 	int result = PHYSFS_readBytes(file, &buffer, size);
@@ -46,6 +47,12 @@ SoundData::SoundData(const std::string& filename) {
 	}
 	std::cout << buffer;
 
+
+	m_sound = audio_mixer_load_wav(buffer, size);
+
+	std::cout << "SOUND phys close" << std::endl;
+	PHYSFS_close(file);
+	*/
 	std::cout << "SOUND audio_mixer_oad" << std::endl;
 
 
@@ -53,7 +60,7 @@ SoundData::SoundData(const std::string& filename) {
 	/**
 	 * Load manually
 	 */
-	/*
+
 	void* buffer2;
 	FILE *pFile = fopen( "test/assets/startup.wav", "rb") ;
 	if (pFile==NULL) {
@@ -61,7 +68,7 @@ SoundData::SoundData(const std::string& filename) {
 		exit (1);
 	}
 	buffer2 = (void*)malloc (size);
-	if (buffer == NULL) {
+	if (buffer2 == NULL) {
 		fputs ("Memory error", stderr);
 		exit (2);
 	}
@@ -69,14 +76,8 @@ SoundData::SoundData(const std::string& filename) {
 	m_sound = audio_mixer_load_wav(buffer2, size);
 	fclose (pFile);
 	free (buffer2);
-	*/
 
 
-
-	m_sound = audio_mixer_load_wav(buffer, size);
-
-	std::cout << "SOUND phys close" << std::endl;
-	PHYSFS_close(file);
 
 	std::cout << "SOUND done" << std::endl;
 

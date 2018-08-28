@@ -6,6 +6,8 @@
 #include "../ChaiLove.h"
 #include "Types/Audio/SoundData.h"
 #include "audio/audio_mixer.h"
+#include "audio/conversion/float_to_s16.h"
+#include "libretro.h"
 
 using ::ChaiLove;
 using love::Types::Audio::SoundData;
@@ -40,8 +42,19 @@ void sound::unload() {
 	m_loaded = false;
 }
 
+
 SoundData* sound::newSoundData(const std::string& filename) {
 	return ChaiLove::getInstance()->audio.newSource(filename);
 }
+
+void sound::update() {
+	int BUFSIZE = 44100 / 60;
+	float samples[BUFSIZE * 2] = { 0 };
+	int16_t samples2[2 * BUFSIZE] = { 0 };
+	audio_mixer_mix(samples, BUFSIZE, 1.0, false);
+	convert_float_to_s16(samples2,samples, 2 * BUFSIZE);
+	audio_batch_cb(samples2, BUFSIZE);
+}
+
 
 }  // namespace love

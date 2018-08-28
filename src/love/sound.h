@@ -3,6 +3,7 @@
 
 #include "Types/Audio/SoundData.h"
 #include <vector>
+#include "libretro.h"
 
 namespace love {
 
@@ -15,10 +16,11 @@ class sound {
 	bool isLoaded();
 	bool hasAudio();
 	void unload();
+	void update();
 	~sound();
 
 
-	//void convert_float_to_s16(int16_t *out, const float *in, size_t samples);
+	// void convert_float_to_s16(int16_t *out, const float *in, size_t samples);
 
 	/**
 	 * Creates a new SoundData.
@@ -32,6 +34,9 @@ class sound {
 	std::vector<Types::Audio::SoundData*> sounds;
 
 	bool m_loaded = false;
+
+	retro_audio_sample_t audio_cb = NULL;
+	retro_audio_sample_batch_t audio_batch_cb = NULL;
 };
 
 }  // namespace love
