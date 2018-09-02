@@ -76,3 +76,5 @@
 [submodule "vendor/cppcodec"]
 	path = vendor/cppcodec
 	url = https://github.com/tplgy/cppcodec.git
+	ignore = dirty
+	branch = master
