@@ -6,5 +6,5 @@ love.window.setTitle("ChaiLove Unit Testing")
 assert_equal(love.window.getTitle(), "ChaiLove Unit Testing", "love.window.setTitle()")
 
 // showMessageBox()
-love.window.showMessageBox("Hello World!")
+love.window.showMessageBox("ChaiLove: Unit tests have run")
 assert(true, "love.window.showMessageBox()")
