@@ -42,6 +42,32 @@ class data {
 	std::string decompress(const std::string& str);
 
 	/**
+	 * Encode Data or a string to a Data or string in one of the EncodeFormats.
+	 *
+	 * @param containerType What type to return the encoded data as. Only supports "string" currently.
+	 * @param format The format of the output data. Can be "base64" or "hex".
+	 * @param sourceString The raw data to encode.
+	 *
+	 * @return String which contains the encoded version of source.
+	 *
+	 * @see love.data.decode
+	 */
+	std::string encode(const std::string& containerType, const std::string& format, const std::string& sourceString);
+
+	/**
+	 * Decode Data or a string to a Data or string in one of the EncodeFormats.
+	 *
+	 * @param containerType What type to return the decoded data as. Only supports "string" currently.
+	 * @param format The format of the input data. Can be "base64" or "hex".
+	 * @param sourceString The raw (encoded) data to decode.
+	 *
+	 * @return String which contains the decoded version of source.
+	 *
+	 * @see love.data.encode
+	 */
+	std::string decode(const std::string& containerType, const std::string& format, const std::string& sourceString);
+
+	/**
 	 * Compute the message digest of specified string with specified algorithm.
 	 *
 	 * @param hashFunction Hash algorithm to use (md5, sha1).
