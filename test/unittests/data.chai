@@ -14,3 +14,13 @@ assert_equal(md5Hash, "b10a8db164e0754105b7a99be72e3fe5", "love.data.hash('md5')
 // hash(sha1)
 var sha1Hash = love.data.hash("sha1", "Hello World")
 assert_equal(sha1Hash, "0a4d55a8d778e5022fab701977c5d840bbc486d0", "love.data.hash('sha1')")
+
+// encode(base64)
+var decodedString = "any carnal pleasure"
+var encodedString = "YW55IGNhcm5hbCBwbGVhc3VyZQ=="
+var encodeResult = love.data.encode("string", "base64", decodedString)
+assert_equal(encodeResult, encodedString, "love.data.encode('base64')")
+
+// decode(base64)
+var decodeResult = love.data.decode("string", "base64", encodedString)
+assert_equal(decodeResult, decodedString, "love.data.decode('base64')")

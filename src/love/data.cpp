@@ -5,9 +5,11 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <vector>
 #include "compat/zlib.h"
 #include "utils/md5.h"
 #include "TinySHA1.hpp"
+#include <cppcodec/base64_default_rfc4648.hpp>
 
 namespace love {
 
@@ -91,6 +93,27 @@ std::string data::decompress(const std::string& str) {
 	}
 
 	return outstring;
+}
+
+std::string data::encode(const std::string& containerType, const std::string& format, const std::string& sourceString) {
+	if (format == "base64") {
+		std::string encoded = base64::encode(sourceString);
+		return encoded;
+	}
+
+	std::cout << "[ChaiLove] Warning: love.data.encode format not found: " << format << "." << std::endl;
+	return sourceString;
+}
+
+std::string data::decode(const std::string& containerType, const std::string& format, const std::string& sourceString) {
+	if (format == "base64") {
+		std::vector<unsigned char> decodedVector = base64::decode(sourceString);
+		std::string decoded(decodedVector.begin(), decodedVector.end());
+		return decoded;
+	}
+
+	std::cout << "[ChaiLove] Warning: love.data.decode format not found: " << format << "." << std::endl;
+	return sourceString;
 }
 
 std::string data::hash(const std::string& hashFunction, const std::string& data) {
