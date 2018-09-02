@@ -10,6 +10,7 @@
 #include "utils/md5.h"
 #include "TinySHA1.hpp"
 #include <cppcodec/base64_default_rfc4648.hpp>
+#include <cppcodec/hex_default_lower.hpp>
 
 namespace love {
 
@@ -101,6 +102,11 @@ std::string data::encode(const std::string& containerType, const std::string& fo
 		return encoded;
 	}
 
+	if (format == "hex") {
+		std::string encoded = hex::encode(sourceString);
+		return encoded;
+	}
+
 	std::cout << "[ChaiLove] Warning: love.data.encode format not found: " << format << "." << std::endl;
 	return sourceString;
 }
@@ -108,6 +114,12 @@ std::string data::encode(const std::string& containerType, const std::string& fo
 std::string data::decode(const std::string& containerType, const std::string& format, const std::string& sourceString) {
 	if (format == "base64") {
 		std::vector<unsigned char> decodedVector = base64::decode(sourceString);
+		std::string decoded(decodedVector.begin(), decodedVector.end());
+		return decoded;
+	}
+
+	if (format == "hex") {
+		std::vector<unsigned char> decodedVector = hex::decode(sourceString);
 		std::string decoded(decodedVector.begin(), decodedVector.end());
 		return decoded;
 	}

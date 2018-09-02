@@ -44,7 +44,7 @@ class data {
 	/**
 	 * Encode Data or a string to a Data or string in one of the EncodeFormats.
 	 *
-	 * @param containerType What type to return the encoded data as. Can be either "data", or "string".
+	 * @param containerType What type to return the encoded data as. Only supports "string" currently.
 	 * @param format The format of the output data. Can be "base64" or "hex".
 	 * @param sourceString The raw data to encode.
 	 *
@@ -57,7 +57,7 @@ class data {
 	/**
 	 * Decode Data or a string to a Data or string in one of the EncodeFormats.
 	 *
-	 * @param containerType What type to return the decoded data as. Can be either "data", or "string".
+	 * @param containerType What type to return the decoded data as. Only supports "string" currently.
 	 * @param format The format of the input data. Can be "base64" or "hex".
 	 * @param sourceString The raw (encoded) data to decode.
 	 *

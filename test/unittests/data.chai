@@ -24,3 +24,13 @@ assert_equal(encodeResult, encodedString, "love.data.encode('base64')")
 // decode(base64)
 var decodeResult = love.data.decode("string", "base64", encodedString)
 assert_equal(decodeResult, decodedString, "love.data.decode('base64')")
+
+// encode(hex)
+var dehexedString = "Hello World"
+var hexedString = "48656c6c6f20576f726c64"
+var hexResult = love.data.encode("string", "hex", dehexedString)
+assert_equal(hexResult, hexedString, "love.data.encode('hex')")
+
+// decode(hex)
+var dedexResult = love.data.decode("string", "hex", hexedString)
+assert_equal(dedexResult, dehexedString, "love.data.decode('hex')")
