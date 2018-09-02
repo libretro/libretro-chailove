@@ -73,3 +73,6 @@
 	url = https://github.com/Didstopia/physfs.git
 	ignore = dirty
 	branch = master
+[submodule "vendor/cppcodec"]
+	path = vendor/cppcodec
+	url = https://github.com/tplgy/cppcodec.git
