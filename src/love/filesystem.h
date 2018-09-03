@@ -51,6 +51,7 @@ class filesystem {
 	 * @endcode
 	 */
 	std::string read(const std::string& filename);
+	void* readBuffer(const std::string& filename, int& size);
 
 	/**
 	 * Check whether a file or directory exists.

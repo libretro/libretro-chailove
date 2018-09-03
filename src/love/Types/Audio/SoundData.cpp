@@ -6,85 +6,30 @@
 #include <stdlib.h>
 
 #include "../../../ChaiLove.h"
-#include "AudioState.h"
-#include "physfs.h"
 
 namespace love {
 namespace Types {
 namespace Audio {
 
 SoundData::SoundData(const std::string& filename) {
-
-	std::cout << "Sound: Loading " << filename << std::endl;
+	// Load the file.
 	ChaiLove* app = ChaiLove::getInstance();
-	PHYSFS_file* file = app->filesystem.openFile(filename);
-	std::cout << "SOUND Loading File" << std::endl;
-	if (file == NULL) {
-		std::cout << "[ChaiLove] [SoundData] Couldn't open up file." << filename << app->filesystem.getLastError() << std::endl;
-		return;
-	}
 
-	std::cout << "SOUND Getting length" << std::endl;
-	// Find the file size.
-	int size = PHYSFS_fileLength(file);
-	if (size <= 0) {
-		std::cout << "[ChaiLove] [SoundData] Couldn't determine file size." << filename << app->filesystem.getLastError() << std::endl;
-		PHYSFS_close(file);
-		return;
-	}
-
-	std::cout << "SOUND size " << size << std::endl;
-	//PHYSFS_seek(file, 0);
-	// Read in the full buffer.
-	std::cout << "SOUND reading buffer" << std::endl;
-	void* buffer;
-	int result = PHYSFS_readBytes(file, &buffer, size);
-	if (result < 0) {
-		std::cout << "[ChaiLove] Failed to load SoundData " << filename << app->filesystem.getLastError() << std::endl;
-		PHYSFS_close(file);
-		return;
-	}
-	std::cout << buffer;
-
-	std::cout << "SOUND audio_mixer_oad" << std::endl;
-
-
-
-	/**
-	 * Load manually
-	 */
-	/*
-	void* buffer2;
-	FILE *pFile = fopen( "test/assets/startup.wav", "rb") ;
-	if (pFile==NULL) {
-		fputs("File error", stderr);
-		exit (1);
-	}
-	buffer2 = (void*)malloc (size);
+	// Load the file.
+	int size = 0;
+	void* buffer = app->filesystem.readBuffer(filename, size);
 	if (buffer == NULL) {
-		fputs ("Memory error", stderr);
-		exit (2);
-	}
-	fread(buffer2, 1, size, pFile);
-	m_sound = audio_mixer_load_wav(buffer2, size);
-	fclose (pFile);
-	free (buffer2);
-	*/
-
-
-
-	m_sound = audio_mixer_load_wav(buffer, size);
-
-	std::cout << "SOUND phys close" << std::endl;
-	PHYSFS_close(file);
-
-	std::cout << "SOUND done" << std::endl;
-
-	if (!isLoaded()) {
-		std::cout << "[ChaiLove] Failed to load SoundData from a wav" << std::endl;
+		std::cout << "[ChaiLove] [SoundData] Failed to load file buffer " << filename << std::endl;
 		return;
 	}
-	std::cout << "SOUND done2" << std::endl;
+
+	// Load the file into the buffer.
+	// TODO(RobLoach): Check the audio file extensions of ".wav".
+	m_sound = audio_mixer_load_wav(buffer, size);
+	free(buffer);
+	if (m_sound == NULL) {
+		std::cout << "[ChaiLove] [SoundData] Failed to load wav from buffer " << filename << std::endl;
+	}
 }
 
 SoundData::~SoundData() {
@@ -92,6 +37,9 @@ SoundData::~SoundData() {
 }
 
 float SoundData::getVolume() {
+	if (m_voice != NULL) {
+		return audio_mixer_voice_get_volume(m_voice);
+	}
 	return m_volume;
 }
 
@@ -102,14 +50,17 @@ SoundData& SoundData::setVolume(float volume) {
 		volume = 0.0f;
 	}
 	m_volume = volume;
+	if (m_voice != NULL) {
+		audio_mixer_voice_set_volume(m_voice, m_volume);
+	}
 	return *this;
 }
 
 void SoundData::unload() {
+	if (m_voice != NULL) {
+		audio_mixer_stop(m_voice);
+	}
 	if (isLoaded()) {
-		// PHYSFS_close(sndta.fp);
-
-		std::cout << "SOUND audio_mixer_destroy" << std::endl;
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
 	}
@@ -117,33 +68,18 @@ void SoundData::unload() {
 
 bool SoundData::play() {
 	if (isLoaded()) {
-		// PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
-		state = Playing;
-		return true;
-	}
-	return false;
-}
-
-bool SoundData::resume() {
-	if (isLoaded()) {
-		state = Playing;
-		return true;
-	}
-	return false;
-}
-
-bool SoundData::pause() {
-	if (isLoaded()) {
-		state = Paused;
+		m_voice = audio_mixer_play(m_sound, m_loop, m_volume, NULL);
 		return true;
 	}
 	return false;
 }
 
 bool SoundData::stop() {
-	state = Stopped;
+	// state = Stopped;
 	if (isLoaded()) {
-		// PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
+		if (m_voice != NULL) {
+			audio_mixer_stop(m_voice);
+		}
 	}
 	return true;
 }
@@ -153,15 +89,18 @@ bool SoundData::isLoaded() {
 }
 
 bool SoundData::isPlaying() {
-	return state == Playing;
+	if (m_voice != NULL) {
+		return true;
+	}
+	return false;
 }
 
 bool SoundData::isLooping() {
-	return loop;
+	return m_loop;
 }
 
 SoundData& SoundData::setLooping(bool looping) {
-	loop = looping;
+	m_loop = looping;
 	return *this;
 }
 

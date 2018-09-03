@@ -152,8 +152,6 @@ script::script(const std::string& file) {
 	chai.add(fun(&SoundData::setLooping), "setLooping");
 	chai.add(fun(&SoundData::stop), "stop");
 	chai.add(fun(&SoundData::play), "play");
-	chai.add(fun(&SoundData::resume), "resume");
-	chai.add(fun(&SoundData::pause), "pause");
 	chai.add(fun(&SoundData::setVolume), "setVolume");
 	chai.add(fun(&SoundData::getVolume), "getVolume");
 
@@ -344,6 +342,8 @@ script::script(const std::string& file) {
 	chai.add(fun<std::string, data, const std::string&, int>(&data::compress), "compress");
 	chai.add(fun(&data::decompress), "decompress");
 	chai.add(fun(&data::hash), "hash");
+	chai.add(fun(&data::encode), "encode");
+	chai.add(fun(&data::decode), "decode");
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");

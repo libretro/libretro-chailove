@@ -8,9 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 - Added `love.system.getClipboardText()`
 - Added `love.system.setClipboardText()`
+- Added `love.data.encode()`
+- Added `love.data.decode()`
+- New audio system from libretro-common
 
 ### Chores
 - Added `love.filesystem.mount()` test
+- Updated documentation
+- Updated unit testing framework
+- Additional method chaining functions
 
 ## 0.23.1 - 2018-08-28
 ### Fixes

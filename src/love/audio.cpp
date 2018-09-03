@@ -1,13 +1,12 @@
 #include "audio.h"
 #include <string>
 #include "Types/Audio/SoundData.h"
-#include "Types/Audio/AudioState.h"
 #include "../ChaiLove.h"
 #include "sound.h"
 #include "physfs.h"
+#include "audio/conversion/float_to_s16.h"
 
 using love::Types::Audio::SoundData;
-using love::Types::Audio::AudioState::Stopped;
 
 namespace love {
 
@@ -44,14 +43,4 @@ audio& audio::setVolume(float volume) {
 	m_volume = volume;
 	return *this;
 }
-
-void audio::mixer_render(int16_t *buffer) {
-	if (!ChaiLove::hasInstance()) {
-		return;
-	}
-
-	ChaiLove* app = ChaiLove::getInstance();
-	// TODO(RobLoach): Play the audio.
-}
-
 }  // namespace love

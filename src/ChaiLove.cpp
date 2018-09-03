@@ -64,6 +64,9 @@ bool ChaiLove::load(const std::string& file) {
 	std::string version = CHAILOVE_VERSION_STRING GIT_VERSION;
 	std::cout << "[ChaiLove] ChaiLove " << version.c_str() << std::endl;
 
+	// Iniitalize some of the initial subsystems.
+	sound.load();
+
 	// Initalize the file system.
 	bool loaded = filesystem.init(file);
 	if (!loaded) {
@@ -84,12 +87,6 @@ bool ChaiLove::load(const std::string& file) {
 
 	// Load up the window dimensions.
 	window.load(config);
-
-	// Initialize the soud, if needed.
-	if (config.modules.sound) {
-		std::cout << "SOUND.load()" << std::endl;
-		sound.load();
-	}
 
 	console.load(config);
 	graphics.load();
@@ -170,6 +167,9 @@ std::string ChaiLove::demo() {
 }
 
 void ChaiLove::update() {
+	// Update the sound system.
+	sound.update();
+
 	// Update and poll all the events.
 	event.update();
 
