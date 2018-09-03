@@ -6,7 +6,6 @@
 #include <stdlib.h>
 
 #include "../../../ChaiLove.h"
-#include "physfs.h"
 
 namespace love {
 namespace Types {
