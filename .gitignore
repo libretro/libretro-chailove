@@ -4,3 +4,4 @@
 node_modules
 *.srm.*
 *.srm1.*
+/package.json
