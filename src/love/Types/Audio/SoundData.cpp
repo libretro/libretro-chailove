@@ -15,36 +15,21 @@ namespace Audio {
 SoundData::SoundData(const std::string& filename) {
 	// Load the file.
 	ChaiLove* app = ChaiLove::getInstance();
-	PHYSFS_file* file = app->filesystem.openFile(filename);
-	if (file == NULL) {
-		std::cout << "[ChaiLove] [SoundData] Couldn't open up file." << filename << app->filesystem.getLastError() << std::endl;
-		return;
-	}
 
-	// Find the file size.
-	int size = app->filesystem.getSize(file);
-	if (size <= 0) {
-		std::cout << "[ChaiLove] [SoundData] Couldn't determine file size." << filename << app->filesystem.getLastError() << std::endl;
-		PHYSFS_close(file);
-		return;
-	}
-
-	// Read the full buffer.
-	void* buffer = (void*)malloc(size);
-	int result = PHYSFS_readBytes(file, buffer, size);
-	if (result < 0) {
-		std::cout << "[ChaiLove] [SoundData] Failed to load SoundData " << filename << app->filesystem.getLastError() << std::endl;
-		free(buffer);
-		PHYSFS_close(file);
+	// Load the file.
+	int size = 0;
+	void* buffer = app->filesystem.readBuffer(filename, size);
+	if (buffer == NULL) {
+		std::cout << "[ChaiLove] [SoundData] Failed to load file buffer " << filename << std::endl;
 		return;
 	}
 
 	// Load the file into the buffer.
+	// TODO(RobLoach): Check the audio file extensions of ".wav".
 	m_sound = audio_mixer_load_wav(buffer, size);
 	free(buffer);
-	PHYSFS_close(file);
-	if (!isLoaded()) {
-		std::cout << "[ChaiLove] audio: Failed to load wav from buffer " << filename << std::endl;
+	if (m_sound == NULL) {
+		std::cout << "[ChaiLove] [SoundData] Failed to load wav from buffer " << filename << std::endl;
 	}
 }
 
