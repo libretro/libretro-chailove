@@ -1,0 +1,21 @@
+/**
+ * Main Test 2
+ *
+ * An alternative test with a different file name.
+ *
+ * retroarch -L chailove_libretro.so test/main2.chai
+ */
+
+global beat
+
+def load() {
+	beat = love.audio.newSource("assets/startup.wav")
+}
+
+def draw() {
+	love.graphics.print("Press a joystick button!", 5, 20)
+}
+
+def joystickpressed(joystick, button) {
+	love.audio.play(beat)
+}

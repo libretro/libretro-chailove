@@ -6,22 +6,21 @@
 #include "libretro.h"
 #include "ChaiLove.h"
 
-static bool use_audio_cb;
-int16_t audio_buffer[2 * (44100 / 60)];
 static retro_video_refresh_t video_cb;
+// This is needed to allow SDL-libretro to compile.
+// @see SDL_LIBRETROaudio.c:37
 retro_audio_sample_t audio_cb;
-static retro_audio_sample_batch_t audio_batch_cb;
 
 void retro_set_video_refresh(retro_video_refresh_t cb) {
 	video_cb = cb;
 }
 
 void retro_set_audio_sample(retro_audio_sample_t cb) {
-	audio_cb = cb;
+	ChaiLove::getInstance()->sound.audio_cb = cb;
 }
 
 void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) {
-	audio_batch_cb = cb;
+	ChaiLove::getInstance()->sound.audio_batch_cb = cb;
 }
 
 void retro_set_input_poll(retro_input_poll_t cb) {
@@ -32,25 +31,13 @@ void retro_set_input_state(retro_input_state_t cb) {
 	ChaiLove::input_state_cb = cb;
 }
 
-static void emit_audio(void) {
-	if (ChaiLove::hasInstance()) {
-		ChaiLove::getInstance()->audio.mixer_render(audio_buffer);
-		audio_batch_cb(audio_buffer, 44100 / 60);
-	}
-}
-
-static void audio_set_state(bool enable) {
-	(void)enable;
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-/**
- * libretro-sdl callback; Send through the audio.
- */
+
 void libretro_audio_cb(int16_t left, int16_t right) {
-	audio_cb(left, right);
+	// Nothing?
+	// audio_cb(left, right);
 }
 
 /**
@@ -334,10 +321,6 @@ bool retro_load_game(const struct retro_game_info *info) {
 	// Set the frame rate callback.
 	struct retro_frame_time_callback frame_cb = { frame_time_cb, 1000000 / 60 };
 	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
-
-	// Make the audio callback.
-	struct retro_audio_callback audio_cb = { emit_audio, audio_set_state };
-	use_audio_cb = ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
 	// Find the game path.
 	std::string gamePath(info ? info->path : "");

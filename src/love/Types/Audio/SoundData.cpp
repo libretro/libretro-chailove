@@ -2,29 +2,34 @@
 #include <string>
 #include <iostream>
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "../../../ChaiLove.h"
-#include "AudioState.h"
-#include "physfs.h"
 
 namespace love {
 namespace Types {
 namespace Audio {
 
 SoundData::SoundData(const std::string& filename) {
+	// Load the file.
 	ChaiLove* app = ChaiLove::getInstance();
-	PHYSFS_file* file = app->filesystem.openFile(filename);
-	if (file == NULL) {
+
+	// Load the file.
+	int size = 0;
+	void* buffer = app->filesystem.readBuffer(filename, size);
+	if (buffer == NULL) {
+		std::cout << "[ChaiLove] [SoundData] Failed to load file buffer " << filename << std::endl;
 		return;
 	}
 
-	int result = PHYSFS_readBytes(file, &sndta.head, sizeof(uint8_t) * WAV_HEADER_SIZE);
-	if (result < 0) {
-		std::cout << "[ChaiLove] Failed to load SoundData " << filename << app->filesystem.getLastError() << std::endl;
-		return;
+	// Load the file into the buffer.
+	// TODO(RobLoach): Check the audio file extensions of ".wav".
+	m_sound = audio_mixer_load_wav(buffer, size);
+	free(buffer);
+	if (m_sound == NULL) {
+		std::cout << "[ChaiLove] [SoundData] Failed to load wav from buffer " << filename << std::endl;
 	}
-
-	sndta.fp = file;
-	bps = sndta.head.NumChannels * sndta.head.BitsPerSample / 8;
 }
 
 SoundData::~SoundData() {
@@ -32,6 +37,10 @@ SoundData::~SoundData() {
 }
 
 float SoundData::getVolume() {
+	if (m_voice != NULL) {
+		m_volume = audio_mixer_voice_get_volume(m_voice);
+	}
+
 	return m_volume;
 }
 
@@ -42,65 +51,87 @@ SoundData& SoundData::setVolume(float volume) {
 		volume = 0.0f;
 	}
 	m_volume = volume;
+	if (m_voice != NULL) {
+		audio_mixer_voice_set_volume(m_voice, m_volume);
+	}
+
 	return *this;
 }
 
 void SoundData::unload() {
+	if (m_voice != NULL) {
+		audio_mixer_stop(m_voice);
+	}
 	if (isLoaded()) {
-		PHYSFS_close(sndta.fp);
-		sndta.fp = NULL;
+		audio_mixer_destroy(m_sound);
+		m_sound = NULL;
 	}
 }
 
 bool SoundData::play() {
 	if (isLoaded()) {
-		PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
-		state = Playing;
-		return true;
-	}
-	return false;
-}
-
-bool SoundData::resume() {
-	if (isLoaded()) {
-		state = Playing;
-		return true;
-	}
-	return false;
-}
-
-bool SoundData::pause() {
-	if (isLoaded()) {
-		state = Paused;
+		m_voice = audio_mixer_play(m_sound, m_loop, m_volume, audioCallback);
+		if (m_voice != NULL) {
+			m_playing = true;
+		}
 		return true;
 	}
 	return false;
 }
 
 bool SoundData::stop() {
-	state = Stopped;
 	if (isLoaded()) {
-		PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
+		if (m_voice != NULL) {
+			audio_mixer_stop(m_voice);
+		}
 	}
 	return true;
 }
 
 bool SoundData::isLoaded() {
-	return sndta.fp != NULL;
+	return m_sound != NULL;
 }
 
 bool SoundData::isPlaying() {
-	return state == Playing;
+	return m_playing;
 }
 
 bool SoundData::isLooping() {
-	return loop;
+	return m_loop;
 }
 
 SoundData& SoundData::setLooping(bool looping) {
-	loop = looping;
+	m_loop = looping;
 	return *this;
 }
+
+void SoundData::audioCallback(audio_mixer_sound_t* sound, unsigned reason) {
+	// This is called when an audio finishes.
+	ChaiLove* app = ChaiLove::getInstance();
+
+	// Loop through all sounds, and find the given one.
+	std::vector<Types::Audio::SoundData*> v = app->sound.sounds;
+	for(std::vector<SoundData*>::iterator it = v.begin(); it != v.end(); ++it) {
+		SoundData* currentsound = *it;
+		if (currentsound == NULL) {
+			continue;
+		}
+		// We found the active sound.
+		if (currentsound->m_sound == sound) {
+			switch (reason) {
+				case AUDIO_MIXER_SOUND_FINISHED:
+				case AUDIO_MIXER_SOUND_STOPPED:
+					currentsound->m_playing = false;
+					break;
+				case AUDIO_MIXER_SOUND_REPEATED:
+					currentsound->m_playing = true;
+					break;
+			}
+			break;
+		}
+	}
+}
+
 
 }  // namespace Audio
 }  // namespace Types
