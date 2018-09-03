@@ -26,7 +26,6 @@ SoundData::SoundData(const std::string& filename) {
 	// Load the file into the buffer.
 	// TODO(RobLoach): Check the audio file extensions of ".wav".
 	m_sound = audio_mixer_load_wav(buffer, size);
-	free(buffer);
 	if (m_sound == NULL) {
 		std::cout << "[ChaiLove] [SoundData] Failed to load wav from buffer " << filename << std::endl;
 	}
@@ -57,30 +56,28 @@ SoundData& SoundData::setVolume(float volume) {
 }
 
 void SoundData::unload() {
-	if (m_voice != NULL) {
-		audio_mixer_stop(m_voice);
-	}
-	if (isLoaded()) {
-		audio_mixer_destroy(m_sound);
-		m_sound = NULL;
-	}
+	// Stop the voice.
+	stop();
+	audio_mixer_destroy(m_sound);
+	m_sound = NULL;
+	m_playing = false;
 }
 
 bool SoundData::play() {
-	if (isLoaded()) {
+	if (!isPlaying()) {
 		m_voice = audio_mixer_play(m_sound, m_loop, m_volume, NULL);
-		return true;
+		if (m_voice != NULL) {
+			m_playing = true;
+			return true;
+		}
 	}
-	return false;
+	return isPlaying();
 }
 
 bool SoundData::stop() {
-	// state = Stopped;
-	if (isLoaded()) {
-		if (m_voice != NULL) {
-			audio_mixer_stop(m_voice);
-		}
-	}
+	audio_mixer_stop(m_voice);
+	m_voice = NULL;
+	m_playing = false;
 	return true;
 }
 
@@ -89,10 +86,7 @@ bool SoundData::isLoaded() {
 }
 
 bool SoundData::isPlaying() {
-	if (m_voice != NULL) {
-		return true;
-	}
-	return false;
+	return m_playing;
 }
 
 bool SoundData::isLooping() {
@@ -102,6 +96,10 @@ bool SoundData::isLooping() {
 SoundData& SoundData::setLooping(bool looping) {
 	m_loop = looping;
 	return *this;
+}
+
+void SoundData::audioCallback(audio_mixer_sound_t* sound, unsigned reason) {
+	std::cout << "Reason: " << reason << std::endl;
 }
 
 }  // namespace Audio

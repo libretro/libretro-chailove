@@ -183,7 +183,7 @@ void* filesystem::readBuffer(const std::string& filename, int& size) {
 	}
 
 	// Create the buffer.
-	void* buffer = (void*)malloc(size + 1);
+	void* buffer = (void*)malloc(size);
 	if (!buffer) {
 		std::cout << "[ChaiLove] [filesystem] Failed to allocate buffer of size " << size + 1 << "." << std::endl;
 		PHYSFS_close(file);
@@ -194,7 +194,9 @@ void* filesystem::readBuffer(const std::string& filename, int& size) {
 	int result = PHYSFS_readBytes(file, buffer, size);
 	if (result < 0) {
 		std::cout << "[ChaiLove] [filesystem] Failed to load SoundData " << filename << getLastError() << std::endl;
-		free(buffer);
+		if (buffer != NULL) {
+			free(buffer);
+		}
 		PHYSFS_close(file);
 		return NULL;
 	}
