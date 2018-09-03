@@ -321,8 +321,9 @@ FileInfo filesystem::getInfo(const std::string& path) {
 	return fileInfo;
 }
 
-const FileData filesystem::newFileData(const std::string& filepath) {
-	return FileData(filepath);
+FileData filesystem::newFileData(const std::string& filepath) {
+	FileData f(filepath);
+	return f;
 }
 
 bool filesystem::createDirectory(const std::string& name) {

@@ -98,10 +98,12 @@ class filesystem {
 	 *
 	 * @see love::Types::FileSystem::FileData
 	 */
-	const FileData newFileData(const std::string& filepath);
+	FileData newFileData(const std::string& filepath);
 
 	/**
-	 * Unmounts a zip file or folder previously mounted with filesystem::unmount.
+	 * Unmounts a zip file or folder previously mounted with love.filesystem.mount.
+	 *
+	 * @param archive The archive that was previously mounted with love.filesystem.mount.
 	 *
 	 * @return bool True, when unmounting was a success.
 	 */

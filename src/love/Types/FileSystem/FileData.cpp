@@ -36,6 +36,6 @@ std::string FileData::getExtension() {
 	return extension;
 }
 
-}
-}
-}
+}  // namespace FileSystem
+}  // namespace Types
+}  // namespace love
