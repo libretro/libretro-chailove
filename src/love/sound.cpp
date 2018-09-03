@@ -48,12 +48,12 @@ SoundData* sound::newSoundData(const std::string& filename) {
 }
 
 void sound::update() {
-	int BUFSIZE = 44100 / 60;
-	float samples[BUFSIZE * 2] = { 0 };
-	int16_t samples2[2 * BUFSIZE] = { 0 };
-	audio_mixer_mix(samples, BUFSIZE, 1.0, false);
-	convert_float_to_s16(samples2, samples, 2 * BUFSIZE);
-	audio_batch_cb(samples2, BUFSIZE);
+	int bufferSize = 44100 / 60;
+	float samples[bufferSize * 2] = { 0 };
+	int16_t samples2[2 * bufferSize] = { 0 };
+	audio_mixer_mix(samples, bufferSize, 1.0, false);
+	convert_float_to_s16(samples2, samples, 2 * bufferSize);
+	audio_batch_cb(samples2, bufferSize);
 }
 
 
