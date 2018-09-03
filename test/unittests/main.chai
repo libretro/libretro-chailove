@@ -9,7 +9,12 @@ def conf(t) {
 def load() {
 	print("\n================================\n")
 	print("ChaiLove: Unit Testing Framework\n")
+	print("\n================================\n")
+}
 
+def update(dt) {
+	print("\n================================\n")
+	print("ChaiLove: Unit Tests\n")
 	love.filesystem.load("assert")
 	love.filesystem.load("audio")
 	love.filesystem.load("console")
@@ -33,10 +38,10 @@ def load() {
 		throw(failure)
 	}
 	else {
-		print("\nUnit tests passed")
+		print("\nChaiLove Unit tests passed")
 	}
-
 	print("\n================================\n")
+	love.event.quit()
 }
 
 def draw() {
@@ -47,5 +52,4 @@ def draw() {
 	else {
 		love.graphics.print("Report: " + failure, 100, 200)
 	}
-	love.event.quit()
 }

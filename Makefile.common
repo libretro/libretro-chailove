@@ -171,6 +171,9 @@ SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
 # TinySHA1
 FLAGS += -I$(CORE_DIR)/vendor/TinySHA1
 
+# cppcodec
+FLAGS += -I$(CORE_DIR)/vendor/cppcodec
+
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -I$(CORE_DIR)/vendor/chaiscript/include

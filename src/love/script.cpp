@@ -344,6 +344,8 @@ script::script(const std::string& file) {
 	chai.add(fun<std::string, data, const std::string&, int>(&data::compress), "compress");
 	chai.add(fun(&data::decompress), "decompress");
 	chai.add(fun(&data::hash), "hash");
+	chai.add(fun(&data::encode), "encode");
+	chai.add(fun(&data::decode), "decode");
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");

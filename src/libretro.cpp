@@ -245,7 +245,8 @@ bool retro_serialize(void *data, size_t size) {
 		return false;
 	}
 
-	// Compress the JSON state data.
+	// Encode the JSON state data.
+	// state = app->data.encode("string", "base64", state);
 	state = app->data.compress(state);
 
 	// Save the information to the state data.
@@ -257,7 +258,7 @@ bool retro_serialize(void *data, size_t size) {
  * libretro callback; Unserialize the given data and load the state.
  */
 bool retro_unserialize(const void *data, size_t size) {
-	if (!ChaiLove::hasInstance()) {
+	if (!ChaiLove::hasInstance() || size <= 0) {
 		return false;
 	}
 	std::cout << "[ChaiLove] retro_unserialize" << std::endl;
@@ -274,6 +275,7 @@ bool retro_unserialize(const void *data, size_t size) {
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Decompress the state data.
+	// loadData = app->data.decode("string", "base64", loadData);
 	loadData = app->data.decompress(loadData);
 
 	// Finally, load the string.
