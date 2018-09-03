@@ -6,7 +6,6 @@
 #include <stdlib.h>
 
 #include "../../../ChaiLove.h"
-#include "AudioState.h"
 #include "physfs.h"
 
 namespace love {
@@ -54,6 +53,9 @@ SoundData::~SoundData() {
 }
 
 float SoundData::getVolume() {
+	if (m_voice != NULL) {
+		return audio_mixer_voice_get_volume(m_voice);
+	}
 	return m_volume;
 }
 
@@ -64,10 +66,16 @@ SoundData& SoundData::setVolume(float volume) {
 		volume = 0.0f;
 	}
 	m_volume = volume;
+	if (m_voice != NULL) {
+		audio_mixer_voice_set_volume(m_voice, m_volume);
+	}
 	return *this;
 }
 
 void SoundData::unload() {
+	if (m_voice != NULL) {
+		audio_mixer_stop(m_voice);
+	}
 	if (isLoaded()) {
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
@@ -76,32 +84,18 @@ void SoundData::unload() {
 
 bool SoundData::play() {
 	if (isLoaded()) {
-		state = Playing;
-		return true;
-	}
-	return false;
-}
-
-bool SoundData::resume() {
-	if (isLoaded()) {
-		state = Playing;
-		return true;
-	}
-	return false;
-}
-
-bool SoundData::pause() {
-	if (isLoaded()) {
-		state = Paused;
+		m_voice = audio_mixer_play(m_sound, m_loop, m_volume, NULL);
 		return true;
 	}
 	return false;
 }
 
 bool SoundData::stop() {
-	state = Stopped;
+	// state = Stopped;
 	if (isLoaded()) {
-		// PHYSFS_seek(sndta.fp, WAV_HEADER_SIZE);
+		if (m_voice != NULL) {
+			audio_mixer_stop(m_voice);
+		}
 	}
 	return true;
 }
@@ -111,15 +105,18 @@ bool SoundData::isLoaded() {
 }
 
 bool SoundData::isPlaying() {
-	return state == Playing;
+	if (m_voice != NULL) {
+		return true;
+	}
+	return false;
 }
 
 bool SoundData::isLooping() {
-	return loop;
+	return m_loop;
 }
 
 SoundData& SoundData::setLooping(bool looping) {
-	loop = looping;
+	m_loop = looping;
 	return *this;
 }
 

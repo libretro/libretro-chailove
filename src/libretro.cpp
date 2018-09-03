@@ -6,11 +6,7 @@
 #include "libretro.h"
 #include "ChaiLove.h"
 
-static bool use_audio_cb;
-int16_t audio_buffer[2 * (44100 / 60)];
 static retro_video_refresh_t video_cb;
-retro_audio_sample_t audio_cb;
-static retro_audio_sample_batch_t audio_batch_cb;
 
 void retro_set_video_refresh(retro_video_refresh_t cb) {
 	video_cb = cb;

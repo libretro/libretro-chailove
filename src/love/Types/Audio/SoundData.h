@@ -2,7 +2,6 @@
 #define SRC_LOVE_TYPES_AUDIO_SOUNDDATA_H_
 
 #include <string>
-#include "AudioState.h"
 #include "physfs.h"
 #include "audio/audio_mixer.h"
 
@@ -55,16 +54,6 @@ class SoundData {
 	bool isPlaying();
 
 	/**
-	 * Resumes playing the given Source.
-	 */
-	bool resume();
-
-	/**
-	 * Pauses the given Source.
-	 */
-	bool pause();
-
-	/**
 	 * Returns whether the Source will loop.
 	 */
 	bool isLooping();
@@ -73,13 +62,13 @@ class SoundData {
 	 * Set whether the Source should loop.
 	 */
 	SoundData& setLooping(bool loop);
-	unsigned bps = 0;
-	bool loop = false;
-	float m_volume = 1.0f;
-	float pitch = 1.0f;
-	AudioState state = Stopped;
 
+	// Properties
+	bool m_loop = false;
+	float m_volume = 1.0f;
 	audio_mixer_sound* m_sound = NULL;
+	// TODO(RobLoach): Make voice a vector.
+	audio_mixer_voice_t* m_voice = NULL;
 };
 
 }  // namespace Audio
