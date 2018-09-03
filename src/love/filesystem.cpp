@@ -10,6 +10,7 @@
 #include "Types/FileSystem/FileInfo.h"
 
 using love::Types::FileSystem::FileInfo;
+using love::Types::FileSystem::FileData;
 
 namespace love {
 
@@ -318,6 +319,11 @@ FileInfo filesystem::getInfo(const std::string& path) {
 	fileInfo.modtime = stat.modtime;
 	fileInfo.size = stat.filesize;
 	return fileInfo;
+}
+
+FileData filesystem::newFileData(const std::string& filepath) {
+	FileData f(filepath);
+	return f;
 }
 
 bool filesystem::createDirectory(const std::string& name) {

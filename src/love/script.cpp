@@ -17,6 +17,7 @@ using love::Types::Input::Joystick;
 using love::Types::Config::WindowConfig;
 using love::Types::Config::ModuleConfig;
 using love::Types::Audio::SoundData;
+using love::Types::FileSystem::FileData;
 using love::graphics;
 
 namespace love {
@@ -129,6 +130,14 @@ script::script(const std::string& file) {
 	chai.add(constructor<FileInfo(const std::string&)>(), "FileInfo");
 	chai.add(constructor<FileInfo(const std::string&, int)>(), "FileInfo");
 	chai.add(constructor<FileInfo(const std::string&, int, int)>(), "FileInfo");
+
+	// FileData Object.
+	chai.add(user_type<FileData>(), "FileData");
+	chai.add(fun(&FileData::getSize), "getSize");
+	chai.add(fun(&FileData::getFilename), "getFilename");
+	chai.add(fun(&FileData::getString), "getString");
+	chai.add(fun(&FileData::getExtension), "getExtension");
+	chai.add(constructor<FileData(const std::string&)>(), "FileData");
 
 	// Color Object.
 	chai.add(user_type<Color>(), "Color");
@@ -268,6 +277,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::write), "write");
 	chai.add(fun(&filesystem::exists), "exists");
 	chai.add(fun(&filesystem::getInfo), "getInfo");
+	chai.add(fun(&filesystem::newFileData), "newFileData");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 	chai.add(fun(&filesystem::mount), "mount");
 	chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
