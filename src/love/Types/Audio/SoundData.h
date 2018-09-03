@@ -62,13 +62,14 @@ class SoundData {
 	 * Set whether the Source should loop.
 	 */
 	SoundData& setLooping(bool loop);
+	static void audioCallback(audio_mixer_sound_t* sound, unsigned reason);
 
-	// Properties
-	bool m_loop = false;
-	float m_volume = 1.0f;
 	audio_mixer_sound* m_sound = NULL;
 	// TODO(RobLoach): Make voice a vector.
 	audio_mixer_voice_t* m_voice = NULL;
+	bool m_loop = false;
+	float m_volume = 1.0f;
+	bool m_playing = false;
 };
 
 }  // namespace Audio

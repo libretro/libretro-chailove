@@ -57,20 +57,24 @@ SoundData& SoundData::setVolume(float volume) {
 }
 
 void SoundData::unload() {
-	if (m_voice != NULL) {
-		audio_mixer_stop(m_voice);
-	}
+	// Stop the voice.
+	stop();
+
+	// Unload the sound.
 	if (isLoaded()) {
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
 	}
+	m_playing = false;
 }
 
 bool SoundData::play() {
 	if (isLoaded()) {
 		m_voice = audio_mixer_play(m_sound, m_loop, m_volume, NULL);
+		m_playing = true;
 		return true;
 	}
+	m_playing = false;
 	return false;
 }
 
@@ -79,8 +83,10 @@ bool SoundData::stop() {
 	if (isLoaded()) {
 		if (m_voice != NULL) {
 			audio_mixer_stop(m_voice);
+			//m_voice = NULL;
 		}
 	}
+	m_playing = false;
 	return true;
 }
 
@@ -89,10 +95,7 @@ bool SoundData::isLoaded() {
 }
 
 bool SoundData::isPlaying() {
-	if (m_voice != NULL) {
-		return true;
-	}
-	return false;
+	return m_playing;
 }
 
 bool SoundData::isLooping() {
@@ -102,6 +105,10 @@ bool SoundData::isLooping() {
 SoundData& SoundData::setLooping(bool looping) {
 	m_loop = looping;
 	return *this;
+}
+
+void SoundData::audioCallback(audio_mixer_sound_t* sound, unsigned reason) {
+	std::cout << "Reason: " << reason << std::endl;
 }
 
 }  // namespace Audio
