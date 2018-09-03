@@ -37,7 +37,7 @@ void sound::unload() {
 	}
 	sounds.clear();
 
-	std::cout << "SOUND audio_mixer_done" << std::endl;
+	// Close the audio mixer.
 	audio_mixer_done();
 	m_loaded = false;
 }
@@ -52,7 +52,7 @@ void sound::update() {
 	float samples[BUFSIZE * 2] = { 0 };
 	int16_t samples2[2 * BUFSIZE] = { 0 };
 	audio_mixer_mix(samples, BUFSIZE, 1.0, false);
-	convert_float_to_s16(samples2,samples, 2 * BUFSIZE);
+	convert_float_to_s16(samples2, samples, 2 * BUFSIZE);
 	audio_batch_cb(samples2, BUFSIZE);
 }
 

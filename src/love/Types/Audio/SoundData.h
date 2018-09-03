@@ -79,7 +79,7 @@ class SoundData {
 	float pitch = 1.0f;
 	AudioState state = Stopped;
 
-	audio_mixer_sound_t* m_sound = NULL;
+	audio_mixer_sound* m_sound = NULL;
 };
 
 }  // namespace Audio

@@ -38,7 +38,7 @@ extern "C" {
 
 void libretro_audio_cb(int16_t left, int16_t right) {
 	// Nothing?
-	//audio_cb(left, right);
+	// audio_cb(left, right);
 }
 
 /**
