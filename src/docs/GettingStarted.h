@@ -3,28 +3,29 @@
  *
  * This provides a quick introduction on how to get started with [ChaiLove](http://github.com/libretro/libretro-chailove).
  *
- * ## Get ChaiLove
+ * ## 1. Install ChaiLove
  *
- * ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). To play the sample game [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)...
+ * ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). It can be installed through the user interface...
  * 1. Run [RetroArch](http://retroarch.com/)
  * 2. *Online Updater* → *Core Updator* → *ChaiLove*
  *
- * ## Running Games
+ * ## 2. Running Games
  *
  * ChaiLove can load a game in two ways:
  *
- * 1. Run on a `main.chai` file
- * 2. Run on a compressed `game.chailove` file
+ * 1. Run the `main.chai` file
+ * 2. Run the compressed `game.chailove` file
  *
- * To [download and play](https://github.com/RobLoach/ChaiLove-FloppyBird/releases) the sample [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird) game...
+ * To download and play the sample game, [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird)...
+ *
  * 1. Run RetroArch
  * 2. Visit *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
  * 3. *Load Content* → *Downloads* → *Floppy Bird.chailove*
  *
- * To run games through ChaiLove manually through the command line interface...
+ * To run games through the command line...
  *
  * @code
- * retroarch -L chailove_libretro.so path/to/FloppyBird.chailove
+ * retroarch -L chailove_libretro.so FloppyBird.chailove
  * @endcode
  *
  * ## Next Steps

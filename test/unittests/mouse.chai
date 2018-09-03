@@ -1,11 +1,15 @@
+// getX()
 var mouseX = love.mouse.getX()
 assert_not_equal(-1, mouseX, "love.mouse.getX()")
 
+// getY()
 var mouseY = love.mouse.getY()
 assert_not_equal(-1, mouseY, "love.mouse.getY()")
 
+// getPosition()
 var mousePoint = love.mouse.getPosition()
 assert_equal(mousePoint.x, mouseX, "love.mouse.getPosition().x")
 assert_equal(mousePoint.y, mouseY, "love.mouse.getPosition().y")
 
+// isDown()
 assert_not(love.mouse.isDown("x1"), "love.mouse.isDown('x1')")

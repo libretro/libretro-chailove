@@ -17,8 +17,10 @@ class audio {
 	 * Plays the specified sound.
 	 *
 	 * @param soundData The sound to play.
+	 *
+	 * @return True or false, depending on whether or not the sound data successfully played.
 	 */
-	void play(SoundData* soundData);
+	bool play(SoundData* soundData);
 
 	/**
 	 * Creates a new audio source from a file.
@@ -30,12 +32,6 @@ class audio {
 	 */
 	SoundData* newSource(const std::string& filename, const std::string& type);
 	SoundData* newSource(const std::string& filename);
-
-	void mixer_render(int16_t *buffer);
-
-	int AUDIO_FRAMES = 735;  // 44100 / 60
-	int WAV_HEADER_SIZE = 44;
-	float m_volume = 1.0f;
 
 	/**
 	 * Returns the master volume.
@@ -52,6 +48,8 @@ class audio {
 	 * @return The audio module, to allow method chaining.
 	 */
 	audio& setVolume(float volume);
+
+	float m_volume = 1.0f;
 };
 
 }  // namespace love

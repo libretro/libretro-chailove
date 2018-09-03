@@ -1,16 +1,27 @@
+// getOS()
 var os = love.system.getOS()
 assert_not_equal(os, "", "love.system.getOS()")
 
+// getVersionString()
 var version = love.system.getVersionString()
 assert_equal(version[1], '.', "love.system.getVersionString()")
 
+// getVersion()
 var versionNumber = love.system.getVersion()
 assert_equal(versionNumber[0], 0, "love.system.getVersion()")
 
+// getUsername()
 var username = love.system.getUsername()
 assert(true, "love.system.getUsername() == '" + username + "'")
 
+// getOS()
 if (love.system.getOS() == "Linux") {
 	var result = love.system.execute("uname")
 	assert(result, "love.system.execute('uname')")
 }
+
+// setClipboardText()
+love.system.setClipboardText("Hello World!")
+
+// getClipboardText
+assert_equal(love.system.getClipboardText(), "Hello World!", "love.system.getClipboardText()")

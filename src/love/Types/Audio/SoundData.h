@@ -2,33 +2,12 @@
 #define SRC_LOVE_TYPES_AUDIO_SOUNDDATA_H_
 
 #include <string>
-#include "AudioState.h"
 #include "physfs.h"
+#include "audio/audio_mixer.h"
 
 namespace love {
 namespace Types {
 namespace Audio {
-
-typedef struct {
-	char ChunkID[4];
-	uint32_t ChunkSize;
-	char Format[4];
-	char Subchunk1ID[4];
-	uint32_t Subchunk1Size;
-	uint16_t AudioFormat;
-	uint16_t NumChannels;
-	uint32_t SampleRate;
-	uint32_t ByteRate;
-	uint16_t BlockAlign;
-	uint16_t BitsPerSample;
-	char Subchunk2ID[4];
-	uint32_t Subchunk2Size;
-} wavhead_t;
-
-typedef struct {
-	PHYSFS_File* fp = NULL;
-	wavhead_t head;
-} snd_SoundData;
 
 /**
  * Contains audio samples that you can playback.
@@ -49,12 +28,6 @@ class SoundData {
 	bool stop();
 
 	void unload();
-	snd_SoundData sndta;
-	unsigned bps = 0;
-	bool loop = false;
-	float m_volume = 1.0f;
-	float pitch = 1.0f;
-	AudioState state = Stopped;
 	bool isLoaded();
 
 	/**
@@ -81,16 +54,6 @@ class SoundData {
 	bool isPlaying();
 
 	/**
-	 * Resumes playing the given Source.
-	 */
-	bool resume();
-
-	/**
-	 * Pauses the given Source.
-	 */
-	bool pause();
-
-	/**
 	 * Returns whether the Source will loop.
 	 */
 	bool isLooping();
@@ -100,7 +63,16 @@ class SoundData {
 	 */
 	SoundData& setLooping(bool loop);
 
-	int WAV_HEADER_SIZE = 44;
+	// Properties
+	bool m_playing = false;
+	bool m_loop = false;
+	float m_volume = 1.0f;
+	audio_mixer_sound* m_sound = NULL;
+	// TODO(RobLoach): Make voice a vector.
+	audio_mixer_voice_t* m_voice = NULL;
+
+	// The audio callback for when a sound finishes.
+	static void audioCallback(audio_mixer_sound_t* sound, unsigned reason);
 };
 
 }  // namespace Audio

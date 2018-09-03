@@ -33,7 +33,8 @@ assert_not(love.filesystem.isDirectory("keyboard.chai"), "love.filesystem.isDire
 assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlink()")
 
 // getDirectoryItems()
-assert_equal(love.filesystem.getDirectoryItems("assets").size(), 2, "love.filesystem.getDirectoryItems()")
+var getDirectoriesItems = love.filesystem.getDirectoryItems("assets").size()
+assert_equal(getDirectoriesItems, 3, "love.filesystem.getDirectoryItems()")
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")
@@ -41,8 +42,19 @@ assert_equal(theLines[0], "// getDirectoryItems()", "love.filesystem.lines()")
 
 // getInfo()
 var fileInfo = love.filesystem.getInfo("keyboard.chai")
-assert_equal(fileInfo.type, "file", "love.filesystem.getInfo().type")
-assert_greater(fileInfo.size, 5, "love.filesystem.getInfo().size")
+assert_not(fileInfo.is_var_null(), "love.filesystem.getInfo()")
+assert_equal(fileInfo.type, "file", "    .type")
+assert_greater(fileInfo.size, 5, "    .size")
+
+// newFileData()
+var loadedFileData = love.filesystem.newFileData("filesystem.chai")
+assert_not(loadedFileData.is_var_null(), "love.filesystem.newFileData()")
+assert_greater(loadedFileData.getSize(), 10, "    .getSize()")
+assert_equal(loadedFileData.getExtension(), "chai", "    .getExtension()")
+assert_equal(loadedFileData.getFilename(), "filesystem.chai", "    .getFilename()")
+var fileDataContents = loadedFileData.getString()
+var fileDataFind = fileDataContents.find("// newFileData()")
+assert_greater(fileDataFind, 50, "    .getString()")
 
 // createDirectory()
 var createDirectoryReturn = love.filesystem.createDirectory("test/createDirectoryTest")
@@ -51,3 +63,16 @@ assert(createDirectoryReturn, "love.filesystem.createDirectory()")
 // write()
 var writeFileReturn = love.filesystem.write("test/createDirectoryTest/test.md", "# Test\n\nHello World!");
 assert(writeFileReturn, "love.filesystem.write()")
+
+// mount()
+// @TODO: Figure out how to have the mount() point be relative to the origin.
+var mountResult = love.filesystem.mount("test/unittests/assets/hello.zip", "hello")
+assert(mountResult, "love.filesystem.mount()")
+
+// mount() - Load
+var mountLoadResult = love.filesystem.read("hello/hello.txt")
+var mountLoadResultType = is_type(mountLoadResult, "string")
+assert(mountLoadResultType, "love.filesystem.mount() & read() == 'string'")
+if (mountLoadResultType) {
+  assert_equal(mountLoadResult.trim(), "Hello World!", "love.filesystem.mount() & read()")
+}

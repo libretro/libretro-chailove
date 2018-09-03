@@ -66,7 +66,7 @@ docs/html: docs-clean
 	doxygen docs/Doxyfile
 
 docs-start: docs/html
-	php -S localhost:9999 -t docs/html
+	php -S localhost:8080 -t docs/html
 
 docs-clean:
 	rm -rf docs/html

@@ -1,11 +1,20 @@
+// newSoundData()
 var theSound = love.sound.newSoundData("assets/jump.wav")
+assert_not(theSound.is_var_null(), "love.sound.newSoundData()")
 
+// getVolume()
 assert_equal(theSound.getVolume(), 1.0f, "SoundData.getVolume()")
 
+// isLooping()
 assert_not(theSound.isLooping(), "SoundData.getLooping()")
 
-theSound.setVolume(0.5f).setLooping(true)
+// setVolume()
+theSound.setVolume(0.5f)
 assert_equal(theSound.getVolume(), 0.5f, "SoundData.setVolume()")
+
+// isLooping()
+theSound.setLooping(true)
 assert(theSound.isLooping(), "SoundData.getLooping()")
 
+// isPlaying()
 assert_not(theSound.isPlaying(), "SoundData.isPlaying()")

@@ -1,9 +1,9 @@
-// The console is enabled by default in main.chai -- t.console = true
+// isEnabled()
 assert_equal(love.console.isEnabled(), true, "love.console.getEnabled()")
 
-// By default, it's hidden.
+// isShown()
 assert_equal(love.console.isShown(), false, "love.console.isShown()")
 
-// Disable the console and re-test.
+// setEnabled()
 love.console.setEnabled(false)
 assert_equal(love.console.isEnabled(), false, "love.console.setEnabled()")

@@ -22,6 +22,30 @@ FLAGS += -I$(CORE_DIR)/vendor/filesystem
 # libretro-common
 FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
 
+# libretro-common audio
+SOURCES_C += $(wildcard \
+	$(CORE_DIR)/vendor/libretro-common/audio/audio_mix.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/audio_mixer.c \
+	$(CORE_DIR)/vendor/libretro-common/formats/wav/rwav.c \
+	$(CORE_DIR)/vendor/libretro-common/memmap/memalign.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/conversion/*.c \
+	$(CORE_DIR)/vendor/libretro-common/streams/file_stream.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/resampler/audio_resampler.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/null_resampler.c \
+	$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/nearest_resampler.c \
+	$(CORE_DIR)/vendor/libretro-common/vfs/*.c \
+	$(CORE_DIR)/vendor/libretro-common/features/features_cpu.c \
+	$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
+	$(CORE_DIR)/vendor/libretro-common/file/file_path.c \
+	$(CORE_DIR)/vendor/libretro-common/compat/compat_strl.c \
+	$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
+	$(CORE_DIR)/vendor/libretro-common/file/config_file.c \
+	$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
+	$(CORE_DIR)/vendor/libretro-common/compat/compat_strcasestr.c \
+	$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
+)
+
 # zlib
 SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-deps/libz/zutil.c \
@@ -146,6 +170,9 @@ SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
 
 # TinySHA1
 FLAGS += -I$(CORE_DIR)/vendor/TinySHA1
+
+# cppcodec
+FLAGS += -I$(CORE_DIR)/vendor/cppcodec
 
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)

@@ -3,6 +3,7 @@
 
 #include "Types/Audio/SoundData.h"
 #include <vector>
+#include "libretro.h"
 
 namespace love {
 
@@ -12,8 +13,10 @@ namespace love {
 class sound {
 	public:
 	bool load();
+	bool isLoaded();
 	bool hasAudio();
 	void unload();
+	void update();
 	~sound();
 
 	/**
@@ -21,11 +24,26 @@ class sound {
 	 *
 	 * @param filename The file name of the file to load.
 	 *
-	 * @return A new SoundData object.
+	 * @return A new SoundData object, NULL if loading failed.
+	 *
+	 * @code
+	 * global boom
+	 * def load() {
+	 *   boom = love.sound.newSoundData("boom.wav")
+	 * }
+	 *
+	 * def joystickpressed(joystick, button) {
+	 *   love.audio.play(beat)
+	 * }
+	 * @endcode
 	 */
 	Types::Audio::SoundData* newSoundData(const std::string& filename);
 
 	std::vector<Types::Audio::SoundData*> sounds;
+
+	bool m_loaded = false;
+	retro_audio_sample_t audio_cb = NULL;
+	retro_audio_sample_batch_t audio_batch_cb = NULL;
 };
 
 }  // namespace love

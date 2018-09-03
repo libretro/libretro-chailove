@@ -17,6 +17,7 @@ using love::Types::Input::Joystick;
 using love::Types::Config::WindowConfig;
 using love::Types::Config::ModuleConfig;
 using love::Types::Audio::SoundData;
+using love::Types::FileSystem::FileData;
 using love::graphics;
 
 namespace love {
@@ -130,6 +131,14 @@ script::script(const std::string& file) {
 	chai.add(constructor<FileInfo(const std::string&, int)>(), "FileInfo");
 	chai.add(constructor<FileInfo(const std::string&, int, int)>(), "FileInfo");
 
+	// FileData Object.
+	chai.add(user_type<FileData>(), "FileData");
+	chai.add(fun(&FileData::getSize), "getSize");
+	chai.add(fun(&FileData::getFilename), "getFilename");
+	chai.add(fun(&FileData::getString), "getString");
+	chai.add(fun(&FileData::getExtension), "getExtension");
+	chai.add(constructor<FileData(const std::string&)>(), "FileData");
+
 	// Color Object.
 	chai.add(user_type<Color>(), "Color");
 	chai.add(fun(&Color::r), "r");
@@ -152,8 +161,6 @@ script::script(const std::string& file) {
 	chai.add(fun(&SoundData::setLooping), "setLooping");
 	chai.add(fun(&SoundData::stop), "stop");
 	chai.add(fun(&SoundData::play), "play");
-	chai.add(fun(&SoundData::resume), "resume");
-	chai.add(fun(&SoundData::pause), "pause");
 	chai.add(fun(&SoundData::setVolume), "setVolume");
 	chai.add(fun(&SoundData::getVolume), "getVolume");
 
@@ -270,6 +277,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::write), "write");
 	chai.add(fun(&filesystem::exists), "exists");
 	chai.add(fun(&filesystem::getInfo), "getInfo");
+	chai.add(fun(&filesystem::newFileData), "newFileData");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 	chai.add(fun(&filesystem::mount), "mount");
 	chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
@@ -283,6 +291,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getVersionString), "getVersionString");
 	chai.add(fun(&system::getUsername), "getUsername");
 	chai.add(fun(&system::execute), "execute");
+	chai.add(fun(&system::getClipboardText), "getClipboardText");
+	chai.add(fun(&system::setClipboardText), "setClipboardText");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");
@@ -304,8 +314,8 @@ script::script(const std::string& file) {
 	// Window
 	chai.add(fun(&window::setTitle), "setTitle");
 	chai.add(fun(&window::getTitle), "getTitle");
-	chai.add(fun<void, window, const std::string&, int>(&window::showMessageBox), "showMessageBox");
-	chai.add(fun<void, window, const std::string&>(&window::showMessageBox), "showMessageBox");
+	chai.add(fun<love::window&, window, const std::string&, int>(&window::showMessageBox), "showMessageBox");
+	chai.add(fun<love::window&, window, const std::string&>(&window::showMessageBox), "showMessageBox");
 
 	// Timer
 	chai.add(fun(&timer::getDelta), "getDelta");
@@ -342,6 +352,8 @@ script::script(const std::string& file) {
 	chai.add(fun<std::string, data, const std::string&, int>(&data::compress), "compress");
 	chai.add(fun(&data::decompress), "decompress");
 	chai.add(fun(&data::hash), "hash");
+	chai.add(fun(&data::encode), "encode");
+	chai.add(fun(&data::decode), "decode");
 
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");

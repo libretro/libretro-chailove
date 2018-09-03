@@ -7,8 +7,10 @@
 #include "SDL.h"
 #include "physfs.h"
 #include "Types/FileSystem/FileInfo.h"
+#include "Types/FileSystem/FileData.h"
 
 using love::Types::FileSystem::FileInfo;
+using love::Types::FileSystem::FileData;
 
 namespace love {
 /**
@@ -19,14 +21,14 @@ class filesystem {
 	/**
 	 * Loads and runs a .chai file.
 	 *
-	 * @param file The name (and path) of the file. Having the .chai extension at the end is optional.
-	 *
 	 * ### Example
 	 *
 	 * @code
 	 * love.filesystem.load("myscript.chai")
 	 * love.filesystem.load("myotherscript")
 	 * @endcode
+	 *
+	 * @param file The name (and path) of the file. Having the .chai extension at the end is optional.
 	 *
 	 * @return Whether or not the file was loaded and ran properly.
 	 */
@@ -51,6 +53,7 @@ class filesystem {
 	 * @endcode
 	 */
 	std::string read(const std::string& filename);
+	void* readBuffer(const std::string& filename, int& size);
 
 	/**
 	 * Check whether a file or directory exists.
@@ -87,7 +90,20 @@ class filesystem {
 	FileInfo getInfo(const std::string& path);
 
 	/**
-	 * Unmounts a zip file or folder previously mounted with filesystem::unmount.
+	 * Creates a new FileData from a file on the storage device.
+	 *
+	 * @param path Path to the file.
+	 *
+	 * @return The new FileData, or nil if an error occurred.
+	 *
+	 * @see love::Types::FileSystem::FileData
+	 */
+	FileData newFileData(const std::string& filepath);
+
+	/**
+	 * Unmounts a zip file or folder previously mounted with love.filesystem.mount.
+	 *
+	 * @param archive The archive that was previously mounted with love.filesystem.mount.
 	 *
 	 * @return bool True, when unmounting was a success.
 	 */

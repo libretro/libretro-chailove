@@ -18,6 +18,8 @@ class mouse {
 	 * Returns the current x-position of the mouse.
 	 *
 	 * @return The position of the mouse along the x-axis.
+	 *
+	 * @see love.mouse.getY
 	 */
 	int getX();
 
@@ -25,11 +27,16 @@ class mouse {
 	 * Returns the current y-position of the mouse.
 	 *
 	 * @return The position of the mouse along the y-axis.
+	 *
+	 * @see love.mouse.getX
 	 */
 	int getY();
 
 	/**
 	 * Returns the current position of the mouse.
+	 *
+	 * @see love.mouse.getX
+	 * @see love.mouse.getY
 	 */
 	Types::Graphics::Point getPosition();
 

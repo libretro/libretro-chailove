@@ -10,6 +10,7 @@
 #include "Types/FileSystem/FileInfo.h"
 
 using love::Types::FileSystem::FileInfo;
+using love::Types::FileSystem::FileData;
 
 namespace love {
 
@@ -169,6 +170,39 @@ std::string filesystem::read(const std::string& filename) {
 	return std::string(myBuf);
 }
 
+void* filesystem::readBuffer(const std::string& filename, int& size) {
+	PHYSFS_file* file = openFile(filename);
+	if (file == NULL) {
+		return NULL;
+	}
+
+	// Find the file size.
+	size = getSize(file);
+	if (size <= 0) {
+		PHYSFS_close(file);
+		return NULL;
+	}
+
+	// Create the buffer.
+	void* buffer = (void*)malloc(size + 1);
+	if (!buffer) {
+		std::cout << "[ChaiLove] [filesystem] Failed to allocate buffer of size " << size + 1 << "." << std::endl;
+		PHYSFS_close(file);
+		return NULL;
+	}
+
+	// Read the file into the buffer.
+	int result = PHYSFS_readBytes(file, buffer, size);
+	if (result < 0) {
+		std::cout << "[ChaiLove] [filesystem] Failed to load SoundData " << filename << getLastError() << std::endl;
+		free(buffer);
+		PHYSFS_close(file);
+		return NULL;
+	}
+
+	PHYSFS_close(file);
+	return buffer;
+}
 
 bool filesystem::unmount(const std::string& archive) {
 	std::cout << "[filesystem] Unmounting " << archive << std::endl;
@@ -285,6 +319,11 @@ FileInfo filesystem::getInfo(const std::string& path) {
 	fileInfo.modtime = stat.modtime;
 	fileInfo.size = stat.filesize;
 	return fileInfo;
+}
+
+FileData filesystem::newFileData(const std::string& filepath) {
+	FileData f(filepath);
+	return f;
 }
 
 bool filesystem::createDirectory(const std::string& name) {

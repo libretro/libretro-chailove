@@ -62,7 +62,7 @@ retroarch -L chailove_libretro.so main.chai
 
 ## Development
 
-Behind ChaiLove, there's the documentation, compiling it, along with testing.
+Behind ChaiLove, there's the [documentation](#documentation), [compiling it](#compiling), along with [testing](#testing).
 
 ### Compiling
 
@@ -88,7 +88,7 @@ retroarch -L chailove_libretro.so test/main.chai
 
 ### Documentation
 
-Visit the [ChaiLove API documentation](https://rawgit.com/libretro/libretro-chailove/docs/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
+See the [ChaiLove API documentation](https://rawgit.com/libretro/libretro-chailove/docs/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
 
 ```
 make docs
@@ -96,12 +96,19 @@ make docs
 
 ### Workflow
 
-ChaiLove uses [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) where new features are merged to `dev`, and then a periodic release is made to the `master` branch. Releases use [Semantic Versioning](https://semver.org) to ensure version compatibility.
+ChaiLove uses modified [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and [Semantic Versioning](https://semver.org) workflow...
 
-## Authors
+1. New features and fixes are added to the [`dev`](https://github.com/libretro/libretro-chailove/tree/dev) branch
+2. When a release is put out, the `dev` branch is merged to `master`, and a tag is made
+
+## Contributors
 
 The following individuals contributed to ChaiLove:
 
 - [@RobLoach](http://github.com/robloach)
+- [webgeek1234](http://github.com/webgeek1234) for the Android support
+- [twinaphex](http://github.com/twinaphex)
+- [orbea](http://github.com/orbea)
+- [fetzerch](http://github.com/fetzerch)
 - [sdl-libretro](https://github.com/r-type/sdl-libretro) by [@r-type](https://github.com/r-type)
 - [Logo](docs/chailove.png) by [@baxysquare](https://github.com/baxysquare)

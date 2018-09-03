@@ -10,6 +10,8 @@ namespace Graphics {
 
 /**
  * Drawable image type.
+ *
+ * @see love.graphics.newImage
  */
 class Image {
 	public:
