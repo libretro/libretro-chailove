@@ -7,8 +7,10 @@
 #include "SDL.h"
 #include "physfs.h"
 #include "Types/FileSystem/FileInfo.h"
+#include "Types/FileSystem/FileData.h"
 
 using love::Types::FileSystem::FileInfo;
+using love::Types::FileSystem::FileData;
 
 namespace love {
 /**
@@ -86,6 +88,17 @@ class filesystem {
 	 * @see love::Types::FileSystem::FileInfo
 	 */
 	FileInfo getInfo(const std::string& path);
+
+	/**
+	 * Creates a new FileData from a file on the storage device.
+	 *
+	 * @param path Path to the file.
+	 *
+	 * @return The new FileData, or nil if an error occurred.
+	 *
+	 * @see love::Types::FileSystem::FileData
+	 */
+	const FileData newFileData(const std::string& filepath);
 
 	/**
 	 * Unmounts a zip file or folder previously mounted with filesystem::unmount.
