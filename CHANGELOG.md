@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.24.0 - Unreleased
 ### Features
+- Update to use libretro-common audio
 - Added `love.system.getClipboardText()`
 - Added `love.system.setClipboardText()`
 - Added `love.data.encode()`
 - Added `love.data.decode()`
-- New audio system from libretro-common
 
 ### Chores
 - Added `love.filesystem.mount()` test

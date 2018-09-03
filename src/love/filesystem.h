@@ -19,14 +19,14 @@ class filesystem {
 	/**
 	 * Loads and runs a .chai file.
 	 *
-	 * @param file The name (and path) of the file. Having the .chai extension at the end is optional.
-	 *
 	 * ### Example
 	 *
 	 * @code
 	 * love.filesystem.load("myscript.chai")
 	 * love.filesystem.load("myotherscript")
 	 * @endcode
+	 *
+	 * @param file The name (and path) of the file. Having the .chai extension at the end is optional.
 	 *
 	 * @return Whether or not the file was loaded and ran properly.
 	 */

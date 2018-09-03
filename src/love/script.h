@@ -177,6 +177,8 @@ class script {
 	 *   buttonPressed = button
 	 * }
 	 * @endcode
+	 *
+	 * @see joystickreleased
 	 */
 	void joystickpressed(int joystick, const std::string& button);
 
@@ -199,6 +201,8 @@ class script {
 	 *   buttonReleased = button
 	 * }
 	 * @endcode
+	 *
+	 * @see joystickpressed
 	 */
 	void joystickreleased(int joystick, const std::string& button);
 
@@ -226,6 +230,8 @@ class script {
 	 *   mousey = y
 	 * }
 	 * @endcode
+	 *
+	 * @see mousereleased
 	 */
 	void mousepressed(int x, int y, const std::string& button);
 
@@ -253,6 +259,8 @@ class script {
 	 *   mousey = y
 	 * }
 	 * @endcode
+	 *
+	 * @see mousepressed
 	 */
 	void mousereleased(int x, int y, const std::string& button);
 
@@ -297,6 +305,8 @@ class script {
 	 *     print("Scancode: " + to_string(scancode))
 	 * }
 	 * @endcode
+	 *
+	 * @see keyreleased
 	 */
 	void keypressed(const std::string& key, int scancode);
 
@@ -314,6 +324,8 @@ class script {
 	 *     print("Scancode: " + to_string(scancode))
 	 * }
 	 * @endcode
+	 *
+	 * @see keypressed
 	 */
 	void keyreleased(const std::string& key, int scancode);
 
@@ -333,6 +345,8 @@ class script {
 	 *     ])
 	 * }
 	 * @endcode
+	 *
+	 * @see loadstate
 	 */
 	std::string savestate();
 
@@ -354,6 +368,8 @@ class script {
 	 *     return true
 	 * }
 	 * @endcode
+	 *
+	 * @see savestate
 	 */
 	bool loadstate(const std::string& data);
 

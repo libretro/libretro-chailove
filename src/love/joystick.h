@@ -49,8 +49,17 @@ class joystick {
 	/**
 	 * Checks if a button is pressed on a joystick.
 	 *
+	 * ## Example
+	 *
+	 * @code
+	 * if (love.joystick.isDown(0, "left")) {
+	 *   love.graphics.print("Joystick is pushed LEFT", 100, 100)
+	 * }
+	 * @endcode
+	 *
 	 * @param joystick The joystick to be checked.
 	 * @param button The button to be checked.
+	 *
 	 *
 	 * @return True if the joystick button is pressed.
 	 */

@@ -20,6 +20,12 @@ class image {
 	/**
 	 * Creates a new ImageData object.
 	 *
+	 * ## Example
+	 *
+	 * @code
+	 * var bear = love.image.newImageData("bear.png")
+	 * @endcode
+	 *
 	 * @param filename The filename of the image file.
 	 *
 	 * @return The new ImageData object.

@@ -19,22 +19,29 @@ class sound {
 	void update();
 	~sound();
 
-
-	// void convert_float_to_s16(int16_t *out, const float *in, size_t samples);
-
 	/**
 	 * Creates a new SoundData.
 	 *
 	 * @param filename The file name of the file to load.
 	 *
 	 * @return A new SoundData object, NULL if loading failed.
+	 *
+	 * @code
+	 * global boom
+	 * def load() {
+	 *   boom = love.sound.newSoundData("boom.wav")
+	 * }
+	 *
+	 * def joystickpressed(joystick, button) {
+	 *   love.audio.play(beat)
+	 * }
+	 * @endcode
 	 */
 	Types::Audio::SoundData* newSoundData(const std::string& filename);
 
 	std::vector<Types::Audio::SoundData*> sounds;
 
 	bool m_loaded = false;
-
 	retro_audio_sample_t audio_cb = NULL;
 	retro_audio_sample_batch_t audio_batch_cb = NULL;
 };

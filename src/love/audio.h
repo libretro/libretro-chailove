@@ -33,8 +33,6 @@ class audio {
 	SoundData* newSource(const std::string& filename, const std::string& type);
 	SoundData* newSource(const std::string& filename);
 
-	float m_volume = 1.0f;
-
 	/**
 	 * Returns the master volume.
 	 *
@@ -50,6 +48,8 @@ class audio {
 	 * @return The audio module, to allow method chaining.
 	 */
 	audio& setVolume(float volume);
+
+	float m_volume = 1.0f;
 };
 
 }  // namespace love

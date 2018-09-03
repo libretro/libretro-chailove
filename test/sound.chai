@@ -1,9 +1,9 @@
 /**
- * Main Test 2
+ * Sound Test
  *
- * An alternative test with a different file name.
+ * Focused sound test.
  *
- * retroarch -L chailove_libretro.so test/main2.chai
+ * retroarch -L chailove_libretro.so test/sound.chai
  */
 
 global beat
@@ -13,7 +13,7 @@ def load() {
 }
 
 def draw() {
-	love.graphics.print("Press a joystick button!", 5, 20)
+	love.graphics.print("Press a joystick button!", 20, 100)
 }
 
 def joystickpressed(joystick, button) {
