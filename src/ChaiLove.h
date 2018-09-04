@@ -111,6 +111,8 @@ class ChaiLove {
 	void reset();
 	std::string savestate();
 	bool loadstate(const std::string& data);
+	void cheatreset();
+	void cheatset(int index, bool enabled, const std::string& code);
 
 	uint32_t *videoBuffer = NULL;
 	SDL_Surface* screen = NULL;

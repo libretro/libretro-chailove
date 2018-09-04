@@ -462,7 +462,7 @@ script::script(const std::string& file) {
 		haskeyreleased = false;
 	}
 	try {
-		chailoadstate = chai.eval<std::function<bool(std::string)> >("loadstate");
+		chailoadstate = chai.eval<std::function<bool(const std::string&)> >("loadstate");
 	}
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] loadstate() " << e.what() << std::endl;
@@ -474,6 +474,20 @@ script::script(const std::string& file) {
 	catch (const std::exception& e) {
 		std::cout << "[ChaiLove] [script] savestate() " << e.what() << std::endl;
 		hassavestate = false;
+	}
+	try {
+		chaicheatreset = chai.eval<std::function<void()> >("cheatreset");
+	}
+	catch (const std::exception& e) {
+		std::cout << "[ChaiLove] [script] cheatreset() Warning: " << e.what() << std::endl;
+		hascheatreset = false;
+	}
+	try {
+		chaicheatset = chai.eval<std::function<void(int, bool, const std::string&)> >("cheatset");
+	}
+	catch (const std::exception& e) {
+		std::cout << "[ChaiLove] [script] cheatset() Warning: " << e.what() << std::endl;
+		hascheatset = false;
 	}
 	try {
 		chaiexit = chai.eval<std::function<void()> >("exit");
@@ -693,6 +707,34 @@ bool script::loadstate(const std::string& data) {
 
 	// If there is an error in loading the state, return false.
 	return false;
+}
+
+void script::cheatreset() {
+	#ifdef __HAVE_CHAISCRIPT__
+	if (hascheatreset) {
+		try {
+			chaicheatreset();
+		}
+		catch (const std::exception& e) {
+			std::cout << "[ChaiLove] [script] Failed to call cheatreset(): " << e.what() << std::endl;
+			hascheatreset = false;
+		}
+	}
+	#endif
+}
+
+void script::cheatset(int index, bool enabled, const std::string& code) {
+	#ifdef __HAVE_CHAISCRIPT__
+	if (hascheatreset) {
+		try {
+			chaicheatset(index, enabled, code);
+		}
+		catch (const std::exception& e) {
+			std::cout << "[ChaiLove] [script] Failed to call cheatset(): " << e.what() << std::endl;
+			hascheatset = false;
+		}
+	}
+	#endif
 }
 
 void script::exit() {
