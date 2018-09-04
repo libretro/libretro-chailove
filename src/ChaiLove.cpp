@@ -240,3 +240,21 @@ bool ChaiLove::loadstate(const std::string& data) {
 	}
 	return false;
 }
+
+/**
+ * Invoke the script cheatreset hook.
+ */
+void ChaiLove::cheatreset() {
+	if (script != NULL) {
+		script->cheatreset();
+	}
+}
+
+/**
+ * Invoke the script cheatset hook.
+ */
+void ChaiLove::cheatset(int index, bool enabled, const std::string& code) {
+	if (script != NULL) {
+		script->cheatset(index, enabled, code);
+	}
+}

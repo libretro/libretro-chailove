@@ -1,0 +1,33 @@
+/**
+ * Cheat Test
+ *
+ * retroarch -L chailove_libretro.so test/sound.chai
+ */
+
+global lastcheatcode
+
+def load() {
+	lastcheatcode = "Enter a cheat code!"
+}
+
+def draw() {
+	love.graphics.print(lastcheatcode, 20, 100)
+}
+
+def cheatset(index, enabled, code) {
+	print("Cheat Test: Cheat Toggle")
+	print("Index:   " + to_string(index))
+	print("Enabled: " + to_string(enabled))
+	print("Code:    " + to_string(code))
+	if (enabled) {
+		lastcheatcode = code + " Enabled"
+	}
+	else {
+		lastcheatcode = code + " Disabled"
+	}
+}
+
+def cheatreset() {
+	print("Cheat Test: Cheat Reset")
+	lastcheatcode = "Cheats have been reset"
+}
