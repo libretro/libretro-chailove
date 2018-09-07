@@ -12,9 +12,8 @@ namespace Types {
 namespace Audio {
 
 SoundData::SoundData(const std::string& filename) {
-	// Load the file.
+	// Check the extension.
 	ChaiLove* app = ChaiLove::getInstance();
-	sourceFile = filename;
 	std::string extension = app->filesystem.newFileData(filename).getExtension();
 	if (extension != "wav" && extension != "ogg") {
 		std::cout << "[ChaiLove] [SoundData] Unknown extension " << extension << " for file " << filename << "." << std::endl;
@@ -29,16 +28,17 @@ SoundData::SoundData(const std::string& filename) {
 		return;
 	}
 
-	// Get the extension of the file.
+	// Load the audio from the file.
 	if (extension == "wav") {
 		m_sound = audio_mixer_load_wav(buffer, size);
+		// Wav files don't need the buffer anymore.
 		free(buffer);
 		buffer = NULL;
 	} else if (extension == "ogg") {
 		m_sound = audio_mixer_load_ogg(buffer, size);
 	}
 
-	// Finally, if it didn't load, report as such.
+	// Finally, if it failed, report as such.
 	if (m_sound == NULL) {
 		std::cout << "[ChaiLove] [SoundData] Failed to load audio for " << filename << std::endl;
 		if (buffer != NULL) {
@@ -75,25 +75,14 @@ SoundData& SoundData::setVolume(float volume) {
 }
 
 void SoundData::unload() {
-	std::cout << "Unload audio_mixer_stop" << sourceFile << std::endl;
 	if (m_voice != NULL) {
 		audio_mixer_stop(m_voice);
 		m_voice = NULL;
 	}
-	std::cout << "Unload audio_mixer_destroy" << sourceFile << std::endl;
 	if (m_sound != NULL) {
-	std::cout << "Unload audio_mixer_destroy engage" << sourceFile << std::endl;
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
-		std::cout << "Unload audio_mixer_destroy complete" << sourceFile << std::endl;
 	}
-	std::cout << "Unload audio_mixer_destroy done" << sourceFile << std::endl;
-
-	if (buffer != NULL) {
-		free(buffer);
-		buffer = NULL;
-	}
-	std::cout << "Unload audio_mixer_destroy done done" << sourceFile << std::endl;
 }
 
 bool SoundData::play() {

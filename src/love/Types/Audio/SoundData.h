@@ -63,19 +63,17 @@ class SoundData {
 	 */
 	SoundData& setLooping(bool loop);
 
+	// The audio callback for when a sound finishes.
+	static void audioCallback(audio_mixer_sound_t* sound, unsigned reason);
+
 	// Properties
 	bool m_playing = false;
 	bool m_loop = false;
 	float m_volume = 1.0f;
-	audio_mixer_sound* m_sound = NULL;
-	// TODO(RobLoach): Make voice a vector.
-	audio_mixer_voice_t* m_voice = NULL;
-
-	// The audio callback for when a sound finishes.
-	static void audioCallback(audio_mixer_sound_t* sound, unsigned reason);
-
-	std::string sourceFile;
 	void* buffer = NULL;
+	audio_mixer_sound* m_sound = NULL;
+	// TODO(RobLoach): Make voice a vector?
+	audio_mixer_voice_t* m_voice = NULL;
 };
 
 }  // namespace Audio
