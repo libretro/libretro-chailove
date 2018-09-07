@@ -47,9 +47,9 @@ SOURCES_C += $(wildcard \
 )
 
 # stb_vorbis
-SOURCES_C += $(CORE_DIR)/vendor/stb/stb_vorbis.c
+#SOURCES_C += $(CORE_DIR)/vendor/stb/stb_vorbis.c
 FLAGS += -DHAVE_STB_VORBIS
-FLAGS += -I$(CORE_DIR)/vendor
+FLAGS += -I$(CORE_DIR)/libretro-deps
 
 # zlib
 SOURCES_C += \
