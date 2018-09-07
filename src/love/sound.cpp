@@ -29,10 +29,9 @@ bool sound::isLoaded() {
 }
 
 void sound::unload() {
-	// Unload all sounds.
-	for (std::vector<SoundData*>::size_type i = 0; i != sounds.size(); i++) {
-		if (sounds[i] != NULL) {
-			delete sounds[i];
+	for(std::vector<SoundData*>::iterator it = sounds.begin(); it != sounds.end(); ++it) {
+		if (*it != NULL) {
+			delete *it;
 		}
 	}
 	sounds.clear();

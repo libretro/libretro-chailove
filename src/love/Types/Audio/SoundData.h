@@ -75,6 +75,7 @@ class SoundData {
 	static void audioCallback(audio_mixer_sound_t* sound, unsigned reason);
 
 	std::string sourceFile;
+	void* buffer = NULL;
 };
 
 }  // namespace Audio
