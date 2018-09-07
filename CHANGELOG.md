@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added Cheat support
 
 ### Fixes
-- Fixes crashes when loading save states
+- Fix loading save states
+- Fix mounting point logic
 
 ## 0.24.0 - 2018-09-03
 ### Features
