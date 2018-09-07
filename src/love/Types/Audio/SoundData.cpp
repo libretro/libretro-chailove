@@ -30,12 +30,11 @@ SoundData::SoundData(const std::string& filename) {
 	} else if (extension == "ogg") {
 		m_sound = audio_mixer_load_ogg(buffer, size);
 	} else {
-		std::cout << "[ChaiLove] [SoundData] File " << filename << " extension of " << extension << " is currently not supported." << std::endl;
-		return;
+		std::cout << "[ChaiLove] [SoundData] Audio ." << extension << " files are not supported." << std::endl;
 	}
 	free(buffer);
 	if (m_sound == NULL) {
-		std::cout << "[ChaiLove] [SoundData] Failed to load wav from buffer " << filename << std::endl;
+		std::cout << "[ChaiLove] [SoundData] Failed to load audio for " << filename << std::endl;
 	}
 }
 
