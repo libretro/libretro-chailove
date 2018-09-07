@@ -54,14 +54,14 @@ bool filesystem::init(const std::string& file) {
 void filesystem::mountlibretro() {
 	// Mount some of the libretro directories.
 	const char *system_dir = NULL;
+	const char *assets_dir = NULL;
+	const char *save_dir = NULL;
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
 		mount(system_dir, "libretro/system");
 	}
-	const char *content_dir = NULL;
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &content_dir) && content_dir) {
-		mount(content_dir, "libretro/assets");
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &assets_dir) && assets_dir) {
+		mount(assets_dir, "libretro/assets");
 	}
-	const char *save_dir = NULL;
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		save_dir = *save_dir ? save_dir : system_dir;
 		mount(save_dir, "libretro/saves");
@@ -214,7 +214,19 @@ bool filesystem::unmount(const std::string& archive) {
 	return true;
 }
 
+bool filesystem::mount(const char *archive, const std::string& mountpoint) {
+	// Allow mounting character pointers safely.
+	if (archive == NULL) {
+		return false;
+	}
+	return mount(std::string(archive), mountpoint);
+}
+
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
+	// Protect against empty archive/mount points.
+	if (archive.length() <= 0 || mountpoint.length() <= 0) {
+		return false;
+	}
 	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
 	int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
 	if (returnValue == 0) {
