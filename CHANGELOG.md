@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 - Added Cheat support
 
+### Fixes
+- Fixes crashes when loading save states
+
 ## 0.24.0 - 2018-09-03
 ### Features
 - Update to use libretro-common audio
