@@ -29,6 +29,8 @@ class audio {
 	 * @param type ("static") The type of audio source to load ("static", "stream"). Optional.
 	 *
 	 * @return The new SoundData if it loaded correctly, NULL otherwise.
+	 *
+	 * @see love.sound.newSoundData
 	 */
 	SoundData* newSource(const std::string& filename, const std::string& type);
 	SoundData* newSource(const std::string& filename);

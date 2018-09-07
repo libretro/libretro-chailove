@@ -9,7 +9,7 @@
 global beat
 
 def load() {
-	beat = love.audio.newSource("assets/startup.wav")
+	beat = love.audio.newSource("assets/unittests/assets/chailove.ogg")
 }
 
 def draw() {

@@ -23,9 +23,16 @@ SoundData::SoundData(const std::string& filename) {
 		return;
 	}
 
-	// Load the file into the buffer.
-	// TODO(RobLoach): Check the audio file extensions of ".wav".
-	m_sound = audio_mixer_load_wav(buffer, size);
+	// Get the extension of the file.
+	std::string extension = app->filesystem.newFileData(filename).getExtension();
+	if (extension == "wav") {
+		m_sound = audio_mixer_load_wav(buffer, size);
+	} else if (extension == "ogg") {
+		m_sound = audio_mixer_load_ogg(buffer, size);
+	} else {
+		std::cout << "[ChaiLove] [SoundData] File " << filename << " extension of " << extension << " is currently not supported." << std::endl;
+		return;
+	}
 	free(buffer);
 	if (m_sound == NULL) {
 		std::cout << "[ChaiLove] [SoundData] Failed to load wav from buffer " << filename << std::endl;

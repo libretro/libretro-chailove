@@ -34,7 +34,7 @@ assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlin
 
 // getDirectoryItems()
 var getDirectoriesItems = love.filesystem.getDirectoryItems("assets").size()
-assert_equal(getDirectoriesItems, 3, "love.filesystem.getDirectoryItems()")
+assert_equal(getDirectoriesItems, 4, "love.filesystem.getDirectoryItems()")
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")

@@ -22,6 +22,10 @@ class sound {
 	/**
 	 * Creates a new SoundData.
 	 *
+	 * Supported file types include:
+	 * - WAV
+	 * - OGG
+	 *
 	 * @param filename The file name of the file to load.
 	 *
 	 * @return A new SoundData object, NULL if loading failed.
