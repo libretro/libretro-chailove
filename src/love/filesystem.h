@@ -115,6 +115,7 @@ class filesystem {
 	 * @return bool True, when mounting was a success.
 	 */
 	bool mount(const std::string& archive, const std::string& mountpoint);
+	bool mount(const char *archive, const std::string& mountpoint);
 
 	PHYSFS_sint64 getSize(PHYSFS_File* file);
 	PHYSFS_file* openFile(const std::string& filename);
