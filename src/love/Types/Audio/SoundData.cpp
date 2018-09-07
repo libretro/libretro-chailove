@@ -14,6 +14,7 @@ namespace Audio {
 SoundData::SoundData(const std::string& filename) {
 	// Load the file.
 	ChaiLove* app = ChaiLove::getInstance();
+	sourceFile = filename;
 
 	// Load the file.
 	int size = 0;
@@ -65,13 +66,17 @@ SoundData& SoundData::setVolume(float volume) {
 }
 
 void SoundData::unload() {
+	std::cout << "Unload audio_mixer_stop" << sourceFile << std::endl;
 	if (m_voice != NULL) {
 		audio_mixer_stop(m_voice);
+		m_voice = NULL;
 	}
+	std::cout << "Unload audio_mixer_destroy" << sourceFile << std::endl;
 	if (isLoaded()) {
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
 	}
+	std::cout << "Unload audio_mixer_destroy done" << sourceFile << std::endl;
 }
 
 bool SoundData::play() {

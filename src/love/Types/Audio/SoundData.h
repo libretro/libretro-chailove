@@ -73,6 +73,8 @@ class SoundData {
 
 	// The audio callback for when a sound finishes.
 	static void audioCallback(audio_mixer_sound_t* sound, unsigned reason);
+
+	std::string sourceFile;
 };
 
 }  // namespace Audio
