@@ -72,7 +72,9 @@ docs-clean:
 	rm -rf docs/html
 
 docs-deploy: docs
-	npm install push-dir && node_modules/.bin/push-dir --dir=docs/html --branch=docs
+	npm init --force -y
+	npm install push-dir
+	node_modules/.bin/push-dir --dir=docs/html --branch=docs
 
 cpplint: vendor/libretro-common/include/libretro.h
 	@vendor/styleguide/cpplint/cpplint.py \

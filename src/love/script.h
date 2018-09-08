@@ -52,7 +52,7 @@ class script {
 	 *   t.console = false
 	 *
 	 *   // The ChaiLove version this game was made for.
-	 *   t.version = "0.24.0"
+	 *   t.version = "0.25.0"
 	 *
 	 *   // The width and height of the game.
 	 *   t.window.width = 1024
@@ -374,6 +374,47 @@ class script {
 	bool loadstate(const std::string& data);
 
 	/**
+	 * Called when requested to reset the state of all the cheats to their default state.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global invincible = false
+	 *
+	 * def cheatreset() {
+	 *     invincible = false
+	 * }
+	 * @endcode
+	 *
+	 * @see cheatset
+	 */
+	void cheatreset();
+
+	/**
+	 * Called when requested to enable or disable a cheat.
+	 *
+	 * @param index The index of the cheat.
+	 * @param enabled Whether the cheat is to be enabled or disabled.
+	 * @param code The code for the cheat.
+	 *
+	 * ### Example
+	 *
+	 * @code
+	 * global invincible = false
+	 *
+	 * def cheatset(index, enabled, code) {
+	 *     if (code == "invincible") {
+	 *         // Enable or disable invincibility
+	 *         invincible = enabled
+	 *     }
+	 * }
+	 * @endcode
+	 *
+	 * @see cheatreset
+	 */
+	void cheatset(int index, bool enabled, const std::string& code);
+
+	/**
 	 * Callback function triggered when the game is closed.
 	 *
 	 * ### Example
@@ -397,7 +438,9 @@ class script {
 	std::function<void()> chaidraw;
 	std::function<void()> chaiexit;
 	std::function<void()> chaireset;
-	std::function<bool(std::string)> chailoadstate;
+	std::function<void(int, bool, const std::string&)> chaicheatset;
+	std::function<void()> chaicheatreset;
+	std::function<bool(const std::string&)> chailoadstate;
 	std::function<std::string()> chaisavestate;
 	std::function<void(int, const std::string&)> chaijoystickpressed;
 	std::function<void(int, const std::string&)> chaijoystickreleased;
@@ -421,6 +464,8 @@ class script {
 	bool hasload = true;
 	bool hasconf = true;
 	bool hasreset = true;
+	bool hascheatreset = true;
+	bool hascheatset = true;
 	#endif
 
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);

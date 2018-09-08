@@ -1,7 +1,6 @@
 #include "SoundData.h"
 #include <string>
 #include <iostream>
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,23 +11,39 @@ namespace Types {
 namespace Audio {
 
 SoundData::SoundData(const std::string& filename) {
-	// Load the file.
+	// Check the extension.
 	ChaiLove* app = ChaiLove::getInstance();
-
-	// Load the file.
-	int size = 0;
-	void* buffer = app->filesystem.readBuffer(filename, size);
-	if (buffer == NULL) {
-		std::cout << "[ChaiLove] [SoundData] Failed to load file buffer " << filename << std::endl;
+	std::string extension = app->filesystem.newFileData(filename).getExtension();
+	if (extension != "wav" && extension != "ogg") {
+		std::cout << "[ChaiLove] [SoundData] Unknown extension " << extension << " for file " << filename << "." << std::endl;
 		return;
 	}
 
-	// Load the file into the buffer.
-	// TODO(RobLoach): Check the audio file extensions of ".wav".
-	m_sound = audio_mixer_load_wav(buffer, size);
-	free(buffer);
+	// Load the file.
+	int size = 0;
+	buffer = app->filesystem.readBuffer(filename, size);
+	if (buffer == NULL) {
+		std::cout << "[ChaiLove] [SoundData] Failed to load file " << filename << std::endl;
+		return;
+	}
+
+	// Load the audio from the file.
+	if (extension == "wav") {
+		m_sound = audio_mixer_load_wav(buffer, size);
+		// Wav files don't need the buffer anymore.
+		free(buffer);
+		buffer = NULL;
+	} else if (extension == "ogg") {
+		m_sound = audio_mixer_load_ogg(buffer, size);
+	}
+
+	// Finally, if it failed, report as such.
 	if (m_sound == NULL) {
-		std::cout << "[ChaiLove] [SoundData] Failed to load wav from buffer " << filename << std::endl;
+		std::cout << "[ChaiLove] [SoundData] Failed to load audio for " << filename << std::endl;
+		if (buffer != NULL) {
+			free(buffer);
+			buffer = NULL;
+		}
 	}
 }
 
@@ -61,8 +76,9 @@ SoundData& SoundData::setVolume(float volume) {
 void SoundData::unload() {
 	if (m_voice != NULL) {
 		audio_mixer_stop(m_voice);
+		m_voice = NULL;
 	}
-	if (isLoaded()) {
+	if (m_sound != NULL) {
 		audio_mixer_destroy(m_sound);
 		m_sound = NULL;
 	}

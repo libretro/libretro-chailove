@@ -6,6 +6,8 @@
 namespace love {
 /**
  * Allows you to work with fonts.
+ *
+ * @see love.graphics.newFont
  */
 class font {
 	public:
@@ -16,6 +18,8 @@ class font {
 	 * Retrieves whether or not all sub-systems have been loaded.
 	 *
 	 * @return True if the Font sub-system has been loaded.
+	 *
+	 * @see love.graphics.newFont
 	 */
 	bool isOpen();
 

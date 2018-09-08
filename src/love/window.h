@@ -38,7 +38,7 @@ class window {
 	 * Display a simple message for a certain amount of frames.
 	 *
 	 * @param msg The message text to be displayed.
-	 * @param frames (4000) The amount of frames to display the message.
+	 * @param frames (2800) The amount of frames to display the message.
 	 *
 	 * @return The window system, for method chaining.
 	 */

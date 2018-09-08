@@ -43,6 +43,13 @@ cache:
     directories:
     - vendor
 
+# Only build on master and dev branches
+# Others are handled by Pull Requests
+branches:
+  only:
+  - master
+  - dev
+
 notifications:
   on_success: false
   email: false

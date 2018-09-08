@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 void libretro_audio_cb(int16_t left, int16_t right) {
-	// Nothing?
+	// Nothing, since we're using libretro-common.
 	// audio_cb(left, right);
 }
 
@@ -285,16 +285,19 @@ bool retro_unserialize(const void *data, size_t size) {
  * libretro callback; Reset the enabled cheats.
  */
 void retro_cheat_reset(void) {
-	// Nothing.
+	if (ChaiLove::hasInstance()) {
+		ChaiLove::getInstance()->cheatreset();
+	}
 }
 
 /**
  * libretro callback; Set the given cheat.
  */
 void retro_cheat_set(unsigned index, bool enabled, const char *code) {
-	(void)index;
-	(void)enabled;
-	(void)code;
+	if (ChaiLove::hasInstance()) {
+		std::string codeString(code);
+		ChaiLove::getInstance()->cheatset(index, enabled, codeString);
+	}
 }
 
 /**

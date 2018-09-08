@@ -47,9 +47,9 @@
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
-#define CHAILOVE_VERSION_MINOR 24
+#define CHAILOVE_VERSION_MINOR 25
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.24.0"
+#define CHAILOVE_VERSION_STRING "0.25.0"
 
 #include "SDL.h"
 #include "libretro.h"
@@ -111,6 +111,8 @@ class ChaiLove {
 	void reset();
 	std::string savestate();
 	bool loadstate(const std::string& data);
+	void cheatreset();
+	void cheatset(int index, bool enabled, const std::string& code);
 
 	uint32_t *videoBuffer = NULL;
 	SDL_Surface* screen = NULL;
