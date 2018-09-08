@@ -10,6 +10,8 @@ namespace love {
 
 /**
  * Provides an interface to output sound to the user's speakers.
+ *
+ * @see love.sound
  */
 class audio {
 	public:

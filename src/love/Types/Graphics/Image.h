@@ -25,11 +25,15 @@ class Image {
 
 	/**
 	 * Gets the width of the Texture.
+	 *
+	 * @see getHeight
 	 */
 	int getWidth();
 
 	/**
 	 * Gets the height of the Texture.
+	 *
+	 * @see getWidth
 	 */
 	int getHeight();
 };

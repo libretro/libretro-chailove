@@ -2,7 +2,6 @@
 #define SRC_LOVE_TYPES_AUDIO_SOUNDDATA_H_
 
 #include <string>
-#include "physfs.h"
 #include "audio/audio_mixer.h"
 
 namespace love {
@@ -34,6 +33,8 @@ class SoundData {
 	 * Gets the current volume of the Source.
 	 *
 	 * @return The volume of the source, from 0.0f to 1.0f.
+	 *
+	 * @see setVolume
 	 */
 	float getVolume();
 
@@ -43,6 +44,8 @@ class SoundData {
 	 * @param volume The volume to set the source at, from 0.0f to 1.0f.
 	 *
 	 * @return The SoundData object iself, to allow for method chaining.
+	 *
+	 * @see getVolume
 	 */
 	SoundData& setVolume(float volume);
 
@@ -55,11 +58,15 @@ class SoundData {
 
 	/**
 	 * Returns whether the Source will loop.
+	 *
+	 * @see setLooping
 	 */
 	bool isLooping();
 
 	/**
 	 * Set whether the Source should loop.
+	 *
+	 * @see isLooping
 	 */
 	SoundData& setLooping(bool loop);
 

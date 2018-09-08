@@ -28,8 +28,8 @@ ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run throu
 Alternatively, you can run the ChaiLove core through RetroArch via the command line:
 
 ```
-wget https://buildbot.libretro.com/assets/cores/ChaiLove/Floppy%20Bird.chailove
-retroarch -L chailove_libretro.so Floppy\ Bird.chailove
+wget https://github.com/RobLoach/ChaiLove-FloppyBird/releases/download/0.20.0/FloppyBird.chailove
+retroarch -L chailove_libretro.so FloppyBird.chailove
 ```
 
 ## API
@@ -60,9 +60,11 @@ To run it, execute the following:
 retroarch -L chailove_libretro.so main.chai
 ```
 
+See the [ChaiLove API](https://rawgit.com/libretro/libretro-chailove/docs/) for coverage of all the callbacks and methods in ChaiLove.
+
 ## Development
 
-Behind ChaiLove, there's the [documentation](#documentation), [compiling it](#compiling), along with [testing](#testing).
+The following are some notes about the development process behind ChaiLove.
 
 ### Compiling
 
