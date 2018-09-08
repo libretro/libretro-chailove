@@ -1,6 +1,6 @@
 # Appveyor Config
 ifeq ($(appveyor),1)
-	FLAGS += -D_MSC_VER
+	FLAGS += -DPRId64=I64d -DPRIu64=I64u -DPRIuPTR=Iu
 endif
 
 # ChaiLove
