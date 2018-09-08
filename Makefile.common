@@ -45,6 +45,7 @@ SOURCES_C += $(wildcard \
 	$(CORE_DIR)/vendor/libretro-common/file/file_path.c \
 	$(CORE_DIR)/vendor/libretro-common/compat/compat_strl.c \
 	$(CORE_DIR)/vendor/libretro-common/compat/fopen_utf8.c \
+	$(CORE_DIR)/vendor/libretro-common/encodings/encoding_utf.c \
 	$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
 	$(CORE_DIR)/vendor/libretro-common/file/config_file.c \
 	$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
