@@ -1,3 +1,8 @@
+# Appveyor Config
+ifeq ($(appveyor),1)
+	FLAGS += -D_MSC_VER
+endif
+
 # ChaiLove
 SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/*.cpp \
