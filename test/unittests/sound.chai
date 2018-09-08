@@ -2,6 +2,10 @@
 var theSound = love.sound.newSoundData("assets/jump.wav")
 assert_not(theSound.is_var_null(), "love.sound.newSoundData()")
 
+// newSoundData() with OGG
+var theOgg = love.sound.newSoundData("assets/chailove.ogg")
+assert_not(theOgg.is_var_null(), "    - ogg")
+
 // getVolume()
 assert_equal(theSound.getVolume(), 1.0f, "SoundData.getVolume()")
 

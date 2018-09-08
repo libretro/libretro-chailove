@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.25.0 - Unreleased
 ### Features
 - Added Cheat support
+- Added .ogg audio support
 
 ### Fixes
 - Fix loading save states

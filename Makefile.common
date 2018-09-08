@@ -46,6 +46,11 @@ SOURCES_C += $(wildcard \
 	$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
 )
 
+# stb_vorbis
+#SOURCES_C += $(CORE_DIR)/vendor/stb/stb_vorbis.c
+FLAGS += -DHAVE_STB_VORBIS
+FLAGS += -I$(CORE_DIR)/vendor/libretro-deps
+
 # zlib
 SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-deps/libz/zutil.c \
