@@ -17,6 +17,7 @@ environment:
   TARGET: chailove_libretro.dll
   platform: win
   system_platform: win
+  appveyor: 1
 
 init:
   - git config --global core.autocrlf input
@@ -32,7 +33,7 @@ before_build:
   - gcc --version
 
 build_script:
-  - make
+  - make appveyor=1
 
 # TODO: Add automated testing
 #before_test:
