@@ -1,8 +1,3 @@
-# Windows-specific
-ifeq ($(platform), win)
-	FLAGS += -DPRId64=I64d -DPRIu64=I64u -DPRIuPTR=Iu
-endif
-
 # ChaiLove
 SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/*.cpp \
@@ -209,3 +204,8 @@ OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(SOURCES_M:.m=.o)
 LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
 
 WARNINGS :=
+
+# Windows: Fix retro_common_api.h
+ifeq ($(system_platform), win)
+	FLAGS += -DPRId64=I64d -DPRIu64=I64u -DPRIuPTR=Iu
+endif
