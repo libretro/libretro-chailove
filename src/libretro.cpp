@@ -36,7 +36,7 @@ extern "C" {
 #endif
 
 void libretro_audio_cb(int16_t left, int16_t right) {
-	// Nothing?
+	// Nothing, since we're using libretro-common.
 	// audio_cb(left, right);
 }
 

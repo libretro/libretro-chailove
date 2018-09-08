@@ -1,9 +1,9 @@
 /**
- * Main Test 2
+ * love.graphics.draw testing
  *
  * An alternative test with a different file name.
  *
- * retroarch -L chailove_libretro.so test/main2.chai
+ * retroarch -L chailove_libretro.so test/love.graphics.draw.chai
  */
 
 global keyPressed = "a";

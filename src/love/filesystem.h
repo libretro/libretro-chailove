@@ -106,6 +106,8 @@ class filesystem {
 	 * @param archive The archive that was previously mounted with love.filesystem.mount.
 	 *
 	 * @return bool True, when unmounting was a success.
+	 *
+	 * @see mount
 	 */
 	bool unmount(const std::string& archive);
 
@@ -113,6 +115,8 @@ class filesystem {
 	 * Mounts a zip file or folder in the game's save directory for reading.
 	 *
 	 * @return bool True, when mounting was a success.
+	 *
+	 * @see unmount
 	 */
 	bool mount(const std::string& archive, const std::string& mountpoint);
 	bool mount(const char *archive, const std::string& mountpoint);
@@ -127,16 +131,25 @@ class filesystem {
 
 	/**
 	 * Check whether something is a directory.
+	 *
+	 * @see isFile
+	 * @see isSymlink
 	 */
 	bool isDirectory(const std::string& filename);
 
 	/**
 	 * Checks whether something is a file.
+	 *
+	 * @see isDirectory
+	 * @see isSymlink
 	 */
 	bool isFile(const std::string& filename);
 
 	/**
 	 * Checks whether something is a symlink.
+	 *
+	 * @see isDirectory
+	 * @see isFile
 	 */
 	bool isSymlink(const std::string& filename);
 
@@ -168,6 +181,8 @@ class filesystem {
 	 * @param delimiter ("\n") A string of characters representing what would be considered a new line.
 	 *
 	 * @return A vector array of strings representing all the lines in the given file.
+	 *
+	 * @see read
 	 */
 	std::vector<std::string> lines(const std::string& filename, const std::string& delimiter);
 	std::vector<std::string> lines(const std::string& filename);

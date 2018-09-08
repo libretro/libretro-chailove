@@ -74,3 +74,15 @@ def joystickpressed(joystick, button) {
 		}
 	}
 }
+
+def savestate() {
+	return to_json([
+		"currenttest": currenttest
+	])
+}
+
+def loadstate(data) {
+	var info = from_json(data)
+	currenttest = info["currenttest"]
+	return true
+}
