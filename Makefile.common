@@ -1,5 +1,5 @@
-# Appveyor Config
-ifeq ($(appveyor),1)
+# Windows-specific
+ifeq ($(platform), win)
 	FLAGS += -DPRId64=I64d -DPRIu64=I64u -DPRIuPTR=Iu
 endif
 
