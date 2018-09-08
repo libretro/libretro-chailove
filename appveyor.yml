@@ -35,7 +35,7 @@ before_build:
   - gcc --version
 
 build_script:
-  - make appveyor=1
+  - make appveyor=1 system_platform=win
 
 # TODO: Add automated testing
 #before_test:
