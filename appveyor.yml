@@ -33,7 +33,7 @@ before_build:
   - gcc --version
 
 build_script:
-  - appveyor=1 make
+  - make appveyor=1
 
 # TODO: Add automated testing
 #before_test:
