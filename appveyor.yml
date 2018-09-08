@@ -2,10 +2,12 @@
 # https://ci.appveyor.com/project/RobLoach/libretro-chailove
 version: '{build}'
 
-# Don't build the Documentation
+# Build branches master and dev
+# The others are done via Pull Requests
 branches:
-  except:
-    - docs
+  only:
+  - master
+  - dev
 
 skip_tags: true
 skip_non_tags: false
