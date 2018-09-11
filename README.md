@@ -112,5 +112,6 @@ The following individuals contributed to ChaiLove:
 - [twinaphex](http://github.com/twinaphex)
 - [orbea](http://github.com/orbea)
 - [fetzerch](http://github.com/fetzerch)
+- [bparker06](https://github.com/bparker06)
 - [sdl-libretro](https://github.com/r-type/sdl-libretro) by [@r-type](https://github.com/r-type)
 - [Logo](docs/chailove.png) by [@baxysquare](https://github.com/baxysquare)
