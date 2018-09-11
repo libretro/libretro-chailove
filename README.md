@@ -105,13 +105,14 @@ ChaiLove uses modified [Gitflow](https://www.atlassian.com/git/tutorials/compari
 
 ## Contributors
 
-The following individuals contributed to ChaiLove:
+The following individuals contributed to ChaiLove in some way:
 
 - [@RobLoach](http://github.com/robloach)
-- [webgeek1234](http://github.com/webgeek1234) for the Android support
-- [twinaphex](http://github.com/twinaphex)
-- [orbea](http://github.com/orbea)
-- [fetzerch](http://github.com/fetzerch)
-- [bparker06](https://github.com/bparker06)
-- [sdl-libretro](https://github.com/r-type/sdl-libretro) by [@r-type](https://github.com/r-type)
-- [Logo](docs/chailove.png) by [@baxysquare](https://github.com/baxysquare)
+- [@webgeek1234](http://github.com/webgeek1234) for the Android support
+- [@r-type](https://github.com/r-type) for his work on [sdl-libretro](https://github.com/r-type/sdl-libretro)
+- [@mudlord](https://github.com/mudlord) for his work on the [libretro-common](https://github.com/libretro/libretro-common) audio system
+- [@orbea](http://github.com/orbea)
+- [@fetzerch](http://github.com/fetzerch)
+- [@bparker06](https://github.com/bparker06)
+- [@twinaphex](http://github.com/twinaphex)
+- [@baxysquare](https://github.com/baxysquare) for the [Logo](docs/chailove.png)
