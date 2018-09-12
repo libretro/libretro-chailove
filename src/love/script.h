@@ -469,6 +469,7 @@ class script {
 	#endif
 
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
+	bool loadModuleRequire(const std::string& moduleName);
 };
 
 }  // namespace love

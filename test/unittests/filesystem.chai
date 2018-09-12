@@ -34,7 +34,7 @@ assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlin
 
 // getDirectoryItems()
 var getDirectoriesItems = love.filesystem.getDirectoryItems("assets").size()
-assert_equal(getDirectoriesItems, 4, "love.filesystem.getDirectoryItems()")
+assert_equal(getDirectoriesItems, 5, "love.filesystem.getDirectoryItems()")
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")
@@ -76,3 +76,7 @@ assert(mountLoadResultType, "love.filesystem.mount() & read() == 'string'")
 if (mountLoadResultType) {
   assert_equal(mountLoadResult.trim(), "Hello World!", "love.filesystem.mount() & read()")
 }
+
+// require()
+require("assets.requiretest")
+assert(requiretestFileLoaded, "require()")

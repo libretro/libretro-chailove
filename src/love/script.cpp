@@ -55,6 +55,10 @@ bool script::loadModule(const std::string& moduleName) {
 	return false;
 }
 
+bool script::loadModuleRequire(const std::string& moduleName) {
+	return loadModule(replaceString(moduleName, ".", "/"));
+}
+
 chaiscript::Boxed_Value script::eval(const std::string& code, const std::string& filename) {
 	// Replace possible problematic tabs, and evaluate the script.
 	std::string contents = replaceString(code, "\t", "  ");
@@ -284,6 +288,7 @@ script::script(const std::string& file) {
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun(&filesystem::load), "load");
+	chai.add(fun(&script::loadModuleRequire, this), "require");
 
 	// System
 	chai.add(fun(&system::getOS), "getOS");

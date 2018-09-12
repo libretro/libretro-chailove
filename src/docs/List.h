@@ -1,6 +1,8 @@
 #ifndef SRC_CHAILOVEDOCS_H_
 #define SRC_CHAILOVEDOCS_H_
 
+#include <string>
+
 /**
  * Provides a Linked List data structure.
  *
@@ -49,5 +51,19 @@ class List {
 	 */
 	void pop_back();
 };
+
+/**
+ * Load a module.
+ *
+ * @param module The name of the module to load, only once. "." will be replaced by "/".
+ *
+ * @return True if the module had been loaded.
+ *
+ * @code
+ * The following will load lib/player.chai.
+ * require("lib.player")
+ * @endcode
+ */
+bool require(const std::string& module);
 
 #endif  // SRC_CHAILOVEDOCS_H_
