@@ -2,6 +2,7 @@
 #define SRC_LOVE_SCRIPT_H_
 
 #include <string>
+#include <list>
 #include "config.h"
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -469,6 +470,8 @@ class script {
 	#endif
 
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
+	bool loadModuleRequire(const std::string& moduleName);
+	std::list<std::string> m_requiremodules;
 };
 
 }  // namespace love
