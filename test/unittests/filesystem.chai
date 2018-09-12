@@ -78,5 +78,7 @@ if (mountLoadResultType) {
 }
 
 // require()
-require("assets.requiretest")
-assert(requiretestFileLoaded, "require()")
+global requiretestFileLoaded = false
+var requireReturn = require("assets.requiretest")
+assert(requireReturn, "require()")
+assert(requiretestFileLoaded, "    - global")
