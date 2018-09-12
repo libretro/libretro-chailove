@@ -53,14 +53,21 @@ class List {
 };
 
 /**
- * Load a module.
+ * Loads the given module, only once.
  *
- * @param module The name of the module to load, only once. "." will be replaced by "/".
+ * While love.filesystem.load will load and execute a module any number of times, the `require()` function will only load and execute any given module just one.
  *
- * @return True if the module had been loaded.
+ * @param module The name of the module to load. "." will be replaced by "/".
+ *
+ * @return True if the module was loaded.
+ *
+ * @see love.filesystem.load
  *
  * @code
- * The following will load lib/player.chai.
+ * // The following will load lib/player.chai.
+ * require("lib.player")
+ *
+ * // Calling require("lib.player") again will not re-load it.
  * require("lib.player")
  * @endcode
  */

@@ -1,6 +1,7 @@
 #include "script.h"
 #include "../ChaiLove.h"
 #include <filesystem/path.h>
+#include <algorithm>
 
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
@@ -56,7 +57,18 @@ bool script::loadModule(const std::string& moduleName) {
 }
 
 bool script::loadModuleRequire(const std::string& moduleName) {
-	return loadModule(replaceString(moduleName, ".", "/"));
+	// Check if the module has already been loaded.
+	std::string filename = replaceString(moduleName, ".", "/");
+	if (std::find(m_requiremodules.begin(), m_requiremodules.end(), filename) != m_requiremodules.end()) {
+		return true;
+	}
+
+	// Attempt to load the module.
+	bool loaded = loadModule(filename);
+	if (loaded) {
+		m_requiremodules.push_back(filename);
+	}
+	return loaded;
 }
 
 chaiscript::Boxed_Value script::eval(const std::string& code, const std::string& filename) {

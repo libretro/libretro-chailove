@@ -82,3 +82,7 @@ global requiretestFileLoaded = false
 var requireReturn = require("assets.requiretest")
 assert(requireReturn, "require()")
 assert(requiretestFileLoaded, "    - global")
+requiretestFileLoaded = false
+requireReturn = require("assets.requiretest")
+assert(requireReturn, "    - double call")
+assert_not(requiretestFileLoaded, "    - not loaded twice")
