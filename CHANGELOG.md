@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.26.0 - Unreleased
 ### Features
-- Added a global `require()` function to load modules
+- Added a global `require()` function to load modules ([#308](https://github.com/libretro/libretro-chailove/pull/308))
+- Added OEM-102 key support (sometimes `\` on EUR keyboard) ([#309](https://github.com/libretro/libretro-chailove/pull/309))
 
 ## 0.25.1 - 2018-09-11
 ### Fixes
