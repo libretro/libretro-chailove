@@ -172,6 +172,7 @@ bool keyboard::load() {
 	scancodeToKey[RETROK_POWER] = "power";
 	scancodeToKey[RETROK_EURO] = "currencyunit";
 	scancodeToKey[RETROK_UNDO] = "undo";
+	scancodeToKey[RETROK_OEM_102] = "oem";
 
 	// Initialize the key to scancode mappings.
 	for (i = 0; i < RETROK_LAST; i++) {
