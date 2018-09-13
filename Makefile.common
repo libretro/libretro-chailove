@@ -66,8 +66,8 @@ SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-deps/libz/inffast.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/inflate.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/inftrees.c \
-	$(CORE_DIR)/vendor/libretro-deps/libz/trees.c
-	$(CORE_DIR)/vendor/libretro-deps/libz/zutil.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/trees.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/zutil.c
 FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/libz
 FLAGS += -I$(CORE_DIR)/vendor/libretro-common/compat
 FLAGS += -DWANT_ZLIB
