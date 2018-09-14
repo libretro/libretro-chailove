@@ -28,7 +28,7 @@ def load() {
 	sprites.push_back(Sprite())
 
 	// Load the music.
-	music = love.audio.newSource("music.wav")
+	music = love.audio.newSource("music.ogg")
 	music.setLooping(true)
 	music.play()
 }
