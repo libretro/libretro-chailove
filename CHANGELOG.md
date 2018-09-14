@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.26.1 - Unreleased
 ### Fixes
 - Fixed `mount()` with relative paths
+- Fix for compiling `nearest_resampler.c` without `STATIC_LINKING` ([#312](https://github.com/libretro/libretro-chailove/pull/312))
+  - By [@twinaphex](https://github.com/twinaphex)
 
 ## 0.26.0 - 2018-09-13
 ### Features
