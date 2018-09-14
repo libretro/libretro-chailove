@@ -43,3 +43,10 @@ build_script:
 #
 #test_script:
 #  - make unittest
+
+# Disable email notifications
+notifications:
+  - provider: Email
+    on_build_success: false
+    on_build_failure: false
+    on_build_status_changed: false
