@@ -65,8 +65,7 @@ var writeFileReturn = love.filesystem.write("test/createDirectoryTest/test.md", 
 assert(writeFileReturn, "love.filesystem.write()")
 
 // mount()
-// @TODO: Figure out how to have the mount() point be relative to the origin.
-var mountResult = love.filesystem.mount("test/unittests/assets/hello.zip", "hello")
+var mountResult = love.filesystem.mount("assets/hello.zip", "hello")
 assert(mountResult, "love.filesystem.mount()")
 
 // mount() - Load
@@ -74,11 +73,11 @@ var mountLoadResult = love.filesystem.read("hello/hello.txt")
 var mountLoadResultType = is_type(mountLoadResult, "string")
 assert(mountLoadResultType, "    read()")
 if (mountLoadResultType) {
-  assert_equal(mountLoadResult.trim(), "Hello World!", "    contents")
+	assert_equal(mountLoadResult.trim(), "Hello World!", "    contents")
 }
 
 // unmount()
-love.filesystem.unmount("test/unittests/assets/hello.zip")
+love.filesystem.unmount("assets/hello.zip")
 assert_not(love.filesystem.exists("hello/hello.txt"), "love.filesystem.unmount()")
 
 // require()

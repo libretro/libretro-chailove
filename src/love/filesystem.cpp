@@ -227,13 +227,30 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	if (archive.length() <= 0 || mountpoint.length() <= 0) {
 		return false;
 	}
+
+	// Display a message.
 	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
-	int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
-	if (returnValue == 0) {
-		std::cout << "[ChaiLove] [filesystem] Error mounting: " << getLastError() << std::endl;
-		return false;
+
+	// Use the simple mount method if we're mounting the root directory.
+	if (mountpoint == "/") {
+		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
+		if (returnValue == 0) {
+			std::cout << "[ChaiLove] [filesystem] Error mounting: " << getLastError() << std::endl;
+			return false;
+		}
+		return true;
 	}
-	return true;
+
+	// Mount using a handle instead, since we're doing another archive.
+	PHYSFS_File* file = openFile(archive);
+	if (file != NULL) {
+		if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), 1) == 0) {
+			std::cout << "[ChaiLove] [filesystem] Error mounting: " << getLastError() << std::endl;
+			return false;
+		}
+		return true;
+	}
+	return false;
 }
 
 /**
