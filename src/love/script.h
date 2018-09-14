@@ -2,6 +2,7 @@
 #define SRC_LOVE_SCRIPT_H_
 
 #include <string>
+#include <list>
 #include "config.h"
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -52,7 +53,7 @@ class script {
 	 *   t.console = false
 	 *
 	 *   // The ChaiLove version this game was made for.
-	 *   t.version = "0.25.1"
+	 *   t.version = "0.26.0"
 	 *
 	 *   // The width and height of the game.
 	 *   t.window.width = 1024
@@ -469,6 +470,8 @@ class script {
 	#endif
 
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
+	bool loadModuleRequire(const std::string& moduleName);
+	std::list<std::string> m_requiremodules;
 };
 
 }  // namespace love

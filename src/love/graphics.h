@@ -68,6 +68,8 @@ class graphics {
 
 	/**
 	 * Draws a point.
+	 *
+	 * @param p The point to draw on the screen.
 	 */
 	graphics& point(Point* p);
 
@@ -131,12 +133,16 @@ class graphics {
 	 * Set an already-loaded Font as the current font.
 	 *
 	 * @param (font) The font to set as the active font. When not provided will set the default font.
+	 *
+	 * @see getFont
 	 */
 	graphics& setFont(Font* font);
 	graphics& setFont();
 
 	/**
 	 * Retrieve th currently active font.
+	 *
+	 * @see setFont
 	 */
 	Font* getFont();
 
@@ -161,6 +167,8 @@ class graphics {
 	 * @param green The amount of green.
 	 * @param blue The amount of blue.
 	 * @param alpha (255) The amount of alpha.
+	 *
+	 * @see getColor
 	 */
 	graphics& setColor(int red, int green, int blue, int alpha);
 	graphics& setColor(int red, int green, int blue);

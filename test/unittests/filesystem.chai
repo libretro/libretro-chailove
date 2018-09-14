@@ -16,15 +16,15 @@ assert(found > 50, "love.filesystem.read()")
 
 // exists()
 assert(love.filesystem.exists("math.chai"), "love.filesystem.exists('math.chai')")
-assert(!love.filesystem.exists("notexist.chai"), "love.filesystem.exists('notexist.chai')")
+assert(!love.filesystem.exists("notexist.chai"), "    On non existant file")
 
 // getSize()
 assert(love.filesystem.getSize("filesystem.chai") > 10, "love.filesystem.getSize()")
-assert_equal(love.filesystem.getSize("notexist.chai"), -1, "love.filesystem.getSize('notexist.chai')")
+assert_equal(love.filesystem.getSize("notexist.chai"), -1, "    On non existant file")
 
 // isFile()
 assert(love.filesystem.isFile("filesystem.chai"), "love.filesystem.isFile()")
-assert(!love.filesystem.isFile("notexist.chai"), "love.filesystem.isFile('notexist.chai')")
+assert(!love.filesystem.isFile("notexist.chai"), "    On non existant file")
 
 // isDirectory()
 assert_not(love.filesystem.isDirectory("keyboard.chai"), "love.filesystem.isDirectory()")
@@ -34,7 +34,7 @@ assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlin
 
 // getDirectoryItems()
 var getDirectoriesItems = love.filesystem.getDirectoryItems("assets").size()
-assert_equal(getDirectoriesItems, 4, "love.filesystem.getDirectoryItems()")
+assert_equal(getDirectoriesItems, 5, "love.filesystem.getDirectoryItems()")
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")
@@ -72,7 +72,21 @@ assert(mountResult, "love.filesystem.mount()")
 // mount() - Load
 var mountLoadResult = love.filesystem.read("hello/hello.txt")
 var mountLoadResultType = is_type(mountLoadResult, "string")
-assert(mountLoadResultType, "love.filesystem.mount() & read() == 'string'")
+assert(mountLoadResultType, "    read()")
 if (mountLoadResultType) {
-  assert_equal(mountLoadResult.trim(), "Hello World!", "love.filesystem.mount() & read()")
+  assert_equal(mountLoadResult.trim(), "Hello World!", "    contents")
 }
+
+// unmount()
+love.filesystem.unmount("test/unittests/assets/hello.zip")
+assert_not(love.filesystem.exists("hello/hello.txt"), "love.filesystem.unmount()")
+
+// require()
+global requiretestFileLoaded = false
+var requireReturn = require("assets.requiretest")
+assert(requireReturn, "require()")
+assert(requiretestFileLoaded, "    global")
+requiretestFileLoaded = false
+requireReturn = require("assets.requiretest")
+assert(requireReturn, "    double call")
+assert_not(requiretestFileLoaded, "    not loaded twice")

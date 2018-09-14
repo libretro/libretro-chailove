@@ -1,6 +1,8 @@
 #ifndef SRC_CHAILOVEDOCS_H_
 #define SRC_CHAILOVEDOCS_H_
 
+#include <string>
+
 /**
  * Provides a Linked List data structure.
  *
@@ -49,5 +51,26 @@ class List {
 	 */
 	void pop_back();
 };
+
+/**
+ * Loads the given module, only once.
+ *
+ * While love.filesystem.load will load and execute a module any number of times, the `require()` function will only load and execute any given module just one.
+ *
+ * @param module The name of the module to load. "." will be replaced by "/".
+ *
+ * @return True if the module was loaded.
+ *
+ * @see love.filesystem.load
+ *
+ * @code
+ * // The following will load lib/player.chai.
+ * require("lib.player")
+ *
+ * // Calling require("lib.player") again will not re-load it.
+ * require("lib.player")
+ * @endcode
+ */
+bool require(const std::string& module);
 
 #endif  // SRC_CHAILOVEDOCS_H_

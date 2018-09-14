@@ -41,6 +41,8 @@ class audio {
 	 * Returns the master volume.
 	 *
 	 * @return The current master volume between 0.0f and 1.0f.
+	 *
+	 * @see setVolume
 	 */
 	float getVolume();
 
@@ -50,6 +52,8 @@ class audio {
 	 * @param volume 1.0f is max and 0.0f is off.
 	 *
 	 * @return The audio module, to allow method chaining.
+	 *
+	 * @see getVolume
 	 */
 	audio& setVolume(float volume);
 

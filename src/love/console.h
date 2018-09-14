@@ -30,11 +30,15 @@ class console {
 
 	/**
 	 * Checks to see if the console is enabled.
+	 *
+	 * @see setEnabled
 	 */
 	bool isEnabled();
 
 	/**
 	 * Enable or disable the console.
+	 *
+	 * @see isEnabled
 	 */
 	bool setEnabled(bool enabled);
 
