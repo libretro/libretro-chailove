@@ -35,7 +35,7 @@ class filesystem {
 	bool load(const std::string& file);
 	void mountlibretro();
 
-	bool init(const std::string& file);
+	bool init(const std::string& file, const void* data);
 	bool unload();
 	SDL_RWops* openRW(const std::string& filename);
 	char* readChar(const std::string& filename);

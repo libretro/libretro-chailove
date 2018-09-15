@@ -105,7 +105,7 @@ class ChaiLove {
 
 	~ChaiLove();
 	void quit(void);
-	bool load(const std::string& file);
+	bool load(const std::string& file, const void* data);
 	void update();
 	void draw();
 	void reset();
