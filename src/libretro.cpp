@@ -246,7 +246,7 @@ bool retro_serialize(void *data, size_t size) {
 
 	// Encode the JSON state data.
 	// state = app->data.encode("string", "base64", state);
-	state = app->data.compress(state);
+	//state = app->data.compress(state);
 
 	// Save the information to the state data.
 	std::copy(state.begin(), state.end(), reinterpret_cast<char*>(data));
@@ -275,7 +275,7 @@ bool retro_unserialize(const void *data, size_t size) {
 
 	// Decompress the state data.
 	// loadData = app->data.decode("string", "base64", loadData);
-	loadData = app->data.decompress(loadData);
+	//loadData = app->data.decompress(loadData);
 
 	// Finally, load the string.
 	return app->loadstate(loadData);
