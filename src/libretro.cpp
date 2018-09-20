@@ -224,8 +224,8 @@ void retro_set_controller_port_device(unsigned port, unsigned device) {
  * libretro callback; Return the amount of bytes required to save a state.
  */
 size_t retro_serialize_size(void) {
-	// Save states will be 10 kilobytes.
-	return 10000;
+	// Save states will be 5 kilobytes.
+	return 5000;
 }
 
 /**
@@ -235,7 +235,6 @@ bool retro_serialize(void *data, size_t size) {
 	if (!ChaiLove::hasInstance()) {
 		return false;
 	}
-	std::cout << "[ChaiLove] retro_serialize" << std::endl;
 
 	// Ask ChaiLove for save data.
 	ChaiLove* app = ChaiLove::getInstance();
@@ -244,9 +243,9 @@ bool retro_serialize(void *data, size_t size) {
 		return false;
 	}
 
-	// Encode the JSON state data.
+	// Encode the JSON state data. Disabled for speed.
 	// state = app->data.encode("string", "base64", state);
-	//state = app->data.compress(state);
+	// state = app->data.compress(state);
 
 	// Save the information to the state data.
 	std::copy(state.begin(), state.end(), reinterpret_cast<char*>(data));
@@ -260,7 +259,6 @@ bool retro_unserialize(const void *data, size_t size) {
 	if (!ChaiLove::hasInstance() || size <= 0) {
 		return false;
 	}
-	std::cout << "[ChaiLove] retro_unserialize" << std::endl;
 
 	// Create a string stream from the data.
 	std::stringstream ss(std::string(
@@ -273,9 +271,9 @@ bool retro_unserialize(const void *data, size_t size) {
 	// Pass the string to the script.
 	ChaiLove* app = ChaiLove::getInstance();
 
-	// Decompress the state data.
+	// Decompress the state data. Disabled for speed.
 	// loadData = app->data.decode("string", "base64", loadData);
-	//loadData = app->data.decompress(loadData);
+	// loadData = app->data.decompress(loadData);
 
 	// Finally, load the string.
 	return app->loadstate(loadData);
