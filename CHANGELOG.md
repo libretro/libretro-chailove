@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed mounting of saves and system directories
 - Fix for compiling `nearest_resampler.c` without `STATIC_LINKING` ([#312](https://github.com/libretro/libretro-chailove/pull/312))
   - By [@twinaphex](https://github.com/twinaphex)
+- Fix netplay and rewind by removing compression of save states
 
 ## 0.26.0 - 2018-09-13
 ### Features
