@@ -48,7 +48,6 @@ ifneq ($(STATIC_LINKING), 1)
 	)
 endif
 
-
 # stb_vorbis
 #SOURCES_C += $(CORE_DIR)/vendor/stb/stb_vorbis.c
 FLAGS += -DHAVE_STB_VORBIS

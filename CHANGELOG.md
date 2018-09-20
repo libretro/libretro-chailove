@@ -4,6 +4,14 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.26.1 - 2018-09-19
+### Fixes
+- Fixed `mount()` with relative paths
+- Fixed mounting of saves and system directories
+- Fix for compiling `nearest_resampler.c` without `STATIC_LINKING` ([#312](https://github.com/libretro/libretro-chailove/pull/312))
+  - By [@twinaphex](https://github.com/twinaphex)
+- Fix rewind by removing compression of save states
+
 ## 0.26.0 - 2018-09-13
 ### Features
 - Added a global `require()` function to load modules ([#308](https://github.com/libretro/libretro-chailove/pull/308))

@@ -328,7 +328,7 @@ bool retro_load_game(const struct retro_game_info *info) {
 	if (gamePath == ".") {
 		gamePath = "main.chai";
 	}
-	return ChaiLove::getInstance()->load(gamePath);
+	return ChaiLove::getInstance()->load(gamePath, info->data);
 }
 
 /**

@@ -48,8 +48,8 @@
 
 #define CHAILOVE_VERSION_MAJOR 0
 #define CHAILOVE_VERSION_MINOR 26
-#define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "0.26.0"
+#define CHAILOVE_VERSION_PATCH 1
+#define CHAILOVE_VERSION_STRING "0.26.1"
 
 #include "SDL.h"
 #include "libretro.h"
@@ -105,7 +105,7 @@ class ChaiLove {
 
 	~ChaiLove();
 	void quit(void);
-	bool load(const std::string& file);
+	bool load(const std::string& file, const void* data);
 	void update();
 	void draw();
 	void reset();

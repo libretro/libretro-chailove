@@ -17,7 +17,7 @@ namespace love {
 /**
  * Initialize the file system.
  */
-bool filesystem::init(const std::string& file) {
+bool filesystem::init(const std::string& file, const void* data) {
 	if (PHYSFS_isInit() == 0) {
 		// Initialize PhysFS
 		if (PHYSFS_init(NULL) == 0) {
@@ -57,16 +57,16 @@ void filesystem::mountlibretro() {
 	const char *assets_dir = NULL;
 	const char *save_dir = NULL;
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
-		mount(system_dir, "libretro/system");
+		mount(system_dir, "/libretro/system");
 	}
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &assets_dir) && assets_dir) {
-		mount(assets_dir, "libretro/assets");
+		mount(assets_dir, "/libretro/assets");
 	}
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		save_dir = *save_dir ? save_dir : system_dir;
-		mount(save_dir, "libretro/saves");
+		mount(save_dir, "/libretro/saves");
 	} else {
-		mount(save_dir = system_dir, "libretro/saves");
+		mount(save_dir = system_dir, "/libretro/saves");
 	}
 
 	// Ensure the write directory is set to the Save Directory.
@@ -227,13 +227,44 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	if (archive.length() <= 0 || mountpoint.length() <= 0) {
 		return false;
 	}
+
+	// Display a message.
 	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
-	int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
-	if (returnValue == 0) {
-		std::cout << "[ChaiLove] [filesystem] Error mounting: " << getLastError() << std::endl;
+
+	// Use the simple mount method if we're mounting the root directory.
+	if (mountpoint == "/") {
+		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
+		if (returnValue == 0) {
+			std::cout << "[ChaiLove] [filesystem] Error mounting /: " << getLastError() << std::endl;
+			return false;
+		}
+		return true;
+	}
+
+	// See if we're mounting a file.
+	if (isFile(archive)) {
+		// Mount using a handle instead, since we're doing another archive.
+		PHYSFS_File* file = openFile(archive);
+		if (file != NULL) {
+			if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), 1) == 0) {
+				std::cout << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
+				return false;
+			}
+			return true;
+		}
 		return false;
 	}
-	return true;
+
+	// Check if we're mounting a directory.
+	if (isDirectory(archive)) {
+		int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
+		if (returnVal == 0) {
+			std::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
+			return false;
+		}
+		return true;
+	}
+	return false;
 }
 
 /**

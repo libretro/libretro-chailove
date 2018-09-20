@@ -56,7 +56,7 @@ void ChaiLove::quit(void) {
 	window.unload();
 }
 
-bool ChaiLove::load(const std::string& file) {
+bool ChaiLove::load(const std::string& file, const void* data) {
 	// Display a welcome message from ChaiLove.
 #ifndef GIT_VERSION
 #define GIT_VERSION ""
@@ -68,7 +68,7 @@ bool ChaiLove::load(const std::string& file) {
 	sound.load();
 
 	// Initalize the file system.
-	bool loaded = filesystem.init(file);
+	bool loaded = filesystem.init(file, data);
 	if (!loaded) {
 		std::cout << "[ChaiLove] [filesystem] Error loading " << file << std::endl;
 		return false;
