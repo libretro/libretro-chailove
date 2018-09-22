@@ -376,6 +376,11 @@ FileData filesystem::newFileData(const std::string& filepath) {
 	return f;
 }
 
+FileData filesystem::newFileData(const std::string& contents, const std::string& name) {
+	FileData f(contents, name);
+	return f;
+}
+
 std::string filesystem::getSaveDirectory() {
 	return "/libretro/saves";
 }

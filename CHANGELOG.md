@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Live updating of core options
 - Mounts `/libretro/core` as the directory where the core was loaded from
 - Adds `love.filesystem.getSaveDirectory()`
+- Adds `love.filesystem.newFileData(contents, name)`
 
 ### Fixes
 - Fixed loading ChaiLove without active content
