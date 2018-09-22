@@ -101,6 +101,18 @@ class filesystem {
 	FileData newFileData(const std::string& filepath);
 
 	/**
+	 * Creates a new FileData object.
+	 *
+	 * @param contents The contents fof the file.
+	 * @param name The name of the file.
+	 *
+	 * @return Your new FileData.
+	 *
+	 * @see love::Types::FileSystem::FileData
+	 */
+	FileData newFileData(const std::string& contents, const std::string& name);
+
+	/**
 	 * Unmounts a zip file or folder previously mounted with love.filesystem.mount.
 	 *
 	 * @param archive The archive that was previously mounted with love.filesystem.mount.

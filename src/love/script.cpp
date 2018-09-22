@@ -294,7 +294,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::exists), "exists");
 	chai.add(fun(&filesystem::getSaveDirectory), "getSaveDirectory");
 	chai.add(fun(&filesystem::getInfo), "getInfo");
-	chai.add(fun(&filesystem::newFileData), "newFileData");
+	chai.add(fun<FileData, filesystem, const std::string&>(&filesystem::newFileData), "newFileData");
+	chai.add(fun<FileData, filesystem, const std::string&, const std::string&>(&filesystem::newFileData), "newFileData");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
 	chai.add(fun<bool, filesystem, const std::string&, const std::string&>(&filesystem::mount), "mount");
 	chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");

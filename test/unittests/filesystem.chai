@@ -55,6 +55,8 @@ assert_equal(loadedFileData.getFilename(), "filesystem.chai", "    .getFilename(
 var fileDataContents = loadedFileData.getString()
 var fileDataFind = fileDataContents.find("// newFileData()")
 assert_greater(fileDataFind, 50, "    .getString()")
+var newFileData = love.filesystem.newFileData("Hello World!", "helloworld.txt")
+assert_equal(newFileData.getString(), "Hello World!", "    newFileData.getString()")
 
 // getSaveDirectory()
 assert_equal(love.filesystem.getSaveDirectory(), "/libretro/saves", "love.filesystem.getSaveDirectory()")
