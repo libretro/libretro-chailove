@@ -56,6 +56,13 @@ void filesystem::mountlibretro() {
 	const char *system_dir = NULL;
 	const char *assets_dir = NULL;
 	const char *save_dir = NULL;
+	const char *core_dir = NULL;
+
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_LIBRETRO_PATH, &core_dir) && core_dir) {
+		// Make sure to get the directory of the core.
+		::filesystem::path p(core_dir);
+		mount(p.parent_path().str(), "/libretro/core");
+	}
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
 		mount(system_dir, "/libretro/system");
 	}
@@ -367,6 +374,10 @@ FileInfo filesystem::getInfo(const std::string& path) {
 FileData filesystem::newFileData(const std::string& filepath) {
 	FileData f(filepath);
 	return f;
+}
+
+std::string filesystem::getSaveDirectory() {
+	return "/libretro/saves";
 }
 
 bool filesystem::createDirectory(const std::string& name) {

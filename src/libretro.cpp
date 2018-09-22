@@ -79,6 +79,8 @@ void retro_set_environment(retro_environment_t cb) {
  */
 static void update_variables(void) {
 	std::cout << "[ChaiLove] [libretro] update_variables()" << std::endl;
+	ChaiLove* app = ChaiLove::getInstance();
+	app->system.updateVariables(app->config);
 }
 
 #ifdef __cplusplus
@@ -425,6 +427,11 @@ void retro_run(void) {
 	ChaiLove* app = ChaiLove::getInstance();
 	if (app->event.m_shouldclose) {
 		return;
+	}
+
+	bool updated = false;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated) {
+		update_variables();
 	}
 
 	// Update the game.

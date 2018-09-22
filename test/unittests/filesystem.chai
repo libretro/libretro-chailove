@@ -56,6 +56,9 @@ var fileDataContents = loadedFileData.getString()
 var fileDataFind = fileDataContents.find("// newFileData()")
 assert_greater(fileDataFind, 50, "    .getString()")
 
+// getSaveDirectory()
+assert_equal(love.filesystem.getSaveDirectory(), "/libretro/saves", "love.filesystem.getSaveDirectory()")
+
 // createDirectory()
 var createDirectoryReturn = love.filesystem.createDirectory("test/createDirectoryTest")
 assert(createDirectoryReturn, "love.filesystem.createDirectory()")

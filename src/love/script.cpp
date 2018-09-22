@@ -292,6 +292,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::isFile), "isFile");
 	chai.add(fun(&filesystem::write), "write");
 	chai.add(fun(&filesystem::exists), "exists");
+	chai.add(fun(&filesystem::getSaveDirectory), "getSaveDirectory");
 	chai.add(fun(&filesystem::getInfo), "getInfo");
 	chai.add(fun(&filesystem::newFileData), "newFileData");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");

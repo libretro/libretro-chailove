@@ -121,6 +121,13 @@ class filesystem {
 	bool mount(const std::string& archive, const std::string& mountpoint);
 	bool mount(const char *archive, const std::string& mountpoint);
 
+	/**
+	 * Gets the path to the designated save directory.
+	 *
+	 * @return The path to the save directory.
+	 */
+	std::string getSaveDirectory();
+
 	PHYSFS_sint64 getSize(PHYSFS_File* file);
 	PHYSFS_file* openFile(const std::string& filename);
 
