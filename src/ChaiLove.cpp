@@ -140,6 +140,8 @@ std::string ChaiLove::demo() {
 			love.graphics.print(text, 10, love.graphics.getHeight() / 2.0f - 100)
 			var ver = love.system.getVersionString()
 			love.graphics.print(ver, love.graphics.getWidth() - defaultFont.getWidth(ver), love.graphics.getHeight() - defaultFont.getHeight(ver) * 2.0f)
+
+			love.graphics.print("FPS: " + to_string(love.timer.getFPS()), 10, love.graphics.getHeight() - defaultFont.getHeight(ver) * 2.0f)
 		}
 
 		def update(dt) {
