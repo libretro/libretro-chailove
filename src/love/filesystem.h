@@ -79,6 +79,17 @@ class filesystem {
 	int getSize(const std::string& file);
 
 	/**
+	 * Removes a file or empty directory.
+	 *
+	 * The directory must be empty before removal or else it will fail. Simply remove all files and folders in the directory beforehand.
+	 * If the file exists in the .love but not in the save directory, it returns false as well.
+	 * An opened File prevents removal of the underlying file. Simply close the File to remove it.
+	 *
+	 * @return True if the file or directory was removed, false otherwise.
+	 */
+	bool remove(const std::string& name);
+
+	/**
 	 * Gets information about the specified file or directory.
 	 *
 	 * @param path The path of the file to get information for.
@@ -205,6 +216,13 @@ class filesystem {
 	 */
 	std::vector<std::string> lines(const std::string& filename, const std::string& delimiter);
 	std::vector<std::string> lines(const std::string& filename);
+
+	/**
+	 * Gets the current working directory.
+	 *
+	 * @return The current working directory.
+	 */
+	std::string getWorkingDirectory();
 
 	std::string getLastError();
 };

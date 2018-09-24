@@ -94,3 +94,14 @@ requiretestFileLoaded = false
 requireReturn = require("assets.requiretest")
 assert(requireReturn, "    double call")
 assert_not(requiretestFileLoaded, "    not loaded twice")
+
+// remove()
+var removeTestDestination = "libretro-chailove-test.txt"
+print(removeTestDestination)
+
+print(love.filesystem.getDirectoryItems("/libretro/saves"))
+
+love.filesystem.write(removeTestDestination, "Hello World!")
+assert(love.filesystem.exists("libretro/saves/" + removeTestDestination), "love.filesystem.write(saveDirectory)")
+//love.filesystem.remove(removeTestDestination)
+//assert_not(love.filesystem.exists(removeTestDestination), "love.filesystem.remove()")
