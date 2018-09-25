@@ -137,10 +137,15 @@ class filesystem {
 	/**
 	 * Mounts a zip file or folder in the game's save directory for reading.
 	 *
-	 * @return bool True, when mounting was a success.
+	 * @param archive The folder or zip file in the game's save directory to mount.
+	 * @param mountpoint The new path the archive will be mounted to.
+	 * @param appendToPath (true) Whether the archive will be searched when reading a filepath before or after already-mounted archives. This includes the game's source and save directories.
+	 *
+	 * @return bool True if the archive was successfully mounted, false otherwise.
 	 *
 	 * @see unmount
 	 */
+	bool mount(const std::string& archive, const std::string& mountpoint, bool appendToPath);
 	bool mount(const std::string& archive, const std::string& mountpoint);
 	bool mount(const char *archive, const std::string& mountpoint);
 
