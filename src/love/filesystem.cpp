@@ -230,7 +230,7 @@ std::string filesystem::getExecutablePath() {
 }
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
-	mount(archive, mountpoint, true);
+	return mount(archive, mountpoint, true);
 }
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint, bool appendToPath) {
