@@ -53,7 +53,7 @@ class script {
 	 *   t.console = false
 	 *
 	 *   // The ChaiLove version this game was made for.
-	 *   t.version = "0.26.2"
+	 *   t.version = "0.27.0"
 	 *
 	 *   // The width and height of the game.
 	 *   t.window.width = 1024
