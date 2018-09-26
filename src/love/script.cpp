@@ -291,12 +291,15 @@ script::script(const std::string& file) {
 	chai.add(fun(&filesystem::isSymlink), "isSymlink");
 	chai.add(fun(&filesystem::isFile), "isFile");
 	chai.add(fun(&filesystem::write), "write");
+	chai.add(fun(&filesystem::remove), "remove");
 	chai.add(fun(&filesystem::exists), "exists");
+	chai.add(fun(&filesystem::getExecutablePath), "getExecutablePath");
 	chai.add(fun(&filesystem::getSaveDirectory), "getSaveDirectory");
 	chai.add(fun(&filesystem::getInfo), "getInfo");
 	chai.add(fun<FileData, filesystem, const std::string&>(&filesystem::newFileData), "newFileData");
 	chai.add(fun<FileData, filesystem, const std::string&, const std::string&>(&filesystem::newFileData), "newFileData");
 	chai.add(fun(&filesystem::getDirectoryItems), "getDirectoryItems");
+	chai.add(fun<bool, filesystem, const std::string&, const std::string&, bool>(&filesystem::mount), "mount");
 	chai.add(fun<bool, filesystem, const std::string&, const std::string&>(&filesystem::mount), "mount");
 	chai.add(fun<int, filesystem, const std::string&>(&filesystem::getSize), "getSize");
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&>(&filesystem::lines), "lines");
