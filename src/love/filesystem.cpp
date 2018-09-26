@@ -18,8 +18,8 @@ namespace love {
  * Initialize the file system.
  */
 bool filesystem::init(const std::string& file, const void* data) {
+	// Initialize PhysFS
 	if (PHYSFS_isInit() == 0) {
-		// Initialize PhysFS
 		if (PHYSFS_init(NULL) == 0) {
 			std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
 			return false;
@@ -34,21 +34,21 @@ bool filesystem::init(const std::string& file, const void* data) {
 	// Find the parent and extension of the given file.
 	::filesystem::path p(file.c_str());
 	std::string extension(p.extension());
-	::filesystem::path parent(p.parent_path());
-	std::string parentPath(parent.str());
 
 	// Allow loading from an Archive.
 	if (extension == "chaigame" || extension == "chailove" || extension == "zip") {
-		return mount(file.c_str(), "/");
+		return mount(file.c_str(), "/", false);
 	}
 
-	// If we are just running the cour, load the base path.
+	// If we are just running the core, load the base path.
+	::filesystem::path parent(p.parent_path());
+	std::string parentPath(parent.str());
 	if (parentPath.empty()) {
-		return mount(".", "/");
+		return mount(".", "/", false);
 	}
 
 	// Otherwise, we are loading a .chai file directly. Load it.
-	return mount(parentPath.c_str(), "/");
+	return mount(parentPath.c_str(), "/", false);
 }
 
 void filesystem::mountlibretro() {
