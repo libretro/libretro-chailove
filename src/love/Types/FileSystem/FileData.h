@@ -20,6 +20,13 @@ class FileData {
 	 * @param filepath Path to the file.
 	 */
 	FileData(const std::string& filepath);
+	/**
+	 * Creates a new FileData from the given data and filename.
+	 *
+	 * @param contents The data for the file.
+	 * @param name The filename of the file.
+	 */
+	FileData(const std::string& contents, const std::string& name);
 
 	/**
 	 * The size of the Data in bytes.
@@ -42,6 +49,7 @@ class FileData {
 	std::string getExtension();
 
 	std::string m_filepath;
+	std::string m_contents;
 };
 
 }  // namespace FileSystem

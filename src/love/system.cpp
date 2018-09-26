@@ -62,7 +62,7 @@ std::string system::getVersionString() {
 	return CHAILOVE_VERSION_STRING;
 }
 
-bool system::load(config& t) {
+void system::updateVariables(config& t) {
 	// Update core option from the libretro variables.
 	struct retro_variable var = {0};
 
@@ -85,6 +85,11 @@ bool system::load(config& t) {
 			t.options["highquality"] = false;
 		}
 	}
+}
+
+bool system::load(config& t) {
+	// Ensure we retrieve the latest variable states.
+	updateVariables(t);
 
 	// Load the semantic version string.
 	semver_t chailoveVersion = {};

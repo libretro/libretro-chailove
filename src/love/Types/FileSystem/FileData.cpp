@@ -16,6 +16,10 @@ FileData::FileData(const std::string& filepath) : m_filepath(filepath) {
 	// Nothing.
 }
 
+FileData::FileData(const std::string& contents, const std::string& name) : m_contents(contents), m_filepath(name) {
+	// Nothing.
+}
+
 int FileData::getSize() {
 	ChaiLove* app = ChaiLove::getInstance();
 	return app->filesystem.getSize(m_filepath);
@@ -26,8 +30,11 @@ std::string FileData::getFilename() {
 }
 
 std::string FileData::getString() {
+	if (!m_contents.empty()) {
+		return m_contents;
+	}
 	ChaiLove* app = ChaiLove::getInstance();
-	return app->filesystem.read(m_filepath);
+	return m_contents = app->filesystem.read(m_filepath);
 }
 
 std::string FileData::getExtension() {

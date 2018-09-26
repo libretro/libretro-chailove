@@ -18,8 +18,8 @@ namespace love {
  * Initialize the file system.
  */
 bool filesystem::init(const std::string& file, const void* data) {
+	// Initialize PhysFS
 	if (PHYSFS_isInit() == 0) {
-		// Initialize PhysFS
 		if (PHYSFS_init(NULL) == 0) {
 			std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
 			return false;
@@ -28,27 +28,27 @@ bool filesystem::init(const std::string& file, const void* data) {
 
 	// Check if we are simply running ChaiLove.
 	if (file.empty()) {
-		return mount(".", "/");
+		return mount(".", "/", false);
 	}
 
 	// Find the parent and extension of the given file.
 	::filesystem::path p(file.c_str());
 	std::string extension(p.extension());
-	::filesystem::path parent(p.parent_path());
-	std::string parentPath(parent.str());
 
 	// Allow loading from an Archive.
 	if (extension == "chaigame" || extension == "chailove" || extension == "zip") {
-		return mount(file.c_str(), "/");
+		return mount(file.c_str(), "/", false);
 	}
 
-	// If we are just running the cour, load the base path.
+	// If we are just running the core, load the base path.
+	::filesystem::path parent(p.parent_path());
+	std::string parentPath(parent.str());
 	if (parentPath.empty()) {
-		return mount(".", "/");
+		return mount(".", "/", false);
 	}
 
 	// Otherwise, we are loading a .chai file directly. Load it.
-	return mount(parentPath.c_str(), "/");
+	return mount(parentPath.c_str(), "/", false);
 }
 
 void filesystem::mountlibretro() {
@@ -56,17 +56,24 @@ void filesystem::mountlibretro() {
 	const char *system_dir = NULL;
 	const char *assets_dir = NULL;
 	const char *save_dir = NULL;
+	const char *core_dir = NULL;
+
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_LIBRETRO_PATH, &core_dir) && core_dir) {
+		// Make sure to get the directory of the core.
+		::filesystem::path p(core_dir);
+		mount(p.parent_path().str(), "/libretro/core", false);
+	}
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
-		mount(system_dir, "/libretro/system");
+		mount(system_dir, "/libretro/system", false);
 	}
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &assets_dir) && assets_dir) {
-		mount(assets_dir, "/libretro/assets");
+		mount(assets_dir, "/libretro/assets", false);
 	}
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		save_dir = *save_dir ? save_dir : system_dir;
-		mount(save_dir, "/libretro/saves");
+		mount(save_dir, "/libretro/saves", false);
 	} else {
-		mount(save_dir = system_dir, "/libretro/saves");
+		mount(save_dir = system_dir, "/libretro/saves", false);
 	}
 
 	// Ensure the write directory is set to the Save Directory.
@@ -78,7 +85,7 @@ bool filesystem::load(const std::string& file) {
 }
 
 bool filesystem::exists(const std::string& file) {
-	return PHYSFS_exists(file.c_str()) > 0;
+	return PHYSFS_exists(file.c_str()) != 0;
 }
 
 int filesystem::getSize(const std::string& file) {
@@ -215,16 +222,22 @@ bool filesystem::unmount(const std::string& archive) {
 }
 
 bool filesystem::mount(const char *archive, const std::string& mountpoint) {
-	// Allow mounting character pointers safely.
-	if (archive == NULL) {
-		return false;
-	}
 	return mount(std::string(archive), mountpoint);
 }
 
+std::string filesystem::getExecutablePath() {
+	return std::string(PHYSFS_getBaseDir());
+}
+
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
+	return mount(archive, mountpoint, true);
+}
+
+bool filesystem::mount(const std::string& archive, const std::string& mountpoint, bool appendToPath) {
 	// Protect against empty archive/mount points.
-	if (archive.length() <= 0 || mountpoint.length() <= 0) {
+	int append = appendToPath ? 1 : 0;
+	if (archive.length() <= 0) {
+		std::cout << "[ChaiLove] [filesystem] Mounting failed because archive was empty." << std::endl;
 		return false;
 	}
 
@@ -233,7 +246,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 
 	// Use the simple mount method if we're mounting the root directory.
 	if (mountpoint == "/") {
-		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
+		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 		if (returnValue == 0) {
 			std::cout << "[ChaiLove] [filesystem] Error mounting /: " << getLastError() << std::endl;
 			return false;
@@ -246,7 +259,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 		// Mount using a handle instead, since we're doing another archive.
 		PHYSFS_File* file = openFile(archive);
 		if (file != NULL) {
-			if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), 1) == 0) {
+			if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), append) == 0) {
 				std::cout << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
 				return false;
 			}
@@ -256,15 +269,12 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	}
 
 	// Check if we're mounting a directory.
-	if (isDirectory(archive)) {
-		int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), 0);
-		if (returnVal == 0) {
-			std::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
-			return false;
-		}
-		return true;
+	int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
+	if (returnVal == 0) {
+		std::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
+		return false;
 	}
-	return false;
+	return true;
 }
 
 /**
@@ -338,6 +348,15 @@ std::vector<std::string> filesystem::lines(const std::string& filename, const st
 	return strings;
 }
 
+bool filesystem::remove(const std::string& name) {
+	int ret = PHYSFS_delete(name.c_str());
+	if (ret == 0) {
+		std::cout << "[ChaiLove] [filesystem] Failed to remove file or directory: " << getLastError() << std::endl;
+		return false;
+	}
+	return true;
+}
+
 FileInfo filesystem::getInfo(const std::string& path) {
 	FileInfo fileInfo;
 	PHYSFS_Stat stat;
@@ -367,6 +386,15 @@ FileInfo filesystem::getInfo(const std::string& path) {
 FileData filesystem::newFileData(const std::string& filepath) {
 	FileData f(filepath);
 	return f;
+}
+
+FileData filesystem::newFileData(const std::string& contents, const std::string& name) {
+	FileData f(contents, name);
+	return f;
+}
+
+std::string filesystem::getSaveDirectory() {
+	return "/libretro/saves";
 }
 
 bool filesystem::createDirectory(const std::string& name) {

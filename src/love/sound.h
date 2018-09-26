@@ -17,6 +17,7 @@ class sound {
 	bool hasAudio();
 	void unload();
 	void update();
+
 	~sound();
 
 	/**

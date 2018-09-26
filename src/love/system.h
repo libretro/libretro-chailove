@@ -121,6 +121,7 @@ class system {
 	 * @see love.system.getClipboardText
 	 */
 	system& setClipboardText(const std::string& text);
+	void updateVariables(config& t);
 
 	bool load(config& t);
 
