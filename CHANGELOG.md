@@ -4,13 +4,14 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.26.2 - 2018-09-25
+## 0.27.0 - 2018-09-25
 ### Features
 - Live updating of core options
 - Mounts `/libretro/core` as the directory where the core was loaded from
 - Adds `love.filesystem.getSaveDirectory()`
 - Adds `love.filesystem.newFileData(contents, name)`
 - Adds `love.filesystem.getExecutablePath()`
+- Adds `love.filesystem.remove()`
 
 ### Fixes
 - Fixed loading ChaiLove without active content

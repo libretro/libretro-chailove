@@ -85,6 +85,8 @@ class filesystem {
 	 * If the file exists in the .love but not in the save directory, it returns false as well.
 	 * An opened File prevents removal of the underlying file. Simply close the File to remove it.
 	 *
+	 * @param name The file or directory to remove.
+	 *
 	 * @return True if the file or directory was removed, false otherwise.
 	 */
 	bool remove(const std::string& name);
