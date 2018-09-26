@@ -222,14 +222,10 @@ bool filesystem::unmount(const std::string& archive) {
 }
 
 bool filesystem::mount(const char *archive, const std::string& mountpoint) {
-	// Allow mounting character pointers safely.
-	if (archive == NULL) {
-		return false;
-	}
 	return mount(std::string(archive), mountpoint);
 }
 
-std::string filesystem::getWorkingDirectory() {
+std::string filesystem::getExecutablePath() {
 	return std::string(PHYSFS_getBaseDir());
 }
 
@@ -239,25 +235,18 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint, bool appendToPath) {
 	// Protect against empty archive/mount points.
-	std::string finalArchive;
 	int append = appendToPath ? 1 : 0;
-	if (archive.length() <= 0 || mountpoint.length() <= 0) {
+	if (archive.length() <= 0) {
+		std::cout << "[ChaiLove] [filesystem] Mounting failed because archive was empty." << std::endl;
 		return false;
 	}
 
-	if (archive == ".") {
-		finalArchive = getWorkingDirectory();
-	}
-	else {
-		finalArchive = archive;
-	}
-
 	// Display a message.
-	std::cout << "[ChaiLove] [filesystem] Mounting " << finalArchive << " as " << mountpoint << std::endl;
+	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
 
 	// Use the simple mount method if we're mounting the root directory.
 	if (mountpoint == "/") {
-		int returnValue = PHYSFS_mount(finalArchive.c_str(), mountpoint.c_str(), append);
+		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 		if (returnValue == 0) {
 			std::cout << "[ChaiLove] [filesystem] Error mounting /: " << getLastError() << std::endl;
 			return false;
@@ -266,11 +255,11 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	}
 
 	// See if we're mounting a file.
-	if (isFile(finalArchive)) {
+	if (isFile(archive)) {
 		// Mount using a handle instead, since we're doing another archive.
-		PHYSFS_File* file = openFile(finalArchive);
+		PHYSFS_File* file = openFile(archive);
 		if (file != NULL) {
-			if (PHYSFS_mountHandle(file, finalArchive.c_str(), mountpoint.c_str(), append) == 0) {
+			if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), append) == 0) {
 				std::cout << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
 				return false;
 			}
@@ -280,15 +269,12 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	}
 
 	// Check if we're mounting a directory.
-	if (isDirectory(finalArchive)) {
-		int returnVal = PHYSFS_mount(finalArchive.c_str(), mountpoint.c_str(), append);
-		if (returnVal == 0) {
-			std::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
-			return false;
-		}
-		return true;
+	int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
+	if (returnVal == 0) {
+		std::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
+		return false;
 	}
-	return false;
+	return true;
 }
 
 /**

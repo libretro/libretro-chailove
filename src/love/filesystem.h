@@ -223,11 +223,11 @@ class filesystem {
 	std::vector<std::string> lines(const std::string& filename);
 
 	/**
-	 * Gets the current working directory.
+	 * Get the path to the executable that was used to run this application.
 	 *
-	 * @return The current working directory.
+	 * @return The base path of the application.
 	 */
-	std::string getWorkingDirectory();
+	std::string getExecutablePath();
 
 	std::string getLastError();
 };

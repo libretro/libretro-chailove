@@ -1,0 +1,201 @@
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex 3e22579..a32a01e 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -7,4 +7,3 @@[m [mnode_modules[m
+ /package.json[m
+ /.bsv[m
+ /*.mkv[m
+[31m-libretro-chailove-test.txt[m
+[1mdiff --git a/CHANGELOG.md b/CHANGELOG.md[m
+[1mindex 8d20826..089c67f 100644[m
+[1m--- a/CHANGELOG.md[m
+[1m+++ b/CHANGELOG.md[m
+[36m@@ -10,6 +10,7 @@[m [mand this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.[m
+ - Mounts `/libretro/core` as the directory where the core was loaded from[m
+ - Adds `love.filesystem.getSaveDirectory()`[m
+ - Adds `love.filesystem.newFileData(contents, name)`[m
+[32m+[m[32m- Adds `love.filesystem.getExecutablePath()`[m
+ [m
+ ### Fixes[m
+ - Fixed loading ChaiLove without active content[m
+[1mdiff --git a/src/love/filesystem.cpp b/src/love/filesystem.cpp[m
+[1mindex e7d2fae..98b892c 100644[m
+[1m--- a/src/love/filesystem.cpp[m
+[1m+++ b/src/love/filesystem.cpp[m
+[36m@@ -8,6 +8,7 @@[m
+ #include "filesystem/path.h"[m
+ #include "../ChaiLove.h"[m
+ #include "Types/FileSystem/FileInfo.h"[m
+[32m+[m[32m#include <SDL.h>[m
+ [m
+ using love::Types::FileSystem::FileInfo;[m
+ using love::Types::FileSystem::FileData;[m
+[36m@@ -222,14 +223,10 @@[m [mbool filesystem::unmount(const std::string& archive) {[m
+ }[m
+ [m
+ bool filesystem::mount(const char *archive, const std::string& mountpoint) {[m
+[31m-	// Allow mounting character pointers safely.[m
+[31m-	if (archive == NULL) {[m
+[31m-		return false;[m
+[31m-	}[m
+ 	return mount(std::string(archive), mountpoint);[m
+ }[m
+ [m
+[31m-std::string filesystem::getWorkingDirectory() {[m
+[32m+[m[32mstd::string filesystem::getExecutablePath() {[m
+ 	return std::string(PHYSFS_getBaseDir());[m
+ }[m
+ [m
+[36m@@ -239,25 +236,18 @@[m [mbool filesystem::mount(const std::string& archive, const std::string& mountpoint[m
+ [m
+ bool filesystem::mount(const std::string& archive, const std::string& mountpoint, bool appendToPath) {[m
+ 	// Protect against empty archive/mount points.[m
+[31m-	std::string finalArchive;[m
+ 	int append = appendToPath ? 1 : 0;[m
+[31m-	if (archive.length() <= 0 || mountpoint.length() <= 0) {[m
+[32m+[m	[32mif (archive.length() <= 0) {[m
+[32m+[m		[32mstd::cout << "[ChaiLove] [filesystem] Mounting failed because archive was empty." << std::endl;[m
+ 		return false;[m
+ 	}[m
+ [m
+[31m-	if (archive == ".") {[m
+[31m-		finalArchive = getWorkingDirectory();[m
+[31m-	}[m
+[31m-	else {[m
+[31m-		finalArchive = archive;[m
+[31m-	}[m
+[31m-[m
+ 	// Display a message.[m
+[31m-	std::cout << "[ChaiLove] [filesystem] Mounting " << finalArchive << " as " << mountpoint << std::endl;[m
+[32m+[m	[32mstd::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;[m
+ [m
+ 	// Use the simple mount method if we're mounting the root directory.[m
+ 	if (mountpoint == "/") {[m
+[31m-		int returnValue = PHYSFS_mount(finalArchive.c_str(), mountpoint.c_str(), append);[m
+[32m+[m		[32mint returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);[m
+ 		if (returnValue == 0) {[m
+ 			std::cout << "[ChaiLove] [filesystem] Error mounting /: " << getLastError() << std::endl;[m
+ 			return false;[m
+[36m@@ -266,11 +256,11 @@[m [mbool filesystem::mount(const std::string& archive, const std::string& mountpoint[m
+ 	}[m
+ [m
+ 	// See if we're mounting a file.[m
+[31m-	if (isFile(finalArchive)) {[m
+[32m+[m	[32mif (isFile(archive)) {[m
+ 		// Mount using a handle instead, since we're doing another archive.[m
+[31m-		PHYSFS_File* file = openFile(finalArchive);[m
+[32m+[m		[32mPHYSFS_File* file = openFile(archive);[m
+ 		if (file != NULL) {[m
+[31m-			if (PHYSFS_mountHandle(file, finalArchive.c_str(), mountpoint.c_str(), append) == 0) {[m
+[32m+[m			[32mif (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), append) == 0) {[m
+ 				std::cout << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;[m
+ 				return false;[m
+ 			}[m
+[36m@@ -280,15 +270,12 @@[m [mbool filesystem::mount(const std::string& archive, const std::string& mountpoint[m
+ 	}[m
+ [m
+ 	// Check if we're mounting a directory.[m
+[31m-	if (isDirectory(finalArchive)) {[m
+[31m-		int returnVal = PHYSFS_mount(finalArchive.c_str(), mountpoint.c_str(), append);[m
+[31m-		if (returnVal == 0) {[m
+[31m-			std::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;[m
+[31m-			return false;[m
+[31m-		}[m
+[31m-		return true;[m
+[32m+[m	[32mint returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);[m
+[32m+[m	[32mif (returnVal == 0) {[m
+[32m+[m		[32mstd::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;[m
+[32m+[m		[32mreturn false;[m
+ 	}[m
+[31m-	return false;[m
+[32m+[m	[32mreturn true;[m
+ }[m
+ [m
+ /**[m
+[1mdiff --git a/src/love/filesystem.h b/src/love/filesystem.h[m
+[1mindex b263d7b..3b2c562 100644[m
+[1m--- a/src/love/filesystem.h[m
+[1m+++ b/src/love/filesystem.h[m
+[36m@@ -223,11 +223,11 @@[m [mclass filesystem {[m
+ 	std::vector<std::string> lines(const std::string& filename);[m
+ [m
+ 	/**[m
+[31m-	 * Gets the current working directory.[m
+[32m+[m	[32m * Get the path to the executable that was used to run this application.[m
+ 	 *[m
+[31m-	 * @return The current working directory.[m
+[32m+[m	[32m * @return The base path of the application.[m
+ 	 */[m
+[31m-	std::string getWorkingDirectory();[m
+[32m+[m	[32mstd::string getExecutablePath();[m
+ [m
+ 	std::string getLastError();[m
+ };[m
+[1mdiff --git a/src/love/script.cpp b/src/love/script.cpp[m
+[1mindex 1b8ae1f..9269419 100644[m
+[1m--- a/src/love/script.cpp[m
+[1m+++ b/src/love/script.cpp[m
+[36m@@ -290,10 +290,10 @@[m [mscript::script(const std::string& file) {[m
+ 	chai.add(fun(&filesystem::createDirectory), "createDirectory");[m
+ 	chai.add(fun(&filesystem::isSymlink), "isSymlink");[m
+ 	chai.add(fun(&filesystem::isFile), "isFile");[m
+[31m-	chai.add(fun(&filesystem::getWorkingDirectory), "getWorkingDirectory");[m
+ 	chai.add(fun(&filesystem::write), "write");[m
+ 	chai.add(fun(&filesystem::remove), "remove");[m
+ 	chai.add(fun(&filesystem::exists), "exists");[m
+[32m+[m	[32mchai.add(fun(&filesystem::getExecutablePath), "getExecutablePath");[m
+ 	chai.add(fun(&filesystem::getSaveDirectory), "getSaveDirectory");[m
+ 	chai.add(fun(&filesystem::getInfo), "getInfo");[m
+ 	chai.add(fun<FileData, filesystem, const std::string&>(&filesystem::newFileData), "newFileData");[m
+[1mdiff --git a/test/.gitignore b/test/.gitignore[m
+[1mindex 852dc25..41ee3e1 100644[m
+[1m--- a/test/.gitignore[m
+[1m+++ b/test/.gitignore[m
+[36m@@ -1,2 +1,2 @@[m
+ /test[m
+[31m-/createDirectoryTest[m
+[32m+[m[32mcreateDirectoryTest[m
+[1mdiff --git a/test/unittests/filesystem.chai b/test/unittests/filesystem.chai[m
+[1mindex c1285a3..9cd6c81 100644[m
+[1m--- a/test/unittests/filesystem.chai[m
+[1m+++ b/test/unittests/filesystem.chai[m
+[36m@@ -62,13 +62,21 @@[m [massert_equal(newFileData.getString(), "Hello World!", "    newFileData.getString[m
+ assert_equal(love.filesystem.getSaveDirectory(), "/libretro/saves", "love.filesystem.getSaveDirectory()")[m
+ [m
+ // createDirectory()[m
+[31m-var createDirectoryReturn = love.filesystem.createDirectory("test/createDirectoryTest")[m
+[32m+[m[32mvar createDirectoryReturn = love.filesystem.createDirectory("test/unittests/createDirectoryTest")[m
+ assert(createDirectoryReturn, "love.filesystem.createDirectory()")[m
+ [m
+ // write()[m
+[31m-var writeFileReturn = love.filesystem.write("test/createDirectoryTest/test.md", "# Test\n\nHello World!");[m
+[32m+[m[32mvar writeFileReturn = love.filesystem.write("test/unittests/createDirectoryTest/test.md", "# Test\n\nHello World!");[m
+ assert(writeFileReturn, "love.filesystem.write()")[m
+ [m
+[32m+[m[32m// remove()[m
+[32m+[m[32massert(love.filesystem.exists("createDirectoryTest/test.md"), "love.filesystem.remove()")[m
+[32m+[m[32massert(love.filesystem.exists("createDirectoryTest"), "    directory exists")[m
+[32m+[m[32massert(love.filesystem.remove("test/unittests/createDirectoryTest/test.md"), "    remove file")[m
+[32m+[m[32massert_not(love.filesystem.exists("createDirectoryTest/test.md"), "    file is gone")[m
+[32m+[m[32massert(love.filesystem.remove("test/unittests/createDirectoryTest"), "    remove directory")[m
+[32m+[m[32massert_not(love.filesystem.exists("createDirectoryTest"), "    directory is gone")[m
+[32m+[m
+ // mount()[m
+ var mountResult = love.filesystem.mount("assets/hello.zip", "hello")[m
+ assert(mountResult, "love.filesystem.mount()")[m
+[36m@@ -94,14 +102,3 @@[m [mrequiretestFileLoaded = false[m
+ requireReturn = require("assets.requiretest")[m
+ assert(requireReturn, "    double call")[m
+ assert_not(requiretestFileLoaded, "    not loaded twice")[m
+[31m-[m
+[31m-// remove()[m
+[31m-var removeTestDestination = "libretro-chailove-test.txt"[m
+[31m-print(removeTestDestination)[m
+[31m-[m
+[31m-print(love.filesystem.getDirectoryItems("/libretro/saves"))[m
+[31m-[m
+[31m-love.filesystem.write(removeTestDestination, "Hello World!")[m
+[31m-assert(love.filesystem.exists("libretro/saves/" + removeTestDestination), "love.filesystem.write(saveDirectory)")[m
+[31m-//love.filesystem.remove(removeTestDestination)[m
+[31m-//assert_not(love.filesystem.exists(removeTestDestination), "love.filesystem.remove()")[m
