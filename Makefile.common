@@ -47,7 +47,7 @@ ifneq ($(STATIC_LINKING), 1)
 		$(CORE_DIR)/vendor/libretro-common/vfs/*.c \
 	)
 endif
-ifeq ($(__ARM_NEON__),1)
+ifeq ($(ARM_NEON),1)
 	OBJ += \
 		$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.o \
 		audio/drivers_resampler/cc_resampler_neon.o \
