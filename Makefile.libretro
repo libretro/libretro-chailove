@@ -584,9 +584,13 @@ CORE_DIR := .
 
 include Makefile.common
 
-CFLAGS += -DWANT_GRIFFIN
+ifeq ($(DEBUG), 0)
+   FLAGS += -O3 -ffast-math -fomit-frame-pointer
+else
+   FLAGS += -O0 -g
+endif
 
-OBJECTS := $(SOURCES_C:.c=.o)
+CFLAGS += -DWANT_GRIFFIN
 
 DEFINES := $(COREDEFINES) $(PLATFORM_DEFINES)
 
