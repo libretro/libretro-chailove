@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixes
 - Fixes undefined reference to `process_sinc_neon_asm()`
   - [#322](https://github.com/libretro/libretro-chailove/issues/322) found by [@ToKe79](https://github.com/ToKe79)
+- Fixes `love.graphics.draw(image)` with no x and y parameter
 
 ### Chores
 - Update libretro-common
