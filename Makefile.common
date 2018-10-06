@@ -46,13 +46,8 @@ ifneq ($(STATIC_LINKING), 1)
 		$(CORE_DIR)/vendor/libretro-common/streams/file_stream.c \
 		$(CORE_DIR)/vendor/libretro-common/vfs/*.c \
 	)
-endif
-ifeq ($(__ARM_NEON__),1)
-	OBJ += \
-		$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.o \
-		audio/drivers_resampler/cc_resampler_neon.o \
-		memory/neon/memcpy-neon.o
-	FLAGS += -DHAVE_NEON
+    # Ensure the sinc_resampler_neon is available for ARM NEON devices.
+	OBJECTS += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.o
 endif
 
 # stb_vorbis
