@@ -115,4 +115,5 @@ The following individuals contributed to ChaiLove in some way:
 - [@fetzerch](http://github.com/fetzerch)
 - [@bparker06](https://github.com/bparker06)
 - [@twinaphex](http://github.com/twinaphex)
+- [@ToKe79](https://github.com/ToKe79)
 - [@baxysquare](https://github.com/baxysquare) for the [Logo](docs/chailove.png)
