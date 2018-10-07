@@ -10,7 +10,7 @@ float timer::getDelta() {
 	return m_delta;
 }
 
-void timer::step(float delta) {
+float timer::step(float delta) {
 	m_delta = delta;
 	m_deltaCounter += delta;
 	m_frameCounter++;
@@ -20,6 +20,8 @@ void timer::step(float delta) {
 		m_frameCounter = 0;
 		m_deltaCounter = 0;
 	}
+
+	return m_delta;
 }
 
 int timer::getFPS() {

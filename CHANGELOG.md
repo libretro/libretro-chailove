@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## 0.28.0 - Unreleased
+### Features
+- `love.timer.step()` now returns `dt`
+
 ### Fixes
 - Fixes undefined reference to `process_sinc_neon_asm()`
   - [#322](https://github.com/libretro/libretro-chailove/issues/322) found by [@ToKe79](https://github.com/ToKe79)

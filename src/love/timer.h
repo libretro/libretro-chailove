@@ -9,7 +9,7 @@ namespace love {
 class timer {
 	public:
 	timer();
-	void step(float delta);
+	float step(float delta);
 
 	/**
 	 * Returns the time between the last two frames.
