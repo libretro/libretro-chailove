@@ -4,6 +4,22 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.28.0 - 2018-10-07
+### Features
+- `love.timer.step()` now returns `dt`
+- Adds `string::replace(search, replace)` to replace all instances of a string
+
+### Fixes
+- Fixes undefined reference to `process_sinc_neon_asm()`
+  - [#322](https://github.com/libretro/libretro-chailove/issues/322) found by [@ToKe79](https://github.com/ToKe79)
+- Fixes `love.graphics.draw(image)` with no x and y parameter
+
+### Chores
+- Update libretro-common
+- Update PhysFS
+- Rework the testing framework
+- Fix Doxygen warnings
+
 ## 0.27.0 - 2018-09-25
 ### Features
 - Live updating of core options

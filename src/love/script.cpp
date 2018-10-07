@@ -91,6 +91,24 @@ script::script(const std::string& file) {
 	chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
 	chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
 
+	// Global Helpers
+	// string::replace(std::string search, std::string replace)
+	chai.add(fun([](const std::string& subject, const std::string& search, const std::string& replace) {
+		std::string newSubject(subject);
+		size_t pos = 0;
+		while ((pos = newSubject.find(search, pos)) != std::string::npos) {
+			newSubject.replace(pos, search.length(), replace);
+			pos += replace.length();
+		}
+		return newSubject;
+	}), "replace");
+	//  string::replace(char search, char replace)
+	chai.add(fun([](const std::string& subject, char search, char replace) {
+		std::string newSubject(subject);
+		std::replace(newSubject.begin(), newSubject.end(), search, replace);
+		return newSubject;
+	}), "replace");
+
 	// List
 	auto listModule = std::make_shared<chaiscript::Module>();
 	chaiscript::bootstrap::standard_library::list_type<std::list<chaiscript::Boxed_Value> >("List", *listModule);

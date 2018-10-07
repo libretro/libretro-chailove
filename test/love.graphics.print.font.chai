@@ -1,10 +1,7 @@
-class graphics_print_font {
-	var name;
-	var ttffont;
-	var pngfont;
+class love_graphics_print_font {
 
-	def graphics_print_font() {
-		this.name = "graphics.print(font)";
+	def love_graphics_print_font() {
+		// Nothing.
 	}
 
 	def load() {
@@ -31,5 +28,7 @@ class graphics_print_font {
 		love.graphics.print(text, love.graphics.getWidth() / 2.0f - width / 2.0f, love.graphics.getHeight() - height)
 	}
 
-	def update(delta) {}
+	def update(delta) {
+		// Nothing.
+	}
 };

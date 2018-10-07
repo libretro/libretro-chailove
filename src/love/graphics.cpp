@@ -97,7 +97,7 @@ graphics& graphics::line(int x1, int y1, int x2, int y2) {
 }
 
 graphics& graphics::draw(Image* image) {
-	return draw(image);
+	return draw(image, 0, 0);
 }
 
 graphics& graphics::draw(Image* image, int x, int y) {

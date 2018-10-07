@@ -2,11 +2,13 @@
  * ChaiLove: Testing Framework
  */
 global testNames = [
-	"graphics_print",
-	"graphics_draw",
-	"graphics_point",
-	"mouse_getPosition",
-	"graphics_print_font"
+	"love.graphics.print",
+	"love.graphics.print.font",
+	"love.graphics.draw",
+	"love.graphics.point",
+	"love.mouse.getPosition",
+	"love.audio.play",
+	"love.graphics.draw.scaling"
 ]
 global tests = []
 global currenttest = 0
@@ -15,17 +17,24 @@ def conf(t) {
 	t.window.width = 460
 	t.window.height = 320
 	t.console = true
-	t.version = "0.27.0"
 }
 
 def load() {
+	print("------------------")
+	print("------------------")
+	print("- ChaiLove Tests -")
+	print("------------------")
+	print("------------------")
+
 	// Set the background to grey, so that we can see screen size.
 	love.graphics.setBackgroundColor(50, 50, 50)
 
 	// Index the test cases.
 	for (name : testNames) {
 		love.filesystem.load(name + ".chai");
-		tests.push_back(eval(name + "()"));
+		var className = name.replace('.', '_')
+		print(className)
+		tests.push_back(eval(className + "()"));
 	}
 
 	// Load all the tests.
@@ -46,7 +55,7 @@ def draw() {
 	// Use the default font.
 	love.graphics.setFont()
 	love.graphics.setColor(255, 255, 255)
-	love.graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + tests[currenttest].name, 5, 5);
+	love.graphics.print("Test " + to_string(currenttest + 1) + "/" + to_string(tests.size()) + ": " + testNames[currenttest], 5, 5);
 	love.graphics.print("FPS " + to_string(love.timer.getFPS()), 5, 20);
 
 	love.graphics.print("Username: " + love.system.getUsername(), 5, 35)

@@ -1,0 +1,33 @@
+class love_graphics_draw_scaling {
+	def love_graphics_draw_scaling() {
+		// Nothing.
+	}
+
+	def load() {
+		this.logo = love.image.newImageData("assets/graphics_draw.png")
+		this.angle = 0.0f
+		this.scale = 1.0f
+	}
+
+	def draw() {
+		love.graphics.setColor(255, 0, 0)
+		//love.graphics.draw(logo, graphics.getWidth() / 2, graphics.getHeight() / 2, math.rad(angle), 2, 2, 64/2, 64/2)
+		love.graphics.point(love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f)
+
+		love.graphics.draw(this.logo, love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f, love.math.rad(this.angle), this.scale, this.scale, this.logo.getWidth() / 2.0f, this.logo.getHeight() / 2.0f)
+		love.graphics.point(love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f)
+		//love.graphics.point(graphics.getWidth() / 2
+
+		love.graphics.print("Press x/z", 100, 100)
+	}
+
+	def update(dt) {
+		this.angle = this.angle - dt * 180.0f
+		if (love.keyboard.isDown("x")) {
+			this.scale = this.scale + dt * 1.0f
+		}
+		else if (love.keyboard.isDown("z")) {
+			this.scale = this.scale - dt * 1.0f
+		}
+	}
+};

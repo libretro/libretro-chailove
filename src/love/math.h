@@ -37,7 +37,7 @@ class math {
 	 * Sets the random seed to a random seed between the given min and max values.
 	 *
 	 * @param min The lower 32 bits of the seed value.
-	 * @param high The higher 32 bits of the seed value.
+	 * @param max The higher 32 bits of the seed value.
 	 *
 	 * @return The math module, to allow for method chaining.
 	 *

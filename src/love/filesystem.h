@@ -43,7 +43,7 @@ class filesystem {
 	/**
 	 * Read the contents of a file.
 	 *
-	 * @param file The name (and path) of the file.
+	 * @param filename The name (and path) of the file.
 	 *
 	 * @return The contents of the file.
 	 *
@@ -72,7 +72,7 @@ class filesystem {
 	/**
 	 * Get the size in bytes of a file.
 	 *
-	 * @param The file to get the size of.
+	 * @param file The file to get the size of.
 	 *
 	 * @return The size of the given file.
 	 */
@@ -105,7 +105,7 @@ class filesystem {
 	/**
 	 * Creates a new FileData from a file on the storage device.
 	 *
-	 * @param path Path to the file.
+	 * @param filepath Path to the file.
 	 *
 	 * @return The new FileData, or nil if an error occurred.
 	 *
