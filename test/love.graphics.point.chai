@@ -1,0 +1,16 @@
+class love_graphics_point {
+	def love_graphics_point() {}
+
+	def load() {
+		// Nothing.
+	}
+
+	def draw() {
+		// graphics.setColor(0, 255, 0)
+		love.graphics.point(100, 200).point(200, 300)
+	}
+
+	def update(delta) {
+		// Nothing.
+	}
+};

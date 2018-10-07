@@ -25,3 +25,10 @@ love.system.setClipboardText("Hello World!")
 
 // getClipboardText
 assert_equal(love.system.getClipboardText(), "Hello World!", "love.system.getClipboardText()")
+
+// string::replace()
+var replaceSubject = "Hello World! Hello World!"
+var newReplaceString = replaceSubject.replace("World", "Space")
+assert_equal(newReplaceString, "Hello Space! Hello Space!", "string::replace(string, string)")
+newReplaceString = replaceSubject.replace('!', '.')
+assert_equal(newReplaceString, "Hello World. Hello World.", "string::replace(char, char)")

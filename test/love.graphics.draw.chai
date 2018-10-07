@@ -1,49 +1,20 @@
-/**
- * love.graphics.draw testing
- *
- * An alternative test with a different file name.
- *
- * retroarch -L chailove_libretro.so test/love.graphics.draw.chai
- */
+class love_graphics_draw {
 
-global keyPressed = "a";
-global keyReleased = "b";
-global logo
-global angle = 0.0f
-global scale = 1.0f
-
-def load() {
-	logo = love.image.newImageData("assets/graphics_draw.png")
-	love.graphics.setBackgroundColor(50, 50, 100)
-}
-
-def update(dt) {
-	angle = angle - dt * 180.0f
-
-	if (keyPressed == "up") {
-		scale = scale + dt * 1.0f
+	def love_graphics_draw() {
+		// Nothing.
 	}
-	else if (keyPressed == "down") {
-		scale = scale - dt * 1.0f
+
+	def load() {
+		this.image = love.graphics.newImage("assets/graphics_draw.png");
+		this.x = love.graphics.getWidth() / 2.0f - this.image.getWidth() / 2.0f;
+		this.y = love.graphics.getHeight() / 2.0f - this.image.getHeight() / 2.0f;
 	}
-}
 
-def draw() {
-	love.graphics.print("Key Pressed: " + keyPressed, 5, 20)
-	love.graphics.print("Key Released: " + keyReleased, 5, 100)
+	def draw() {
+		love.graphics.draw(this.image, this.x, this.y);
+	}
 
-	love.graphics.setColor(255, 0, 0)
-	//love.graphics.draw(logo, graphics.getWidth() / 2, graphics.getHeight() / 2, math.rad(angle), 2, 2, 64/2, 64/2)
-	love.graphics.point(love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f)
-	love.graphics.draw(logo, love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f, love.math.rad(angle), scale, scale, logo.getWidth() / 2.0f, logo.getHeight() / 2.0f)
-	love.graphics.point(love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 2.0f)
-	//love.graphics.point(graphics.getWidth() / 2
-}
-
-def keypressed(key, scancode) {
-	keyPressed = key
-}
-
-def keyreleased(key, scancode) {
-	keyReleased = key
-}
+	def update(delta) {
+		// Nothing.
+	}
+};
