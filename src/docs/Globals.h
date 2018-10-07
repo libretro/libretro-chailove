@@ -1,6 +1,13 @@
 #ifndef SRC_CHAILOVEDOCS_H_
 #define SRC_CHAILOVEDOCS_H_
 
+/**
+ * @file Globals.h
+ * @page globals Globals
+ *
+ * This provides documentation about globals available through ChaiLove.
+ */
+
 #include <string>
 
 /**
@@ -72,5 +79,27 @@ class List {
  * @endcode
  */
 bool require(const std::string& module);
+
+/**
+ * Provides some additional functionality to the basic string object.
+ */
+class String {
+	public:
+	/**
+	 * Replaces all instances of the search string with the given replace string.
+	 *
+	 * @param search The string to search for that should be replaced.
+	 * @param replace The string that will replace the found string.
+	 *
+	 * @return The new string with the replaced strings.
+	 *
+	 * @code
+	 * var hello = "Hello World!"
+	 * var goodbye = hello.replace("Hello", "Goodbye")
+	 * // => "Goodbye World!"
+	 * @endcode
+	 */
+	std::string replace(const std::string& search, const std::string& replace);
+};
 
 #endif  // SRC_CHAILOVEDOCS_H_

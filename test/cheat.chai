@@ -1,7 +1,7 @@
 /**
  * Cheat Test
  *
- * retroarch -L chailove_libretro.so test/sound.chai
+ * retroarch -L chailove_libretro.so test/cheats.chai
  */
 
 global lastcheatcode

@@ -1,0 +1,19 @@
+class love_audio_play {
+	def love_audio_play() {
+		// Nothing.
+	}
+
+	def load() {
+		this.chailovesound = love.audio.newSource("unittests/assets/chailove.ogg")
+	}
+
+	def draw() {
+		love.graphics.print("Press the X key", 100, 200)
+	}
+
+	def update(delta) {
+		if (love.keyboard.isDown("x")) {
+			love.audio.play(this.chailovesound)
+		}
+	}
+};

@@ -1,11 +1,12 @@
-class mouse_getPosition {
-	var name;
+class love_mouse_getPosition {
 
-	def mouse_getPosition() {
-		this.name = "mouse.getPosition()";
+	def love_mouse_getPosition() {
+		// Nothing.
 	}
 
-	def load() {}
+	def load() {
+		// Nothing.
+	}
 
 	def draw() {
 		love.graphics.setColor(255, 150, 0)
@@ -14,5 +15,7 @@ class mouse_getPosition {
 		love.graphics.print(output, pos.x, pos.y);
 	}
 
-	def update(delta) {}
+	def update(delta) {
+		// Nothing.
+	}
 };
