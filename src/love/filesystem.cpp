@@ -72,8 +72,12 @@ void filesystem::mountlibretro() {
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		save_dir = *save_dir ? save_dir : system_dir;
 		mount(save_dir, "/libretro/saves", false);
-	} else {
+	} else if (system_dir) {
+		// Have the system directory be the save directory if available.
 		mount(save_dir = system_dir, "/libretro/saves", false);
+	} else {
+		// Save directory becomes the current working directory.
+		mount(save_dir = ".", "/libretro/saves", false);
 	}
 
 	// Ensure the write directory is set to the Save Directory.
@@ -171,10 +175,11 @@ char* filesystem::readChar(const std::string& filename) {
 std::string filesystem::read(const std::string& filename) {
 	// Retrieve a character buffer.
 	char* myBuf = readChar(filename);
-	if (myBuf == NULL) {
-		return std::string("");
+	std::string output;
+	if (myBuf != NULL) {
+		output = std::string(myBuf);
 	}
-	return std::string(myBuf);
+	return output;
 }
 
 void* filesystem::readBuffer(const std::string& filename, int& size) {
@@ -222,6 +227,9 @@ bool filesystem::unmount(const std::string& archive) {
 }
 
 bool filesystem::mount(const char *archive, const std::string& mountpoint) {
+	if (strlen(archive) == 0) {
+		return false;
+	}
 	return mount(std::string(archive), mountpoint);
 }
 
