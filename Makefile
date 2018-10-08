@@ -16,16 +16,16 @@ all: $(TARGET)
 	$(MAKE) $(TARGET)
 
 $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
-	-$(CXX) -o $@ $^ $(LDFLAGS)
+	$(CXX) -Wfatal-errors -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp | vendor/libretro-common/include/libretro.h
-	-$(CXX) -c -o $@ $< $(CXXFLAGS)
+	$(CXX) -Wfatal-errors -c -o $@ $< $(CXXFLAGS)
 
 %.o: %.c | vendor/libretro-common/include/libretro.h
-	-$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -Wfatal-errors -c -o $@ $< $(CFLAGS)
 
 %.o: %.m | vendor/libretro-common/include/libretro.h
-	-$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -Wfatal-errors -c -o $@ $< $(CFLAGS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
