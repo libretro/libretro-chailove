@@ -48,6 +48,10 @@ ifneq ($(STATIC_LINKING), 1)
 	)
     # Ensure the sinc_resampler_neon is available for ARM NEON devices.
 	OBJECTS += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.o
+    
+    # MD5
+    FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
+    SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
 endif
 
 # stb_vorbis
@@ -172,10 +176,6 @@ FLAGS += -I$(CORE_DIR)/vendor/Snippets
 
 # STB
 FLAGS += -I$(CORE_DIR)/vendor/stb
-
-# MD5
-FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
-SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
 
 # TinySHA1
 FLAGS += -I$(CORE_DIR)/vendor/TinySHA1
