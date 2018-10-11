@@ -96,7 +96,9 @@ class system {
 	/**
 	 * Execute an operating system shell command. This is like the C system() function.
 	 *
-	 * @return True or False depending on whether or not the command started properly.
+	 * @param command The command to run.
+	 *
+	 * @return Returns true or false depending on the process succeeded to execute.
 	 */
 	bool execute(const std::string& command);
 

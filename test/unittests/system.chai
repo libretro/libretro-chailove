@@ -16,6 +16,7 @@ assert(true, "love.system.getUsername() == '" + username + "'")
 
 // getOS()
 if (love.system.getOS() == "Linux") {
+	// Run in foreground.
 	var result = love.system.execute("uname")
 	assert(result, "love.system.execute('uname')")
 }
@@ -32,3 +33,7 @@ var newReplaceString = replaceSubject.replace("World", "Space")
 assert_equal(newReplaceString, "Hello Space! Hello Space!", "string::replace(string, string)")
 newReplaceString = replaceSubject.replace('!', '.')
 assert_equal(newReplaceString, "Hello World. Hello World.", "string::replace(char, char)")
+
+// string::trim()
+var trimSubject = "   Hello World!   "
+assert_equal(trimSubject.trim(), "Hello World!", "string::trim()")

@@ -76,6 +76,7 @@ chaiscript::Boxed_Value script::eval(const std::string& code, const std::string&
 	std::string contents = replaceString(code, "\t", "  ");
 	return chai.eval(contents, Exception_Handler(), filename);
 }
+
 std::string script::evalString(const std::string& code, const std::string& filename) {
 	// Replace possible problematic tabs, and evaluate the script.
 	std::string contents = replaceString(code, "\t", "  ");
@@ -102,12 +103,22 @@ script::script(const std::string& file) {
 		}
 		return newSubject;
 	}), "replace");
+
 	//  string::replace(char search, char replace)
 	chai.add(fun([](const std::string& subject, char search, char replace) {
 		std::string newSubject(subject);
 		std::replace(newSubject.begin(), newSubject.end(), search, replace);
 		return newSubject;
 	}), "replace");
+
+	//  string::trim()
+	chai.add(fun([](const std::string& subject) {
+		std::string result(subject);
+		std::string chars = "\t\n\v\f\r ";
+		result.erase(0, result.find_first_not_of(chars));
+		result.erase(0, result.find_last_not_of(chars));
+		return result;
+	}), "trim");
 
 	// List
 	auto listModule = std::make_shared<chaiscript::Module>();
@@ -330,9 +341,9 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getVersion), "getVersion");
 	chai.add(fun(&system::getVersionString), "getVersionString");
 	chai.add(fun(&system::getUsername), "getUsername");
-	chai.add(fun(&system::execute), "execute");
 	chai.add(fun(&system::getClipboardText), "getClipboardText");
 	chai.add(fun(&system::setClipboardText), "setClipboardText");
+	chai.add(fun(&system::execute), "execute");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");

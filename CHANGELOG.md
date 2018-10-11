@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixes
 - Fixed save_dir mounting
 
+### Features
+- Added `string::trim()`
+
 ## 0.28.0 - 2018-10-07
 ### Features
 - `love.timer.step()` now returns `dt`
