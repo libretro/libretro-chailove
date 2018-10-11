@@ -78,7 +78,6 @@ void retro_set_environment(retro_environment_t cb) {
  * libretro callback; Updates the core option variables.
  */
 static void update_variables(void) {
-	std::cout << "[ChaiLove] [libretro] update_variables()" << std::endl;
 	ChaiLove* app = ChaiLove::getInstance();
 	app->system.updateVariables(app->config);
 }
@@ -314,7 +313,6 @@ void frame_time_cb(retro_usec_t usec) {
  * libretro callback; Load the given game.
  */
 bool retro_load_game(const struct retro_game_info *info) {
-	std::cout << "[ChaiLove] retro_load_game" << std::endl;
 	// Update the core options.
 	update_variables();
 
