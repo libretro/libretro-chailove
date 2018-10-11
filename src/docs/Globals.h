@@ -110,8 +110,14 @@ class String {
 	 * var hello = "    Hello World!    "
 	 * var result = hello.trim()
 	 * // => "Hello World!"
+     * @endcode
 	 */
 	std::string trim();
+    
+	/**
+	 * Splits a string by the given token.
+	 */
+	std::string split(const std::string& token);
 };
 
 #endif  // SRC_CHAILOVEDOCS_H_
