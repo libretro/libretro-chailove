@@ -6,7 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.28.1 - Unreleased
 ### Fixes
-- Fixed save_dir mounting
+- Fixed `/libretro/saves` mounting
+
+### Features
+- Added `string::trim()`
+- Added `string::split()`
 
 ## 0.28.0 - 2018-10-07
 ### Features
