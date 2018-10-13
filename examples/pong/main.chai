@@ -6,16 +6,6 @@ global pongSound
 global ball
 
 /**
- * ChaiLove callback; Configure the application.
- */
-def conf(t) {
-  t.window.width = 640
-  t.window.height = 480
-  //t.modules.sound = false
-  t.console = true
-}
-
-/**
  * ChaiLove callback; Load the application.
  */
 def load() {
@@ -29,7 +19,6 @@ def load() {
     Player(false, 80.0f, love.graphics.getHeight() / 2.0f),
     Player(true, love.graphics.getWidth() - 80.0f, love.graphics.getHeight() / 2.0f)
   ]
-
 }
 
 /**

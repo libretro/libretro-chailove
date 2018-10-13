@@ -100,6 +100,24 @@ class String {
 	 * @endcode
 	 */
 	std::string replace(const std::string& search, const std::string& replace);
+
+	/**
+	 * Returns a trimmed version of the given string.
+	 *
+	 * @return A new string with trimmed left and right.
+	 *
+	 * @code
+	 * var hello = "    Hello World!    "
+	 * var result = hello.trim()
+	 * // => "Hello World!"
+     * @endcode
+	 */
+	std::string trim();
+    
+	/**
+	 * Splits a string by the given token.
+	 */
+	std::string split(const std::string& token);
 };
 
 #endif  // SRC_CHAILOVEDOCS_H_

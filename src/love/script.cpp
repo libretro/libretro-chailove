@@ -58,7 +58,7 @@ bool script::loadModule(const std::string& moduleName) {
 
 bool script::loadModuleRequire(const std::string& moduleName) {
 	// Check if the module has already been loaded.
-	std::string filename = replaceString(moduleName, ".", "/");
+	std::string filename = replaceString(replaceString(moduleName, ".chai", ""), ".", "/");
 	if (std::find(m_requiremodules.begin(), m_requiremodules.end(), filename) != m_requiremodules.end()) {
 		return true;
 	}
@@ -76,6 +76,7 @@ chaiscript::Boxed_Value script::eval(const std::string& code, const std::string&
 	std::string contents = replaceString(code, "\t", "  ");
 	return chai.eval(contents, Exception_Handler(), filename);
 }
+
 std::string script::evalString(const std::string& code, const std::string& filename) {
 	// Replace possible problematic tabs, and evaluate the script.
 	std::string contents = replaceString(code, "\t", "  ");
@@ -102,12 +103,42 @@ script::script(const std::string& file) {
 		}
 		return newSubject;
 	}), "replace");
-	//  string::replace(char search, char replace)
+
+	// string::replace(char search, char replace)
 	chai.add(fun([](const std::string& subject, char search, char replace) {
 		std::string newSubject(subject);
 		std::replace(newSubject.begin(), newSubject.end(), search, replace);
 		return newSubject;
 	}), "replace");
+
+	// string::trim()
+	chai.add(fun([](const std::string& subject) {
+		std::string result(subject);
+		std::string chars = "\t\n\v\f\r ";
+		result.erase(0, result.find_first_not_of(chars));
+		result.erase(0, result.find_last_not_of(chars));
+		return result;
+	}), "trim");
+
+	// string::split()
+	chai.add(fun([](const std::string& subject, const std::string& token) {
+		std::string str(subject);
+		std::vector<std::string> result;
+		while (str.size()) {
+			int index = str.find(token);
+			if (index != std::string::npos) {
+				result.push_back(str.substr(0, index));
+				str = str.substr(index + token.size());
+				if (str.size() == 0) {
+					result.push_back(str);
+				}
+			} else {
+				result.push_back(str);
+				str = "";
+			}
+		}
+		return result;
+	}), "split");
 
 	// List
 	auto listModule = std::make_shared<chaiscript::Module>();
@@ -330,9 +361,9 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getVersion), "getVersion");
 	chai.add(fun(&system::getVersionString), "getVersionString");
 	chai.add(fun(&system::getUsername), "getUsername");
-	chai.add(fun(&system::execute), "execute");
 	chai.add(fun(&system::getClipboardText), "getClipboardText");
 	chai.add(fun(&system::setClipboardText), "setClipboardText");
+	chai.add(fun(&system::execute), "execute");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");
@@ -407,12 +438,13 @@ script::script(const std::string& file) {
 		// Load the main.chai file.
 		::filesystem::path p(file.c_str());
 		std::string extension(p.extension());
+		loadModuleRequire("conf");
 		if (extension == "chailove" || extension == "chaigame") {
-			mainLoaded = loadModule("main.chai");
+			mainLoaded = loadModuleRequire("main");
 		} else {
 			// Otherwise, load the actual file.
 			std::string filename(p.filename());
-			mainLoaded = loadModule(filename);
+			mainLoaded = loadModuleRequire(filename);
 		}
 	}
 

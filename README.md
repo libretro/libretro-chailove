@@ -16,14 +16,20 @@ ChaiLove is an awesome framework you can use to make 2D games in [ChaiScript](ht
 - [Game of Life](https://github.com/RobLoach/ChaiLove-GameOfLife)
 - [... and more](https://github.com/topics/chailove)
 
-## Usage
+## Installation
 
-ChaiLove is a [libretro](https://www.libretro.com/) core, which can be run through [RetroArch](http://retroarch.com/). [Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird) is a [free game you can download and play](https://www.youtube.com/watch?v=RLVwTh6qDFI)...
+ChaiLove is a [libretro](https://www.libretro.com/) core, which can be installed through [RetroArch](http://retroarch.com/). 
 
 1. Run [RetroArch](http://retroarch.com/)
 2. *Online Updater* → *Core Updator* → *ChaiLove*
-3. *Online Updater* → *Content Downloader* → *ChaiLove* → *Floppy Bird*
-4. *Load Content* → *Downloads* → *Floppy Bird.chailove*
+
+## Usage
+
+[Floppy Bird](https://github.com/RobLoach/ChaiLove-FloppyBird) is a [free game you can download and play](https://www.youtube.com/watch?v=RLVwTh6qDFI)...
+
+1. Run [RetroArch](http://retroarch.com/)
+2. *Online Updater* → *Content Downloader* → *ChaiLove* → *FloppyBird.chailove*
+3. *Load Content* → *Downloads* → *FloppyBird.chailove*
 
 Alternatively, you can run the ChaiLove core through RetroArch via the command line:
 

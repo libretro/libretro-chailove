@@ -4,4 +4,4 @@ assert(delta >= 0, "love.timer.getDelta()")
 
 // getFPS()
 var fps = love.timer.getFPS()
-assert(fps >= 0, "love.love.timer.getFPS()")
+assert(fps >= 0, "love.timer.getFPS()")
