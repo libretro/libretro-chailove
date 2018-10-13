@@ -126,8 +126,6 @@ class Sprite {
 };
 
 def loadstate(data) {
-	print("Load State")
-	print(data)
 	var info = from_json(data)
 	var num = info["number"]
 
@@ -147,8 +145,6 @@ def savestate() {
 
 	// Construct the JSON data.
 	var data = ["number": num]
-	print("Save State")
-	print(to_json(data))
 
 	// Tell the system to save the JSON data.
 	return to_json(data)

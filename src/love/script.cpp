@@ -58,7 +58,7 @@ bool script::loadModule(const std::string& moduleName) {
 
 bool script::loadModuleRequire(const std::string& moduleName) {
 	// Check if the module has already been loaded.
-	std::string filename = replaceString(moduleName, ".", "/");
+	std::string filename = replaceString(replaceString(moduleName, ".chai", ""), ".", "/");
 	if (std::find(m_requiremodules.begin(), m_requiremodules.end(), filename) != m_requiremodules.end()) {
 		return true;
 	}
@@ -438,12 +438,13 @@ script::script(const std::string& file) {
 		// Load the main.chai file.
 		::filesystem::path p(file.c_str());
 		std::string extension(p.extension());
+		loadModuleRequire("conf");
 		if (extension == "chailove" || extension == "chaigame") {
-			mainLoaded = loadModule("main.chai");
+			mainLoaded = loadModuleRequire("main");
 		} else {
 			// Otherwise, load the actual file.
 			std::string filename(p.filename());
-			mainLoaded = loadModule(filename);
+			mainLoaded = loadModuleRequire(filename);
 		}
 	}
 

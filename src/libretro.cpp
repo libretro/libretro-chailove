@@ -225,8 +225,8 @@ void retro_set_controller_port_device(unsigned port, unsigned device) {
  * libretro callback; Return the amount of bytes required to save a state.
  */
 size_t retro_serialize_size(void) {
-	// Save states will be 5 kilobytes.
-	return 5000;
+	// Save states will be 32 kilobytes.
+	return 32768;
 }
 
 /**
