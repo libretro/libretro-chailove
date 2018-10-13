@@ -4,6 +4,7 @@
 #include <string>
 #include <list>
 #include "config.h"
+#include <sol.hpp>
 
 #ifdef __HAVE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
@@ -472,6 +473,8 @@ class script {
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
 	bool loadModuleRequire(const std::string& moduleName);
 	std::list<std::string> m_requiremodules;
+
+	sol::state m_lua;
 };
 
 }  // namespace love

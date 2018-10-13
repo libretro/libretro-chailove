@@ -193,10 +193,14 @@ ifeq ($(HAVE_CHAISCRIPT),)
 endif
 
 # Lua
-FLAGS += -I$(CORE_DIR)/vendor/lua/src
-SOURCES_C += $(wildcard \
-	$(CORE_DIR)/vendor/lua/src/*.c \
-)
+FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/lua/src
+#SOURCES_C +=
+
+# LuaJIT
+FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/luajit/src
+#SOURCES_C +=$(wildcard \
+#	$(CORE_DIR)/vendor/libretro-deps/luajit/src/*.c \
+#)
 
 # sol2
 FLAGS += -I$(CORE_DIR)/vendor/sol2/single/sol
