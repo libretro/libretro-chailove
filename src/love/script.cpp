@@ -597,6 +597,9 @@ void script::load() {
 		}
 	}
 	#endif
+
+	m_lua.open_libraries(sol::lib::base);
+	m_lua.script("print('Hello World!')");
 }
 
 void script::reset() {

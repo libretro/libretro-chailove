@@ -9,6 +9,7 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Input/*.cpp \
 )
 FLAGS += -Wfatal-errors
+FLAGS += -I$(CORE_DIR)/vendor
 
 # semver
 FLAGS += -I$(CORE_DIR)/vendor/semver
@@ -194,13 +195,43 @@ endif
 
 # Lua
 FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/lua/src
-#SOURCES_C +=
+SOURCES_C += \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lauxlib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lapi.c  \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lbaselib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lcode.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/ldebug.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/ldo.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/ldump.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lfunc.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lgc.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/llex.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lmem.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lobject.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lopcodes.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lparser.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lstate.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lstring.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/ltable.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/ltm.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lundump.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lvm.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lzio.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/ldblib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/liolib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lmathlib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/loslib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/ltablib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/lstrlib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/loadlib.c \
+	$(CORE_DIR)/vendor/libretro-deps/lua/src/linit.c
 
 # LuaJIT
 FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/luajit/src
-#SOURCES_C +=$(wildcard \
-#	$(CORE_DIR)/vendor/libretro-deps/luajit/src/*.c \
-#)
+SOURCES_C += \
+	$(CORE_DIR)/vendor/libretro-deps/luajit/src/lib_ffi.c \
+	$(CORE_DIR)/vendor/libretro-deps/luajit/src/lib_jit.c \
+	$(CORE_DIR)/vendor/libretro-deps/luajit/src/lib_bit.c
 
 # sol2
 FLAGS += -I$(CORE_DIR)/vendor/sol2/single/sol
