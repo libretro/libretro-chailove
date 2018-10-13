@@ -94,8 +94,8 @@ class Sprite {
 	def Sprite() {
 		this.x = love.math.random(love.graphics.getWidth()) * 1.0f
 		this.y = love.math.random(love.graphics.getHeight()) * 1.0f
-		this.xspeed = love.math.random(10) * 50.0f
-		this.yspeed = love.math.random(10) * 50.0f
+		this.xspeed = love.math.random(-10, 10) * 50
+		this.yspeed = love.math.random(-10, 10) * 50
 	}
 
 	def draw() {
