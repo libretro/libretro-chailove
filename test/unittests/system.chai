@@ -42,6 +42,14 @@ assert_equal(trimSubject.trim(), "Hello World!", "string::trim()")
 var splitTest = "Hello|How|Are|You"
 var splitResult = splitTest.split("|")
 assert_equal(splitResult[1], "How", "string::split()")
-splitTest = "Rob, John, Loach"
+splitTest = "Hello, World, Time"
 splitResult = splitTest.split(", ")
-assert_equal(splitResult[1], "John", "    - commas")
+assert_equal(splitResult[1], "World", "    - commas")
+
+// conf.chai
+var objs = get_objects()
+var confTestLoadedExists = objs["confTestLoaded"].get_type_info().bare_equal(bool_type)
+assert(confTestLoadedExists, "conf.chai is loaded")
+if (confTestLoadedExists) {
+	assert(confTestLoaded, "conf() called")
+}
