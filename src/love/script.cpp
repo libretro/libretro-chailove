@@ -2,6 +2,7 @@
 #include "../ChaiLove.h"
 #include <filesystem/path.h>
 #include <algorithm>
+#include <sol.hpp>
 
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
