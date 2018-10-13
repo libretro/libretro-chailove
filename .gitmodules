@@ -78,3 +78,8 @@
 	url = https://github.com/tplgy/cppcodec.git
 	ignore = dirty
 	branch = master
+[submodule "vendor/sol2"]
+	path = vendor/sol2
+	url = https://github.com/ThePhD/sol2.git
+	ignore = dirty
+	branch = develop
