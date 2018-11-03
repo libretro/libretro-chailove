@@ -286,7 +286,8 @@ else ifeq ($(platform), libnx)
 				-fPIE -I$(LIBNX)/include/ -ffunction-sections -fdata-sections -ftls-model=local-exec -Wl,--allow-multiple-definition -specs=$(LIBNX)/switch.specs
     CFLAGS += $(INCDIRS)
     CFLAGS	+=	$(INCLUDE)  -D__SWITCH__ -DHAVE_LIBNX
-    CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
+    # Replaced -fno-rtti -fno-exceptions with -fexceptions, using C++14
+    CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fexceptions -std=c++14
     CFLAGS += -std=gnu11
     PLATFORM_DEFINES += -DARM -march=armv8-a -mtune=cortex-a57 -mtp=soft
     STATIC_LINKING = 1
