@@ -7,3 +7,4 @@ node_modules
 /package.json
 /.bsv
 /*.mkv
+*.d
