@@ -292,6 +292,7 @@ else ifeq ($(platform), libnx)
     CFLAGS += -std=gnu11
     PLATFORM_DEFINES += -DARM -march=armv8-a -mtune=cortex-a57 -mtp=soft
     STATIC_LINKING = 1
+    PLATFORM_DEFINES += -D_INCL_PHYSFS_PLATFORMS -DPHYSFS_PLATFORM_UNIX=1
 
 # ARM
 else ifneq (,$(findstring armv,$(platform)))
