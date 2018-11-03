@@ -53,11 +53,11 @@ std::string filesystem::getParentDirectory(const std::string& filepath) {
 }
 
 std::string filesystem::getFileExtension(const std::string& filepath) {
-   size_t i = filepath.rfind('.', filepath.length());
-   if (i != std::string::npos) {
-      return filepath.substr(i + 1, filepath.length() - i);
-   }
-   return "";
+	size_t i = filepath.rfind('.', filepath.length());
+	if (i != std::string::npos) {
+		return filepath.substr(i + 1, filepath.length() - i);
+	}
+	return "";
 }
 
 std::string filesystem::getBasename(const std::string& filepath) {
