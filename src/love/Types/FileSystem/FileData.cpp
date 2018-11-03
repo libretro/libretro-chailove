@@ -38,7 +38,7 @@ std::string FileData::getString() {
 
 std::string FileData::getExtension() {
 	ChaiLove* app = ChaiLove::getInstance();
-	return app->filesystem.getExtension(m_filepath);
+	return app->filesystem.getFileExtension(m_filepath);
 }
 
 }  // namespace FileSystem

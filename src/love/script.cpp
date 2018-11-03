@@ -394,7 +394,7 @@ script::script(const std::string& file) {
 		// Load the main.chai file.
 		loadModuleRequire("conf");
 
-		std::string extension(app->filesystem.getExtension(file));
+		std::string extension(app->filesystem.getFileExtension(file));
 		if (extension == "chailove" || extension == "chaigame") {
 			mainLoaded = loadModuleRequire("main");
 		} else {
