@@ -293,8 +293,7 @@ else ifeq ($(platform), libnx)
     PLATFORM_DEFINES += -DARM -march=armv8-a -mtune=cortex-a57 -mtp=soft
     STATIC_LINKING = 1
     PLATFORM_DEFINES += -D_INCL_PHYSFS_PLATFORMS -DPHYSFS_PLATFORM_UNIX=1 -DPHYSFS_PLATFORM_POSIX=1
-    #PLATFORM_DEFINES += -Dpthread_t=Thread -Dpthread_mutex_t=Mutex -Dpthread_mutexattr_t='void*' -Dpthread_attr_t=int -Dpthread_cond_t=CondVar -Dpthread_condattr_t='int' -D_SYS__PTHREADTYPES_H_
-    PLATFORM_DEFINES += -D_POSIX_THREADS
+    PLATFORM_DEFINES += -Dpthread_t=Thread -Dpthread_mutex_t=Mutex -Dpthread_mutexattr_t='void*' -Dpthread_attr_t=int -Dpthread_cond_t=CondVar -Dpthread_condattr_t='int' -D_SYS__PTHREADTYPES_H_
 
 # ARM
 else ifneq (,$(findstring armv,$(platform)))

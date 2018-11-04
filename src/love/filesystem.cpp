@@ -2,6 +2,9 @@
 #include <iostream>
 
 #include "libretro.h"
+#if SWITCH
+#include <switch.h>
+#endif
 #include "physfs.h"
 #include "filesystem.h"
 #include "physfsrwops.h"
