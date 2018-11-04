@@ -1,6 +1,5 @@
 #include "script.h"
 #include "../ChaiLove.h"
-#include <filesystem/path.h>
 #include <algorithm>
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -86,6 +85,7 @@ std::string script::evalString(const std::string& code, const std::string& filen
 
 script::script(const std::string& file) {
 	#ifdef __HAVE_CHAISCRIPT__
+	ChaiLove* app = ChaiLove::getInstance();
 
 	// ChaiScript Standard Library Additions
 	// This adds some basic type definitions to ChaiScript.
@@ -388,18 +388,18 @@ script::script(const std::string& file) {
 	// Load the desired main.chai file.
 	if (file.empty()) {
 		// When no content is provided, display a No Game demo.
-		eval(ChaiLove::getInstance()->demo(), "demo.chai");
+		eval(app->demo(), "demo.chai");
 		mainLoaded = true;
 	} else {
 		// Load the main.chai file.
-		::filesystem::path p(file.c_str());
-		std::string extension(p.extension());
 		loadModuleRequire("conf");
+
+		std::string extension(app->filesystem.getFileExtension(file));
 		if (extension == "chailove" || extension == "chaigame") {
 			mainLoaded = loadModuleRequire("main");
 		} else {
 			// Otherwise, load the actual file.
-			std::string filename(p.filename());
+			std::string filename(app->filesystem.getBasename(file));
 			mainLoaded = loadModuleRequire(filename);
 		}
 	}
