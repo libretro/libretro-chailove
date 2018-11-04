@@ -13,11 +13,6 @@
 	url = https://github.com/ChaiScript/ChaiScript.git
 	ignore = dirty
 	branch = develop
-[submodule "vendor/filesystem"]
-	path = vendor/filesystem
-	url = https://github.com/wjakob/filesystem.git
-	ignore = dirty
-	branch = master
 [submodule "vendor/SDL_tty"]
 	path = vendor/SDL_tty
 	url = https://github.com/Grumbel/SDL_tty.git
