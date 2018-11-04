@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.29.1 - Unreleased
 ### Chores
 - Moved String Methods to [ChaiScript_Extras](https://github.com/ChaiScript/ChaiScript_Extras)
+- Replaced use of `filesystem/path.h` with internal functions
 
 ## 0.29.0 - 2018-10-13
 ### Fixes

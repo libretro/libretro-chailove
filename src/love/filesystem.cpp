@@ -62,11 +62,9 @@ std::string filesystem::getFileExtension(const std::string& filepath) {
 
 std::string filesystem::getBasename(const std::string& filepath) {
 	char sep = '/';
-	#ifdef _WIN32
 	if (filepath.find('\\') != std::string::npos) {
 		sep = '\\';
 	}
-	#endif
 
 	size_t i = filepath.rfind(sep, filepath.length());
 	if (i != std::string::npos) {
