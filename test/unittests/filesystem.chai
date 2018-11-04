@@ -102,3 +102,12 @@ requiretestFileLoaded = false
 requireReturn = require("assets.requiretest")
 assert(requireReturn, "    double call")
 assert_not(requiretestFileLoaded, "    not loaded twice")
+
+// getFileExtension()
+assert_equal(love.filesystem.getFileExtension("/opt/var/something.txt"), "txt", "love.filesystem.getFileExtension()")
+
+// getBasename
+assert_equal(love.filesystem.getBasename("/opt/var/something.txt"), "something.txt", "love.filesystem.getBasename()")
+
+// getParentDirectory
+assert_equal(love.filesystem.getParentDirectory("/opt/var/something.txt"), "/opt/var", "love.filesystem.getParentDirectory()")

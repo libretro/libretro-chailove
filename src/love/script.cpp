@@ -311,6 +311,9 @@ script::script(const std::string& file) {
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun(&filesystem::load), "load");
 	chai.add(fun(&script::loadModuleRequire, this), "require");
+	chai.add(fun(&filesystem::getFileExtension), "getFileExtension");
+	chai.add(fun(&filesystem::getBasename), "getBasename");
+	chai.add(fun(&filesystem::getParentDirectory), "getParentDirectory");
 
 	// System
 	chai.add(fun(&system::getOS), "getOS");
