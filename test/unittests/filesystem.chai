@@ -105,9 +105,12 @@ assert_not(requiretestFileLoaded, "    not loaded twice")
 
 // getFileExtension()
 assert_equal(love.filesystem.getFileExtension("/opt/var/something.txt"), "txt", "love.filesystem.getFileExtension()")
+assert_equal(love.filesystem.getFileExtension("/opt/var/something.tar.gz"), "gz", "love.filesystem.getFileExtension()")
 
 // getBasename
 assert_equal(love.filesystem.getBasename("/opt/var/something.txt"), "something.txt", "love.filesystem.getBasename()")
+assert_equal(love.filesystem.getBasename("something.txt"), "something.txt", "love.filesystem.getBasename()")
 
 // getParentDirectory
 assert_equal(love.filesystem.getParentDirectory("/opt/var/something.txt"), "/opt/var", "love.filesystem.getParentDirectory()")
+assert_equal(love.filesystem.getParentDirectory("something.txt"), "", "love.filesystem.getParentDirectory()")

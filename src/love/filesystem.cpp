@@ -49,7 +49,11 @@ bool filesystem::init(const std::string& file, const void* data) {
 }
 
 std::string filesystem::getParentDirectory(const std::string& filepath) {
-	return filepath.substr(0, filepath.find_last_of("/\\"));
+	size_t last = filepath.find_last_of("/\\");
+	if (last != std::string::npos) {
+		return filepath.substr(0, last);
+	}
+	return "";
 }
 
 std::string filesystem::getFileExtension(const std::string& filepath) {
@@ -71,7 +75,7 @@ std::string filesystem::getBasename(const std::string& filepath) {
 		return filepath.substr(i + 1, filepath.length() - i);
 	}
 
-	return "";
+	return filepath;
 }
 
 void filesystem::mountlibretro() {

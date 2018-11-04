@@ -35,7 +35,7 @@ bool script::loadModule(const std::string& moduleName) {
 		// See if we are to append .chai.
 		filename = filename + ".chai";
 		if (!app->filesystem.exists(filename)) {
-			std::cout << "[ChaiLove] [script] Module " << moduleName << " not found." << std::endl;
+			std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
 			return false;
 		}
 	}
@@ -45,7 +45,7 @@ bool script::loadModule(const std::string& moduleName) {
 
 	// Make sure it was not empty.
 	if (contents.empty()) {
-		std::cout << "[ChaiLove] [script] Module " << moduleName << " was loaded, but empty." << std::endl;
+		std::cout << "[ChaiLove] [script] Module " << filename << " was loaded, but empty." << std::endl;
 		return false;
 	}
 
