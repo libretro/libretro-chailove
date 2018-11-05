@@ -19,7 +19,7 @@ all: $(TARGET)
 $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
 	$(CXX) -o $@ $^ $(LDFLAGS)
 	@echo "** BUILD SUCCESSFUL! GG NO RE **"
-	
+
 %.o: %.cpp | vendor/libretro-common/include/libretro.h
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
@@ -27,6 +27,9 @@ $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 %.o: %.m | vendor/libretro-common/include/libretro.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+%.o: %.S | vendor/libretro-common/include/libretro.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
