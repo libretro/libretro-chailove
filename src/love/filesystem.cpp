@@ -5,7 +5,6 @@
 #include "physfs.h"
 #include "filesystem.h"
 #include "physfsrwops.h"
-#include "filesystem/path.h"
 #include "../ChaiLove.h"
 #include "Types/FileSystem/FileInfo.h"
 
@@ -32,8 +31,7 @@ bool filesystem::init(const std::string& file, const void* data) {
 	}
 
 	// Find the parent and extension of the given file.
-	::filesystem::path p(file.c_str());
-	std::string extension(p.extension());
+	std::string extension(getFileExtension(file));
 
 	// Allow loading from an Archive.
 	if (extension == "chaigame" || extension == "chailove" || extension == "zip") {
@@ -41,14 +39,43 @@ bool filesystem::init(const std::string& file, const void* data) {
 	}
 
 	// If we are just running the core, load the base path.
-	::filesystem::path parent(p.parent_path());
-	std::string parentPath(parent.str());
+	std::string parentPath(getParentDirectory(file));
 	if (parentPath.empty()) {
 		return mount(".", "/", false);
 	}
 
 	// Otherwise, we are loading a .chai file directly. Load it.
 	return mount(parentPath.c_str(), "/", false);
+}
+
+std::string filesystem::getParentDirectory(const std::string& filepath) {
+	size_t last = filepath.find_last_of("/\\");
+	if (last != std::string::npos) {
+		return filepath.substr(0, last);
+	}
+	return "";
+}
+
+std::string filesystem::getFileExtension(const std::string& filepath) {
+	size_t i = filepath.rfind('.', filepath.length());
+	if (i != std::string::npos) {
+		return filepath.substr(i + 1, filepath.length() - i);
+	}
+	return "";
+}
+
+std::string filesystem::getBasename(const std::string& filepath) {
+	char sep = '/';
+	if (filepath.find('\\') != std::string::npos) {
+		sep = '\\';
+	}
+
+	size_t i = filepath.rfind(sep, filepath.length());
+	if (i != std::string::npos) {
+		return filepath.substr(i + 1, filepath.length() - i);
+	}
+
+	return filepath;
 }
 
 void filesystem::mountlibretro() {
@@ -60,8 +87,8 @@ void filesystem::mountlibretro() {
 
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_LIBRETRO_PATH, &core_dir) && core_dir) {
 		// Make sure to get the directory of the core.
-		::filesystem::path p(core_dir);
-		mount(p.parent_path().str(), "/libretro/core", false);
+		std::string parentPath(getParentDirectory(core_dir));
+		mount(parentPath, "/libretro/core", false);
 	}
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
 		mount(system_dir, "/libretro/system", false);
@@ -72,8 +99,12 @@ void filesystem::mountlibretro() {
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		save_dir = *save_dir ? save_dir : system_dir;
 		mount(save_dir, "/libretro/saves", false);
-	} else {
+	} else if (system_dir) {
+		// Have the system directory be the save directory if available.
 		mount(save_dir = system_dir, "/libretro/saves", false);
+	} else {
+		// Save directory becomes the current working directory.
+		mount(save_dir = ".", "/libretro/saves", false);
 	}
 
 	// Ensure the write directory is set to the Save Directory.
@@ -171,10 +202,11 @@ char* filesystem::readChar(const std::string& filename) {
 std::string filesystem::read(const std::string& filename) {
 	// Retrieve a character buffer.
 	char* myBuf = readChar(filename);
-	if (myBuf == NULL) {
-		return std::string("");
+	std::string output;
+	if (myBuf != NULL) {
+		output = std::string(myBuf);
 	}
-	return std::string(myBuf);
+	return output;
 }
 
 void* filesystem::readBuffer(const std::string& filename, int& size) {
@@ -222,6 +254,9 @@ bool filesystem::unmount(const std::string& archive) {
 }
 
 bool filesystem::mount(const char *archive, const std::string& mountpoint) {
+	if (strlen(archive) == 0) {
+		return false;
+	}
 	return mount(std::string(archive), mountpoint);
 }
 

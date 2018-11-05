@@ -78,6 +78,10 @@ class filesystem {
 	 */
 	int getSize(const std::string& file);
 
+	std::string getFileExtension(const std::string& filepath);
+	std::string getBasename(const std::string& filepath);
+	std::string getParentDirectory(const std::string& filepath);
+
 	/**
 	 * Removes a file or empty directory.
 	 *

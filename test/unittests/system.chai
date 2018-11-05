@@ -16,6 +16,7 @@ assert(true, "love.system.getUsername() == '" + username + "'")
 
 // getOS()
 if (love.system.getOS() == "Linux") {
+	// Run in foreground.
 	var result = love.system.execute("uname")
 	assert(result, "love.system.execute('uname')")
 }
@@ -32,3 +33,23 @@ var newReplaceString = replaceSubject.replace("World", "Space")
 assert_equal(newReplaceString, "Hello Space! Hello Space!", "string::replace(string, string)")
 newReplaceString = replaceSubject.replace('!', '.')
 assert_equal(newReplaceString, "Hello World. Hello World.", "string::replace(char, char)")
+
+// string::trim()
+var trimSubject = "   Hello World!   "
+assert_equal(trimSubject.trim(), "Hello World!", "string::trim()")
+
+// string::split()
+var splitTest = "Hello|How|Are|You"
+var splitResult = splitTest.split("|")
+assert_equal(splitResult[1], "How", "string::split()")
+splitTest = "Hello, World, Time"
+splitResult = splitTest.split(", ")
+assert_equal(splitResult[1], "World", "    - commas")
+
+// conf.chai
+var objs = get_objects()
+var confTestLoadedExists = objs["confTestLoaded"].get_type_info().bare_equal(bool_type)
+assert(confTestLoadedExists, "conf.chai is loaded")
+if (confTestLoadedExists) {
+	assert(confTestLoaded, "conf() called")
+}

@@ -1,10 +1,10 @@
 #include "script.h"
 #include "../ChaiLove.h"
-#include <filesystem/path.h>
 #include <algorithm>
 
 #ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
+#include "chaiscript/extras/string_methods.hpp"
 using namespace chaiscript;
 #endif
 
@@ -35,7 +35,7 @@ bool script::loadModule(const std::string& moduleName) {
 		// See if we are to append .chai.
 		filename = filename + ".chai";
 		if (!app->filesystem.exists(filename)) {
-			std::cout << "[ChaiLove] [script] Module " << moduleName << " not found." << std::endl;
+			std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
 			return false;
 		}
 	}
@@ -45,7 +45,7 @@ bool script::loadModule(const std::string& moduleName) {
 
 	// Make sure it was not empty.
 	if (contents.empty()) {
-		std::cout << "[ChaiLove] [script] Module " << moduleName << " was loaded, but empty." << std::endl;
+		std::cout << "[ChaiLove] [script] Module " << filename << " was loaded, but empty." << std::endl;
 		return false;
 	}
 
@@ -58,7 +58,7 @@ bool script::loadModule(const std::string& moduleName) {
 
 bool script::loadModuleRequire(const std::string& moduleName) {
 	// Check if the module has already been loaded.
-	std::string filename = replaceString(moduleName, ".", "/");
+	std::string filename = replaceString(replaceString(moduleName, ".chai", ""), ".", "/");
 	if (std::find(m_requiremodules.begin(), m_requiremodules.end(), filename) != m_requiremodules.end()) {
 		return true;
 	}
@@ -76,6 +76,7 @@ chaiscript::Boxed_Value script::eval(const std::string& code, const std::string&
 	std::string contents = replaceString(code, "\t", "  ");
 	return chai.eval(contents, Exception_Handler(), filename);
 }
+
 std::string script::evalString(const std::string& code, const std::string& filename) {
 	// Replace possible problematic tabs, and evaluate the script.
 	std::string contents = replaceString(code, "\t", "  ");
@@ -84,6 +85,7 @@ std::string script::evalString(const std::string& code, const std::string& filen
 
 script::script(const std::string& file) {
 	#ifdef __HAVE_CHAISCRIPT__
+	ChaiLove* app = ChaiLove::getInstance();
 
 	// ChaiScript Standard Library Additions
 	// This adds some basic type definitions to ChaiScript.
@@ -91,23 +93,8 @@ script::script(const std::string& file) {
 	chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
 	chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
 
-	// Global Helpers
-	// string::replace(std::string search, std::string replace)
-	chai.add(fun([](const std::string& subject, const std::string& search, const std::string& replace) {
-		std::string newSubject(subject);
-		size_t pos = 0;
-		while ((pos = newSubject.find(search, pos)) != std::string::npos) {
-			newSubject.replace(pos, search.length(), replace);
-			pos += replace.length();
-		}
-		return newSubject;
-	}), "replace");
-	//  string::replace(char search, char replace)
-	chai.add(fun([](const std::string& subject, char search, char replace) {
-		std::string newSubject(subject);
-		std::replace(newSubject.begin(), newSubject.end(), search, replace);
-		return newSubject;
-	}), "replace");
+	auto stringmethods = chaiscript::extras::string_methods::bootstrap();
+	chai.add(stringmethods);
 
 	// List
 	auto listModule = std::make_shared<chaiscript::Module>();
@@ -324,15 +311,18 @@ script::script(const std::string& file) {
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun(&filesystem::load), "load");
 	chai.add(fun(&script::loadModuleRequire, this), "require");
+	chai.add(fun(&filesystem::getFileExtension), "getFileExtension");
+	chai.add(fun(&filesystem::getBasename), "getBasename");
+	chai.add(fun(&filesystem::getParentDirectory), "getParentDirectory");
 
 	// System
 	chai.add(fun(&system::getOS), "getOS");
 	chai.add(fun(&system::getVersion), "getVersion");
 	chai.add(fun(&system::getVersionString), "getVersionString");
 	chai.add(fun(&system::getUsername), "getUsername");
-	chai.add(fun(&system::execute), "execute");
 	chai.add(fun(&system::getClipboardText), "getClipboardText");
 	chai.add(fun(&system::setClipboardText), "setClipboardText");
+	chai.add(fun(&system::execute), "execute");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");
@@ -401,18 +391,19 @@ script::script(const std::string& file) {
 	// Load the desired main.chai file.
 	if (file.empty()) {
 		// When no content is provided, display a No Game demo.
-		eval(ChaiLove::getInstance()->demo(), "demo.chai");
+		eval(app->demo(), "demo.chai");
 		mainLoaded = true;
 	} else {
 		// Load the main.chai file.
-		::filesystem::path p(file.c_str());
-		std::string extension(p.extension());
+		loadModuleRequire("conf");
+
+		std::string extension(app->filesystem.getFileExtension(file));
 		if (extension == "chailove" || extension == "chaigame") {
-			mainLoaded = loadModule("main.chai");
+			mainLoaded = loadModuleRequire("main");
 		} else {
 			// Otherwise, load the actual file.
-			std::string filename(p.filename());
-			mainLoaded = loadModule(filename);
+			std::string filename(app->filesystem.getBasename(file));
+			mainLoaded = loadModuleRequire(filename);
 		}
 	}
 

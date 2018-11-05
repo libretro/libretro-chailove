@@ -45,6 +45,8 @@ class script {
 	 *
 	 * @param t The config object to modify.
 	 *
+	 * This callback can live in the `conf.chai` file.
+	 *
 	 * ### Example
 	 *
 	 * @code
@@ -53,7 +55,7 @@ class script {
 	 *   t.console = false
 	 *
 	 *   // The ChaiLove version this game was made for.
-	 *   t.version = "0.27.0"
+	 *   t.version = "0.29.0"
 	 *
 	 *   // The width and height of the game.
 	 *   t.window.width = 1024

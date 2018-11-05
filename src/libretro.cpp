@@ -78,7 +78,6 @@ void retro_set_environment(retro_environment_t cb) {
  * libretro callback; Updates the core option variables.
  */
 static void update_variables(void) {
-	std::cout << "[ChaiLove] [libretro] update_variables()" << std::endl;
 	ChaiLove* app = ChaiLove::getInstance();
 	app->system.updateVariables(app->config);
 }
@@ -226,8 +225,8 @@ void retro_set_controller_port_device(unsigned port, unsigned device) {
  * libretro callback; Return the amount of bytes required to save a state.
  */
 size_t retro_serialize_size(void) {
-	// Save states will be 5 kilobytes.
-	return 5000;
+	// Save states will be 8 KB.
+	return 8192;
 }
 
 /**
@@ -314,7 +313,6 @@ void frame_time_cb(retro_usec_t usec) {
  * libretro callback; Load the given game.
  */
 bool retro_load_game(const struct retro_game_info *info) {
-	std::cout << "[ChaiLove] retro_load_game" << std::endl;
 	// Update the core options.
 	update_variables();
 
