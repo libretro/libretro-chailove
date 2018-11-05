@@ -4,10 +4,13 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.29.1 - Unreleased
+## 0.29.1 - 2018-11-05
 ### Chores
 - Moved String Methods to [ChaiScript_Extras](https://github.com/ChaiScript/ChaiScript_Extras)
 - Replaced use of `filesystem/path.h` with internal functions
+- Updated ChaiScript/ChaiScript_Extras
+- Updated libretro/libretro-common
+- Updated effolkronium/random
 
 ## 0.29.0 - 2018-10-13
 ### Fixes
