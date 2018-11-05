@@ -277,19 +277,23 @@ else ifeq ($(platform), switch)
 
 # Nintendo Switch (libnx)
 else ifeq ($(platform), libnx)
-    include $(DEVKITPRO)/libnx/switch_rules
-    EXT=a
-    TARGET := $(TARGET_NAME)_libretro_$(platform).$(EXT)
-    DEFINES := -DSWITCH=1 -U__linux__ -U__linux -DRARCH_INTERNAL
-    CFLAGS	:=	 $(DEFINES) -g \
-                -O2 \
+	export DEPSDIR := $(CURDIR)/
+	include $(DEVKITPRO)/libnx/switch_rules
+	EXT=a
+	TARGET := $(TARGET_NAME)_libretro_$(platform).$(EXT)
+	DEFINES := -DSWITCH=1 -U__linux__ -U__linux -DRARCH_INTERNAL
+	CFLAGS	:=	 $(DEFINES) -g \
+				-O2 \
 				-fPIE -I$(LIBNX)/include/ -ffunction-sections -fdata-sections -ftls-model=local-exec -Wl,--allow-multiple-definition -specs=$(LIBNX)/switch.specs
-    CFLAGS += $(INCDIRS)
-    CFLAGS	+=	$(INCLUDE)  -D__SWITCH__ -DHAVE_LIBNX
-    CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
-    CFLAGS += -std=gnu11
-    PLATFORM_DEFINES += -DARM -march=armv8-a -mtune=cortex-a57 -mtp=soft
-    STATIC_LINKING = 1
+	CFLAGS += $(INCDIRS)
+	CFLAGS	+=	$(INCLUDE)  -D__SWITCH__ -DHAVE_LIBNX
+	# Replaced -fno-rtti -fno-exceptions with -fexceptions, using C++14
+	CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fexceptions -std=c++14
+	CFLAGS += -std=gnu11
+	PLATFORM_DEFINES += -DARM -march=armv8-a -mtune=cortex-a57 -mtp=soft
+	STATIC_LINKING = 1
+	#PLATFORM_DEFINES += -D_INCL_PHYSFS_PLATFORMS -DPHYSFS_PLATFORM_UNIX=1 -DPHYSFS_PLATFORM_POSIX=1
+	#PLATFORM_DEFINES += -Dpthread_t=Thread -Dpthread_mutex_t=Mutex -Dpthread_mutexattr_t='void*' -Dpthread_attr_t=int -Dpthread_cond_t=CondVar -Dpthread_condattr_t='int' -D_SYS__PTHREADTYPES_H_
 
 # ARM
 else ifneq (,$(findstring armv,$(platform)))

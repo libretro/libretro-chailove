@@ -3,7 +3,6 @@
 #include "Types/Audio/SoundData.h"
 #include "../ChaiLove.h"
 #include "sound.h"
-#include "physfs.h"
 #include "audio/conversion/float_to_s16.h"
 
 using love::Types::Audio::SoundData;

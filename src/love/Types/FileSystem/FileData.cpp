@@ -4,7 +4,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "filesystem/path.h"
 
 #include "../../../ChaiLove.h"
 
@@ -38,9 +37,8 @@ std::string FileData::getString() {
 }
 
 std::string FileData::getExtension() {
-	::filesystem::path p(m_filepath.c_str());
-	std::string extension(p.extension());
-	return extension;
+	ChaiLove* app = ChaiLove::getInstance();
+	return app->filesystem.getFileExtension(m_filepath);
 }
 
 }  // namespace FileSystem
