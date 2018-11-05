@@ -314,6 +314,7 @@ else ifeq ($(platform), classic_armv7_a7)
 	-fmerge-all-constants -fno-math-errno \
 	-marm -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
 	PLATFORM_DEFINES += -DARM
+	LDFLAGS += -marm -mtune=cortex-a7 -mfpu=neon-vfpv4
 	ifeq ($(shell echo `$(CC) -dumpversion` "< 4.9" | bc -l), 1)
 	  PLATFORM_DEFINES += -march=armv7-a
 	else
