@@ -13,21 +13,19 @@ CFLAGS += $(FLAGS) -std=gnu99
 
 # Ignore first attempt builds, and re-try for a cleaner dependency chain.
 all: $(TARGET)
-	@echo "** BUILDING $(TARGET) FOR PLATFORM $(platform) **"
 	$(MAKE) $(TARGET)
 
 $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
-	-$(CXX) -o $@ $^ $(LDFLAGS)
-	@echo "** BUILD SUCCESSFUL! GG NO RE **"
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp | vendor/libretro-common/include/libretro.h
-	-$(CXX) -c -o $@ $< $(CXXFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 %.o: %.c | vendor/libretro-common/include/libretro.h
-	-$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 %.o: %.m | vendor/libretro-common/include/libretro.h
-	-$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
