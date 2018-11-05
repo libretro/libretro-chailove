@@ -45,7 +45,7 @@ ifneq ($(STATIC_LINKING), 1)
 		$(CORE_DIR)/vendor/libretro-common/vfs/*.c \
 	)
     # Ensure the sinc_resampler_neon is available for ARM NEON devices.
-	OBJECTS += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.o
+	SOURCES_S += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.S
 
     # MD5
     FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
@@ -199,7 +199,7 @@ endif
 FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
 FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/include
 
-OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(SOURCES_M:.m=.o)
+OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(SOURCES_S:.S=.o) $(SOURCES_M:.m=.o)
 
 LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
 
