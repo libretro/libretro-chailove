@@ -27,6 +27,9 @@ $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
 %.o: %.m | vendor/libretro-common/include/libretro.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+%.o: %.S | vendor/libretro-common/include/libretro.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 	git clean -xdf
