@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.30.0 - Unreleased
 ### Features
 - Added support for classic_armv7_a7
+  - By @Classicmods & @swingflip
 
 ## 0.29.1 - 2018-11-05
 ### Chores
