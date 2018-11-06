@@ -32,9 +32,14 @@ bool script::loadModule(const std::string& moduleName) {
 
 	// Make sure it exists.
 	if (!app->filesystem.exists(filename)) {
-		// See if we are to append .chai.
-		filename = filename + ".chai";
-		if (!app->filesystem.exists(filename)) {
+		// Find the file to load.
+		if (app->filesystem.exists(filename + ".chai")) {
+            filename = filename + ".chai";
+        }
+        else if (app->filesystem.exists(filename + ".lua")) {
+            filename = filename + ".lua";
+        }
+        else {
 			std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
 			return false;
 		}
