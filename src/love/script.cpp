@@ -26,6 +26,11 @@ namespace love {
 bool script::loadModule(const std::string& moduleName) {
 	#ifdef __HAVE_CHAISCRIPT__
 	ChaiLove* app = ChaiLove::getInstance();
+    
+    if (moduleName.empty()) {
+        std::cout << "[ChaiLove] [script] loadModule was called with an empty moduleName." << std::endl;
+        return false;
+    }
 
 	// Store a filename for the module.
 	std::string filename = moduleName;
@@ -38,6 +43,12 @@ bool script::loadModule(const std::string& moduleName) {
         }
         else if (app->filesystem.exists(filename + ".lua")) {
             filename = filename + ".lua";
+        }
+        else if (app->filesystem.exists(filename + "/init.chai")) {
+            filename = filename + "/init.chai";
+        }
+        else if (app->filesystem.exists(filename + "/init.lua")) {
+            filename = filename + "/init.lua";
         }
         else {
 			std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
