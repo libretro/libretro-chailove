@@ -62,17 +62,19 @@ bool script::loadModule(const std::string& moduleName) {
 		return false;
 	}
 
+	// Run the script.
 	eval(contents, filename);
 	return true;
-
 	#endif
 	return false;
 }
 
 bool script::require(const std::string& moduleName) {
-	// Check if the module has already been loaded.
-	std::string basename = replaceString(replaceString(moduleName, ".chai", ""), ".lua", "");
-	std::string filename = replaceString(basename, ".", "/");
+	// Find what the cleansed module name is.
+	std::string noExtension = replaceString(replaceString(moduleName, ".chai", ""), ".lua", "");
+	std::string filename = replaceString(noExtension, ".", "/");
+
+	// Ensure we only load the script once.
 	if (std::find(m_requiremodules.begin(), m_requiremodules.end(), filename) != m_requiremodules.end()) {
 		return true;
 	}
@@ -82,6 +84,7 @@ bool script::require(const std::string& moduleName) {
 	if (loaded) {
 		m_requiremodules.push_back(filename);
 	}
+
 	return loaded;
 }
 
