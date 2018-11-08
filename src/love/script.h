@@ -472,7 +472,9 @@ class script {
 	#endif
 
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
-	bool loadModuleRequire(const std::string& moduleName);
+	bool require(const std::string& moduleName);
+
+	// Properties
 	std::list<std::string> m_requiremodules;
 };
 

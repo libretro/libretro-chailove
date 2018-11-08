@@ -62,16 +62,19 @@ bool script::loadModule(const std::string& moduleName) {
 		return false;
 	}
 
+	// Run the script.
 	eval(contents, filename);
 	return true;
-
 	#endif
 	return false;
 }
 
-bool script::loadModuleRequire(const std::string& moduleName) {
-	// Check if the module has already been loaded.
-	std::string filename = replaceString(replaceString(moduleName, ".chai", ""), ".", "/");
+bool script::require(const std::string& moduleName) {
+	// Find what the cleansed module name is.
+	std::string noExtension = replaceString(replaceString(moduleName, ".chai", ""), ".lua", "");
+	std::string filename = replaceString(noExtension, ".", "/");
+
+	// Ensure we only load the script once.
 	if (std::find(m_requiremodules.begin(), m_requiremodules.end(), filename) != m_requiremodules.end()) {
 		return true;
 	}
@@ -81,6 +84,7 @@ bool script::loadModuleRequire(const std::string& moduleName) {
 	if (loaded) {
 		m_requiremodules.push_back(filename);
 	}
+
 	return loaded;
 }
 
@@ -323,7 +327,7 @@ script::script(const std::string& file) {
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun(&filesystem::load), "load");
-	chai.add(fun(&script::loadModuleRequire, this), "require");
+	chai.add(fun(&script::require, this), "require");
 	chai.add(fun(&filesystem::getFileExtension), "getFileExtension");
 	chai.add(fun(&filesystem::getBasename), "getBasename");
 	chai.add(fun(&filesystem::getParentDirectory), "getParentDirectory");
@@ -408,15 +412,15 @@ script::script(const std::string& file) {
 		mainLoaded = true;
 	} else {
 		// Load the main.chai file.
-		loadModuleRequire("conf");
+		require("conf");
 
 		std::string extension(app->filesystem.getFileExtension(file));
 		if (extension == "chailove" || extension == "chaigame") {
-			mainLoaded = loadModuleRequire("main");
+			mainLoaded = require("main");
 		} else {
 			// Otherwise, load the actual file.
 			std::string filename(app->filesystem.getBasename(file));
-			mainLoaded = loadModuleRequire(filename);
+			mainLoaded = require(filename);
 		}
 	}
 
