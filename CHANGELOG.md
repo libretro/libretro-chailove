@@ -4,10 +4,11 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.29.2 - Unreleased
+## 0.30.0 - Unreleased
 ### Features
 - Added support for classic_armv7_a7
   - By [@classicmods](https://github.com/classicmods) and [@swingflip](https://github.com/swingflip)
+- Added `lib/init.chai` loading with `require("lib")`
 
 ## 0.29.1 - 2018-11-05
 ### Chores
