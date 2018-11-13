@@ -34,7 +34,7 @@ assert_not(love.filesystem.isSymlink("keyboard.chai"), "love.filesystem.isSymlin
 
 // getDirectoryItems()
 var getDirectoriesItems = love.filesystem.getDirectoryItems("assets").size()
-assert_equal(getDirectoriesItems, 5, "love.filesystem.getDirectoryItems()")
+assert_equal(getDirectoriesItems, 6, "love.filesystem.getDirectoryItems()")
 
 // lines()
 var theLines = love.filesystem.lines("filesystem.chai")
@@ -102,6 +102,11 @@ requiretestFileLoaded = false
 requireReturn = require("assets.requiretest")
 assert(requireReturn, "    double call")
 assert_not(requiretestFileLoaded, "    not loaded twice")
+
+// require() - dir/init.chai
+requiretestFileLoaded = false
+require("assets")
+assert(requiretestFileLoaded, "    loaded assets/init.chai")
 
 // getFileExtension()
 assert_equal(love.filesystem.getFileExtension("/opt/var/something.txt"), "txt", "love.filesystem.getFileExtension()")

@@ -23,6 +23,26 @@ using love::graphics;
 
 namespace love {
 
+std::string script::findModule(const std::string& filename) {
+	ChaiLove* app = ChaiLove::getInstance();
+	std::string possibilities[5] = {
+		filename,
+		filename + ".chai",
+		// Allow loading lua files as ChaiScript?
+		filename + ".lua",
+		// Attempt to load a directory's init.chai, if available.
+		filename + "/init.chai",
+		filename + "/init.lua"
+	};
+	for (const std::string& possibility : possibilities) {
+		// Make sure the file exists and is a file.
+		if (app->filesystem.exists(possibility) && app->filesystem.isFile(possibility)) {
+			return possibility;
+		}
+	}
+	return "";
+}
+
 bool script::loadModule(const std::string& moduleName) {
 	#ifdef __HAVE_CHAISCRIPT__
 	ChaiLove* app = ChaiLove::getInstance();
@@ -34,23 +54,10 @@ bool script::loadModule(const std::string& moduleName) {
 	}
 
 	// Store a filename for the module.
-	std::string filename = moduleName;
-
-	// Make sure it exists.
-	if (!app->filesystem.exists(filename)) {
-		// Find the file to load.
-		if (app->filesystem.exists(filename + ".chai")) {
-			filename = filename + ".chai";
-		} else if (app->filesystem.exists(filename + ".lua")) {
-			filename = filename + ".lua";
-		} else if (app->filesystem.exists(filename + "/init.chai")) {
-			filename = filename + "/init.chai";
-		} else if (app->filesystem.exists(filename + "/init.lua")) {
-			filename = filename + "/init.lua";
-		} else {
-			std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
-			return false;
-		}
+	std::string filename = findModule(moduleName);
+	if (filename.empty()) {
+		std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
+		return false;
 	}
 
 	// Load the contents of the file.

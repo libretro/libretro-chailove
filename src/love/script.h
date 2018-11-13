@@ -471,6 +471,7 @@ class script {
 	bool hascheatset = true;
 	#endif
 
+	std::string findModule(const std::string& filename);
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
 	bool require(const std::string& moduleName);
 
