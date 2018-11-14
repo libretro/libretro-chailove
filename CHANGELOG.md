@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - By [@classicmods](https://github.com/classicmods) and [@swingflip](https://github.com/swingflip)
 - Added `lib/init.chai` loading with `require("lib")`
 - Updated ChaiScript/ChaiScript_Extras
+- Updated libretro/libretro-common
 
 ## 0.29.1 - 2018-11-05
 ### Chores
