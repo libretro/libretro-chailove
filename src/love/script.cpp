@@ -29,10 +29,11 @@ std::string script::findModule(const std::string& filename) {
 		filename,
 		filename + ".chai",
 		// Allow loading lua files as ChaiScript?
-		filename + ".lua",
+		// filename + ".lua",
 		// Attempt to load a directory's init.chai, if available.
-		filename + "/init.chai",
-		filename + "/init.lua"
+		filename + "/init.chai"
+        // Allow loading .lua files?
+		// filename + "/init.lua"
 	};
 	for (const std::string& possibility : possibilities) {
 		// Make sure the file exists and is a file.
