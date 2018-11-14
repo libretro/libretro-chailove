@@ -71,11 +71,16 @@ class List {
  * @see love.filesystem.load
  *
  * @code
- * // The following will load lib/player.chai.
+ * // The following will load "lib/player.chai".
  * require("lib.player")
  *
  * // Calling require("lib.player") again will not re-load it.
  * require("lib.player")
+ *
+ * // Calling a directory name will attempt to load the directory's "init.chai"
+ * // file. The following example will load "lib/init.chai" if "lib.chai"
+ * // doesn't exist.
+ * require("lib")
  * @endcode
  */
 bool require(const std::string& module);
@@ -110,10 +115,10 @@ class String {
 	 * var hello = "    Hello World!    "
 	 * var result = hello.trim()
 	 * // => "Hello World!"
-     * @endcode
+	 * @endcode
 	 */
 	std::string trim();
-    
+
 	/**
 	 * Splits a string by the given token.
 	 */

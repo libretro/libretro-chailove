@@ -23,21 +23,42 @@ using love::graphics;
 
 namespace love {
 
+std::string script::findModule(const std::string& filename) {
+	ChaiLove* app = ChaiLove::getInstance();
+	std::string possibilities[5] = {
+		filename,
+		filename + ".chai",
+		// Allow loading lua files as ChaiScript?
+		// filename + ".lua",
+		// Attempt to load a directory's init.chai, if available.
+		filename + "/init.chai"
+        // Allow loading .lua files?
+		// filename + "/init.lua"
+	};
+	for (const std::string& possibility : possibilities) {
+		// Make sure the file exists and is a file.
+		if (app->filesystem.exists(possibility) && app->filesystem.isFile(possibility)) {
+			return possibility;
+		}
+	}
+	return "";
+}
+
 bool script::loadModule(const std::string& moduleName) {
 	#ifdef __HAVE_CHAISCRIPT__
 	ChaiLove* app = ChaiLove::getInstance();
 
-	// Store a filename for the module.
-	std::string filename = moduleName;
+	// Ensure we're loading a valid module name.
+	if (moduleName.empty()) {
+		std::cout << "[ChaiLove] [script] loadModule was called with an empty moduleName." << std::endl;
+		return false;
+	}
 
-	// Make sure it exists.
-	if (!app->filesystem.exists(filename)) {
-		// See if we are to append .chai.
-		filename = filename + ".chai";
-		if (!app->filesystem.exists(filename)) {
-			std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
-			return false;
-		}
+	// Store a filename for the module.
+	std::string filename = findModule(moduleName);
+	if (filename.empty()) {
+		std::cout << "[ChaiLove] [script] Module " << moduleName << " not found." << std::endl;
+		return false;
 	}
 
 	// Load the contents of the file.
@@ -49,16 +70,19 @@ bool script::loadModule(const std::string& moduleName) {
 		return false;
 	}
 
+	// Run the script.
 	eval(contents, filename);
 	return true;
-
 	#endif
 	return false;
 }
 
-bool script::loadModuleRequire(const std::string& moduleName) {
-	// Check if the module has already been loaded.
-	std::string filename = replaceString(replaceString(moduleName, ".chai", ""), ".", "/");
+bool script::require(const std::string& moduleName) {
+	// Find what the cleansed module name is.
+	std::string noExtension = replaceString(replaceString(moduleName, ".chai", ""), ".lua", "");
+	std::string filename = replaceString(noExtension, ".", "/");
+
+	// Ensure we only load the script once.
 	if (std::find(m_requiremodules.begin(), m_requiremodules.end(), filename) != m_requiremodules.end()) {
 		return true;
 	}
@@ -68,6 +92,7 @@ bool script::loadModuleRequire(const std::string& moduleName) {
 	if (loaded) {
 		m_requiremodules.push_back(filename);
 	}
+
 	return loaded;
 }
 
@@ -310,7 +335,7 @@ script::script(const std::string& file) {
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun<std::vector<std::string>, filesystem, const std::string&, const std::string&>(&filesystem::lines), "lines");
 	chai.add(fun(&filesystem::load), "load");
-	chai.add(fun(&script::loadModuleRequire, this), "require");
+	chai.add(fun(&script::require, this), "require");
 	chai.add(fun(&filesystem::getFileExtension), "getFileExtension");
 	chai.add(fun(&filesystem::getBasename), "getBasename");
 	chai.add(fun(&filesystem::getParentDirectory), "getParentDirectory");
@@ -395,15 +420,15 @@ script::script(const std::string& file) {
 		mainLoaded = true;
 	} else {
 		// Load the main.chai file.
-		loadModuleRequire("conf");
+		require("conf");
 
 		std::string extension(app->filesystem.getFileExtension(file));
 		if (extension == "chailove" || extension == "chaigame") {
-			mainLoaded = loadModuleRequire("main");
+			mainLoaded = require("main");
 		} else {
 			// Otherwise, load the actual file.
 			std::string filename(app->filesystem.getBasename(file));
-			mainLoaded = loadModuleRequire(filename);
+			mainLoaded = require(filename);
 		}
 	}
 
