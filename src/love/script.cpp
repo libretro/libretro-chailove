@@ -57,7 +57,7 @@ bool script::loadModule(const std::string& moduleName) {
 	// Store a filename for the module.
 	std::string filename = findModule(moduleName);
 	if (filename.empty()) {
-		std::cout << "[ChaiLove] [script] Module " << filename << " not found." << std::endl;
+		std::cout << "[ChaiLove] [script] Module " << moduleName << " not found." << std::endl;
 		return false;
 	}
 
