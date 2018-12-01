@@ -322,7 +322,7 @@ void retro_audio_cb() {
  */
 void audio_set_state(bool enabled) {
 	// TODO(RobLoach): Act on whether or not audio is enabled/disabled?
-	(void)enabled;
+	std::cout << "[ChaiLove] audio_set_state(" << (enabled ? "true" : "false") << ")" << std::endl;
 }
 
 /**
