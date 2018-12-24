@@ -310,6 +310,22 @@ void frame_time_cb(retro_usec_t usec) {
 }
 
 /**
+ * libretro callback; Step the audio forwards a step.
+ */
+void retro_audio_cb() {
+	// Update the sound system.
+	ChaiLove::getInstance()->sound.update();
+}
+
+/**
+ * libretro callback; Set the current state of the audio.
+ */
+void audio_set_state(bool enabled) {
+	// TODO(RobLoach): Act on whether or not audio is enabled/disabled?
+	std::cout << "[ChaiLove] audio_set_state(" << (enabled ? "true" : "false") << ")" << std::endl;
+}
+
+/**
  * libretro callback; Load the given game.
  */
 bool retro_load_game(const struct retro_game_info *info) {
@@ -322,6 +338,10 @@ bool retro_load_game(const struct retro_game_info *info) {
 	// Set the frame rate callback.
 	struct retro_frame_time_callback frame_cb = { frame_time_cb, 1000000 / 60 };
 	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK, &frame_cb);
+
+	// Set the audio callback.
+	struct retro_audio_callback retro_audio = { retro_audio_cb, audio_set_state };
+	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &retro_audio);
 
 	// Find the game path.
 	std::string gamePath(info ? info->path : "");

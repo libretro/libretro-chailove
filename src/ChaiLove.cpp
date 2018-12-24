@@ -169,9 +169,6 @@ std::string ChaiLove::demo() {
 }
 
 void ChaiLove::update() {
-	// Update the sound system.
-	sound.update();
-
 	// Update and poll all the events.
 	event.update();
 

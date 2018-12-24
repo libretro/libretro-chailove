@@ -4,6 +4,13 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.31.0 - 2018-12-24
+### Chores
+- Update to use the libretro audio callback
+- Updated cppcodec
+- Updated PhysFS
+- Updated libretro-common
+
 ## 0.30.0 - 2018-11-14
 ### Features
 - Added support for classic_armv7_a7
