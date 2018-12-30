@@ -40,7 +40,7 @@ retroarch -L chailove_libretro.so FloppyBird.chailove
 
 ## API
 
-The [ChaiLove API](https://rawgit.com/libretro/libretro-chailove/docs/) is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a [simple Hello World example](examples/simple/main.chai):
+The [ChaiLove API](https://raw.githack.com/libretro/libretro-chailove/docs/index.html) is roughly inspired by the [LÖVE API](https://love2d.org/wiki/Main_Page). The following `main.chai` is a [simple Hello World example](examples/simple/main.chai):
 
 ``` lua
 global logo
@@ -66,7 +66,7 @@ To run it, execute the following:
 retroarch -L chailove_libretro.so main.chai
 ```
 
-See the [ChaiLove API](https://rawgit.com/libretro/libretro-chailove/docs/) for coverage of all the callbacks and methods in ChaiLove.
+See the [ChaiLove API](https://raw.githack.com/libretro/libretro-chailove/docs/index.html) for coverage of all the callbacks and methods in ChaiLove.
 
 ## Development
 
@@ -96,7 +96,7 @@ retroarch -L chailove_libretro.so test/main.chai
 
 ### Documentation
 
-See the [ChaiLove API documentation](https://rawgit.com/libretro/libretro-chailove/docs/). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
+See the [ChaiLove API documentation](https://raw.githack.com/libretro/libretro-chailove/docs/index.html). Build it through [Doxygen](http://www.stack.nl/~dimitri/doxygen/) by using:
 
 ```
 make docs
