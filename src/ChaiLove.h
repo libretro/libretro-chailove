@@ -99,7 +99,6 @@ class ChaiLove {
 	love::math math;
 	love::window window;
 	love::event event;
-	std::string demo();
 
 	~ChaiLove();
 	void quit(void);

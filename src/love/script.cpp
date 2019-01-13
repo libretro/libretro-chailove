@@ -413,23 +413,16 @@ script::script(const std::string& file) {
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");
 
-	// Load the desired main.chai file.
-	if (file.empty()) {
-		// When no content is provided, display a No Game demo.
-		eval(app->demo(), "demo.chai");
-		mainLoaded = true;
-	} else {
-		// Load the main.chai file.
-		require("conf");
+	// Load the main.chai file.
+	require("conf");
 
-		std::string extension(app->filesystem.getFileExtension(file));
-		if (extension == "chailove" || extension == "chaigame") {
-			mainLoaded = require("main");
-		} else {
-			// Otherwise, load the actual file.
-			std::string filename(app->filesystem.getBasename(file));
-			mainLoaded = require(filename);
-		}
+	std::string extension(app->filesystem.getFileExtension(file));
+	if (extension == "chailove" || extension == "chaigame") {
+		mainLoaded = require("main");
+	} else {
+		// Otherwise, load the actual file.
+		std::string filename(app->filesystem.getBasename(file));
+		mainLoaded = require(filename);
 	}
 
 	// Find the game functions.
