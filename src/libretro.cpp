@@ -208,7 +208,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 	info->geometry.base_width   = width;
 	info->geometry.base_height  = height;
 	info->geometry.max_width    = width;
-	info->geometry.max_height   = width;
+	info->geometry.max_height   = height;
 	info->geometry.aspect_ratio = static_cast<float>(width) / static_cast<float>(height);
 
 	info->timing.fps = 60.0;
