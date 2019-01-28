@@ -114,9 +114,13 @@ script::script(const std::string& file) {
 
 	// ChaiScript Standard Library Additions
 	// This adds some basic type definitions to ChaiScript.
+	chai.add(bootstrap::standard_library::vector_type<std::vector<bool>>("VectorBool"));
 	chai.add(bootstrap::standard_library::vector_type<std::vector<int>>("VectorInt"));
+	chai.add(bootstrap::standard_library::vector_type<std::vector<float>>("VectorFloat"));
 	chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
 	chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
+	chai.add(bootstrap::standard_library::map_type<std::map<std::string, int>>("StringIntMap"));
+	chai.add(bootstrap::standard_library::map_type<std::map<std::string, float>>("StringFloatMap"));
 
 	auto stringmethods = chaiscript::extras::string_methods::bootstrap();
 	chai.add(stringmethods);
