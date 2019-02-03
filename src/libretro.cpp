@@ -57,7 +57,7 @@ void retro_set_environment(retro_environment_t cb) {
 	// Set the environment callback.
 	ChaiLove::environ_cb = cb;
 
-	// The core supports having no game.
+	// The core requires content.
 	bool no_rom = false;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
