@@ -4,6 +4,18 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.32.0 - 2019-03-10
+### Features
+- [BunnyMark](examples/bunnymark) to test performance
+
+### Chores
+- ChaiLove now requires content to run
+- Updated ChaiScript_Extras for more string methods
+- Updated PhysFS
+- Updated libretro-common
+- Updated random to fix a gcc 7.3+ error
+- Updated stb
+
 ## 0.31.0 - 2018-12-24
 ### Chores
 - Update to use the libretro audio callback

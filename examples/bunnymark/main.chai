@@ -1,0 +1,120 @@
+// Copyright (c) 2018 KANO Computing Ltd.
+// Licensed under the GNU GPL v2
+//
+// Original by Iain Lobb
+// Inspired by PixieJS
+// Bunny Image by Amanda Lobb
+// https://github.com/rishavs/love2d-bunnymark
+// ChaiLove version by Rob Loach
+
+def conf(t) {
+    t.console = true
+    t.window.title = "Bunnymark Mark II ; a little better!"
+    t.window.width = 800
+    t.window.height = 600
+}
+
+def load() {
+    global bunnies = List()
+    global gravity = 0.98f
+
+    global maxX = love.graphics.getWidth( )
+    global minX = 0
+
+    global maxY = love.graphics.getHeight( )
+    global minY = 0
+
+    // optimise the bunny size for embedded devices
+    global baseLitterSize = 50
+    global litterSizeIncrement = 50
+    global litterSize = baseLitterSize
+
+    global stdOutText = ""
+
+    global bunnyImg = love.graphics.newImage("bunny.png")
+    procreate(0, 0)
+}
+
+def draw() {
+    love.graphics.print(to_string(bunnies.size()) + " Total Bunnies", 20, 10)
+    love.graphics.print(to_string(litterSize) + " bunnies in each Litter", 20, 20)
+
+    // print the current memory usage
+    // rounding down mem to three dig: math.floor(mem+0.5) / math.pow(10,dig)
+    //love.graphics.print(floor(collectgarbage("count") + 0.5)/pow(10,3) + " MB Mem Usage", 20, 30)
+    love.graphics.print("Current FPS: " + to_string(love.timer.getFPS()), 20, 40)
+    //love.graphics.print(string.format("Elapsed clock cycles: " + to_string(%.4f", (os.clock() - x) *1000), 20, 50)
+
+    for (bunny : bunnies) {
+        love.graphics.draw(bunnyImg, bunny[0], bunny[1])
+    }
+}
+
+def mousepressed(x, y, button) {
+    for (var i = 0; i < litterSize; ++i) {
+        procreate(x, y)
+    }
+}
+
+def joystickpressed(joystick, button) {
+    for (var i = 0; i < litterSize; ++i) {
+        procreate(love.graphics.getWidth() / 2.0f, love.graphics.getHeight() / 8.0f)
+    }
+}
+
+def update(dt) {
+    // Initialize variables once per cycle.
+    var tempBunnyPosX = 0.0f
+    var tempBunnyPosY = 0.0f
+    var tempBunnySpeedX = 0.0f
+    var tempBunnySpeedY = 0.0f
+
+    for (bunny : bunnies) {
+        // Retrieve the bunny values.
+        tempBunnyPosX = bunny[0]
+        tempBunnyPosY = bunny[1]
+        tempBunnySpeedX = bunny[2]
+        tempBunnySpeedY = bunny[3]
+
+        // Move the bunny.
+        tempBunnyPosX = tempBunnyPosX + tempBunnySpeedX;
+        tempBunnyPosY = tempBunnyPosY + tempBunnySpeedY;
+
+        // Adjust coordinates with world.
+        tempBunnySpeedY = tempBunnySpeedY + gravity;
+        if (tempBunnyPosX > maxX) {
+            tempBunnySpeedX = tempBunnySpeedX * -0.9f;
+            tempBunnyPosX = maxX;
+        } else if (tempBunnyPosX < minX) {
+            tempBunnySpeedX = tempBunnySpeedX * -0.9f;
+            tempBunnyPosX = minX;
+        }
+        if (tempBunnyPosY > maxY) {
+            tempBunnySpeedY = tempBunnySpeedY * -0.9f;
+            tempBunnyPosY = maxY;
+        } else if (tempBunnyPosY < minY) {
+            tempBunnySpeedY = tempBunnySpeedY * -0.9f;
+            tempBunnyPosY = minY;
+        }
+
+        // Update the bunny
+        bunny[0] = tempBunnyPosX
+        bunny[1] = tempBunnyPosY
+        bunny[2] = tempBunnySpeedX
+        bunny[3] = tempBunnySpeedY
+    }
+}
+
+//------------------------------------------------
+// Custom functions
+//------------------------------------------------
+
+def procreate(x,y) {
+    var bunnyPosX = x
+    var bunnyPosY = y
+    var bunnySpeedX = love.math.random(-5.0f, 5.0f)
+    var bunnySpeedY = love.math.random(-5.0f, 5.0f)
+    var bunny = [bunnyPosX, bunnyPosY, bunnySpeedX, bunnySpeedY]
+
+    bunnies.push_back_ref(bunny)
+}

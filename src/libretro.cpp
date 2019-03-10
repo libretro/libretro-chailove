@@ -57,8 +57,8 @@ void retro_set_environment(retro_environment_t cb) {
 	// Set the environment callback.
 	ChaiLove::environ_cb = cb;
 
-	// The core supports having no game.
-	bool no_rom = true;
+	// The core requires content.
+	bool no_rom = false;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
 	// Set the Variables.
@@ -208,7 +208,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 	info->geometry.base_width   = width;
 	info->geometry.base_height  = height;
 	info->geometry.max_width    = width;
-	info->geometry.max_height   = width;
+	info->geometry.max_height   = height;
 	info->geometry.aspect_ratio = static_cast<float>(width) / static_cast<float>(height);
 
 	info->timing.fps = 60.0;

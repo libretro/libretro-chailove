@@ -115,9 +115,13 @@ script::script(const std::string& file) {
 	// ChaiScript Standard Library Additions
 	// This adds some basic type definitions to ChaiScript.
 	chai.add(bootstrap::standard_library::vector_type<std::vector<int>>("VectorInt"));
+	chai.add(bootstrap::standard_library::vector_type<std::vector<float>>("VectorFloat"));
 	chai.add(bootstrap::standard_library::vector_type<std::vector<std::string>>("StringVector"));
 	chai.add(bootstrap::standard_library::map_type<std::map<std::string, bool>>("StringBoolMap"));
+	chai.add(bootstrap::standard_library::map_type<std::map<std::string, int>>("StringIntMap"));
+	chai.add(bootstrap::standard_library::map_type<std::map<std::string, float>>("StringFloatMap"));
 
+	// ChaiScript_Extras: String Methods
 	auto stringmethods = chaiscript::extras::string_methods::bootstrap();
 	chai.add(stringmethods);
 
@@ -413,23 +417,16 @@ script::script(const std::string& file) {
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");
 
-	// Load the desired main.chai file.
-	if (file.empty()) {
-		// When no content is provided, display a No Game demo.
-		eval(app->demo(), "demo.chai");
-		mainLoaded = true;
-	} else {
-		// Load the main.chai file.
-		require("conf");
+	// Load the main.chai file.
+	require("conf");
 
-		std::string extension(app->filesystem.getFileExtension(file));
-		if (extension == "chailove" || extension == "chaigame") {
-			mainLoaded = require("main");
-		} else {
-			// Otherwise, load the actual file.
-			std::string filename(app->filesystem.getBasename(file));
-			mainLoaded = require(filename);
-		}
+	std::string extension(app->filesystem.getFileExtension(file));
+	if (extension == "chailove" || extension == "chaigame") {
+		mainLoaded = require("main");
+	} else {
+		// Otherwise, load the actual file.
+		std::string filename(app->filesystem.getBasename(file));
+		mainLoaded = require(filename);
 	}
 
 	// Find the game functions.
