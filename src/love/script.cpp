@@ -121,6 +121,7 @@ script::script(const std::string& file) {
 	chai.add(bootstrap::standard_library::map_type<std::map<std::string, int>>("StringIntMap"));
 	chai.add(bootstrap::standard_library::map_type<std::map<std::string, float>>("StringFloatMap"));
 
+	// ChaiScript_Extras: String Methods
 	auto stringmethods = chaiscript::extras::string_methods::bootstrap();
 	chai.add(stringmethods);
 
