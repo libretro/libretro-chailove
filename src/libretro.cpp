@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include "libretro.h"
+#include "libretro_core_options.h"
 #include "ChaiLove.h"
 
 static retro_video_refresh_t video_cb;
@@ -61,17 +62,8 @@ void retro_set_environment(retro_environment_t cb) {
 	bool no_rom = false;
 	cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &no_rom);
 
-	// Set the Variables.
-	struct retro_variable variables[] = {
-		{
-			"chailove_alphablending", "Alpha Blending; enabled|disabled",
-		},
-		{
-			"chailove_highquality", "High Quality; enabled|disabled",
-		},
-		{ NULL, NULL },
-	};
-	cb(RETRO_ENVIRONMENT_SET_VARIABLES, variables);
+	// Configure the core options.
+	libretro_set_core_options(cb);
 }
 
 /**
