@@ -32,8 +32,8 @@ struct retro_core_option_definition option_defs_us[] = {
       "Alpha Blending",
       "Whether or not to enable hardware alpha blending. This will improve graphics, but have an impact on performance.",
       {
-         { "enabled", "Enabled" },
-         { "disabled", "Disabled" },
+         { "enabled", NULL },
+         { "disabled", NULL },
          { NULL, NULL },
       }
    },
@@ -42,8 +42,8 @@ struct retro_core_option_definition option_defs_us[] = {
       "High Quality",
       "When enabled, will take steps to improve the graphic fidelity. Can have an impact on performance.",
       {
-         { "enabled", "Enabled" },
-         { "disabled", "Disabled" },
+         { "enabled", NULL },
+         { "disabled", NULL },
          { NULL, NULL },
       }
    },
