@@ -25,7 +25,6 @@ extern "C" {
  *   is not available
  * - Will be used as a fallback for any missing entries in
  *   frontend language definition */
-
 struct retro_core_option_definition option_defs_us[] = {
    {
       "chailove_alphablending",
@@ -35,7 +34,8 @@ struct retro_core_option_definition option_defs_us[] = {
          { "enabled", NULL },
          { "disabled", NULL },
          { NULL, NULL },
-      }
+      },
+      "enabled"
    },
    {
       "chailove_highquality",
@@ -45,9 +45,10 @@ struct retro_core_option_definition option_defs_us[] = {
          { "enabled", NULL },
          { "disabled", NULL },
          { NULL, NULL },
-      }
+      },
+      "enabled"
    },
-   { NULL, NULL, NULL, {{0}} },
+   { NULL, NULL, NULL, {{0}}, NULL },
 };
 
 /* RETRO_LANGUAGE_JAPANESE */
