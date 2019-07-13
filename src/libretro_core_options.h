@@ -25,29 +25,30 @@ extern "C" {
  *   is not available
  * - Will be used as a fallback for any missing entries in
  *   frontend language definition */
-
 struct retro_core_option_definition option_defs_us[] = {
    {
       "chailove_alphablending",
       "Alpha Blending",
       "Whether or not to enable hardware alpha blending. This will improve graphics, but have an impact on performance.",
       {
-         { "enabled", "Enabled" },
-         { "disabled", "Disabled" },
+         { "enabled", NULL },
+         { "disabled", NULL },
          { NULL, NULL },
-      }
+      },
+      "enabled"
    },
    {
       "chailove_highquality",
       "High Quality",
       "When enabled, will take steps to improve the graphic fidelity. Can have an impact on performance.",
       {
-         { "enabled", "Enabled" },
-         { "disabled", "Disabled" },
+         { "enabled", NULL },
+         { "disabled", NULL },
          { NULL, NULL },
-      }
+      },
+      "enabled"
    },
-   { NULL, NULL, NULL, {{0}} },
+   { NULL, NULL, NULL, {{0}}, NULL },
 };
 
 /* RETRO_LANGUAGE_JAPANESE */
