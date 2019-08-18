@@ -6,7 +6,6 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
-#include "semver.h"
 #include "libretro.h"
 
 namespace love {
@@ -91,53 +90,7 @@ bool system::load(config& t) {
 	// Ensure we retrieve the latest variable states.
 	updateVariables(t);
 
-	// Load the semantic version string.
-	semver_t chailoveVersion = {};
-	semver_t coreVersion = {};
-	bool showWarning = false;
-
-	if (semver_parse(getVersionString().c_str(), &chailoveVersion)
-		|| semver_parse(t.version.c_str(), &coreVersion)) {
-		std::cout << "[ChaiLove] [system] Error: Invalid t.version string " << t.version << std::endl;
-		return true;
-	}
-	std::cout << "[ChaiLove] [system] Version current:  " << getVersionString() << std::endl;
-	std::cout << "[ChaiLove] [system] Version targeted: " << t.version << std::endl;
-
-	// Compare the version to the version of ChaiLove.
-	int resolution = semver_compare(coreVersion, chailoveVersion);
-	if (resolution == 0) {
-		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " == " << t.version << std::endl;
-	} else if (resolution == -1) {
-		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " > " << t.version << std::endl;
-	} else {
-		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " < " << t.version << std::endl;
-	}
-
-	// Check the ~= satisfaction
-	resolution = semver_satisfies(chailoveVersion, coreVersion, "~");
-	if (resolution == 1) {
-		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " ~= " << t.version << std::endl;
-	} else {
-		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " !~= " << t.version << std::endl;
-	}
-
-	// Check the ^= satisfaction
-	resolution = semver_satisfies(chailoveVersion, coreVersion, "^");
-	if (resolution == 1) {
-		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " ^= " << t.version << std::endl;
-	} else {
-		std::cout << "[ChaiLove] [system] Version " << getVersionString() << " !^= " << t.version << std::endl;
-		showWarning = true;
-	}
-
-	// Display a warning in the On-Screen Display.
-	if (showWarning) {
-		std::string message = "Warning: Expected ChaiLove " + t.version + ", running " + getVersionString();
-		std::cout << "[ChaiLove] [system] " << message << std::endl;
-		ChaiLove::getInstance()->window.showMessageBox(message);
-	}
-
+	// Loading success.
 	return true;
 }
 

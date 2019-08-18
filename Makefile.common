@@ -10,10 +10,6 @@ SOURCES_CXX := $(wildcard \
 )
 FLAGS += -Wfatal-errors
 
-# semver
-FLAGS += -I$(CORE_DIR)/vendor/semver
-SOURCES_C := $(CORE_DIR)/vendor/semver/semver.c
-
 # random
 FLAGS += -I$(CORE_DIR)/vendor/random/include
 
