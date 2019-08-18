@@ -53,11 +53,6 @@
 	url = https://github.com/effolkronium/random.git
 	ignore = dirty
 	branch = master
-[submodule "vendor/semver"]
-	path = vendor/semver
-	url = https://github.com/h2non/semver.c.git
-	ignore = dirty
-	branch = master
 [submodule "vendor/TinySHA1"]
 	path = vendor/TinySHA1
 	url = https://github.com/mohaps/TinySHA1.git
