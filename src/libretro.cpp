@@ -5,6 +5,7 @@
 #include <iostream>
 #include "libretro.h"
 #include "libretro_core_options.h"
+#define __STDC_FORMAT_MACROS
 #include "ChaiLove.h"
 
 static retro_video_refresh_t video_cb;
