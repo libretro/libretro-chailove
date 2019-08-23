@@ -1,5 +1,5 @@
-#ifndef LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_LIBRETRO_CORE_OPTIONS_H_
-#define LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_LIBRETRO_CORE_OPTIONS_H_
+#ifndef SRC_LIBRETRO_CORE_OPTIONS_H_
+#define SRC_LIBRETRO_CORE_OPTIONS_H_
 
 #include <stdlib.h>
 #include <string.h>
@@ -118,15 +118,14 @@ struct retro_core_option_definition *option_defs_intl[RETRO_LANGUAGE_LAST] = {
  *   be as painless as possible for core devs)
  */
 
-static INLINE void libretro_set_core_options(retro_environment_t environ_cb)
-{
+static INLINE void libretro_set_core_options(retro_environment_t environ_cb) {
 	unsigned version = 0;
 
-	if (!environ_cb)
+	if (!environ_cb) {
 		return;
+	}
 
-	if (environ_cb(RETRO_ENVIRONMENT_GET_CORE_OPTIONS_VERSION, &version) && (version >= 1))
-	{
+	if (environ_cb(RETRO_ENVIRONMENT_GET_CORE_OPTIONS_VERSION, &version) && (version >= 1)) {
 #ifndef HAVE_NO_LANGEXTRA
 		struct retro_core_options_intl core_options_intl;
 		unsigned language = 0;
@@ -142,33 +141,31 @@ static INLINE void libretro_set_core_options(retro_environment_t environ_cb)
 #else
 		environ_cb(RETRO_ENVIRONMENT_SET_CORE_OPTIONS, &option_defs_us);
 #endif
-	}
-	else
-	{
+	} else {
 		size_t i;
 		size_t num_options               = 0;
 		struct retro_variable *variables = NULL;
 		char **values_buf                = NULL;
 
 		/* Determine number of options */
-		while (true)
-		{
-			if (option_defs_us[num_options].key)
+		while (true) {
+			if (option_defs_us[num_options].key) {
 				num_options++;
-			else
+			} else {
 				break;
+			}
 		}
 
 		/* Allocate arrays */
 		variables  = (struct retro_variable *)calloc(num_options + 1, sizeof(struct retro_variable));
 		values_buf = (char **)calloc(num_options, sizeof(char *));
 
-		if (!variables || !values_buf)
+		if (!variables || !values_buf) {
 			goto error;
+		}
 
 		/* Copy parameters from option_defs_us array */
-		for (i = 0; i < num_options; i++)
-		{
+		for (i = 0; i < num_options; i++) {
 			const char *key                        = option_defs_us[i].key;
 			const char *desc                       = option_defs_us[i].desc;
 			const char *default_value              = option_defs_us[i].default_value;
@@ -178,30 +175,28 @@ static INLINE void libretro_set_core_options(retro_environment_t environ_cb)
 
 			values_buf[i] = NULL;
 
-			if (desc)
-			{
+			if (desc) {
 				size_t num_values = 0;
 
 				/* Determine number of values */
-				while (true)
-				{
-					if (values[num_values].value)
-					{
+				while (true) {
+					if (values[num_values].value) {
 						/* Check if this is the default value */
-						if (default_value)
-							if (strcmp(values[num_values].value, default_value) == 0)
+						if (default_value) {
+							if (strcmp(values[num_values].value, default_value) == 0) {
 								default_index = num_values;
+							}
+						}
 
 						buf_len += strlen(values[num_values].value);
 						num_values++;
-					}
-					else
+					} else {
 						break;
+					}
 				}
 
 				/* Build values string */
-				if (num_values > 0)
-				{
+				if (num_values > 0) {
 					size_t j;
 
 					buf_len += num_values - 1;
@@ -218,10 +213,8 @@ static INLINE void libretro_set_core_options(retro_environment_t environ_cb)
 					strcat(values_buf[i], values[default_index].value);
 
 					/* Add remaining values */
-					for (j = 0; j < num_values; j++)
-					{
-						if (j != default_index)
-						{
+					for (j = 0; j < num_values; j++) {
+						if (j != default_index) {
 							strcat(values_buf[i], "|");
 							strcat(values_buf[i], values[j].value);
 						}
@@ -239,12 +232,9 @@ static INLINE void libretro_set_core_options(retro_environment_t environ_cb)
 error:
 
 		/* Clean up */
-		if (values_buf)
-		{
-			for (i = 0; i < num_options; i++)
-			{
-				if (values_buf[i])
-				{
+		if (values_buf) {
+			for (i = 0; i < num_options; i++) {
+				if (values_buf[i]) {
 					free(values_buf[i]);
 					values_buf[i] = NULL;
 				}
@@ -254,8 +244,7 @@ error:
 			values_buf = NULL;
 		}
 
-		if (variables)
-		{
+		if (variables) {
 			free(variables);
 			variables = NULL;
 		}
@@ -266,4 +255,4 @@ error:
 }
 #endif
 
-#endif  // LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_LIBRETRO_CORE_OPTIONS_H_
+#endif  // SRC_LIBRETRO_CORE_OPTIONS_H_

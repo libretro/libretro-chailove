@@ -87,7 +87,7 @@ cpplint: vendor/libretro-common/include/libretro.h
 		--filter=-build/include,-legal/copyright,-runtime/int,-runtime-readability/braces,\
 	-runtime/threadsafe_fn,-build/namespaces,-runtime/explicit,-whitespace/tab,\
 	-readability/casting,-whitespace/line_length,-runtime/references \
-		src/*.h src/*.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
+		src/ChaiLove.cpp src/ChaiLove.h src/libretro.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
 
 tests: vendor/libretro-common/include/libretro.h
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1

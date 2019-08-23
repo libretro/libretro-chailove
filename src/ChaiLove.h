@@ -41,8 +41,8 @@
  * To run the above, execute it with `retroarch -L chailove_libretro.so main.chai` .
  */
 
-#ifndef LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_CHAILOVE_H_
-#define LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_CHAILOVE_H_
+#ifndef SRC_CHAILOVE_H_
+#define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 0
 #define CHAILOVE_VERSION_MINOR 32
@@ -115,4 +115,4 @@ class ChaiLove {
 	SDL_Surface* screen = NULL;
 };
 
-#endif  // LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_CHAILOVE_H_
+#endif  // SRC_CHAILOVE_H_

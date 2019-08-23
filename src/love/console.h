@@ -1,5 +1,5 @@
-#ifndef LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_LOVE_CONSOLE_H_
-#define LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_LOVE_CONSOLE_H_
+#ifndef SRC_LOVE_CONSOLE_H_
+#define SRC_LOVE_CONSOLE_H_
 
 #include <string>
 #include <vector>
@@ -52,4 +52,4 @@ class console {
 
 }  // namespace love
 
-#endif  // LIBRETRO_DATABASE_LIBRETRO_CHAILOVE_SRC_LOVE_CONSOLE_H_
+#endif  // SRC_LOVE_CONSOLE_H_
