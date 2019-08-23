@@ -38,6 +38,7 @@ ifneq ($(STATIC_LINKING), 1)
 		$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
 		$(CORE_DIR)/vendor/libretro-common/memmap/memalign.c \
 		$(CORE_DIR)/vendor/libretro-common/streams/file_stream.c \
+		$(CORE_DIR)/vendor/libretro-common/string/stdstring.c \
 		$(CORE_DIR)/vendor/libretro-common/vfs/vfs_implementation.c \
 	)
     # Ensure the sinc_resampler_neon is available for ARM NEON devices.
