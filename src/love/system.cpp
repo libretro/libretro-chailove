@@ -106,7 +106,7 @@ std::string system::getUsername() {
 }
 
 bool system::execute(const std::string& command) {
-#ifndef CHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+#ifdef CHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
 	std::cout << "[ChaiLove] [system] love.system.execute() is disabled." << std::endl;
 	return false;
 #else
