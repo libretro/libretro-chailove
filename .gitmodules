@@ -3,11 +3,6 @@
 	url = https://github.com/libretro/sdl-libretro.git
 	ignore = dirty
 	branch = master
-[submodule "vendor/libretro-common"]
-	path = vendor/libretro-common
-	url = https://github.com/libretro/libretro-common.git
-	ignore = dirty
-	branch = master
 [submodule "vendor/chaiscript"]
 	path = vendor/chaiscript
 	url = https://github.com/ChaiScript/ChaiScript.git

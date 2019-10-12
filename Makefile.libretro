@@ -102,7 +102,8 @@ else ifneq (,$(findstring ios,$(platform)))
 		IOSSDK := $(shell xcodebuild -version -sdk iphoneos Path)
 	endif
 	ifeq ($(platform),ios-arm64)
-		CC = cc -DDONT_WANT_ARM_OPTIMIZATIONS -arch arm64 -isysroot -DHAVE_POSIX_MEMALIGN $(IOSSDK)
+		CC = cc -arch arm64 -isysroot -DHAVE_POSIX_MEMALIGN $(IOSSDK)
+		CFLAGS += -DDONT_WANT_ARM_OPTIMIZATIONS
 		HAVE_NEON = 0
 	else
 		CC = cc -arch armv7 -isysroot $(IOSSDK)
