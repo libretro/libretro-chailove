@@ -32,6 +32,12 @@ $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)
+	git clean -xdf
+	rm -rf vendor
+	git reset --hard HEAD
+	git submodule update -f --init --recursive
+	git submodule foreach --recursive git clean -xfd
+	git submodule foreach --recursive git reset --hard HEAD
 
 vendor/libretro-common/include/libretro.h:
 	@git submodule update --init --recursive
