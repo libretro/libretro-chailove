@@ -106,6 +106,10 @@ std::string system::getUsername() {
 }
 
 bool system::execute(const std::string& command) {
+#ifdef CHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+	std::cout << "[ChaiLove] [system] love.system.execute() is disabled." << std::endl;
+	return false;
+#else
 	std::cout << "[ChaiLove] [system] love.system.execute(\"" << command << "\")" << std::endl;
 	int result = std::system(command.c_str());
 	if (result != 0) {
@@ -114,6 +118,7 @@ bool system::execute(const std::string& command) {
 	}
 	std::cout << "[ChaiLove] [system] Finished " << command << std::endl;
 	return true;
+#endif
 }
 
 std::string system::getClipboardText() {

@@ -102,14 +102,16 @@ else ifneq (,$(findstring ios,$(platform)))
 		IOSSDK := $(shell xcodebuild -version -sdk iphoneos Path)
 	endif
 	ifeq ($(platform),ios-arm64)
-		CC = cc -arch arm64 -isysroot $(IOSSDK)
+		CC = cc -arch arm64 -isysroot -DHAVE_POSIX_MEMALIGN $(IOSSDK)
+		CFLAGS += -DDONT_WANT_ARM_OPTIMIZATIONS
+		HAVE_NEON = 0
 	else
-	  CC = cc -arch armv7 -isysroot $(IOSSDK)
+		CC = cc -arch armv7 -isysroot $(IOSSDK)
 	endif
 	CFLAGS += -DIOS
 ifeq ($(platform),$(filter $(platform),ios9 ios-arm64))
-	CC +=  -miphoneos-version-min=8.0
-	CFLAGS += -miphoneos-version-min=8.0
+	CC +=  -miphoneos-version-min=8.0 -DHAVE_POSIX_MEMALIGN
+	CFLAGS += -miphoneos-version-min=8.0 -DHAVE_POSIX_MEMALIGN
 else
 	CC +=  -miphoneos-version-min=5.0
 	CFLAGS += -miphoneos-version-min=5.0
@@ -299,8 +301,8 @@ else ifeq ($(platform), libnx)
 # Platform affix = classic_<ISA>_<µARCH>
 # Help at https://modmyclassic.com/comp
 
-# (armv7 a7, hard point, neon based) ### 
-# NESC, SNESC, C64 mini 
+# (armv7 a7, hard point, neon based) ###
+# NESC, SNESC, C64 mini
 else ifeq ($(platform), classic_armv7_a7)
 	TARGET := $(TARGET_NAME)_libretro.so
 	fpic := -fPIC
@@ -609,6 +611,13 @@ else
 		CFLAGS += -O2 -DNDEBUG
 		CXXFLAGS += -O2 -DNDEBUG
 	endif
+endif
+
+ifeq ($(platform), ios-arm64)
+	LDFLAGS += -framework IOKit -framework Foundation
+	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
+	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+	SOURCES_M += $(CORE_DIR)/vendor/didstopia-physfs/src/physfs_platform_apple.m
 endif
 
 ifeq ($(EXTERNAL_ZLIB), 1)
