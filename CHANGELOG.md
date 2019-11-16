@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixes
 - iOS compilation
   - By [@jet082](https://github.com/jet082) in [#383](https://github.com/libretro/libretro-chailove/pull/383)
+- Updated dependencies
 
 ## 1.0.0 - 2019-08-23
 ### Chores
