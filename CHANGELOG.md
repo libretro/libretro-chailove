@@ -4,10 +4,11 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 1.1.x - xxxx-xx-xx
+## 1.1.0 - 2019-12-31
 ### Fixes
 - iOS compilation
-
+  - By [@jet082](https://github.com/jet082) in [#383](https://github.com/libretro/libretro-chailove/pull/383)
+- Updated dependencies
 
 ## 1.0.0 - 2019-08-23
 ### Chores

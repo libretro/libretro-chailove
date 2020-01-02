@@ -49,6 +49,7 @@ test: unittest unittest-chailove cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
 vendor/noarch/noarch: vendor/libretro-common/include/libretro.h
+	cd vendor/noarch && cmake .
 	@$(MAKE) -C vendor/noarch
 
 unittest: vendor/noarch/noarch all
