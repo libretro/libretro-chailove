@@ -16,7 +16,11 @@ all: $(TARGET)
 	$(MAKE) $(TARGET)
 
 $(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
+ifeq ($(STATIC_LINKING), 1)
+	$(AR) rcs $@ $(OBJECTS)
+else
 	$(CXX) -o $@ $^ $(LDFLAGS)
+endif
 
 %.o: %.cpp | vendor/libretro-common/include/libretro.h
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
