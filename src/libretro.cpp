@@ -459,3 +459,9 @@ void retro_run(void) {
 		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 	}
 }
+
+#ifdef _3DS
+extern "C" int nanosleep(const struct timespec *req, struct timespec *rem) {
+  return 0;
+}
+#endif

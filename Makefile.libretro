@@ -190,11 +190,18 @@ else ifeq ($(platform), dos)
 else ifeq ($(platform), ctr)
 	TARGET := $(TARGET_NAME)_libretro_$(platform).a
 	CC = $(DEVKITARM)/bin/arm-none-eabi-gcc$(EXE_EXT)
+	CXX = $(DEVKITARM)/bin/arm-none-eabi-g++$(EXE_EXT)
+	AR = $(DEVKITARM)/bin/arm-none-eabi-ar$(EXE_EXT)
 	AR = $(DEVKITARM)/bin/arm-none-eabi-ar$(EXE_EXT)
 	PLATFORM_DEFINES := -DARM11 -D_3DS
 	CFLAGS += -march=armv6k -mtune=mpcore -mfloat-abi=hard
 	CFLAGS += -Wall -mword-relocations
 	CFLAGS += -fomit-frame-pointer -fstrict-aliasing -ffast-math
+	CFLAGS += -I$(DEVKITPRO)/libctru/include
+	CXXFLAGS += -march=armv6k -mtune=mpcore -mfloat-abi=hard
+	CXXFLAGS += -Wall -mword-relocations
+	CXXFLAGS += -fomit-frame-pointer -fstrict-aliasing -ffast-math
+	CXXFLAGS += -I$(DEVKITPRO)/libctru/include
 	STATIC_LINKING=1
 	EXTERNAL_ZLIB=1
 

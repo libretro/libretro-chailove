@@ -52,7 +52,7 @@ bool window::load(const config& conf) {
 	}
 
 	// Enable video buffering.
-	app->videoBuffer = (unsigned int *)app->screen->pixels;
+	app->videoBuffer = (uint32_t *)app->screen->pixels;
 
 	// Set the title.
 	setTitle(conf.window.title);
