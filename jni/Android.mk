@@ -13,7 +13,7 @@ endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE       := retro
-LOCAL_SRC_FILES    := $(SOURCES_CXX) $(SOURCES_C)
+LOCAL_SRC_FILES    := $(SOURCES_CXX) $(SOURCES_C) $(SOURCES_S)
 LOCAL_CXXFLAGS     := $(COREFLAGS) -std=c++14
 LOCAL_CFLAGS       := $(COREFLAGS)
 LOCAL_LDFLAGS      := -Wl,-version-script=$(CORE_DIR)/link.T
