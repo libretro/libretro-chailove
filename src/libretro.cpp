@@ -7,6 +7,8 @@
 #include "libretro_core_options.h"
 #define __STDC_FORMAT_MACROS
 #include "ChaiLove.h"
+#include "libretro-sdl-bridge.h"
+#include "libretro-sdl-bridge-cpp.h"
 
 static retro_video_refresh_t video_cb;
 // This is needed to allow SDL-libretro to compile.
@@ -32,25 +34,6 @@ void retro_set_input_poll(retro_input_poll_t cb) {
 void retro_set_input_state(retro_input_state_t cb) {
 	ChaiLove::input_state_cb = cb;
 }
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void libretro_audio_cb(int16_t left, int16_t right) {
-	// Nothing, since we're using libretro-common.
-	// audio_cb(left, right);
-}
-
-/**
- * libretro-sdl callback; Send through the input state.
- */
-short int libretro_input_state_cb(unsigned port, unsigned device, unsigned index, unsigned id) {
-	return ChaiLove::input_state_cb(port, device, index, id);
-}
-#ifdef __cplusplus
-}
-#endif
 
 /**
  * libretro callback; Sets up the environment based on the system variables.

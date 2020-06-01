@@ -2,6 +2,8 @@
 SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/ChaiLove.cpp \
 	$(CORE_DIR)/src/libretro.cpp \
+	$(CORE_DIR)/src/libretro-sdl-bridge.c \
+	$(CORE_DIR)/src/libretro-sdl-bridge-cpp.cpp \
 	$(CORE_DIR)/src/love/*.cpp \
 	$(CORE_DIR)/src/love/Types/Audio/*.cpp \
 	$(CORE_DIR)/src/love/Types/Config/*.cpp \
@@ -9,7 +11,9 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Graphics/*.cpp \
 	$(CORE_DIR)/src/love/Types/Input/*.cpp \
 )
-SOURCES_C =
+SOURCES_C = \
+	$(CORE_DIR)/src/libretro-sdl-bridge.c \
+	$(CORE_DIR)/src/libretro-sdl-bridge-cpp.cpp
 SOURCES_S =
 FLAGS += -Wfatal-errors
 
