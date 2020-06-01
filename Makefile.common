@@ -20,6 +20,7 @@ FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
 # Only compile libretro-common when not STATIC_LINKING
 ifneq ($(STATIC_LINKING), 1)
 	SOURCES_C += $(wildcard \
+    	$(CORE_DIR)/vendor/libretro-common/utils/md5.c \
 		$(CORE_DIR)/vendor/libretro-common/audio/audio_mix.c \
 		$(CORE_DIR)/vendor/libretro-common/audio/audio_mixer.c \
 		$(CORE_DIR)/vendor/libretro-common/audio/conversion/*.c \
@@ -45,10 +46,6 @@ ifneq ($(STATIC_LINKING), 1)
 	)
     # Ensure the sinc_resampler_neon is available for ARM NEON devices.
 	SOURCES_S += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.S
-
-    # MD5
-    FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
-    SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
 endif
 
 ifeq ($(platform), ctr)

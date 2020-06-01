@@ -706,7 +706,7 @@ ifeq ($(SIGNED_CHAR), 1)
 	CFLAGS += -fsigned-char
 endif
 
-CORE_DIR := src
+CORE_DIR := .
 
 include Makefile.common
 

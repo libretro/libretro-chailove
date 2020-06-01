@@ -15,44 +15,31 @@ CFLAGS += $(FLAGS) -std=gnu99
 all: $(TARGET)
 	$(MAKE) $(TARGET)
 
-$(TARGET): $(OBJECTS) | vendor/libretro-common/include/libretro.h
+$(TARGET): $(OBJECTS)
 ifeq ($(STATIC_LINKING), 1)
 	$(AR) rcs $@ $(OBJECTS)
 else
 	$(CXX) -o $@ $^ $(LDFLAGS)
 endif
 
-%.o: %.cpp | vendor/libretro-common/include/libretro.h
+%.o: %.cpp
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-%.o: %.c | vendor/libretro-common/include/libretro.h
+%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-%.o: %.m | vendor/libretro-common/include/libretro.h
+%.o: %.m
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-%.o: %.S | vendor/libretro-common/include/libretro.h
+%.o: %.S
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-	rm -f $(TARGET) $(OBJECTS)
-	git clean -xdf
-	rm -rf vendor
-	git reset --hard HEAD
-	git submodule update -f --init --recursive
-	git submodule foreach --recursive git clean -xfd
-	git submodule foreach --recursive git reset --hard HEAD
-
-vendor/libretro-common/include/libretro.h:
-	@git submodule update --init --recursive
-
-submodules-update:
-	@git submodule update --remote
 
 test: unittest unittest-chailove cpplint
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
-vendor/noarch/noarch: vendor/libretro-common/include/libretro.h
+vendor/noarch/noarch:
 	cd vendor/noarch && cmake .
 	@$(MAKE) -C vendor/noarch
 
@@ -68,7 +55,7 @@ examples: all
 test-script: all
 	@retroarch -L $(TARGET) test/main.chai
 
-docs: vendor/libretro-common/include/libretro.h docs/html
+docs: docs/html
 
 docs/html: docs-clean
 	doxygen docs/Doxyfile
@@ -84,7 +71,7 @@ docs-deploy: docs
 	npm install push-dir
 	node_modules/.bin/push-dir --dir=docs/html --branch=docs
 
-cpplint: vendor/libretro-common/include/libretro.h
+cpplint:
 	@vendor/styleguide/cpplint/cpplint.py \
 		--linelength=120 \
 		--quiet \
@@ -94,7 +81,7 @@ cpplint: vendor/libretro-common/include/libretro.h
 	-readability/casting,-whitespace/line_length,-runtime/references \
 		src/ChaiLove.cpp src/ChaiLove.h src/libretro.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
 
-tests: vendor/libretro-common/include/libretro.h
+tests:
 	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
 
 PREFIX := /usr
