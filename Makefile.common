@@ -98,10 +98,8 @@ endif
 
 # SDL_tty
 FLAGS += -I$(CORE_DIR)/vendor/SDL_tty/include
-SOURCES_C += $(wildcard \
-	$(CORE_DIR)/vendor/SDL_tty/src/SDL_fnt.c \
-	$(CORE_DIR)/vendor/SDL_tty/src/SDL_tty.c \
-)
+SOURCES_C += $(CORE_DIR)/vendor/SDL_tty/src/SDL_fnt.c \
+	$(CORE_DIR)/vendor/SDL_tty/src/SDL_tty.c
 
 # SDL_gfx
 FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/tests/SDL_gfx-2.0.26
