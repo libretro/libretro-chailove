@@ -1,6 +1,7 @@
 # ChaiLove
 SOURCES_CXX := $(wildcard \
-	$(CORE_DIR)/src/*.cpp \
+	$(CORE_DIR)/src/ChaiLove.cpp \
+	$(CORE_DIR)/src/libretro.cpp \
 	$(CORE_DIR)/src/love/*.cpp \
 	$(CORE_DIR)/src/love/Types/Audio/*.cpp \
 	$(CORE_DIR)/src/love/Types/Config/*.cpp \
@@ -36,6 +37,7 @@ ifneq ($(STATIC_LINKING), 1)
 		$(CORE_DIR)/vendor/libretro-common/features/features_cpu.c \
 		$(CORE_DIR)/vendor/libretro-common/file/config_file.c \
 		$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
+		$(CORE_DIR)/vendor/libretro-common/file/file_path_io.c \
 		$(CORE_DIR)/vendor/libretro-common/file/file_path.c \
 		$(CORE_DIR)/vendor/libretro-common/formats/wav/rwav.c \
 		$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
@@ -193,9 +195,48 @@ endif
 
 # SDL
 ifeq ($(platform), win)
-	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c  ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/dummy/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/thread/win32/SDL_sysmutex.c ./vendor/sdl-libretro/src/thread/win32/SDL_syssem.c ./vendor/sdl-libretro/src/thread/win32/SDL_systhread.c ./vendor/sdl-libretro/src/thread/generic/SDL_syscond.c ./vendor/sdl-libretro/src/loadso/dummy/*.c)
+	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/audio/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/cdrom/dummy/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/cdrom/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/cpuinfo/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/events/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/file/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/stdlib/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/thread/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/timer/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/video/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/joystick/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/video/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/joystick/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/timer/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/audio/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/thread/win32/SDL_sysmutex.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/thread/win32/SDL_syssem.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/thread/win32/SDL_systhread.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/thread/generic/SDL_syscond.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/loadso/dummy/*.c \
+	)
 else
-	SOURCES_C += $(wildcard $(CORE_DIR)/vendor/sdl-libretro/src/*.c $(CORE_DIR)/vendor/sdl-libretro/src/audio/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/cdrom/dummy/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/cdrom/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/cpuinfo/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/events/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/file/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/stdlib/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/thread/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/timer/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/video/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/joystick/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/video/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/thread/generic/*.c $(CORE_DIR)/vendor/sdl-libretro/src/joystick/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/timer/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/audio/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/loadso/dummy/*.c)
+	SOURCES_C += $(wildcard $(CORE_DIR)/vendor/sdl-libretro/src/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/audio/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/cdrom/dummy/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/cdrom/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/cpuinfo/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/events/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/file/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/stdlib/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/thread/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/timer/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/video/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/joystick/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/video/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/joystick/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/timer/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/audio/libretro/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/thread/generic/*.c \
+		$(CORE_DIR)/vendor/sdl-libretro/src/loadso/dummy/*.c \
+	)
 endif
 FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
 FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/include

@@ -18,7 +18,7 @@ ChaiLove is an awesome framework you can use to make 2D games in [ChaiScript](ht
 
 ## Installation
 
-ChaiLove is a [libretro](https://www.libretro.com/) core, which can be installed through [RetroArch](http://retroarch.com/). 
+ChaiLove is a [libretro](https://www.libretro.com/) core, which can be installed through [RetroArch](http://retroarch.com/).
 
 1. Run [RetroArch](http://retroarch.com/)
 2. *Online Updater* → *Core Updator* → *ChaiLove*
@@ -77,6 +77,9 @@ The following are some notes about the development process behind ChaiLove.
 ChaiLove requires a C++14 compiler, and has been tested with `g++>=5.2`. To compile it, run:
 
 ```
+git clone https://github.com/libretro/libretro-chailove.git
+cd libretro-chailove
+git submodule update --init
 make
 ```
 
