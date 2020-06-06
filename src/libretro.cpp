@@ -26,7 +26,7 @@ void retro_set_input_poll(retro_input_poll_t cb) {
 }
 
 void retro_set_input_state(retro_input_state_t cb) {
-	ChaiLove::input_state_cb = cb;
+	input_state_cb = cb;
 }
 
 /**

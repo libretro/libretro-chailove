@@ -1,6 +1,7 @@
 #include "Joystick.h"
 #include "SDL.h"
 #include "../../../ChaiLove.h"
+#include "../../../libretro-bridge.h"
 #include <string>
 
 namespace love {
@@ -51,7 +52,7 @@ void Joystick::update() {
 	// Loop through each button.
 	for (int u = 0; u < 14; u++) {
 		// Retrieve the state of the button.
-		state = ChaiLove::input_state_cb(m_index, RETRO_DEVICE_JOYPAD, 0, u);
+		state = input_state_cb(m_index, RETRO_DEVICE_JOYPAD, 0, u);
 
 		// Check if there's a change of state.
 		if (m_state[u] != state) {

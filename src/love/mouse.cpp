@@ -5,6 +5,7 @@
 #include "libretro.h"
 #include "Types/Graphics/Point.h"
 #include "../ChaiLove.h"
+#include "../libretro-bridge.h"
 
 using love::Types::Graphics::Point;
 using ::ChaiLove;
@@ -81,8 +82,8 @@ void mouse::update() {
 	int16_t state, dx, dy;
 
 	// Update the x/y coordinates.
-	dx = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X);
-	dy = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y);
+	dx = input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X);
+	dy = input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y);
 	if (dx != 0 || dy != 0) {
 		m_x = m_x + dx;
 		m_y = m_y + dy;
@@ -91,7 +92,7 @@ void mouse::update() {
 
 	// Update all buttons.
 	for (int i = RETRO_DEVICE_ID_MOUSE_LEFT; i <= RETRO_DEVICE_ID_MOUSE_BUTTON_5; i++) {
-		state = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, i);
+		state = input_state_cb(0, RETRO_DEVICE_MOUSE, 0, i);
 
 		if (state != m_buttonState[i]) {
 			m_buttonState[i] = state;
