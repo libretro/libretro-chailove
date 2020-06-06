@@ -9,7 +9,7 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Graphics/*.cpp \
 	$(CORE_DIR)/src/love/Types/Input/*.cpp \
 )
-SOURCES_C =
+SOURCES_C = $(CORE_DIR)/src/libretro-bridge.c
 SOURCES_S =
 FLAGS += -Wfatal-errors
 

@@ -7,11 +7,7 @@
 #include "libretro_core_options.h"
 #define __STDC_FORMAT_MACROS
 #include "ChaiLove.h"
-
-static retro_video_refresh_t video_cb;
-// This is needed to allow SDL-libretro to compile.
-// @see SDL_LIBRETROaudio.c:37
-retro_audio_sample_t audio_cb;
+#include "libretro-bridge.h"
 
 void retro_set_video_refresh(retro_video_refresh_t cb) {
 	video_cb = cb;
