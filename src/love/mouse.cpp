@@ -82,11 +82,15 @@ std::string mouse::getButtonName(int button) {
 void mouse::update() {
 	int16_t state, dx, dy;
 	std::cout << "mouseupdate!" <<std::endl;
+	if (input_state_cb == NULL) {
+		std::cout << "ASFDFASDSDADSFAAFSDADF" << std::endl;
+
+	}
 
 	// Update the x/y coordinates.
-	dx = libretro_input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X);
+	dx = input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X);
 	std::cout << "mouseupdate!2" <<std::endl;
-	dy = libretro_input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y);
+	dy = input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y);
 	if (dx != 0 || dy != 0) {
 		m_x = m_x + dx;
 		m_y = m_y + dy;
@@ -95,7 +99,7 @@ void mouse::update() {
 
 	// Update all buttons.
 	for (int i = RETRO_DEVICE_ID_MOUSE_LEFT; i <= RETRO_DEVICE_ID_MOUSE_BUTTON_5; i++) {
-		state = libretro_input_state_cb(0, RETRO_DEVICE_MOUSE, 0, i);
+		state = input_state_cb(0, RETRO_DEVICE_MOUSE, 0, i);
 
 		if (state != m_buttonState[i]) {
 			m_buttonState[i] = state;

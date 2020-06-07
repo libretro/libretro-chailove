@@ -28,6 +28,7 @@ void retro_set_input_poll(retro_input_poll_t cb) {
 void retro_set_input_state(retro_input_state_t cb) {
 	std::cout << "sset" << std::endl;
 	input_state_cb = cb;
+	libretro_set_input(cb);
 }
 
 /**
