@@ -77,7 +77,6 @@ class ChaiLove {
 	static void destroy();
 	static bool hasInstance();
 
-	static retro_input_state_t input_state_cb;
 	static retro_input_poll_t input_poll_cb;
 	static retro_environment_t environ_cb;
 

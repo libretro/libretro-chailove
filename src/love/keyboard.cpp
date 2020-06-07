@@ -198,7 +198,7 @@ bool keyboard::update() {
 	int16_t state;
 	for (int i = 0; i < RETROK_LAST; i++) {
 		// Get updated state for each key.
-		state = input_state_cb(0, RETRO_DEVICE_KEYBOARD, 0, i);
+		state = libretro_input_state_cb(0, RETRO_DEVICE_KEYBOARD, 0, i);
 
 		// If the state is different, then issue a keyPressed, or keyReleased.
 		if (keys[i] != state) {

@@ -3,11 +3,16 @@
 
 #include "libretro.h"
 
-static retro_input_state_t input_state_cb;
+#ifdef LIBRETRO_BRIDGE_IMPLEMENTATION
+static retro_input_state_t input_state_cb = NULL;
+static retro_video_refresh_t video_cb = NULL;
+retro_audio_sample_t audio_cb = NULL;
+#else
+extern static retro_input_state_t input_state_cb;
+extern static retro_video_refresh_t video_cb;
+extern retro_audio_sample_t audio_cb;
+#endif
 
-
-
-static retro_video_refresh_t video_cb;
 // This is needed to allow SDL-libretro to compile.
 // @see SDL_LIBRETROaudio.c:37
 // retro_audio_sample_t audio_cb;

@@ -103,13 +103,18 @@ bool ChaiLove::load(const std::string& file, const void* data) {
 }
 
 void ChaiLove::update() {
+	std::cout << "update" << std::endl;
 	// Update and poll all the events.
 	event.update();
+		std::cout << "input" << std::endl;
 
 	// Update the input systems.
 	mouse.update();
+		std::cout << "joystick" << std::endl;
 	joystick.update();
+		std::cout << "keyboard" << std::endl;
 	keyboard.update();
+		std::cout << "timer" << std::endl;
 
 	// Step forward the timer, and update the game.
 	if (script != NULL) {

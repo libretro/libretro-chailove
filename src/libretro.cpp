@@ -26,6 +26,7 @@ void retro_set_input_poll(retro_input_poll_t cb) {
 }
 
 void retro_set_input_state(retro_input_state_t cb) {
+	std::cout << "sset" << std::endl;
 	input_state_cb = cb;
 }
 
@@ -379,6 +380,7 @@ size_t retro_get_memory_size(unsigned id) {
 void retro_init(void) {
 	// Pixel Format
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
+	std::cout << "FSDAFDASDFSA\n" << std::endl;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
 		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
 	}
@@ -390,6 +392,7 @@ void retro_init(void) {
 void retro_deinit(void) {
 	std::cout << "[ChaiLove] retro_deinit()" << std::endl;
 	ChaiLove::destroy();
+	std::cout << "sssssssssssssss\n" << std::endl;
 }
 
 /**
@@ -406,35 +409,44 @@ void retro_reset(void) {
  * libretro callback; Run a game loop in the core.
  */
 void retro_run(void) {
+std::cout << "rrrrun\n" << std::endl;
 	// Ensure there is a game running.
 	if (!ChaiLove::hasInstance()) {
+	std::cout << "nope\n" << std::endl;
 		return;
 	}
 
 	// Check if the game should be closed.
 	ChaiLove* app = ChaiLove::getInstance();
 	if (app->event.m_shouldclose) {
+	std::cout << "nope\n" << std::endl;
 		return;
 	}
 
 	bool updated = false;
 	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated) {
+	std::cout << "update_variables var\n" << std::endl;
 		update_variables();
 	}
+	std::cout << "update\n" << std::endl;
 
 	// Update the game.
 	app->update();
 
+	std::cout << "draw\n" << std::endl;
 	// Render the game.
 	app->draw();
 
+	std::cout << "video_cb\n" << std::endl;
 	// Copy the video buffer to the screen.
 	video_cb(app->videoBuffer, app->config.window.width, app->config.window.height, app->config.window.width << 2);
 
+	std::cout << "event.m_shouldclose\n" << std::endl;
 	// See if the game requested to close itself.
 	if (app->event.m_shouldclose) {
 		ChaiLove::environ_cb(RETRO_ENVIRONMENT_SHUTDOWN, 0);
 	}
+	std::cout << "done\n" << std::endl;
 }
 
 #ifdef _3DS
