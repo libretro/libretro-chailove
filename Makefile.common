@@ -20,7 +20,6 @@ FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
 # Only compile libretro-common when not STATIC_LINKING
 ifneq ($(STATIC_LINKING), 1)
 	SOURCES_C += $(wildcard \
-		$(CORE_DIR)/vendor/libretro-common/utils/md5.c \
 		$(CORE_DIR)/vendor/libretro-common/audio/audio_mix.c \
 		$(CORE_DIR)/vendor/libretro-common/audio/audio_mixer.c \
 		$(CORE_DIR)/vendor/libretro-common/audio/conversion/*.c \
