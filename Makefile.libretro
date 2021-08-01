@@ -604,7 +604,7 @@ ifeq ($(platform), ios-arm64)
 	LDFLAGS += -framework IOKit -framework Foundation
 	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
 	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
-	SOURCES_M += $(CORE_DIR)/vendor/didstopia-physfs/src/physfs_platform_apple.m
+	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m
 endif
 
 ifeq ($(EXTERNAL_ZLIB), 1)
