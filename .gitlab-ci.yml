@@ -9,7 +9,7 @@
   variables:
     JNI_PATH: .
     CORENAME: chailove
-    MAKEFILE: Makefile.libretro
+    MAKEFILE: Makefile
 
 # Inclusion templates, required for the build to work
 include:
