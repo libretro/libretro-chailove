@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## x.x.x - xxxx-xx-xx
 ### Chores
 - Make PhysFS only support `.zip` compression
+- Update vendor dependencies
 
 ## 1.1.0 - 2019-12-31
 ### Fixes

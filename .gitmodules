@@ -13,11 +13,6 @@
 	url = https://github.com/ChaiScript/ChaiScript.git
 	ignore = dirty
 	branch = develop
-[submodule "vendor/SDL_tty"]
-	path = vendor/SDL_tty
-	url = https://github.com/Grumbel/SDL_tty.git
-	ignore = dirty
-	branch = master
 [submodule "vendor/stb"]
 	path = vendor/stb
 	url = https://github.com/nothings/stb.git
@@ -68,3 +63,8 @@
 	url = https://github.com/icculus/physfs.git
 	ignore = dirty
 	branch = main
+[submodule "vendor/SDL_tty-gitlab"]
+	path = vendor/SDL_tty
+	url = https://gitlab.com/grumbel/SDL_tty.git
+	ignore = dirty
+	branch = master
