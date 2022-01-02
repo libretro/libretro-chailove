@@ -64,5 +64,7 @@
 	ignore = dirty
 	branch = main
 [submodule "vendor/SDL_tty-gitlab"]
-	path = vendor/SDL_tty-gitlab
+	path = vendor/SDL_tty
 	url = https://gitlab.com/grumbel/SDL_tty.git
+	ignore = dirty
+	branch = master
