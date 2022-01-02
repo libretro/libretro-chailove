@@ -84,7 +84,10 @@ FLAGS += -DWANT_ZLIB
 # PhysFS
 FLAGS += -I$(CORE_DIR)/vendor/physfs/src
 FLAGS += -I$(CORE_DIR)/vendor/physfs/extras
-FLAGS += -DPHYSFS_NO_CDROM_SUPPORT=1
+FLAGS += -DPHYSFS_NO_CDROM_SUPPORT=1 \
+	-DPHYSFS_SUPPORTS_DEFAULT=0 \
+	-DPHYSFS_SUPPORTS_ZIP=1
+
 SOURCES_C += $(wildcard \
 	$(CORE_DIR)/vendor/physfs/extras/physfsrwops.c \
 	$(CORE_DIR)/vendor/physfs/src/*.c \
