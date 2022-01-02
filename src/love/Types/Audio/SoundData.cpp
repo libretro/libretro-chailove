@@ -29,7 +29,7 @@ SoundData::SoundData(const std::string& filename) {
 
 	// Load the audio from the file.
 	if (extension == "wav") {
-		m_sound = audio_mixer_load_wav(buffer, size);
+		m_sound = audio_mixer_load_wav(buffer, size, "audio", RESAMPLER_QUALITY_DONTCARE);
 		// Wav files don't need the buffer anymore.
 		free(buffer);
 		buffer = NULL;
@@ -86,7 +86,7 @@ void SoundData::unload() {
 
 bool SoundData::play() {
 	if (isLoaded()) {
-		m_voice = audio_mixer_play(m_sound, m_loop, m_volume, audioCallback);
+		m_voice = audio_mixer_play(m_sound, m_loop, m_volume, "audio", RESAMPLER_QUALITY_DONTCARE, audioCallback);
 		if (m_voice != NULL) {
 			m_playing = true;
 		}
