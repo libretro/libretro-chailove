@@ -16,7 +16,8 @@ FLAGS += -Wfatal-errors
 FLAGS += -I$(CORE_DIR)/vendor/random/include
 
 # libretro-common
-FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include
+FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include \
+	-DHAVE_RWAV=1
 # Only compile libretro-common when not STATIC_LINKING
 ifneq ($(STATIC_LINKING), 1)
 	SOURCES_C += $(wildcard \
