@@ -90,7 +90,19 @@ else ifeq ($(platform), osx)
 		CFLAGS += $(ARCHFLAGS)
 		LDFLAGS += $(ARCHFLAGS)
 	endif
-
+else ifeq ($(platform), tvos-arm64)
+	TARGET := $(TARGET_NAME)_libretro_tvos.dylib
+	fpic := -fPIC
+	SHARED := -dynamiclib
+	CFLAGS += -DIOS -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+	CXXFLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+	ifeq ($(IOSSDK),)
+		IOSSDK := $(shell xcodebuild -version -sdk appletvos Path)
+	endif
+	CC = cc -arch arm64 -isysroot $(IOSSDK)
+	CXX = clang++ -arch arm64 -isysroot $(IOSSDK)
+	CFLAGS += -DDONT_WANT_ARM_OPTIMIZATIONS -DHAVE_POSIX_MEMALIGN
+	HAVE_NEON = 0
 # iOS
 else ifneq (,$(findstring ios,$(platform)))
 
@@ -102,18 +114,22 @@ else ifneq (,$(findstring ios,$(platform)))
 		IOSSDK := $(shell xcodebuild -version -sdk iphoneos Path)
 	endif
 	ifeq ($(platform),ios-arm64)
-		CC = cc -arch arm64 -isysroot -DHAVE_POSIX_MEMALIGN $(IOSSDK)
+		CC = cc -arch arm64 -isysroot $(IOSSDK)
+		CXX = clang++ -arch arm64 -isysroot $(IOSSDK)
 		CFLAGS += -DDONT_WANT_ARM_OPTIMIZATIONS
 		HAVE_NEON = 0
 	else
 		CC = cc -arch armv7 -isysroot $(IOSSDK)
+		CXX = clang++ -arch armv7 -isysroot $(IOSSDK)
 	endif
 	CFLAGS += -DIOS
 ifeq ($(platform),$(filter $(platform),ios9 ios-arm64))
 	CC +=  -miphoneos-version-min=8.0 -DHAVE_POSIX_MEMALIGN
+	CXX +=  -miphoneos-version-min=8.0 -DHAVE_POSIX_MEMALIGN
 	CFLAGS += -miphoneos-version-min=8.0 -DHAVE_POSIX_MEMALIGN
 else
 	CC +=  -miphoneos-version-min=5.0
+	CXX +=  -miphoneos-version-min=5.0
 	CFLAGS += -miphoneos-version-min=5.0
 endif
 
@@ -602,6 +618,13 @@ endif
 
 ifeq ($(platform), ios-arm64)
 	LDFLAGS += -framework IOKit -framework Foundation
+	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
+	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m
+endif
+
+ifeq ($(platform), tvos-arm64)
+	LDFLAGS += -framework Foundation
 	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
 	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
 	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m

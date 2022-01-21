@@ -201,10 +201,10 @@ android-x86:
     - .core-defs
 
 # iOS
-#libretro-build-ios-arm64:
-#  extends:
-#    - .libretro-ios-arm64-make-default
-#    - .core-defs
+libretro-build-ios-arm64:
+  extends:
+    - .libretro-ios-arm64-make-default
+    - .core-defs
 
 # iOS (armv7) [iOS 9 and up]
 #libretro-build-ios9:
@@ -213,10 +213,10 @@ android-x86:
 #    - .core-defs
 
 # tvOS
-#libretro-build-tvos-arm64:
-#  extends:
-#    - .libretro-tvos-arm64-make-default
-#    - .core-defs
+libretro-build-tvos-arm64:
+  extends:
+    - .libretro-tvos-arm64-make-default
+    - .core-defs
 
 ################################### CONSOLES #################################
 # PlayStation Portable
