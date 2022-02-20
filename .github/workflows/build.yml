@@ -16,7 +16,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install cmake time g++-7 gcc-7 binutils libc6 python
 
+    - name: Configure
+      run: ./configure
+
     - name: Build
-      run: |
-        ./configure
-        make test
+      run: make
+
+    - name: Test
+      run: make test
