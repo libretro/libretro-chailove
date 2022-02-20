@@ -4,11 +4,12 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## x.x.x - xxxx-xx-xx
-### Chores
+## 1.2.0 - 2022-02-20
+### Fixes
 - Make PhysFS only support `.zip` compression
 - Update vendor dependencies
 - Enable compilation of dingus, ios-arm64 and tvos-arm64 (by phcoder)
+- Remove submodule manipulation from `Makefile`
 
 ## 1.1.0 - 2019-12-31
 ### Fixes
