@@ -1,0 +1,24 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  # === Ubuntu ===
+  linux:
+    runs-on: ubuntu-latest
+
+    steps:
+  uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+  name: Install
+        run: |
+          sudo apt-get update
+          sudo apt-get install cmake time g++-7 gcc-7 binutils libc6 libc6-amd64 libc6-dev libc6-dbg python
+
+  name: Build
+        run: |
+          ./configure
+          make test
