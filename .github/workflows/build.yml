@@ -14,7 +14,7 @@ jobs:
     - name: Install
       run: |
         sudo apt-get update
-        sudo apt-get install cmake time g++-7 gcc-7 binutils libc6 libc6-amd64 libc6-dev libc6-dbg python
+        sudo apt-get install cmake time g++-7 gcc-7 binutils libc6 python
 
     - name: Build
       run: |
