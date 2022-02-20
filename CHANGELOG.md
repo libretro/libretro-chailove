@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Chores
 - Make PhysFS only support `.zip` compression
 - Update vendor dependencies
+- Enable compilation of dingus, ios-arm64 and tvos-arm64 (by phcoder)
 
 ## 1.1.0 - 2019-12-31
 ### Fixes
