@@ -1,6 +1,6 @@
 # ChaiLove :heart:
-[![Travis](https://travis-ci.org/libretro/libretro-chailove.svg?branch=master)](https://travis-ci.org/libretro/libretro-chailove)
-[![Appveyor](https://ci.appveyor.com/api/projects/status/es2wh45kcu76n6a9/branch/master?svg=true)](https://ci.appveyor.com/project/RobLoach/libretro-chailove/branch/master)
+
+[![Tests](https://github.com/libretro/libretro-chailove/actions/workflows/build.yml/badge.svg)](https://github.com/libretro/libretro-chailove/actions/workflows/build.yml)
 [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://rawgit.com/libretro/libretro-chailove/docs/)
 
@@ -18,7 +18,7 @@ ChaiLove is an awesome framework you can use to make 2D games in [ChaiScript](ht
 
 ## Installation
 
-ChaiLove is a [libretro](https://www.libretro.com/) core, which can be installed through [RetroArch](http://retroarch.com/). 
+ChaiLove is a [libretro](https://www.libretro.com/) core, which can be installed through [RetroArch](http://retroarch.com/).
 
 1. Run [RetroArch](http://retroarch.com/)
 2. *Online Updater* → *Core Updator* → *ChaiLove*

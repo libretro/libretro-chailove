@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 1.2.0 - 2022-02-20
 ### Fixes
 - Make PhysFS only support `.zip` compression
+
+### Chores
 - Update vendor dependencies
 - Enable compilation of dingus, ios-arm64 and tvos-arm64 (by phcoder)
 - Remove submodule manipulation from `Makefile`
+- Switched Travis testing for [GitHub Actions](https://github.com/libretro/libretro-chailove/actions)
 
 ## 1.1.0 - 2019-12-31
 ### Fixes
