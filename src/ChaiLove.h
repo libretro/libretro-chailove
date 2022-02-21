@@ -45,9 +45,9 @@
 #define SRC_CHAILOVE_H_
 
 #define CHAILOVE_VERSION_MAJOR 1
-#define CHAILOVE_VERSION_MINOR 1
+#define CHAILOVE_VERSION_MINOR 2
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "1.1.0"
+#define CHAILOVE_VERSION_STRING "1.2.0"
 
 #include "SDL.h"
 #include "libretro.h"
