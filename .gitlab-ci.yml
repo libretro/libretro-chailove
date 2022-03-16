@@ -295,8 +295,8 @@ libretro-build-retrofw-mips32:
     - .libretro-retrofw-mips32-make-default
     - .core-defs
 
-# OpenDingux
-libretro-build-dingux-arm32:
+# MIYOO
+libretro-build-miyoo-arm32:
   extends:
     - .libretro-miyoo-arm32-make-default
     - .core-defs
