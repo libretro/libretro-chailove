@@ -23,13 +23,13 @@ else
 endif
 
 %.o: %.cpp
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS) -include retro_endianness.h
 
 %.o: %.c
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
 %.o: %.m
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
 %.o: %.S
 	$(CC) -c -o $@ $< $(CFLAGS)
