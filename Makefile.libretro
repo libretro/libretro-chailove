@@ -72,9 +72,13 @@ else ifeq ($(platform), osx)
 	TARGET := $(TARGET_NAME)_libretro.dylib
 	fpic := -fPIC
 	SHARED := -dynamiclib
-	ifndef ($(NOUNIVERSAL))
-		CFLAGS += $(ARCHFLAGS)
-		LDFLAGS += $(ARCHFLAGS)
+
+	ifeq ($(CROSS_COMPILE),1)
+		TARGET_RULE   = -target $(LIBRETRO_APPLE_PLATFORM) -isysroot $(LIBRETRO_APPLE_ISYSROOT)
+		CFLAGS   += $(TARGET_RULE)
+		CPPFLAGS += $(TARGET_RULE)
+		CXXFLAGS += $(TARGET_RULE)
+		LDFLAGS  += $(TARGET_RULE)
 	endif
 else ifeq ($(platform), tvos-arm64)
 	TARGET := $(TARGET_NAME)_libretro_tvos.dylib
