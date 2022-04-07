@@ -102,13 +102,6 @@ See the [ChaiLove API documentation](https://raw.githack.com/libretro/libretro-c
 make docs
 ```
 
-### Workflow
-
-ChaiLove uses modified [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and [Semantic Versioning](https://semver.org) workflow...
-
-1. New features and fixes are added to the [`dev`](https://github.com/libretro/libretro-chailove/tree/dev) branch
-2. When a release is put out, the `dev` branch is merged to `master`, and a tag is made
-
 ## Contributors
 
 The following individuals contributed to ChaiLove in some way:
