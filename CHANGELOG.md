@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 1.2.1 - 2022-03-07
 ### Fixes
 - Update `libretro-common` for audio fixes
+* Fix miyoo compilation name by @phcoder in https://github.com/libretro/libretro-chailove/pull/408
+* Fix osx-arm64 compilation and few Makefile cleanups by @phcoder in https://github.com/libretro/libretro-chailove/pull/409
 
 ## 1.2.0 - 2022-02-20
 ### Fixes
