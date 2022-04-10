@@ -68,3 +68,8 @@
 	url = https://gitlab.com/grumbel/SDL_tty.git
 	ignore = dirty
 	branch = master
+[submodule "vendor/gfxprim"]
+	path = vendor/gfxprim
+	url = https://github.com/gfxprim/gfxprim.git
+	ignore = dirty
+	branch = master
