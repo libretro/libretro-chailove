@@ -1,6 +1,6 @@
 #include "ChaiLove.h"
 #include <libretro.h>
-#include <SDL.h>
+#include <gfxprim.h>
 #include <iostream>
 #include <string>
 
@@ -54,6 +54,7 @@ void ChaiLove::quit(void) {
 	sound.unload();
 	filesystem.unload();
 	window.unload();
+	gp_backend_exit(backend);
 }
 
 bool ChaiLove::load(const std::string& file, const void* data) {
@@ -64,9 +65,6 @@ bool ChaiLove::load(const std::string& file, const void* data) {
 	std::string version = CHAILOVE_VERSION_STRING GIT_VERSION;
 	std::cout << "[ChaiLove] ChaiLove " << version.c_str() << std::endl;
 
-	// Iniitalize some of the initial subsystems.
-	sound.load();
-
 	// Initalize the file system.
 	bool loaded = filesystem.init(file, data);
 	if (!loaded) {
@@ -75,6 +73,9 @@ bool ChaiLove::load(const std::string& file, const void* data) {
 	}
 
 	filesystem.mountlibretro();
+
+	// Iniitalize some of the initial subsystems.
+	sound.load();
 
 	// Initialize the scripting system.
 	script = new love::script(file);
@@ -88,7 +89,6 @@ bool ChaiLove::load(const std::string& file, const void* data) {
 	// Load up the window dimensions.
 	window.load(config);
 
-	console.load(config);
 	graphics.load();
 	image.load();
 	keyboard.load();
@@ -144,9 +144,6 @@ void ChaiLove::draw() {
 	if (script != NULL) {
 		script->draw();
 	}
-
-	// Render the in-game console.
-	console.draw();
 
 	// Flip the buffer.
 	if (SDL_Flip(screen) == -1) {

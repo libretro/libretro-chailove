@@ -25,7 +25,7 @@ endif
 %.o: %.cpp
 	$(CXX) -c -o $@ $< $(CXXFLAGS) -include retro_endianness.h
 
-%.o: %.c
+%.o: %.c vendor/gfxprim/libs/core/gp_blit.gen.c
 	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
 %.o: %.m
@@ -33,6 +33,11 @@ endif
 
 %.o: %.S
 	$(CC) -c -o $@ $< $(CFLAGS)
+
+vendor/gfxprim/libs/core/gp_blit.gen.c: vendor/gfxprim/config.h
+
+vendor/gfxprim/config.h:
+	cp gfxprim-config.h vendor/gfxprim/config.h
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)

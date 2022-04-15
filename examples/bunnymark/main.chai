@@ -8,7 +8,6 @@
 // ChaiLove version by Rob Loach
 
 def conf(t) {
-    t.console = true
     t.window.title = "Bunnymark Mark II ; a little better!"
     t.window.width = 800
     t.window.height = 600

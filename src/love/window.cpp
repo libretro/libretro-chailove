@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include "../ChaiLove.h"
-#include "SDL.h"
+#include "gfxprim.h"
 #include "config.h"
 #include "libretro.h"
 #include "Types/Graphics/Point.h"
@@ -16,7 +16,7 @@ bool window::load(const config& conf) {
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Initialize SDL.
-	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+	/*if (SDL_Init(SDL_INIT_VIDEO) == -1) {
 		const char* errorChar = SDL_GetError();
 		std::string errString("");
 		if (errorChar != NULL) {
@@ -53,6 +53,7 @@ bool window::load(const config& conf) {
 
 	// Enable video buffering.
 	app->videoBuffer = (uint32_t *)app->screen->pixels;
+	*/
 
 	// Set the title.
 	setTitle(conf.window.title);
@@ -63,24 +64,26 @@ bool window::unload() {
 	// Destroy the screen.
 	ChaiLove* app = ChaiLove::getInstance();
 	if (app->screen != NULL) {
-		SDL_FreeSurface(app->screen);
+		//SDL_FreeSurface(app->screen);
 		app->screen = NULL;
 	}
 
 	// Close SDL.
-	SDL_Quit();
+	//SDL_Quit();
 	return true;
 }
 
 std::string window::getTitle() {
-	char* titleChar;
-	SDL_WM_GetCaption(&titleChar, NULL);
+	return "";
+	/*char* titleChar;
+	//SDL_WM_GetCaption(&titleChar, NULL);
 	return std::string(titleChar);
+	*/
 }
 
 window& window::setTitle(const std::string& title) {
 	ChaiLove::getInstance()->config.window.title = title;
-	SDL_WM_SetCaption(title.c_str(), 0);
+	//SDL_WM_SetCaption(title.c_str(), 0);
 	return *this;
 }
 

@@ -1,5 +1,4 @@
 #include "joystick.h"
-#include "SDL.h"
 #include <string>
 #include <vector>
 #include <libretro.h>
@@ -51,11 +50,6 @@ bool joystick::isDown(int joystick, const std::string& button) {
 }
 
 void joystick::update() {
-	// Ignore Joypad input when the console is shown.
-	if (ChaiLove::getInstance()->console.isShown()) {
-		return;
-	}
-
 	for (std::vector<Joystick*>::iterator it = m_joysticks.begin(); it != m_joysticks.end(); ++it) {
 		(*it)->update();
 	}

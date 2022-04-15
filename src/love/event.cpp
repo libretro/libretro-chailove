@@ -1,7 +1,7 @@
 #include "event.h"
 
 #include "../ChaiLove.h"
-#include <SDL.h>
+#include <gfxprim.h>
 
 namespace love {
 

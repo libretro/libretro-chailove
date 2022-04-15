@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
-#include "SDL.h"
-#include "SDL_ttf.h"
+#include "gfxprim.h"
 #include "font.h"
 #include "Types/Graphics/Font.h"
 
@@ -12,7 +11,7 @@ font::~font() {
 }
 
 bool font::load() {
-	int result = TTF_Init();
+	/*int result = TTF_Init();
 	if(result == -1) {
 		const char* errorChar = TTF_GetError();
 		std::string errString("");
@@ -21,19 +20,20 @@ bool font::load() {
 		}
 		std::cout << "[ChaiLove] TTF_Init failed to initialize font system: {}" << errString << std::endl;
 		return false;
-	}
+	}*/
 	return true;
 }
 
 bool font::unload() {
 	if (isOpen()) {
-		TTF_Quit();
+		//TTF_Quit();
 	}
 	return true;
 }
 
 bool font::isOpen() {
-	return TTF_WasInit();
+	return true;
+	//return TTF_WasInit();
 }
 
 }  // namespace love

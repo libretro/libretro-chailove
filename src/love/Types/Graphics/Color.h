@@ -1,8 +1,6 @@
 #ifndef SRC_LOVE_TYPES_GRAPHICS_COLOR_H_
 #define SRC_LOVE_TYPES_GRAPHICS_COLOR_H_
 
-#include "SDL.h"
-
 namespace love {
 namespace Types {
 namespace Graphics {
@@ -51,15 +49,6 @@ struct Color {
 	 * The amount of alpha.
 	 */
 	int a;
-
-	SDL_Color toSDLColor() {
-		SDL_Color c;
-		c.r = r;
-		c.g = g;
-		c.b = b;
-		c.unused = a;
-		return c;
-	}
 };
 
 }  // namespace Graphics

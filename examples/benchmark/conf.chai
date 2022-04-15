@@ -4,5 +4,4 @@
 def conf(t) {
 	t.window.width = 720
 	t.window.height = 680
-	t.console = true
 }

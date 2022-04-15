@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include "sound.h"
-#include "SDL.h"
 #include "../ChaiLove.h"
 #include "Types/Audio/SoundData.h"
 #include "audio/audio_mixer.h"

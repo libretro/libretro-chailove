@@ -103,19 +103,6 @@ ifeq ($(platform), osx)
 	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m
 endif
 
-# SDL_tty
-FLAGS += -I$(CORE_DIR)/vendor/SDL_tty/include
-SOURCES_C += $(wildcard \
-	$(CORE_DIR)/vendor/SDL_tty/src/SDL_fnt.c \
-	$(CORE_DIR)/vendor/SDL_tty/src/SDL_tty.c \
-)
-
-# SDL_gfx
-FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/tests/SDL_gfx-2.0.26
-SOURCES_C += $(wildcard \
-	$(CORE_DIR)/vendor/sdl-libretro/tests/SDL_gfx-2.0.26/*.c \
-)
-
 # FreeType2
 # See https://github.com/emscripten-ports/FreeType/blob/master/builds/amiga/makefile
 FLAGS += -I$(CORE_DIR)/vendor/libretro-deps/freetype/include
@@ -175,13 +162,6 @@ SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-deps/freetype/src/type42/type42.c \
 	$(CORE_DIR)/vendor/libretro-deps/freetype/src/winfonts/winfnt.c
 
-# SDL_ttf
-FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/tests/SDL_ttf-2.0.11/VisualC/external/include
-SOURCES_C += $(CORE_DIR)/vendor/sdl-libretro/tests/SDL_ttf-2.0.11/SDL_ttf.c
-
-# SDL_stbimage
-FLAGS += -I$(CORE_DIR)/vendor/Snippets
-
 # STB
 FLAGS += -I$(CORE_DIR)/vendor/stb
 
@@ -191,6 +171,201 @@ FLAGS += -I$(CORE_DIR)/vendor/TinySHA1
 # cppcodec
 FLAGS += -I$(CORE_DIR)/vendor/cppcodec
 
+
+
+# GFXPrim
+GFXPRIM_DIR := $(CORE_DIR)/vendor/gfxprim
+GFXPRIM_LIBS := $(GFXPRIM_DIR)/libs
+FLAGS += -I$(GFXPRIM_DIR)
+SOURCES_C += \
+	$(GFXPRIM_LIBS)/backends/gp_aalib.c \
+	$(GFXPRIM_LIBS)/backends/gp_backend.c \
+	$(GFXPRIM_LIBS)/backends/gp_backend_init.c \
+	$(GFXPRIM_LIBS)/backends/gp_backend_virtual.c \
+	$(GFXPRIM_LIBS)/backends/gp_clipboard.c \
+	$(GFXPRIM_LIBS)/backends/gp_input_driver_sdl.c \
+	$(GFXPRIM_LIBS)/backends/gp_linux_fb.c \
+	$(GFXPRIM_LIBS)/backends/gp_proxy.c \
+	$(GFXPRIM_LIBS)/backends/gp_proxy_cli.c \
+	$(GFXPRIM_LIBS)/backends/gp_proxy_conn.c \
+	$(GFXPRIM_LIBS)/backends/gp_proxy_proto.c \
+	$(GFXPRIM_LIBS)/backends/gp_proxy_shm.c \
+	$(GFXPRIM_LIBS)/backends/gp_sdl.c \
+	$(GFXPRIM_LIBS)/backends/gp_x11.c \
+	$(GFXPRIM_LIBS)/backends/gp_xcb.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/core/gp_blit.c \
+    $(GFXPRIM_LIBS)/core/gp_blit.gen.c \
+    $(GFXPRIM_LIBS)/core/gp_common.c \
+    $(GFXPRIM_LIBS)/core/gp_convert.gen.c \
+    $(GFXPRIM_LIBS)/core/gp_debug.c \
+    $(GFXPRIM_LIBS)/core/gp_fill.gen.c \
+    $(GFXPRIM_LIBS)/core/gp_gamma.c \
+    $(GFXPRIM_LIBS)/core/gp_gamma_correction.gen.c \
+    $(GFXPRIM_LIBS)/core/gp_get_put_pixel.c \
+    $(GFXPRIM_LIBS)/core/gp_pixel.c \
+    $(GFXPRIM_LIBS)/core/gp_pixel.gen.c \
+    $(GFXPRIM_LIBS)/core/gp_pixmap.c \
+    $(GFXPRIM_LIBS)/core/gp_write_pixel.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/filters/gp_add.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_apply_tables.c \
+    $(GFXPRIM_LIBS)/filters/gp_apply_tables.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_brightness_contrast.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_brightness.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_contrast.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_convolution.c \
+    $(GFXPRIM_LIBS)/filters/gp_cubic.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_diff.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_edge.c \
+    $(GFXPRIM_LIBS)/filters/gp_floyd_steinberg.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_gaussian_noise.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_hilbert_peano.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_histogram.c \
+    $(GFXPRIM_LIBS)/filters/gp_histogram.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_invert.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_laplace.c \
+    $(GFXPRIM_LIBS)/filters/gp_linear_convolution.c \
+    $(GFXPRIM_LIBS)/filters/gp_linear_convolution.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_max.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_median.c \
+    $(GFXPRIM_LIBS)/filters/gp_min.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_mirror_h.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_mul.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_multi_tone.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_posterize.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_rand.c \
+    $(GFXPRIM_LIBS)/filters/gp_resize.c \
+    $(GFXPRIM_LIBS)/filters/gp_resize_cubic_float.c \
+    $(GFXPRIM_LIBS)/filters/gp_resize_cubic.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_resize_linear.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_resize_nn.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_rotate.c \
+    $(GFXPRIM_LIBS)/filters/gp_rotate.gen.c \
+    $(GFXPRIM_LIBS)/filters/gp_sepia.c \
+    $(GFXPRIM_LIBS)/filters/gp_sigma.c \
+    $(GFXPRIM_LIBS)/filters/gp_weighted_median.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/gfx/gp_arc.c \
+    $(GFXPRIM_LIBS)/gfx/gp_circle.c \
+    $(GFXPRIM_LIBS)/gfx/gp_circle.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_circle_seg.c \
+    $(GFXPRIM_LIBS)/gfx/gp_circle_seg.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_ellipse.c \
+    $(GFXPRIM_LIBS)/gfx/gp_fill_circle.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_fill_ellipse.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_fill_ring.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_fill_triangle.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_hline.c \
+    $(GFXPRIM_LIBS)/gfx/gp_hline.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_line_clip.c \
+    $(GFXPRIM_LIBS)/gfx/gp_line.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_line_th.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_polygon.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_rect.c \
+    $(GFXPRIM_LIBS)/gfx/gp_symbol.c \
+    $(GFXPRIM_LIBS)/gfx/gp_symbol.gen.c \
+    $(GFXPRIM_LIBS)/gfx/gp_tetragon.c \
+    $(GFXPRIM_LIBS)/gfx/gp_triangle.c \
+    $(GFXPRIM_LIBS)/gfx/gp_vline.c \
+    $(GFXPRIM_LIBS)/gfx/gp_vline.gen.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/input/gp_event.c \
+    $(GFXPRIM_LIBS)/input/gp_event_queue.c \
+    $(GFXPRIM_LIBS)/input/gp_input_driver_kbd.c \
+    $(GFXPRIM_LIBS)/input/gp_input_driver_linux.c \
+    $(GFXPRIM_LIBS)/input/gp_task.c \
+    $(GFXPRIM_LIBS)/input/gp_timer.c \
+    $(GFXPRIM_LIBS)/input/gp_time_stamp.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/loaders/gp_bmp.c \
+	$(GFXPRIM_LIBS)/loaders/gp_container.c \
+	$(GFXPRIM_LIBS)/loaders/gp_data_storage.c \
+	$(GFXPRIM_LIBS)/loaders/gp_exif.c \
+	$(GFXPRIM_LIBS)/loaders/gp_gif.c \
+	$(GFXPRIM_LIBS)/loaders/gp_ico.c \
+	$(GFXPRIM_LIBS)/loaders/gp_io.c \
+	$(GFXPRIM_LIBS)/loaders/gp_io_zlib.c \
+	$(GFXPRIM_LIBS)/loaders/gp_jp2.c \
+	$(GFXPRIM_LIBS)/loaders/gp_jpg.c \
+	$(GFXPRIM_LIBS)/loaders/gp_line_convert.c \
+	$(GFXPRIM_LIBS)/loaders/gp_loader.c \
+	$(GFXPRIM_LIBS)/loaders/gp_pcx.c \
+	$(GFXPRIM_LIBS)/loaders/gp_png.c \
+	$(GFXPRIM_LIBS)/loaders/gp_pnm.c \
+	$(GFXPRIM_LIBS)/loaders/gp_psd.c \
+	$(GFXPRIM_LIBS)/loaders/gp_psp.c \
+	$(GFXPRIM_LIBS)/loaders/gp_rar.c \
+	$(GFXPRIM_LIBS)/loaders/gp_tiff.c \
+	$(GFXPRIM_LIBS)/loaders/gp_webp.c \
+	$(GFXPRIM_LIBS)/loaders/gp_zip.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/text/gp_default_font.c \
+	$(GFXPRIM_LIBS)/text/gp_font.c \
+	$(GFXPRIM_LIBS)/text/gp_font_c64.c \
+	$(GFXPRIM_LIBS)/text/gp_font_haxor_narrow_18.c \
+	$(GFXPRIM_LIBS)/text/gp_fonts.c \
+	$(GFXPRIM_LIBS)/text/gp_font_tiny.c \
+	$(GFXPRIM_LIBS)/text/gp_free_type.c \
+	$(GFXPRIM_LIBS)/text/gp_haxor_narrow_15.c \
+	$(GFXPRIM_LIBS)/text/gp_haxor_narrow_16.c \
+	$(GFXPRIM_LIBS)/text/gp_haxor_narrow_17.c \
+	$(GFXPRIM_LIBS)/text/gp_haxor_square_8x8.c \
+	$(GFXPRIM_LIBS)/text/gp_text.c \
+	$(GFXPRIM_LIBS)/text/gp_text.gen.c \
+	$(GFXPRIM_LIBS)/text/gp_text_metric.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/utils/gp_block_alloc.c \
+    $(GFXPRIM_LIBS)/utils/gp_fds.c \
+    $(GFXPRIM_LIBS)/utils/gp_htable.c \
+    $(GFXPRIM_LIBS)/utils/gp_json.c \
+    $(GFXPRIM_LIBS)/utils/gp_matrix.c \
+    $(GFXPRIM_LIBS)/utils/gp_vec.c \
+    $(GFXPRIM_LIBS)/utils/gp_vec_str.c
+
+SOURCES_C += $(GFXPRIM_LIBS)/widgets/gp_date_time.c \
+	$(GFXPRIM_LIBS)/widgets/gp_dialog.c \
+	$(GFXPRIM_LIBS)/widgets/gp_dialog_file.c \
+	$(GFXPRIM_LIBS)/widgets/gp_dialog_input.c \
+	$(GFXPRIM_LIBS)/widgets/gp_dialog_msg.c \
+	$(GFXPRIM_LIBS)/widgets/gp_dir_cache.c \
+	$(GFXPRIM_LIBS)/widgets/gp_file_size.c \
+	$(GFXPRIM_LIBS)/widgets/gp_key_repeat_timer.c \
+	$(GFXPRIM_LIBS)/widgets/gp_markup_parser.c \
+	$(GFXPRIM_LIBS)/widgets/gp_string.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_app.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_bool.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_button.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_checkbox.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_choice.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_event.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_frame.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_gfx.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_grid.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_int.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_json.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_label.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_log.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_markup.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_ops.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_overlay.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_pbar.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_pixmap.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_radio_button.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_render.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widgets_color_scheme.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_scroll_area.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_size_units.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_spin_button.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_stock.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_switch.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_table.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_tabs.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_tattr.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_tbox.c \
+	$(GFXPRIM_LIBS)/widgets/gp_widget_timer.c
+
 # ChaiScript
 ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -I$(CORE_DIR)/vendor/chaiscript/include
@@ -199,15 +374,6 @@ ifeq ($(HAVE_CHAISCRIPT),)
 	FLAGS += -DCHAISCRIPT_NO_THREADS -DCHAISCRIPT_NO_THREADS_WARNING -DCHAISCRIPT_NO_DYNLOAD
 	FLAGS += -DCHAISCRIPT_EXTRAS_MATH_SKIP_ADVANCED
 endif
-
-# SDL
-ifeq ($(platform), win)
-	SOURCES_C += $(wildcard ./vendor/sdl-libretro/src/*.c  ./vendor/sdl-libretro/src/audio/*.c  ./vendor/sdl-libretro/src/cdrom/dummy/*.c  ./vendor/sdl-libretro/src/cdrom/*.c  ./vendor/sdl-libretro/src/cpuinfo/*.c  ./vendor/sdl-libretro/src/events/*.c  ./vendor/sdl-libretro/src/file/*.c  ./vendor/sdl-libretro/src/stdlib/*.c  ./vendor/sdl-libretro/src/thread/*.c  ./vendor/sdl-libretro/src/timer/*.c  ./vendor/sdl-libretro/src/video/*.c  ./vendor/sdl-libretro/src/joystick/*.c  ./vendor/sdl-libretro/src/video/libretro/*.c  ./vendor/sdl-libretro/src/joystick/libretro/*.c  ./vendor/sdl-libretro/src/timer/libretro/*.c  ./vendor/sdl-libretro/src/audio/libretro/*.c  ./vendor/sdl-libretro/src/thread/win32/SDL_sysmutex.c ./vendor/sdl-libretro/src/thread/win32/SDL_syssem.c ./vendor/sdl-libretro/src/thread/win32/SDL_systhread.c ./vendor/sdl-libretro/src/thread/generic/SDL_syscond.c ./vendor/sdl-libretro/src/loadso/dummy/*.c)
-else
-	SOURCES_C += $(wildcard $(CORE_DIR)/vendor/sdl-libretro/src/*.c $(CORE_DIR)/vendor/sdl-libretro/src/audio/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/cdrom/dummy/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/cdrom/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/cpuinfo/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/events/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/file/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/stdlib/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/thread/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/timer/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/video/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/joystick/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/video/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/thread/generic/*.c $(CORE_DIR)/vendor/sdl-libretro/src/joystick/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/timer/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/audio/libretro/*.c  $(CORE_DIR)/vendor/sdl-libretro/src/loadso/dummy/*.c)
-endif
-FLAGS += -DSDL_THREADS_DISABLED -DSDL_CDROM_DISABLED
-FLAGS += -I$(CORE_DIR)/vendor/sdl-libretro/include
 
 OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(SOURCES_S:.S=.o) $(SOURCES_M:.m=.o)
 

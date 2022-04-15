@@ -1,5 +1,4 @@
 #include "Joystick.h"
-#include "SDL.h"
 #include "../../../ChaiLove.h"
 #include <string>
 

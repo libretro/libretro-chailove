@@ -231,6 +231,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `love.math.compress()` is now `love.data.compress()`
 - Documentation
 
+## 0.18.0 - xxxx-xx-xx
+### Changed
+- Switched rendering from SDL to [gfxprim](https://github.com/gfxprim/gfxprim)
+
+### Removed
+- `love.console` has been removed
+
 ## 0.17.0 - 2018-03-18
 ### Added
 - `love.system.getOS()` now returns actual operating system name

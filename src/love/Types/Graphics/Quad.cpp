@@ -1,5 +1,4 @@
 #include "Quad.h"
-#include "SDL.h"
 
 namespace love {
 namespace Types {
@@ -16,15 +15,6 @@ Quad::Quad(int t_x, int t_y, int t_width, int t_height)
 
 Quad::Quad() {
 	// Nothing.
-}
-
-SDL_Rect Quad::toRect() {
-	SDL_Rect rect;
-	rect.x = x;
-	rect.y = y;
-	rect.w = width;
-	rect.h = height;
-	return rect;
 }
 
 }  // namespace Graphics

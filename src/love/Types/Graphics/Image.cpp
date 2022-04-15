@@ -1,7 +1,5 @@
 #include "Image.h"
-#include "SDL.h"
-#define SDL_STBIMAGE_IMPLEMENTATION
-#include <SDL_stbimage.h>
+#include "gfxprim.h"
 
 #include <iostream>
 #include <string>
@@ -66,8 +64,8 @@ Image::~Image() {
 }
 
 Image::Image(const std::string& filename) {
-	SDL_RWops* image = ChaiLove::getInstance()->filesystem.openRW(filename);
-	loadFromRW(image);
+	//SDL_RWops* image = ChaiLove::getInstance()->filesystem.openRW(filename);
+	//loadFromRW(image);
 }
 
 int Image::getWidth() {

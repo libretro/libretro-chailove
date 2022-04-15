@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "SDL.h"
+#include "gfxprim.h"
 #include "physfs.h"
 #include "Types/FileSystem/FileInfo.h"
 #include "Types/FileSystem/FileData.h"
@@ -37,7 +37,7 @@ class filesystem {
 
 	bool init(const std::string& file, const void* data);
 	bool unload();
-	SDL_RWops* openRW(const std::string& filename);
+	//SDL_RWops* openRW(const std::string& filename);
 	char* readChar(const std::string& filename);
 
 	/**

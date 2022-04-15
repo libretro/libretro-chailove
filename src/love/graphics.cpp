@@ -1,9 +1,6 @@
 #include "graphics.h"
 
-#include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include <SDL_gfxBlitFunc.h>
-#include <SDL_rotozoom.h>
+#include <gfxprim.h>
 #include <iostream>
 #include "../ChaiLove.h"
 #include "Types/Graphics/Image.h"
@@ -22,20 +19,21 @@ graphics::graphics() {
 	setFont();
 }
 
-SDL_Surface* graphics::getScreen() {
+gp_pixmap* graphics::getScreen() {
 	if (ChaiLove::hasInstance()) {
-		return ChaiLove::getInstance()->screen;
+		return ChaiLove::getInstance()->backend->pixmap;
 	}
 	return NULL;
 }
 
 bool graphics::load() {
 	// Enable alpha blending.
+	/*
 	if (ChaiLove::getInstance()->config.options["alphablending"]) {
 		if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
 			std::cout << "[ChaiLove] Enabling alpha blending failed" << std::endl;
 		}
-	}
+	}*/
 
 	// Set the default font.
 	graphics::setFont();
@@ -47,9 +45,9 @@ graphics& graphics::clear() {
 }
 
 graphics& graphics::clear(int r, int g, int b, int a) {
-	SDL_Surface* screen = getScreen();
+	/*SDL_Surface* screen = getScreen();
 	Uint32 color = SDL_MapRGBA(screen->format, r, g, b, a);
-	SDL_FillRect(screen, NULL, color);
+	SDL_FillRect(screen, NULL, color);*/
 	return *this;
 }
 
@@ -58,7 +56,7 @@ graphics& graphics::clear(int r, int g, int b) {
 }
 
 graphics& graphics::point(int x, int y) {
-	pixelRGBA(getScreen(), x, y, r, g, b, a);
+	//pixelRGBA(getScreen(), x, y, r, g, b, a);
 	return *this;
 }
 
@@ -83,16 +81,16 @@ void graphics::points(std::vector<Point> points) {
 
 graphics& graphics::rectangle(const std::string& drawmode, int x, int y, int width, int height) {
 	if (drawmode == "line") {
-		rectangleRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
+		//rectangleRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
 	} else {
-		boxRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
+		//boxRGBA(getScreen(), x, y, x + width, y + height, r, g, b, a);
 	}
 
 	return *this;
 }
 
 graphics& graphics::line(int x1, int y1, int x2, int y2) {
-	lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
+	//lineRGBA(getScreen(), x1, y1, x2, y2, r, g, b, a);
 	return *this;
 }
 
@@ -102,10 +100,10 @@ graphics& graphics::draw(Image* image) {
 
 graphics& graphics::draw(Image* image, int x, int y) {
 	if (image && image->loaded()) {
-		SDL_Rect dstrect;
+		/*SDL_Rect dstrect;
 		dstrect.x = x;
 		dstrect.y = y;
-		SDL_BlitSurface(image->surface, NULL, getScreen(), &dstrect);
+		SDL_BlitSurface(image->surface, NULL, getScreen(), &dstrect);*/
 	}
 
 	return *this;
@@ -117,13 +115,13 @@ graphics& graphics::draw(Image* image, Quad quad) {
 
 graphics& graphics::draw(Image* image, Quad quad, int x, int y) {
 	if (image && image->loaded()) {
-		SDL_Rect dest;
+		/*SDL_Rect dest;
 		dest.x = x;
 		dest.y = y;
 		dest.w = x + quad.width;
 		dest.h = y + quad.height;
 		SDL_Rect src = quad.toRect();
-		SDL_BlitSurface(image->surface, &src, getScreen(), &dest);
+		SDL_BlitSurface(image->surface, &src, getScreen(), &dest);*/
 	}
 
 	return *this;
@@ -131,6 +129,7 @@ graphics& graphics::draw(Image* image, Quad quad, int x, int y) {
 
 graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy) {
 	if (image && image->loaded()) {
+		/*
 		ChaiLove* app = ChaiLove::getInstance();
 		float angle = app->math.degrees(r);
 		SDL_Surface* tempSurface = rotozoomSurfaceXY(image->surface, angle, sx, sy, m_smooth);
@@ -143,6 +142,7 @@ graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy
 			SDL_BlitSurface(tempSurface, NULL, getScreen(), &dstrect);
 			SDL_FreeSurface(tempSurface);
 		}
+		*/
 	}
 
 	return *this;
@@ -263,9 +263,9 @@ Point graphics::getDimensions() {
 
 graphics& graphics::circle(const std::string& drawmode, int x, int y, int radius) {
 	if (drawmode == "line") {
-		circleRGBA(getScreen(), x, y, radius, r, g, b, a);
+		//circleRGBA(getScreen(), x, y, radius, r, g, b, a);
 	} else {
-		filledCircleRGBA(getScreen(), x, y, radius, r, g, b, a);
+		//filledCircleRGBA(getScreen(), x, y, radius, r, g, b, a);
 	}
 
 	return *this;
@@ -273,9 +273,9 @@ graphics& graphics::circle(const std::string& drawmode, int x, int y, int radius
 
 graphics& graphics::arc(const std::string& drawmode, int x, int y, int radius, int angle1, int angle2) {
 	if (drawmode == "line") {
-		arcRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
+		//arcRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
 	} else {
-		filledPieRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
+		//filledPieRGBA(getScreen(), x, y, radius, angle1, angle2, r, g, b, a);
 	}
 
 	return *this;
@@ -283,9 +283,9 @@ graphics& graphics::arc(const std::string& drawmode, int x, int y, int radius, i
 
 graphics& graphics::ellipse(const std::string& drawmode, int x, int y, int radiusx, int radiusy) {
 	if (drawmode == "line") {
-		ellipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
+		//ellipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
 	} else {
-		filledEllipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
+		//filledEllipseRGBA(getScreen(), x, y, radiusx, radiusy, r, g, b, a);
 	}
 
 	return *this;

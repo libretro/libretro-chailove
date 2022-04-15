@@ -63,11 +63,6 @@
 	url = https://github.com/icculus/physfs.git
 	ignore = dirty
 	branch = main
-[submodule "vendor/SDL_tty-gitlab"]
-	path = vendor/SDL_tty
-	url = https://gitlab.com/grumbel/SDL_tty.git
-	ignore = dirty
-	branch = master
 [submodule "vendor/gfxprim"]
 	path = vendor/gfxprim
 	url = https://github.com/gfxprim/gfxprim.git

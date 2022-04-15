@@ -135,7 +135,6 @@ script::script(const std::string& file) {
 		ChaiLove* app = ChaiLove::getInstance();
 		love["audio"] = var(std::ref(app->audio));
 		love["config"] = var(std::ref(app->config));
-		love["console"] = var(std::ref(app->console));
 		love["data"] = var(std::ref(app->data));
 		love["event"] = var(std::ref(app->event));
 		love["filesystem"] = var(std::ref(app->filesystem));
@@ -238,12 +237,6 @@ script::script(const std::string& file) {
 	chai.add(fun(&config::window), "window");
 	chai.add(fun(&config::modules), "modules");
 	chai.add(fun(&config::options), "options");
-	chai.add(fun(&config::console), "console");
-
-	// Console
-	chai.add(fun(&console::isEnabled), "isEnabled");
-	chai.add(fun(&console::setEnabled), "setEnabled");
-	chai.add(fun(&console::isShown), "isShown");
 
 	// Joystick
 	chai.add(user_type<Joystick>(), "Joystick");
