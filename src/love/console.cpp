@@ -24,7 +24,7 @@ bool console::isShown() {
 
 void console::keypressed(std::string key, int scancode) {
 	// Test scancode and key input.
-	// std::cout << "Key: " << key << std::endl << "Cod: " << scancode << std::endl << m_togglescancode;
+	// ChaiLove::log(RETRO_LOG_DEBUG) << "Key: " << key << std::endl << "Cod: " << scancode << std::endl << m_togglescancode;
 
 	// Only use the console if it is available.
 	if (!isEnabled()) {

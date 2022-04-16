@@ -221,7 +221,7 @@ void retro_get_system_info(struct retro_system_info *info) {
  * libretro callback; Set the audio/video settings.
  */
 void retro_get_system_av_info(struct retro_system_av_info *info) {
-	std::cout << "[ChaiLove] retro_get_system_av_info" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_get_system_av_info" << std::endl;
 	if (!ChaiLove::hasInstance()) {
 		return;
 	}
@@ -245,7 +245,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 }
 
 void retro_set_controller_port_device(unsigned port, unsigned device) {
-	std::cout << "[ChaiLove] retro_set_controller_port_device" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_set_controller_port_device" << std::endl;
 	(void)port;
 	(void)device;
 }
@@ -351,7 +351,7 @@ void retro_audio_cb() {
  */
 void audio_set_state(bool enabled) {
 	// TODO(RobLoach): Act on whether or not audio is enabled/disabled?
-	std::cout << "[ChaiLove] audio_set_state(" << (enabled ? "true" : "false") << ")" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] audio_set_state(" << (enabled ? "true" : "false") << ")" << std::endl;
 }
 
 /**
@@ -388,7 +388,7 @@ bool retro_load_game(const struct retro_game_info *info) {
  * libretro callback; Loads the given special game.
  */
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
-	std::cout << "[ChaiLove] retro_load_game_special" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_load_game_special" << std::endl;
 	return retro_load_game(info);
 }
 
@@ -396,7 +396,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
  * libretro callback; Unload the current game.
  */
 void retro_unload_game(void) {
-	std::cout << "[ChaiLove] retro_unload_game()" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_unload_game()" << std::endl;
 
 	// Invoke the quit event.
 	if (ChaiLove::hasInstance()) {
@@ -439,7 +439,7 @@ void retro_init(void) {
 	// Pixel Format
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
-		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
+		LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
 	}
 
 	const char *content_dir = NULL;
@@ -461,7 +461,7 @@ void retro_init(void) {
  * libretro callback; Deinitialize the core.
  */
 void retro_deinit(void) {
-	std::cout << "[ChaiLove] retro_deinit()" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_deinit()" << std::endl;
 	ChaiLove::destroy();
 }
 
@@ -469,7 +469,7 @@ void retro_deinit(void) {
  * libretro callback; The frontend requested to reset the game.
  */
 void retro_reset(void) {
-	std::cout << "[ChaiLove] retro_reset()" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_reset()" << std::endl;
 	if (ChaiLove::hasInstance()) {
 		ChaiLove::getInstance()->reset();
 	}
