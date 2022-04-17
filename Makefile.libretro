@@ -55,6 +55,7 @@ LIBS :=
 ifeq ($(platform), unix)
 	TARGET := $(TARGET_NAME)_libretro.so
 	fpic := -fPIC
+	LDFLAGS += -lpthread
 ifneq ($(findstring SunOS,$(shell uname -a)),)
 	CC = gcc
 	SHARED := -shared -z defs
@@ -282,10 +283,8 @@ else ifeq ($(platform), libnx)
 	# Replaced -fno-rtti -fno-exceptions with -fexceptions, using C++14
 	CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fexceptions -std=c++14
 	CFLAGS += -std=gnu11
-	PLATFORM_DEFINES += -DARM -march=armv8-a -mtune=cortex-a57 -mtp=soft
+	PLATFORM_DEFINES += -march=armv8-a -mtune=cortex-a57 -mtp=soft
 	STATIC_LINKING = 1
-	#PLATFORM_DEFINES += -D_INCL_PHYSFS_PLATFORMS -DPHYSFS_PLATFORM_UNIX=1 -DPHYSFS_PLATFORM_POSIX=1
-	#PLATFORM_DEFINES += -Dpthread_t=Thread -Dpthread_mutex_t=Mutex -Dpthread_mutexattr_t='void*' -Dpthread_attr_t=int -Dpthread_cond_t=CondVar -Dpthread_condattr_t='int' -D_SYS__PTHREADTYPES_H_
 
 # Classic Platforms ####################
 # Platform affix = classic_<ISA>_<µARCH>
@@ -366,7 +365,7 @@ else ifeq ($(platform), rs90)
    fpic := -fPIC
    SHARED := -shared -Wl,-version-script=link.T
    PLATFORM_DEFINES := -DCC_RESAMPLER -DCC_RESAMPLER_NO_HIGHPASS
-   CFLAGS += -fomit-frame-pointer -ffast-math -march=mips32 -mtune=mips32
+   CFLAGS += -fomit-frame-pointer -ffast-math -march=mips32 -mtune=mips32 -DDINGUX_BETA
    CXXFLAGS += $(CFLAGS)
 # RETROFW
 else ifeq ($(platform), retrofw)
@@ -638,16 +637,14 @@ endif
 
 ifeq ($(platform), ios-arm64)
 	LDFLAGS += -framework IOKit -framework Foundation
-	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
+	FLAGS += -D__MACH__ -D__APPLE__
 	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
-	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m
 endif
 
 ifeq ($(platform), tvos-arm64)
 	LDFLAGS += -framework Foundation
-	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
+	FLAGS += -D__MACH__ -D__APPLE__
 	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
-	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m
 endif
 
 ifeq ($(EXTERNAL_ZLIB), 1)
@@ -666,7 +663,7 @@ endif
 
 CFLAGS += -DWANT_GRIFFIN
 
-DEFINES := $(COREDEFINES) $(PLATFORM_DEFINES)
+DEFINES := $(COREDEFINES) $(PLATFORM_DEFINES) -D_INCL_PHYSFS_PLATFORMS
 
 ifeq ($(STATIC_LINKING),1)
 	DEFINES += -DSTATIC_LINKING
@@ -680,6 +677,7 @@ WARNING_DEFINES = -Wno-write-strings
 endif
 
 CFLAGS += $(COREDEFINES) $(fpic) $(WARNING_DEFINES) $(DEFINES)
+CXXFLAGS += $(COREDEFINES) $(fpic) $(WARNING_DEFINES) $(DEFINES)
 LDFLAGS += $(LIBM)
 
 ifeq ($(platform), psp1)
