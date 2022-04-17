@@ -383,15 +383,6 @@ std::vector<std::string> filesystem::lines(const std::string& filename, const st
 	return strings;
 }
 
-bool filesystem::remove(const std::string& name) {
-	int ret = PHYSFS_delete(name.c_str());
-	if (ret == 0) {
-		std::cout << "[ChaiLove] [filesystem] Failed to remove file or directory: " << getLastError() << std::endl;
-		return false;
-	}
-	return true;
-}
-
 FileInfo filesystem::getInfo(const std::string& path) {
 	FileInfo fileInfo;
 	PHYSFS_Stat stat;

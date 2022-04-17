@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixes
 - Fix playing empty ogg files through `libretro-common`, by @phcoder
 
+### Changed
+- `love.filesystem.remove()` has been removed
+
 ## 1.2.1 - 2022-03-07
 ### Fixes
 - Update `libretro-common` for audio fixes

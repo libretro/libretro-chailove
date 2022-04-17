@@ -69,14 +69,6 @@ assert(createDirectoryReturn, "love.filesystem.createDirectory()")
 var writeFileReturn = love.filesystem.write("test/unittests/createDirectoryTest/test.md", "# Test\n\nHello World!");
 assert(writeFileReturn, "love.filesystem.write()")
 
-// remove()
-assert(love.filesystem.exists("createDirectoryTest/test.md"), "love.filesystem.remove()")
-assert(love.filesystem.exists("createDirectoryTest"), "    directory exists")
-assert(love.filesystem.remove("test/unittests/createDirectoryTest/test.md"), "    remove file")
-assert_not(love.filesystem.exists("createDirectoryTest/test.md"), "    file is gone")
-assert(love.filesystem.remove("test/unittests/createDirectoryTest"), "    remove directory")
-assert_not(love.filesystem.exists("createDirectoryTest"), "    directory is gone")
-
 // mount()
 var mountResult = love.filesystem.mount("assets/hello.zip", "hello")
 assert(mountResult, "love.filesystem.mount()")
