@@ -4,7 +4,7 @@ CORE_DIR = $(LOCAL_PATH)/..
 
 include $(CORE_DIR)/Makefile.common
 
-COREFLAGS := -D__LIBRETRO__ -DANDROID $(FLAGS)
+COREFLAGS := -D__LIBRETRO__ -DANDROID -DHAVE_THREADS=1 $(FLAGS)
 
 GIT_VERSION := " $(shell git rev-parse --short HEAD || echo unknown)"
 ifneq ($(GIT_VERSION)," unknown")
