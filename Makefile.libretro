@@ -158,8 +158,9 @@ else ifeq ($(platform), psp1)
 else ifeq ($(platform), vita)
 	TARGET := $(TARGET_NAME)_libretro_$(platform).a
 	CC = arm-vita-eabi-gcc$(EXE_EXT)
+	CXX = arm-vita-eabi-g++$(EXE_EXT)
 	AR = arm-vita-eabi-ar$(EXE_EXT)
-	PLATFORM_DEFINES := -DVITA
+	PLATFORM_DEFINES := -DVITA  -DDUMMY_ENUM_VALUE="DUMMY_ENUM_VALUE = 0x10000000"
 	STATIC_LINKING=1
 	EXTERNAL_ZLIB=1
 

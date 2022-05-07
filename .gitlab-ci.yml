@@ -230,10 +230,10 @@ libretro-build-tvos-arm64:
 #    - .core-defs
 
 # PlayStation Vita
-#libretro-build-vita:
-#  extends:
-#    - .libretro-vita-static-retroarch-master
-#    - .core-defs
+libretro-build-vita:
+  extends:
+    - .libretro-vita-static-retroarch-master
+    - .core-defs
 
 # PlayStation2
 #libretro-build-ps2:
