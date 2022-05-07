@@ -158,8 +158,9 @@ else ifeq ($(platform), psp1)
 else ifeq ($(platform), vita)
 	TARGET := $(TARGET_NAME)_libretro_$(platform).a
 	CC = arm-vita-eabi-gcc$(EXE_EXT)
+	CXX = arm-vita-eabi-g++$(EXE_EXT)
 	AR = arm-vita-eabi-ar$(EXE_EXT)
-	PLATFORM_DEFINES := -DVITA
+	PLATFORM_DEFINES := -DVITA  -DDUMMY_ENUM_VALUE="DUMMY_ENUM_VALUE = 0x10000000"
 	STATIC_LINKING=1
 	EXTERNAL_ZLIB=1
 
@@ -272,7 +273,7 @@ else ifeq ($(platform), libnx)
 	EXT=a
 	TARGET := $(TARGET_NAME)_libretro_$(platform).$(EXT)
 	DEFINES := -DSWITCH=1 -U__linux__ -U__linux -DRARCH_INTERNAL
-	CFLAGS	:=	 $(DEFINES) -g \
+	CFLAGS	:=	 $(DEFINES) \
 				-O2 \
 				-fPIE -I$(LIBNX)/include/ -ffunction-sections -fdata-sections -ftls-model=local-exec -Wl,--allow-multiple-definition -specs=$(LIBNX)/switch.specs
 	CFLAGS += $(INCDIRS)
