@@ -1,5 +1,9 @@
 TARGET_NAME := chailove
 
+ifeq ($(VERBOSE),)
+Q=@
+endif
+
 include Makefile.libretro
 
 ifeq ($(STATIC_LINKING),1)
@@ -23,10 +27,12 @@ else
 endif
 
 %.o: %.cpp
-	$(CXX) -c -o $@ $< $(CXXFLAGS) -include retro_endianness.h
+	@echo CXX $<
+	$(Q)$(CXX) -c -o $@ $< $(CXXFLAGS) -include retro_endianness.h
 
 %.o: %.c
-	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
+	@echo CXX $<
+	$(Q)$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
 %.o: %.m
 	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
