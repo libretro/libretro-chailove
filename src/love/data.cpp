@@ -153,9 +153,14 @@ std::string data::hash_md5(const std::string& data) {
 	MD5_Final(digest, &context);
 
 	// Construct the MD5 hash string.
-	char md5string[33];
+	char md5string[33+8];
 	for (int i = 0; i < 16; ++i) {
-		snprintf(&md5string[i * 2], sizeof(&md5string[i * 2]), "%02x", (unsigned int)digest[i]);
+		/*
+		  sizeof(&md5string[i * 2]) is a sizeof of a pointer, so 4 or 8
+		  instead of intended 3 (2 hex digits + \0) leading
+		  to a potential overflow
+		*/
+		snprintf(&md5string[i * 2], 3, "%02x", (unsigned int)digest[i]); /* NOLINT(runtime/printf).  */
 	}
 
 	// Output the hash.
@@ -169,7 +174,10 @@ std::string data::hash_sha1(const std::string& data) {
 	uint32_t digest[5];
 	s.getDigest(digest);
 	char tmp[48];
-	snprintf(tmp, sizeof(tmp), "%08x%08x%08x%08x%08x", digest[0], digest[1], digest[2], digest[3], digest[4]);
+	snprintf(tmp, sizeof(tmp), "%08x%08x%08x%08x%08x",
+		 (unsigned int) digest[0], (unsigned int) digest[1],
+		 (unsigned int) digest[2], (unsigned int) digest[3],
+		 (unsigned int) digest[4]);
 	return std::string(tmp);
 }
 
