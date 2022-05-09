@@ -5,7 +5,6 @@
 #include <string>
 #include <stdexcept>
 #include <sstream>
-#include <iostream>
 #include <vector>
 #include "compat/zlib.h"
 #include "utils/md5.h"

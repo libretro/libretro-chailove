@@ -1,6 +1,5 @@
 #include "window.h"
 #include <string>
-#include <iostream>
 #include "../ChaiLove.h"
 #include "../LibretroLog.h"
 

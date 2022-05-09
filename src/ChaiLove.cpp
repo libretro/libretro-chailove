@@ -2,7 +2,6 @@
 #include "LibretroLog.h"
 #include <libretro.h>
 #include <SDL.h>
-#include <iostream>
 #include <string>
 
 ChaiLove* ChaiLove::m_instance = NULL;

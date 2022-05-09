@@ -7,7 +7,6 @@
 #include "../../../ChaiLove.h"
 #include "../../../LibretroLog.h"
 #include "Image.h"
-#include <iostream>
 
 namespace love {
 namespace Types {

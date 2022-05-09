@@ -4,7 +4,6 @@
 
 #include <string>
 #include <cstdlib>
-#include <iostream>
 #include <cstdio>
 #include <vector>
 #include "libretro.h"

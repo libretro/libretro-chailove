@@ -1,7 +1,6 @@
 #include "image.h"
 #include <string>
 #include <list>
-#include <iostream>
 #include "Types/Graphics/Image.h"
 
 using love::Types::Graphics::Image;

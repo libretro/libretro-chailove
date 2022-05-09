@@ -3,7 +3,6 @@
 #define SDL_STBIMAGE_IMPLEMENTATION
 #include <SDL_stbimage.h>
 
-#include <iostream>
 #include <string>
 #include "../../../ChaiLove.h"
 #include "../../../LibretroLog.h"

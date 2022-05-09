@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 
 #include "libretro.h"
 #include "physfs.h"

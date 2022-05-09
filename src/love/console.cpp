@@ -2,7 +2,6 @@
 #include "../ChaiLove.h"
 #include "Types/Graphics/Font.h"
 
-#include <iostream>
 #include <string>
 #include <vector>
 

@@ -2,7 +2,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <sstream>
-#include <iostream>
 #include "libretro.h"
 #include "libretro_core_options.h"
 #define __STDC_FORMAT_MACROS

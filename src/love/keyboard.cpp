@@ -1,7 +1,6 @@
 #include "keyboard.h"
 
 #include <string>
-#include <iostream>
 #include "../ChaiLove.h"
 #include "libretro.h"
 
