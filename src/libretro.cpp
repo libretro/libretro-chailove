@@ -7,11 +7,15 @@
 #include "libretro_core_options.h"
 #define __STDC_FORMAT_MACROS
 #include "ChaiLove.h"
+#include <retro_dirent.h>
+#include <streams/file_stream.h>
 
 static retro_video_refresh_t video_cb;
 // This is needed to allow SDL-libretro to compile.
 // @see SDL_LIBRETROaudio.c:37
 retro_audio_sample_t audio_cb;
+char *home_directory;
+struct retro_vfs_interface *vfs_interface;
 
 void retro_set_video_refresh(retro_video_refresh_t cb) {
 	video_cb = cb;
@@ -65,6 +69,15 @@ void retro_set_environment(retro_environment_t cb) {
 
 	// Configure the core options.
 	libretro_set_core_options(cb);
+
+	struct retro_vfs_interface_info vfs_interface_info;
+	vfs_interface_info.required_interface_version = DIRENT_REQUIRED_VFS_VERSION;
+	vfs_interface_info.iface = NULL;
+	if (cb(RETRO_ENVIRONMENT_GET_VFS_INTERFACE, &vfs_interface_info)) {
+		vfs_interface = vfs_interface_info.iface;
+		filestream_vfs_init(&vfs_interface_info);
+		dirent_vfs_init(&vfs_interface_info);
+	}
 }
 
 /**
@@ -404,6 +417,20 @@ void retro_init(void) {
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
 		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
+	}
+
+	const char *content_dir = NULL;
+
+	ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir);
+
+	if (!home_directory && !content_dir)
+		content_dir = "/";
+
+	if (content_dir) {
+		size_t l = strlen(content_dir);
+		home_directory = (char *) malloc(l + 1);
+		if (home_directory)
+			memcpy(home_directory, content_dir, l + 1);
 	}
 }
 

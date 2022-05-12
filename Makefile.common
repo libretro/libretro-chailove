@@ -8,7 +8,7 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Graphics/*.cpp \
 	$(CORE_DIR)/src/love/Types/Input/*.cpp \
 )
-SOURCES_C =
+SOURCES_C = $(CORE_DIR)/src/physfs_platform_libretro.c
 SOURCES_S =
 FLAGS += -Wfatal-errors
 
@@ -38,6 +38,7 @@ ifneq ($(STATIC_LINKING), 1)
 		$(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c \
 		$(CORE_DIR)/vendor/libretro-common/file/file_path.c \
 		$(CORE_DIR)/vendor/libretro-common/file/file_path_io.c \
+		$(CORE_DIR)/vendor/libretro-common/file/retro_dirent.c \
 		$(CORE_DIR)/vendor/libretro-common/time/rtime.c \
 		$(CORE_DIR)/vendor/libretro-common/formats/wav/rwav.c \
 		$(CORE_DIR)/vendor/libretro-common/lists/string_list.c \
@@ -58,6 +59,10 @@ endif
 ifeq ($(platform), ctr)
      SOURCES_C += $(CORE_DIR)/vendor/libretro-common/audio/audio_mix.c \
        $(CORE_DIR)/vendor/libretro-common/audio/audio_mixer.c
+endif
+
+ifeq ($(platform), emscripten)
+     SOURCES_C += $(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.c
 endif
 
 # stb_vorbis
@@ -101,7 +106,6 @@ ifeq ($(platform), osx)
 	LDFLAGS += -framework IOKit -framework Foundation
 #	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
 	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
-	SOURCES_M += $(CORE_DIR)/vendor/physfs/src/physfs_platform_apple.m
 endif
 
 # SDL_tty
