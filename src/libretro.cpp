@@ -7,10 +7,16 @@
 #include "libretro_core_options.h"
 #define __STDC_FORMAT_MACROS
 #include "ChaiLove.h"
+#include "LibretroLog.h"
 #include <retro_dirent.h>
 #include <streams/file_stream.h>
 
+static void fallback_log(enum retro_log_level level,
+			 const char *fmt, ...);
+
 static retro_video_refresh_t video_cb;
+retro_log_printf_t log_cb = fallback_log;
+
 // This is needed to allow SDL-libretro to compile.
 // @see SDL_LIBRETROaudio.c:37
 retro_audio_sample_t audio_cb;
@@ -35,6 +41,17 @@ void retro_set_input_poll(retro_input_poll_t cb) {
 
 void retro_set_input_state(retro_input_state_t cb) {
 	ChaiLove::input_state_cb = cb;
+}
+
+static void fallback_log(enum retro_log_level level,
+			 const char *fmt, ...) {
+    va_list args;
+
+    (void) level;
+
+    va_start(args, fmt);
+    vfprintf(stderr, fmt, args);
+    va_end(args);
 }
 
 #ifdef __cplusplus
@@ -77,6 +94,12 @@ void retro_set_environment(retro_environment_t cb) {
 		vfs_interface = vfs_interface_info.iface;
 		filestream_vfs_init(&vfs_interface_info);
 		dirent_vfs_init(&vfs_interface_info);
+	}
+
+	struct retro_log_callback log;
+
+	if (cb(RETRO_ENVIRONMENT_GET_LOG_INTERFACE, &log)) {
+		log_cb = log.log;
 	}
 }
 
@@ -450,6 +473,28 @@ void retro_reset(void) {
 	if (ChaiLove::hasInstance()) {
 		ChaiLove::getInstance()->reset();
 	}
+}
+
+int LibretroLog::LoggerBuf::sync() {
+	const std::string &s = str();
+	if (!s.empty()) {
+		if (s[s.length() - 1] == '\n')
+			log_cb(level, "%s", s.c_str());
+		else
+			log_cb(level, "%s\n", s.c_str());
+	}
+	str() = "";
+	return 0;
+}
+
+std::ostream &LibretroLog::log(enum retro_log_level level) {
+	static LibretroLog::LoggerBuf *bufs[RETRO_LOG_ERROR + 1] = {0};
+	static std::ostream *streams[RETRO_LOG_ERROR + 1] = {0};
+	if (!bufs[level]) {
+		bufs[level] = new LibretroLog::LoggerBuf(level);
+		streams[level] = new std::ostream(bufs[level]);
+	}
+	return *streams[level];
 }
 
 /**
