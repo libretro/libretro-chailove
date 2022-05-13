@@ -15,7 +15,7 @@ FileData::FileData(const std::string& filepath) : m_filepath(filepath) {
 	// Nothing.
 }
 
-FileData::FileData(const std::string& contents, const std::string& name) : m_contents(contents), m_filepath(name) {
+FileData::FileData(const std::string& contents, const std::string& name) : m_filepath(name), m_contents(contents) {
 	// Nothing.
 }
 
