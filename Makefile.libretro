@@ -323,6 +323,7 @@ else ifneq (,$(findstring armv,$(platform)))
 	TARGET := $(TARGET_NAME)_libretro.so
 	SHARED := -shared -Wl,--version-script=link.T -Wl,-no-undefined
 	fpic := -fPIC
+	LDFLAGS += -lpthread
 	ifneq (,$(findstring cortexa5,$(platform)))
 		PLATFORM_DEFINES += -marm -mcpu=cortex-a5
 	else ifneq (,$(findstring cortexa8,$(platform)))
