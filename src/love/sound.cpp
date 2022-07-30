@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-#include <iostream>
 #include "sound.h"
 #include "SDL.h"
 #include "../ChaiLove.h"

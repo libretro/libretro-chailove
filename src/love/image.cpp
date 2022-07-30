@@ -1,7 +1,6 @@
 #include "image.h"
 #include <string>
 #include <list>
-#include <iostream>
 #include "Types/Graphics/Image.h"
 
 using love::Types::Graphics::Image;
@@ -30,7 +29,7 @@ bool image::load() {
 		if (errorChar != NULL) {
 			errString = errorChar;
 		}
-		std::cout << "Failed to call IMG_Init with jpg/png: {}", errString);
+		ChaiLove::log(RETRO_LOG_ERROR) << "Failed to call IMG_Init with jpg/png: {}", errString);
 		return false;
 	}
 	return true;*/

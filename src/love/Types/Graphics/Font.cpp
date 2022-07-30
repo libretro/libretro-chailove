@@ -5,8 +5,8 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_fnt.h>
 #include "../../../ChaiLove.h"
+#include "../../../LibretroLog.h"
 #include "Image.h"
-#include <iostream>
 
 namespace love {
 namespace Types {
@@ -21,7 +21,7 @@ Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const s
 	if (m_image->loaded()) {
 		TTY_Font* newFont = FNT_Create(m_image->surface, glyphWidth, glyphHeight, letters.c_str());
 		if (newFont == NULL) {
-			std::cout << "[ChaiLove] Error creating FNT_Create()" << std::endl;
+			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] Error creating FNT_Create()" << std::endl;
 			return;
 		}
 
@@ -41,7 +41,7 @@ Font::Font(const std::string& filename, int ptsize) {
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			std::cout << "TTF_OpenFontRW: " << errString << std::endl;
+			LibretroLog::log(RETRO_LOG_ERROR) << "TTF_OpenFontRW: " << errString << std::endl;
 			return;
 		}
 
@@ -126,7 +126,7 @@ void Font::print(const std::string& text, int x, int y, int r, int g, int b, int
 			if (errorChar != NULL) {
 				errString = errorChar;
 			}
-			std::cout << "[ChaiLove] Font::print - %s" << errString << std::endl;
+			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] Font::print - %s" << errString << std::endl;
 			return;
 		}
 

@@ -1,7 +1,8 @@
 #include "window.h"
 #include <string>
-#include <iostream>
 #include "../ChaiLove.h"
+#include "../LibretroLog.h"
+
 #include "SDL.h"
 #include "config.h"
 #include "libretro.h"
@@ -22,7 +23,7 @@ bool window::load(const config& conf) {
 		if (errorChar != NULL) {
 			errString = errorChar;
 		}
-		std::cout << "[game] Unable to initialize SDL " << errString << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[game] Unable to initialize SDL " << errString << std::endl;
 		return false;
 	}
 
@@ -46,7 +47,7 @@ bool window::load(const config& conf) {
 		if (errorChar != NULL) {
 			errString = errorChar;
 		}
-		std::cout << "[game] Unable to initialize SDL" << errString << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[game] Unable to initialize SDL" << errString << std::endl;
 		SDL_Quit();
 		return false;
 	}

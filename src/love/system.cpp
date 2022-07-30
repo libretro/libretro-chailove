@@ -1,9 +1,9 @@
 #include "system.h"
 #include "../ChaiLove.h"
+#include "../LibretroLog.h"
 
 #include <string>
 #include <cstdlib>
-#include <iostream>
 #include <cstdio>
 #include <vector>
 #include "libretro.h"
@@ -107,16 +107,16 @@ std::string system::getUsername() {
 
 bool system::execute(const std::string& command) {
 #ifdef CHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
-	std::cout << "[ChaiLove] [system] love.system.execute() is disabled." << std::endl;
+	LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [system] love.system.execute() is disabled." << std::endl;
 	return false;
 #else
-	std::cout << "[ChaiLove] [system] love.system.execute(\"" << command << "\")" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [system] love.system.execute(\"" << command << "\")" << std::endl;
 	int result = std::system(command.c_str());
 	if (result != 0) {
-		std::cout << "[ChaiLove] [system] Failed to execute " << command << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [system] Failed to execute " << command << std::endl;
 		return false;
 	}
-	std::cout << "[ChaiLove] [system] Finished " << command << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [system] Finished " << command << std::endl;
 	return true;
 #endif
 }

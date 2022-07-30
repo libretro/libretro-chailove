@@ -1,9 +1,9 @@
 #include <string>
-#include <iostream>
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include "font.h"
 #include "Types/Graphics/Font.h"
+#include "../LibretroLog.h"
 
 namespace love {
 
@@ -19,7 +19,7 @@ bool font::load() {
 		if (errorChar != NULL) {
 			errString = errorChar;
 		}
-		std::cout << "[ChaiLove] TTF_Init failed to initialize font system: {}" << errString << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] TTF_Init failed to initialize font system: {}" << errString << std::endl;
 		return false;
 	}
 	return true;

@@ -6,8 +6,6 @@
 #include "Types/Input/Joystick.h"
 #include "../ChaiLove.h"
 
-#include <iostream>
-
 using love::Types::Input::Joystick;
 using ::ChaiLove;
 

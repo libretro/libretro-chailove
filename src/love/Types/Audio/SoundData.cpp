@@ -1,10 +1,10 @@
 #include "SoundData.h"
 #include <string>
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "../../../ChaiLove.h"
+#include "../../../LibretroLog.h"
 
 namespace love {
 namespace Types {
@@ -15,7 +15,7 @@ SoundData::SoundData(const std::string& filename) {
 	ChaiLove* app = ChaiLove::getInstance();
 	std::string extension = app->filesystem.newFileData(filename).getExtension();
 	if (extension != "wav" && extension != "ogg") {
-		std::cout << "[ChaiLove] [SoundData] Unknown extension " << extension << " for file " << filename << "." << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [SoundData] Unknown extension " << extension << " for file " << filename << "." << std::endl;
 		return;
 	}
 
@@ -23,7 +23,7 @@ SoundData::SoundData(const std::string& filename) {
 	int size = 0;
 	buffer = app->filesystem.readBuffer(filename, size);
 	if (buffer == NULL) {
-		std::cout << "[ChaiLove] [SoundData] Failed to load file " << filename << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [SoundData] Failed to load file " << filename << std::endl;
 		return;
 	}
 
@@ -39,7 +39,7 @@ SoundData::SoundData(const std::string& filename) {
 
 	// Finally, if it failed, report as such.
 	if (m_sound == NULL) {
-		std::cout << "[ChaiLove] [SoundData] Failed to load audio for " << filename << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [SoundData] Failed to load audio for " << filename << std::endl;
 		if (buffer != NULL) {
 			free(buffer);
 			buffer = NULL;

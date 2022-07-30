@@ -1,11 +1,11 @@
 #include <string>
-#include <iostream>
 
 #include "libretro.h"
 #include "physfs.h"
 #include "filesystem.h"
 #include "physfsrwops.h"
 #include "../ChaiLove.h"
+#include "../LibretroLog.h"
 #include "Types/FileSystem/FileInfo.h"
 
 using love::Types::FileSystem::FileInfo;
@@ -20,7 +20,7 @@ bool filesystem::init(const std::string& file, const void* data) {
 	// Initialize PhysFS
 	if (PHYSFS_isInit() == 0) {
 		if (PHYSFS_init(NULL) == 0) {
-			std::cout << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
+			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
 			return false;
 		}
 	}
@@ -134,11 +134,11 @@ PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
 	if (file) {
 		size = PHYSFS_fileLength(file);
 		if (size < 0) {
-			std::cout << "[ChaiLove] [filesystem] Could not get size of file " << getLastError() << std::endl;
+			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Could not get size of file " << getLastError() << std::endl;
 			return -1;
 		}
 	} else {
-		std::cout << "[ChaiLove] [filesystem] The file is not currently open." << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] The file is not currently open." << std::endl;
 	}
 	return size;
 }
@@ -159,7 +159,7 @@ SDL_RWops* filesystem::openRW(const std::string& filename) {
 			sdlErr = errorChar;
 		}
 
-		std::cout << "[ChaiLove] [filesystem] Error loading file " << filename << getLastError() << sdlErr << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error loading file " << filename << getLastError() << sdlErr << std::endl;
 	}
 	return rw;
 }
@@ -167,7 +167,7 @@ SDL_RWops* filesystem::openRW(const std::string& filename) {
 PHYSFS_file* filesystem::openFile(const std::string& filename) {
 	PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 	if (myfile == NULL) {
-		std::cout << "[ChaiLove] [filesystem] Error opening file " << filename << getLastError() << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error opening file " << filename << getLastError() << std::endl;
 		return NULL;
 	}
 	return myfile;
@@ -185,14 +185,14 @@ char* filesystem::readChar(const std::string& filename) {
 		output = new char[file_size + 1];
 		int length_read = PHYSFS_readBytes(myfile, output, file_size);
 		if (length_read != file_size) {
-			std::cout << "[ChaiLove] [filesystem] File System error while reading from file " << filename << getLastError() << std::endl;
+			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] File System error while reading from file " << filename << getLastError() << std::endl;
 			output = NULL;
 		} else {
 			// Make sure there is a null terminating character at the end of the string.
 			output[file_size] = '\0';
 		}
 	} else {
-		std::cout << "[ChaiLove] [filesystem] Error getting filesize of " << filename << getLastError() << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error getting filesize of " << filename << getLastError() << std::endl;
 	}
 
 	PHYSFS_close(myfile);
@@ -225,7 +225,7 @@ void* filesystem::readBuffer(const std::string& filename, int& size) {
 	// Create the buffer.
 	void* buffer = (void*)malloc(size + 1);
 	if (!buffer) {
-		std::cout << "[ChaiLove] [filesystem] Failed to allocate buffer of size " << size + 1 << "." << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Failed to allocate buffer of size " << size + 1 << "." << std::endl;
 		PHYSFS_close(file);
 		return NULL;
 	}
@@ -233,7 +233,7 @@ void* filesystem::readBuffer(const std::string& filename, int& size) {
 	// Read the file into the buffer.
 	int result = PHYSFS_readBytes(file, buffer, size);
 	if (result < 0) {
-		std::cout << "[ChaiLove] [filesystem] Failed to load SoundData " << filename << getLastError() << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Failed to load SoundData " << filename << getLastError() << std::endl;
 		free(buffer);
 		PHYSFS_close(file);
 		return NULL;
@@ -244,10 +244,10 @@ void* filesystem::readBuffer(const std::string& filename, int& size) {
 }
 
 bool filesystem::unmount(const std::string& archive) {
-	std::cout << "[filesystem] Unmounting " << archive << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[filesystem] Unmounting " << archive << std::endl;
 	int returnValue = PHYSFS_unmount(archive.c_str());
 	if (returnValue == 0) {
-		std::cout << "[ChaiLove] [filesystem] Error unmounting: " << getLastError() << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error unmounting: " << getLastError() << std::endl;
 		return false;
 	}
 	return true;
@@ -272,18 +272,18 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	// Protect against empty archive/mount points.
 	int append = appendToPath ? 1 : 0;
 	if (archive.length() <= 0) {
-		std::cout << "[ChaiLove] [filesystem] Mounting failed because archive was empty." << std::endl;
+	        LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [filesystem] Mounting failed because archive was empty." << std::endl;
 		return false;
 	}
 
 	// Display a message.
-	std::cout << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
 
 	// Use the simple mount method if we're mounting the root directory.
 	if (mountpoint == "/") {
 		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 		if (returnValue == 0) {
-			std::cout << "[ChaiLove] [filesystem] Error mounting /: " << getLastError() << std::endl;
+			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting /: " << getLastError() << std::endl;
 			return false;
 		}
 		return true;
@@ -295,7 +295,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 		PHYSFS_File* file = openFile(archive);
 		if (file != NULL) {
 			if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), append) == 0) {
-				std::cout << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
+				LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
 				return false;
 			}
 			return true;
@@ -306,7 +306,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	// Check if we're mounting a directory.
 	int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 	if (returnVal == 0) {
-		std::cout << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
 		return false;
 	}
 	return true;
@@ -330,7 +330,7 @@ std::vector<std::string> filesystem::getDirectoryItems(const std::string& dir) {
 		}
 		PHYSFS_freeList(rc);
 	} else {
-		std::cout << "[ChaiLove] [filesystem] Error enumerating files from " << dir << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error enumerating files from " << dir << std::endl;
 	}
 
 	return result;
@@ -426,7 +426,7 @@ std::string filesystem::getSaveDirectory() {
 bool filesystem::createDirectory(const std::string& name) {
 	int ret = PHYSFS_mkdir(name.c_str());
 	if (ret == 0) {
-		std::cout << "[ChaiLove] [filesystem] Failed to create directory: " << getLastError() << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Failed to create directory: " << getLastError() << std::endl;
 		return false;
 	}
 	return true;
@@ -435,7 +435,7 @@ bool filesystem::createDirectory(const std::string& name) {
 bool filesystem::write(const std::string& name, const std::string& data) {
 	PHYSFS_File* file = PHYSFS_openWrite(name.c_str());
 	if (file == NULL) {
-		std::cout << "[ChaiLove] [filesystem] Error opening file for writing: " << getLastError() << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error opening file for writing: " << getLastError() << std::endl;
 		return false;
 	}
 	const char* buffer = data.c_str();

@@ -3,9 +3,9 @@
 #define SDL_STBIMAGE_IMPLEMENTATION
 #include <SDL_stbimage.h>
 
-#include <iostream>
 #include <string>
 #include "../../../ChaiLove.h"
+#include "../../../LibretroLog.h"
 
 
 namespace love {
@@ -29,7 +29,7 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 		if (errorChar != NULL) {
 			errString = errorChar;
 		}
-		std::cout << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
 		return false;
 	}
 
@@ -45,7 +45,7 @@ bool Image::loadFromRW(SDL_RWops* rw) {
 	}
 
 	if (optimizedImage == NULL) {
-		std::cout << "[ChaiLove] [graphics] Warning: SDL_DisplayFormat failed to optimize the image." << std::endl;
+		LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [graphics] Warning: SDL_DisplayFormat failed to optimize the image." << std::endl;
 	} else {
 		SDL_FreeSurface(surface);
 		surface = optimizedImage;

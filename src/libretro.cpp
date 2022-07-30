@@ -2,15 +2,20 @@
 #include <cstdio>
 #include <cstdlib>
 #include <sstream>
-#include <iostream>
 #include "libretro.h"
 #include "libretro_core_options.h"
 #define __STDC_FORMAT_MACROS
 #include "ChaiLove.h"
+#include "LibretroLog.h"
 #include <retro_dirent.h>
 #include <streams/file_stream.h>
 
+static void fallback_log(enum retro_log_level level,
+			 const char *fmt, ...);
+
 static retro_video_refresh_t video_cb;
+retro_log_printf_t log_cb = fallback_log;
+
 // This is needed to allow SDL-libretro to compile.
 // @see SDL_LIBRETROaudio.c:37
 retro_audio_sample_t audio_cb;
@@ -35,6 +40,17 @@ void retro_set_input_poll(retro_input_poll_t cb) {
 
 void retro_set_input_state(retro_input_state_t cb) {
 	ChaiLove::input_state_cb = cb;
+}
+
+static void fallback_log(enum retro_log_level level,
+			 const char *fmt, ...) {
+    va_list args;
+
+    (void) level;
+
+    va_start(args, fmt);
+    vfprintf(stderr, fmt, args);
+    va_end(args);
 }
 
 #ifdef __cplusplus
@@ -77,6 +93,12 @@ void retro_set_environment(retro_environment_t cb) {
 		vfs_interface = vfs_interface_info.iface;
 		filestream_vfs_init(&vfs_interface_info);
 		dirent_vfs_init(&vfs_interface_info);
+	}
+
+	struct retro_log_callback log;
+
+	if (cb(RETRO_ENVIRONMENT_GET_LOG_INTERFACE, &log)) {
+		log_cb = log.log;
 	}
 }
 
@@ -198,7 +220,7 @@ void retro_get_system_info(struct retro_system_info *info) {
  * libretro callback; Set the audio/video settings.
  */
 void retro_get_system_av_info(struct retro_system_av_info *info) {
-	std::cout << "[ChaiLove] retro_get_system_av_info" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_get_system_av_info" << std::endl;
 	if (!ChaiLove::hasInstance()) {
 		return;
 	}
@@ -222,7 +244,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info) {
 }
 
 void retro_set_controller_port_device(unsigned port, unsigned device) {
-	std::cout << "[ChaiLove] retro_set_controller_port_device" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_set_controller_port_device" << std::endl;
 	(void)port;
 	(void)device;
 }
@@ -328,7 +350,7 @@ void retro_audio_cb() {
  */
 void audio_set_state(bool enabled) {
 	// TODO(RobLoach): Act on whether or not audio is enabled/disabled?
-	std::cout << "[ChaiLove] audio_set_state(" << (enabled ? "true" : "false") << ")" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] audio_set_state(" << (enabled ? "true" : "false") << ")" << std::endl;
 }
 
 /**
@@ -365,7 +387,7 @@ bool retro_load_game(const struct retro_game_info *info) {
  * libretro callback; Loads the given special game.
  */
 bool retro_load_game_special(unsigned game_type, const struct retro_game_info *info, size_t num_info) {
-	std::cout << "[ChaiLove] retro_load_game_special" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_load_game_special" << std::endl;
 	return retro_load_game(info);
 }
 
@@ -373,7 +395,7 @@ bool retro_load_game_special(unsigned game_type, const struct retro_game_info *i
  * libretro callback; Unload the current game.
  */
 void retro_unload_game(void) {
-	std::cout << "[ChaiLove] retro_unload_game()" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_unload_game()" << std::endl;
 
 	// Invoke the quit event.
 	if (ChaiLove::hasInstance()) {
@@ -416,7 +438,7 @@ void retro_init(void) {
 	// Pixel Format
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
-		std::cout << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
+		LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
 	}
 
 	const char *content_dir = NULL;
@@ -438,7 +460,7 @@ void retro_init(void) {
  * libretro callback; Deinitialize the core.
  */
 void retro_deinit(void) {
-	std::cout << "[ChaiLove] retro_deinit()" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_deinit()" << std::endl;
 	ChaiLove::destroy();
 }
 
@@ -446,10 +468,32 @@ void retro_deinit(void) {
  * libretro callback; The frontend requested to reset the game.
  */
 void retro_reset(void) {
-	std::cout << "[ChaiLove] retro_reset()" << std::endl;
+	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] retro_reset()" << std::endl;
 	if (ChaiLove::hasInstance()) {
 		ChaiLove::getInstance()->reset();
 	}
+}
+
+int LibretroLog::LoggerBuf::sync() {
+	const std::string &s = str();
+	if (!s.empty()) {
+		if (s[s.length() - 1] == '\n')
+			log_cb(level, "%s", s.c_str());
+		else
+			log_cb(level, "%s\n", s.c_str());
+	}
+	str() = "";
+	return 0;
+}
+
+std::ostream &LibretroLog::log(enum retro_log_level level) {
+	static LibretroLog::LoggerBuf *bufs[RETRO_LOG_ERROR + 1] = {0};
+	static std::ostream *streams[RETRO_LOG_ERROR + 1] = {0};
+	if (!bufs[level]) {
+		bufs[level] = new LibretroLog::LoggerBuf(level);
+		streams[level] = new std::ostream(bufs[level]);
+	}
+	return *streams[level];
 }
 
 /**
