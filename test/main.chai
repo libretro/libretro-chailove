@@ -25,6 +25,15 @@ def load() {
 	print("- ChaiLove Tests -")
 	print("------------------")
 	print("------------------")
+// powerInfo
+var powerInfo = love.system.getPowerInfo()
+
+print("battery0----")
+print(to_string(powerInfo.state))
+print(to_string(powerInfo.seconds))
+print(to_string(powerInfo.percent))
+print("FSD")
+
 
 	// Set the background to grey, so that we can see screen size.
 	love.graphics.setBackgroundColor(50, 50, 50)

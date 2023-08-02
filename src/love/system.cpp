@@ -8,6 +8,8 @@
 #include <vector>
 #include "libretro.h"
 
+#include "Types/System/PowerInfo.h"
+
 namespace love {
 
 system::system() {
@@ -128,6 +130,39 @@ std::string system::getClipboardText() {
 system& system::setClipboardText(const std::string& text) {
 	m_clipboardtext = text;
 	return *this;
+}
+
+love::Types::System::PowerInfo system::getPowerInfo() {
+	struct retro_device_power device_power;
+	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_DEVICE_POWER, &device_power)) {
+		love::Types::System::PowerInfo output;
+		switch (device_power.state) {
+			case RETRO_POWERSTATE_UNKNOWN:
+				output.state = 0;
+				break;
+			case RETRO_POWERSTATE_DISCHARGING:
+				output.state = 1;
+				break;
+			case RETRO_POWERSTATE_CHARGING:
+				output.state = 3;
+				break;
+			case RETRO_POWERSTATE_CHARGED:
+				output.state = 4;
+				break;
+			case RETRO_POWERSTATE_PLUGGED_IN:
+				output.state = 3;
+				break;
+			default:
+				output.state = 0;
+		}
+		output.percent = device_power.percent;
+		output.seconds = device_power.seconds;
+		return output;
+	}
+
+	love::Types::System::PowerInfo info;
+	info.state = 0;
+	return info;
 }
 
 }  // namespace love

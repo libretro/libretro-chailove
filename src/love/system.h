@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "config.h"
+#include "Types/System/PowerInfo.h"
 
 /**
  * This covers all the modules available through ChaiLove.
@@ -123,6 +124,9 @@ class system {
 	 * @see love.system.getClipboardText
 	 */
 	system& setClipboardText(const std::string& text);
+
+	love::Types::System::PowerInfo getPowerInfo();
+
 	void updateVariables(config& t);
 
 	bool load(config& t);
