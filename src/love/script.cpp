@@ -1,6 +1,7 @@
 #include "script.h"
 #include "../ChaiLove.h"
 #include "../LibretroLog.h"
+#include "Types/System/PowerInfo.h"
 #include <algorithm>
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -20,6 +21,7 @@ using love::Types::Config::WindowConfig;
 using love::Types::Config::ModuleConfig;
 using love::Types::Audio::SoundData;
 using love::Types::FileSystem::FileData;
+using love::Types::System::PowerInfo;
 using love::graphics;
 
 namespace love {
@@ -190,6 +192,12 @@ script::script(const std::string& file) {
 	chai.add(fun(&FileData::getExtension), "getExtension");
 	chai.add(constructor<FileData(const std::string&)>(), "FileData");
 
+	// PowerInfo
+	chai.add(user_type<PowerInfo>(), "PowerInfo");
+	chai.add(fun(&PowerInfo::state), "state");
+	chai.add(fun(&PowerInfo::percent), "percent");
+	chai.add(fun(&PowerInfo::seconds), "seconds");
+
 	// Color Object.
 	chai.add(user_type<Color>(), "Color");
 	chai.add(fun(&Color::r), "r");
@@ -352,6 +360,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getClipboardText), "getClipboardText");
 	chai.add(fun(&system::setClipboardText), "setClipboardText");
 	chai.add(fun(&system::execute), "execute");
+	chai.add(fun(&system::getPowerInfo), "getPowerInfo");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");
