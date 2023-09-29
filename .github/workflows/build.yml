@@ -11,10 +11,10 @@ jobs:
         submodules: recursive
         fetch-depth: 0
 
-    - name: Install
-      run: |
-        sudo apt-get update
-        sudo apt-get install cmake time g++-7 gcc-7 binutils libc6 python
+    #- name: Install
+    #  run: |
+    #    sudo apt-get update
+    #    sudo apt-get install cmake time g++-7 gcc-7 binutils libc6 python
 
     - name: Configure
       run: ./configure
