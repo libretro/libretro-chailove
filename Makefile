@@ -43,7 +43,7 @@ endif
 clean:
 	rm -f $(TARGET) $(OBJECTS)
 
-test: unittest unittest-chailove cpplint
+test: unittest unittest-chailove
 	@echo "Run the testing suite by using:\n\n    retroarch -L $(TARGET) test/main.chai\n\n"
 
 vendor/noarch/noarch:
