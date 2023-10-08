@@ -109,7 +109,7 @@ ifeq ($(platform), osx)
 endif
 
 # SDL_tty
-FLAGS += -I$(CORE_DIR)/vendor/SDL_tty/include
+FLAGS += -I$(CORE_DIR)/vendor/SDL_tty/include/SDL_tty
 SOURCES_C += $(wildcard \
 	$(CORE_DIR)/vendor/SDL_tty/src/SDL_fnt.c \
 	$(CORE_DIR)/vendor/SDL_tty/src/SDL_tty.c \
