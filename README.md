@@ -34,7 +34,7 @@ ChaiLove is a [libretro](https://www.libretro.com/) core, which can be installed
 Alternatively, you can run the ChaiLove core through RetroArch via the command line:
 
 ``` bash
-curl -o FloppyBird.chailove https://github.com/RobLoach/ChaiLove-FloppyBird/releases/download/0.27.0/FloppyBird.chailove
+curl -o FloppyBird.chailove https://github.com/RobLoach/ChaiLove-FloppyBird/releases/download/1.0.1/FloppyBird.chailove
 retroarch -L chailove_libretro.so FloppyBird.chailove
 ```
 
