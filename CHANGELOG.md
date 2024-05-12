@@ -4,12 +4,23 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 1.2.x - xxxx-xx-xx
+## 1.3.0 - 2024-05-11
 ### Fixes
 - Fix playing empty ogg files through `libretro-common`, by @phcoder
+- docs: Remove the dev branch by @RobLoach in https://github.com/libretro/libretro-chailove/pull/410
+- Enable compilation for psvita and switch by @phcoder in https://github.com/libretro/libretro-chailove/pull/417
+- Update mixer to thread-safe version by @phcoder in https://github.com/libretro/libretro-chailove/pull/416
+- Switch straight file I/O to VFS by @phcoder in https://github.com/libretro/libretro-chailove/pull/415
+- love: Fix buffer overflow by @phcoder in https://github.com/libretro/libretro-chailove/pull/419
+- Misc build fixes by @phcoder in https://github.com/libretro/libretro-chailove/pull/418
+- Fix `unix-armv7-hardfloat-neon` build by @zoltanvb in https://github.com/libretro/libretro-chailove/pull/420
+- Move from std::cout to libretro logging by @phcoder in https://github.com/libretro/libretro-chailove/pull/412
+- Update GitHub Actions by @RobLoach in https://github.com/libretro/libretro-chailove/pull/427
 
 ### Changed
 - `love.filesystem.remove()` has been removed
+- SDL_tty: Update by @gouchi in https://github.com/libretro/libretro-chailove/pull/426
+- Update libretro-common by @RobLoach in https://github.com/libretro/libretro-chailove/pull/413
 
 ## 1.2.1 - 2022-03-07
 ### Fixes
