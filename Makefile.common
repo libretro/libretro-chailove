@@ -8,7 +8,6 @@ SOURCES_CXX := $(wildcard \
 	$(CORE_DIR)/src/love/Types/Graphics/*.cpp \
 	$(CORE_DIR)/src/love/Types/Input/*.cpp \
 )
-SOURCES_C = $(CORE_DIR)/src/physfs_platform_libretro.c
 SOURCES_S =
 FLAGS += -Wfatal-errors
 
@@ -91,21 +90,24 @@ FLAGS += -I$(CORE_DIR)/vendor/libretro-common/compat
 FLAGS += -DWANT_ZLIB
 
 # PhysFS
-FLAGS += -I$(CORE_DIR)/vendor/physfs/src
-FLAGS += -I$(CORE_DIR)/vendor/physfs/extras
+PHYSFS_DIR = $(CORE_DIR)/vendor/physfs-libretro
+FLAGS += -I$(PHYSFS_DIR)/src
+FLAGS += -I$(PHYSFS_DIR)/extras
 FLAGS += -DPHYSFS_NO_CDROM_SUPPORT=1 \
 	-DPHYSFS_SUPPORTS_DEFAULT=0 \
-	-DPHYSFS_SUPPORTS_ZIP=1
+	-DPHYSFS_SUPPORTS_ZIP=1 \
+	-DPHYSFS_PLATFORM_LIBRETRO
 
 SOURCES_C += $(wildcard \
-	$(CORE_DIR)/vendor/physfs/extras/physfsrwops.c \
-	$(CORE_DIR)/vendor/physfs/src/*.c \
+	$(PHYSFS_DIR)/extras/physfsrwops.c \
+	$(PHYSFS_DIR)/src/*.c \
 )
 ifeq ($(platform), osx)
 #	LDFLAGS += -mmacosx-version-min=10.2
 	LDFLAGS += -framework IOKit -framework Foundation
 #	FLAGS += -DMAC_OS_X_VERSION_MIN_REQUIRED=1020
-	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
+#	FLAGS += -D__MACH__ -D__APPLE__ -DPHYSFS_PLATFORM_APPLE
+	FLAGS += -D__MACH__ -D__APPLE__
 endif
 
 # SDL_tty

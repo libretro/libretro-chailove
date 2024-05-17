@@ -68,3 +68,6 @@
 	url = https://github.com/grumbel/SDL_tty.git
 	ignore = dirty
 	branch = master
+[submodule "vendor/physfs-libretro"]
+	path = vendor/physfs-libretro
+	url = https://github.com/RobLoach/physfs.git
