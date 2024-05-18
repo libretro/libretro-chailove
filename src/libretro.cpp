@@ -17,8 +17,6 @@ retro_log_printf_t log_cb = fallback_log;
 // This is needed to allow SDL-libretro to compile.
 // @see SDL_LIBRETROaudio.c:37
 retro_audio_sample_t audio_cb;
-char *home_directory;
-struct retro_vfs_interface *vfs_interface;
 
 void retro_set_video_refresh(retro_video_refresh_t cb) {
 	video_cb = cb;
@@ -428,20 +426,6 @@ void retro_init(void) {
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt)) {
 		LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Pixel format XRGB8888 not supported by platform, cannot use." << std::endl;
-	}
-
-	const char *content_dir = NULL;
-
-	ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CONTENT_DIRECTORY, &content_dir);
-
-	if (!home_directory && !content_dir)
-		content_dir = "/";
-
-	if (content_dir) {
-		size_t l = strlen(content_dir);
-		home_directory = (char *) malloc(l + 1);
-		if (home_directory)
-			memcpy(home_directory, content_dir, l + 1);
 	}
 }
 
