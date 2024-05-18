@@ -7,8 +7,6 @@
 #define __STDC_FORMAT_MACROS
 #include "ChaiLove.h"
 #include "LibretroLog.h"
-#include <retro_dirent.h>
-#include <streams/file_stream.h>
 
 static void fallback_log(enum retro_log_level level,
 			 const char *fmt, ...);
@@ -85,15 +83,6 @@ void retro_set_environment(retro_environment_t cb) {
 
 	// Configure the core options.
 	libretro_set_core_options(cb);
-
-	struct retro_vfs_interface_info vfs_interface_info;
-	vfs_interface_info.required_interface_version = DIRENT_REQUIRED_VFS_VERSION;
-	vfs_interface_info.iface = NULL;
-	if (cb(RETRO_ENVIRONMENT_GET_VFS_INTERFACE, &vfs_interface_info)) {
-		vfs_interface = vfs_interface_info.iface;
-		filestream_vfs_init(&vfs_interface_info);
-		dirent_vfs_init(&vfs_interface_info);
-	}
 
 	struct retro_log_callback log;
 
