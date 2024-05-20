@@ -121,12 +121,41 @@ bool system::execute(const std::string& command) {
 #endif
 }
 
+/**
+ * WIP: Clipboard
+ *
+ * RETRO_ENVIRONMENT_GET_CLIPBOARD_TEXT
+ * RETRO_ENVIRONMENT_SET_CLIPBOARD_TEXT
+ */
+
+/**
+ * const char **
+ * Returns the current clipboard text, if available.
+ * The returned value can be NULL.
+ */
+#ifndef RETRO_ENVIRONMENT_GET_CLIPBOARD_TEXT
+#define RETRO_ENVIRONMENT_GET_CLIPBOARD_TEXT (80 | RETRO_ENVIRONMENT_EXPERIMENTAL)
+#endif
+
+/**
+ * const char *
+ * Set the current clipboard text.
+ */
+#ifndef RETRO_ENVIRONMENT_SET_CLIPBOARD_TEXT
+#define RETRO_ENVIRONMENT_SET_CLIPBOARD_TEXT (81 | RETRO_ENVIRONMENT_EXPERIMENTAL)
+#endif
+
 std::string system::getClipboardText() {
-	return m_clipboardtext;
+	const char *clipboard = NULL;
+	//if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CLIPBOARD_TEXT, &clipboard) && clipboard) {
+		//return std::string(clipboard);
+	//}
+
+	return "";
 }
 
 system& system::setClipboardText(const std::string& text) {
-	m_clipboardtext = text;
+	//ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_CLIPBOARD_TEXT, (void*)text.c_str());
 	return *this;
 }
 
