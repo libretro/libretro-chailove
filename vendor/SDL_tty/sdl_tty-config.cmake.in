@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(SDL)
+find_dependency(SDL_image)
+
+include("${CMAKE_CURRENT_LIST_DIR}/sdl_tty-config-version.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/sdl_tty-targets.cmake")
+
+check_required_components(SDL_tty)
+
+# EOF #

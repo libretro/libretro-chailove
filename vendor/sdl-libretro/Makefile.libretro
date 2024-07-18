@@ -1,0 +1,96 @@
+
+DEBUG = 0
+
+ifeq ($(platform),)
+   platform := unix
+ifeq ($(shell uname -a),)
+   platform := win
+else ifneq ($(findstring Darwin,$(shell uname -a)),)
+   platform := osx
+else ifneq ($(findstring MINGW,$(shell uname -a)),)
+   platform := win
+endif
+endif
+
+TARGET_NAME := libSDL_$(platform).a
+
+ifeq ($(platform), unix)
+	CFLAGS += -O2 -Iinclude -D_GNU_SOURCE=1 -Wall -D__LIBRETRO__ -DHAVE_POW -DHAVE_MMAP=0
+	CXXFLAGS += -g -O2  -fno-merge-constants
+	TARGET := $(TARGET_NAME)
+	fpic += -fPIC
+#	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
+	ENDIANNESS_DEFINES := -DLSB_FIRST
+	FLAGS += -D__LINUX__
+	EXTRA_LDF += -fPIC -lm -lrt -lpthread
+	SDL_PREFIX := lin
+# android arm
+else ifneq (,$(findstring android,$(platform)))
+   	TARGET := $(TARGET_NAME)
+	fpic += -fPIC
+   	SHARED := -lstdc++ -llog -lz -shared -Wl,--version-script=link.T -Wl,--no-undefined
+	CFLAGS +=  -g -O2 
+# cross Windows
+else ifeq ($(platform), wincross64)
+	TARGET := libSDL_win.a
+	AR := x86_64-w64-mingw32-ar
+	CC := x86_64-w64-mingw32-gcc
+	CXX := x86_64-w64-mingw32-g++
+	CFLAGS := -O2 -Iinclude -D_GNU_SOURCE=1 -Wall -D__LIBRETRO__
+#	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
+	LDFLAGS += -static-libgcc -static-libstdc++ 
+	ENDIANNESS_DEFINES := -DLSB_FIRST
+	FLAGS +=
+	EXTRA_LDF := -lwinmm -Wl,--export-all-symbols
+	SDL_PREFIX := win
+else
+   	TARGET :=  libSDL_win.a
+	CC := gcc
+	CXX := g++
+	CFLAGS += -O2 -Iinclude -D_GNU_SOURCE=1 -Wall -D__LIBRETRO__
+#   	SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
+   	LDFLAGS += -static-libgcc -static-libstdc++ 
+   	ENDIANNESS_DEFINES := -DLSB_FIRST
+   	FLAGS +=
+	EXTRA_LDF += -lwinmm -Wl,--export-all-symbols
+	SDL_PREFIX := win
+endif
+
+ifneq ($(platform), unix)
+SOURCES_C := $(wildcard ./src/*.c  ./src/audio/*.c  ./src/cdrom/win32/*.c  ./src/cdrom/*.c  ./src/cpuinfo/*.c  ./src/events/*.c  ./src/file/*.c  ./src/stdlib/*.c  ./src/thread/*.c  ./src/timer/*.c  ./src/video/*.c  ./src/joystick/*.c  ./src/video/libretro/*.c  ./src/joystick/libretro/*.c  ./src/timer/libretro/*.c  ./src/audio/libretro/*.c  ./src/thread/win32/SDL_sysmutex.c ./src/thread/win32/SDL_syssem.c ./src/thread/win32/SDL_systhread.c ./src/thread/generic/SDL_syscond.c ./src/loadso/dummy/*.c)
+else
+SOURCES_C := $(wildcard ./src/*.c ./src/audio/*.c  ./src/cdrom/linux/*.c  ./src/cdrom/*.c  ./src/cpuinfo/*.c  ./src/events/*.c  ./src/file/*.c  ./src/stdlib/*.c  ./src/thread/*.c  ./src/timer/*.c  ./src/video/*.c  ./src/joystick/*.c  ./src/video/libretro/*.c  ./src/thread/pthread/*.c ./src/joystick/libretro/*.c  ./src/timer/libretro/*.c  ./src/audio/libretro/*.c  ./src/loadso/dummy/*.c)
+endif
+
+OBJECTS := $(SOURCES_C:.c=.o)
+
+ifeq ($(DEBUG), 0)
+#   FLAGS += -O3 -ffast-math -fomit-frame-pointer
+else
+   FLAGS += -O0 -g
+endif
+
+LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF) 
+FLAGS += -I. -I.. -I./include
+
+WARNINGS :=  
+	
+FLAGS += -D__LIBRETRO__ $(ENDIANNESS_DEFINES) $(WARNINGS) $(fpic) 
+
+CXXFLAGS += $(FLAGS) -fpermissive
+CFLAGS += $(FLAGS) 
+
+$(TARGET): $(OBJECTS)
+	$(AR) rcs $@ $^ 
+#$(LDFLAGS)
+
+%.o: %.cpp
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
+
+%.o: %.c
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+clean:
+	rm -f $(TARGET) $(OBJECTS)
+
+.PHONY: clean

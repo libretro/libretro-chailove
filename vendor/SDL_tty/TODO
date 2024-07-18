@@ -1,0 +1,10 @@
+* supply a good collection of base fonts
+
+* rename fontdump to something more clever, also add proper
+  commandline arguments to make things easier to understand
+
+* add OpenGL support
+
+* added variable width fonts
+
+# EOF #

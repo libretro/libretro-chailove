@@ -1,0 +1,534 @@
+**2013/07/24
+
+* MPU実行ルーチンを入れ替える
+xkeropi: M68KRUN() (68kem.asm/_68KRUN)
+cps2: m68000/c68k.c/INT32  C68k_Exec(c68k_struc *cpu, INT32 cycle)
+
+* cps2側はc68k_struct C68K構造体で、レジスタ等を管理している。xkeropiの各変数をこの構造体にマッピングしていく
+
+typedef struct c68k_t
+{
+	UINT32 D[8];
+	UINT32 A[8];
+
+	UINT32 flag_C;
+	UINT32 flag_V;
+	UINT32 flag_Z;
+	UINT32 flag_N;
+
+	UINT32 flag_X;
+	UINT32 flag_I;
+	UINT32 flag_S;
+
+	UINT32 USP;
+	UINT32 PC;
+
+	UINT32 HaltState;
+	INT32 IRQLine;
+	INT32 IRQState;
+	INT32 ICount;
+
+	UINT32 BasePC;
+	UINT32 Fetch[C68K_FETCH_BANK];
+
+	UINT8  (*Read_Byte)(UINT32 address);
+	UINT16 (*Read_Word)(UINT32 address);
+	UINT8  (*Read_Byte_PC_Relative)(UINT32 address);
+	UINT16 (*Read_Word_PC_Relative)(UINT32 address);
+	void (*Write_Byte)(UINT32 address, UINT8 data);
+	void (*Write_Word)(UINT32 address, UINT16 data);
+
+	INT32  (*Interrupt_CallBack)(INT32 irqline);
+	void (*Reset_CallBack)(void);
+
+} c68k_struc;
+
+* TODO: まずはxkeropiのレジスタ関連をocps2のc68k_strucにマッピングする
+
+xkeropi側のレジスタは68kem.asm内の_regsが実態。
+これをextern m68k_regs regs;としてC言語側に見せている。
+
+* TODO: stack pointerの扱いがよくわからん
+-> 
+
+- A7がスタックポインタ
+- スタックポインタはユーザーモードと特権モードで異なる
+- ステータスレジスタのSビット(13bit目)が1ならスーパーバイザーモード
+
+cps2側はc68k_struc内にa[7], USPの二つ
+xkeropi側はm68k_regs内にa[7], isp, uspの三つ
+
+xkeropiのCコードでispを触るのはここだけ。あとはR_ISPとしてアセンブラコードのMPUコアで操作されるのみ。
+x11/winx68k.cpp:        regs.a[7] = regs.isp = (IPL[0x30001]<<24)|(IPL[0x30000]<<16)|(IPL[0x30003]<<8)|IPL[0x30002];
+
+xkeropiのCコードでuspを触る個所はない。アセンブラコード内で操作されるのみ。
+
+* cps2のCPU初期化
+cps2/cps2.c/cps2_main()
+ cps2/cps2.c/cps2_init()
+  cps2/drive.c/cps2_drive_init()
+   cps2/cps2crpt.c/cps2_init_68k()
+    m68000.c/m68000_init()
+
+* m68000_init()の解析
+
+- メモリのbyte/word単位のread/write関数のセットC68k_Set_ReadB(&C68K, Memory_ReadB);等
+  keropiではアセンブリではcpu_readmem24{,_word,_dword}のだが、xkeropiではC言語で書かれたmem_wrap.c/cpu_readmem24{,_word,_dword}()があるではないか。
+すばらしい。現状使われていないようだが、これを有効にしよう。
+
+x68k/memory.h:#define   Memory_ReadB            cpu_readmem24
+x68k/memory.h:#define Memory_ReadW              cpu_readmem24_word
+x68k/memory.h:#define Memory_ReadD              cpu_readmem24_dword
+
+#define m68k_read_memory_8(address)  Memory_ReadB(address)
+
+* 2013/07/25
+R_IRQ	 DD 0			 ; IRQ Request Level
+:
+R_IRQ_CALLBACK	 DD 0			 ; irq callback (get vector)
+
+struct m68k_regs {
+DWORD IRQ_level;
+:
+void *irq_callback;
+}
+
+** 2013/07/29
+
+* 残るアセンブリコードの洗い出し
+-> done
+- x11/windraw.c [done]
+- x68k/bga.asm [deleted]
+- x68k/tvram.c [done]
+- x68k/bg.c 少々手直し、追加[done]
+- x68k/gvram.c [done]
+- x68k/crtc.c [done]
+
+* x68k/bg.c/Sprite_DrawLineMcr()でsegvる
+-> 修正done
+
+%macro  Sprite_DrawLineMcr      2 (%2が引数でint pri)
+        mov     ebp, [TextDotX]
+        add     ebp, 16
+        mov     edx, 127 * 8
+spline_%1_lp:
+        mov     al, [Sprite_Regs + spritectrltbl.sprite_ply + edx]
+        and     al, 3
+        cmp     al, %2
+	; sctp = &sct[edx/sizeof(spritectrltbl)];
+	; if (sctp->sprite_ply & 3 == pri)
+        je      spline_%1_plyhit
+spline_%1_lpcnt:
+        sub     dx, 8
+        jns     spline_%1_lp
+        jmp     spline_%1_ed
+spline_%1_plyhit:
+        movzx   edi, word [Sprite_Regs + spritectrltbl.sprite_posx + edx]
+        add     edi, [BG_HAdjust]
+        and     di, 3ffh
+	; if (sctp->sprite_posx + BG_HAdjust) & 0x3ff)
+	;     ~~~~xxx: sctp not sct 
+        cmp     edi, ebp
+        jnc     spline_%1_lpcnt
+	; if (t >= TextDotX + 16)
+	;       ~~xxx: >= not > (=でもcarry flagはセットされない)
+        movzx   eax, word [Sprite_Regs + spritectrltbl.sprite_posy + edx]
+        and     ax, 3ffh
+	; y = sctp->sprite_posy & 0x3fff
+        sub     eax, [VLINEBG]
+        add     eax, [BG_VLINE]
+        neg     eax
+        add     eax, 16
+	; y -= VLINEBG, y+= BG_VLINE, y = -y, y+= 16
+        jnc     spline_%1_lpcnt
+        shl     al, 4
+	; y *= 16; //xxx忘れるな
+        movzx   esi, word [Sprite_Regs + spritectrltbl.sprite_ctrl + edx]
+        mov     bx, si
+	; bx = sctp->sprite_ctrl
+        shl     si, 8
+	si = sctp->scrite_ctrl * 256; //xxx忘れるな
+        cmp     bh, 40h
+        jc      spline_%1_flipx
+	; if (sctp->sprite_ctrl < 0x4000)
+        js      spline_%1_fxflipy //サインフラグは引き算後マイナスでよい？
+	; else if (sctp->sprite_ctrl - 0x4000 & 0x8000)
+        jge     spline_%1_fxflipx
+	; else if (sctp->sprite_ctrl >= 0x4000)
+        xor     al, 0f0h
+	; else y ^= 0xf0;
+spline_%1_flipx:
+        lea     esi, [BGCHR16 + esi + eax]
+	; esi = BGCHR16[(sctp->sprite_ctrl * 256) & 0xffff + (y * 16)]
+        cld ; directioin flagをクリア -> インクリメント方向
+spline_%1_out:
+        shl     bh, 4
+        mov     ecx, 16
+spline_%1_outlp:
+        lodsb ; al = *esi;
+        and     ax, 0fh
+        je      spline_%1_trans
+        or      al, bh
+        cmp     [BG_PriBuf + edi * 2], dx
+        jc      spline_%1_trans
+        mov     ax, [TextPal + eax * 2]
+        mov     [BG_LineBuf + edi * 2], ax
+        or      byte [Text_TrFlag + edi], 2
+        mov     [BG_PriBuf + edi * 2], dx
+spline_%1_trans:
+        inc     edi
+        loop    spline_%1_outlp
+        jmp     spline_%1_lpcnt
+spline_%1_fxflipy:
+        xor     al, 0f0h
+spline_%1_fxflipx:
+        lea     esi, [BGCHR16 + esi + eax + 15]
+        std
+        jmp     spline_%1_out
+spline_%1_ed:
+%endmacro
+
+* BG_DrawLineMcrX()がない
+-> done
+
+
+** 2013/07/30
+
+* gtk/x11関連のソースをなくす
+
+** 2013/08/08
+
+SDL2.0の研究
+
+int SDL_GetNumVideoDisplays(void)
+Disp num: 1
+
+int SDL_GetNumDisplayModes(0) // 引数は0 origin?
+DispMode num: 1
+
+SDL_GetDisplayMode(0, 0, &dm);
+format: 0x15151002 w: 1280 h: 736 refresh_rate: 0 driverdata: 0
+
+
+0x X X X X XX XX
+   | | | |  |  |
+   | | | |  |  +-- bytes
+   | | | |  +-- bites
+   | | | +-- layout
+   | | +--order
+   | +-- type
+   +-- always 1
+
+#define SDL_DEFINE_PIXELFORMAT(type, order, layout, bits, bytes) \
+    ((1 << 28) | ((type) << 24) | ((order) << 20) | ((layout) << 16) | \
+     ((bits) << 8) | ((bytes) << 0))
+
+    SDL_PIXELFORMAT_RGB565 =
+        SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB,
+                               SDL_PACKEDLAYOUT_565, 16, 2),
+
+
+SDL_GetWindowSurface()のタイミングで初めてSDL_Surfaceが作成される。
+これが32ビットdepthでXRGBフォーマットだ。
+struct SDL_Windowはsrc/video/SDL_sysvideo.h で定義されている
+SDL_Windowの>surface_validをセットするのはSDL_GetWindowSurface()。
+
+ということは、SDL_GetWindowSurface()するしかWindowにSurfaceをつける手段が
+ない？わかりずらいわ！！
+
+* 2013/08/09
+
+OpenGL ESの研究
+
+- OpenGL ES 2.0のライブラリをリンクしても、デフォルトでは1.1で開始される。
+2.0で開始するには、以下が必要
+
+SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
+SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 0 );
+
+- OpenGL ESの開始はSDL_GL_CreateContext()呼び出しの延長で行われる
+
+- glClearColor() はクリアする時の色を指定するだけ。clear本体はglClear()
+
+* 2013/08/10
+
+OpenGL ESの研究の２
+
+- SDL_CreateContext()でEGL Contextが作られる
+- SDL_GetWindowSurface()の延長でSDL_Surfaceが作られてしまい、こちらにEGL Contextが移ってしまう?
+-> Textureが真っ白になってしまう。
+   -> 元々sdl_surfaceはスクリーンバッファだが実画面に2倍blitするようにしていたので、単なるmalloc()で確保してもよい。
+      -> ではスクリーンバッファはmalloc()にする
+         -> をぉ、textureが反映されるようになった！！
+
+* 2013/08/13
+
+- 仮想キー入力について
+
+Androidの画面下の戻るボタンやメニューボタンのある領域をアイコン領域
+その上のアプリが使える領域を描画領域と定義する。
+
+OpenGL座標は描画領域内で800x600にしている。
+一方、SDL_FINGERDOWNで拾える座標はアイコン領域まで含めた全画面で(0,0)-(1,1)
+
+SDL_FINGERDOWNで拾える描画領域内の最大値は1*(736/800)
+
+<---1280 (Nexus 7)-->
++--------------------+A
+|                    ||
+|                    ||
+|                    |736 (Nexus 7の場合) ここをDrawYとする
+|                    ||
+|                    |V
++--------------------+A
+|  ← △  □     ：  ||64 (Nexus 7の場合) こことDrawYでFullYとする
++--------------------+V
+
+OpenGL座標 -> SDL_FINGERDOWN座標変換
+
+x: ox / 800
+y: oy / 600 * (DrawY/FullY)
+
+Nexus 7の場合は oy / 600 * (736 / 800)
+
+** 2013/8/17
+
+* keyboard関連の解析
+
+とりあえずKeyBuf[]にkeycodeを突っ込んでいく感じで。
+
+keycodeはキーダウンは0x80が0で、キーアップは0x80が1な感じで。
+
+** 2013/08/22, 23 PSPの遅さについて
+
+MIDI_DelayOut()がものすごく遅くね？
+これ削ると早くなる。
+
+mainloopでNoWaitModeを有効にすれば早くなるけど早くなりすぎる
+(オートフレームスキップ時)。
+
+FrameRateは7でAuto Frame Skip
+1だとフルフレーム描画
+2だと2回に一回画面描画 -> 30fps
+3だと3回に一回画面描画 -> 20fps
+4だと4回に一回画面描画 -> 15fps
+
+--> MIDI_DelayOut()削り、NoWaitModeでフレームスキップ4ぐらいだとよさげ。
+
+
+** 2013/08/23
+
+* サウンド関連の解析
+
+ddwin.c/DSound_Init()内でSDL_OpenAudio()を呼び出す。この時のsamples
+pcmfree = pcmfreemax = rate * buflen / 200 / 2 -> 2756
+rateはConfig.SampleRate 22050
+buflenはConfig.BufferSize 50
+ds_halfbuffer = pcmfreemax * 4 -> 11024
+
+samplesはpsfreemaxより大きい2のべき乗 -> 4096
+samplesは1チャンネル分の大きさなのでステレオの場合はバッファ8192になる。
+
+
+Send0呼び出し時のclock
+216?, 432?の繰り返し px68k
+210, 420の繰り返し xkeropi
+
+** 2013/08/26
+
+* サウンドバッファの見直し
+
+- 現状だと、作成したデータの後半を取りこぼしたり、空のデータを食わせたり
+してしまっている。
+
+-> サウンドバッファをリングバッファに作り直す
+
+pcmbuffer
++------+----------+----------------+
+|      |//////////|                |
++------+----------+----------------+
+       A          A
+       |          |
+       |        pcmbufwp 書き込みポインタ
+       |
+     pcmbufrp 読み込みポインタ
+
+* fmgenの修正点
+
+fmgen/fmgen.h
+#define FM_SAMPLETYPE  int16
+
+fmgen/psg.h
+#define PSG_SAMPLETYPE         int16
+
+** 2013/08/27
+
+* winx68k-065s
+
++------------------+------------------+
+|                  |                  |
++------------------+------------------+
+<--ds_halfbuffer--> <--ds_halfbuffer-->
+
+前半のバッファを書き出したらEvent=0
+後半のバッファを書き出したらEvent=1
+
+
+** 2013/09/03
+
+* scan code
+SDL_SCANCODE_MENU = 118,
+SDL_SCANCODE_AC_BACK = 270,
+
+* key code
+
+ SDLK_MENU = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_MENU),
+ SDLK_AC_BACK = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_BACK),
+
+** 2013/09/05
+
+* menuについて
+
+PSP: 480x272
+sk17: 480x320
+so-02c: 854x480
+
+PSP 480x272で16dotフォント 30x17
+Android 仮想800x600で24dotフォント 33x25
+VGA 640x480で16dotフォント 40x30 24dotフォント 26x20
+QVGA 320x240で16dotフォント 20x15
+
+30x17をメニュー描画領域とすると
+16dotフォント 480x272
+24dotフォント 720x408
+
+->
+PSPは16dotフォントでそのまま
+Unix系は24dotフォントで800x600画面でそのまま
+Androidは24dotフォントで画面いっぱいに描画
+
+
+
+SYSTEM RESET
+FDD1 FDD1.XDF
+FDD2 FDD2.XDF
+Frame Skip Auto Full 1/2 1/3 1/4 1/5 1/6 
+Screen 4:3 Full x1 x2 x3 x4 1.3x1 2.6x2 3.9x3
+Help About
+
+** 2013/09/15
+
+* FDイメージの拡張子
+d88 88d hdm dup 2hd dim xdf img
+
+** 2013/09/17
+
+xxx 長いファイル名でもはみ出ないようにする
+
+** 2013/09/18
+
+ボタンが押されたらbit off
+
+now pre  ^  ~^  down
+-------+---+---+----
+ 1   1   0   1   1
+ 1   0   1   0   1
+ 0   0   0   1   1
+ 0   1   1   0   0
+
+down = ~(now ^ pre) | now;
+
+xxx PSPの終了処理
+xxx PSボタンが押されたときに正しく終わらない時がある
+
+sceKernelRegisterExitCallback()
+
+** 2013/10/01
+
+TODO: menuでキーリピートを有効にする
+TODO: software keyboardでキーリピートを有効にする
+TODO:[done] software keyboardを出しているときは、joystick入力を無効にする
+TODO: software keyboard用のkeytblに従来のkeytblをマージする
+TODO:[done] 仮想ボタンの遊びをもたせる
+
+** 2013/10/15
+
+ボタンが押されたらbit off
+
+now pre  ^  ~^  up
+-------+---+---+----
+ 1   1   0   1   0
+ 1   0   1   0   1
+ 0   0   0   1   0
+ 0   1   1   0   0
+
+up = (now ^ pre) & now;
+
+** 2012/10/28
+
+OpenGL ES 1.1 を使う -> USE_OGLES11
+SDL_gfx を使う -> USE_SDLGFX
+
+Software Keyboard は PSP または OpenGL ES 1.1 専用
+
+** 2014/2/12
+
+* 以前解析した分を忘れているので復習
+
+* BYTE CRTC_Regs[0x30] CRTC内部レジスタ (big endian)
+
+  0xe80000 - 0xe80480
+
+  - CRTC_VSTART = (((WORD)CRTC_Regs[0xc]<<8)+CRTC_Regs[0xd]);
+    垂直表示開始位置
+
+  - CRTC_VEND = (((WORD)CRTC_Regs[0xe]<<8)+CRTC_Regs[0xf]);
+    垂直表示終了位置
+
+  - CRTC_Regs[0x29]&4  垂直ドット数   0: 256Line 1: 512Line
+  - CRTC_Regs[0x29]&16 水平偏向周波数 0: 15.98kHz 1: 31.50kHz
+
+
+* BYTE BG_Regs[0x12] BGスクロールレジスタ/画面モードレジスタ (big endian)
+
+ (- BG_Regs[0x0c] 水平表示位置 x8しないとだめ?)
+
+  - BG_VLINE = ((long)BG_Regs[0x0f]-CRTC_VSTART)/((BG_Regs[0x11]&4)?1:2); 
+    - BG_Regs[0x0f] BG垂直表示位置
+    - BG_Regs[0x11]&4 0: 垂直256ラインモード 1: 垂直512ラインモード
+    - BG_Regs[0x11]&16 水平同期周波数  0: 15.98kHz 1: 31.50kHz
+
+** 2014/2/14
+
+* BYTE GVRAM[0x80000]の構造
+
+  256色の場合は、Page0の(0, 0), Page1の(0, 0), Page0の(1, 0), Page1の(1, 0)...
+  と交互に並ぶ。
+
+  16色モードの場合は、以下の様に詰めていく
+  Page0の(0, 0)を下位4ビットに, Page1の(0, 0)を上位4ビットに,
+  Page0の(1, 0)を下位4ビットに, Page1の(1, 0)を上位4ビットに,
+
+** 2014/07/04
+
+* 一度解析したはずだが、すっかり忘れているのでもう一度
+
+#define C68K_FETCH_BITS 8		// [4-12]   default = 8
+#define C68K_ADR_BITS	24
+#define C68K_FETCH_SFT	(C68K_ADR_BITS - C68K_FETCH_BITS) -> 16
+#define C68K_FETCH_BANK	(1 << C68K_FETCH_BITS) -> 256
+#define C68K_FETCH_MASK	(C68K_FETCH_BANK - 1)  -> 255 = 0xff
+
+CPU->Fetch[256]
+
+C68k_Set_Fetch(&C68K, 0xc00000, 0xc7ffff, (UINT32)GVRAM);
+
+i = 0xc0, j = 0xc7
+fetch_adr = fetch_adr - (0xc0 << 16) = 0x12345678 - 0xc00000
+CPU->Fetch[0xc0] = fetch_adr
+CPU->Fetch[0xc1] = fetch_adr
+     :                 :
+CPU->Ftech[0xc7] = fetch_adr
+
+仮想MPUが0xc12345にアクセスする場合は、
+CPU->Fetch[0xc1] + 0xc12345 がホストCPUのアドレスになる

@@ -1,0 +1,16 @@
+SDL_tty 0.0.2
+=============
+
+  *
+
+SDL_tty 0.0.1
+=============
+
+  * some support for scrolling
+  * support for fixed-width fonts
+  * support for loading fonts from an SDL_Surface as well as from a C header file
+  * small and meant to be included in your source, not meant to be compiled as a real .so/dll library
+  * some example fonts included
+
+
+# EOF #

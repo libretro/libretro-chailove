@@ -1,0 +1,154 @@
+ポータブルX68000エミュレータ
+PX68K ( Portable (x)keropi PRO-68K )
+
+ソースを自分でコンパイルする際に役に立つかもしれないドキュメント
+                                                          2014/07/04 ひっそりぃ
+
+■開発環境について
+
+・UNIX 系
+
+  Ubuntu Linux 13.04
+  SDL 1.2
+  SDL_gfx 1.2-4
+
+・PSP
+
+  Mac OS X 10.9.2
+  psptoolchain
+  psplibraries (SDL 1.2.9)
+
+・Android
+
+  Mac OS X 10.9.2
+  SDL2-2.0.3 (http://www.libsdl.org/ から入手)
+  android-ndk-r9-linux-x86 (Android NDK)
+  adt-bundle-linux-x86-20130729 (Android SDK)
+  OpenGL ES 1.1
+
+・Mac OS X
+
+  Mac OS X 10.9.3
+  SDL2-2.0.3
+  SDL2_gfx-1.0.1
+  Xcode 5.0.2 (GUIは使わずMakefileを用いてコマンドからmake)
+
+
+■コンパイルについて
+
+・UNIX 系
+
+  ・SDL1.2 の場合
+
+    $ make
+
+    (ばりばりソース修正とコンパイルをする方は、make depend で
+     あらかじめ Makefile に依存関係情報を付与してください)
+
+  ・SDL2 の場合
+
+    $ make SDL2=1
+
+
+・PSP
+
+  $ make -f Makefile.psp
+
+
+・Android
+
+    ※ SDL2-2.0.0 から SDL2-2.0.3 に変更します。(2014/4/1)
+       既に SDL2-2.0.0 環境を作成している方は以下の対処を行ってください。
+       ・px68k/px68k-android/jni/SDL を 2.0.3 に更新
+       ・Eclipse で 「Android SDK Manager」を実行し、
+         「Android3.1 (API 12)」の「SDK Platform」をインストール
+       ・Eclipse で「Package Explorer」の「PX68K」アイコンを右クリックし、
+         「Propertiles」を選択。
+         「Android」をクリックし、「Android 3.1」を選択する。
+
+  * px68k-android/jni/ にSDLという名前でSDL2-2.0.3のディレクトリをコピー
+    するか、シンボリックリンクをはってください。
+    
+  * Android.mk の LOCAL_C_INCLUDES で、ndkのディレクトリを指定している
+    箇所は、自分の環境にあわせて書き直すこと
+
+  * まずはnative codeのコンパイル
+
+    px68k-android/jni/srcディレクトリに移動してから、
+    $ /usr/local/android-ndk-r9/ndk-build (ndkを/usr/local/に入れた場合)
+
+  * Eclipseへのプロジェクトの登録
+   
+    ・[File] -> [New] -> [Other]
+       Android Project from Existing Code を選択して[Next]
+
+    ・[Root Directory:]にandroid-projectのディレクトリを指定する
+      (例) /home/hissorii/src/px68k/px68k-android
+
+    ・[Projects:]の[New Project Name]のSDLActivityを二つともPX68Kに変更
+
+    ・[Finish] をクリック
+
+  * 次にapkの作成
+
+    px68k-androidディレクトリに移動してから、
+    $ ant release (またはant debug)
+
+    で、px68k-android/bin/ に .apk ファイルが作成される
+
+    README-android.txtに記載があるが、antを実行するためには、
+    px68k-android/local.propatiesにsdkのパスを指定しておくこと。
+    ひっそりぃの設定は以下。
+    hissorii@ubuntu:~/src/px68k/px68k-android$ cat local.properties
+    sdk.dir=/usr/local/adt-bundle-linux-x86-20130729/sdk
+
+    antで作成したrelease版は.apkインストールではじかれるな。うーむ。
+    署名をしなければならないらしい。
+    とりあえずeclipse上で[Run]->[Run]で作成される.apkだと大丈夫。
+
+
+・Raspberry Pi (Raspbian) について
+
+  ・自前でコンパイルしてください。
+
+  ・インターネットにつながっている状態で、以下を実行してください。
+
+    $ sudo apt-get install libsdl1.2-dev libsdl-gfx1.2-dev
+    $ mkdir src ; cd src ; git clone http://github.com/hissorii/px68k
+    $ cd px68k
+    $ make
+
+  ・GitHub 上のソースが更新された場合は、インターネットにつながっている
+    状態で、以下を実行してください。
+
+    $ cd src/px68k
+    $ git pull http://github.com/hissorii/px68k
+    $ make clean ; make
+
+
+・Mac OS X 版
+
+  SDL2 はソースを入手してコンパイルします。
+  SDL2 のソースを解凍したディレクトリに移動し、以下を実行します。
+
+  $ ./configure CFLAGS="-m32 -O3" LDFLAGS=-m32
+  $ make
+  $ sudo make install
+
+  次にSDL2_gfx のコンパイルをします。
+
+  $ ./configure CFLAGS="-m32 -O2" LDFLAGS=-m32
+  $ make
+  $ sudo make install
+
+  ここまでで、/usr/local/ 以下に 32bit 版の SDL2, SDL2_gfx が
+  インストールされます。
+  64bit の SDL アプリを作成したい場合は、これらのライブラリも
+  64bit で作り直す必要がありますのでご注意ください。
+
+  次に px68k のディレクトリに移動し、以下を実行してください。
+
+  $ make SDL2=1
+
+
+以上

@@ -1,0 +1,43 @@
+
+ifeq ($(platform),)
+platform = unix
+endif
+
+ifeq ($(platform), unix)
+CC = gcc
+AR=ar rc
+LPREFIX := unix
+else ifeq ($(platform), wincross64)
+CC = x86_64-w64-mingw32-gcc
+AR = x86_64-w64-mingw32-ar rc
+LPREFIX := win
+endif
+
+RANLIB=ranlib
+
+CFLAGS = -O3  -I../../include -fPIC -DLOAD_JPG -DLOAD_PNG -DLOAD_BMP -DLOAD_GIF -DLOAD_LBM \
+	-DLOAD_PCX -DLOAD_PNM -DLOAD_TGA -DLOAD_XCF -DLOAD_XPM \
+	-DLOAD_XV
+
+LIBS = -fPIC -lz
+
+SRCS := $(notdir $(filter-out %/showimage.c, $(wildcard ./*.c)))
+OBJS := $(SRCS:%.c=%.o)
+
+STATIC_LIB=SDL_image_$(LPREFIX).a
+
+
+all: $(STATIC_LIB)
+
+$(STATIC_LIB): $(OBJS)
+	echo $(OBJS)
+	$(AR) $@ $^
+	$(RANLIB) $@
+
+
+uninstall:
+	rm -f $(lib_dir)/$(STATIC_LIB)
+
+clean:
+	rm -f *.o *.a 
+

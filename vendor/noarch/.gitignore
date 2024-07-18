@@ -1,0 +1,8 @@
+*.o
+/build
+/noarch
+/bin
+CMakeCache.txt
+CMakeFiles
+*.cmake
+Makefile
