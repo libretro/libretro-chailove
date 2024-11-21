@@ -19,7 +19,7 @@ namespace love {
 bool filesystem::init(const std::string& file, const void* data) {
 	// Initialize PhysFS
 	if (PHYSFS_isInit() == 0) {
-		if (PHYSFS_init(NULL) == 0) {
+		if (PHYSFS_init((const char*)ChaiLove::getInstance()->environ_cb) == 0) {
 			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
 			return false;
 		}
