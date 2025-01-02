@@ -77,6 +77,7 @@ The following are some notes about the development process behind ChaiLove.
 ChaiLove requires a C++14 compiler, and has been tested with `g++>=5.2`. To compile it, run:
 
 ```
+git submodule update --init
 make
 ```
 
