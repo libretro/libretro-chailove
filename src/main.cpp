@@ -18,15 +18,14 @@ typedef struct AppData {
 } AppData;
 
 bool Init(pntr_app* app) {
-    // Initialize PhysFS
-    const char* physfs_input =
-    #ifdef PNTR_APP_LIBRETRO
-        (const char*)pntr_app_libretro_environ_cb(app);
-    #else
-        app->argv[0];
-    #endif
+    // Set up the initial app data.
+    AppData* appData = (AppData*)pntr_load_memory(sizeof(AppData));
+    pntr_app_set_userdata(app, appData);
 
-    if (PHYSFS_init(physfs_input) == 0) {
+
+
+    // Initialize PhysFS
+    if (PHYSFS_init((const char*)pntr_app_libretro_environ_cb(app)) == 0) {
         pntr_app_log(PNTR_APP_LOG_ERROR, "PHYSFS_init() failed");
         return false;
     }
@@ -35,9 +34,6 @@ bool Init(pntr_app* app) {
     //     pntr_app_log(PNTR_APP_LOG_ERROR, "PHYSFS_mount() failed");
     //     return false;
     // };
-
-    AppData* appData = (AppData*)pntr_load_memory(sizeof(AppData));
-    pntr_app_set_userdata(app, appData);
 
     // Load the given file.
     unsigned int size;
@@ -87,10 +83,9 @@ bool Update(pntr_app* app, pntr_image* screen) {
 void Close(pntr_app* app) {
     AppData* appData = (AppData*)pntr_app_userdata(app);
 
-    //pntr_unload_font(appData->font);
 
-    pntr_unload_memory(appData);
-    PHYSFS_deinit();
+
+    ChaiLove::destroy();
 }
 
 pntr_app Main(int argc, char* argv[]) {
