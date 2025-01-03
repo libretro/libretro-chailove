@@ -1,0 +1,32 @@
+/**
+ * This is an example of using ChaiLove in a simple example.
+ */
+
+def load() {
+	love.graphics.setBackgroundColor(46, 44, 59)
+	love.graphics.setColor(193, 229, 234)
+}
+
+/**
+ * ChaiLove Callback; Configure the game.
+ */
+def conf(t) {
+	t.window.width  = 400
+	t.window.height = 300
+}
+
+def draw() {
+    love.graphics.print("Press C to set clipboard to 'Hello World'", 40, 50)
+    love.graphics.print("Current Clipboard:", 40, 130)
+    var clipboard = love.system.getClipboardText()
+    if (clipboard == "") {
+        clipboard = "Empty"
+    }
+    love.graphics.print(clipboard, 40, 160)
+}
+
+def update(delta) {
+	if (love.keyboard.isDown("c")) {
+        love.system.setClipboardText("Hello World")
+    }
+}
