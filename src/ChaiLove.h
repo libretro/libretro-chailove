@@ -44,12 +44,13 @@
 #ifndef SRC_CHAILOVE_H_
 #define SRC_CHAILOVE_H_
 
-#define CHAILOVE_VERSION_MAJOR 1
-#define CHAILOVE_VERSION_MINOR 3
+#define CHAILOVE_VERSION_MAJOR 2
+#define CHAILOVE_VERSION_MINOR 0
 #define CHAILOVE_VERSION_PATCH 0
-#define CHAILOVE_VERSION_STRING "1.3.0"
+#define CHAILOVE_VERSION_STRING "2.0.0-pre"
 
-#include "SDL.h"
+#include "pntr_app.h"
+
 #include "libretro.h"
 #include "love/keyboard.h"
 #include "love/config.h"
@@ -68,7 +69,6 @@
 #include "love/window.h"
 #include "love/math.h"
 #include "love/event.h"
-#include "love/console.h"
 
 class ChaiLove {
 	public:
@@ -82,7 +82,6 @@ class ChaiLove {
 	static retro_environment_t environ_cb;
 
 	love::config config;
-	love::console console;
 	love::keyboard keyboard;
 	love::script* script = NULL;
 	love::data data;
@@ -111,8 +110,8 @@ class ChaiLove {
 	void cheatreset();
 	void cheatset(int index, bool enabled, const std::string& code);
 
-	uint32_t *videoBuffer = NULL;
-	SDL_Surface* screen = NULL;
+	pntr_image* screen = NULL;
+	pntr_app* app = NULL;
 };
 
 #endif  // SRC_CHAILOVE_H_
