@@ -32,6 +32,7 @@ class math {
 	int random(int min, int max);
 	int random(int max);
 	double random(double min, double max);
+	double random(double max);
 
 	/**
 	 * Sets the random seed to a random seed between the given min and max values.

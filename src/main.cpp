@@ -1,10 +1,12 @@
+#include <string>
+#include <iostream> // TODO: Remove this
+
 #define PNTR_PHYSFS_IMPLEMENTATION
 #include "pntr_physfs.h"
 
 #define PNTR_APP_IMPLEMENTATION
 #define PNTR_ENABLE_DEFAULT_FONT
 #define PNTR_ENABLE_TTF
-//#define PNTR_ENABLE_VARGS
 #define PNTR_ENABLE_MATH
 #define PNTR_NO_STDIO
 #define PNTR_NO_SAVE_IMAGE
@@ -12,80 +14,57 @@
 
 #include "ChaiLove.h"
 
-typedef struct AppData {
-    pntr_image* image;
-    ChaiLove* chailove;
-} AppData;
-
 bool Init(pntr_app* app) {
-    // Set up the initial app data.
-    AppData* appData = (AppData*)pntr_load_memory(sizeof(AppData));
-    pntr_app_set_userdata(app, appData);
-
-
+    ChaiLove::environ_cb = pntr_app_libretro_environ_cb(app);
 
     // Initialize PhysFS
-    if (PHYSFS_init((const char*)pntr_app_libretro_environ_cb(app)) == 0) {
+    if (PHYSFS_init((const char*)ChaiLove::environ_cb) == 0) {
         pntr_app_log(PNTR_APP_LOG_ERROR, "PHYSFS_init() failed");
         return false;
     }
 
-    // if (PHYSFS_mount("examples", "ex", 1) == 0) {
-    //     pntr_app_log(PNTR_APP_LOG_ERROR, "PHYSFS_mount() failed");
-    //     return false;
-    // };
-
-    // Load the given file.
-    unsigned int size;
-    void* fileData = pntr_app_load_arg_file(app, &size);
-    if (fileData == NULL) {
-        pntr_app_log(PNTR_APP_LOG_ERROR, "Failed to load file");
+    // Set up the chailove instance.
+    ChaiLove* chailove = ChaiLove::getInstance();
+    if (chailove == NULL) {
+        PHYSFS_deinit();
         return false;
     }
 
-    if (PHYSFS_mountMemory((const char*)fileData, (PHYSFS_uint64)size, &pntr_unload_memory, "chailove.zip", NULL, 1) == 0) {
-
-        pntr_unload_memory(fileData);
+    // Load
+    std::string argFile = app->argFile == NULL ? "" : app->argFile;
+    if (!chailove->load(argFile, app->argFileData, app->argFileDataSize)) {
+        ChaiLove::destroy();
+        PHYSFS_deinit();
+        return false;
     }
-    if (fileData) {
-        appData->image = pntr_load_image_from_memory(PNTR_IMAGE_TYPE_PNG, (const unsigned char*)fileData, size);
-    }
-    else {
-        pntr_app_log(PNTR_APP_LOG_ERROR, "Failed to load file");
-    }
-	// Find the game path.
-	// std::string gamePath(info ? info->path : "");
-	// if (gamePath == ".") {
-	// 	gamePath = "main.chai";
-	// }
-	// void* data = NULL;
-	// if (info != NULL) {
-	// 	data = (void*)info->data;
-	// }
+    pntr_app_set_userdata(app, (void*)chailove);
 
     return true;
 }
 
 bool Update(pntr_app* app, pntr_image* screen) {
-    AppData* appData = (AppData*)pntr_app_userdata(app);
+    ChaiLove* chailove = (ChaiLove*)pntr_app_userdata(app);
+    chailove->screen = screen;
+    if (chailove == NULL) {
+        return false;
+    }
 
-    // Clear the screen
-    pntr_clear_background(screen, PNTR_RAYWHITE);
+	// Update the game.
+	chailove->update();
 
-    pntr_draw_image(screen, appData->image, 0, 0);
+    if (chailove->event.m_shouldclose) {
+        return false;
+    }
 
-    // Draw some text
-    //pntr_draw_text(screen, appData->font, "Congrats! You created your first pntr_app!", 35, screen->height - 30, PNTR_DARKGRAY);
+	// Render the game.
+	chailove->draw();
 
     return true;
 }
 
 void Close(pntr_app* app) {
-    AppData* appData = (AppData*)pntr_app_userdata(app);
-
-
-
     ChaiLove::destroy();
+    PHYSFS_deinit();
 }
 
 pntr_app Main(int argc, char* argv[]) {
@@ -94,7 +73,7 @@ pntr_app Main(int argc, char* argv[]) {
     return (pntr_app) {
         .width = 640,
         .height = 480,
-        .title = "libretro_chailove",
+        .title = "ChaiLove",
         .init = Init,
         .update = Update,
         .close = Close,

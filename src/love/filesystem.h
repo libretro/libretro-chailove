@@ -35,7 +35,7 @@ class filesystem {
 	bool load(const std::string& file);
 	void mountlibretro();
 
-	bool init(const std::string& file, const void* data);
+	bool init(const std::string& file, const void* data, unsigned int dataSize);
 	bool unload();
 	void* openRW(const std::string& filename);
 	char* readChar(const std::string& filename);
@@ -141,6 +141,7 @@ class filesystem {
 	bool mount(const std::string& archive, const std::string& mountpoint, bool appendToPath);
 	bool mount(const std::string& archive, const std::string& mountpoint);
 	bool mount(const char *archive, const std::string& mountpoint);
+	bool mount(const void *data, unsigned int size, const std::string& mountpoint);
 
 	/**
 	 * Gets the path to the designated save directory.

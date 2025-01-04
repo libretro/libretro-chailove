@@ -1,7 +1,6 @@
-#include "ChaiLove.h"
-#include "LibretroLog.h"
 #include <libretro.h>
 #include <string>
+#include "ChaiLove.h"
 
 ChaiLove* ChaiLove::m_instance = NULL;
 retro_input_state_t ChaiLove::input_state_cb = NULL;
@@ -55,11 +54,11 @@ void ChaiLove::quit(void) {
 	window.unload();
 }
 
-bool ChaiLove::load(const std::string& file, const void* data) {
+bool ChaiLove::load(const std::string& file, const void* data, unsigned int dataSize) {
 	// Display a welcome message from ChaiLove.
-#ifndef GIT_VERSION
-#define GIT_VERSION ""
-#endif
+	#ifndef GIT_VERSION
+	#define GIT_VERSION ""
+	#endif
 	std::string version = CHAILOVE_VERSION_STRING GIT_VERSION;
 	//LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] ChaiLove " << version.c_str() << std::endl;
 
@@ -67,8 +66,7 @@ bool ChaiLove::load(const std::string& file, const void* data) {
 	sound.load(app);
 
 	// Initalize the file system.
-	bool loaded = filesystem.init(file, data);
-	if (!loaded) {
+	if (!filesystem.init(file, data, dataSize)) {
 		//LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error loading " << file << std::endl;
 		return false;
 	}
@@ -131,10 +129,6 @@ void ChaiLove::reset() {
  * Render the ChaiLove.
  */
 void ChaiLove::draw() {
-	if (event.m_shouldclose) {
-		return;
-	}
-
 	// Clear the screen.
 	graphics.clear();
 

@@ -4,7 +4,6 @@
 #include "physfs.h"
 #include "filesystem.h"
 #include "../ChaiLove.h"
-#include "../LibretroLog.h"
 #include "Types/FileSystem/FileInfo.h"
 
 using love::Types::FileSystem::FileInfo;
@@ -15,15 +14,7 @@ namespace love {
 /**
  * Initialize the file system.
  */
-bool filesystem::init(const std::string& file, const void* data) {
-	// Initialize PhysFS
-	if (PHYSFS_isInit() == 0) {
-		if (PHYSFS_init((const char*)ChaiLove::getInstance()->environ_cb) == 0) {
-			//LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error loading PhysFS - " << getLastError() << std::endl;
-			return false;
-		}
-	}
-
+bool filesystem::init(const std::string& file, const void* data, unsigned int dataSize) {
 	// Check if we are simply running ChaiLove.
 	if (file.empty()) {
 		return mount(".", "/", false);
@@ -34,7 +25,7 @@ bool filesystem::init(const std::string& file, const void* data) {
 
 	// Allow loading from an Archive.
 	if (extension == "chaigame" || extension == "chailove" || extension == "zip") {
-		return mount(file.c_str(), "/", false);
+		return mount(data, dataSize, "/");
 	}
 
 	// If we are just running the core, load the base path.
@@ -143,9 +134,6 @@ PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
 }
 
 bool filesystem::unload() {
-	if (PHYSFS_isInit() != 0) {
-		PHYSFS_deinit();
-	}
 	return true;
 }
 
@@ -260,6 +248,14 @@ std::string filesystem::getExecutablePath() {
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint) {
 	return mount(archive, mountpoint, true);
+}
+
+bool filesystem::mount(const void *data, unsigned int size, const std::string& mountpoint) {
+	// TODO: Do we need to register del() callback?
+	if (PHYSFS_mountMemory(data, (PHYSFS_uint64)size, NULL, "chailove.zip", mountpoint.c_str(), 1) == 0) {
+		return false;
+	}
+	return true;
 }
 
 bool filesystem::mount(const std::string& archive, const std::string& mountpoint, bool appendToPath) {

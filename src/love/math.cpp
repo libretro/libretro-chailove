@@ -31,6 +31,10 @@ double math::random(double min, double max) {
 	return (double)pntr_app_random_float(app, (float)min, (float)max);
 }
 
+double math::random(double max) {
+	return (double)pntr_app_random_float(app, 0.0f, (float)max);
+}
+
 math& math::setRandomSeed(int min, int max) {
 	return setRandomSeed(random(min, max));
 }

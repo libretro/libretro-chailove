@@ -4,7 +4,6 @@
 #include <stdlib.h>
 
 #include "../../../ChaiLove.h"
-#include "../../../LibretroLog.h"
 
 namespace love {
 namespace Types {

@@ -2,7 +2,6 @@
 #include "pntr_app.h"
 #include "font.h"
 #include "Types/Graphics/Font.h"
-#include "../LibretroLog.h"
 
 namespace love {
 

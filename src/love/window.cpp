@@ -1,7 +1,6 @@
 #include "window.h"
 #include <string>
 #include "../ChaiLove.h"
-#include "../LibretroLog.h"
 
 #include "pntr_app.h"
 #include "config.h"

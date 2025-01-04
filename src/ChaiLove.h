@@ -49,6 +49,8 @@
 #define CHAILOVE_VERSION_PATCH 0
 #define CHAILOVE_VERSION_STRING "2.0.0-pre"
 
+#include <string>
+
 #include "pntr_app.h"
 
 #include "libretro.h"
@@ -101,7 +103,7 @@ class ChaiLove {
 
 	~ChaiLove();
 	void quit(void);
-	bool load(const std::string& file, const void* data);
+	bool load(const std::string& file, const void* data, unsigned int dataSize);
 	void update();
 	void draw();
 	void reset();

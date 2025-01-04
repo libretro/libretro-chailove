@@ -3,7 +3,6 @@
 
 #include <string>
 #include "../../../ChaiLove.h"
-#include "../../../LibretroLog.h"
 
 namespace love {
 namespace Types {

@@ -1,6 +1,5 @@
 #include "system.h"
 #include "../ChaiLove.h"
-#include "../LibretroLog.h"
 
 #include <string>
 #include <cstdlib>

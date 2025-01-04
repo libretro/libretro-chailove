@@ -2,7 +2,6 @@
 #include "pntr_app.h"
 #include <string>
 #include "../../../ChaiLove.h"
-#include "../../../LibretroLog.h"
 #include "Image.h"
 
 namespace love {

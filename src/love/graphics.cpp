@@ -1,7 +1,6 @@
 #include "graphics.h"
 
 #include "../ChaiLove.h"
-#include "../LibretroLog.h"
 #include "Types/Graphics/Image.h"
 #include "Types/Graphics/Font.h"
 #include "Types/Graphics/Color.h"

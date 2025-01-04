@@ -1,6 +1,5 @@
 #include "script.h"
 #include "../ChaiLove.h"
-#include "../LibretroLog.h"
 #include <algorithm>
 
 #ifdef __HAVE_CHAISCRIPT__
@@ -395,8 +394,8 @@ script::script(const std::string& file) {
 	chai.add(fun<int, math, int, int>(&math::random), "random");
 	chai.add(fun<double, math, double>(&math::random), "random");
 	chai.add(fun<double, math, double, double>(&math::random), "random");
-	chai.add(fun<love::math&, math, int, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun<love::math&, math, int>(&math::setRandomSeed), "setRandomSeed");
+	chai.add(fun<love::math&, math, int, int>(&math::setRandomSeed), "setRandomSeed");
 	chai.add(fun(&math::getRandomSeed), "getRandomSeed");
 
 	// Data
