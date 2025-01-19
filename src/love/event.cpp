@@ -9,9 +9,9 @@ void event::quit() {
 }
 
 void event::update() {
-	if (ChaiLove::hasInstance()) {
+	//if (ChaiLove::hasInstance()) {
 		// Poll all the inputs.
-		ChaiLove::input_poll_cb();
+		//ChaiLove::input_poll_cb();
 
 		// TODO(RobLoach): Is polling the SDL events required?
 		/*
@@ -23,7 +23,7 @@ void event::update() {
 			}
 		}
 		*/
-	}
+	//}
 }
 
 }  // namespace love

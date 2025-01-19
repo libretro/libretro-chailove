@@ -12,6 +12,8 @@
 #define PNTR_NO_SAVE_IMAGE
 #include "pntr_app.h"
 
+#include "LibretroLog.h"
+
 #include "ChaiLove.h"
 
 bool Init(pntr_app* app) {
@@ -42,6 +44,81 @@ bool Init(pntr_app* app) {
     return true;
 }
 
+void Event(pntr_app* app, pntr_app_event* event) {
+    ChaiLove* chailove = (ChaiLove*)pntr_app_userdata(app);
+
+    switch (event->type) {
+        case PNTR_APP_EVENTTYPE_KEY_DOWN: {
+            chailove->keyboard.eventKeyPressed(event->key);
+        }
+        break;
+
+        case PNTR_APP_EVENTTYPE_KEY_UP: {
+            chailove->keyboard.eventKeyReleased(event->key);
+        }
+        break;
+
+        // case PNTR_APP_EVENTTYPE_MOUSE_WHEEL: {
+        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Wheel: %d", event->mouseWheel);
+        // }
+        // break;
+
+        // case PNTR_APP_EVENTTYPE_MOUSE_BUTTON_DOWN:
+        // case PNTR_APP_EVENTTYPE_MOUSE_BUTTON_UP: {
+        //     const char* buttonDown = event->type == PNTR_APP_EVENTTYPE_MOUSE_BUTTON_DOWN ? "Pressed" : "Released";
+
+        //     const char* button;
+        //     switch (event->mouseButton) {
+        //         case PNTR_APP_MOUSE_BUTTON_LEFT: button = "left"; break;
+        //         case PNTR_APP_MOUSE_BUTTON_RIGHT: button = "right"; break;
+        //         case PNTR_APP_MOUSE_BUTTON_MIDDLE: button = "middle"; break;
+        //         case PNTR_APP_MOUSE_BUTTON_LAST:
+        //         case PNTR_APP_MOUSE_BUTTON_UNKNOWN: button = "unknown"; break;
+        //     }
+        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Mouse Button %s: %s", buttonDown, button);
+
+        //     if (event->type == PNTR_APP_EVENTTYPE_MOUSE_BUTTON_DOWN) {
+        //         if (event->mouseButton == PNTR_APP_MOUSE_BUTTON_LEFT) {
+        //             pntr_play_sound(appData->sound, false);
+        //         }
+        //         else if (event->mouseButton == PNTR_APP_MOUSE_BUTTON_RIGHT) {
+        //             pntr_stop_sound(appData->music);
+        //             pntr_play_sound(appData->music, true);
+        //         }
+        //     }
+        // }
+        // break;
+
+        // case PNTR_APP_EVENTTYPE_MOUSE_MOVE: {
+        //     //pntr_app_log_ex(PNTR_APP_LOG_INFO, "Mouse Move: (%d, %d) | (%d, %d)", event->mouseX, event->mouseY, event->mouseDeltaX, event->mouseDeltaY);
+        // }
+        // break;
+
+        // case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_UP:
+        // case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_DOWN: {
+        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Gamepad: %d. Button: %d %s", event->gamepad, event->gamepadButton, event->type == PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_DOWN ? "Pressed" : "Released");
+        // }
+        // break;
+
+        // case PNTR_APP_EVENTTYPE_FILE_DROPPED: {
+        //     sprintf(message, "File Dropped: %s", event->fileDropped);
+        //     pntr_app_log(PNTR_APP_LOG_INFO, message);
+
+        //     if (appData->droppedImage != NULL) {
+        //         pntr_unload_image(appData->droppedImage);
+        //     }
+
+        //     appData->droppedImage = pntr_load_image(event->fileDropped);
+        // }
+        // break;
+
+        // default: {
+        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Unknown event: %d", event->type);
+        // }
+        // break;
+    }
+}
+
 bool Update(pntr_app* app, pntr_image* screen) {
     ChaiLove* chailove = (ChaiLove*)pntr_app_userdata(app);
     chailove->screen = screen;
@@ -50,12 +127,15 @@ bool Update(pntr_app* app, pntr_image* screen) {
     }
 
 	// Update the game.
+    pntr_app_log(PNTR_APP_LOG_INFO, "OMGOMGOMG");
 	chailove->update();
+    pntr_app_log(PNTR_APP_LOG_INFO, "OMGOMGOMG2222");
 
     if (chailove->event.m_shouldclose) {
         return false;
     }
 
+    pntr_app_log(PNTR_APP_LOG_INFO, "drawing");
 	// Render the game.
 	chailove->draw();
 
@@ -77,6 +157,29 @@ pntr_app Main(int argc, char* argv[]) {
         .init = Init,
         .update = Update,
         .close = Close,
-        .fps = 0
+        .event = Event,
+        .fps = 0,
     };
+}
+
+int LibretroLog::LoggerBuf::sync() {
+	const std::string &s = str();
+	if (!s.empty()) {
+		if (s[s.length() - 1] == '\n')
+			log_cb(level, "%s", s.c_str());
+		else
+			log_cb(level, "%s\n", s.c_str());
+	}
+	str() = "";
+	return 0;
+}
+
+std::ostream &LibretroLog::log(enum retro_log_level level) {
+	static LibretroLog::LoggerBuf *bufs[RETRO_LOG_ERROR + 1] = {0};
+	static std::ostream *streams[RETRO_LOG_ERROR + 1] = {0};
+	if (!bufs[level]) {
+		bufs[level] = new LibretroLog::LoggerBuf(level);
+		streams[level] = new std::ostream(bufs[level]);
+	}
+	return *streams[level];
 }

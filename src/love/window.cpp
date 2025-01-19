@@ -22,7 +22,7 @@ bool window::load(const config& conf) {
 	// 	if (errorChar != NULL) {
 	// 		errString = errorChar;
 	// 	}
-	// 	//LibretroLog::log(RETRO_LOG_ERROR) << "[game] Unable to initialize SDL " << errString << std::endl;
+	// 	LibretroLog::log(RETRO_LOG_ERROR) << "[game] Unable to initialize SDL " << errString << std::endl;
 	// 	return false;
 	// }
 
@@ -46,7 +46,7 @@ bool window::load(const config& conf) {
 	// 	if (errorChar != NULL) {
 	// 		errString = errorChar;
 	// 	}
-	// 	//LibretroLog::log(RETRO_LOG_ERROR) << "[game] Unable to initialize SDL" << errString << std::endl;
+	// 	LibretroLog::log(RETRO_LOG_ERROR) << "[game] Unable to initialize SDL" << errString << std::endl;
 	// 	SDL_Quit();
 	// 	return false;
 	// }

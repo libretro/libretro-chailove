@@ -25,7 +25,7 @@ bool Image::loadFromRW(const unsigned char* data, unsigned int size) {
 		if (errorChar != NULL) {
 			errString = errorChar;
 		}
-		//LibretroLog::log(RETRO_LOG_ERROR) << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
+		LibretroLog::log(RETRO_LOG_ERROR) << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
 		return false;
 	}
 

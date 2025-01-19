@@ -54,6 +54,8 @@
 #include "pntr_app.h"
 
 #include "libretro.h"
+#include "LibretroLog.h"
+
 #include "love/keyboard.h"
 #include "love/config.h"
 #include "love/data.h"

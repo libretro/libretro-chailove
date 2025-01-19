@@ -6,6 +6,8 @@
 
 #include "libretro.h"
 
+#include "pntr_app.h"
+
 namespace love {
 /**
  * Provides an interface to the user's keyboard.
@@ -58,8 +60,8 @@ class keyboard {
 	std::string getKeyFromScancode(int scancode);
 
 	std::map<std::string, int> keyToScancode;
-	std::string scancodeToKey[RETROK_LAST] = {};
-	short int keys[RETROK_LAST] = {};
+	std::string scancodeToKey[PNTR_APP_KEY_LAST] = {};
+	short int keys[PNTR_APP_KEY_LAST] = {};
 
 	void eventKeyPressed(int key);
 	void eventKeyReleased(int key);

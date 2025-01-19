@@ -17,7 +17,7 @@ namespace love {
 class joystick {
 	public:
 	~joystick();
-	void load();
+	void load(pntr_app* app);
 	void update();
 
 	/**
@@ -87,6 +87,7 @@ class joystick {
 
 	private:
 	std::vector<Joystick*> m_joysticks;
+	pntr_app* m_app;
 };
 
 }  // namespace love
