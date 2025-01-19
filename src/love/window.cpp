@@ -90,7 +90,7 @@ window& window::showMessageBox(const std::string& msg, int frames) {
 }
 
 window& window::showMessageBox(const std::string& msg) {
-	showMessageBox(msg, 1000);
+	showMessageBox(msg, 500);
 	return *this;
 }
 

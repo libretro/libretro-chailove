@@ -16,16 +16,13 @@ namespace love {
  */
 bool filesystem::init(const std::string& file, const void* data, unsigned int dataSize) {
 	// Check if we are simply running ChaiLove.
-	if (file.empty()) {
+	if (file.empty() && data == NULL) {
 		return mount(".", "/", false);
 	}
 
-	// Find the parent and extension of the given file.
-	std::string extension(getFileExtension(file));
-
-	// Allow loading from an Archive.
-	if (extension == "chaigame" || extension == "chailove" || extension == "zip") {
-		return mount(data, dataSize, "/");
+	// Attempt to mount the data straight up.
+	if (data != NULL && mount(data, dataSize, "/")) {
+		return true;
 	}
 
 	// If we are just running the core, load the base path.

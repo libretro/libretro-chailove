@@ -15,7 +15,9 @@ system::system() {
 
 std::string system::getOS() {
 	// TODO(RobLoach): Replace Macros with something more complex?
-	#if (defined __HAIKU__)
+	#if (defined __EMSCRIPTEN__)
+	return "Web";
+	#elif (defined __HAIKU__)
 	return "Linux";
 	#elif((defined __BEOS__) ||(defined __beos__))
 	return "Linux";

@@ -33,6 +33,7 @@ struct WindowConfig {
 	bool asyncblit = true;
 	bool hwsurface = true;
 	bool doublebuffering = true;
+	bool console = false;
 };
 
 }  // namespace Config

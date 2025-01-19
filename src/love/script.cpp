@@ -229,6 +229,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&WindowConfig::asyncblit), "asyncblit");
 	chai.add(fun(&WindowConfig::hwsurface), "hwsurface");
 	chai.add(fun(&WindowConfig::doublebuffering), "doublebuffering");
+	chai.add(fun(&WindowConfig::console), "console");
 	chai.add(user_type<ModuleConfig>(), "ModuleConfig");
 	chai.add(fun(&ModuleConfig::sound), "sound");
 	chai.add(user_type<config>(), "Config");

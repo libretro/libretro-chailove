@@ -2,6 +2,7 @@
 #include <string>
 #include "ChaiLove.h"
 #include "LibretroLog.h"
+#include "pntr_app.h"
 
 ChaiLove* ChaiLove::m_instance = NULL;
 retro_input_state_t ChaiLove::input_state_cb = NULL;
@@ -9,19 +10,19 @@ retro_input_poll_t ChaiLove::input_poll_cb = NULL;
 retro_environment_t ChaiLove::environ_cb = NULL;
 
 void ChaiLove::destroy() {
-	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Attempting to destroy ChaiLove" << std::endl;
+	pntr_app_log(PNTR_APP_LOG_INFO, "[ChaiLove] Attempting to destroy ChaiLove");
 	if (hasInstance()) {
-		LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Destroying ChaiLove" << std::endl;
+		pntr_app_log(PNTR_APP_LOG_INFO, "[ChaiLove] Destroying ChaiLove");
 		m_instance->quit();
 		delete m_instance;
 		m_instance = NULL;
 	}
-	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Destroyed ChaiLove" << std::endl;
+	pntr_app_log(PNTR_APP_LOG_INFO, "[ChaiLove] Destroyed ChaiLove");
 }
 
 ChaiLove* ChaiLove::getInstance() {
 	if (!hasInstance()) {
-		LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Initializing ChaiLove" << std::endl;
+		pntr_app_log(PNTR_APP_LOG_INFO, "[ChaiLove] Initializing ChaiLove");
 		m_instance = new ChaiLove;
 	}
 	return m_instance;
@@ -61,14 +62,15 @@ bool ChaiLove::load(const std::string& file, const void* data, unsigned int data
 	#define GIT_VERSION ""
 	#endif
 	std::string version = CHAILOVE_VERSION_STRING GIT_VERSION;
-	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] ChaiLove " << version.c_str() << std::endl;
+	pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] ChaiLove %s", version.c_str());
 
 	// Iniitalize some of the initial subsystems.
 	sound.load(app);
+	timer.load(app);
 
 	// Initalize the file system.
 	if (!filesystem.init(file, data, dataSize)) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error loading " << file << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [filesystem] Error loading %s", file.c_str());
 		return false;
 	}
 
@@ -77,7 +79,7 @@ bool ChaiLove::load(const std::string& file, const void* data, unsigned int data
 	// Initialize the scripting system.
 	script = new love::script(file);
 	if (!script->mainLoaded) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [script] Error loading " << file << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] Error loading %s", file);
 		return false;
 	}
 	script->conf(config);
@@ -111,7 +113,7 @@ void ChaiLove::update() {
 
 	// Step forward the timer, and update the game.
 	if (script != NULL) {
-		script->update(timer.getDelta());
+		script->update(pntr_app_delta_time(app));
 	}
 }
 
@@ -120,7 +122,7 @@ void ChaiLove::update() {
  */
 void ChaiLove::reset() {
 	// Tell the script that we are to reset the game.
-	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] Reset" << std::endl;
+	pntr_app_log(PNTR_APP_LOG_INFO, "[ChaiLove] Reset");
 	if (script != NULL) {
 		script->reset();
 	}

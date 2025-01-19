@@ -31,6 +31,7 @@ bool Init(pntr_app* app) {
         PHYSFS_deinit();
         return false;
     }
+    chailove->app = app;
 
     // Load
     std::string argFile = app->argFile == NULL ? "" : app->argFile;
@@ -127,15 +128,12 @@ bool Update(pntr_app* app, pntr_image* screen) {
     }
 
 	// Update the game.
-    pntr_app_log(PNTR_APP_LOG_INFO, "OMGOMGOMG");
 	chailove->update();
-    pntr_app_log(PNTR_APP_LOG_INFO, "OMGOMGOMG2222");
 
     if (chailove->event.m_shouldclose) {
         return false;
     }
 
-    pntr_app_log(PNTR_APP_LOG_INFO, "drawing");
 	// Render the game.
 	chailove->draw();
 

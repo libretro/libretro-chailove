@@ -34,6 +34,11 @@ bool graphics::load() {
 
 	// Set the default font.
 	graphics::setFont();
+
+	// Match the default colors of Love2D
+	color_back = pntr_new_color(0, 0, 0, 255); // Black
+	color_front = pntr_new_color(255, 255, 255, 255); // White
+
 	return true;
 }
 
