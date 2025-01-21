@@ -22,6 +22,7 @@ SoundData* audio::newSource(const std::string& filename) {
 		ChaiLove::getInstance()->sound.sounds.push_back(newSound);
 		return newSound;
 	}
+	delete newSound;
 	return NULL;
 }
 

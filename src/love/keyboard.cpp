@@ -171,28 +171,6 @@ std::string keyboard::getKeyFromScancode(int scancode) {
 	return scancodeToKey[scancode];
 }
 
-bool keyboard::update() {
-	// // Go through all keys.
-	// int16_t state;
-	// for (int i = 0; i < RETROK_LAST; i++) {
-	// 	// Get updated state for each key.
-	// 	state = ChaiLove::input_state_cb(0, RETRO_DEVICE_KEYBOARD, 0, i);
-
-	// 	// If the state is different, then issue a keyPressed, or keyReleased.
-	// 	if (keys[i] != state) {
-	// 		keys[i] = state;
-
-	// 		if (state == 1) {
-	// 			eventKeyPressed(i);
-	// 		} else {
-	// 			eventKeyReleased(i);
-	// 		}
-	// 	}
-	// }
-	// return true;
-	return true;
-}
-
 void keyboard::eventKeyPressed(int scancode) {
 	std::string key = getKeyFromScancode(scancode);
 	ChaiLove* app = ChaiLove::getInstance();

@@ -16,8 +16,7 @@ float timer::step(float delta) {
 }
 
 int timer::getFPS() {
-	// TODO: Add a FPS counter to pntr_app
-	return -1;
+	return pntr_app_fps(m_app);
 }
 
 }  // namespace love

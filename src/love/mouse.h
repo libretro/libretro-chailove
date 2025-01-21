@@ -60,14 +60,13 @@ class mouse {
 	 */
 	bool isDown(const std::string& button);
 
-	void update();
-
 	int getButtonKey(const std::string& button);
 	std::string getButtonName(int button);
 
 	void mousemoved(int x, int y, int dx, int dy);
 	void mousepressed(int x, int y, const std::string& button);
 	void mousereleased(int x, int y, const std::string& button);
+	void wheelmoved(int x, int y);
 
 	pntr_app* m_app;
 };

@@ -43,8 +43,6 @@ class keyboard {
 	 */
 	bool isScancodeDown(int scancode);
 
-	bool update();
-
 	/**
 	 * Retrieve a scancode from the given key.
 	 *

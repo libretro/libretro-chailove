@@ -18,7 +18,6 @@ class joystick {
 	public:
 	~joystick();
 	void load(pntr_app* app);
-	void update();
 
 	/**
 	 * Gets a list of connected Joysticks.

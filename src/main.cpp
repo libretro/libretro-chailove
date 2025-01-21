@@ -49,74 +49,40 @@ void Event(pntr_app* app, pntr_app_event* event) {
     ChaiLove* chailove = (ChaiLove*)pntr_app_userdata(app);
 
     switch (event->type) {
-        case PNTR_APP_EVENTTYPE_KEY_DOWN: {
+        case PNTR_APP_EVENTTYPE_KEY_DOWN:
             chailove->keyboard.eventKeyPressed(event->key);
-        }
         break;
 
-        case PNTR_APP_EVENTTYPE_KEY_UP: {
+        case PNTR_APP_EVENTTYPE_KEY_UP:
             chailove->keyboard.eventKeyReleased(event->key);
-        }
         break;
 
-        // case PNTR_APP_EVENTTYPE_MOUSE_WHEEL: {
-        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Wheel: %d", event->mouseWheel);
-        // }
-        // break;
+        case PNTR_APP_EVENTTYPE_MOUSE_BUTTON_DOWN:
+            chailove->mouse.mousepressed(event->mouseX, event->mouseY, chailove->mouse.getButtonName(event->mouseButton));
+        break;
 
-        // case PNTR_APP_EVENTTYPE_MOUSE_BUTTON_DOWN:
-        // case PNTR_APP_EVENTTYPE_MOUSE_BUTTON_UP: {
-        //     const char* buttonDown = event->type == PNTR_APP_EVENTTYPE_MOUSE_BUTTON_DOWN ? "Pressed" : "Released";
+        case PNTR_APP_EVENTTYPE_MOUSE_BUTTON_UP:
+            chailove->mouse.mousereleased(event->mouseX, event->mouseY, chailove->mouse.getButtonName(event->mouseButton));
+        break;
 
-        //     const char* button;
-        //     switch (event->mouseButton) {
-        //         case PNTR_APP_MOUSE_BUTTON_LEFT: button = "left"; break;
-        //         case PNTR_APP_MOUSE_BUTTON_RIGHT: button = "right"; break;
-        //         case PNTR_APP_MOUSE_BUTTON_MIDDLE: button = "middle"; break;
-        //         case PNTR_APP_MOUSE_BUTTON_LAST:
-        //         case PNTR_APP_MOUSE_BUTTON_UNKNOWN: button = "unknown"; break;
-        //     }
-        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Mouse Button %s: %s", buttonDown, button);
+        case PNTR_APP_EVENTTYPE_MOUSE_MOVE:
+            chailove->mouse.mousemoved(event->mouseX, event->mouseY, event->mouseDeltaX, event->mouseDeltaY);
+        break;
 
-        //     if (event->type == PNTR_APP_EVENTTYPE_MOUSE_BUTTON_DOWN) {
-        //         if (event->mouseButton == PNTR_APP_MOUSE_BUTTON_LEFT) {
-        //             pntr_play_sound(appData->sound, false);
-        //         }
-        //         else if (event->mouseButton == PNTR_APP_MOUSE_BUTTON_RIGHT) {
-        //             pntr_stop_sound(appData->music);
-        //             pntr_play_sound(appData->music, true);
-        //         }
-        //     }
-        // }
-        // break;
+        case PNTR_APP_EVENTTYPE_MOUSE_WHEEL:
+            if (event->mouseWheel != 0) {
+                // TODO: Add horizontal mouse wheel to pntr
+                chailove->mouse.wheelmoved(event->mouseWheel, 0);
+            }
+        break;
 
-        // case PNTR_APP_EVENTTYPE_MOUSE_MOVE: {
-        //     //pntr_app_log_ex(PNTR_APP_LOG_INFO, "Mouse Move: (%d, %d) | (%d, %d)", event->mouseX, event->mouseY, event->mouseDeltaX, event->mouseDeltaY);
-        // }
-        // break;
+        case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_DOWN:
+            chailove->script->gamepadpressed(chailove->joystick[event->gamepad], chailove->joystick.getButtonName(event->gamepadButton));
+        break;
 
-        // case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_UP:
-        // case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_DOWN: {
-        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Gamepad: %d. Button: %d %s", event->gamepad, event->gamepadButton, event->type == PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_DOWN ? "Pressed" : "Released");
-        // }
-        // break;
-
-        // case PNTR_APP_EVENTTYPE_FILE_DROPPED: {
-        //     sprintf(message, "File Dropped: %s", event->fileDropped);
-        //     pntr_app_log(PNTR_APP_LOG_INFO, message);
-
-        //     if (appData->droppedImage != NULL) {
-        //         pntr_unload_image(appData->droppedImage);
-        //     }
-
-        //     appData->droppedImage = pntr_load_image(event->fileDropped);
-        // }
-        // break;
-
-        // default: {
-        //     pntr_app_log_ex(PNTR_APP_LOG_INFO, "Unknown event: %d", event->type);
-        // }
-        // break;
+        case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_UP:
+            chailove->script->gamepadreleased(chailove->joystick[event->gamepad], chailove->joystick.getButtonName(event->gamepadButton));
+        break;
     }
 }
 

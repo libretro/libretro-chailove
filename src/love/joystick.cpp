@@ -49,12 +49,6 @@ bool joystick::isDown(int joystick, const std::string& button) {
 	return m_joysticks[joystick]->isDown(button);
 }
 
-void joystick::update() {
-	// for (std::vector<Joystick*>::iterator it = m_joysticks.begin(); it != m_joysticks.end(); ++it) {
-	// 	(*it)->update();
-	// }
-}
-
 Joystick* joystick::operator[](int joystick) {
 	if (joystick < 0) {
 		joystick = 0;

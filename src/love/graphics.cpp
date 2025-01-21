@@ -25,13 +25,6 @@ pntr_image* graphics::getScreen() {
 }
 
 bool graphics::load() {
-	// Enable alpha blending.
-	// if (ChaiLove::getInstance()->config.options["alphablending"]) {
-	// 	if (SDL_SetAlpha(getScreen(), SDL_SRCALPHA, 0) == -1) {
-	// 		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] Enabling alpha blending failed" << std::endl;
-	// 	}
-	// }
-
 	// Set the default font.
 	graphics::setFont();
 

@@ -106,11 +106,6 @@ void ChaiLove::update() {
 	// Update and poll all the events.
 	event.update();
 
-	// Update the input systems.
-	mouse.update();
-	joystick.update();
-	keyboard.update();
-
 	// Step forward the timer, and update the game.
 	if (script != NULL) {
 		script->update(pntr_app_delta_time(app));

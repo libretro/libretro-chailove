@@ -78,33 +78,6 @@ std::string mouse::getButtonName(int button) {
 	return "unknown";
 }
 
-void mouse::update() {
-	// int16_t state, dx, dy;
-
-	// // Update the x/y coordinates.
-	// dx = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X);
-	// dy = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y);
-	// if (dx != 0 || dy != 0) {
-	// 	m_x = m_x + dx;
-	// 	m_y = m_y + dy;
-	// 	mousemoved(m_x, m_y, dx, dy);
-	// }
-
-	// // Update all buttons.
-	// for (int i = RETRO_DEVICE_ID_MOUSE_LEFT; i <= RETRO_DEVICE_ID_MOUSE_BUTTON_5; i++) {
-	// 	state = ChaiLove::input_state_cb(0, RETRO_DEVICE_MOUSE, 0, i);
-
-	// 	if (state != m_buttonState[i]) {
-	// 		m_buttonState[i] = state;
-	// 		if (m_buttonState[i] == 0) {
-	// 			mousereleased(m_x, m_y, getButtonName(i));
-	// 		} else {
-	// 			mousepressed(m_x, m_y, getButtonName(i));
-	// 		}
-	// 	}
-	// }
-}
-
 void mouse::mousemoved(int x, int y, int dx, int dy) {
 	ChaiLove::getInstance()->script->mousemoved(x, y, dx, dy);
 }
@@ -115,6 +88,10 @@ void mouse::mousepressed(int x, int y, const std::string& button) {
 
 void mouse::mousereleased(int x, int y, const std::string& button) {
 	ChaiLove::getInstance()->script->mousereleased(x, y, button);
+}
+
+void mouse::wheelmoved(int x, int y) {
+	ChaiLove::getInstance()->script->wheelmoved(x, y);
 }
 
 Point mouse::getPosition() {

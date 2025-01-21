@@ -85,6 +85,8 @@ class config {
 	 * @endcode
 	 */
 	std::map<std::string, bool> options;
+
+	bool console = false;
 };
 
 }  // namespace love
