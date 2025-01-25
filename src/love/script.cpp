@@ -109,9 +109,40 @@ std::string script::evalString(const std::string& code, const std::string& filen
 	return chai.eval<std::string>(contents, Exception_Handler(), filename);
 }
 
+void chailove_print(const std::string& message) {
+	pntr_app_log(PNTR_APP_LOG_INFO, message.c_str());
+}
+
+void chailove_dofile(const std::string& filename) {
+	ChaiLove* chailove = ChaiLove::getInstance();
+	const std::string& contents = chailove->filesystem.read(filename);
+	if (!contents.empty()) {
+		chailove->script->evalString(contents, filename);
+	}
+	else {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] dofile() script is empty: %s", filename.c_str());
+	}
+}
+
+void chailove_error(const std::string& message) {
+	pntr_app_log(PNTR_APP_LOG_ERROR, message.c_str());
+}
+
+void chailove_error_level(const std::string& message, int level) {
+	(void)level;
+	pntr_app_log(PNTR_APP_LOG_ERROR, message.c_str());
+}
+
 script::script(const std::string& file) {
 	#ifdef __HAVE_CHAISCRIPT__
 	ChaiLove* app = ChaiLove::getInstance();
+
+	// Override some of the global Lua functions
+	// https://www.lua.org/manual/5.4/manual.html#6.1
+	chai.add(fun(&chailove_print), "print");
+	chai.add(fun(&chailove_dofile), "dofile");
+	chai.add(fun(&chailove_error), "error");
+	chai.add(fun(&chailove_error_level), "error");
 
 	// ChaiScript Standard Library Additions
 	// This adds some basic type definitions to ChaiScript.

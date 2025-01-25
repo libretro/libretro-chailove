@@ -229,10 +229,18 @@ std::string graphics::getDefaultFilter() {
 
 
 int graphics::getWidth() {
-	return getScreen()->width;
+	pntr_image* screen = getScreen();
+	if (screen != NULL) {
+		return screen->width;
+	}
+	return 800;
 }
 int graphics::getHeight() {
-	return getScreen()->height;
+	pntr_image* screen = getScreen();
+	if (screen != NULL) {
+		return screen->height;
+	}
+	return 600;
 }
 
 Point graphics::getDimensions() {
