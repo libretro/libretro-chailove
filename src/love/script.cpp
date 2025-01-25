@@ -58,7 +58,7 @@ bool script::loadModule(const std::string& moduleName) {
 	// Store a filename for the module.
 	std::string filename = findModule(moduleName);
 	if (filename.empty()) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] Module %s not found.", moduleName);
+		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] Module %s not found.", moduleName.c_str());
 		return false;
 	}
 
@@ -67,7 +67,7 @@ bool script::loadModule(const std::string& moduleName) {
 
 	// Make sure it was not empty.
 	if (contents.empty()) {
-		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Module %s was loaded, but empty", filename);
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Module %s was loaded, but empty", filename.c_str());
 		return false;
 	}
 
@@ -230,7 +230,6 @@ script::script(const std::string& file) {
 	chai.add(fun(&WindowConfig::asyncblit), "asyncblit");
 	chai.add(fun(&WindowConfig::hwsurface), "hwsurface");
 	chai.add(fun(&WindowConfig::doublebuffering), "doublebuffering");
-	chai.add(fun(&WindowConfig::console), "console");
 	chai.add(user_type<ModuleConfig>(), "ModuleConfig");
 	chai.add(fun(&ModuleConfig::sound), "sound");
 	chai.add(user_type<config>(), "Config");
@@ -239,6 +238,7 @@ script::script(const std::string& file) {
 	chai.add(fun(&config::window), "window");
 	chai.add(fun(&config::modules), "modules");
 	chai.add(fun(&config::options), "options");
+	chai.add(fun(&config::console), "console");
 
 	// Joystick
 	chai.add(user_type<Joystick>(), "Joystick");
@@ -560,7 +560,7 @@ void script::conf(config& t) {
 			chaiconf(t);
 		}
 		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to invoke conf(t): %s", e.what());
+			pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] Failed to invoke conf(t): %s", e.what());
 			hasconf = false;
 		}
 	}

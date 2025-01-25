@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "config.h"
+#include "pntr_app.h"
 
 /**
  * This covers all the modules available through ChaiLove.

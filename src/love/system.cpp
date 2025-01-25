@@ -108,16 +108,16 @@ std::string system::getUsername() {
 
 bool system::execute(const std::string& command) {
 #ifdef CHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
-	LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [system] love.system.execute() is disabled." << std::endl;
+	pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] [system] love.system.execute() is disabled");
 	return false;
 #else
-	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [system] love.system.execute(\"" << command << "\")" << std::endl;
+	pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [system] love.system.execute: %s", command.c_str());
 	int result = std::system(command.c_str());
 	if (result != 0) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [system] Failed to execute " << command << std::endl;
+		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] [system] love.system.execute failed");
 		return false;
 	}
-	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [system] Finished " << command << std::endl;
+	pntr_app_log(PNTR_APP_LOG_INFO, "[ChaiLove] [system] love.system.execute finished");
 	return true;
 #endif
 }

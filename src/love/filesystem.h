@@ -38,7 +38,7 @@ class filesystem {
 	bool init(const std::string& file, const void* data, unsigned int dataSize);
 	bool unload();
 	void* openRW(const std::string& filename);
-	char* readChar(const std::string& filename);
+	unsigned char* readBuffer(const std::string& filename);
 
 	/**
 	 * Read the contents of a file.
@@ -53,7 +53,6 @@ class filesystem {
 	 * @endcode
 	 */
 	std::string read(const std::string& filename);
-	void* readBuffer(const std::string& filename, int& size);
 
 	/**
 	 * Check whether a file or directory exists.

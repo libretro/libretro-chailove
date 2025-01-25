@@ -12,8 +12,14 @@ using love::Types::Graphics::Point;
 
 namespace love {
 
-bool window::load(const config& conf) {
-	ChaiLove* app = ChaiLove::getInstance();
+bool window::load(pntr_app* app, const config& conf) {
+	m_app = app;
+
+	// Title
+	setTitle(conf.window.title.c_str());
+
+	// Size
+	pntr_app_set_size(app, conf.window.width, conf.window.height);
 
 	// // Initialize SDL.
 	// if (SDL_Init(SDL_INIT_VIDEO) == -1) {
@@ -73,11 +79,11 @@ bool window::unload() {
 }
 
 std::string window::getTitle() {
-	return pntr_app_title(ChaiLove::getInstance()->app);
+	return pntr_app_title(m_app);
 }
 
 window& window::setTitle(const std::string& title) {
-	pntr_app_set_title(ChaiLove::getInstance()->app, title.c_str());
+	pntr_app_set_title(m_app, title.c_str());
 	return *this;
 }
 

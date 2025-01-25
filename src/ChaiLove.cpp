@@ -86,7 +86,7 @@ bool ChaiLove::load(const std::string& file, const void* data, unsigned int data
 	system.load(config);
 
 	// Load up the window dimensions.
-	window.load(config);
+	window.load(app, config);
 
 	graphics.load();
 	image.load();
@@ -134,15 +134,6 @@ void ChaiLove::draw() {
 	if (script != NULL) {
 		script->draw();
 	}
-
-	// Render the in-game console.
-	//console.draw();
-
-	// Flip the buffer.
-	// if (SDL_Flip(screen) == -1) {
-	// 	std::string out("[ChaiLove] Failed to swap the buffers: ");
-	// 	LibretroLog::log(RETRO_LOG_ERROR) << out << SDL_GetError() << std::endl;
-	// }
 }
 
 /**

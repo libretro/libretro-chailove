@@ -121,11 +121,11 @@ PHYSFS_sint64 filesystem::getSize(PHYSFS_File* file) {
 	if (file) {
 		size = PHYSFS_fileLength(file);
 		if (size < 0) {
-			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Could not get size of file " << getLastError() << std::endl;
+			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Could not get size of file %s", getLastError().c_str());
 			return -1;
 		}
 	} else {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] The file is not currently open." << std::endl;
+		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] The file is not currently open");
 	}
 	return size;
 }
@@ -138,7 +138,7 @@ void* filesystem::openRW(const std::string& filename) {
 	unsigned int size;
 	void* data = pntr_load_file(filename.c_str(), &size);
 	if (data == NULL) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error loading file " << filename << getLastError() << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Could not get size of file %s: %s", filename.c_str(), getLastError().c_str());
 	}
 	return data;
 }
@@ -146,80 +146,25 @@ void* filesystem::openRW(const std::string& filename) {
 PHYSFS_file* filesystem::openFile(const std::string& filename) {
 	PHYSFS_file* myfile = PHYSFS_openRead(filename.c_str());
 	if (myfile == NULL) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error opening file " << filename << getLastError() << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error opening file %s: %s", filename.c_str(), getLastError().c_str());
 		return NULL;
 	}
 	return myfile;
 }
 
-char* filesystem::readChar(const std::string& filename) {
-	char* output = NULL;
-	PHYSFS_file* myfile = openFile(filename);
-	if (myfile == NULL) {
-		return NULL;
-	}
-
-	PHYSFS_sint64 file_size = getSize(myfile);
-	if (file_size > 0) {
-		output = new char[file_size + 1];
-		int length_read = PHYSFS_readBytes(myfile, output, file_size);
-		if (length_read != file_size) {
-			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] File System error while reading from file " << filename << getLastError() << std::endl;
-			output = NULL;
-		} else {
-			// Make sure there is a null terminating character at the end of the string.
-			output[file_size] = '\0';
-		}
-	} else {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error getting filesize of " << filename << getLastError() << std::endl;
-	}
-
-	PHYSFS_close(myfile);
-	return output;
+unsigned char* filesystem::readBuffer(const std::string& filename) {
+	return pntr_load_file(filename.c_str(), NULL);
 }
 
 std::string filesystem::read(const std::string& filename) {
 	// Retrieve a character buffer.
-	char* myBuf = readChar(filename);
-	std::string output;
+	const char* myBuf = pntr_load_file_text(filename.c_str());
+	std::string output = "";
 	if (myBuf != NULL) {
 		output = std::string(myBuf);
+		pntr_unload_file_text(myBuf);
 	}
 	return output;
-}
-
-void* filesystem::readBuffer(const std::string& filename, int& size) {
-	PHYSFS_file* file = openFile(filename);
-	if (file == NULL) {
-		return NULL;
-	}
-
-	// Find the file size.
-	size = getSize(file);
-	if (size <= 0) {
-		PHYSFS_close(file);
-		return NULL;
-	}
-
-	// Create the buffer.
-	void* buffer = (void*)malloc(size + 1);
-	if (!buffer) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Failed to allocate buffer of size " << size + 1 << "." << std::endl;
-		PHYSFS_close(file);
-		return NULL;
-	}
-
-	// Read the file into the buffer.
-	int result = PHYSFS_readBytes(file, buffer, size);
-	if (result < 0) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Failed to load SoundData " << filename << getLastError() << std::endl;
-		free(buffer);
-		PHYSFS_close(file);
-		return NULL;
-	}
-
-	PHYSFS_close(file);
-	return buffer;
 }
 
 bool filesystem::unmount(const std::string& archive) {
@@ -259,7 +204,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	// Protect against empty archive/mount points.
 	int append = appendToPath ? 1 : 0;
 	if (archive.length() <= 0) {
-	        LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [filesystem] Mounting failed because archive was empty." << std::endl;
+		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Mounting failed because archive was empty");
 		return false;
 	}
 
@@ -277,18 +222,18 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	}
 
 	// See if we're mounting a file.
-	if (isFile(archive)) {
-		// Mount using a handle instead, since we're doing another archive.
-		PHYSFS_File* file = openFile(archive);
-		if (file != NULL) {
-			if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), append) == 0) {
-				LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
-				return false;
-			}
-			return true;
-		}
-		return false;
-	}
+	// if (isFile(archive)) {
+	// 	// Mount using a handle instead, since we're doing another archive.
+	// 	PHYSFS_File* file = openFile(archive);
+	// 	if (file != NULL) {
+	// 		if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), append) == 0) {
+	// 			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
+	// 			return false;
+	// 		}
+	// 		return true;
+	// 	}
+	// 	return false;
+	// }
 
 	// Check if we're mounting a directory.
 	int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);

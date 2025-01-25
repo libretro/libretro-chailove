@@ -1,6 +1,9 @@
 #include <string>
 #include <iostream> // TODO: Remove this
 
+void libretro_chailove_pntr_set_error(int error);
+#define PNTR_SET_ERROR libretro_chailove_pntr_set_error
+
 #define PNTR_PHYSFS_IMPLEMENTATION
 #include "pntr_physfs.h"
 
@@ -15,6 +18,32 @@
 #include "LibretroLog.h"
 
 #include "ChaiLove.h"
+
+void libretro_chailove_pntr_set_error(int error) {
+    switch (error) {
+        case PNTR_ERROR_NONE:
+            // No error
+            break;
+        case PNTR_ERROR_INVALID_ARGS:
+            pntr_app_log(PNTR_APP_LOG_ERROR, "[pntr] Invalid args passed");
+            break;
+        case PNTR_ERROR_NO_MEMORY:
+            pntr_app_log(PNTR_APP_LOG_ERROR, "[pntr] No memory available");
+            break;
+        case PNTR_ERROR_NOT_SUPPORTED:
+            pntr_app_log(PNTR_APP_LOG_ERROR, "[pntr] Not supported");
+            break;
+        case PNTR_ERROR_FAILED_TO_OPEN:
+            pntr_app_log(PNTR_APP_LOG_ERROR, "[pntr] Failed to open");
+            break;
+        case PNTR_ERROR_FAILED_TO_WRITE:
+            pntr_app_log(PNTR_APP_LOG_ERROR, "[pntr] Failed to write");
+            break;
+        default:
+            pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[pntr] Unknown error: %d", (int)error);
+            break;
+    }
+}
 
 bool Init(pntr_app* app) {
     ChaiLove::environ_cb = pntr_app_libretro_environ_cb(app);

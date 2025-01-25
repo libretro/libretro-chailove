@@ -1,7 +1,9 @@
+#include <string>
+
 #include "Image.h"
 #include "pntr.h"
+#include "pntr_app.h"
 
-#include <string>
 #include "../../../ChaiLove.h"
 
 namespace love {
@@ -21,11 +23,7 @@ bool Image::loadFromRW(const unsigned char* data, unsigned int size) {
 
 	if (!loaded()) {
 		const char* errorChar = pntr_get_error();
-		std::string errString("");
-		if (errorChar != NULL) {
-			errString = errorChar;
-		}
-		LibretroLog::log(RETRO_LOG_ERROR) << "STBIMG_Load_RW failed to load data: " << errString << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] Error loading image: %s", errorChar);
 		return false;
 	}
 
@@ -46,6 +44,10 @@ Image::~Image() {
 
 Image::Image(const std::string& filename) {
 	surface = pntr_load_image(filename.c_str());
+
+	if (surface == NULL) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] Failed to load image: %s", filename.c_str());
+	}
 }
 
 int Image::getWidth() {
