@@ -129,7 +129,7 @@ int joystick::getButtonKey(const std::string& name) {
 	if (name == "left" || name == "dpleft") {
 		return PNTR_APP_GAMEPAD_BUTTON_LEFT;
 	}
-	if (name == "right" || name == "dpriht") {
+	if (name == "right" || name == "dpright") {
 		return PNTR_APP_GAMEPAD_BUTTON_RIGHT;
 	}
 	return -1;
