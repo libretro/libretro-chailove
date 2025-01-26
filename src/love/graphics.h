@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "pntr_app.h"
+#include "config.h"
 #include "Types/Graphics/Image.h"
 #include "Types/Graphics/Quad.h"
 #include "Types/Graphics/Font.h"
@@ -24,7 +25,7 @@ namespace love {
 class graphics {
 	public:
 	graphics();
-	bool load();
+	bool load(pntr_app* app);
 
 	/**
 	 * Draws a rectangle.
@@ -108,12 +109,21 @@ class graphics {
 	 * Creates a new TrueType font, with the given font size.
 	 *
 	 * @param filename (default) The path to the TrueType .ttf font. When not provided, will return the default font.
-	 * @param size (12) The size of the font to create.
+	 * @param size (16) The size of the font to create.
 	 *
 	 * @return The created TrueType font.
 	 */
 	Font* newFont(const std::string& filename, int size);
 	Font* newFont(const std::string& filename);
+
+	/**
+	 * Creates a new pixel font at the given size.
+	 *
+	 * @param size (8) The size of the font to create.
+	 *
+	 * @return The created Pixel font.
+	 */
+	Font* newFont(int size);
 	Font* newFont();
 
 	/**
@@ -308,6 +318,8 @@ class graphics {
 	Font defaultFont;
 
 	int m_smooth = 1;
+
+	pntr_app* m_app = NULL;
 };
 
 }  // namespace love

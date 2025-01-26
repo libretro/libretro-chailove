@@ -303,6 +303,7 @@ script::script(const std::string& file) {
 	chai.add(fun<Font*, graphics, const std::string&, int>(&graphics::newFont), "newFont");
 	chai.add(fun<Font*, graphics, const std::string&>(&graphics::newFont), "newFont");
 	chai.add(fun<Font*, graphics, const std::string&, int, int, const std::string&>(&graphics::newFont), "newFont");
+	chai.add(fun<Font*, graphics, int>(&graphics::newFont), "newFont");
 	chai.add(fun<Font*, graphics>(&graphics::newFont), "newFont");
 	chai.add(fun<love::graphics&, graphics, Font*>(&graphics::setFont), "setFont");
 	chai.add(fun<love::graphics&, graphics>(&graphics::setFont), "setFont");

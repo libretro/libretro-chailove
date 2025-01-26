@@ -12,6 +12,16 @@ Font::Font() {
 	font = pntr_load_font_default();
 }
 
+Font::Font(int size) {
+	font = pntr_load_font_default();
+	if (font != NULL) {
+		float scale = (float)size / 8.0f;
+		pntr_font* newFont = pntr_font_scale(font, scale, scale, PNTR_FILTER_NEARESTNEIGHBOR);
+		pntr_unload_font(font);
+		font = newFont;
+	}
+}
+
 Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
 	font = pntr_load_font_tty(filename.c_str(), glyphWidth, glyphHeight, letters.c_str());
 }

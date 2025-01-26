@@ -88,7 +88,7 @@ bool ChaiLove::load(const std::string& file, const void* data, unsigned int data
 	// Load up the window dimensions.
 	window.load(app, config);
 
-	graphics.load();
+	graphics.load(app);
 	image.load();
 	keyboard.load();
 	joystick.load(app);

@@ -18,19 +18,21 @@ graphics::graphics() {
 }
 
 pntr_image* graphics::getScreen() {
-	if (ChaiLove::hasInstance()) {
-		return ChaiLove::getInstance()->screen;
+	if (m_app != NULL) {
+		return m_app->screen;
 	}
 	return NULL;
 }
 
-bool graphics::load() {
+bool graphics::load(pntr_app* app) {
 	// Set the default font.
 	graphics::setFont();
 
 	// Match the default colors of Love2D
 	color_back = pntr_new_color(0, 0, 0, 255); // Black
 	color_front = pntr_new_color(255, 255, 255, 255); // White
+
+	m_app = app;
 
 	return true;
 }
@@ -229,18 +231,10 @@ std::string graphics::getDefaultFilter() {
 
 
 int graphics::getWidth() {
-	pntr_image* screen = getScreen();
-	if (screen != NULL) {
-		return screen->width;
-	}
-	return 800;
+	return pntr_app_width(m_app);
 }
 int graphics::getHeight() {
-	pntr_image* screen = getScreen();
-	if (screen != NULL) {
-		return screen->height;
-	}
-	return 600;
+	return pntr_app_height(m_app);
 }
 
 Point graphics::getDimensions() {
@@ -278,23 +272,59 @@ graphics& graphics::ellipse(const std::string& drawmode, int x, int y, int radiu
 }
 
 Font* graphics::newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-	return new Font(filename, glyphWidth, glyphHeight, letters);
+	Font* font = new Font(filename, glyphWidth, glyphHeight, letters);
+	if (font->loaded()) {
+		return font;
+	}
+
+	delete font;
+	return NULL;
 }
 
 Font* graphics::newFont(const std::string& filename, int size) {
-	return new Font(filename, size);
+	Font* font = new Font(filename, size);
+	if (font->loaded()) {
+		return font;
+	}
+
+	delete font;
+	return NULL;
 }
 
 Font* graphics::newFont(const std::string& filename) {
-	return new Font(filename, 12);
+	Font* font = new Font(filename, 16);
+	if (font->loaded()) {
+		return font;
+	}
+
+	delete font;
+	return NULL;
 }
 
 Font* graphics::newFont() {
-	return new Font();
+	Font* font = new Font();
+	if (font->loaded()) {
+		return font;
+	}
+
+	delete font;
+	return NULL;
+}
+
+Font* graphics::newFont(int size) {
+	Font* font = new Font(size);
+	if (font->loaded()) {
+		return font;
+	}
+
+	delete font;
+	return NULL;
 }
 
 graphics& graphics::setFont(Font* font) {
-	activeFont = font;
+	if (font != NULL) {
+		activeFont = font;
+	}
 	return *this;
 }
 

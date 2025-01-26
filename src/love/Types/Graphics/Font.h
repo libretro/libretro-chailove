@@ -16,6 +16,7 @@ namespace Graphics {
 class Font {
 	public:
 	Font();
+	Font(int size);
 	Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters);
 	Font(const std::string& filename, int ptsize);
 	~Font();

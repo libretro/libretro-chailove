@@ -144,8 +144,8 @@ pntr_app Main(int argc, char* argv[]) {
     (void)argc;
     (void)argv;
     return (pntr_app) {
-        .width = 640,
-        .height = 480,
+        .width = 800,
+        .height = 600,
         .title = "ChaiLove",
         .init = Init,
         .update = Update,
