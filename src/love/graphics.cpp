@@ -120,21 +120,31 @@ graphics& graphics::draw(Image* image, Quad quad, int x, int y) {
 }
 
 graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy) {
-	if (image && image->loaded()) {
-		// TODO: Implement rotozoomSurfaceXY
+	if (image == NULL) {
+		return *this;
+	}
 
-		// ChaiLove* app = ChaiLove::getInstance();
-		// float angle = app->math.degrees(r);
-		// SDL_Surface* tempSurface = rotozoomSurfaceXY(image->surface, angle, sx, sy, m_smooth);
-		// if (tempSurface) {
-		// 	float aspectX = ox / image->getWidth();
-		// 	float aspectY = oy / image->getHeight();
-		// 	SDL_Rect dstrect;
-		// 	dstrect.x = x - aspectX * tempSurface->w;
-		// 	dstrect.y = y - aspectY * tempSurface->h;
-		// 	SDL_BlitSurface(tempSurface, NULL, getScreen(), &dstrect);
-		// 	SDL_FreeSurface(tempSurface);
-		// }
+	if (!image->loaded()) {
+		return *this;
+	}
+
+	// TODO: Implement proper rotozoomSurfaceXY
+	if (r == 0.0f) {
+		pntr_draw_image_scaled(getScreen(), image->surface, x, y, sx, sy, ox, oy, m_smooth);
+		return *this;
+	}
+
+	if (sx == 1.0f && sy == 1.0f) {
+		ChaiLove* chailove = ChaiLove::getInstance();
+		pntr_draw_image_rotated(getScreen(), image->surface, x, y, chailove->math.degrees(r), ox, oy, m_smooth);
+		return *this;
+	}
+
+	pntr_image* scaled = pntr_image_scale(image->surface, sx, sy, m_smooth);
+	if (scaled != NULL) {
+		ChaiLove* chailove = ChaiLove::getInstance();
+		pntr_draw_image_rotated(getScreen(), scaled, x, y, chailove->math.degrees(r), ox, oy, m_smooth);
+		pntr_unload_image(scaled);
 	}
 
 	return *this;

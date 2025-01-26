@@ -317,7 +317,7 @@ class graphics {
 	Font* activeFont = NULL;
 	Font defaultFont;
 
-	int m_smooth = 1;
+	pntr_filter m_smooth = PNTR_FILTER_BILINEAR;
 
 	pntr_app* m_app = NULL;
 };
