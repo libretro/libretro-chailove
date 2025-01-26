@@ -54,6 +54,21 @@ SoundData& SoundData::setLooping(bool looping) {
 	return *this;
 }
 
+SoundData& SoundData::setVolume(float volume) {
+	// TODO: Add set volume
+	return *this;
+}
+
+float SoundData::getVolume() {
+	// TODO: Add get volume
+	return 1.0f;
+}
+
+bool SoundData::isPlaying() {
+	// TODO: Add Is Playing
+	return false;
+}
+
 }  // namespace Audio
 }  // namespace Types
 }  // namespace love

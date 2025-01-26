@@ -45,6 +45,11 @@ class SoundData {
 	 */
 	SoundData& setLooping(bool loop);
 
+	SoundData& setVolume(float volume);
+	float getVolume();
+
+	bool isPlaying();
+
 	pntr_sound* m_sound;
 	bool m_loop;
 };
