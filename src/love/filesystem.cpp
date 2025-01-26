@@ -168,10 +168,10 @@ std::string filesystem::read(const std::string& filename) {
 }
 
 bool filesystem::unmount(const std::string& archive) {
-	LibretroLog::log(RETRO_LOG_INFO) << "[filesystem] Unmounting " << archive << std::endl;
+	pntr_app_log_ex(PNTR_APP_LOG_INFO, "[filesystem] Unmounting %s", archive.c_str());
 	int returnValue = PHYSFS_unmount(archive.c_str());
 	if (returnValue == 0) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error unmounting: " << getLastError() << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error unmounting: %s", getLastError().c_str());
 		return false;
 	}
 	return true;
@@ -209,13 +209,13 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	}
 
 	// Display a message.
-	LibretroLog::log(RETRO_LOG_INFO) << "[ChaiLove] [filesystem] Mounting " << archive << " as " << mountpoint << std::endl;
+	pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [filesystem] Mounting: %s as %s", archive.c_str(), mountpoint.c_str());
 
 	// Use the simple mount method if we're mounting the root directory.
 	if (mountpoint == "/") {
 		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 		if (returnValue == 0) {
-			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting /: " << getLastError() << std::endl;
+			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error mounting '/': ", getLastError().c_str());
 			return false;
 		}
 		return true;
@@ -238,7 +238,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	// Check if we're mounting a directory.
 	int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 	if (returnVal == 0) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting directory: " << getLastError() << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error mounting directory: %s", getLastError().c_str());
 		return false;
 	}
 	return true;
@@ -262,7 +262,7 @@ std::vector<std::string> filesystem::getDirectoryItems(const std::string& dir) {
 		}
 		PHYSFS_freeList(rc);
 	} else {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error enumerating files from " << dir << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error enumerating files from %s", dir.c_str());
 	}
 
 	return result;
@@ -358,7 +358,7 @@ std::string filesystem::getSaveDirectory() {
 bool filesystem::createDirectory(const std::string& name) {
 	int ret = PHYSFS_mkdir(name.c_str());
 	if (ret == 0) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Failed to create directory: " << getLastError() << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Failed to create directory: %s", getLastError().c_str());
 		return false;
 	}
 	return true;
@@ -367,7 +367,7 @@ bool filesystem::createDirectory(const std::string& name) {
 bool filesystem::write(const std::string& name, const std::string& data) {
 	PHYSFS_File* file = PHYSFS_openWrite(name.c_str());
 	if (file == NULL) {
-		LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error opening file for writing: " << getLastError() << std::endl;
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error opening file for writing: %s", getLastError().c_str());
 		return false;
 	}
 	const char* buffer = data.c_str();

@@ -1,7 +1,6 @@
 #include <libretro.h>
 #include <string>
 #include "ChaiLove.h"
-#include "LibretroLog.h"
 #include "pntr_app.h"
 
 ChaiLove* ChaiLove::m_instance = NULL;

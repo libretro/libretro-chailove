@@ -15,8 +15,6 @@ void libretro_chailove_pntr_set_error(int error);
 #define PNTR_NO_SAVE_IMAGE
 #include "pntr_app.h"
 
-#include "LibretroLog.h"
-
 #include "ChaiLove.h"
 
 void libretro_chailove_pntr_set_error(int error) {
@@ -153,26 +151,4 @@ pntr_app Main(int argc, char* argv[]) {
         .event = Event,
         .fps = 0,
     };
-}
-
-int LibretroLog::LoggerBuf::sync() {
-	const std::string &s = str();
-	if (!s.empty()) {
-		if (s[s.length() - 1] == '\n')
-			log_cb(level, "%s", s.c_str());
-		else
-			log_cb(level, "%s\n", s.c_str());
-	}
-	str() = "";
-	return 0;
-}
-
-std::ostream &LibretroLog::log(enum retro_log_level level) {
-	static LibretroLog::LoggerBuf *bufs[RETRO_LOG_ERROR + 1] = {0};
-	static std::ostream *streams[RETRO_LOG_ERROR + 1] = {0};
-	if (!bufs[level]) {
-		bufs[level] = new LibretroLog::LoggerBuf(level);
-		streams[level] = new std::ostream(bufs[level]);
-	}
-	return *streams[level];
 }
