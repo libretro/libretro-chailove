@@ -44,8 +44,6 @@ class Joystick {
 	 */
 	bool isDown(const std::string& button);
 
-	void update();
-
 	/**
 	 * Gets whether the Joystick is connected.
 	 *

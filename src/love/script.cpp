@@ -505,6 +505,23 @@ script::script(const std::string& file) {
 		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] gamepadreleased() %s", e.what());
 		hasgamepadreleased = false;
 	}
+
+	try {
+		chaijoystickpressed = chai.eval<std::function<void(Joystick*, int)> >("joystickpressed");
+	}
+	catch (const std::exception& e) {
+		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] joystickpressed() %s", e.what());
+		hasjoystickpressed = false;
+	}
+
+	try {
+		chaijoystickreleased = chai.eval<std::function<void(Joystick*, int)> >("joystickreleased");
+	}
+	catch (const std::exception& e) {
+		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] joystickreleased() %s", e.what());
+		hasjoystickreleased = false;
+	}
+
 	try {
 		chaimousepressed = chai.eval<std::function<void(int, int, const std::string&)> >("mousepressed");
 	}
@@ -680,6 +697,34 @@ void script::gamepadreleased(Joystick* joystick, const std::string& button) {
 		catch (const std::exception& e) {
 			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call gamepadreleased(): %s", e.what());
 			hasgamepadreleased = false;
+		}
+	}
+	#endif
+}
+
+void script::joystickpressed(Joystick* joystick, int button) {
+	#ifdef __HAVE_CHAISCRIPT__
+	if (hasjoystickpressed) {
+		try {
+			chaijoystickpressed(joystick, button);
+		}
+		catch (const std::exception& e) {
+			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call joystickpressed(): %s", e.what());
+			hasjoystickpressed = false;
+		}
+	}
+	#endif
+}
+
+void script::joystickreleased(Joystick* joystick, int button) {
+	#ifdef __HAVE_CHAISCRIPT__
+	if (hasjoystickreleased) {
+		try {
+			chaijoystickreleased(joystick, button);
+		}
+		catch (const std::exception& e) {
+			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call joystickreleased(): %s", e.what());
+			hasjoystickreleased = false;
 		}
 	}
 	#endif

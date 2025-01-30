@@ -210,6 +210,26 @@ class script {
 	void gamepadreleased(Joystick* joystick, const std::string& button);
 
 	/**
+	 * Called when a joystick button is pressed.
+	 *
+	 * @param joystick The joystick object.
+	 * @param button The number representing the button that was released.
+	 *
+	 * @see joystickreleased
+	 */
+	void joystickpressed(Joystick* joystick, int button);
+
+	/**
+	 * Called when a joystick button is released.
+	 *
+	 * @param joystick The joystick object.
+	 * @param button The number representing the button that was pushed.
+	 *
+	 * @see joystickpressed
+	 */
+	void joystickreleased(Joystick* joystick, int button);
+
+	/**
 	 * Called when a mouse button is pressed.
 	 *
 	 * @param x The mouse position on the x-axis.
@@ -448,6 +468,8 @@ class script {
 	std::function<std::string()> chaisavestate;
 	std::function<void(Joystick*, const std::string&)> chaigamepadpressed;
 	std::function<void(Joystick*, const std::string&)> chaigamepadreleased;
+	std::function<void(Joystick*, int)> chaijoystickpressed;
+	std::function<void(Joystick*, int)> chaijoystickreleased;
 	std::function<void(int, int, const std::string&)> chaimousepressed;
 	std::function<void(int, int, const std::string&)> chaimousereleased;
 	std::function<void(int, int, int, int)> chaimousemoved;
@@ -458,6 +480,8 @@ class script {
 	bool hasDraw = true;
 	bool hasgamepadpressed = true;
 	bool hasgamepadreleased = true;
+	bool hasjoystickreleased = true;
+	bool hasjoystickpressed = true;
 	bool hasmousepressed = true;
 	bool hasmousereleased = true;
 	bool hasmousemoved = true;

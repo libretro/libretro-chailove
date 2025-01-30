@@ -105,10 +105,12 @@ void Event(pntr_app* app, pntr_app_event* event) {
 
         case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_DOWN:
             chailove->script->gamepadpressed(chailove->joystick[event->gamepad], chailove->joystick.getButtonName(event->gamepadButton));
+            chailove->script->joystickpressed(chailove->joystick[event->gamepad], event->gamepadButton);
         break;
 
         case PNTR_APP_EVENTTYPE_GAMEPAD_BUTTON_UP:
             chailove->script->gamepadreleased(chailove->joystick[event->gamepad], chailove->joystick.getButtonName(event->gamepadButton));
+            chailove->script->joystickreleased(chailove->joystick[event->gamepad], event->gamepadButton);
         break;
     }
 }

@@ -50,11 +50,10 @@ bool joystick::isDown(int joystick, const std::string& button) {
 }
 
 Joystick* joystick::operator[](int joystick) {
-	if (joystick < 0) {
-		joystick = 0;
-	} else if (joystick >= getJoystickCount()) {
-		joystick = getJoystickCount() - 1;
+	if (joystick < 0 || joystick >= getJoystickCount()) {
+		return NULL;
 	}
+
 	return m_joysticks[joystick];
 }
 
