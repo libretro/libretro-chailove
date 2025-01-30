@@ -15,7 +15,6 @@ FLAGS += -Wfatal-errors
 FLAGS += -I$(CORE_DIR)/vendor/pntr
 FLAGS += -I$(CORE_DIR)/vendor/pntr_app/include
 FLAGS += \
-	-DPNTR_CUTE_PNG \
 	-DPNTR_ENABLE_VARGS
 
 # pntr_physfs
