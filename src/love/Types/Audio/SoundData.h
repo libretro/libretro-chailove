@@ -50,8 +50,9 @@ class SoundData {
 
 	bool isPlaying();
 
-	pntr_sound* m_sound;
-	bool m_loop;
+	pntr_sound* m_sound = NULL;
+	bool m_loop = false;
+	float m_volume = 1.0f;
 };
 
 }  // namespace Audio

@@ -55,18 +55,23 @@ SoundData& SoundData::setLooping(bool looping) {
 }
 
 SoundData& SoundData::setVolume(float volume) {
-	// TODO: Add set volume
+	if (volume < 0.0f) {
+		volume = 0.0f;
+	}
+	else if (volume >= 1.0f) {
+		volume = 1.0f;
+	}
+	m_volume = volume;
+	pntr_set_volume(m_sound, m_volume);
 	return *this;
 }
 
 float SoundData::getVolume() {
-	// TODO: Add get volume
-	return 1.0f;
+	return m_volume;
 }
 
 bool SoundData::isPlaying() {
-	// TODO: Add Is Playing
-	return false;
+	return pntr_sound_playing(m_sound);
 }
 
 }  // namespace Audio
