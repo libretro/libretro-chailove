@@ -238,7 +238,7 @@ script::script(const std::string& file) {
 	// SoundData Object.
 	chai.add(user_type<SoundData>(), "SoundData");
 	chai.add(fun(&SoundData::isLooping), "isLooping");
-	//chai.add(fun(&SoundData::isPlaying), "isPlaying");
+	chai.add(fun(&SoundData::isPlaying), "isPlaying");
 	chai.add(fun(&SoundData::setLooping), "setLooping");
 	chai.add(fun(&SoundData::stop), "stop");
 	chai.add(fun(&SoundData::play), "play");

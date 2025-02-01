@@ -35,9 +35,7 @@ bool SoundData::play() {
 }
 
 bool SoundData::stop() {
-	if (isLoaded()) {
-		pntr_stop_sound(m_sound);
-	}
+	pntr_stop_sound(m_sound);
 	return true;
 }
 
