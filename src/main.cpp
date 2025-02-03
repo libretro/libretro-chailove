@@ -112,6 +112,31 @@ void Event(pntr_app* app, pntr_app_event* event) {
             chailove->script->gamepadreleased(chailove->joystick[event->gamepad], chailove->joystick.getButtonName(event->gamepadButton));
             chailove->script->joystickreleased(chailove->joystick[event->gamepad], event->gamepadButton);
         break;
+
+        case PNTR_APP_EVENTTYPE_LOAD: {
+            // Create a string stream from the data.
+            std::stringstream ss(std::string(
+                reinterpret_cast<const char*>(event->save),
+                reinterpret_cast<const char*>(event->save) + event->save_size));
+
+            // Port the string stream to a straight string.
+            std::string loadData = ss.str();
+
+            // Finally, load the string.
+            chailove->loadstate(loadData);
+        }
+        break;
+
+        case PNTR_APP_EVENTTYPE_SAVE: {
+            // Ask ChaiLove for save data.
+            std::string state = chailove->savestate();
+            if (state.empty()) {
+                return;
+            }
+
+            // Save the information to the state data.
+            std::copy(state.begin(), state.end(), (char*)event->save);
+        }
     }
 }
 

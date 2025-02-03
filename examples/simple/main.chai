@@ -20,3 +20,17 @@ def update(delta) {
 	x += delta * 60.0f
 	y += delta * 30.0f
 }
+
+def loadstate(data) {
+	var info = from_json(data)
+	x = info["x"]
+	y = info["y"]
+	return true
+}
+
+def savestate() {
+    return to_json([
+        "x": x,
+		"y": y
+    ])
+}
