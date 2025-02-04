@@ -12,9 +12,9 @@ namespace Graphics {
  */
 struct Color {
 	/**
-	 * Create a color with the value of 0, 0, 0, 0.
+	 * Create a color with the value of 0, 0, 0, 255.
 	 */
-	Color() : r(0), g(0), b(0), a(0) {
+	Color() : r(0), g(0), b(0), a(255) {
 		// Nothing.
 	}
 
@@ -28,7 +28,7 @@ struct Color {
 	/**
 	 * Create a new color.
 	 */
-	Color(int rValue, int gValue, int bValue) : r(rValue), g(gValue), b(bValue) {
+	Color(int rValue, int gValue, int bValue) : r(rValue), g(gValue), b(bValue), a(255) {
 		// Nothing.
 	}
 

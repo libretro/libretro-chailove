@@ -12,7 +12,7 @@ class love_audio_play {
 	}
 
 	def update(delta) {
-		if (love.keyboard.isDown("x")) {
+		if (love.keyboard.isDown("x") || love.joystick[0].isDown("a")) {
 			love.audio.play(this.chailovesound)
 		}
 	}

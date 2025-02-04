@@ -221,14 +221,14 @@ script::script(const std::string& file) {
 	chai.add(constructor<FileData(const std::string&)>(), "FileData");
 
 	// Color Object.
-	// chai.add(user_type<Color>(), "Color");
-	// chai.add(fun(&Color::r), "r");
-	// chai.add(fun(&Color::g), "g");
-	// chai.add(fun(&Color::b), "b");
-	// chai.add(fun(&Color::a), "a");
-	// chai.add(constructor<Color()>(), "Color");
-	// chai.add(constructor<Color(int, int, int)>(), "Color");
-	// chai.add(constructor<Color(int, int, int, int)>(), "Color");
+	chai.add(user_type<Color>(), "Color");
+	chai.add(fun(&Color::r), "r");
+	chai.add(fun(&Color::g), "g");
+	chai.add(fun(&Color::b), "b");
+	chai.add(fun(&Color::a), "a");
+	chai.add(constructor<Color()>(), "Color");
+	chai.add(constructor<Color(int, int, int)>(), "Color");
+	chai.add(constructor<Color(int, int, int, int)>(), "Color");
 
 	// Image Object.
 	chai.add(user_type<Image>(), "Image");
