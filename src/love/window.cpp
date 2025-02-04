@@ -16,7 +16,7 @@ bool window::load(pntr_app* app, const config& conf) {
 	m_app = app;
 
 	// Title
-	setTitle(conf.window.title.c_str());
+	setTitle(conf.window.title);
 
 	// Size
 	pntr_app_set_size(app, conf.window.width, conf.window.height);
@@ -79,11 +79,14 @@ bool window::unload() {
 }
 
 std::string window::getTitle() {
-	return pntr_app_title(m_app);
+	return m_title;
 }
 
 window& window::setTitle(const std::string& title) {
-	pntr_app_set_title(m_app, title.c_str());
+	if (m_app != NULL) {
+		pntr_app_set_title(m_app, title.c_str());
+	}
+	m_title = title;
 	return *this;
 }
 

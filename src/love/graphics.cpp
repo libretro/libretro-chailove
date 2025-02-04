@@ -120,30 +120,32 @@ graphics& graphics::draw(Image* image, Quad quad, int x, int y) {
 }
 
 graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy, float ox, float oy) {
-	if (image == NULL) {
+	if (image == NULL || !image->loaded()) {
 		return *this;
 	}
 
-	if (!image->loaded()) {
-		return *this;
-	}
-
-	// TODO: Implement proper rotozoomSurfaceXY
+	// Scaled.
 	if (r == 0.0f) {
 		pntr_draw_image_scaled(getScreen(), image->surface, x, y, sx, sy, ox, oy, m_smooth);
 		return *this;
 	}
 
+	// Just rotated
+	float degrees = chailove->math.degrees(r);
 	if (sx == 1.0f && sy == 1.0f) {
 		ChaiLove* chailove = ChaiLove::getInstance();
-		pntr_draw_image_rotated(getScreen(), image->surface, x, y, chailove->math.degrees(r), ox, oy, m_smooth);
+		pntr_draw_image_rotated(getScreen(), image->surface, x, y, degrees, ox, oy, m_smooth);
 		return *this;
 	}
 
+	// Rotate scaled
+	// TODO: Implement proper rotozoomSurfaceXY
 	pntr_image* scaled = pntr_image_scale(image->surface, sx, sy, m_smooth);
 	if (scaled != NULL) {
 		ChaiLove* chailove = ChaiLove::getInstance();
-		pntr_draw_image_rotated(getScreen(), scaled, x, y, chailove->math.degrees(r), ox, oy, m_smooth);
+		float newox = ox / (float)image->getWidth() * (float)scaled->width;
+		float newoy = oy / (float)image->getHeight() * (float)scaled->height;
+		pntr_draw_image_rotated(getScreen(), scaled, x, y, degrees, newox, newoy, m_smooth);
 		pntr_unload_image(scaled);
 	}
 
@@ -165,9 +167,9 @@ graphics& graphics::draw(Image* image, int x, int y, float r, float sx) {
 graphics& graphics::draw(Image* image, int x, int y, float r) {
 	if (r == 0.0f) {
 		return draw(image, x, y);
-	} else {
-		return draw(image, x, y, r, 1.0f, 1.0f, 0.0f, 0.0f);
 	}
+
+	return draw(image, x, y, r, 1.0f, 1.0f, 0.0f, 0.0f);
 }
 
 Image* graphics::newImage(const std::string& filename) {
@@ -238,7 +240,6 @@ std::string graphics::getDefaultFilter() {
 
 	return "nearest";
 }
-
 
 int graphics::getWidth() {
 	return pntr_app_width(m_app);

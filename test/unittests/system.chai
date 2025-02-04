@@ -8,7 +8,7 @@ assert_equal(version[1], '.', "love.system.getVersionString()")
 
 // getVersion()
 var versionNumber = love.system.getVersion()
-assert_equal(versionNumber[0], 1, "love.system.getVersion()")
+assert_equal(versionNumber[0], 2, "love.system.getVersion()")
 
 // getUsername()
 var username = love.system.getUsername()

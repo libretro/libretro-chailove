@@ -50,6 +50,8 @@ class window {
 	bool unload();
 
 	pntr_app* m_app;
+
+	std::string m_title;
 };
 
 }  // namespace love

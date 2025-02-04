@@ -221,13 +221,14 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 		return true;
 	}
 
+	// TODO: Fix Mounting an internal file
 	// See if we're mounting a file.
 	// if (isFile(archive)) {
 	// 	// Mount using a handle instead, since we're doing another archive.
 	// 	PHYSFS_File* file = openFile(archive);
 	// 	if (file != NULL) {
 	// 		if (PHYSFS_mountHandle(file, archive.c_str(), mountpoint.c_str(), append) == 0) {
-	// 			LibretroLog::log(RETRO_LOG_ERROR) << "[ChaiLove] [filesystem] Error mounting file: " << getLastError() << std::endl;
+	// 			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error mounting file: %s", getLastError().c_str());
 	// 			return false;
 	// 		}
 	// 		return true;
@@ -238,7 +239,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	// Check if we're mounting a directory.
 	int returnVal = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 	if (returnVal == 0) {
-		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error mounting directory: %s", getLastError().c_str());
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error mounting directory '%s' as '%s': %s", archive.c_str(), mountpoint.c_str(), getLastError().c_str());
 		return false;
 	}
 	return true;

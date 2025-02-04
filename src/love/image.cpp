@@ -19,20 +19,6 @@ Image* image::newImageData(const std::string& filename) {
 
 bool image::load() {
 	return true;
-	// TODO(RobLoach): Remove this, as we're using STB Image.
-	/*int flags = IMG_INIT_PNG | IMG_INIT_JPG;
-	int initted = IMG_Init(flags);
-	if(flags != (initted & flags)) {
-
-		const char* errorChar = IMG_GetError();
-		std::string errString("");
-		if (errorChar != NULL) {
-			errString = errorChar;
-		}
-		ChaiLove::log(RETRO_LOG_ERROR) << "Failed to call IMG_Init with jpg/png: {}", errString);
-		return false;
-	}
-	return true;*/
 }
 
 bool image::unload() {

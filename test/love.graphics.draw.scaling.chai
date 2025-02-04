@@ -23,10 +23,10 @@ class love_graphics_draw_scaling {
 
 	def update(dt) {
 		this.angle = this.angle - dt * 180.0f
-		if (love.keyboard.isDown("x")) {
+		if (love.joystick[0].isDown("a")) {
 			this.scale = this.scale + dt * 1.0f
 		}
-		else if (love.keyboard.isDown("z")) {
+		if (love.joystick[0].isDown("b")) {
 			this.scale = this.scale - dt * 1.0f
 		}
 	}

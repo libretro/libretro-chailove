@@ -1,14 +1,14 @@
 // getScancodeFromKey()
 var scancode = love.keyboard.getScancodeFromKey("a")
-assert_equal(scancode, 97, "love.keyboard.getScancodeFromKey()")
+assert_equal(scancode, 65, "love.keyboard.getScancodeFromKey()")
 
 // getKeyFromScancode()
-var key = love.keyboard.getKeyFromScancode(97)
+var key = love.keyboard.getKeyFromScancode(65)
 assert_equal(key, "a", "love.keyboard.getKeyFromScancode()")
 
 // isDown()
 assert_not(love.keyboard.isDown("7"), "love.keyboard.isDown('7')")
-assert_not(love.keyboard.isDown(97), "love.keyboard.isDown(97)")
+assert_not(love.keyboard.isDown(65), "love.keyboard.isDown(65)")
 
 // isScancodeDown()
-assert_not(love.keyboard.isScancodeDown(97), "love.keyboard.isScancodeDown(97)")
+assert_not(love.keyboard.isScancodeDown(65), "love.keyboard.isScancodeDown(65)")

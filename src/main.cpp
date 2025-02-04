@@ -137,6 +137,7 @@ void Event(pntr_app* app, pntr_app_event* event) {
             // Save the information to the state data.
             std::copy(state.begin(), state.end(), (char*)event->save);
         }
+        break;
 
         case PNTR_APP_EVENTTYPE_CHEAT: {
             if (event->cheat == NULL) {
@@ -146,6 +147,7 @@ void Event(pntr_app* app, pntr_app_event* event) {
             std::string cheat(event->cheat);
             chailove->cheatset(0, true, cheat);
         }
+        break;
     }
 }
 

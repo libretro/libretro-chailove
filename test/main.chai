@@ -13,12 +13,6 @@ global testNames = [
 global tests = []
 global currenttest = 0
 
-def conf(t) {
-	t.window.width = 460
-	t.window.height = 320
-	t.console = true
-}
-
 def load() {
 	print("------------------")
 	print("------------------")
@@ -69,29 +63,17 @@ def update(delta) {
 	}
 }
 
-def joystickpressed(joystick, button) {
-	if (button == "left" || button == "down") {
+def gamepadpressed(joystick, button) {
+	if (button == "dpleft" || button == "dpdown") {
 		currenttest = currenttest - 1
 		if (currenttest < 0) {
 			currenttest = tests.size() - 1
 		}
 	}
-	else if (button == "right" || button == "up") {
+	else if (button == "dpright" || button == "dpup") {
 		currenttest = currenttest + 1
 		if (currenttest >= tests.size()) {
 			currenttest = 0
 		}
 	}
-}
-
-def savestate() {
-	return to_json([
-		"currenttest": currenttest
-	])
-}
-
-def loadstate(data) {
-	var info = from_json(data)
-	currenttest = info["currenttest"]
-	return true
 }
