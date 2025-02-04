@@ -131,9 +131,9 @@ graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy
 	}
 
 	// Just rotated
+	ChaiLove* chailove = ChaiLove::getInstance();
 	float degrees = chailove->math.degrees(r);
 	if (sx == 1.0f && sy == 1.0f) {
-		ChaiLove* chailove = ChaiLove::getInstance();
 		pntr_draw_image_rotated(getScreen(), image->surface, x, y, degrees, ox, oy, m_smooth);
 		return *this;
 	}
@@ -142,7 +142,6 @@ graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy
 	// TODO: Implement proper rotozoomSurfaceXY
 	pntr_image* scaled = pntr_image_scale(image->surface, sx, sy, m_smooth);
 	if (scaled != NULL) {
-		ChaiLove* chailove = ChaiLove::getInstance();
 		float newox = ox / (float)image->getWidth() * (float)scaled->width;
 		float newoy = oy / (float)image->getHeight() * (float)scaled->height;
 		pntr_draw_image_rotated(getScreen(), scaled, x, y, degrees, newox, newoy, m_smooth);
