@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 2.0.0 - WIP
 ### Changed
 - Moved from [sdl-libretro](https://github.com/libretro/sdl-libretro) to [pntr](https://github.com/robloach/pntr) and [pntr_app](https://github.com/robloach/pntr)
+- Make sure to use `conf.chai` for `def conf(t)`
+- `joystickpressed()` and `joystickreleased()` now match their respective [love.joystickpressed](https://love2d.org/wiki/love.joystickpressed) counterpart
+- Added `gamepadpressed()` and `gamepadreleased()`, matching Love2D's [love.gamepadpressed`](https://love2d.org/wiki/love.gamepadpressed)
 
 ## 1.3.0 - 2024-05-11
 ### Fixes
