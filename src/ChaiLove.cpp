@@ -78,7 +78,7 @@ bool ChaiLove::load(const std::string& file, const void* data, unsigned int data
 	// Initialize the scripting system.
 	script = new love::script(file);
 	if (!script->mainLoaded) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] Error loading %s", file);
+		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] Error loading %s", file.c_str());
 		return false;
 	}
 	script->conf(config);

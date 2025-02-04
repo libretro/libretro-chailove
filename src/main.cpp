@@ -148,6 +148,11 @@ void Event(pntr_app* app, pntr_app_event* event) {
             chailove->cheatset(0, true, cheat);
         }
         break;
+
+        default:
+            // PNTR_APP_EVENTTYPE_UNKNOWN
+            // PNTR_APP_EVENTTYPE_FILE_DROPPED
+        break;
     }
 }
 
