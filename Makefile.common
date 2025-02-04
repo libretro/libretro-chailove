@@ -53,7 +53,7 @@ ifneq ($(STATIC_LINKING), 1)
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/string/stdstring.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/time/rtime.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/vfs/vfs_implementation.c
-    #SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/fopen_utf8.c
+    SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/fopen_utf8.c
 
     # Ensure the sinc_resampler_neon is available for ARM NEON devices.
 	SOURCES_S += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.S
