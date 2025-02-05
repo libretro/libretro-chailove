@@ -45,9 +45,21 @@ class SoundData {
 	 */
 	SoundData& setLooping(bool loop);
 
+	/**
+	 * Set the volume for the sound.
+	 *
+	 * @param volume A float from 0.0f to 1.0f.
+	 */
 	SoundData& setVolume(float volume);
+
+	/**
+	 * Retrieve the volume for the sound.
+	 */
 	float getVolume();
 
+	/**
+	 * Returns true or false depending on if the sound is actively playing.
+	 */
 	bool isPlaying();
 
 	pntr_sound* m_sound = NULL;

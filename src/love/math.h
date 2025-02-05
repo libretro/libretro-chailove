@@ -15,8 +15,8 @@ class math {
 	/**
 	 * Get uniformly distributed pseudo-random number, between the given numbers.
 	 *
-	 * @param min (0.0f) The minimum value.
-	 * @param max (1.0f) The max value.
+	 * @param min (0.0f) The minimum value. Can be a double, float, or int.
+	 * @param max (1.0f) The max value. Can be a double, float, or int.
 	 *
 	 * @return A number between the two given min and max values.
 	 *
