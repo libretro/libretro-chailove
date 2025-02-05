@@ -4,6 +4,11 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 1.3.1 - 2025-02-04
+### Change
+- tvos: propoerly set min supported version, by @warmenhoven
+- Update to physfs-libretro
+
 ## 1.3.0 - 2024-05-11
 ### Fixes
 - Fix playing empty ogg files through `libretro-common`, by @phcoder
