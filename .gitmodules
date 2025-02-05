@@ -1,8 +1,3 @@
-[submodule "vendor/sdl-libretro"]
-	path = vendor/sdl-libretro
-	url = https://github.com/libretro/sdl-libretro.git
-	ignore = dirty
-	branch = master
 [submodule "vendor/libretro-common"]
 	path = vendor/libretro-common
 	url = https://github.com/libretro/libretro-common.git
@@ -63,13 +58,23 @@
 	url = https://github.com/icculus/physfs.git
 	ignore = dirty
 	branch = main
-[submodule "vendor/SDL_tty"]
-	path = vendor/SDL_tty
-	url = https://github.com/grumbel/SDL_tty.git
-	ignore = dirty
-	branch = master
 [submodule "vendor/physfs-libretro"]
 	path = vendor/physfs-libretro
 	url = https://github.com/RobLoach/physfs.git
 	ignore = dirty
 	branch = libretro-support
+[submodule "vendor/pntr"]
+	path = vendor/pntr
+	url = https://github.com/RobLoach/pntr.git
+	ignore = dirty
+	branch = master
+[submodule "vendor/pntr_app"]
+	path = vendor/pntr_app
+	url = https://github.com/RobLoach/pntr_app.git
+	ignore = dirty
+	branch = master
+[submodule "vendor/pntr_physfs"]
+	path = vendor/pntr_physfs
+	url = https://github.com/RobLoach/pntr_physfs.git
+	ignore = dirty
+	branch = master

@@ -2,6 +2,7 @@
 #define SRC_LOVE_MATH_H_
 
 #include <string>
+#include "pntr_app.h"
 
 namespace love {
 /**
@@ -9,13 +10,13 @@ namespace love {
  */
 class math {
 	public:
-	bool load();
+	bool load(pntr_app* app);
 
 	/**
 	 * Get uniformly distributed pseudo-random number, between the given numbers.
 	 *
-	 * @param min (0.0f) The minimum value.
-	 * @param max (1.0f) The max value.
+	 * @param min (0.0f) The minimum value. Can be a double, float, or int.
+	 * @param max (1.0f) The max value. Can be a double, float, or int.
 	 *
 	 * @return A number between the two given min and max values.
 	 *
@@ -93,6 +94,8 @@ class math {
 
 	private:
 	int m_seed = 0;
+
+	pntr_app* app;
 };
 
 }  // namespace love

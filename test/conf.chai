@@ -1,0 +1,5 @@
+def conf(t) {
+	t.window.width = 460
+	t.window.height = 320
+	t.console = true
+}

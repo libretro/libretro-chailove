@@ -11,11 +11,26 @@ def load() {
 }
 
 def draw() {
-    love.graphics.print("Congrats! You created your first ChaiLove application!", 200, 300)
+    love.graphics.print("Congrats!", 170, 150)
+	love.graphics.print("You created your first ChaiLove application!", 30, 170)
     love.graphics.draw(logo, x, y)
 }
 
 def update(delta) {
 	x += delta * 60.0f
 	y += delta * 30.0f
+}
+
+def loadstate(data) {
+	var info = from_json(data)
+	x = info["x"]
+	y = info["y"]
+	return true
+}
+
+def savestate() {
+    return to_json([
+        "x": x,
+		"y": y
+    ])
 }

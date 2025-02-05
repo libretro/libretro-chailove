@@ -1,7 +1,7 @@
 # ChaiLove :heart:
 
 [![Tests](https://github.com/libretro/libretro-chailove/actions/workflows/build.yml/badge.svg)](https://github.com/libretro/libretro-chailove/actions/workflows/build.yml)
-[![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](http://buildbot.fiveforty.net/admin/buildbot/build/?name=chailove)
+[![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](https://git.libretro.com/libretro/libretro-chailove/-/pipelines)
 [![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://rawgit.com/libretro/libretro-chailove/docs/)
 
 ChaiLove is an awesome framework you can use to make 2D games in [ChaiScript](http://chaiscript.com/). It's free, open-source, and works on Windows, Mac OS X, Linux, Android, and ARM through [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
@@ -70,7 +70,7 @@ See the [ChaiLove API](https://raw.githack.com/libretro/libretro-chailove/docs/i
 
 ## Development
 
-The following are some notes about the development process behind ChaiLove.
+ChaiLove is built with [pntr_app](https://github.com/robloach/pntr_app) under the hood to handle its graphics, audio and input.
 
 ### Compiling
 
@@ -108,12 +108,20 @@ make docs
 The following individuals contributed to ChaiLove in some way:
 
 - [@RobLoach](http://github.com/robloach)
+- [@phcoder](https://github.com/phcoder) for the many builtbot fixes
 - [@webgeek1234](http://github.com/webgeek1234) for the Android support
-- [@r-type](https://github.com/r-type) for his work on [sdl-libretro](https://github.com/r-type/sdl-libretro)
-- [@mudlord](https://github.com/mudlord) for his work on the [libretro-common](https://github.com/libretro/libretro-common) audio system
+- [@r-type](https://github.com/r-type) for [sdl-libretro](https://github.com/r-type/sdl-libretro)
+- [@mudlord](https://github.com/mudlord) for the [libretro-common](https://github.com/libretro/libretro-common) audio system
 - [@orbea](http://github.com/orbea)
 - [@fetzerch](http://github.com/fetzerch)
 - [@bparker06](https://github.com/bparker06)
 - [@twinaphex](http://github.com/twinaphex)
 - [@ToKe79](https://github.com/ToKe79)
+- [@konsumer](https://github.com/konsumer)
 - [@baxysquare](https://github.com/baxysquare) for the [Logo](docs/chailove.png)
+
+And many others!
+
+## License
+
+[MIT](COPYING)
