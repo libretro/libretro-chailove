@@ -4,12 +4,17 @@ All notable changes to [ChaiLove](https://github.com/RobLoach/ChaiLove) will be 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.0.0 - WIP
+## 2.0.0 - Unreleased
 ### Changed
 - Moved from [sdl-libretro](https://github.com/libretro/sdl-libretro) to [pntr](https://github.com/robloach/pntr) and [pntr_app](https://github.com/robloach/pntr)
 - Make sure to use `conf.chai` for `def conf(t)`
-- `joystickpressed()` and `joystickreleased()` now match their respective [love.joystickpressed](https://love2d.org/wiki/love.joystickpressed) counterpart
-- Added `gamepadpressed()` and `gamepadreleased()`, matching Love2D's [love.gamepadpressed`](https://love2d.org/wiki/love.gamepadpressed)
+- `joystickpressed()` and `joystickreleased()` now matches [love.joystickpressed](https://love2d.org/wiki/love.joystickpressed) counterpart
+- Added `gamepadpressed()` and `gamepadreleased()` matching [love.gamepadpressed`](https://love2d.org/wiki/love.gamepadpressed)
+
+## 1.3.1 - 2025-02-04
+### Change
+- tvos: propoerly set min supported version, by @warmenhoven
+- Update to physfs-libretro
 
 ## 1.3.0 - 2024-05-11
 ### Fixes
