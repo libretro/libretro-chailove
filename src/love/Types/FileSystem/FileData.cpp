@@ -1,9 +1,6 @@
 #include "FileData.h"
 #include <string>
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "../../../ChaiLove.h"
 
 namespace love {
