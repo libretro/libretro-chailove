@@ -193,5 +193,6 @@ pntr_app Main(int argc, char* argv[]) {
         .close = Close,
         .event = Event,
         .fps = 0,
+        .extensions = "chai|chailove"
     };
 }
