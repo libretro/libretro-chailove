@@ -1,5 +1,4 @@
-#include <string>
-#include <iostream> // TODO: Remove this
+#define PROJECT_VERSION "2.0.0"
 
 void libretro_chailove_pntr_set_error(int error);
 #define PNTR_SET_ERROR libretro_chailove_pntr_set_error
