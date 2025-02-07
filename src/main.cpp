@@ -47,7 +47,7 @@ bool Init(pntr_app* app) {
 
     // Initialize PhysFS
     if (PHYSFS_init((const char*)ChaiLove::environ_cb) == 0) {
-        pntr_app_log_ex(PNTR_APP_LOG_ERROR, "PHYSFS_init() failed: %s", PHYSFS_getLastError());
+        pntr_app_log_ex(PNTR_APP_LOG_ERROR, "PHYSFS_init() failed: %s", PHYSFS_getErrorByCode(PHYSFS_getLastErrorCode()));
         return false;
     }
 
