@@ -1,3 +1,5 @@
+#include <string.h>
+#include <stddef.h>
 #define PROJECT_VERSION "2.0.0"
 
 void libretro_chailove_pntr_set_error(int error);
