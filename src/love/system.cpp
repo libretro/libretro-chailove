@@ -2,7 +2,9 @@
 #include "../ChaiLove.h"
 
 #include <string>
+#ifdef CHAILOVE_ENABLE_LOVE_SYSTEM_EXECUTE
 #include <cstdlib>
+#endif
 #include <cstdio>
 #include <vector>
 #include "libretro.h"
@@ -107,7 +109,7 @@ std::string system::getUsername() {
 }
 
 bool system::execute(const std::string& command) {
-#ifdef CHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+#ifndef CHAILOVE_ENABLE_LOVE_SYSTEM_EXECUTE
 	pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] [system] love.system.execute() is disabled");
 	return false;
 #else

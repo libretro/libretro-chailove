@@ -97,6 +97,8 @@ class system {
 	/**
 	 * Execute an operating system shell command. This is like the C system() function.
 	 *
+	 * This feature is disabled by default. Enable with `CHAILOVE_ENABLE_LOVE_SYSTEM_EXECUTE` compiler definition.
+	 *
 	 * @param command The command to run.
 	 *
 	 * @return Returns true or false depending on the process succeeded to execute.
