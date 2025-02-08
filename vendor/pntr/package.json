@@ -1,0 +1,28 @@
+{
+  "name": "pntr",
+  "version": "0.0.1",
+  "private": true,
+  "description": "pntr: Image manipulation library for C99 and C++, with a focus on ease-of-use.",
+  "main": "pntr.h",
+  "scripts": {
+    "test": "ctest --test-dir build -V",
+    "pretest": "npm run build",
+    "build": "cmake --build build",
+    "prebuild": "cmake -B build",
+    "predocs": "npm it",
+    "docs": "gh-pages -d docs/html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobLoach/pntr.git"
+  },
+  "author": "Rob Loach (https://robloach.net)",
+  "license": "Zlib",
+  "bugs": {
+    "url": "https://github.com/RobLoach/pntr/issues"
+  },
+  "homepage": "https://github.com/RobLoach/pntr#readme",
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}

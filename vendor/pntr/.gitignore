@@ -1,0 +1,7 @@
+.vscode
+build
+/web/pntr_demo*
+/docs
+Testing
+package-lock.json
+node_modules
