@@ -65,6 +65,14 @@ include:
     file: '/ios9.yml'
 
   ################################## CONSOLES ################################
+  # PlayStation2
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/ps2-static.yml'
+
+  # PlayStation3
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/psl1ght-static.yml'
+
   # PlayStation Portable
   - project: 'libretro-infrastructure/ci-templates'
     file: '/psp-static.yml'
@@ -72,10 +80,6 @@ include:
   # PlayStation Vita
   - project: 'libretro-infrastructure/ci-templates'
     file: '/vita-static.yml'
-
-  # PlayStation2
-  - project: 'libretro-infrastructure/ci-templates'
-    file: '/ps2-static.yml'
 
   # Nintendo 3DS
   - project: 'libretro-infrastructure/ci-templates'
@@ -101,7 +105,7 @@ include:
   - project: 'libretro-infrastructure/ci-templates'
     file: '/dingux-mips32.yml'
 
-  # OpenDingux
+  # OpenDingux (ARM)
   - project: 'libretro-infrastructure/ci-templates'
     file: '/dingux-arm32.yml'
 
@@ -138,22 +142,22 @@ libretro-build-windows-i686:
     - .core-defs
 
 # Windows msvc10 64-bit
-#libretro-build-windows-msvc10-x64:
-#  extends:
-#    - .libretro-windows-x64-msvc10-msys2-make-default
-#    - .core-defs
+libretro-build-windows-msvc10-x64:
+  extends:
+    - .libretro-windows-x64-msvc10-msys2-make-default
+    - .core-defs
 
 # Windows msvc10 32-bit
-#libretro-build-windows-msvc10-i686:
-#  extends:
-#    - .libretro-windows-i686-msvc10-msys2-make-default
-#    - .core-defs
+libretro-build-windows-msvc10-i686:
+  extends:
+    - .libretro-windows-i686-msvc10-msys2-make-default
+    - .core-defs
 
 # Windows msvc05 32-bit
-#libretro-build-windows-msvc05-i686:
-#  extends:
-#    - .libretro-windows-i686-msvc05-msys2-make-default
-#    - .core-defs
+libretro-build-windows-msvc05-i686:
+  extends:
+    - .libretro-windows-i686-msvc05-msys2-make-default
+    - .core-defs
 
 # Linux 64-bit
 libretro-build-linux-x64:
@@ -170,7 +174,7 @@ libretro-build-linux-i686:
 # MacOS 64-bit
 libretro-build-osx-x64:
   extends:
-    - .libretro-osx-x64-make-default
+    - .libretro-osx-x64-make-10-7
     - .core-defs
 
 # MacOS ARM 64-bit
@@ -211,10 +215,10 @@ libretro-build-ios-arm64:
     - .core-defs
 
 # iOS (armv7) [iOS 9 and up]
-#libretro-build-ios9:
-#  extends:
-#    - .libretro-ios9-make-default
-#    - .core-defs
+libretro-build-ios9:
+  extends:
+    - .libretro-ios9-make-default
+    - .core-defs
 
 # tvOS
 libretro-build-tvos-arm64:
@@ -224,10 +228,10 @@ libretro-build-tvos-arm64:
 
 ################################### CONSOLES #################################
 # PlayStation Portable
-#libretro-build-psp:
-#  extends:
-#    - .libretro-psp-static-retroarch-master
-#    - .core-defs
+libretro-build-psp:
+  extends:
+    - .libretro-psp-static-retroarch-master
+    - .core-defs
 
 # PlayStation Vita
 libretro-build-vita:
@@ -236,34 +240,40 @@ libretro-build-vita:
     - .core-defs
 
 # PlayStation2
-#libretro-build-ps2:
-#  extends:
-#    - .libretro-ps2-static-retroarch-master
-#    - .core-defs
+libretro-build-ps2:
+  extends:
+    - .libretro-ps2-static-retroarch-master
+    - .core-defs
+
+# PlayStation3
+libretro-build-psl1ght:
+  extends:
+    - .libretro-psl1ght-static-retroarch-master
+    - .core-defs
 
 # Nintendo 3DS
-#libretro-build-ctr:
-#  extends:
-#    - .libretro-ctr-static-retroarch-master
-#    - .core-defs
+libretro-build-ctr:
+  extends:
+    - .libretro-ctr-static-retroarch-master
+    - .core-defs
 
 # Nintendo GameCube
-#libretro-build-ngc:
-#  extends:
-#    - .libretro-ngc-static-retroarch-master
-#    - .core-defs
+libretro-build-ngc:
+  extends:
+    - .libretro-ngc-static-retroarch-master
+    - .core-defs
 
 # Nintendo Wii
-#libretro-build-wii:
-#  extends:
-#    - .libretro-wii-static-retroarch-master
-#    - .core-defs
+libretro-build-wii:
+  extends:
+    - .libretro-wii-static-retroarch-master
+    - .core-defs
 
 # Nintendo WiiU
-#libretro-build-wiiu:
-#  extends:
-#    - .libretro-wiiu-static-retroarch-master
-#    - .core-defs
+libretro-build-wiiu:
+  extends:
+    - .libretro-wiiu-static-retroarch-master
+    - .core-defs
 
 # Nintendo Switch
 libretro-build-libnx-aarch64:
@@ -272,21 +282,15 @@ libretro-build-libnx-aarch64:
     - .core-defs
 
 # OpenDingux
-#libretro-build-dingux-mips32:
-#  extends:
-#    - .libretro-dingux-mips32-make-default
-#    - .core-defs
+libretro-build-dingux-mips32:
+  extends:
+    - .libretro-dingux-mips32-make-default
+    - .core-defs
 
 # OpenDingux Beta
 libretro-build-dingux-odbeta-mips32:
   extends:
     - .libretro-dingux-odbeta-mips32-make-default
-    - .core-defs
-
-# OpenDingux Beta
-libretro-build-rs90-odbeta-mips32:
-  extends:
-    - .libretro-rs90-odbeta-mips32-make-default
     - .core-defs
 
 # RetroFW
@@ -295,7 +299,7 @@ libretro-build-retrofw-mips32:
     - .libretro-retrofw-mips32-make-default
     - .core-defs
 
-# MIYOO
+# Miyoo
 libretro-build-miyoo-arm32:
   extends:
     - .libretro-miyoo-arm32-make-default

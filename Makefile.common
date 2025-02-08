@@ -72,6 +72,10 @@ ifeq ($(platform), emscripten)
      SOURCES_C += $(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.c
 endif
 
+ifneq (,$(findstring msvc2003,$(platform)))
+	FLAGS += -I$(LIBRETRO_COMM_DIR)/include/compat/msvc
+endif
+
 # stb_vorbis
 #SOURCES_C += $(CORE_DIR)/vendor/stb/stb_vorbis.c
 FLAGS += -DHAVE_STB_VORBIS
