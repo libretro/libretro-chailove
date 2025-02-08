@@ -87,8 +87,7 @@ else ifeq ($(platform), tvos-arm64)
 	TARGET := $(TARGET_NAME)_libretro_tvos.dylib
 	fpic := -fPIC
 	SHARED := -dynamiclib
-	CFLAGS += -DIOS -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
-	CXXFLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
+	CFLAGS += -DIOS
 	ifeq ($(IOSSDK),)
 		IOSSDK := $(shell xcodebuild -version -sdk appletvos Path)
 	endif
@@ -697,13 +696,11 @@ endif
 ifeq ($(platform), ios-arm64)
 	LDFLAGS += -framework IOKit -framework Foundation
 	FLAGS += -D__MACH__ -D__APPLE__
-	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
 endif
 
 ifeq ($(platform), tvos-arm64)
 	LDFLAGS += -framework Foundation
 	FLAGS += -D__MACH__ -D__APPLE__
-	FLAGS += -DCHAILOVE_DISABLE_LOVE_SYSTEM_EXECUTE
 endif
 
 ifeq ($(EXTERNAL_ZLIB), 1)

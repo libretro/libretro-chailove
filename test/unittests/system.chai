@@ -14,13 +14,6 @@ assert_equal(versionNumber[0], 2, "love.system.getVersion()")
 var username = love.system.getUsername()
 assert(true, "love.system.getUsername() == '" + username + "'")
 
-// getOS()
-if (love.system.getOS() == "Linux") {
-	// Run in foreground.
-	var result = love.system.execute("uname")
-	assert(result, "love.system.execute('uname')")
-}
-
 // setClipboardText()
 love.system.setClipboardText("Hello World!")
 
