@@ -185,15 +185,15 @@ void Close(pntr_app* app) {
 pntr_app Main(int argc, char* argv[]) {
     (void)argc;
     (void)argv;
-    return (pntr_app) {
-        .width = 800,
-        .height = 600,
-        .title = "ChaiLove",
-        .init = Init,
-        .update = Update,
-        .close = Close,
-        .event = Event,
-        .fps = 0,
-        .extensions = "chai|chailove"
-    };
+    pntr_app app = { 0 };
+    app.width = 800,
+    app.height = 600,
+    app.title = "ChaiLove",
+    app.init = Init,
+    app.update = Update,
+    app.close = Close,
+    app.event = Event,
+    app.fps = 0,
+    app.extensions = "chai|chailove";
+    return app;
 }
