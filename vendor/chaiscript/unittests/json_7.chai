@@ -1,4 +1,0 @@
-assert_equal(from_json("\n" + 
-"{\n" +
-"    \"Key\" : \"Value\"\n" +
-"}\n"), ["Key":"Value"])

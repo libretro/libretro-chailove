@@ -1,2 +1,0 @@
-assert_throws("Error: \"Function redefined 'foo'\"", fun(){ def foo(x) { x + 1 }; def foo(x) { x + 1 } } );
-

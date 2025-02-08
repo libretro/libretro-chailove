@@ -1,7 +1,0 @@
-
-
-def string::`/=`(double d) { this = "${this}/=${d}"; return this; }
-
-var s = "Hello World"
-s /= 2
-

@@ -1,2 +1,0 @@
-eval_file("file_with_bom.inc")
-assert_true(alwaysTrue())

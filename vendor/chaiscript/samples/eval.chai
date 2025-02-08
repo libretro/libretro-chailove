@@ -1,2 +1,0 @@
-var i = 1
-var j = eval("5 + 4")

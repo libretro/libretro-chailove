@@ -1,4 +1,0 @@
-assert_equal("\u00aa", "\u00AA")
-assert_equal("\u00bb", "\xC2\xBB")
-
-assert_equal("Test\u0040", "Test@")
