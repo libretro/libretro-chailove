@@ -46,6 +46,10 @@ void libretro_chailove_pntr_set_error(int error) {
 
 bool Init(pntr_app* app) {
     ChaiLove::environ_cb = pntr_app_libretro_environ_cb(app);
+    if (ChaiLove::environ_cb == NULL) {
+        pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] Environment callback not set");
+        return false;
+    }
 
     // Initialize PhysFS
     if (PHYSFS_init((const char*)ChaiLove::environ_cb) == 0) {
