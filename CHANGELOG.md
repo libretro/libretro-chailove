@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Make sure to use `conf.chai` for `def conf(t)`
 - `joystickpressed()` and `joystickreleased()` now matches [love.joystickpressed](https://love2d.org/wiki/love.joystickpressed) counterpart
 - Added `gamepadpressed()` and `gamepadreleased()` matching [love.gamepadpressed`](https://love2d.org/wiki/love.gamepadpressed)
+- `love.system.execute()` build disabled by default. Enable with `CHAILOVE_ENABLE_LOVE_SYSTEM_EXECUTE` compile define.
 
 ## 1.3.1 - 2025-02-04
 ### Change
