@@ -98,7 +98,7 @@ FLAGS += -I$(CORE_DIR)/vendor/libretro-common/compat
 FLAGS += -DWANT_ZLIB
 
 # PhysFS
-PHYSFS_DIR = $(CORE_DIR)/vendor/physfs-libretro
+PHYSFS_DIR = $(CORE_DIR)/vendor/physfs
 FLAGS += -I$(PHYSFS_DIR)/src
 
 FLAGS += -DPHYSFS_NO_CDROM_SUPPORT=1 \
