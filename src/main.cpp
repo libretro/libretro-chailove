@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stddef.h>
+#include "libretro.h"
 #define PROJECT_VERSION "2.0.0"
 
 void libretro_chailove_pntr_set_error(int error);
@@ -45,16 +46,19 @@ void libretro_chailove_pntr_set_error(int error) {
 }
 
 bool Init(pntr_app* app) {
-    ChaiLove::environ_cb = pntr_app_libretro_environ_cb(app);
-    if (ChaiLove::environ_cb == NULL) {
-        pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] Environment callback not set");
+    retro_environment_t environ_cb = pntr_app_libretro_environ_cb(app);
+    if (environ_cb == NULL) {
+        pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] Environment callback not set for Init");
         return false;
     }
 
     // Initialize PhysFS
-    if (PHYSFS_init((const char*)ChaiLove::environ_cb) == 0) {
-        pntr_app_log_ex(PNTR_APP_LOG_ERROR, "PHYSFS_init() failed: %s", PHYSFS_getErrorByCode(PHYSFS_getLastErrorCode()));
-        return false;
+    if (PHYSFS_init((const char*)environ_cb) == 0) {
+        PHYSFS_ErrorCode code = PHYSFS_getLastErrorCode();
+        if (code != PHYSFS_ERR_IS_INITIALIZED) {
+            pntr_app_log_ex(PNTR_APP_LOG_ERROR, "PHYSFS_init() failed: %s", PHYSFS_getErrorByCode(code));
+            return false;
+        }
     }
 
     // Set up the chailove instance.

@@ -43,7 +43,12 @@ window& window::showMessageBox(const std::string& msg, int frames) {
 	retro_message retroMessage;
 	retroMessage.msg = msg.c_str();
 	retroMessage.frames = frames;
-	ChaiLove::environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &retroMessage);
+	retro_environment_t environ_cb = pntr_app_libretro_environ_cb(NULL);
+	if (environ_cb == NULL) {
+		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] Environment callback not set for showMessageBox");
+		return *this;
+	}
+	environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &retroMessage);
 	return *this;
 }
 
