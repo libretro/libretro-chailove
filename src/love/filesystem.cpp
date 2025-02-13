@@ -72,18 +72,23 @@ void filesystem::mountlibretro() {
 	const char *save_dir = NULL;
 	const char *core_dir = NULL;
 
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_LIBRETRO_PATH, &core_dir) && core_dir) {
+    retro_environment_t environ_cb = pntr_app_libretro_environ_cb(NULL);
+	if (environ_cb == NULL) {
+		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] No environment callback for filesystem");
+	}
+
+	if (environ_cb(RETRO_ENVIRONMENT_GET_LIBRETRO_PATH, &core_dir) && core_dir) {
 		// Make sure to get the directory of the core.
 		std::string parentPath(getParentDirectory(core_dir));
 		mount(parentPath, "/libretro/core", false);
 	}
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
+	if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
 		mount(system_dir, "/libretro/system", false);
 	}
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &assets_dir) && assets_dir) {
+	if (environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &assets_dir) && assets_dir) {
 		mount(assets_dir, "/libretro/assets", false);
 	}
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
+	if (environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		save_dir = *save_dir ? save_dir : system_dir;
 		mount(save_dir, "/libretro/saves", false);
 	} else if (system_dir) {

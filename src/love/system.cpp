@@ -67,11 +67,15 @@ std::string system::getVersionString() {
 void system::updateVariables(config& t) {
 	// Update core option from the libretro variables.
 	struct retro_variable var = {0};
+    retro_environment_t environ_cb = pntr_app_libretro_environ_cb(NULL);
+	if (environ_cb == NULL) {
+		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] No environment callback for filesystem");
+	}
 
 	// Alpha Blending
 	var.key = "chailove_alphablending";
 	var.value = NULL;
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
 		std::string varvalue(var.value);
 		if (varvalue == "disabled") {
 			t.options["alphablending"] = false;
@@ -81,7 +85,7 @@ void system::updateVariables(config& t) {
 	// High Quality
 	var.key = "chailove_highquality";
 	var.value = NULL;
-	if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
+	if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) {
 		std::string varvalue(var.value);
 		if (varvalue == "disabled") {
 			t.options["highquality"] = false;
@@ -101,7 +105,13 @@ std::string system::getUsername() {
 	if (!m_usernameInitialized) {
 		m_usernameInitialized = true;
 		const char *username = NULL;
-		if (ChaiLove::environ_cb(RETRO_ENVIRONMENT_GET_USERNAME, &username) && username) {
+		retro_environment_t environ_cb = pntr_app_libretro_environ_cb(NULL);
+		if (environ_cb == NULL) {
+			pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] Environment callback not set for getUsername");
+			return m_username;
+		}
+
+		if (environ_cb(RETRO_ENVIRONMENT_GET_USERNAME, &username) && username) {
 			m_username = std::string(username);
 		}
 	}
