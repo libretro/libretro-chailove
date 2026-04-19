@@ -58,11 +58,6 @@
 	url = https://github.com/icculus/physfs.git
 	ignore = dirty
 	branch = main
-[submodule "vendor/physfs-libretro"]
-	path = vendor/physfs-libretro
-	url = https://github.com/RobLoach/physfs.git
-	ignore = dirty
-	branch = libretro-support
 [submodule "vendor/pntr"]
 	path = vendor/pntr
 	url = https://github.com/RobLoach/pntr.git
