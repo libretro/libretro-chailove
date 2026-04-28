@@ -12,7 +12,7 @@ endif
 
 FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES) $(WARNINGS) $(fpic)
 
-CXXFLAGS += $(FLAGS) -std=c++14
+CXXFLAGS += $(FLAGS) -std=c++17
 CFLAGS += $(FLAGS) -std=gnu99
 
 # Ignore first attempt builds, and re-try for a cleaner dependency chain.
