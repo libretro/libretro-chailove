@@ -74,7 +74,7 @@ ChaiLove is built with [pntr_app](https://github.com/robloach/pntr_app) under th
 
 ### Compiling
 
-ChaiLove requires a C++14 compiler, and has been tested with `g++>=5.2`. To compile it, run:
+ChaiLove requires a C++17 compiler. To compile it, run:
 
 ```
 git submodule update --init
