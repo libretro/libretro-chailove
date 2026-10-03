@@ -37,8 +37,11 @@ endif
 %.o: %.m
 	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
+# --noexecstack emits the .note.GNU-stack that hand-written assembly does not
+# get for free. Without it a single .S object marks the whole core as needing an
+# executable stack, which hardened systems refuse to load.
 %.o: %.S
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS) -Wa,--noexecstack
 
 clean:
 	rm -f $(TARGET) $(OBJECTS)

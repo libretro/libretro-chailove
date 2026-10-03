@@ -56,8 +56,12 @@ ifneq ($(STATIC_LINKING), 1)
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/vfs/vfs_implementation.c
     SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/fopen_utf8.c
 
-    # Ensure the sinc_resampler_neon is available for ARM NEON devices.
-	SOURCES_S += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_neon.S
+    # sinc_resampler_neon.S is deliberately not built. Its body is guarded by
+    # HAVE_ARM_NEON_ASM_OPTIMIZATIONS, which is never defined here, so it
+    # assembled to an empty object on every platform. That empty object carried
+    # no .note.GNU-stack, which made GNU ld mark the whole core as requiring an
+    # executable stack on x86 and ARM32, and hardened systems then refuse to
+    # load it. sinc_resampler.c uses the NEON intrinsics path instead.
 
     # MD5
     SOURCES_C += $(CORE_DIR)/vendor/libretro-common/utils/md5.c
@@ -136,6 +140,16 @@ endif
 OBJECTS += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(SOURCES_S:.S=.o) $(SOURCES_M:.m=.o)
 
 LDFLAGS +=  $(fpic) $(SHARED) $(EXTRA_LDF)
+
+# Hardened Linux systems (SteamOS, Fedora, Flatpak) refuse to load a shared
+# object that requests an executable stack, so never ask for one. -z is an ELF
+# notion, and the ELF platforms here are exactly the ones linking a version
+# script with GNU ld; Windows targets do that too, but emit PE.
+ifneq (,$(findstring version-script,$(SHARED)))
+ifeq (,$(findstring win,$(platform)))
+	LDFLAGS += -Wl,-z,noexecstack
+endif
+endif
 
 WARNINGS :=
 
