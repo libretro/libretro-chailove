@@ -47,6 +47,7 @@ void ChaiLove::quit(void) {
 
 	// Unload all the other sub-systems.
 	joystick.unload();
+	graphics.setFont();
 	font.unload();
 	image.unload();
 	sound.unload();
