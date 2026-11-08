@@ -37,21 +37,30 @@ ifneq ($(STATIC_LINKING), 1)
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/audio/resampler/audio_resampler.c
 	#SOURCES_C += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/nearest_resampler.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/audio/resampler/audio_resampler_int16.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler_int16.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/compat_posix_string.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/compat_strcasestr.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/compat_strl.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/compat_strldup.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/file/config_file.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/file/config_file_io.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/file/config_file_userdata.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/file/file_path.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/file/file_path_io.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/features/features_cpu.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/encodings/encoding_crc32.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/encodings/encoding_utf.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/formats/audio_transfer.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/formats/vorbis/rvorbis.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/formats/wav/rwav.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/lists/string_list.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/memmap/memalign.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/streams/file_stream.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/rthreads/retro_eventcount.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/string/stdstring.c
+	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/string/rstrtod.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/time/rtime.c
 	SOURCES_C += $(CORE_DIR)/vendor/libretro-common/vfs/vfs_implementation.c
     SOURCES_C += $(CORE_DIR)/vendor/libretro-common/compat/fopen_utf8.c
@@ -76,22 +85,19 @@ ifeq ($(platform), emscripten)
      SOURCES_C += $(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.c
 endif
 
-# stb_vorbis
-#SOURCES_C += $(CORE_DIR)/vendor/stb/stb_vorbis.c
-FLAGS += -DHAVE_STB_VORBIS
-FLAGS += -I$(CORE_DIR)/vendor/libretro-deps
+# OGG Vorbis
+FLAGS += -DHAVE_RVORBIS
 
 # zlib
 SOURCES_C += \
 	$(CORE_DIR)/vendor/libretro-deps/libz/adler32.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/compress.c \
-	$(CORE_DIR)/vendor/libretro-deps/libz/crc32.c \
+	$(CORE_DIR)/vendor/libretro-deps/libz/libz-crc32.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/deflate.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/gzclose.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/gzlib.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/gzread.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/gzwrite.c \
-	$(CORE_DIR)/vendor/libretro-deps/libz/infback.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/inffast.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/inflate.c \
 	$(CORE_DIR)/vendor/libretro-deps/libz/inftrees.c \

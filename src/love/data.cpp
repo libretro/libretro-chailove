@@ -6,8 +6,8 @@
 #include <stdexcept>
 #include <sstream>
 #include <vector>
-#include "compat/zlib.h"
-#include "utils/md5.h"
+#include "zlib.h"
+#include <lrc_hash.h>
 #include "TinySHA1.hpp"
 #include <cppcodec/base64_default_rfc4648.hpp>
 #include <cppcodec/hex_default_lower.hpp>

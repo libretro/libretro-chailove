@@ -34,6 +34,10 @@ endif
 	@echo CXX $<
 	$(Q)$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
+# The forced retro_endianness.h include pulls in libc headers before rthreads.c
+# can define _GNU_SOURCE, which it needs for cpu_set_t and CPU_SET().
+$(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.o: CFLAGS += -D_GNU_SOURCE
+
 %.o: %.m
 	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
