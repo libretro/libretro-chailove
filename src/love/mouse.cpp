@@ -28,10 +28,10 @@ float mouse::getY() {
 
 bool mouse::isDown(int button) {
 	if (button == RETRO_DEVICE_ID_MOUSE_WHEELUP) {
-		return pntr_app_mouse_wheel(m_app) < 0;
+		return pntr_app_mouse_wheel(m_app) > 0;
 	}
 	else if (button == RETRO_DEVICE_ID_MOUSE_WHEELDOWN) {
-		return pntr_app_mouse_wheel(m_app) > 0;
+		return pntr_app_mouse_wheel(m_app) < 0;
 	}
 	else if (button < PNTR_APP_MOUSE_BUTTON_FIRST) {
 		return false;
@@ -40,7 +40,7 @@ bool mouse::isDown(int button) {
 		return false;
 	}
 
-	return pntr_app_key_down(m_app, (pntr_app_key)button);
+	return pntr_app_mouse_button_down(m_app, (pntr_app_mouse_button)button);
 }
 bool mouse::isDown(const std::string& button) {
 	return isDown(getButtonKey(button));
@@ -71,9 +71,9 @@ std::string mouse::getButtonName(int button) {
 		case PNTR_APP_MOUSE_BUTTON_MIDDLE:
 			return "m";
 		case RETRO_DEVICE_ID_MOUSE_WHEELUP:
-			return "wd";
-		case RETRO_DEVICE_ID_MOUSE_WHEELDOWN:
 			return "wu";
+		case RETRO_DEVICE_ID_MOUSE_WHEELDOWN:
+			return "wd";
 	}
 	return "unknown";
 }
