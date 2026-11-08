@@ -88,7 +88,7 @@ bool ChaiLove::load(const std::string& file, const void* data, unsigned int data
 
 	graphics.load(app);
 	image.load();
-	keyboard.load();
+	keyboard.load(app);
 	joystick.load(app);
 	math.load(app);
 	mouse.load(app);

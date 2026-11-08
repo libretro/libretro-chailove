@@ -14,7 +14,7 @@ namespace love {
  */
 class keyboard {
 	public:
-	bool load();
+	bool load(pntr_app* app);
 
 	/**
 	 * Checks whether a certain key is down.
@@ -59,7 +59,7 @@ class keyboard {
 
 	std::map<std::string, int> keyToScancode;
 	std::string scancodeToKey[PNTR_APP_KEY_LAST] = {};
-	short int keys[PNTR_APP_KEY_LAST] = {};
+	pntr_app* m_app = NULL;
 
 	void eventKeyPressed(int key);
 	void eventKeyReleased(int key);
