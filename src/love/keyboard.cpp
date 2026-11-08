@@ -11,8 +11,8 @@ bool keyboard::isDown(int scancode) {
 }
 
 bool keyboard::isScancodeDown(int scancode) {
-	if (scancode > 0 && scancode < RETROK_LAST) {
-		return keys[scancode] != 0;
+	if (m_app != NULL && scancode > 0 && scancode < PNTR_APP_KEY_LAST) {
+		return pntr_app_key_down(m_app, (pntr_app_key)scancode);
 	}
 
 	return false;
@@ -22,10 +22,12 @@ bool keyboard::isDown(const std::string& key) {
 	return isDown(getScancodeFromKey(key));
 }
 
-bool keyboard::load() {
+bool keyboard::load(pntr_app* app) {
+	m_app = app;
+
 	// Initialize the scancode to key mappings with empty strings.
 	int i;
-	for (i = 0; i < RETROK_LAST; i++) {
+	for (i = 0; i < PNTR_APP_KEY_LAST; i++) {
 		scancodeToKey[i] = "";
 	}
 
@@ -154,7 +156,7 @@ bool keyboard::load() {
 	scancodeToKey[PNTR_APP_KEY_MENU] = "menu";
 
 	// Initialize the key to scancode mappings.
-	for (i = 0; i < RETROK_LAST; i++) {
+	for (i = 0; i < PNTR_APP_KEY_LAST; i++) {
 		if (!scancodeToKey[i].empty()) {
 			keyToScancode.insert(std::pair<std::string, int> (scancodeToKey[i], i));
 		}
@@ -164,11 +166,18 @@ bool keyboard::load() {
 }
 
 int keyboard::getScancodeFromKey(const std::string& name) {
-	return keyToScancode[name];
+	std::map<std::string, int>::iterator it = keyToScancode.find(name);
+	if (it != keyToScancode.end()) {
+		return it->second;
+	}
+	return PNTR_APP_KEY_INVALID;
 }
 
 std::string keyboard::getKeyFromScancode(int scancode) {
-	return scancodeToKey[scancode];
+	if (scancode >= 0 && scancode < PNTR_APP_KEY_LAST) {
+		return scancodeToKey[scancode];
+	}
+	return "";
 }
 
 void keyboard::eventKeyPressed(int scancode) {
