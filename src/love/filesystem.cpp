@@ -220,7 +220,7 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	if (mountpoint == "/") {
 		int returnValue = PHYSFS_mount(archive.c_str(), mountpoint.c_str(), append);
 		if (returnValue == 0) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error mounting '/': ", getLastError().c_str());
+			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error mounting '/': %s", getLastError().c_str());
 			return false;
 		}
 		return true;
@@ -377,8 +377,16 @@ bool filesystem::write(const std::string& name, const std::string& data) {
 		return false;
 	}
 	const char* buffer = data.c_str();
-	int bytesWritten = PHYSFS_writeBytes(file, (const void*)buffer, data.size());
-	return bytesWritten >= 0;
+	PHYSFS_sint64 bytesWritten = PHYSFS_writeBytes(file, (const void*)buffer, data.size());
+	bool success = bytesWritten == (PHYSFS_sint64)data.size();
+	if (!success) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error writing file %s: %s", name.c_str(), getLastError().c_str());
+	}
+	if (PHYSFS_close(file) == 0) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error closing file %s: %s", name.c_str(), getLastError().c_str());
+		return false;
+	}
+	return success;
 }
 
 std::string filesystem::getLastError() {
