@@ -870,7 +870,7 @@ void script::cheatreset() {
 
 void script::cheatset(int index, bool enabled, const std::string& code) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hascheatreset) {
+	if (hascheatset) {
 		try {
 			chaicheatset(index, enabled, code);
 		}
