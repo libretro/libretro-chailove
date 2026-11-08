@@ -126,7 +126,7 @@ graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy
 
 	// Scaled.
 	if (r == 0.0f) {
-		pntr_draw_image_scaled(getScreen(), image->surface, x, y, sx, sy, ox, oy, m_smooth);
+		pntr_draw_image_scaled(getScreen(), image->surface, x, y, sx, sy, ox, oy, m_smooth, PNTR_WHITE);
 		return *this;
 	}
 
