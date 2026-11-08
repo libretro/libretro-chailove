@@ -2,6 +2,9 @@
 #define SRC_LOVE_FONT_H_
 
 #include "Types/Graphics/Font.h"
+#include <list>
+
+using love::Types::Graphics::Font;
 
 namespace love {
 /**
@@ -24,6 +27,16 @@ class font {
 	bool isOpen();
 
 	bool unload();
+
+	/**
+	 * Takes ownership of the given Font, freeing it on unload.
+	 *
+	 * @return The Font, or NULL if it failed to load.
+	 */
+	Font* add(Font* newFont);
+
+	private:
+	std::list<Font*> m_fonts;
 };
 
 }  // namespace love

@@ -282,53 +282,23 @@ graphics& graphics::ellipse(const std::string& drawmode, int x, int y, int radiu
 }
 
 Font* graphics::newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-	Font* font = new Font(filename, glyphWidth, glyphHeight, letters);
-	if (font->loaded()) {
-		return font;
-	}
-
-	delete font;
-	return NULL;
+	return ChaiLove::getInstance()->font.add(new Font(filename, glyphWidth, glyphHeight, letters));
 }
 
 Font* graphics::newFont(const std::string& filename, int size) {
-	Font* font = new Font(filename, size);
-	if (font->loaded()) {
-		return font;
-	}
-
-	delete font;
-	return NULL;
+	return ChaiLove::getInstance()->font.add(new Font(filename, size));
 }
 
 Font* graphics::newFont(const std::string& filename) {
-	Font* font = new Font(filename, 16);
-	if (font->loaded()) {
-		return font;
-	}
-
-	delete font;
-	return NULL;
+	return ChaiLove::getInstance()->font.add(new Font(filename, 16));
 }
 
 Font* graphics::newFont() {
-	Font* font = new Font();
-	if (font->loaded()) {
-		return font;
-	}
-
-	delete font;
-	return NULL;
+	return ChaiLove::getInstance()->font.add(new Font());
 }
 
 Font* graphics::newFont(int size) {
-	Font* font = new Font(size);
-	if (font->loaded()) {
-		return font;
-	}
-
-	delete font;
-	return NULL;
+	return ChaiLove::getInstance()->font.add(new Font(size));
 }
 
 graphics& graphics::setFont(Font* font) {
