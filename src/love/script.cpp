@@ -377,7 +377,8 @@ script::script(const std::string& file) {
 	chai.add(fun(&system::getUsername), "getUsername");
 	chai.add(fun(&system::getClipboardText), "getClipboardText");
 	chai.add(fun(&system::setClipboardText), "setClipboardText");
-	chai.add(fun(&system::execute), "execute");
+	chai.add(fun<bool, system, const std::string&>(&system::execute), "execute");
+	chai.add(fun<bool, system, const std::string&, bool>(&system::execute), "execute");
 
 	// Mouse
 	chai.add(fun(&mouse::getX), "getX");
