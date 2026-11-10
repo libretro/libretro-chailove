@@ -12,7 +12,7 @@ endif
 
 FLAGS += -D__LIBRETRO__ $(COREDEFINES) $(ENDIANNESS_DEFINES) $(PLATFORM_DEFINES) $(WARNINGS) $(fpic)
 
-CXXFLAGS += $(FLAGS) -std=c++14
+CXXFLAGS += $(FLAGS) -std=c++20
 CFLAGS += $(FLAGS) -std=gnu99
 
 # Ignore first attempt builds, and re-try for a cleaner dependency chain.
@@ -37,6 +37,10 @@ endif
 # The forced retro_endianness.h include pulls in libc headers before rthreads.c
 # can define _GNU_SOURCE, which it needs for cpu_set_t and CPU_SET().
 $(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.o: CFLAGS += -D_GNU_SOURCE
+
+# On 32-bit x86, -ffast-math switches sinc's AVX functions to SSE math,
+# which then cannot inline the SSE intrinsics.
+$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler.o: CFLAGS += -fno-fast-math
 
 %.o: %.m
 	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
