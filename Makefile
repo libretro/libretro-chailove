@@ -38,6 +38,10 @@ endif
 # can define _GNU_SOURCE, which it needs for cpu_set_t and CPU_SET().
 $(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.o: CFLAGS += -D_GNU_SOURCE
 
+# On 32-bit x86, -ffast-math switches sinc's AVX functions to SSE math,
+# which then cannot inline the SSE intrinsics.
+$(CORE_DIR)/vendor/libretro-common/audio/resampler/drivers/sinc_resampler.o: CFLAGS += -fno-fast-math
+
 %.o: %.m
 	$(CC) -c -o $@ $< $(CFLAGS) -include retro_endianness.h
 
