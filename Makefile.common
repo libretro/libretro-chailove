@@ -86,7 +86,7 @@ ifeq ($(platform), emscripten)
 endif
 
 ifneq (,$(findstring msvc2003,$(platform)))
-	FLAGS += -I$(LIBRETRO_COMM_DIR)/include/compat/msvc
+	FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include/compat/msvc
 endif
 
 # OGG Vorbis

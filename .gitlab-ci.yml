@@ -149,23 +149,25 @@ libretro-build-windows-i686:
     - .libretro-windows-i686-mingw-make-default
     - .core-defs
 
+# Windows MSVC: disabled. ChaiScript needs C++14 (MSVC 2015 or later), and
+# the Makefile's compile rules use GCC-style flags (-o, -include, -std).
 # Windows msvc10 64-bit
-libretro-build-windows-msvc10-x64:
-  extends:
-    - .libretro-windows-x64-msvc10-msys2-make-default
-    - .core-defs
+#libretro-build-windows-msvc10-x64:
+#  extends:
+#    - .libretro-windows-x64-msvc10-msys2-make-default
+#    - .core-defs
 
 # Windows msvc10 32-bit
-libretro-build-windows-msvc10-i686:
-  extends:
-    - .libretro-windows-i686-msvc10-msys2-make-default
-    - .core-defs
+#libretro-build-windows-msvc10-i686:
+#  extends:
+#    - .libretro-windows-i686-msvc10-msys2-make-default
+#    - .core-defs
 
 # Windows msvc05 32-bit
-libretro-build-windows-msvc05-i686:
-  extends:
-    - .libretro-windows-i686-msvc05-msys2-make-default
-    - .core-defs
+#libretro-build-windows-msvc05-i686:
+#  extends:
+#    - .libretro-windows-i686-msvc05-msys2-make-default
+#    - .core-defs
 
 # Linux 64-bit
 libretro-build-linux-x64:
@@ -253,11 +255,11 @@ libretro-build-vita:
     - .libretro-vita-static-retroarch-master
     - .core-defs
 
-# PlayStation2
-libretro-build-ps2:
-  extends:
-    - .libretro-ps2-static-retroarch-master
-    - .core-defs
+# PlayStation2: disabled, Makefile.libretro has no ps2 platform.
+#libretro-build-ps2:
+#  extends:
+#    - .libretro-ps2-static-retroarch-master
+#    - .core-defs
 
 # PlayStation3
 libretro-build-psl1ght:
@@ -305,6 +307,12 @@ libretro-build-dingux-mips32:
 libretro-build-dingux-odbeta-mips32:
   extends:
     - .libretro-dingux-odbeta-mips32-make-default
+    - .core-defs
+
+# RS-90 OpenDingux Beta
+libretro-build-rs90-odbeta-mips32:
+  extends:
+    - .libretro-rs90-odbeta-mips32-make-default
     - .core-defs
 
 # RetroFW
