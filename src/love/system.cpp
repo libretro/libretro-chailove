@@ -4,6 +4,7 @@
 #include <string>
 #ifdef CHAILOVE_ENABLE_LOVE_SYSTEM_EXECUTE
 #include <cstdlib>
+#include <thread>
 #endif
 #include <cstdio>
 #include <vector>
@@ -119,11 +120,21 @@ std::string system::getUsername() {
 }
 
 bool system::execute(const std::string& command) {
+	return execute(command, false);
+}
+
+bool system::execute(const std::string& command, bool background) {
 #ifndef CHAILOVE_ENABLE_LOVE_SYSTEM_EXECUTE
 	pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] [system] love.system.execute() is disabled");
 	return false;
 #else
 	pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [system] love.system.execute: %s", command.c_str());
+	if (background) {
+		std::thread([command]() {
+			std::system(command.c_str());
+		}).detach();
+		return true;
+	}
 	int result = std::system(command.c_str());
 	if (result != 0) {
 		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] [system] love.system.execute failed");
