@@ -85,6 +85,10 @@ ifeq ($(platform), emscripten)
      SOURCES_C += $(CORE_DIR)/vendor/libretro-common/rthreads/rthreads.c
 endif
 
+ifneq (,$(findstring msvc2003,$(platform)))
+	FLAGS += -I$(CORE_DIR)/vendor/libretro-common/include/compat/msvc
+endif
+
 # OGG Vorbis
 FLAGS += -DHAVE_RVORBIS
 
