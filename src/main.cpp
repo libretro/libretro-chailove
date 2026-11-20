@@ -108,7 +108,7 @@ void Event(pntr_app* app, pntr_app_event* event) {
         case PNTR_APP_EVENTTYPE_MOUSE_WHEEL:
             if (event->mouseWheel != 0) {
                 // TODO: Add horizontal mouse wheel to pntr
-                chailove->mouse.wheelmoved(event->mouseWheel, 0);
+                chailove->mouse.wheelmoved(0, event->mouseWheel);
             }
         break;
 
