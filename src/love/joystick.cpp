@@ -42,11 +42,13 @@ int joystick::getJoystickCount() {
 }
 
 bool joystick::isDown(int joystick, int button) {
-	return m_joysticks[joystick]->isDown(button);
+	Joystick* stick = (*this)[joystick];
+	return stick != NULL && stick->isDown(button);
 }
 
 bool joystick::isDown(int joystick, const std::string& button) {
-	return m_joysticks[joystick]->isDown(button);
+	Joystick* stick = (*this)[joystick];
+	return stick != NULL && stick->isDown(button);
 }
 
 Joystick* joystick::operator[](int joystick) {

@@ -14,6 +14,9 @@ Joystick::Joystick(pntr_app* app, int i) : m_index(i), m_app(app) {
 }
 
 bool Joystick::isDown(int button) {
+	if (button < PNTR_APP_GAMEPAD_BUTTON_FIRST || button >= PNTR_APP_GAMEPAD_BUTTON_LAST) {
+		return false;
+	}
 	return pntr_app_gamepad_button_down(m_app, m_index, (pntr_app_gamepad_button)button);
 }
 
