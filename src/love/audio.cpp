@@ -41,6 +41,11 @@ audio& audio::setVolume(float volume) {
 		volume = 1.0f;
 	}
 	m_volume = volume;
+
+	// Re-apply each source's volume, scaled by the new master volume.
+	for (SoundData* sound : ChaiLove::getInstance()->sound.sounds) {
+		sound->setVolume(sound->getVolume());
+	}
 	return *this;
 }
 }  // namespace love

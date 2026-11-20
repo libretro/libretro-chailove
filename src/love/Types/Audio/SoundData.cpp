@@ -10,8 +10,10 @@ namespace Audio {
 
 SoundData::SoundData(const std::string& filename) {
 	// Check the extension.
-	ChaiLove* app = ChaiLove::getInstance();
 	m_sound = pntr_load_sound(filename.c_str());
+
+	// Apply the master volume.
+	setVolume(m_volume);
 }
 
 SoundData::~SoundData() {
@@ -27,7 +29,10 @@ void SoundData::unload() {
 
 bool SoundData::play() {
 	if (isLoaded()) {
-		pntr_play_sound(m_sound, m_loop);
+		// Playing an already playing source does nothing, matching Love2D.
+		if (!isPlaying()) {
+			pntr_play_sound(m_sound, m_loop);
+		}
 		return true;
 	}
 	return false;
@@ -59,7 +64,7 @@ SoundData& SoundData::setVolume(float volume) {
 		volume = 1.0f;
 	}
 	m_volume = volume;
-	pntr_set_volume(m_sound, m_volume);
+	pntr_set_volume(m_sound, m_volume * ChaiLove::getInstance()->audio.getVolume());
 	return *this;
 }
 
