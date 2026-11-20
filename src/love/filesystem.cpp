@@ -75,6 +75,8 @@ void filesystem::mountlibretro() {
     retro_environment_t environ_cb = pntr_app_libretro_environ_cb(NULL);
 	if (environ_cb == NULL) {
 		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] No environment callback for filesystem");
+		mount(".", "/libretro/saves", false);
+		return;
 	}
 
 	if (environ_cb(RETRO_ENVIRONMENT_GET_LIBRETRO_PATH, &core_dir) && core_dir) {
@@ -89,7 +91,9 @@ void filesystem::mountlibretro() {
 		mount(assets_dir, "/libretro/assets", false);
 	}
 	if (environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
-		save_dir = *save_dir ? save_dir : system_dir;
+		if (*save_dir == '\0') {
+			save_dir = system_dir != NULL ? system_dir : ".";
+		}
 		mount(save_dir, "/libretro/saves", false);
 	} else if (system_dir) {
 		// Have the system directory be the save directory if available.

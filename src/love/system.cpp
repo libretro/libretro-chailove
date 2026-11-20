@@ -69,7 +69,8 @@ void system::updateVariables(config& t) {
 	struct retro_variable var = {0};
     retro_environment_t environ_cb = pntr_app_libretro_environ_cb(NULL);
 	if (environ_cb == NULL) {
-		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] No environment callback for filesystem");
+		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] No environment callback for core options");
+		return;
 	}
 
 	// Alpha Blending

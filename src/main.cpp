@@ -172,10 +172,10 @@ void Event(pntr_app* app, pntr_app_event* event) {
 
 bool Update(pntr_app* app, pntr_image* screen) {
     ChaiLove* chailove = (ChaiLove*)pntr_app_userdata(app);
-    chailove->screen = screen;
     if (chailove == NULL) {
         return false;
     }
+    chailove->screen = screen;
 
 	// Update the game.
 	chailove->update();
