@@ -143,13 +143,12 @@ std::string data::hash(const std::string& hashFunction, const std::string& data)
 }
 
 std::string data::hash_md5(const std::string& data) {
-	const char* input = data.c_str();
 	unsigned char digest[16];
 
 	// Calculate the MD5 hash using libretro-common.
 	MD5_CTX context;
 	MD5_Init(&context);
-	MD5_Update(&context, input, strlen(input));
+	MD5_Update(&context, data.data(), data.size());
 	MD5_Final(digest, &context);
 
 	// Construct the MD5 hash string.

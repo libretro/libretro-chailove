@@ -306,12 +306,14 @@ std::vector<std::string> filesystem::lines(const std::string& filename, const st
 	std::string str = read(filename);
 	std::vector<std::string> strings;
 
-	if (!str.empty()) {
+	if (!str.empty() && delimiter.empty()) {
+		strings.push_back(str);
+	} else if (!str.empty()) {
 		std::string::size_type pos = 0;
 		std::string::size_type prev = 0;
 		while ((pos = str.find(delimiter, prev)) != std::string::npos) {
 			strings.push_back(str.substr(prev, pos - prev));
-			prev = pos + 1;
+			prev = pos + delimiter.length();
 		}
 
 		// To get the last substring (or only, if delimiter is not found)
