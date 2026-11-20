@@ -123,13 +123,10 @@ void Event(pntr_app* app, pntr_app_event* event) {
         break;
 
         case PNTR_APP_EVENTTYPE_LOAD: {
-            // Create a string stream from the data.
-            std::stringstream ss(std::string(
-                reinterpret_cast<const char*>(event->save),
-                reinterpret_cast<const char*>(event->save) + event->save_size));
-
-            // Port the string stream to a straight string.
-            std::string loadData = ss.str();
+            // The state is NUL-terminated within the fixed-size buffer.
+            const char* data = reinterpret_cast<const char*>(event->save);
+            const char* end = reinterpret_cast<const char*>(memchr(data, '\0', event->save_size));
+            std::string loadData(data, end != NULL ? end - data : event->save_size);
 
             // Finally, load the string.
             chailove->loadstate(loadData);
@@ -143,8 +140,16 @@ void Event(pntr_app* app, pntr_app_event* event) {
                 return;
             }
 
-            // Save the information to the state data.
-            std::copy(state.begin(), state.end(), (char*)event->save);
+            // Leave room for the NUL terminator.
+            if (state.size() >= event->save_size) {
+                pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] savestate() data is too large for the save buffer");
+                return;
+            }
+
+            // Save the information to the state data, zeroing the rest of the buffer.
+            char* save = reinterpret_cast<char*>(event->save);
+            std::copy(state.begin(), state.end(), save);
+            memset(save + state.size(), 0, event->save_size - state.size());
         }
         break;
 
