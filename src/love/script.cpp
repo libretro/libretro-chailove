@@ -144,6 +144,13 @@ script::script(const std::string& file) {
 	chai.add(fun(&chailove_error), "error");
 	chai.add(fun(&chailove_error_level), "error");
 
+	// Route ChaiScript's print(x) and puts(x) for any type to the libretro log.
+	// Guarded overloads are dispatched before the prelude's stdout versions.
+	chai.eval(R"(
+		def print(x) : true { print(to_string(x)); }
+		def puts(x) : true { print(to_string(x)); }
+	)");
+
 	// ChaiScript Standard Library Additions
 	// This adds some basic type definitions to ChaiScript.
 	chai.add(bootstrap::standard_library::vector_type<std::vector<int>>("VectorInt"));
