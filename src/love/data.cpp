@@ -61,23 +61,18 @@ std::string data::compress(const std::string& str, int compressionlevel) {
 }
 
 std::string data::decompress(const std::string& str) {
-	return decompress(str.data(), str.size());
-}
-
-std::string data::decompress(const char* input, size_t size, size_t expectedSize) {
 	z_stream zs;
 	memset(&zs, 0, sizeof(zs));
 
 	if (inflateInit(&zs) != Z_OK)
 		throw(std::runtime_error("inflateInit failed while decompressing."));
 
-	zs.next_in = (Bytef*)input;
-	zs.avail_in = size;
+	zs.next_in = (Bytef*)str.data();
+	zs.avail_in = str.size();
 
 	int ret;
 	char outbuffer[32768];
 	std::string outstring;
-	outstring.reserve(expectedSize);
 
 	do {
 		zs.next_out = reinterpret_cast<Bytef*>(outbuffer);
