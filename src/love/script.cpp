@@ -293,10 +293,7 @@ script::script(const std::string& file) {
 	chai.add(fun<love::graphics&, graphics, const std::string&>(&graphics::print), "print");
 	chai.add(fun<love::graphics&, graphics, int, int>(&graphics::point), "point");
 	chai.add(fun<love::graphics&, graphics, Point*>(&graphics::point), "point");
-	// chai.add(bootstrap::standard_library::vector_type<std::vector<Point*>>("VectorPointPointer"));
-	// chai.add(bootstrap::standard_library::vector_type<std::vector<Point>>("VectorPoint"));
-	// chai.add(fun<void, graphics, std::vector<Point*>>(&graphics::points), "points");
-	// chai.add(fun<void, graphics, std::vector<Point>>(&graphics::points), "points");
+	chai.add(fun<love::graphics&, graphics, const std::vector<chaiscript::Boxed_Value>&>(&graphics::points), "points");
 	chai.add(fun(&graphics::arc), "arc");
 	chai.add(fun(&graphics::ellipse), "ellipse");
 	chai.add(fun(&graphics::getWidth), "getWidth");

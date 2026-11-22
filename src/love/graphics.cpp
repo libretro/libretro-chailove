@@ -5,6 +5,9 @@
 #include "Types/Graphics/Font.h"
 #include "Types/Graphics/Color.h"
 
+#include <limits>
+#include <vector>
+
 using love::Types::Graphics::Image;
 using love::Types::Graphics::Quad;
 using love::Types::Graphics::Font;
@@ -60,20 +63,82 @@ graphics& graphics::point(Point* p) {
 	return point(p->x, p->y);
 }
 
-/*
-TODO: Fix graphics.points(Vector<Points>)
-void graphics::points(std::vector<Point*> points) {
-	for (std::vector<Point*>::iterator it = points.begin() ; it != points.end(); ++it) {
-		point(*it);
+namespace {
+
+/**
+ * Converts a script coordinate to a pixel, keeping out-of-range values within an int.
+ */
+int toPixel(double value) {
+	if (!(value > -2147483648.0)) {
+		// Negative overflow, or NaN.
+		return std::numeric_limits<int>::min();
 	}
-}
-void graphics::points(std::vector<Point> points) {
-	for (std::vector<Point>::iterator it = points.begin() ; it != points.end(); ++it) {
-		Point a = *it;
-		point(a.x, a.y);
+	if (value > 2147483647.0) {
+		return std::numeric_limits<int>::max();
 	}
+	return static_cast<int>(value);
 }
-*/
+
+/**
+ * Reads a number from a script value, returning false when it is not a number.
+ */
+bool toNumber(const chaiscript::Boxed_Value& value, double* output) {
+	if (!value.get_type_info().is_arithmetic()) {
+		return false;
+	}
+	*output = chaiscript::Boxed_Number(value).get_as<double>();
+	return true;
+}
+
+}  // namespace
+
+graphics& graphics::points(const std::vector<chaiscript::Boxed_Value>& points) {
+	std::vector<pntr_vector> vectors;
+	vectors.reserve(points.size());
+
+	// Numbers are read in x and y pairs.
+	bool hasX = false;
+	double x = 0;
+	double number;
+
+	for (const chaiscript::Boxed_Value& value : points) {
+		if (toNumber(value, &number)) {
+			if (hasX) {
+				vectors.push_back(pntr_vector{toPixel(x), toPixel(number)});
+			} else {
+				x = number;
+			}
+			hasX = !hasX;
+			continue;
+		}
+
+		// A Point.
+		try {
+			const Point& p = chaiscript::boxed_cast<const Point&>(value);
+			vectors.push_back(pntr_vector{toPixel(p.x), toPixel(p.y)});
+			continue;
+		} catch (const chaiscript::exception::bad_boxed_cast&) {
+			// Not a Point.
+		}
+
+		// A nested [x, y] vector.
+		try {
+			const std::vector<chaiscript::Boxed_Value>& pair = chaiscript::boxed_cast<const std::vector<chaiscript::Boxed_Value>&>(value);
+			double pairX, pairY;
+			if (pair.size() >= 2 && toNumber(pair[0], &pairX) && toNumber(pair[1], &pairY)) {
+				vectors.push_back(pntr_vector{toPixel(pairX), toPixel(pairY)});
+			}
+		} catch (const chaiscript::exception::bad_boxed_cast&) {
+			// Unsupported values are skipped.
+		}
+	}
+
+	if (!vectors.empty()) {
+		pntr_draw_points(getScreen(), vectors.data(), static_cast<int>(vectors.size()), color_front);
+	}
+
+	return *this;
+}
 
 graphics& graphics::rectangle(const std::string& drawmode, int x, int y, int width, int height) {
 	if (drawmode == "line") {
