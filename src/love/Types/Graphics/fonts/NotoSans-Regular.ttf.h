@@ -13887,5 +13887,6 @@ static const unsigned char NotoSans_Regular_ttf_zlib[] = {
 };
 
 static const unsigned int NotoSans_Regular_ttf_zlib_len = 222055;
+static const unsigned int NotoSans_Regular_ttf_len = 431364;
 
 #endif  // SRC_LOVE_TYPES_GRAPHICS_FONTS_NOTOSANS_REGULAR_TTF_H_

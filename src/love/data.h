@@ -1,6 +1,7 @@
 #ifndef SRC_LOVE_DATA_H_
 #define SRC_LOVE_DATA_H_
 
+#include <cstddef>
 #include <string>
 
 namespace love {
@@ -40,6 +41,19 @@ class data {
 	 * @see love.data.compress
 	 */
 	std::string decompress(const std::string& str);
+
+	/**
+	 * Decompresses a compressed buffer, without copying it into a string first.
+	 *
+	 * @internal Not exposed to scripts. Used to load embedded data, like the default font.
+	 *
+	 * @param input The compressed data.
+	 * @param size The size of the compressed data.
+	 * @param expectedSize (0) The decompressed size, if known, to avoid reallocations.
+	 *
+	 * @return A string containing the raw decompressed data.
+	 */
+	std::string decompress(const char* input, size_t size, size_t expectedSize = 0);
 
 	/**
 	 * Encode Data or a string to a Data or string in one of the EncodeFormats.
