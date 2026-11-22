@@ -125,3 +125,5 @@ And many others!
 ## License
 
 [MIT](COPYING)
+
+The default font, Bitstream Vera Sans, is under the [Bitstream Vera license](src/love/Types/Graphics/fonts/Vera-COPYRIGHT.TXT).

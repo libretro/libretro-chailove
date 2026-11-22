@@ -117,11 +117,11 @@ class graphics {
 	Font* newFont(const std::string& filename);
 
 	/**
-	 * Creates a new pixel font at the given size.
+	 * Creates a new default font (Bitstream Vera Sans) at the given size.
 	 *
-	 * @param size (8) The size of the font to create.
+	 * @param size (12) The size of the font to create.
 	 *
-	 * @return The created Pixel font.
+	 * @return The created font.
 	 */
 	Font* newFont(int size);
 	Font* newFont();

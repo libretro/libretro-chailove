@@ -10,7 +10,6 @@ void libretro_chailove_pntr_set_error(int error);
 #include "pntr_physfs.h"
 
 #define PNTR_APP_IMPLEMENTATION
-#define PNTR_ENABLE_DEFAULT_FONT
 #define PNTR_ENABLE_TTF
 #define PNTR_ENABLE_MATH
 #define PNTR_NO_STDIO
