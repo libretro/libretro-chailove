@@ -138,15 +138,9 @@ graphics& graphics::draw(Image* image, int x, int y, float r, float sx, float sy
 		return *this;
 	}
 
-	// Rotate scaled
-	// TODO: Implement proper rotozoomSurfaceXY
-	pntr_image* scaled = pntr_image_scale(image->surface, sx, sy, m_smooth);
-	if (scaled != NULL) {
-		float newox = ox / (float)image->getWidth() * (float)scaled->width;
-		float newoy = oy / (float)image->getHeight() * (float)scaled->height;
-		pntr_draw_image_rotated(getScreen(), scaled, x, y, degrees, newox, newoy, m_smooth);
-		pntr_unload_image(scaled);
-	}
+	// Rotated and scaled, with the origin given in unscaled image pixels.
+	pntr_rectangle srcRect = {0, 0, 0, 0};
+	pntr_draw_image_rotozoom(getScreen(), image->surface, srcRect, x, y, degrees, sx, sy, ox, oy, m_smooth, PNTR_WHITE);
 
 	return *this;
 }
