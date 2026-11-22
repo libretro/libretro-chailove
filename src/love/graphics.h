@@ -17,6 +17,10 @@ using love::Types::Graphics::Font;
 using love::Types::Graphics::Point;
 using love::Types::Graphics::Color;
 
+namespace chaiscript {
+class Boxed_Value;
+}
+
 namespace love {
 
 /**
@@ -73,8 +77,23 @@ class graphics {
 	 */
 	graphics& point(Point* p);
 
-	// void points(std::vector<Point*>);
-	// void points(std::vector<Point>);
+	/**
+	 * Draws one or more points, using the current color.
+	 *
+	 * @param points A vector of Point objects, of [x, y] pairs, or a flat list of x and y numbers. Values that are not understood are skipped.
+	 *
+	 * @code
+	 * // A vector of Points.
+	 * love.graphics.points([Point(100, 100), Point(110, 100)])
+	 *
+	 * // A flat vector of x and y coordinates.
+	 * love.graphics.points([100, 110, 120, 110])
+	 *
+	 * // A vector of [x, y] pairs.
+	 * love.graphics.points([[100, 120], [110, 120]])
+	 * @endcode
+	 */
+	graphics& points(const std::vector<chaiscript::Boxed_Value>& points);
 
 	/**
 	 * Draws a line.

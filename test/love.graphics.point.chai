@@ -8,6 +8,10 @@ class love_graphics_point {
 	def draw() {
 		// graphics.setColor(0, 255, 0)
 		love.graphics.point(100, 200).point(200, 300)
+
+		// Draw a line of points from a vector of Points, and from a flat vector of numbers.
+		love.graphics.points([Point(300, 200), Point(302, 200), Point(304, 200), Point(306, 200)])
+		love.graphics.points([300, 210, 302, 210, 304, 210, 306, 210])
 	}
 
 	def update(delta) {
