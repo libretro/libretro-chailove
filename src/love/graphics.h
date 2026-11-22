@@ -117,9 +117,9 @@ class graphics {
 	Font* newFont(const std::string& filename);
 
 	/**
-	 * Creates a new default font (Bitstream Vera Sans) at the given size.
+	 * Creates a new default font (Noto Sans) at the given size.
 	 *
-	 * @param size (12) The size of the font to create.
+	 * @param size (13) The size of the font to create.
 	 *
 	 * @return The created font.
 	 */

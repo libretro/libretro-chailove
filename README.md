@@ -126,4 +126,4 @@ And many others!
 
 [MIT](COPYING)
 
-The default font, Bitstream Vera Sans, is under the [Bitstream Vera license](src/love/Types/Graphics/fonts/Vera-COPYRIGHT.TXT).
+The default font, Noto Sans, is under the [SIL Open Font License](src/love/Types/Graphics/fonts/NotoSans-OFL.txt).
