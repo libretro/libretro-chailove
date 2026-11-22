@@ -4,7 +4,7 @@
 #include "../../../ChaiLove.h"
 #include "Image.h"
 #include "fonts/NotoSans-Regular.ttf.h"
-#include "zlib.h"
+#include "../../data.h"
 
 namespace love {
 namespace Types {
@@ -15,24 +15,13 @@ Font::Font() : Font(13) {
 
 Font::Font(int size) {
 	// Decompress the embedded Noto Sans before loading it.
-	unsigned char* data = (unsigned char*)pntr_load_memory(NotoSans_Regular_ttf_len);
-	if (data == NULL) {
-		return;
+	try {
+		std::string compressed((const char*)NotoSans_Regular_ttf_zlib, NotoSans_Regular_ttf_zlib_len);
+		std::string fontData = love::data().decompress(compressed);
+		font = pntr_load_font_ttf_from_memory((const unsigned char*)fontData.data(), fontData.size(), size);
+	} catch (const std::exception& e) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [graphics] Failed to load default font: %s", e.what());
 	}
-
-	z_stream zs = {};
-	zs.next_in = (Bytef*)NotoSans_Regular_ttf_zlib;
-	zs.avail_in = NotoSans_Regular_ttf_zlib_len;
-	zs.next_out = data;
-	zs.avail_out = NotoSans_Regular_ttf_len;
-	if (inflateInit(&zs) == Z_OK) {
-		if (inflate(&zs, Z_FINISH) == Z_STREAM_END) {
-			font = pntr_load_font_ttf_from_memory(data, NotoSans_Regular_ttf_len, size);
-		}
-		inflateEnd(&zs);
-	}
-
-	pntr_unload_memory(data);
 }
 
 Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
