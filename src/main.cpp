@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stddef.h>
 #include "libretro.h"
-#define PROJECT_VERSION "2.0.0"
+#define PROJECT_VERSION "2.1.0"
 
 void libretro_chailove_pntr_set_error(int error);
 #define PNTR_SET_ERROR libretro_chailove_pntr_set_error
