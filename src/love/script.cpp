@@ -145,6 +145,18 @@ void script::find(bool& has, const char* name, Function& function) {
 	}
 }
 
+/**
+ * Describes a value thrown by a script, such as throw("Game over").
+ */
+std::string describeThrown(const chaiscript::Boxed_Value& value) {
+	try {
+		return chaiscript::boxed_cast<std::string>(value);
+	}
+	catch (const chaiscript::exception::bad_boxed_cast&) {
+		return "The script threw a value that isn't a string";
+	}
+}
+
 void script::call(bool& has, const char* name, const std::function<void()>& function) {
 	if (!has) {
 		return;
@@ -154,6 +166,10 @@ void script::call(bool& has, const char* name, const std::function<void()>& func
 	}
 	catch (const std::exception& e) {
 		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call %s: %s", name, e.what());
+		has = false;
+	}
+	catch (const chaiscript::Boxed_Value& value) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call %s: %s", name, describeThrown(value).c_str());
 		has = false;
 	}
 }
@@ -473,16 +489,26 @@ script::script(const std::string& file) {
 	// Ensure the love namespace is imported and ready.
 	chai.import("love");
 
-	// Load the main.chai file.
-	require("conf");
+	// Load the conf.chai and main.chai files, where errors would stop the game from loading.
+	try {
+		require("conf");
 
-	std::string extension(app->filesystem.getFileExtension(file));
-	if (extension == "chailove" || extension == "chaigame") {
-		mainLoaded = require("main");
-	} else {
-		// Otherwise, load the actual file.
-		std::string filename(app->filesystem.getBasename(file));
-		mainLoaded = require(filename);
+		std::string extension(app->filesystem.getFileExtension(file));
+		if (extension == "chailove" || extension == "chaigame") {
+			mainLoaded = require("main");
+		} else {
+			// Otherwise, load the actual file.
+			std::string filename(app->filesystem.getBasename(file));
+			mainLoaded = require(filename);
+		}
+	}
+	catch (const std::exception& e) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] %s", e.what());
+		mainLoaded = false;
+	}
+	catch (const chaiscript::Boxed_Value& value) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] %s", describeThrown(value).c_str());
+		mainLoaded = false;
 	}
 
 	// Find the game functions.
