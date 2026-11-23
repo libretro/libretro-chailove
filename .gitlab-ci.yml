@@ -262,10 +262,11 @@ libretro-build-vita:
 #    - .core-defs
 
 # PlayStation3
-libretro-build-psl1ght:
-  extends:
-    - .libretro-psl1ght-static-retroarch-master
-    - .core-defs
+# Disabled: its toolchain lacks the C99 functions ChaiScript needs, like std::to_string().
+#libretro-build-psl1ght:
+#  extends:
+#    - .libretro-psl1ght-static-retroarch-master
+#    - .core-defs
 
 # Nintendo 3DS
 libretro-build-ctr:
@@ -298,10 +299,11 @@ libretro-build-libnx-aarch64:
     - .core-defs
 
 # OpenDingux
-libretro-build-dingux-mips32:
-  extends:
-    - .libretro-dingux-mips32-make-default
-    - .core-defs
+# Disabled: its toolchain lacks the C99 functions ChaiScript needs, like std::to_string().
+#libretro-build-dingux-mips32:
+#  extends:
+#    - .libretro-dingux-mips32-make-default
+#    - .core-defs
 
 # OpenDingux Beta
 libretro-build-dingux-odbeta-mips32:
