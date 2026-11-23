@@ -133,6 +133,32 @@ void chailove_error_level(const std::string& message, int level) {
 	pntr_app_log(PNTR_APP_LOG_ERROR, message.c_str());
 }
 
+#ifdef __HAVE_CHAISCRIPT__
+template <typename Function>
+void script::find(bool& has, const char* name, Function& function) {
+	try {
+		function = chai.eval<Function>(name);
+	}
+	catch (const std::exception& e) {
+		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] %s() %s", name, e.what());
+		has = false;
+	}
+}
+
+void script::call(bool& has, const char* name, const std::function<void()>& function) {
+	if (!has) {
+		return;
+	}
+	try {
+		function();
+	}
+	catch (const std::exception& e) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call %s: %s", name, e.what());
+		has = false;
+	}
+}
+#endif
+
 script::script(const std::string& file) {
 	#ifdef __HAVE_CHAISCRIPT__
 	ChaiLove* app = ChaiLove::getInstance();
@@ -460,218 +486,60 @@ script::script(const std::string& file) {
 	}
 
 	// Find the game functions.
-	try {
-		chaiload = chai.eval<std::function<void()> >("load");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] load() %s", e.what());
-		hasload = false;
-	}
-	try {
-		chaireset = chai.eval<std::function<void()> >("reset");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] reset() %s", e.what());
-		hasreset = false;
-	}
-	try {
-		chaiupdate = chai.eval<std::function<void(float)> >("update");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] update(delta) %s", e.what());
-		hasUpdate = false;
-	}
-	try {
-		chaiconf = chai.eval<std::function<void(config&)> >("conf");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] conf(t) %s", e.what());
-		hasconf = false;
-	}
-	try {
-		chaidraw = chai.eval<std::function<void()> >("draw");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] draw() %s", e.what());
-		hasDraw = false;
-	}
-	try {
-		chaigamepadpressed = chai.eval<std::function<void(Joystick*, const std::string&)> >("gamepadpressed");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] gamepadpressed() %s", e.what());
-		hasgamepadpressed = false;
-	}
-	try {
-		chaigamepadreleased = chai.eval<std::function<void(Joystick*, const std::string&)> >("gamepadreleased");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] gamepadreleased() %s", e.what());
-		hasgamepadreleased = false;
-	}
+	find(hasload, "load", chaiload);
+	find(hasreset, "reset", chaireset);
+	find(hasUpdate, "update", chaiupdate);
+	find(hasconf, "conf", chaiconf);
+	find(hasDraw, "draw", chaidraw);
+	find(hasgamepadpressed, "gamepadpressed", chaigamepadpressed);
+	find(hasgamepadreleased, "gamepadreleased", chaigamepadreleased);
 
-	try {
-		chaijoystickpressed = chai.eval<std::function<void(Joystick*, int)> >("joystickpressed");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] joystickpressed() %s", e.what());
-		hasjoystickpressed = false;
-	}
+	find(hasjoystickpressed, "joystickpressed", chaijoystickpressed);
 
-	try {
-		chaijoystickreleased = chai.eval<std::function<void(Joystick*, int)> >("joystickreleased");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] joystickreleased() %s", e.what());
-		hasjoystickreleased = false;
-	}
+	find(hasjoystickreleased, "joystickreleased", chaijoystickreleased);
 
-	try {
-		chaimousepressed = chai.eval<std::function<void(int, int, const std::string&)> >("mousepressed");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] mousepressed() %s", e.what());
-		hasmousepressed = false;
-	}
-	try {
-		chaimousereleased = chai.eval<std::function<void(int, int, const std::string&)> >("mousereleased");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] mousereleased() %s", e.what());
-		hasmousereleased = false;
-	}
-	try {
-		chaimousemoved = chai.eval<std::function<void(int, int, int, int)> >("mousemoved");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] mousemoved() %s", e.what());
-		hasmousemoved = false;
-	}
-	try {
-		chaiwheelmoved = chai.eval<std::function<void(int, int)> >("wheelmoved");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] wheelmoved() %s", e.what());
-		haswheelmoved = false;
-	}
-	try {
-		chaikeypressed = chai.eval<std::function<void(const std::string&, int)> >("keypressed");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] keypressed() %s", e.what());
-		haskeypressed = false;
-	}
-	try {
-		chaikeyreleased = chai.eval<std::function<void(const std::string&, int)> >("keyreleased");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] keyreleased() %s", e.what());
-		haskeyreleased = false;
-	}
-	try {
-		chailoadstate = chai.eval<std::function<bool(const std::string&)> >("loadstate");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] loadstate() %s", e.what());
-		hasloadstate = false;
-	}
-	try {
-		chaisavestate = chai.eval<std::function<std::string()> >("savestate");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] savestate() %s", e.what());
-		hassavestate = false;
-	}
-	try {
-		chaicheatreset = chai.eval<std::function<void()> >("cheatreset");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] cheatreset() Warning: %s", e.what());
-		hascheatreset = false;
-	}
-	try {
-		chaicheatset = chai.eval<std::function<void(int, bool, const std::string&)> >("cheatset");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] cheatset() Warning: %s", e.what());
-		hascheatset = false;
-	}
-	try {
-		chaiexit = chai.eval<std::function<void()> >("exit");
-	}
-	catch (const std::exception& e) {
-		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] exit() Warning: %s", e.what());
-		hasexit = false;
-	}
+	find(hasmousepressed, "mousepressed", chaimousepressed);
+	find(hasmousereleased, "mousereleased", chaimousereleased);
+	find(hasmousemoved, "mousemoved", chaimousemoved);
+	find(haswheelmoved, "wheelmoved", chaiwheelmoved);
+	find(haskeypressed, "keypressed", chaikeypressed);
+	find(haskeyreleased, "keyreleased", chaikeyreleased);
+	find(hasloadstate, "loadstate", chailoadstate);
+	find(hassavestate, "savestate", chaisavestate);
+	find(hascheatreset, "cheatreset", chaicheatreset);
+	find(hascheatset, "cheatset", chaicheatset);
+	find(hasexit, "exit", chaiexit);
 	#endif
 }
 
 void script::conf(config& t) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasconf) {
-		try {
-			chaiconf(t);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] Failed to invoke conf(t): %s", e.what());
-			hasconf = false;
-		}
-	}
+	call(hasconf, "conf(t)", [&] { chaiconf(t); });
 	#endif
 }
 
 void script::load() {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasload) {
-		try {
-			chaiload();
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call load(): %s", e.what());
-			hasload = false;
-		}
-	}
+	call(hasload, "load()", [&] { chaiload(); });
 	#endif
 }
 
 void script::reset() {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasreset) {
-		try {
-			chaireset();
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call reset(): %s", e.what());
-			hasreset = false;
-		}
-	}
+	call(hasreset, "reset()", [&] { chaireset(); });
 	#endif
 }
 
 void script::update(float delta) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasUpdate) {
-		try {
-			chaiupdate(delta);
-		}
-		catch (const std::exception& e) {
-			hasUpdate = false;
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call update(delta): %s", e.what());
-		}
-	}
+	call(hasUpdate, "update(delta)", [&] { chaiupdate(delta); });
 	#endif
 }
 
 void script::draw() {
 	#ifdef __HAVE_CHAISCRIPT__
 	if (hasDraw) {
-		try {
-			chaidraw();
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call draw(): %s", e.what());
-			hasDraw = false;
-		}
+		call(hasDraw, "draw()", [&] { chaidraw(); });
 	} else {
 		ChaiLove::getInstance()->graphics.print("ChaiLove: def draw() not found.", 100, 100);
 	}
@@ -680,141 +548,61 @@ void script::draw() {
 
 void script::gamepadpressed(Joystick* joystick, const std::string& button) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasgamepadpressed) {
-		try {
-			chaigamepadpressed(joystick, button);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call gamepadpressed(): %s", e.what());
-			hasgamepadpressed = false;
-		}
-	}
+	call(hasgamepadpressed, "gamepadpressed()", [&] { chaigamepadpressed(joystick, button); });
 	#endif
 }
 
 void script::gamepadreleased(Joystick* joystick, const std::string& button) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasgamepadreleased) {
-		try {
-			chaigamepadreleased(joystick, button);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call gamepadreleased(): %s", e.what());
-			hasgamepadreleased = false;
-		}
-	}
+	call(hasgamepadreleased, "gamepadreleased()", [&] { chaigamepadreleased(joystick, button); });
 	#endif
 }
 
 void script::joystickpressed(Joystick* joystick, int button) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasjoystickpressed) {
-		try {
-			chaijoystickpressed(joystick, button);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call joystickpressed(): %s", e.what());
-			hasjoystickpressed = false;
-		}
-	}
+	call(hasjoystickpressed, "joystickpressed()", [&] { chaijoystickpressed(joystick, button); });
 	#endif
 }
 
 void script::joystickreleased(Joystick* joystick, int button) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasjoystickreleased) {
-		try {
-			chaijoystickreleased(joystick, button);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call joystickreleased(): %s", e.what());
-			hasjoystickreleased = false;
-		}
-	}
+	call(hasjoystickreleased, "joystickreleased()", [&] { chaijoystickreleased(joystick, button); });
 	#endif
 }
 
 void script::mousepressed(int x, int y, const std::string& button) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasmousepressed) {
-		try {
-			chaimousepressed(x, y, button);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call mousepressed(): %s", e.what());
-			hasmousepressed = false;
-		}
-	}
+	call(hasmousepressed, "mousepressed()", [&] { chaimousepressed(x, y, button); });
 	#endif
 }
 
 void script::mousereleased(int x, int y, const std::string& button) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasmousereleased) {
-		try {
-			chaimousereleased(x, y, button);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call mousereleased(): %s", e.what());
-			hasmousereleased = false;
-		}
-	}
+	call(hasmousereleased, "mousereleased()", [&] { chaimousereleased(x, y, button); });
 	#endif
 }
 
 void script::mousemoved(int x, int y, int dx, int dy) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasmousemoved) {
-		try {
-			chaimousemoved(x, y, dx, dy);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call mousemoved(): %s", e.what());
-			hasmousemoved = false;
-		}
-	}
+	call(hasmousemoved, "mousemoved()", [&] { chaimousemoved(x, y, dx, dy); });
 	#endif
 }
 
 void script::wheelmoved(int x, int y) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (haswheelmoved) {
-		try {
-			chaiwheelmoved(x, y);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call wheelmoved(): %s", e.what());
-			haswheelmoved = false;
-		}
-	}
+	call(haswheelmoved, "wheelmoved()", [&] { chaiwheelmoved(x, y); });
 	#endif
 }
 
 void script::keypressed(const std::string& key, int scancode) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (haskeypressed) {
-		try {
-			chaikeypressed(key, scancode);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call keypressed(): %s", e.what());
-			haskeypressed = false;
-		}
-	}
+	call(haskeypressed, "keypressed()", [&] { chaikeypressed(key, scancode); });
 	#endif
 }
 
 void script::keyreleased(const std::string& key, int scancode) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (haskeyreleased) {
-		try {
-			chaikeyreleased(key, scancode);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call keyreleased(): %s", e.what());
-			haskeyreleased = false;
-		}
-	}
+	call(haskeyreleased, "keyreleased()", [&] { chaikeyreleased(key, scancode); });
 	#endif
 }
 
@@ -822,81 +610,41 @@ void script::keyreleased(const std::string& key, int scancode) {
  * Call the script's savestate() function and retrieve a string.
  */
 std::string script::savestate() {
-	#ifdef __HAVE_CHAISCRIPT__
-	if (hassavestate) {
-		try {
-			return chaisavestate();
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call savestate(): %s", e.what());
-			hassavestate = false;
-		}
-	}
-	#endif
-
 	// If there is no state data, return an empty string.
-	return std::string("");
+	std::string state;
+	#ifdef __HAVE_CHAISCRIPT__
+	call(hassavestate, "savestate()", [&] { state = chaisavestate(); });
+	#endif
+	return state;
 }
 
 /**
  * Pass the state data string over to the script, asking it to load the state.
  */
 bool script::loadstate(const std::string& data) {
-	#ifdef __HAVE_CHAISCRIPT__
-	if (hasloadstate) {
-		try {
-			return chailoadstate(data);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call loadstate(): %s", e.what());
-			hasloadstate = false;
-		}
-	}
-	#endif
-
 	// If there is an error in loading the state, return false.
-	return false;
+	bool loaded = false;
+	#ifdef __HAVE_CHAISCRIPT__
+	call(hasloadstate, "loadstate()", [&] { loaded = chailoadstate(data); });
+	#endif
+	return loaded;
 }
 
 void script::cheatreset() {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hascheatreset) {
-		try {
-			chaicheatreset();
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call cheatreset(): %s", e.what());
-			hascheatreset = false;
-		}
-	}
+	call(hascheatreset, "cheatreset()", [&] { chaicheatreset(); });
 	#endif
 }
 
 void script::cheatset(int index, bool enabled, const std::string& code) {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hascheatset) {
-		try {
-			chaicheatset(index, enabled, code);
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call cheatset(): %s", e.what());
-			hascheatset = false;
-		}
-	}
+	call(hascheatset, "cheatset()", [&] { chaicheatset(index, enabled, code); });
 	#endif
 }
 
 void script::exit() {
 	#ifdef __HAVE_CHAISCRIPT__
-	if (hasexit) {
-		try {
-			chaiexit();
-		}
-		catch (const std::exception& e) {
-			pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [script] Failed to call exit(): %s", e.what());
-			hasexit = false;
-		}
-	}
+	call(hasexit, "exit()", [&] { chaiexit(); });
 	#endif
 }
 
