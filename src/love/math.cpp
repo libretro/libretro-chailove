@@ -35,8 +35,9 @@ double math::random(double max) {
 	return (double)pntr_app_random_float(app, 0.0f, (float)max);
 }
 
-math& math::setRandomSeed(int min, int max) {
-	return setRandomSeed(random(min, max));
+math& math::setRandomSeed(int low, int high) {
+	pntr_app_random_set_seed(app, ((uint64_t)(uint32_t)high << 32) | (uint32_t)low);
+	return *this;
 }
 
 math& math::setRandomSeed(int seed) {
