@@ -125,3 +125,5 @@ And many others!
 ## License
 
 [MIT](COPYING)
+
+The default font, Noto Sans, is under the [SIL Open Font License](src/love/Types/Graphics/fonts/NotoSans-OFL.txt).

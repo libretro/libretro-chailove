@@ -3,23 +3,17 @@
 #include <string>
 #include "../../../ChaiLove.h"
 #include "Image.h"
+#include "fonts/NotoSans-Regular.ttf.h"
 
 namespace love {
 namespace Types {
 namespace Graphics {
 
-Font::Font() {
-	font = pntr_load_font_default();
+Font::Font() : Font(13) {
 }
 
 Font::Font(int size) {
-	font = pntr_load_font_default();
-	if (font != NULL) {
-		float scale = (float)size / 8.0f;
-		pntr_font* newFont = pntr_font_scale(font, scale, scale, PNTR_FILTER_NEARESTNEIGHBOR);
-		pntr_unload_font(font);
-		font = newFont;
-	}
+	font = pntr_load_font_ttf_from_memory(NotoSans_Regular_ttf, NotoSans_Regular_ttf_len, size);
 }
 
 Font::Font(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
