@@ -85,6 +85,10 @@ if (mountLoadResultType) {
 }
 */
 
+// mount() - Only from within the game
+assert_not(love.filesystem.mount("/etc", "/host"), "love.filesystem.mount() outside of the game")
+assert_not(love.filesystem.mount("..", "/parent"), "love.filesystem.mount() parent directory")
+
 // unmount()
 love.filesystem.unmount("assets/hello.zip")
 assert_not(love.filesystem.exists("hello/hello.txt"), "love.filesystem.unmount()")

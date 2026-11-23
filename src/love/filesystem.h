@@ -143,6 +143,20 @@ class filesystem {
 	bool mount(const void *data, unsigned int size, const std::string& mountpoint);
 
 	/**
+	 * Mounts a folder or archive from anywhere on the host. Not exposed to scripts.
+	 *
+	 * @internal
+	 */
+	bool mountHost(const std::string& archive, const std::string& mountpoint, bool appendToPath);
+
+	/**
+	 * Finds the host path of a file within the game, or an empty string if it is not in the game.
+	 *
+	 * @internal
+	 */
+	std::string getGamePath(const std::string& archive);
+
+	/**
 	 * Gets the path to the designated save directory.
 	 *
 	 * @return The path to the save directory.
