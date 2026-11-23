@@ -152,6 +152,14 @@ void Event(pntr_app* app, pntr_app_event* event) {
         }
         break;
 
+        case PNTR_APP_EVENTTYPE_RESET:
+            chailove->reset();
+        break;
+
+        case PNTR_APP_EVENTTYPE_CHEAT_RESET:
+            chailove->cheatreset();
+        break;
+
         case PNTR_APP_EVENTTYPE_CHEAT: {
             if (event->cheat == NULL) {
                 return;
