@@ -341,23 +341,27 @@ graphics& graphics::ellipse(const std::string& drawmode, int x, int y, int radiu
 }
 
 Font* graphics::newFont(const std::string& filename, int glyphWidth, int glyphHeight, const std::string& letters) {
-	return ChaiLove::getInstance()->font.add(new Font(filename, glyphWidth, glyphHeight, letters));
+	std::string key = filename + ":" + std::to_string(glyphWidth) + "x" + std::to_string(glyphHeight) + ":" + letters;
+	return ChaiLove::getInstance()->font.get(key, [&] { return new Font(filename, glyphWidth, glyphHeight, letters); });
 }
 
 Font* graphics::newFont(const std::string& filename, int size) {
-	return ChaiLove::getInstance()->font.add(new Font(filename, size));
+	std::string key = filename + ":" + std::to_string(size);
+	return ChaiLove::getInstance()->font.get(key, [&] { return new Font(filename, size); });
 }
 
 Font* graphics::newFont(const std::string& filename) {
-	return ChaiLove::getInstance()->font.add(new Font(filename, 16));
+	return newFont(filename, 16);
 }
 
 Font* graphics::newFont() {
-	return ChaiLove::getInstance()->font.add(new Font());
+	return newFont(13);
 }
 
 Font* graphics::newFont(int size) {
-	return ChaiLove::getInstance()->font.add(new Font(size));
+	// Not a valid file name, so it can't clash with the TrueType font keys.
+	std::string key = ":default:" + std::to_string(size);
+	return ChaiLove::getInstance()->font.get(key, [&] { return new Font(size); });
 }
 
 graphics& graphics::setFont(Font* font) {

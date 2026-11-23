@@ -3,7 +3,7 @@
 
 #include "Types/Graphics/Image.h"
 #include <string>
-#include <list>
+#include <map>
 
 using love::Types::Graphics::Image;
 
@@ -28,12 +28,14 @@ class image {
 	 *
 	 * @param filename The filename of the image file.
 	 *
+	 * Images can't be changed, so loading the same file again returns the same ImageData.
+	 *
 	 * @return The new ImageData object.
 	 */
 	Image* newImageData(const std::string& filename);
 
 	private:
-	std::list<Image*> m_images;
+	std::map<std::string, Image*> m_images;
 };
 
 }  // namespace love
