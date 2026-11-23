@@ -2,11 +2,9 @@
 #include "../ChaiLove.h"
 #include <algorithm>
 
-#ifdef __HAVE_CHAISCRIPT__
 #include "chaiscript/extras/math.hpp"
 #include "chaiscript/extras/string_methods.hpp"
 using namespace chaiscript;
-#endif
 
 using ::ChaiLove;
 using love::Types::Graphics::Point;
@@ -46,7 +44,6 @@ std::string script::findModule(const std::string& filename) {
 }
 
 bool script::loadModule(const std::string& moduleName) {
-	#ifdef __HAVE_CHAISCRIPT__
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Ensure we're loading a valid module name.
@@ -74,8 +71,6 @@ bool script::loadModule(const std::string& moduleName) {
 	// Run the script.
 	eval(contents, filename);
 	return true;
-	#endif
-	return false;
 }
 
 bool script::require(const std::string& moduleName) {
@@ -133,7 +128,6 @@ void chailove_error_level(const std::string& message, int level) {
 	pntr_app_log(PNTR_APP_LOG_ERROR, message.c_str());
 }
 
-#ifdef __HAVE_CHAISCRIPT__
 template <typename Function>
 void script::find(bool& has, const char* name, Function& function) {
 	try {
@@ -173,10 +167,8 @@ void script::call(bool& has, const char* name, const std::function<void()>& func
 		has = false;
 	}
 }
-#endif
 
 script::script(const std::string& file) {
-	#ifdef __HAVE_CHAISCRIPT__
 	ChaiLove* app = ChaiLove::getInstance();
 
 	// Override some of the global Lua functions
@@ -535,101 +527,70 @@ script::script(const std::string& file) {
 	find(hascheatreset, "cheatreset", chaicheatreset);
 	find(hascheatset, "cheatset", chaicheatset);
 	find(hasexit, "exit", chaiexit);
-	#endif
 }
 
 void script::conf(config& t) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasconf, "conf(t)", [&] { chaiconf(t); });
-	#endif
 }
 
 void script::load() {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasload, "load()", [&] { chaiload(); });
-	#endif
 }
 
 void script::reset() {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasreset, "reset()", [&] { chaireset(); });
-	#endif
 }
 
 void script::update(float delta) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasUpdate, "update(delta)", [&] { chaiupdate(delta); });
-	#endif
 }
 
 void script::draw() {
-	#ifdef __HAVE_CHAISCRIPT__
 	if (hasDraw) {
 		call(hasDraw, "draw()", [&] { chaidraw(); });
 	} else {
 		ChaiLove::getInstance()->graphics.print("ChaiLove: def draw() not found.", 100, 100);
 	}
-	#endif
 }
 
 void script::gamepadpressed(Joystick* joystick, const std::string& button) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasgamepadpressed, "gamepadpressed()", [&] { chaigamepadpressed(joystick, button); });
-	#endif
 }
 
 void script::gamepadreleased(Joystick* joystick, const std::string& button) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasgamepadreleased, "gamepadreleased()", [&] { chaigamepadreleased(joystick, button); });
-	#endif
 }
 
 void script::joystickpressed(Joystick* joystick, int button) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasjoystickpressed, "joystickpressed()", [&] { chaijoystickpressed(joystick, button); });
-	#endif
 }
 
 void script::joystickreleased(Joystick* joystick, int button) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasjoystickreleased, "joystickreleased()", [&] { chaijoystickreleased(joystick, button); });
-	#endif
 }
 
 void script::mousepressed(int x, int y, const std::string& button) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasmousepressed, "mousepressed()", [&] { chaimousepressed(x, y, button); });
-	#endif
 }
 
 void script::mousereleased(int x, int y, const std::string& button) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasmousereleased, "mousereleased()", [&] { chaimousereleased(x, y, button); });
-	#endif
 }
 
 void script::mousemoved(int x, int y, int dx, int dy) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasmousemoved, "mousemoved()", [&] { chaimousemoved(x, y, dx, dy); });
-	#endif
 }
 
 void script::wheelmoved(int x, int y) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(haswheelmoved, "wheelmoved()", [&] { chaiwheelmoved(x, y); });
-	#endif
 }
 
 void script::keypressed(const std::string& key, int scancode) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(haskeypressed, "keypressed()", [&] { chaikeypressed(key, scancode); });
-	#endif
 }
 
 void script::keyreleased(const std::string& key, int scancode) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(haskeyreleased, "keyreleased()", [&] { chaikeyreleased(key, scancode); });
-	#endif
 }
 
 /**
@@ -638,9 +599,7 @@ void script::keyreleased(const std::string& key, int scancode) {
 std::string script::savestate() {
 	// If there is no state data, return an empty string.
 	std::string state;
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hassavestate, "savestate()", [&] { state = chaisavestate(); });
-	#endif
 	return state;
 }
 
@@ -650,28 +609,20 @@ std::string script::savestate() {
 bool script::loadstate(const std::string& data) {
 	// If there is an error in loading the state, return false.
 	bool loaded = false;
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasloadstate, "loadstate()", [&] { loaded = chailoadstate(data); });
-	#endif
 	return loaded;
 }
 
 void script::cheatreset() {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hascheatreset, "cheatreset()", [&] { chaicheatreset(); });
-	#endif
 }
 
 void script::cheatset(int index, bool enabled, const std::string& code) {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hascheatset, "cheatset()", [&] { chaicheatset(index, enabled, code); });
-	#endif
 }
 
 void script::exit() {
-	#ifdef __HAVE_CHAISCRIPT__
 	call(hasexit, "exit()", [&] { chaiexit(); });
-	#endif
 }
 
 /**
