@@ -14,6 +14,8 @@ void libretro_chailove_pntr_set_error(int error);
 #define PNTR_ENABLE_MATH
 #define PNTR_NO_STDIO
 #define PNTR_NO_SAVE_IMAGE
+// Room for the string from savestate(). RetroArch keeps one of these for each rewind step.
+#define PNTR_APP_SAVE_SIZE 65536
 #include "pntr_app.h"
 
 #include "ChaiLove.h"
