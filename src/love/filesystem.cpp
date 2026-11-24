@@ -17,7 +17,7 @@ namespace love {
 bool filesystem::init(const std::string& file, const void* data, unsigned int dataSize) {
 	// Check if we are simply running ChaiLove.
 	if (file.empty() && data == NULL) {
-		return mount(".", "/", false);
+		return mountHost(".", "/", false);
 	}
 
 	// Attempt to mount the data straight up.
@@ -28,11 +28,11 @@ bool filesystem::init(const std::string& file, const void* data, unsigned int da
 	// If we are just running the core, load the base path.
 	std::string parentPath(getParentDirectory(file));
 	if (parentPath.empty()) {
-		return mount(".", "/", false);
+		return mountHost(".", "/", false);
 	}
 
 	// Otherwise, we are loading a .chai file directly. Load it.
-	return mount(parentPath.c_str(), "/", false);
+	return mountHost(parentPath.c_str(), "/", false);
 }
 
 std::string filesystem::getParentDirectory(const std::string& filepath) {
@@ -75,32 +75,32 @@ void filesystem::mountlibretro() {
     retro_environment_t environ_cb = pntr_app_libretro_environ_cb(NULL);
 	if (environ_cb == NULL) {
 		pntr_app_log(PNTR_APP_LOG_ERROR, "[ChaiLove] No environment callback for filesystem");
-		mount(".", "/libretro/saves", false);
+		mountHost(".", "/libretro/saves", false);
 		return;
 	}
 
 	if (environ_cb(RETRO_ENVIRONMENT_GET_LIBRETRO_PATH, &core_dir) && core_dir) {
 		// Make sure to get the directory of the core.
 		std::string parentPath(getParentDirectory(core_dir));
-		mount(parentPath, "/libretro/core", false);
+		mountHost(parentPath, "/libretro/core", false);
 	}
 	if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &system_dir) && system_dir) {
-		mount(system_dir, "/libretro/system", false);
+		mountHost(system_dir, "/libretro/system", false);
 	}
 	if (environ_cb(RETRO_ENVIRONMENT_GET_CORE_ASSETS_DIRECTORY, &assets_dir) && assets_dir) {
-		mount(assets_dir, "/libretro/assets", false);
+		mountHost(assets_dir, "/libretro/assets", false);
 	}
 	if (environ_cb(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY, &save_dir) && save_dir) {
 		if (*save_dir == '\0') {
 			save_dir = system_dir != NULL ? system_dir : ".";
 		}
-		mount(save_dir, "/libretro/saves", false);
+		mountHost(save_dir, "/libretro/saves", false);
 	} else if (system_dir) {
 		// Have the system directory be the save directory if available.
-		mount(save_dir = system_dir, "/libretro/saves", false);
+		mountHost(save_dir = system_dir, "/libretro/saves", false);
 	} else {
 		// Save directory becomes the current working directory.
-		mount(save_dir = ".", "/libretro/saves", false);
+		mountHost(save_dir = ".", "/libretro/saves", false);
 	}
 
 	// Ensure the write directory is set to the Save Directory.
@@ -178,7 +178,8 @@ std::string filesystem::read(const std::string& filename) {
 
 bool filesystem::unmount(const std::string& archive) {
 	pntr_app_log_ex(PNTR_APP_LOG_INFO, "[filesystem] Unmounting %s", archive.c_str());
-	int returnValue = PHYSFS_unmount(archive.c_str());
+	std::string path = getGamePath(archive);
+	int returnValue = PHYSFS_unmount(path.empty() ? archive.c_str() : path.c_str());
 	if (returnValue == 0) {
 		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Error unmounting: %s", getLastError().c_str());
 		return false;
@@ -201,6 +202,25 @@ bool filesystem::mount(const std::string& archive, const std::string& mountpoint
 	return mount(archive, mountpoint, true);
 }
 
+std::string filesystem::getGamePath(const std::string& archive) {
+	// Find which mounted directory or archive the file is in. Paths outside of the game aren't found.
+	const char* realDir = PHYSFS_getRealDir(archive.c_str());
+	if (realDir == NULL) {
+		return "";
+	}
+	return std::string(realDir) + PHYSFS_getDirSeparator() + archive;
+}
+
+bool filesystem::mount(const std::string& archive, const std::string& mountpoint, bool appendToPath) {
+	// Only allow mounting files and folders from within the game, like Love2D.
+	std::string path = getGamePath(archive);
+	if (path.empty()) {
+		pntr_app_log_ex(PNTR_APP_LOG_ERROR, "[ChaiLove] [filesystem] Cannot mount %s, as it is not in the game", archive.c_str());
+		return false;
+	}
+	return mountHost(path, mountpoint, appendToPath);
+}
+
 bool filesystem::mount(const void *data, unsigned int size, const std::string& mountpoint) {
 	// TODO: Do we need to register del() callback?
 	if (PHYSFS_mountMemory(data, (PHYSFS_uint64)size, NULL, "chailove.zip", mountpoint.c_str(), 1) == 0) {
@@ -209,7 +229,7 @@ bool filesystem::mount(const void *data, unsigned int size, const std::string& m
 	return true;
 }
 
-bool filesystem::mount(const std::string& archive, const std::string& mountpoint, bool appendToPath) {
+bool filesystem::mountHost(const std::string& archive, const std::string& mountpoint, bool appendToPath) {
 	// Protect against empty archive/mount points.
 	int append = appendToPath ? 1 : 0;
 	if (archive.length() <= 0) {
