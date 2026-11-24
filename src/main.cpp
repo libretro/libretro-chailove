@@ -166,7 +166,7 @@ void Event(pntr_app* app, pntr_app_event* event) {
             }
 
             std::string cheat(event->cheat);
-            chailove->cheatset(0, true, cheat);
+            chailove->cheatset(event->cheatIndex, event->cheatEnabled, cheat);
         }
         break;
 
