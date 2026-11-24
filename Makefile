@@ -91,9 +91,6 @@ cpplint:
 	-readability/casting,-whitespace/line_length,-runtime/references \
 		src/ChaiLove.cpp src/ChaiLove.h src/libretro.cpp src/love/*.h src/love/*.cpp src/love/Types/*/*.h src/love/Types/*/*.cpp
 
-tests:
-	$(MAKE) HAVE_CHAISCRIPT=0 HAVE_TESTS=1
-
 PREFIX := /usr
 INSTALLDIR := $(PREFIX)/lib/libretro
 install: all
