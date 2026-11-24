@@ -128,10 +128,36 @@ void chailove_error_level(const std::string& message, int level) {
 	pntr_app_log(PNTR_APP_LOG_ERROR, message.c_str());
 }
 
+/**
+ * Whether the function is only ever defined as a method of a class, like a class's def joystickpressed(button).
+ */
+bool isOnlyClassMethod(const chaiscript::Boxed_Value& value) {
+	Const_Proxy_Function function = chaiscript::boxed_cast<Const_Proxy_Function>(value);
+	std::vector<Const_Proxy_Function> functions = {function};
+	if (std::dynamic_pointer_cast<const detail::Dispatch_Function>(function)) {
+		functions = function->get_contained_functions();
+	}
+	for (const Const_Proxy_Function& overload : functions) {
+		if (!std::dynamic_pointer_cast<const dispatch::detail::Dynamic_Object_Function>(overload)) {
+			return false;
+		}
+	}
+	return true;
+}
+
 template <typename Function>
 void script::find(bool& has, const char* name, Function& function) {
 	try {
-		function = chai.eval<Function>(name);
+		chaiscript::Boxed_Value value = chai.eval(name);
+
+		// Class methods share the global function names, but are not the callback.
+		if (isOnlyClassMethod(value)) {
+			pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] %s() Only found as a class method", name);
+			has = false;
+			return;
+		}
+
+		function = chai.boxed_cast<Function>(value);
 	}
 	catch (const std::exception& e) {
 		pntr_app_log_ex(PNTR_APP_LOG_INFO, "[ChaiLove] [script] %s() %s", name, e.what());
