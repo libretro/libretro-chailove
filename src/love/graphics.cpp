@@ -173,11 +173,6 @@ graphics& graphics::draw(Image* image, Quad quad) {
 
 graphics& graphics::draw(Image* image, Quad quad, int x, int y) {
 	if (image && image->loaded()) {
-		pntr_rectangle srcRect;
-		srcRect.x = quad.x;
-		srcRect.y = quad.x;
-		srcRect.width = quad.sw;
-		srcRect.height = quad.sh;
 		pntr_draw_image_rec(getScreen(), image->surface, quad.toRect(), x, y);
 	}
 
