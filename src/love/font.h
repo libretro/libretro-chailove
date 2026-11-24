@@ -2,7 +2,9 @@
 #define SRC_LOVE_FONT_H_
 
 #include "Types/Graphics/Font.h"
-#include <list>
+#include <functional>
+#include <map>
+#include <string>
 
 using love::Types::Graphics::Font;
 
@@ -29,14 +31,16 @@ class font {
 	bool unload();
 
 	/**
-	 * Takes ownership of the given Font, freeing it on unload.
+	 * Retrieves the Font loaded with the given key, or creates it, freeing it on unload.
+	 *
+	 * Fonts can't be changed, so the same one is shared rather than loaded again.
 	 *
 	 * @return The Font, or NULL if it failed to load.
 	 */
-	Font* add(Font* newFont);
+	Font* get(const std::string& key, const std::function<Font*()>& create);
 
 	private:
-	std::list<Font*> m_fonts;
+	std::map<std::string, Font*> m_fonts;
 };
 
 }  // namespace love
