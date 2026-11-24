@@ -107,9 +107,8 @@ void Event(pntr_app* app, pntr_app_event* event) {
         break;
 
         case PNTR_APP_EVENTTYPE_MOUSE_WHEEL:
-            if (event->mouseWheel != 0) {
-                // TODO: Add horizontal mouse wheel to pntr
-                chailove->mouse.wheelmoved(0, event->mouseWheel);
+            if (event->mouseWheel != 0 || event->mouseWheelX != 0) {
+                chailove->mouse.wheelmoved(event->mouseWheelX, event->mouseWheel);
             }
         break;
 
@@ -168,7 +167,7 @@ void Event(pntr_app* app, pntr_app_event* event) {
             }
 
             std::string cheat(event->cheat);
-            chailove->cheatset(0, true, cheat);
+            chailove->cheatset(event->cheatIndex, event->cheatEnabled, cheat);
         }
         break;
 

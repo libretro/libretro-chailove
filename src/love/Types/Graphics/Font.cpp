@@ -47,7 +47,8 @@ int Font::getHeight(const std::string& text) {
 }
 
 int Font::getHeight() {
-	return getHeight("A");
+	// How far a new line moves down, like Love2D.
+	return pntr_font_line_height(font);
 }
 
 int Font::getWidth(const std::string& text) {
