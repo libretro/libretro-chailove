@@ -496,6 +496,17 @@ class script {
 	bool hasreset = true;
 	bool hascheatreset = true;
 	bool hascheatset = true;
+
+	/**
+	 * Finds the named function in the script, or marks it as missing.
+	 */
+	template <typename Function>
+	void find(bool& has, const char* name, Function& function);
+
+	/**
+	 * Calls a script function, and stops calling it if it fails.
+	 */
+	void call(bool& has, const char* name, const std::function<void()>& function);
 	#endif
 
 	std::string findModule(const std::string& filename);
