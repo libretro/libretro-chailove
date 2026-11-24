@@ -6,12 +6,10 @@
 #include "config.h"
 #include "Types/Input/Joystick.h"
 
-#ifdef __HAVE_CHAISCRIPT__
 #include <chaiscript/chaiscript.hpp>
 
 // TODO(RobLoach): Fix Chai loading with the Standard Library.
 // #include <chaiscript/chaiscript_stdlib.hpp>
-#endif
 
 using love::Types::Input::Joystick;
 
@@ -454,7 +452,6 @@ class script {
 	chaiscript::Boxed_Value eval(const std::string& code, const std::string& filename);
 	std::string evalString(const std::string& code, const std::string& filename);
 
-	#ifdef __HAVE_CHAISCRIPT__
 	chaiscript::ChaiScript chai;
 	std::function<void()> chaiload;
 	std::function<void(config&)> chaiconf;
@@ -507,7 +504,6 @@ class script {
 	 * Calls a script function, and stops calling it if it fails.
 	 */
 	void call(bool& has, const char* name, const std::function<void()>& function);
-	#endif
 
 	std::string findModule(const std::string& filename);
 	std::string replaceString(std::string subject, const std::string& search, const std::string& replace);
