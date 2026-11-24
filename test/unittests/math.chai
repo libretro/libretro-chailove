@@ -22,7 +22,9 @@ assert(num >= 10.0f && num <= 100.0f, "love.math.random(10.0, 100.0)")
 
 // setRandomSeed()
 love.math.setRandomSeed(50, 100)
-assert(true, "love.math.setRandomSeed(50, 100)")
+var firstRandom = love.math.random()
+love.math.setRandomSeed(50, 100)
+assert_equal(love.math.random(), firstRandom, "love.math.setRandomSeed(50, 100)")
 
 love.math.setRandomSeed(10)
 assert(true, "love.math.setRandomSeed(10)")
