@@ -106,6 +106,16 @@ class system {
 	bool execute(const std::string& command);
 
 	/**
+	 * Execute an operating system shell command, optionally in the background.
+	 *
+	 * @param command The command to run.
+	 * @param background When true, the command runs on a separate thread and this returns immediately.
+	 *
+	 * @return Returns true if the command succeeded, or was started in the background.
+	 */
+	bool execute(const std::string& command, bool background);
+
+	/**
 	 * Gets text from the clipboard.
 	 *
 	 * Note: This is emulated, and not the actual system clipboard text.
