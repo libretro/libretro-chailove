@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/libretro/libretro-chailove/actions/workflows/build.yml/badge.svg)](https://github.com/libretro/libretro-chailove/actions/workflows/build.yml)
 [![platform libretro](https://img.shields.io/badge/platform-libretro-brightgreen.svg)](https://git.libretro.com/libretro/libretro-chailove/-/pipelines)
-[![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://rawgit.com/libretro/libretro-chailove/docs/)
+[![Documentation](https://img.shields.io/badge/docs-doxygen-blue.svg)](https://libretro.github.io/libretro-chailove/)
 
 ChaiLove is an awesome framework you can use to make 2D games in [ChaiScript](http://chaiscript.com/). It's free, open-source, and works on Windows, Mac OS X, Linux, Android, and ARM through [libretro](https://www.libretro.com)/[RetroArch](http://retroarch.com).
 
